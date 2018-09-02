@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 44ebff632260a5f43ad5344befa15b4b
+timeCreated: 1531315990
+licenseType: Pro
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - agent: {fileID: 114828541192764560, guid: e94d87c0c56f8a240b7f56634ae5b43d, type: 2}
+  - animator: {fileID: 95752331060267862, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+      type: 2}
+  - spriteRenderer: {fileID: 212071811527906632, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+      type: 2}
+  - target: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

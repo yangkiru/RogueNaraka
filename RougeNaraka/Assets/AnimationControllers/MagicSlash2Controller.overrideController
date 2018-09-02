@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: MagicSlash2Controller
+  m_Controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 34b98781d5b5e6342aa9feb96fe3c0b6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5bd333b875eed9f478ceb6ca688c34b2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a991ac033557e8947918a5fce3d4bbd2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d2a95e2ecb4198b438d8fb3391ebeaf8, type: 2}

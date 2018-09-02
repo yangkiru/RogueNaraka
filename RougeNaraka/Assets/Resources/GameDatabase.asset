@@ -1,0 +1,725 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214e2a3687be0b44a8958480b4f79b23, type: 3}
+  m_Name: GameDatabase
+  m_EditorClassIdentifier: 
+  playerBase:
+    dmg: 1
+    spd: 1
+    luck: 1
+    hp: 1
+    mp: 1
+    hpRegen: 1
+    mpRegen: 1
+  enemies:
+  - name: RepeatShooterNormal
+    id: 0
+    cost: 1
+    stat:
+      dmg: 0.1
+      spd: 1
+      luck: 0
+      hp: 3
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    weapon:
+      name: RepeatShooter
+      level: 0
+      startBulletId: 00000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 1
+      isShoot: 1
+      shootSpeed: 2
+    isFriendly: 0
+    move: 2
+    moveTime: 0
+    moveDistance: 2
+    minDistance: 1
+    maxDistance: 2
+  - name: RepeatShooterRed
+    id: 1
+    cost: 2
+    stat:
+      dmg: 0.2
+      spd: 3
+      luck: 0
+      hp: 5
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
+    color: {r: 1, g: 0.4764151, b: 0.63653207, a: 1}
+    weapon:
+      name: RepeatShooter
+      level: 0
+      startBulletId: 00000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 1
+      isShoot: 1
+      shootSpeed: 2
+    isFriendly: 0
+    move: 2
+    moveTime: 0
+    moveDistance: 2
+    minDistance: 1
+    maxDistance: 2
+  - name: RepeatShooterBlue
+    id: 2
+    cost: 3
+    stat:
+      dmg: 0.3
+      spd: 5
+      luck: 0
+      hp: 8
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
+    color: {r: 0.4198113, g: 0.81014097, b: 1, a: 1}
+    weapon:
+      name: RepeatShooter
+      level: 0
+      startBulletId: 00000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 1
+      isShoot: 1
+      shootSpeed: 2
+    isFriendly: 0
+    move: 2
+    moveTime: 0
+    moveDistance: 2
+    minDistance: 1
+    maxDistance: 2
+  - name: Slasher
+    id: 3
+    cost: 1
+    stat:
+      dmg: 0.5
+      spd: 10
+      luck: 0
+      hp: 2
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 0.27450982}
+    weapon:
+      name: Slasher
+      level: 0
+      startBulletId: 08000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 0
+      isShoot: 0
+      shootSpeed: 2
+    isFriendly: 0
+    move: 0
+    moveTime: 0
+    moveDistance: 2
+    minDistance: 1
+    maxDistance: 2
+  - name: SlasherRed
+    id: 4
+    cost: 2
+    stat:
+      dmg: 1
+      spd: 15
+      luck: 0
+      hp: 4
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
+    color: {r: 1, g: 0.47450984, b: 0.63529414, a: 0.27450982}
+    weapon:
+      name: Slasher
+      level: 0
+      startBulletId: 08000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 0
+      isShoot: 0
+      shootSpeed: 2
+    isFriendly: 0
+    move: 0
+    moveTime: 0
+    moveDistance: 2
+    minDistance: 1
+    maxDistance: 2
+  - name: SlasherBlue
+    id: 5
+    cost: 3
+    stat:
+      dmg: 1.5
+      spd: 20
+      luck: 0
+      hp: 6
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
+    color: {r: 0.41960788, g: 0.8117648, b: 1, a: 0.27450982}
+    weapon:
+      name: Slasher
+      level: 0
+      startBulletId: 08000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 0
+      isShoot: 0
+      shootSpeed: 2
+    isFriendly: 0
+    move: 0
+    moveTime: 0
+    moveDistance: 2
+    minDistance: 1
+    maxDistance: 2
+  - name: Runner
+    id: 6
+    cost: 4
+    stat:
+      dmg: 0.5
+      spd: 40
+      luck: 0
+      hp: 1
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
+    color: {r: 1, g: 0.99759674, b: 0.57254905, a: 1}
+    weapon:
+      name: runner
+      level: 0
+      startBulletId: 01000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 1
+      isShoot: 1
+      shootSpeed: 1
+    isFriendly: 0
+    move: 3
+    moveTime: 1
+    moveDistance: 2.5
+    minDistance: 1
+    maxDistance: 2
+  bosses:
+  - name: Boss0
+    id: 0
+    cost: 0
+    stat:
+      dmg: 5
+      spd: 3
+      luck: 0
+      hp: 20
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    weapon:
+      name: 
+      level: 0
+      startBulletId: 
+      spawnPoint: {x: 0, y: 0}
+      type: 0
+      isShoot: 0
+      shootSpeed: 0
+    isFriendly: 0
+    move: 0
+    moveTime: 0
+    moveDistance: 0
+    minDistance: 0
+    maxDistance: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  unitMask:
+    serializedVersion: 2
+    m_Bits: 768
+  friendlyMask:
+    serializedVersion: 2
+    m_Bits: 1536
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 1280
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  bullets:
+  - name: MagicBall0
+    id: 0
+    type: 0
+    dmg: 1
+    dealSpeed: 0
+    size: 0.15
+    destroyTime: 0.75
+    angle: 0
+    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities: []
+    children:
+    - name: MagicSpawn
+      bulletId: 7
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    effects: []
+  - name: MagicBall1
+    id: 1
+    type: 0
+    dmg: 1
+    dealSpeed: 0
+    size: 0.15
+    destroyTime: 0.75
+    angle: 0
+    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities: []
+    children:
+    - name: MagicSpawn
+      bulletId: 7
+      sortingOrder: 2
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSpin0
+      bulletId: 4
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 1
+      isEndWith: 1
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    effects: []
+  - name: MagicBall2
+    id: 2
+    type: 0
+    dmg: 1
+    dealSpeed: 0
+    size: 0.15
+    destroyTime: 0.75
+    angle: 0
+    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities: []
+    children:
+    - name: MagicSpawn
+      bulletId: 7
+      sortingOrder: 2
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSpin0
+      bulletId: 4
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 1
+      isEndWith: 1
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSpin1
+      bulletId: 5
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 1
+      isEndWith: 1
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    effects: []
+  - name: MagicBall3
+    id: 3
+    type: 0
+    dmg: 1
+    dealSpeed: 0
+    size: 0.15
+    destroyTime: 0.75
+    angle: 0
+    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities: []
+    children:
+    - name: MagicSpawn
+      bulletId: 7
+      sortingOrder: 2
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSpin0
+      bulletId: 4
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 1
+      isEndWith: 1
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSpin1
+      bulletId: 5
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 1
+      isEndWith: 1
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSpin2
+      bulletId: 6
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 1
+      isEndWith: 1
+      isShoot: 0
+      spawnPoint: {x: 0, y: 0}
+    effects: []
+  - name: MagicSpin0
+    id: 4
+    type: 1
+    dmg: 1
+    dealSpeed: 0.1
+    size: 0.3
+    destroyTime: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: 0f8b2066368d1ad43840304e871873a4, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: -720
+    children: []
+    effects: []
+  - name: MagicSpin1
+    id: 5
+    type: 1
+    dmg: 1
+    dealSpeed: 0.1
+    size: 0.3
+    destroyTime: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: 0e5bd7cad351be646aa837e110b135d1, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 720
+    children: []
+    effects: []
+  - name: MagicSpin2
+    id: 6
+    type: 1
+    dmg: 1
+    dealSpeed: 0.1
+    size: 0.3
+    destroyTime: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: adb582aa48649df44af2868177d96176, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: -360
+    children: []
+    effects: []
+  - name: MagicSpawn
+    id: 7
+    type: 5
+    dmg: 0
+    dealSpeed: 0
+    size: 0.3
+    destroyTime: 0.75
+    angle: 0
+    controller: {fileID: 22100000, guid: e0b825f9dc32100479242bc04e60e2b6, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 5
+      value: 0
+    children: []
+    effects: []
+  - name: MagicSlash0
+    id: 8
+    type: 6
+    dmg: 2
+    dealSpeed: 0.2
+    size: 0.5
+    destroyTime: 0.3
+    angle: 90
+    controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 5
+      value: 0.1
+    children: []
+    effects: []
+  - name: MagicSlash1
+    id: 9
+    type: 6
+    dmg: 2
+    dealSpeed: 0.2
+    size: 1
+    destroyTime: 0.3
+    angle: 90
+    controller: {fileID: 9100000, guid: e2ebdd70d9f6c2a49a5ade3aea94ea69, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 5
+      value: 0.1
+    children: []
+    effects: []
+  - name: MagicSlash2
+    id: 10
+    type: 6
+    dmg: 2
+    dealSpeed: 0.1
+    size: 1
+    destroyTime: 0.3
+    angle: 90
+    controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 5
+      value: 0.1
+    children: []
+    effects: []
+  - name: MagicSlash3
+    id: 11
+    type: 6
+    dmg: 2
+    dealSpeed: 0.2
+    size: 0.62
+    destroyTime: 0.3
+    angle: 90
+    controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 5
+      value: 0.1
+    children:
+    - name: MagicSlash0
+      bulletId: 8
+      sortingOrder: -1
+      startTime: 0
+      waitTime: 0
+      angle: 20
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: 1, y: 0}
+    - name: MagicSlash0
+      bulletId: 8
+      sortingOrder: -1
+      startTime: 0
+      waitTime: 0
+      angle: -20
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: -1, y: 0}
+    effects: []
+  - name: MagicSlash4
+    id: 12
+    type: 6
+    dmg: 2
+    dealSpeed: 0.2
+    size: 1
+    destroyTime: 0.3
+    angle: 90
+    controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 5
+      value: 0.1
+    children:
+    - name: MagicSlash2
+      bulletId: 10
+      sortingOrder: 2
+      startTime: 0
+      waitTime: 0
+      angle: 120
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: 0.5, y: 0.9}
+    - name: MagicSlash2
+      bulletId: 10
+      sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: -120
+      shootSpeed: 0
+      isRepeat: 0
+      isStick: 0
+      isEndWith: 0
+      isShoot: 0
+      spawnPoint: {x: -0.5, y: 0.9}
+    effects: []
+  weapons:
+  - name: MagicBall
+    level: 0
+    startBulletId: 00000000010000000200000003000000
+    spawnPoint: {x: 0, y: 0.5}
+    type: 1
+    isShoot: 1
+    shootSpeed: 3
+  - name: MagicSlash
+    level: 0
+    startBulletId: 08000000090000000a0000000b0000000c000000
+    spawnPoint: {x: 0, y: 0.5}
+    type: 0
+    isShoot: 0
+    shootSpeed: 0
+  stageCosts: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000
+  unitCosts:
+  - cost: 1
+    unitId: 0000000003000000
+  - cost: 2
+    unitId: 0100000004000000
+  - cost: 3
+    unitId: 0200000005000000
+  skills:
+  - name: Roll
+    spr: {fileID: 21300008, guid: 253638be60f62b740ac1295e324fa08d, type: 3}
+    id: 0
+    level: 1
+    coolTime: 2
+    coolTimeLeft: 0
+    manaCost: 0.5
+    distance: 1
+    isDeath: 0
+    effects: []
+    values: []
+    levelUp:
+      coolTime: -0.1
+      manaCost: 0.2
+      distance: 0.1
+      effects:
+      - type: 0
+        value: 1
+        time: 1
+        isInfinity: 0
+      values: []
+  - name: Bandage
+    spr: {fileID: 21300002, guid: 9b0fda0bc0ad6494e95c2bbbefd3a118, type: 3}
+    id: 1
+    level: 1
+    coolTime: 5
+    coolTimeLeft: 0
+    manaCost: 0
+    distance: 0
+    isDeath: 0
+    effects: []
+    values:
+    - name: heal
+      value: 2
+    levelUp:
+      coolTime: 0
+      manaCost: 0
+      distance: 0
+      effects: []
+      values: []
+  - name: Meditation
+    spr: {fileID: 21300008, guid: a1d7aa10f6bb3b448bc66afc830070ed, type: 3}
+    id: 2
+    level: 1
+    coolTime: 0
+    coolTimeLeft: 0
+    manaCost: 0
+    distance: 0
+    isDeath: 0
+    effects: []
+    values: []
+    levelUp:
+      coolTime: 0
+      manaCost: 0
+      distance: 0
+      effects: []
+      values: []
+  - name: 3
+    spr: {fileID: 21300008, guid: 351ae5d626b876b45a228347658ec0ab, type: 3}
+    id: 3
+    level: 1
+    coolTime: 0
+    coolTimeLeft: 0
+    manaCost: 0
+    distance: 0
+    isDeath: 0
+    effects: []
+    values: []
+    levelUp:
+      coolTime: 0
+      manaCost: 0
+      distance: 0
+      effects: []
+      values: []
+  - name: 4
+    spr: {fileID: 21300054, guid: 53b6b47620ef0d04388873788f5d20ed, type: 3}
+    id: 4
+    level: 1
+    coolTime: 0
+    coolTimeLeft: 0
+    manaCost: 0
+    distance: 0
+    isDeath: 0
+    effects: []
+    values: []
+    levelUp:
+      coolTime: 0
+      manaCost: 0
+      distance: 0
+      effects: []
+      values: []
