@@ -99,6 +99,12 @@ public class BoardManager : MonoBehaviour {
 
     private void InitStage(int stage)
     {
+        for (int i = 0; i < bulletPool.transform.childCount; i++)
+        {
+            GameObject obj = bulletPool.transform.GetChild(i).gameObject;
+            if (obj.activeSelf)
+                bulletPool.EnqueueObjectPool(obj);
+        }
         //Debug.Log("SetStage(" + stage + ")");
         int cost = GameDatabase.instance.stageCosts[stage - 1];
         UnitCost[] unitCosts = GameDatabase.instance.unitCosts;
@@ -111,19 +117,42 @@ public class BoardManager : MonoBehaviour {
         for (int i = able.Count-1; i >= 1; i--)
         {
             int amount = Random.Range(0, (cost / able[i]) + 1);
-            for (int j = 0; j < amount; j++)
+            List<int> ids = new List<int>();
+
+            for(int j = 0; j < unitCosts[i].unitId.Length; j++)//stage 제한
             {
-                int index = Random.Range(0, unitCosts[i].unitId.Length);
-                SpawnEnemy(unitCosts[i].unitId[index]);
-                cost -= unitCosts[i].cost;
+                int temp = unitCosts[i].unitId[j];
+                if (GameDatabase.instance.enemies[temp].stage < _stage)
+                    ids.Add(temp);
+                
+            }
+            if (ids.Count > 0)
+            {
+                for (int j = 0; j < amount; j++)
+                {
+                    int index = Random.Range(0, ids.Count);
+                    SpawnEnemy(ids[index]);
+                    cost -= unitCosts[i].cost;
+                }
             }
             if (cost <= 1)
                 break;
         }
         for (int i = 0; i < cost; i++)
         {
-            int index = Random.Range(0, unitCosts[0].unitId.Length);
-            SpawnEnemy(unitCosts[0].unitId[index]);
+            List<int> ids = new List<int>();
+            for (int j = 0; j < unitCosts[0].unitId.Length; j++)//stage 제한
+            {
+                int temp = unitCosts[0].unitId[j];
+                if (GameDatabase.instance.enemies[temp].stage < _stage)
+                    ids.Add(temp);
+            }
+            if (ids.Count > 0)
+            {
+                int index = Random.Range(0, ids.Count);
+                //Debug.Log("index:" + index + " ids.Count:" + ids.Count + " ids[index]:" + ids[index]);
+                SpawnEnemy(ids[index]);
+            }
         }
 
         StartCoroutine(StageTxtEffect());

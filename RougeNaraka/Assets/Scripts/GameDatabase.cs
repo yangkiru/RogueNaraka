@@ -75,6 +75,15 @@ public class GameDatabase : ScriptableObject
             unitCosts[i].unitId = list.ToArray();
         }
     }
+
+    [ContextMenu("StageFunc")]
+    public void StageFunc()
+    {
+        for(int i = 0; i < 50; i++)
+        {
+            stageCosts[i] = 5 + i * 2;
+        }
+    }
 }
 
 [Serializable]
@@ -119,6 +128,7 @@ public struct UnitData
     public string name;
     public int id;
     public int cost;
+    public int stage;
     public Stat stat;
     public RuntimeAnimatorController controller;
     public Color color;
@@ -158,7 +168,6 @@ public struct BulletData
     public float dmg;
     public float dealSpeed;
     public float size;
-    public float destroyTime;
     public float angle; //TRIANGLE, SECTOR 에서 타격 범위
     public RuntimeAnimatorController controller;
     public Color color;

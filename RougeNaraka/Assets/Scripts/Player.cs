@@ -29,6 +29,8 @@ public class Player : Unit
 
     protected void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+            GetComponent<Rigidbody2D>().AddForce((GameManager.GetMousePosition() - (Vector2)transform.position).normalized * 10);
         if (!isPause)
         {
             CheckDeath();

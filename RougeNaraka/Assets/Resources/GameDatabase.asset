@@ -23,11 +23,12 @@ MonoBehaviour:
   - name: RepeatShooterNormal
     id: 0
     cost: 1
+    stage: 0
     stat:
-      dmg: 0.1
+      dmg: 0.05
       spd: 1
       luck: 0
-      hp: 3
+      hp: 4
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -49,12 +50,13 @@ MonoBehaviour:
     maxDistance: 2
   - name: RepeatShooterRed
     id: 1
-    cost: 2
+    cost: 1
+    stage: 1
     stat:
-      dmg: 0.2
-      spd: 3
+      dmg: 0.1
+      spd: 1
       luck: 0
-      hp: 5
+      hp: 2
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -76,10 +78,11 @@ MonoBehaviour:
     maxDistance: 2
   - name: RepeatShooterBlue
     id: 2
-    cost: 3
+    cost: 1
+    stage: 2
     stat:
-      dmg: 0.3
-      spd: 5
+      dmg: 0.025
+      spd: 1
       luck: 0
       hp: 8
       mp: 0
@@ -103,12 +106,13 @@ MonoBehaviour:
     maxDistance: 2
   - name: Slasher
     id: 3
-    cost: 1
+    cost: 2
+    stage: 3
     stat:
-      dmg: 0.5
+      dmg: 0.1
       spd: 10
       luck: 0
-      hp: 2
+      hp: 4
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -118,7 +122,7 @@ MonoBehaviour:
       name: Slasher
       level: 0
       startBulletId: 08000000
-      spawnPoint: {x: 0, y: 0.5}
+      spawnPoint: {x: 0, y: 0.25}
       type: 0
       isShoot: 0
       shootSpeed: 2
@@ -131,11 +135,12 @@ MonoBehaviour:
   - name: SlasherRed
     id: 4
     cost: 2
+    stage: 4
     stat:
-      dmg: 1
-      spd: 15
+      dmg: 0.2
+      spd: 10
       luck: 0
-      hp: 4
+      hp: 2
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -145,7 +150,7 @@ MonoBehaviour:
       name: Slasher
       level: 0
       startBulletId: 08000000
-      spawnPoint: {x: 0, y: 0.5}
+      spawnPoint: {x: 0, y: 0.25}
       type: 0
       isShoot: 0
       shootSpeed: 2
@@ -157,12 +162,13 @@ MonoBehaviour:
     maxDistance: 2
   - name: SlasherBlue
     id: 5
-    cost: 3
+    cost: 2
+    stage: 5
     stat:
-      dmg: 1.5
-      spd: 20
+      dmg: 0.1
+      spd: 10
       luck: 0
-      hp: 6
+      hp: 8
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -172,7 +178,7 @@ MonoBehaviour:
       name: Slasher
       level: 0
       startBulletId: 08000000
-      spawnPoint: {x: 0, y: 0.5}
+      spawnPoint: {x: 0, y: 0.25}
       type: 0
       isShoot: 0
       shootSpeed: 2
@@ -184,9 +190,10 @@ MonoBehaviour:
     maxDistance: 2
   - name: Runner
     id: 6
-    cost: 4
+    cost: 1
+    stage: 6
     stat:
-      dmg: 0.5
+      dmg: 0.01
       spd: 40
       luck: 0
       hp: 1
@@ -198,7 +205,7 @@ MonoBehaviour:
     weapon:
       name: runner
       level: 0
-      startBulletId: 01000000
+      startBulletId: 00000000
       spawnPoint: {x: 0, y: 0.5}
       type: 1
       isShoot: 1
@@ -213,6 +220,7 @@ MonoBehaviour:
   - name: Boss0
     id: 0
     cost: 0
+    stage: 0
     stat:
       dmg: 5
       spd: 3
@@ -259,7 +267,6 @@ MonoBehaviour:
     dmg: 1
     dealSpeed: 0
     size: 0.15
-    destroyTime: 0.75
     angle: 0
     controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -284,7 +291,6 @@ MonoBehaviour:
     dmg: 1
     dealSpeed: 0
     size: 0.15
-    destroyTime: 0.75
     angle: 0
     controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -321,7 +327,6 @@ MonoBehaviour:
     dmg: 1
     dealSpeed: 0
     size: 0.15
-    destroyTime: 0.75
     angle: 0
     controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -370,7 +375,6 @@ MonoBehaviour:
     dmg: 1
     dealSpeed: 0
     size: 0.15
-    destroyTime: 0.75
     angle: 0
     controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -428,10 +432,9 @@ MonoBehaviour:
   - name: MagicSpin0
     id: 4
     type: 1
-    dmg: 1
+    dmg: 0.1
     dealSpeed: 0.1
     size: 0.3
-    destroyTime: 0
     angle: 0
     controller: {fileID: 22100000, guid: 0f8b2066368d1ad43840304e871873a4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -443,10 +446,9 @@ MonoBehaviour:
   - name: MagicSpin1
     id: 5
     type: 1
-    dmg: 1
+    dmg: 0.1
     dealSpeed: 0.1
-    size: 0.3
-    destroyTime: 0
+    size: 0.5
     angle: 0
     controller: {fileID: 22100000, guid: 0e5bd7cad351be646aa837e110b135d1, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -458,10 +460,9 @@ MonoBehaviour:
   - name: MagicSpin2
     id: 6
     type: 1
-    dmg: 1
-    dealSpeed: 0.1
-    size: 0.3
-    destroyTime: 0
+    dmg: 0.1
+    dealSpeed: 0.2
+    size: 0.8
     angle: 0
     controller: {fileID: 22100000, guid: adb582aa48649df44af2868177d96176, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -476,7 +477,6 @@ MonoBehaviour:
     dmg: 0
     dealSpeed: 0
     size: 0.3
-    destroyTime: 0.75
     angle: 0
     controller: {fileID: 22100000, guid: e0b825f9dc32100479242bc04e60e2b6, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -488,10 +488,9 @@ MonoBehaviour:
   - name: MagicSlash0
     id: 8
     type: 6
-    dmg: 2
+    dmg: 1
     dealSpeed: 0.2
     size: 0.5
-    destroyTime: 0.3
     angle: 90
     controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -503,10 +502,9 @@ MonoBehaviour:
   - name: MagicSlash1
     id: 9
     type: 6
-    dmg: 2
+    dmg: 0.1
     dealSpeed: 0.2
     size: 1
-    destroyTime: 0.3
     angle: 90
     controller: {fileID: 9100000, guid: e2ebdd70d9f6c2a49a5ade3aea94ea69, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -518,10 +516,9 @@ MonoBehaviour:
   - name: MagicSlash2
     id: 10
     type: 6
-    dmg: 2
-    dealSpeed: 0.1
+    dmg: 0.1
+    dealSpeed: 0.2
     size: 1
-    destroyTime: 0.3
     angle: 90
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -533,10 +530,9 @@ MonoBehaviour:
   - name: MagicSlash3
     id: 11
     type: 6
-    dmg: 2
+    dmg: 0.1
     dealSpeed: 0.2
     size: 0.62
-    destroyTime: 0.3
     angle: 90
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -572,10 +568,9 @@ MonoBehaviour:
   - name: MagicSlash4
     id: 12
     type: 6
-    dmg: 2
+    dmg: 0.1
     dealSpeed: 0.2
     size: 1
-    destroyTime: 0.3
     angle: 90
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -623,14 +618,12 @@ MonoBehaviour:
     type: 0
     isShoot: 0
     shootSpeed: 0
-  stageCosts: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000
+  stageCosts: 0500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f00000061000000630000006500000067000000
   unitCosts:
   - cost: 1
-    unitId: 0000000003000000
+    unitId: 00000000010000000200000006000000
   - cost: 2
-    unitId: 0100000004000000
-  - cost: 3
-    unitId: 0200000005000000
+    unitId: 030000000400000005000000
   skills:
   - name: Roll
     spr: {fileID: 21300008, guid: 253638be60f62b740ac1295e324fa08d, type: 3}

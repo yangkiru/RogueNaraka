@@ -23,6 +23,12 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     { get { return Player.instance; } }
     //public bool isEnter;
 
+    public void OnEnable()
+    {
+        if (data.coolTimeLeft > 0)
+            StartCoroutine(CoolTime());
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!isEmpty)
@@ -99,6 +105,8 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         if (data.coolTime > 0)
         {
+            data.coolTimeLeft = data.coolTime;
+            coolImg.enabled = true;
             StartCoroutine(CoolTime());
         }
 
@@ -231,8 +239,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public IEnumerator CoolTime()
     {
-        data.coolTimeLeft = data.coolTime;
-        coolImg.enabled = true;
         while (data.coolTimeLeft > 0)
         {
             yield return null;
@@ -251,6 +257,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         Debug.Log("Roll!");
         Player player = Player.instance;
         originSpeed = player.GetOriginSpeed();
+        player.attackable = false;
         player.SetSpeed(originSpeed * 2);
         player.isAutoMove = false;
         player.Move(mp);
@@ -262,6 +269,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         Debug.Log("End Roll!");
         Player player = Player.instance;
+        player.attackable = true;
         player.SetSpeed(originSpeed);
         player.isAutoMove = true;
         player.agent.OnDestinationInvalid -= EndRoll;

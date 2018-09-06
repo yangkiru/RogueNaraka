@@ -688,8 +688,10 @@ public abstract class Unit : MonoBehaviour {
         {
             yield return new WaitForSeconds(time);
             if (_health > 0)
-                AddHealth(stat.hpRegen * 0.05f);
-            AddMana(stat.mpRegen * 0.05f);
+            {
+                AddHealth(stat.hpRegen * 0.1f);
+                AddMana(stat.mpRegen * 0.1f);
+            }
         }
     }
 }

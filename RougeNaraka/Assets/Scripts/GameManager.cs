@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour {
     //Debug params
     public int weaponId;
     public int weaponLevel;
+    private int _weaponId;
+    private int _weaponLevel;
     public int stage;
 
     public bool isDebug;
@@ -110,6 +112,13 @@ public class GameManager : MonoBehaviour {
                 StopCoroutine(autoSaveCoroutine);
                 autoSaveCoroutine = null;
             }
+        }
+
+        if(weaponId != _weaponId || weaponLevel != _weaponLevel)
+        {
+            _weaponId = weaponId;
+            _weaponLevel = weaponLevel;
+            player.EquipWeapon(weaponId, weaponLevel);
         }
     }
 
@@ -597,6 +606,11 @@ public class GameManager : MonoBehaviour {
         Debug.Log("End");
         StartCoroutine(WaitForEnd());
         player.GetComponent<Collider2D>().enabled = true;
+    }
+
+    public static Vector2 GetMousePosition()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private IEnumerator WaitForEnd()

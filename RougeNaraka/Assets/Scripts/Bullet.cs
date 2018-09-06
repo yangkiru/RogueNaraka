@@ -16,7 +16,6 @@ public class Bullet : MonoBehaviour {
     private float unitDamage;
     private float size;
     private float basicSpeed = 1;
-    private float destroyTime;
     private float dotTime;
     private float spinVelocity;
     private float spinValue;
@@ -91,7 +90,6 @@ public class Bullet : MonoBehaviour {
         name = data.name;
         SetFriendly(isFriendly);
         animator.runtimeAnimatorController = data.controller;
-        destroyTime = data.destroyTime;
         size = data.size;
         transform.rotation = new Quaternion(0, 0, 0, 0);
         renderer.color = data.color;
@@ -561,7 +559,7 @@ public class Bullet : MonoBehaviour {
         } while (!animationState.IsName("Destroy"));
         clips = animator.GetCurrentAnimatorClipInfo(0);
         
-        float time = clips[0].clip.length * animationState.speed;
+        float time = clips[0].clip.length / animationState.speed;
         //Debug.Log(clips[0].clip.name +" "+ clips[0].clip.length + "*" + animationState.speed + "=" + time);
         yield return new WaitForSeconds(time);
 
