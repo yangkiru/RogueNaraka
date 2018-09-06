@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour {
     private LayerMask layerMask;
 
     private Vector2 vec;
+    private int knockBack;
     private float damage;
     private float unitDamage;
     private float size;
@@ -101,11 +102,7 @@ public class Bullet : MonoBehaviour {
         spinValue = 0;
         shootSpeed = 0;
         angle = data.angle;
-    }
-
-    public void SetEffects(EffectData[] ef)
-    {
-        effects = ef;
+        effects = dt.effects;
     }
 
     public void SetFriendly(bool value)
@@ -217,8 +214,6 @@ public class Bullet : MonoBehaviour {
             {
                 switch (data.abilities[i].ability)
                 {
-                    case ABILITY.KNOCKBACK:
-                        break;
                     case ABILITY.GRAVITY:
                         break;
                     case ABILITY.CHAIN:
@@ -320,6 +315,26 @@ public class Bullet : MonoBehaviour {
         return damage * unitDamage;
     }
 
+    private void EffectFunc(Unit unit)
+    {
+        if (effects != null)
+        {
+            for (int i = 0; i < effects.Length; i++)
+            {
+                switch (effects[i].type)
+                {
+                    case EFFECT.KNOCKBACK:
+                        for(int j = 0; j < effects[i].value; j++)
+                            unit.KnockBack(unit.transform.position - transform.position);
+                        break;
+                    case EFFECT.STUN:
+                        unit.Stun(effects[i].time);
+                        break;
+                }
+            }
+        }
+    }
+
     private void Update()
     {
         if (transform.position.x > 50 || transform.position.x < -50 ||
@@ -349,7 +364,7 @@ public class Bullet : MonoBehaviour {
                         //Debug.Log(name + " hit to " + hits[i].transform.name);
                         Unit unit = hits[i].transform.GetComponent<Unit>();
                         unit.GetDamage(Damage());
-                        unit.AddEffect(effects);
+                        EffectFunc(unit);
                     }
                 }
                 if(hits.Length > 0)
@@ -371,7 +386,7 @@ public class Bullet : MonoBehaviour {
                             Debug.Log(name + " dot hit to " + hits[i].transform.name);
                             Unit unit = hits[i].GetComponent<Unit>();
                             unit.GetDamage(Damage());
-                            unit.AddEffect(effects);
+                            EffectFunc(unit);
                         }
                     }
                 }
@@ -393,7 +408,7 @@ public class Bullet : MonoBehaviour {
                         Debug.Log(name + " hit to " + hit.transform.name);
                         Unit unit = hit.transform.GetComponent<Unit>();
                         unit.GetDamage(Damage());
-                        unit.AddEffect(effects);
+                        EffectFunc(unit);
                     }
                 }
             }
@@ -406,7 +421,7 @@ public class Bullet : MonoBehaviour {
                     Debug.Log(name + " hit to " + hits[i].transform.name);
                     Unit unit = hits[i].transform.GetComponent<Unit>();
                     unit.GetDamage(Damage());
-                    unit.AddEffect(effects);
+                    EffectFunc(unit);
                 }
             }
             else if (data.type == BULLET_TYPE.TRIANGLE)//삼각형 도트 데미지
@@ -439,7 +454,7 @@ public class Bullet : MonoBehaviour {
                             {
                                 Debug.Log(name + " dot hit to " + hits[i].transform.name);
                                 unit.GetDamage(Damage());
-                                unit.AddEffect(effects);
+                                EffectFunc(unit);
                             }
                             else
                                 Debug.Log(name + " not inside of triangle" + hits[i].transform.name);
@@ -478,7 +493,7 @@ public class Bullet : MonoBehaviour {
                             {
                                 //Debug.Log(name + " dot hit to " + hits[i].transform.name);
                                 unit.GetDamage(Damage());
-                                unit.AddEffect(effects);
+                                EffectFunc(unit);
                             }
                             else
                             {

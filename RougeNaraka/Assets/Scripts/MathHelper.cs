@@ -14,35 +14,40 @@ public static class MathHelpers
     }
     public static Vector2 DegreeToVector2(float degree)
     {
-        return RadianToVector2(degree * Mathf.Deg2Rad);
+        float standard = 90;
+        bool isInverse = true;
+        if (degree > 180)
+        {
+            degree = 360 - degree;
+            isInverse = false;
+        }
+        Vector2 vec = RadianToVector2((degree + standard) * Mathf.Deg2Rad);
+        if (isInverse)
+            vec = new Vector2(-vec.x, vec.y);
+        return vec;
     }
     public static Vector2 DegreeToVector2(float degree, float length)
     {
         return RadianToVector2(degree * Mathf.Deg2Rad) * length;
     }
-    public static float IncreaseAngle(float angle, Vector2 standard, Vector2 vec)
+    public static float Vector2ToDegree(Vector2 vec)
+    {
+        float angle = Vector2.Angle(Vector2.up, vec);
+        return IncreaseAngle(angle, vec);
+    }
+    public static float IncreaseAngle(float angle, Vector2 vec)
     {
         float result = angle;
-        bool isAdd = true;
-        if (standard == Vector2.up && vec.x > 0)
-            isAdd = false;
-        else if (standard == Vector2.right && vec.y < 0)
-            isAdd = false;
-        else if (standard == Vector2.down && vec.x < 0)
-            isAdd = false;
-        else if (standard == Vector2.left && vec.y > 0)
-            isAdd = false;
-        else return float.NaN;
-        if (isAdd)
-            result += 180;
+        if (vec.x < 0)
+            result = 360 - angle;
         return CutAngle(result);
     }
     public static float CutAngle(float angle)
     {
         if (angle >= 360)
-            return angle % 360;
+            return CutAngle(angle - 360);
         else if (angle <= -360)
-            return -((-angle) % 360);
+            return CutAngle(angle + 360);
         else
             return angle;
     }

@@ -188,9 +188,10 @@ public class Enemy : Unit {
             CheckDeath();
             if (!isDeath)
             {
+                StunFunc();
+                KnockBackFunc();
                 TargetUpdate();
                 Attack();
-                StunFunc();
             }
             Animation();
         }

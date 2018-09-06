@@ -19,6 +19,7 @@ public abstract class Unit : MonoBehaviour {
     public PolyNav.PolyNavAgent agent;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
+    public Rigidbody2D rigid;
 
     public List<Effect> effects
     { get { return _effects; } }
@@ -444,6 +445,8 @@ public abstract class Unit : MonoBehaviour {
                 //Debug.Log(name + "Attacking");
                 isAttackCool = true;
                 Bullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+                if (!bullet)
+                    bullet = boardManager.SpawnBulletObj().GetComponent<Bullet>();
                 bullet.Init(bulletId, stat.dmg, isFriendly);
                 bullet.gameObject.SetActive(true);
                 Vector2 vec = (targetPosition - (Vector2)transform.position).normalized;
@@ -502,10 +505,32 @@ public abstract class Unit : MonoBehaviour {
             }
         }
     }
+    //상태이상
+    public void KnockBack(Vector2 vec)
+    {
+        AddEffect(EFFECT.KNOCKBACK, MathHelpers.Vector2ToDegree(vec), 0);
+        Debug.Log(name + " KnockBack!");
+    }
+
+    protected void KnockBackFunc()
+    {
+        Effect[] knockBacks = GetEffects(EFFECT.KNOCKBACK);
+        for(int i = 0; i < knockBacks.Length; i++)
+        {
+            Vector2 vec = MathHelpers.DegreeToVector2(knockBacks[i].data.value);
+            rigid.AddForce(vec.normalized * 10);
+            //Debug.Log("angle:" + knockBacks[i].data.value + " vec:" + vec.x + "," + vec.y);
+        }
+
+        for (int i = knockBacks.Length - 1; i >= 0; i--)
+        {
+            RemoveEffect(knockBacks[i]);
+        }
+    }
 
     public void Stun(float time)
     {
-        AddEffect(EFFECT.STUN, time, time);
+        AddEffect(EFFECT.STUN, 0, time);
     }
 
     protected void StunFunc()
@@ -519,11 +544,12 @@ public abstract class Unit : MonoBehaviour {
             if (highest.data.time < stuns[i].data.time)
                 highest = stuns[i];
             else
-                stuns[i].DestroySelf();
+                RemoveEffect(stuns[i]);
         }
 
         if (highest != null)
         {
+            agent.Stop();
             isStun = true;
         }
         else if(isStun)
@@ -534,6 +560,7 @@ public abstract class Unit : MonoBehaviour {
     }
 
     protected virtual void OnStunEnd() { }
+    //상태이상
 
     public void AddEffect(EffectData data)
     {
@@ -560,6 +587,12 @@ public abstract class Unit : MonoBehaviour {
                 AddEffect(datas[i]);
             }
         }
+    }
+
+    public void RemoveEffect(Effect ef)
+    {
+        _effects.Remove(ef);
+        ef.DestroySelf();
     }
 
     public void RemoveDebuff()
@@ -598,7 +631,7 @@ public abstract class Unit : MonoBehaviour {
         List<Effect> list = new List<Effect>();
         for(int i = 0; i < _effects.Count; i++)
         {
-            if (_effects[i].data.type== type)
+            if (_effects[i].data.type == type)
                 list.Add(_effects[i]);
         }
 

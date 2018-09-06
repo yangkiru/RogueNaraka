@@ -185,7 +185,7 @@ public enum BULLET_TYPE
 [Serializable]
 public enum ABILITY
 {
-    KNOCKBACK, GRAVITY, CHAIN, SPIN, PIERCE, TIME, ORBIT
+    GRAVITY, CHAIN, SPIN, PIERCE, TIME, ORBIT
 }
 
 [Serializable]
@@ -285,7 +285,7 @@ public class EffectData
 [Serializable]
 public enum EFFECT
 {
-    STUN, SLOW, FIRE, ICE
+    STUN, SLOW, FIRE, ICE, KNOCKBACK
 }
 
 [Serializable]

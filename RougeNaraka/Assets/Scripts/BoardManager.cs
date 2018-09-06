@@ -48,26 +48,39 @@ public class BoardManager : MonoBehaviour {
             Gizmos.DrawWireSphere(boardRange[1], 0.1f);
         }
     }
+
+    public GameObject SpawnEnemyObj()
+    {
+        GameObject obj = Instantiate(enemyPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0));
+        obj.transform.SetParent(enemyPool.transform);
+        return obj;
+    }
+
+    public GameObject SpawnBulletObj()
+    {
+        GameObject obj = Instantiate(bulletPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0));
+        obj.transform.SetParent(bulletPool.transform);
+        return obj;
+    }
+
     public void InitBoard()
     {
         //Debug.Log("InitBoard");
         int count = enemyPool.GetCount();
-        if (count < 100)//enemy Pooling
+        if (count < 500)//enemy Pooling
         {
-            for (int i = count; i < 100; i++)
+            for (int i = count; i < 500; i++)
             {
-                GameObject obj = Instantiate(enemyPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0));
-                obj.transform.SetParent(enemyPool.transform);
+                GameObject obj = SpawnEnemyObj();
                 enemyPool.EnqueueObjectPool(obj);
             }
         }
         count = bulletPool.GetCount();
-        if (count < 200)//enemy Pooling
+        if (count < 500)//bullet Pooling
         {
-            for (int i = count; i < 200; i++)
+            for (int i = count; i < 500; i++)
             {
-                GameObject obj = Instantiate(bulletPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0));
-                obj.transform.SetParent(bulletPool.transform);
+                GameObject obj = SpawnBulletObj();
                 bulletPool.EnqueueObjectPool(obj);
             }
         }

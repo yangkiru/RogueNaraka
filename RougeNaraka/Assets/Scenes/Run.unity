@@ -1995,11 +1995,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 178475815}
   m_CullTransparentMesh: 0
---- !u!212 &182588597 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212071811527906632, guid: e94d87c0c56f8a240b7f56634ae5b43d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1155720485}
 --- !u!1 &183834731
 GameObject:
   m_ObjectHideFlags: 0
@@ -6143,7 +6138,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.25, y: 3.125}
+  m_Offset: {x: 4.85, y: 3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6154,7 +6149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 8.25}
+  m_Size: {x: 2.25, y: 10}
   m_EdgeRadius: 0
 --- !u!61 &752147866
 BoxCollider2D:
@@ -6168,7 +6163,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.25, y: 3.125}
+  m_Offset: {x: -4.85, y: 3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6179,7 +6174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 8.25}
+  m_Size: {x: 2.25, y: 10}
   m_EdgeRadius: 0
 --- !u!61 &752147867
 BoxCollider2D:
@@ -6193,7 +6188,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6204,7 +6199,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.5, y: 1}
+  m_Size: {x: 7.5, y: 2}
   m_EdgeRadius: 0
 --- !u!61 &752147868
 BoxCollider2D:
@@ -6218,7 +6213,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 6.75}
+  m_Offset: {x: 0, y: 7.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6229,7 +6224,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.5, y: 1}
+  m_Size: {x: 7.5, y: 1.8}
   m_EdgeRadius: 0
 --- !u!4 &752147869
 Transform:
@@ -7153,7 +7148,7 @@ MonoBehaviour:
   goalPoint: {x: 0, y: 5.25}
   bossPoint: {x: 0, y: 5}
   boardRange:
-  - {x: -3.75, y: 0.1}
+  - {x: -3.75, y: -0.02}
   - {x: 3.75, y: 6.25}
   enemyPool: {fileID: 474995332}
   bulletPool: {fileID: 15169744}
@@ -8244,8 +8239,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 3.75, y: 6.25}
       - {x: -3.75, y: 6.25}
-      - {x: -3.75, y: 0.1}
-      - {x: 3.75, y: 0.1}
+      - {x: -3.75, y: -0.02}
+      - {x: 3.75, y: -0.02}
 --- !u!114 &990179674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9266,47 +9261,23 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114828541192764560, guid: e94d87c0c56f8a240b7f56634ae5b43d,
-        type: 2}
-      propertyPath: stoppingDistance
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
         type: 2}
-      propertyPath: spriteRenderer
+      propertyPath: rigid
       value: 
-      objectReference: {fileID: 182588597}
-    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+      objectReference: {fileID: 1447312199}
+    - target: {fileID: 50444502640560000, guid: e94d87c0c56f8a240b7f56634ae5b43d,
         type: 2}
-      propertyPath: attackDistance
-      value: 1
+      propertyPath: m_LinearDrag
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+    - target: {fileID: 50444502640560000, guid: e94d87c0c56f8a240b7f56634ae5b43d,
         type: 2}
-      propertyPath: attackable
-      value: 1
+      propertyPath: m_Mass
+      value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
-        type: 2}
-      propertyPath: attackCoolTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212071811527906632, guid: e94d87c0c56f8a240b7f56634ae5b43d,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
-        type: 2}
-      propertyPath: _stat.hp
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
-        type: 2}
-      propertyPath: _stat.dmg
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e94d87c0c56f8a240b7f56634ae5b43d, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1158900152
@@ -11637,44 +11608,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1435143464}
   m_CullTransparentMesh: 0
---- !u!1 &1447312193 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1068433391245634, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+--- !u!50 &1447312199 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 50444502640560000, guid: e94d87c0c56f8a240b7f56634ae5b43d,
     type: 2}
   m_PrefabInternal: {fileID: 1155720485}
---- !u!114 &1447312198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1447312193}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948863b042db47e4abda209a689e6cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orderID: 2
-  render: {fileID: 182588597}
---- !u!50 &1447312199
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1447312193}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.20747682
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!1 &1452925683
 GameObject:
   m_ObjectHideFlags: 0

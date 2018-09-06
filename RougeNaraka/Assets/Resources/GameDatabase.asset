@@ -284,7 +284,11 @@ MonoBehaviour:
       isEndWith: 0
       isShoot: 0
       spawnPoint: {x: 0, y: 0}
-    effects: []
+    effects:
+    - type: 4
+      value: 1
+      time: 0
+      isInfinity: 0
   - name: MagicBall1
     id: 1
     type: 0
@@ -495,8 +499,8 @@ MonoBehaviour:
     controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
-    - ability: 5
-      value: 0.1
+    - ability: 4
+      value: 0.4
     children: []
     effects: []
   - name: MagicSlash1
@@ -509,8 +513,8 @@ MonoBehaviour:
     controller: {fileID: 9100000, guid: e2ebdd70d9f6c2a49a5ade3aea94ea69, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
-    - ability: 5
-      value: 0.1
+    - ability: 4
+      value: 0.4
     children: []
     effects: []
   - name: MagicSlash2
@@ -523,8 +527,8 @@ MonoBehaviour:
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
-    - ability: 5
-      value: 0.1
+    - ability: 4
+      value: 0.4
     children: []
     effects: []
   - name: MagicSlash3
@@ -537,8 +541,8 @@ MonoBehaviour:
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
-    - ability: 5
-      value: 0.1
+    - ability: 4
+      value: 0.4
     children:
     - name: MagicSlash0
       bulletId: 8
@@ -575,8 +579,8 @@ MonoBehaviour:
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
-    - ability: 5
-      value: 0.1
+    - ability: 4
+      value: 0.4
     children:
     - name: MagicSlash2
       bulletId: 10
