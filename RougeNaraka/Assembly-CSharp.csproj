@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Skill.cs" />
     <Compile Include="Assets\Scripts\SkillManager.cs" />
     <Compile Include="Assets\Scripts\SkillShowCase.cs" />
+    <Compile Include="Assets\Scripts\TxtHolder.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/skrtm/Desktop/Project/Git/RougeNaraka/RougeNaraka/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

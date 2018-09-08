@@ -9,12 +9,11 @@ public class PointTxtManager : MonoBehaviour {
     public GameObject txtObj;
 
     public static PointTxtManager instance;
-
     private void Awake()
     {
         if (instance == null)
             instance = this;
-        for(int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++)
         {
             SpawnTxt();
         }
@@ -42,7 +41,7 @@ public class PointTxtManager : MonoBehaviour {
         if (value < 0)
             txt.text = value.ToString(cut);
         else
-            txt.text = "+" + value.ToString(cut);   
+            txt.text = "+" + value.ToString(cut);
         return txt;
     }
 
@@ -68,32 +67,36 @@ public class PointTxtManager : MonoBehaviour {
         return TxtOn((Vector2)tf.position + offset, value, color, cut);
     }
 
-    public void TxtOnHead(float value, Transform tf, Color color)
+    public Text TxtOnHead(float value, Transform tf, Color color, TxtHolder holder)
     {
-        Text txt = TxtOn(tf, value, color, new Vector2(2, 0.5f), "N2");
-        StartCoroutine(MoveUp(txt.transform, 0.5f, 0.01f));
+        Text txt = TxtOn(tf, value, color, new Vector2(2, 0.5f + holder.position * 0.25f), "N2");
+        holder.AddTxt(txt);
+        StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
+        return txt;
     }
 
-    public void TxtOnGold(float value, Transform tf)
+    public void TxtOnGold(float value, Transform tf, TxtHolder holder)
     {
-        Text txt = TxtOn(tf, value, Color.yellow, new Vector2(0.5f, 0.3f));
-        StartCoroutine(MoveUp(txt.transform, 1f, 0.005f));
+        Text txt = TxtOn(tf, value, Color.yellow, new Vector2(0.5f, 0.3f + holder.position * 0.25f));
+        holder.AddTxt(txt);
+        StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
     }
 
-    public void TxtOnSoul(float value, Transform tf)
+    public void TxtOnSoul(float value, Transform tf, TxtHolder holder)
     {
-        Text txt = TxtOn(tf, value, Color.cyan, new Vector2(0.5f, 0.3f));
-        StartCoroutine(MoveUp(txt.transform, 1f, 0.005f));
+        Text txt = TxtOn(tf, value, Color.cyan, new Vector2(0.5f, 0.3f + holder.position * 0.25f));
+        holder.AddTxt(txt);
+        StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
     }
 
-    private IEnumerator MoveUp(Transform tf, float time, float speed)
+    private IEnumerator MoveUp(Text txt, float time, float speed, TxtHolder holder)
     {
         float amount = 0.05f;
         for(float t = 0; t < time; t += amount)
         {
-            tf.position = new Vector2(tf.position.x, tf.position.y + speed);
+            txt.transform.position = new Vector2(txt.transform.position.x, txt.transform.position.y + speed);
             yield return new WaitForSecondsRealtime(amount);
         }
-        txtPool.EnqueueObjectPool(tf.gameObject);
+        holder.RemoveTxt(txt);
     }
 }

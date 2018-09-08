@@ -7,6 +7,9 @@ public class MoneyManager : MonoBehaviour {
 
     public Text goldTxt;
     public Text soulTxt;
+
+    private TxtHolder goldHolder = new TxtHolder();
+    private TxtHolder soulHolder = new TxtHolder();
     public int gold
     {
         get { return _gold; }
@@ -50,7 +53,7 @@ public class MoneyManager : MonoBehaviour {
         else
             _gold = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnGold(value, goldTxt.transform);
+        PointTxtManager.instance.TxtOnGold(value, goldTxt.transform, goldHolder);
     }
 
     public bool UseGold(int amount)
@@ -59,7 +62,7 @@ public class MoneyManager : MonoBehaviour {
         {
             _gold -= amount;
             MoneyUpdate();
-            PointTxtManager.instance.TxtOnGold(-amount, goldTxt.transform);
+            PointTxtManager.instance.TxtOnGold(-amount, goldTxt.transform, goldHolder);
             return true;
         }
         else
@@ -78,7 +81,7 @@ public class MoneyManager : MonoBehaviour {
         else
             _collectedSoul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform);
+        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulHolder);
     }
 
     public void SetSoul(int value)
@@ -94,7 +97,7 @@ public class MoneyManager : MonoBehaviour {
         else
             _soul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform);
+        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulHolder);
     }
 
     public bool UseSoul(int amount)
@@ -103,7 +106,7 @@ public class MoneyManager : MonoBehaviour {
         {
             _soul -= amount;
             MoneyUpdate();
-            PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform);
+            PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform, soulHolder);
             return true;
         }
         else

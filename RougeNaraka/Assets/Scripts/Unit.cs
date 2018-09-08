@@ -91,8 +91,23 @@ public abstract class Unit : MonoBehaviour {
     [SerializeField][ReadOnly]
     protected float attackCoolTime;
 
+    /// <summary>
+    /// 텍스트가 안 겹치게 하는 홀더
+    /// </summary>
+    protected TxtHolder txtHolder = new TxtHolder();
+
+    protected UnityEngine.UI.Text[] texts = new UnityEngine.UI.Text[5];
+
     //upadate target, targetPosition
     public abstract bool SetTarget();
+
+    protected virtual void OnEnable()
+    {
+        _targetDistance = 1000;
+        StartCoroutine(AttackCool());
+        StartCoroutine(DistanceCoroutine());
+        StartCoroutine(Regen());
+    }
 
     /// <summary>
     /// Enemy 전용
@@ -149,6 +164,11 @@ public abstract class Unit : MonoBehaviour {
         SyncSpeed();
     }
 
+    public void TxtOnHead(float amount, Transform transform, Color color)
+    {
+        PointTxtManager.instance.TxtOnHead(amount, transform, color, txtHolder);
+    }
+
     public void SetHealth(float value)
     {
         _health = value;
@@ -186,7 +206,7 @@ public abstract class Unit : MonoBehaviour {
         if (_health + amount > stat.hp)
             amount = stat.hp - _mana;
         AddMana(amount);
-        PointTxtManager.instance.TxtOnHead(amount, transform, Color.blue);
+        TxtOnHead(amount, transform, Color.blue);
     }
 
     public bool UseMana(float amount)
@@ -194,7 +214,7 @@ public abstract class Unit : MonoBehaviour {
         if (_mana - amount >= 0)
         {
             AddMana(-amount);
-            PointTxtManager.instance.TxtOnHead(-amount, transform, Color.blue);
+            TxtOnHead(-amount, transform, Color.blue);
             return true;
         }
         else
@@ -251,14 +271,6 @@ public abstract class Unit : MonoBehaviour {
     {
         _weapon = w;
         //Debug.Log(name + " Equiped " + _weapon.name);
-    }
-
-    protected virtual void OnEnable()
-    {
-        _targetDistance = 1000;
-        StartCoroutine(AttackCool());
-        StartCoroutine(DistanceCoroutine());
-        StartCoroutine(Regen());
     }
 
     private IEnumerator DistanceCoroutine()
@@ -477,7 +489,7 @@ public abstract class Unit : MonoBehaviour {
     public void GetDamage(float damage)
     {
         _health -= damage;
-        PointTxtManager.instance.TxtOnHead(-damage, transform, Color.red);
+        TxtOnHead(-damage, transform, Color.red);
     }
 
     public void HealHealth(float amount)
@@ -485,7 +497,7 @@ public abstract class Unit : MonoBehaviour {
         if (_health + amount > stat.hp)
             amount = stat.hp - _health;
         AddHealth(amount);
-        PointTxtManager.instance.TxtOnHead(amount, transform, Color.green);
+        TxtOnHead(amount, transform, Color.green);
     }
 
     public void MoveToAttack()
