@@ -40,6 +40,8 @@ public class GameDatabase : ScriptableObject
     public int[] stageCosts;
     public UnitCost[] unitCosts;
     public SkillData[] skills;
+    public ItemData[] items;
+    public ItemSpriteData[] itemSprites;
 
     [ContextMenu("BulletIdToData")]
     public void BulletIdToData()
@@ -234,12 +236,12 @@ public struct SkillData
     public float distance;
     public bool isDeath;
     public EffectData[] effects;
-    public SkillValueData[] values;
+    public ValueData[] values;
     public SkillUpData levelUp;
 
     public void Reset()
     {
-        name = string.Empty; spr = null; id = -1; level = 1; coolTime = 0; coolTimeLeft = 0; manaCost = 0; effects = new EffectData[0]; values = new SkillValueData[0];
+        name = string.Empty; spr = null; id = -1; level = 1; coolTime = 0; coolTimeLeft = 0; manaCost = 0; effects = new EffectData[0]; values = new ValueData[0];
     }
 }
 
@@ -250,11 +252,11 @@ public struct SkillUpData
     public float manaCost;
     public float distance;
     public EffectData[] effects;
-    public SkillValueData[] values;
+    public ValueData[] values;
 }
 
 [Serializable]
-public struct SkillValueData
+public struct ValueData
 {
     public string name;
     public float value;
@@ -286,6 +288,23 @@ public class EffectData
 public enum EFFECT
 {
     STUN, SLOW, FIRE, ICE, KNOCKBACK
+}
+
+[Serializable]
+public struct ItemData
+{
+    public string name;
+    public int id;
+    public int spriteId;
+    public ValueData[] values;
+    public bool isKnown;
+}
+
+[Serializable]
+public struct ItemSpriteData
+{
+    public int id;
+    public Sprite spr;
 }
 
 [Serializable]
