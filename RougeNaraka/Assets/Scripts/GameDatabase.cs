@@ -296,8 +296,9 @@ public struct ItemData
     public string name;
     public int id;
     public int spriteId;
-    public ValueData[] values;
+    public float value;
     public bool isKnown;
+    public int amount;
 }
 
 [Serializable]

@@ -720,3 +720,23 @@ MonoBehaviour:
       distance: 0
       effects: []
       values: []
+  items:
+  - name: Heal
+    id: 0
+    spriteId: 0
+    value: 0
+    isKnown: 0
+    amount: 0
+  - name: Bomb
+    id: 0
+    spriteId: 0
+    value: 0
+    isKnown: 0
+    amount: 0
+  - name: 
+    id: 0
+    spriteId: 0
+    value: 0
+    isKnown: 0
+    amount: 0
+  itemSprites: []
