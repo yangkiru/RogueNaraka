@@ -4494,12 +4494,13 @@ MonoBehaviour:
   data:
     name: 
     id: 0
-    spriteId: 0
     value: 0
     isKnown: 0
     amount: 0
-  img: {fileID: 0}
-  spriteIds: 
+  img: {fileID: 582290416}
+  sprIds: 
+  isKnown: 
+  isDragable: 0
 --- !u!1 &592338154
 GameObject:
   m_ObjectHideFlags: 0

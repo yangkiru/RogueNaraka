@@ -83,7 +83,7 @@ public class GameDatabase : ScriptableObject
     {
         for(int i = 0; i < 50; i++)
         {
-            stageCosts[i] = 5 + i * 2;
+            stageCosts[i] = 3 + i * 2;
         }
     }
 }
@@ -295,9 +295,7 @@ public struct ItemData
 {
     public string name;
     public int id;
-    public int spriteId;
     public float value;
-    public bool isKnown;
     public int amount;
 }
 

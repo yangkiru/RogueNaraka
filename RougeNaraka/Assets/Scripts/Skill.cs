@@ -15,7 +15,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public SkillData data;
     public int position;
     public bool isCool;
-    public bool isEmpty;
 
     private SkillManager skillManager
     { get { return SkillManager.instance; } }
@@ -31,7 +30,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!isEmpty)
+        if (data.id != -1)
         {
             skillManager.DrawLine(position, true);
             skillManager.SetLine(true);
@@ -40,7 +39,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!isEmpty && (!player.isDeath || data.isDeath))
+        if (data.id != -1 && (!player.isDeath || data.isDeath))
         {
             SkillManager.instance.DrawLine(position, true);
             switch(data.id)
@@ -57,7 +56,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         skillManager.SetLine(false);
         skillManager.SetCircle(false);
-        if (!isEmpty && IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
+        if (data.id != -1 && IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
         {
             if (data.coolTimeLeft <= 0)
                 UseSkill();
@@ -132,7 +131,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void Init()
     {
-        isEmpty = true;
         isCool = true;
         img.sprite = null;
         img.color = Color.clear;
@@ -154,7 +152,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         SyncCoolImg();
         SyncCoolText();
         isCool = true;
-        isEmpty = false;
         img.color = Color.white;
         levelTxt.text = data.level.ToString();
         levelTxt.enabled = true;

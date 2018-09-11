@@ -723,20 +723,23 @@ MonoBehaviour:
   items:
   - name: Heal
     id: 0
-    spriteId: 0
-    value: 0
+    value: 3
     isKnown: 0
     amount: 0
-  - name: Bomb
-    id: 0
-    spriteId: 0
-    value: 0
+  - name: FragGrenade
+    id: 1
+    value: 3
     isKnown: 0
     amount: 0
-  - name: 
-    id: 0
-    spriteId: 0
-    value: 0
+  - name: HighExplosive
+    id: 2
+    value: 3
     isKnown: 0
     amount: 0
-  itemSprites: []
+  itemSprites:
+  - id: 0
+    spr: {fileID: 21300008, guid: 547fcd63638356545980197e8057c5c8, type: 3}
+  - id: 1
+    spr: {fileID: 21300000, guid: 02c111416a7e2d9498a3fd1f8b2b9053, type: 3}
+  - id: 2
+    spr: {fileID: 21300000, guid: 9d073f1b0befdcd499516a760c050d0a, type: 3}
