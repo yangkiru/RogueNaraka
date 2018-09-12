@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Item : MonoBehaviour {
+public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHandler
+{
 
+    public static Item instance = null;
     [SerializeField][ReadOnly]
     private ItemData data;
 
@@ -12,8 +15,12 @@ public class Item : MonoBehaviour {
     public int[] sprIds;
     public bool[] isKnown;
 
+    public RectTransform[] points;
+
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
         Load();
     }
 
@@ -74,6 +81,10 @@ public class Item : MonoBehaviour {
                     }
                     isKnown = temp.ToArray();
                 }
+            }
+            else//isKnown은 항상 값이 있어야하는데 아마도 이건 오류가 아닐까
+            {
+                isKnown = new bool[GameDatabase.instance.items.Length];
             }
             if (itemData != string.Empty)
             {
@@ -152,10 +163,76 @@ public class Item : MonoBehaviour {
         img.color = Color.white;
     }
 
+    [ContextMenu("Spawn")]
     public void SpawnRandomItem()
     {
         int rnd = Random.Range(0, GameDatabase.instance.items.Length);
         SyncData(rnd);
         SyncSprite();
     }
+
+    //public void UseItem()
+    //{
+    //    switch(data.id)
+    //    {
+    //        case 0:
+    //    }
+    //}
+
+    //private void DrawLine()
+    //{
+    //    points[0].position = transform.position;
+    //    points
+    //}
+
+    //public void OnBeginDrag(PointerEventData eventData)
+    //{
+    //    if (data.id != -1)
+    //    {
+    //        skillManager.DrawLine(position);
+    //        StartCoroutine(SetLine(true));
+    //    }
+    //}
+
+    //private IEnumerator SetLine(bool value)
+    //{
+    //    yield return null;
+    //    skillManager.SetLine(value);
+    //}
+
+    //public void OnDrag(PointerEventData eventData)
+    //{
+    //    if (skillManager.isDragable && IsSelected())
+    //        skillManager.DrawLine(position);
+    //}
+
+    //public void OnEndDrag(PointerEventData eventData)
+    //{
+    //    skillManager.SetLine(false);
+    //    if (skillManager.isDragable && IsSelected())
+    //    {
+    //        var pointer = new PointerEventData(EventSystem.current);
+    //        pointer.position = Input.mousePosition;
+    //        var raycastResults = new List<RaycastResult>();
+    //        EventSystem.current.RaycastAll(pointer, raycastResults);
+    //        if (raycastResults.Count > 0)
+    //        {
+    //            if (raycastResults[0].gameObject.CompareTag("Skill"))
+    //            {
+    //                int showCaseId = skillManager.GetId(position);
+    //                Skill target = raycastResults[0].gameObject.GetComponent<Skill>();
+    //                if (!skillManager.HasSkill(showCaseId))
+    //                    skillManager.EquipSkill(position, target.position);
+    //                else
+    //                {
+    //                    if (target.data.id == showCaseId)
+    //                    {
+    //                        target.LevelUp(1);
+    //                        skillManager.SetSkillPnl(false);
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 }

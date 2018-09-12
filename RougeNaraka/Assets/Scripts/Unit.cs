@@ -739,4 +739,9 @@ public abstract class Unit : MonoBehaviour {
             }
         }
     }
+    [ContextMenu("Suicide")]
+    public void Suicide()
+    {
+        GetDamage(_health);
+    }
 }

@@ -194,6 +194,7 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetFloat("mana", player.mana);
             PlayerPrefs.SetInt("stage", boardManager.stage);
             SkillManager.instance.Save();
+            Item.instance.Save();
         }
         if(isLevelUp)
             PlayerPrefs.SetInt("isLevelUp", 1);
@@ -235,6 +236,7 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("stage", 1);
 
             SkillManager.instance.ResetSave();
+            Item.instance.ResetSave();
         }
 
         //Debug.Log("Load");
@@ -277,6 +279,7 @@ public class GameManager : MonoBehaviour {
                 boardManager.SetStage(stage);
 
             SkillManager.instance.Load();
+            Item.instance.Load();
 
             if (PlayerPrefs.GetInt("isLevelUp") == 1)
             {
@@ -300,6 +303,7 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetFloat("mana", 1);
             SoulShopOpen();
             SkillManager.instance.ResetSave();
+            Item.instance.ResetSave();
         }
     }
 
