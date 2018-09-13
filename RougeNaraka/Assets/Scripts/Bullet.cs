@@ -8,11 +8,13 @@ public class Bullet : MonoBehaviour {
     public Animator animator;
     public new SpriteRenderer renderer;
 
-    [SerializeField][ReadOnly]
+    [SerializeField]
     private LayerMask layerMask;
 
     private Vector2 vec;
     private int knockBack;
+    [SerializeField][ReadOnly]
+    private int pierce = 1;
     private float damage;
     private float unitDamage;
     private float size;
@@ -103,6 +105,7 @@ public class Bullet : MonoBehaviour {
         shootSpeed = 0;
         angle = data.angle;
         effects = dt.effects;
+        pierce = 1;
     }
 
     public void SetFriendly(bool value)
@@ -216,13 +219,12 @@ public class Bullet : MonoBehaviour {
                 {
                     case ABILITY.GRAVITY:
                         break;
-                    case ABILITY.CHAIN:
-                        break;
                     case ABILITY.SPIN:
                         spinVelocity = data.abilities[i].value;
                         isSpin = true;
                         break;
                     case ABILITY.PIERCE:
+                        pierce += (int)data.abilities[i].value;
                         break;
                     case ABILITY.TIME:
                         if(data.abilities[i].ability > 0)
@@ -367,16 +369,18 @@ public class Bullet : MonoBehaviour {
                         EffectFunc(unit);
                     }
                 }
-                if(hits.Length > 0)
-                    Destroy();
+                if (hits.Length > 0)
+                {
+                    pierce -= hits.Length;
+                    if(pierce <= 0)
+                        Destroy();
+                }
             }
             else if (data.type == BULLET_TYPE.CIRCLEOVERLAP)//원형 도트 데미지
             {
-                if (dotTime >= 0)
-                {
-                    dotTime -= Time.deltaTime;
-                }
                 Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, size, layerMask);
+                if (dotTime >= 0)
+                    dotTime -= Time.deltaTime;
                 for (int i = 0; i < hits.Length; i++)
                 {
                     if (!(hits[i].gameObject.layer == GameDatabase.wallLayer))
@@ -390,8 +394,15 @@ public class Bullet : MonoBehaviour {
                         }
                     }
                 }
-                if (dotTime < 0)
+                if (dotTime < 0 && hits.Length > 0)
+                {
+                    pierce -= hits.Length;
+                    if (pierce <= 0)
+                        Destroy();
                     dotTime += data.dealSpeed;
+                }
+                if (hits.Length <= 0)
+                    dotTime = 0;                    
             }
             else if (data.type == BULLET_TYPE.LINECAST)//직선 단일 데미지
             {
@@ -402,6 +413,7 @@ public class Bullet : MonoBehaviour {
                     if (hit.collider.gameObject.layer == GameDatabase.wallLayer)
                     {
                         Debug.Log(name + " hit to wall");
+                        Destroy();
                     }
                     else
                     {
@@ -409,6 +421,9 @@ public class Bullet : MonoBehaviour {
                         Unit unit = hit.transform.GetComponent<Unit>();
                         unit.GetDamage(Damage());
                         EffectFunc(unit);
+                        pierce--;
+                        if (pierce <= 0)
+                            Destroy();
                     }
                 }
             }
@@ -422,6 +437,13 @@ public class Bullet : MonoBehaviour {
                     Unit unit = hits[i].transform.GetComponent<Unit>();
                     unit.GetDamage(Damage());
                     EffectFunc(unit);
+                }
+
+                if (hits.Length > 0)
+                {
+                    pierce -= hits.Length;
+                    if(pierce <= 0)
+                        Destroy();
                 }
             }
             else if (data.type == BULLET_TYPE.TRIANGLE)//삼각형 도트 데미지
@@ -461,7 +483,7 @@ public class Bullet : MonoBehaviour {
                         }
                     }
                 }
-                if (dotTime < 0)
+                if (dotTime < 0 && hits.Length > 0)
                     dotTime += data.dealSpeed;
             }
             else if (data.type == BULLET_TYPE.SECTOR)//부채꼴 도트 데미지
@@ -503,7 +525,7 @@ public class Bullet : MonoBehaviour {
                         }
                     }
                 }
-                if (dotTime < 0)
+                if (dotTime < 0 && hits.Length > 0)
                     dotTime += data.dealSpeed;
             }
         }
@@ -542,7 +564,8 @@ public class Bullet : MonoBehaviour {
             Bullet child = destroyChildren[i];
             destroyChildren.RemoveAt(i);
             i--;
-            child.Destroy();
+            if(child.gameObject.activeSelf)
+                child.Destroy();
         }
     }
 

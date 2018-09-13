@@ -4495,7 +4495,9 @@ MonoBehaviour:
     name: 
     id: 0
     value: 0
+    size: 0
     amount: 0
+  circle: {fileID: 0}
   img: {fileID: 582290416}
   sprIds: 
   isKnown: 
@@ -9366,6 +9368,11 @@ Prefab:
       propertyPath: m_Mass
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+        type: 2}
+      propertyPath: attackable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e94d87c0c56f8a240b7f56634ae5b43d, type: 2}
@@ -9662,7 +9669,7 @@ MonoBehaviour:
   - {fileID: 710444246}
   - {fileID: 633652486}
   weaponId: 0
-  weaponLevel: 0
+  weaponLevel: 2
   stage: 1
   isDebug: 1
   isReset: 0

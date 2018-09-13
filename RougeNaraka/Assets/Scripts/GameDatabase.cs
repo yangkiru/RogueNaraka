@@ -184,10 +184,13 @@ public enum BULLET_TYPE
     CIRCLECAST, CIRCLEOVERLAP, LINECAST, LINECASTS, TRIANGLE, NONE, SECTOR
 }
 
+/// <summary>
+/// Bullet Ability
+/// </summary>
 [Serializable]
 public enum ABILITY
 {
-    GRAVITY, CHAIN, SPIN, PIERCE, TIME, ORBIT
+    GRAVITY, SPIN, PIERCE, TIME, ORBIT
 }
 
 [Serializable]
@@ -296,6 +299,7 @@ public struct ItemData
     public string name;
     public int id;
     public float value;
+    public float size;
     public int amount;
 }
 
