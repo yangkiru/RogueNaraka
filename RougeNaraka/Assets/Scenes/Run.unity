@@ -4499,6 +4499,7 @@ MonoBehaviour:
   img: {fileID: 582290416}
   sprIds: 
   isKnown: 
+  points: []
 --- !u!1 &592338154
 GameObject:
   m_ObjectHideFlags: 0
