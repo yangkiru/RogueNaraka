@@ -492,54 +492,9 @@ public class SkillManager : MonoBehaviour {
         SetSkillSelectPnl(false);
     }
 
-    public void SetCircle(Vector2 radius, Vector2 pos)
-    {
-        circle.SetCircle(radius, pos);
-        circle.SetEnable(true);
-    }
-
-    public void SetCircle(Vector2 radius)
-    {
-        circle.SetCircle(radius);
-        circle.SetEnable(true);
-    }
-
-    public void SetCircle(float radius)
-    {
-        circle.SetCircle(radius);
-        circle.SetEnable(true);
-    }
-
-    public void SetCircle(float radius, Vector2 pos)
-    {
-        circle.SetCircle(radius, pos);
-        circle.SetEnable(true);
-    }
-
-    public void SetCircle(bool value)
-    {
-        circle.SetEnable(value);
-    }
-
-    public void SpinCircle(float amount)
-    {
-        circle.Spin(amount);
-    }
-
-    public void SpinCircle()
-    {
-        circle.Spin();
-    }
-
     public CircleRenderer GetCircle()
     {
         return circle;
-    }
-
-    public void MoveCircleToMouse()
-    {
-        Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        circle.Move(mp);
     }
 
     //public void Change(int id, int position)//스킬 교환, 확인과 효과

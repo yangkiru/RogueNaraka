@@ -11,6 +11,8 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
     [SerializeField][ReadOnly]
     private ItemData data;
 
+    public CircleRenderer circle;
+
     public Image img;
     public int[] sprIds;
     public bool[] isKnown;
@@ -171,13 +173,18 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
         SyncSprite();
     }
 
-    //public void UseItem()
-    //{
-    //    switch(data.id)
-    //    {
-    //        case 0:
-    //    }
-    //}
+    public void UseItem()
+    {
+        circle.SetCircle(data.size);
+        circle.MoveCircleToMouse();
+        Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(
+            Input.mousePosition), data.size, GameDatabase.instance.unitMask);
+        switch (data.id)
+        {
+            case 0://HealPotion
+                break;
+        }
+    }
 
     //private void DrawLine()
     //{

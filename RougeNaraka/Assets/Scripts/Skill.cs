@@ -46,7 +46,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 case 0://Roll
                     CircleToPlayer();
-                    skillManager.SpinCircle(0.05f);
+                    skillManager.GetCircle().Spin(0.05f);
                     break;
             }
         }
@@ -55,7 +55,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public void OnEndDrag(PointerEventData eventData)
     {
         skillManager.SetLine(false);
-        skillManager.SetCircle(false);
+        skillManager.GetCircle().SetEnable(false);
         if (data.id != -1 && IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
         {
             if (data.coolTimeLeft <= 0)
@@ -68,7 +68,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     private void CircleToPlayer()
     {
         skillManager.GetCircle().SetParent(player.transform);
-        skillManager.SetCircle(data.distance);
+        skillManager.GetCircle().SetCircle(data.distance);
     }
 
     private Vector3 GetMousePosition()

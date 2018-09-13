@@ -111,4 +111,10 @@ public class CircleRenderer : MonoBehaviour {
         spinAmount = amount;
         Spin();
     }
+
+    public void MoveCircleToMouse()
+    {
+        Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Move(mp);
+    }
 }
