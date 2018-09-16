@@ -60,13 +60,7 @@ public class Enemy : Unit {
 
     protected int MoneyFunction(int cost, float luck)
     {
-        float min = (cost - 1) * 10 + 1 + (int)(luck * 0.1f);
-        float max = cost * 10;
-        if (min > max)
-            min = max;
-        int money = UnityEngine.Random.Range((int)min, (int)max + 1);
-        if (luck > 100)
-            money += (int)luck - 100;
+        int money = UnityEngine.Random.Range(1, (int)((10 * cost) + luck));
         return money;
     }
 

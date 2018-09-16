@@ -34,6 +34,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             skillManager.DrawLine(position, true);
             skillManager.SetLine(true);
+            skillManager.GetCircle().SetEnable(true);
         }
     }
 
@@ -56,7 +57,8 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         skillManager.SetLine(false);
         skillManager.GetCircle().SetEnable(false);
-        if (data.id != -1 && IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
+        skillManager.GetCircle().transform.SetParent(null);
+        if (data.id != -1 && BoardManager.IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
         {
             if (data.coolTimeLeft <= 0)
                 UseSkill();
@@ -70,12 +72,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         skillManager.GetCircle().SetParent(player.transform);
         skillManager.GetCircle().SetCircle(data.distance);
     }
-
-    private Vector3 GetMousePosition()
-    {
-        Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return new Vector3(mp.x, mp.y, 0);
-    }
     
     public void UseMana()
     {
@@ -87,17 +83,9 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         return player.mana >= data.manaCost;
     }
 
-    public bool IsMouseInBoard()
-    {
-        Vector3 mp = GetMousePosition();
-        Vector3 min = BoardManager.instance.boardRange[0];
-        Vector3 max = BoardManager.instance.boardRange[1];
-        return mp.x > min.x && mp.y > min.y && mp.x < max.x && mp.y < max.y;
-    }
-
     public void UseSkill()
     {
-        Vector3 mp = GetMousePosition();
+        Vector3 mp = BoardManager.GetMousePosition();
         float distance = Vector2.Distance(mp, player.transform.position);
         Vector2 vec = mp - player.transform.position;
         Vector2 pos = mp;

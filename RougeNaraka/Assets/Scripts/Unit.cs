@@ -518,10 +518,9 @@ public abstract class Unit : MonoBehaviour {
         }
     }
     //상태이상
-    public void KnockBack(Vector2 vec)
+    public void KnockBack(Vector2 vec, float amount = 1)
     {
-        AddEffect(EFFECT.KNOCKBACK, MathHelpers.Vector2ToDegree(vec), 0);
-        Debug.Log(name + " KnockBack!");
+        AddEffect(EFFECT.KNOCKBACK, MathHelpers.Vector2ToDegree(vec), amount);
     }
 
     protected void KnockBackFunc()
@@ -530,7 +529,7 @@ public abstract class Unit : MonoBehaviour {
         for(int i = 0; i < knockBacks.Length; i++)
         {
             Vector2 vec = MathHelpers.DegreeToVector2(knockBacks[i].data.value);
-            rigid.AddForce(vec.normalized * 10);
+            rigid.AddForce(vec.normalized * knockBacks[i].data.time * 10);
             //Debug.Log("angle:" + knockBacks[i].data.value + " vec:" + vec.x + "," + vec.y);
         }
 

@@ -222,4 +222,17 @@ public class BoardManager : MonoBehaviour {
         enemies.Clear();
         enemyPool.Clear();
     }
+    public static Vector3 GetMousePosition()
+    {
+        Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return new Vector3(mp.x, mp.y, 0);
+    }
+
+    public static bool IsMouseInBoard()
+    {
+        Vector3 mp = GetMousePosition();
+        Vector3 min = BoardManager.instance.boardRange[0];
+        Vector3 max = BoardManager.instance.boardRange[1];
+        return mp.x > min.x && mp.y > min.y && mp.x < max.x && mp.y < max.y;
+    }
 }

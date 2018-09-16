@@ -38,7 +38,7 @@ public class CircleRenderer : MonoBehaviour {
 
     public void SetCircle(Vector2 radius, Vector2 pos)
     {
-        MoveCircle(pos);
+        Move(pos);
         SetCircle(radius);
     }
 
@@ -50,19 +50,13 @@ public class CircleRenderer : MonoBehaviour {
 
     public void SetCircle(float radius)
     {
-        this.radius = new Vector2(radius, radius);
-        CreatePoints();
+        SetCircle(new Vector2(radius, radius));
     }
     
     public void SetCircle(float radius, Vector2 pos)
     {
-        MoveCircle(pos);
+        Move(pos);
         SetCircle(radius);
-    }
-
-    public void MoveCircle(Vector2 pos)
-    {
-        transform.position = pos;
     }
 
     public void SetParent(Transform parent)

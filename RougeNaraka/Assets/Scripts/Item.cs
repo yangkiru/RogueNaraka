@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
     public static Item instance = null;
@@ -12,6 +12,7 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
     private ItemData data;
 
     public CircleRenderer circle;
+    public LineRenderer line;
 
     public Image img;
     public int[] sprIds;
@@ -29,7 +30,7 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
     public void ResetSave()
     {
         PlayerPrefs.SetInt("isItemFirst", 0);
-        PlayerPrefs.SetString("item", string.Empty);
+        PlayerPrefs.SetInt("item", -1);
         PlayerPrefs.SetString("itemSpr", string.Empty);
         PlayerPrefs.SetString("itemIsKnow", string.Empty);
     }
@@ -37,10 +38,7 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
     public void Save()
     {
         //현재 데이터 저장
-        if (data.id == -1)
-            PlayerPrefs.SetString("item", string.Empty);
-        else
-            PlayerPrefs.SetString("item", JsonUtility.ToJson(data));
+        PlayerPrefs.SetInt("item", data.id);
         PlayerPrefs.SetString("itemSpr", JsonHelper.ToJson<int>(sprIds));
         PlayerPrefs.SetString("itemIsKnow", JsonHelper.ToJson<bool>(isKnown));
     }
@@ -53,11 +51,12 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
             isKnown = new bool[GameDatabase.instance.items.Length];
             data.id = -1;
             img.color = Color.clear;
+            Save();
             PlayerPrefs.SetInt("isItemFirst", 1);
         }
         else
         {
-            string itemData = PlayerPrefs.GetString("item");
+            int itemData = PlayerPrefs.GetInt("item");
             string sprData = PlayerPrefs.GetString("itemSpr");
             string isKnownData = PlayerPrefs.GetString("itemIsKnown");
             if (sprData != string.Empty)
@@ -88,9 +87,9 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
             {
                 isKnown = new bool[GameDatabase.instance.items.Length];
             }
-            if (itemData != string.Empty)
+            if (itemData != -1)
             {
-                SyncData(JsonUtility.FromJson<ItemData>(itemData));
+                SyncData(GameDatabase.instance.items[itemData]);
                 SyncSprite();
             }
         }
@@ -148,10 +147,7 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void SyncData(ItemData dt)
     {
-        data.name = dt.name;
-        data.id = dt.id;
-        data.value = dt.value;
-        data.amount = dt.amount;
+        data = dt;
     }
 
     public void SyncData(int id)
@@ -177,69 +173,78 @@ public class Item : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHa
     {
         circle.SetCircle(data.size);
         circle.MoveCircleToMouse();
+        isKnown[data.id] = true;
         Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(
             Input.mousePosition), data.size, GameDatabase.instance.unitMask);
-        switch (data.id)
+        for (int i = 0; i < hits.Length; i++)
         {
-            case 0://HealPotion
-                break;
+            Unit unit = hits[i].GetComponent<Unit>();
+            switch (data.id)
+            {
+                case 0://HealPotion
+                    Debug.Log("Heal");
+                    unit.HealHealth(data.value);
+                    break;
+                case 1:
+                    Debug.Log("FragGrenade");
+                    unit.GetDamage(data.value);
+                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)(data.value/2));
+                    break;
+                case 2:
+                    Debug.Log("HighExplosive");
+                    unit.GetDamage(data.value / 2);
+                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)data.value);
+                    break;
+            }
+        }
+        InitItem();
+    }
+
+    public void InitItem()
+    {
+        data.id = -1;
+        img.color = Color.clear;
+    }
+
+    private void DrawLine()
+    {
+        points[0].position = new Vector3(transform.position.x, transform.position.y, 0);
+        Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        points[2].position = new Vector3(mp.x, mp.y, 0);
+        float mid = (BoardManager.instance.boardRange[0].x + BoardManager.instance.boardRange[1].x) / 2;
+        points[1].position = new Vector3((mid + mp.x) / 2, (points[0].position.y + points[2].position.y) / 2, 0);
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (data.id != -1)
+        {
+            circle.MoveCircleToMouse();
+            circle.SetCircle(data.size);
+            circle.SetEnable(true);
+            line.enabled = true;
         }
     }
 
-    //private void DrawLine()
-    //{
-    //    points[0].position = transform.position;
-    //    points
-    //}
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (data.id != -1)
+        {
+            circle.MoveCircleToMouse();
+            DrawLine();
+        }
+    }
 
-    //public void OnBeginDrag(PointerEventData eventData)
-    //{
-    //    if (data.id != -1)
-    //    {
-    //        skillManager.DrawLine(position);
-    //        StartCoroutine(SetLine(true));
-    //    }
-    //}
-
-    //private IEnumerator SetLine(bool value)
-    //{
-    //    yield return null;
-    //    skillManager.SetLine(value);
-    //}
-
-    //public void OnDrag(PointerEventData eventData)
-    //{
-    //    if (skillManager.isDragable && IsSelected())
-    //        skillManager.DrawLine(position);
-    //}
-
-    //public void OnEndDrag(PointerEventData eventData)
-    //{
-    //    skillManager.SetLine(false);
-    //    if (skillManager.isDragable && IsSelected())
-    //    {
-    //        var pointer = new PointerEventData(EventSystem.current);
-    //        pointer.position = Input.mousePosition;
-    //        var raycastResults = new List<RaycastResult>();
-    //        EventSystem.current.RaycastAll(pointer, raycastResults);
-    //        if (raycastResults.Count > 0)
-    //        {
-    //            if (raycastResults[0].gameObject.CompareTag("Skill"))
-    //            {
-    //                int showCaseId = skillManager.GetId(position);
-    //                Skill target = raycastResults[0].gameObject.GetComponent<Skill>();
-    //                if (!skillManager.HasSkill(showCaseId))
-    //                    skillManager.EquipSkill(position, target.position);
-    //                else
-    //                {
-    //                    if (target.data.id == showCaseId)
-    //                    {
-    //                        target.LevelUp(1);
-    //                        skillManager.SetSkillPnl(false);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        line.enabled = false;
+        circle.SetEnable(false);
+        if (data.id != -1)
+        {
+            if(BoardManager.IsMouseInBoard())
+            {
+                UseItem();
+            }
+        }
+    }
 }
