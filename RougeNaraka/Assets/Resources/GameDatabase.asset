@@ -44,8 +44,8 @@ MonoBehaviour:
       shootSpeed: 2
     isFriendly: 0
     move: 2
-    moveTime: 0
-    moveDistance: 2
+    moveTime: 0.5
+    moveDistance: 1
     minDistance: 1
     maxDistance: 2
   - name: RepeatShooterRed
@@ -72,8 +72,8 @@ MonoBehaviour:
       shootSpeed: 2
     isFriendly: 0
     move: 2
-    moveTime: 0
-    moveDistance: 2
+    moveTime: 0.5
+    moveDistance: 1
     minDistance: 1
     maxDistance: 2
   - name: RepeatShooterBlue
@@ -100,8 +100,8 @@ MonoBehaviour:
       shootSpeed: 2
     isFriendly: 0
     move: 2
-    moveTime: 0
-    moveDistance: 2
+    moveTime: 0.5
+    moveDistance: 1
     minDistance: 1
     maxDistance: 2
   - name: Slasher

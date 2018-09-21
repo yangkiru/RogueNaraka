@@ -71,94 +71,98 @@ public class Enemy : Unit {
             Move();
         }
         else
-        switch (move)
         {
-            case MOVE_TYPE.RUSH:
-                //Debug.Log("RUSH");
-                Move(targetPosition);
-                break;
-            case MOVE_TYPE.STATUE:
-                break;
-            case MOVE_TYPE.DISTANCE:
-                Vector2 v = (targetPosition - (Vector2)transform.position);
-                float vAngle = Vector2.Angle(Vector2.up, v);
-                if (v.x < 0)
-                    vAngle = 360 - vAngle;
-                //Debug.Log("vAngle" + vAngle);
+            Vector2 v;
+            switch (move)
+            {
+                case MOVE_TYPE.RUSH:
+                    //Debug.Log("RUSH");
+                    v = targetPosition - (Vector2)transform.position;
+                    attackable = true;
+                    Move(v.normalized * minDistance);
+                    break;
+                case MOVE_TYPE.STATUE:
+                    break;
+                case MOVE_TYPE.DISTANCE:
+                    v = (targetPosition - (Vector2)transform.position);
+                    float vAngle = Vector2.Angle(Vector2.up, v);
+                    if (v.x < 0)
+                        vAngle = 360 - vAngle;
+                    //Debug.Log("vAngle" + vAngle);
 
-                if (targetDistance < minDistance)//move back
-                {
-                    //Debug.Log("back");
-                    float angle = vAngle - 180;
-                    if (angle < 0)
-                        angle += 360;
-                    angle += (UnityEngine.Random.Range(-90, 91));
-                    if (angle < 0)
-                        angle += 360;
-                    else if (angle > 360)
-                        angle -= 360;
-
-                    angle = 450 - angle;
-
-                    v = MathHelpers.DegreeToVector2(angle);
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, v, moveDistance, GameDatabase.instance.wallMask);
-                    if(hit)
+                    if (targetDistance < minDistance)//move back
                     {
-                        //Debug.Log("wall");
-                        v = -v;
-                    }
-
-                }
-                else if (targetDistance < maxDistance)//inside
-                {
-                    //Debug.Log("Inside");
-                    if (UnityEngine.Random.Range(0, 2) == 0)//move left
-                    {
-                        float angle = vAngle - 90;
+                        //Debug.Log("back");
+                        float angle = vAngle - 180;
                         if (angle < 0)
                             angle += 360;
-                        //Debug.Log("vAngle : " + vAngle + "left : " + angle);
-                        angle = 450 - angle;
-                        v = MathHelpers.DegreeToVector2(angle);
-                    }
-                    else//move right
-                    {
-                        float angle = vAngle + 90;
-                        if (angle > 360)
+                        angle += (UnityEngine.Random.Range(-90, 91));
+                        if (angle < 0)
+                            angle += 360;
+                        else if (angle > 360)
                             angle -= 360;
-                        //Debug.Log("vAngle : " + vAngle + "right : " + angle);
+
                         angle = 450 - angle;
+
                         v = MathHelpers.DegreeToVector2(angle);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, v, moveDistance, GameDatabase.instance.wallMask);
+                        if (hit)
+                        {
+                            //Debug.Log("wall");
+                            v = -v;
+                        }
+
                     }
-                }
-                else //move forward
-                {
-                    float d = targetDistance - moveDistance;//이동 후 타겟과의 거리
-                    //Debug.Log("d:" + d);
-                    if (minDistance > d)
+                    else if (targetDistance < maxDistance)//inside
                     {
-                        moveDistance = moveDistance - minDistance + d;//이동 후 거리가 최소 거리를 넘지 않게
-                        //Debug.Log("moveD " + moveDistance);
+                        //Debug.Log("Inside");
+                        if (UnityEngine.Random.Range(0, 2) == 0)//move left
+                        {
+                            float angle = vAngle - 90;
+                            if (angle < 0)
+                                angle += 360;
+                            //Debug.Log("vAngle : " + vAngle + "left : " + angle);
+                            angle = 450 - angle;
+                            v = MathHelpers.DegreeToVector2(angle);
+                        }
+                        else//move right
+                        {
+                            float angle = vAngle + 90;
+                            if (angle > 360)
+                                angle -= 360;
+                            //Debug.Log("vAngle : " + vAngle + "right : " + angle);
+                            angle = 450 - angle;
+                            v = MathHelpers.DegreeToVector2(angle);
+                        }
                     }
-                }
-                moveVector = v.normalized * moveDistance;
-                //Debug.Log(moveVector.ToString());
-                Move((Vector2)transform.position + v.normalized * moveDistance);
-                break;
-            case MOVE_TYPE.RUN:
-                Vector2 vec = -(targetPosition - (Vector2)transform.position);
-                RaycastHit2D hitt = Physics2D.Raycast(transform.position, vec, moveDistance, GameDatabase.instance.wallMask);
-                if (hitt)
-                {
-                    if (targetDistance < moveDistance)
+                    else //move forward
                     {
-                        Vector2 mid = new Vector2((boardManager.boardRange[0].x + boardManager.boardRange[1].x) / 2,
-                            (boardManager.boardRange[0].y + boardManager.boardRange[1].y) / 2);
-                        vec = mid - (Vector2)transform.position;
+                        float d = targetDistance - moveDistance;//이동 후 타겟과의 거리
+                                                                //Debug.Log("d:" + d);
+                        if (minDistance > d)
+                        {
+                            moveDistance = moveDistance - minDistance + d;//이동 후 거리가 최소 거리를 넘지 않게
+                        }
                     }
-                }
-                Move((Vector2)transform.position + vec.normalized * moveDistance);
-                break;
+                    moveVector = v.normalized * moveDistance;
+                    //Debug.Log(moveVector.ToString());
+                    Move((Vector2)transform.position + v.normalized * moveDistance);
+                    break;
+                case MOVE_TYPE.RUN:
+                    Vector2 vec = -(targetPosition - (Vector2)transform.position);
+                    RaycastHit2D hitt = Physics2D.Raycast(transform.position, vec, moveDistance, GameDatabase.instance.wallMask);
+                    if (hitt)
+                    {
+                        if (targetDistance < moveDistance)
+                        {
+                            Vector2 mid = new Vector2((boardManager.boardRange[0].x + boardManager.boardRange[1].x) / 2,
+                                (boardManager.boardRange[0].y + boardManager.boardRange[1].y) / 2);
+                            vec = mid - (Vector2)transform.position;
+                        }
+                    }
+                    Move((Vector2)transform.position + vec.normalized * moveDistance);
+                    break;
+            }
         }
     }
 
@@ -166,12 +170,14 @@ public class Enemy : Unit {
     protected void Move()
     {
         StartCoroutine(MoveCoolTime(moveTime));
-        //MoveCheck();//StackOverFlow 발생
     }
 
     private IEnumerator MoveCoolTime(float time)
     {
+        attackable = true;
         yield return new WaitForSeconds(time);
+        attackable = false;
+
         MoveCheck();
     }
 
