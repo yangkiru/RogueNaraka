@@ -34,13 +34,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    weaponId: 3
+    weaponLevel: 0
     weapon:
-      name: RepeatShooter
+      name: HandGun
       level: 0
-      startBulletId: 00000000
-      spawnPoint: {x: 0, y: 0.5}
+      startBulletId: 0f000000
+      spawnPoint: {x: 0, y: 0.25}
       type: 1
-      shootSpeed: 2
+      localSpeed: 0
+      worldSpeed: 1
     isFriendly: 0
     move: 2
     moveTime: 0.5
@@ -61,13 +64,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 1, g: 0.4764151, b: 0.63653207, a: 1}
+    weaponId: 3
+    weaponLevel: 0
     weapon:
-      name: RepeatShooter
+      name: HandGun
       level: 0
-      startBulletId: 00000000
-      spawnPoint: {x: 0, y: 0.5}
+      startBulletId: 0f000000
+      spawnPoint: {x: 0, y: 0.25}
       type: 1
-      shootSpeed: 2
+      localSpeed: 0
+      worldSpeed: 1
     isFriendly: 0
     move: 2
     moveTime: 0.5
@@ -88,13 +94,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 0.4198113, g: 0.81014097, b: 1, a: 1}
+    weaponId: 3
+    weaponLevel: 0
     weapon:
-      name: RepeatShooter
+      name: HandGun
       level: 0
-      startBulletId: 00000000
-      spawnPoint: {x: 0, y: 0.5}
+      startBulletId: 0f000000
+      spawnPoint: {x: 0, y: 0.25}
       type: 1
-      shootSpeed: 2
+      localSpeed: 0
+      worldSpeed: 1
     isFriendly: 0
     move: 2
     moveTime: 0.5
@@ -115,13 +124,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 1, g: 1, b: 1, a: 0.27450982}
+    weaponId: 0
+    weaponLevel: 0
     weapon:
-      name: Slasher
+      name: MagicBall
       level: 0
-      startBulletId: 08000000
-      spawnPoint: {x: 0, y: 0.25}
-      type: 0
-      shootSpeed: 2
+      startBulletId: 00000000010000000200000003000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 1
+      localSpeed: 1
+      worldSpeed: 0
     isFriendly: 0
     move: 0
     moveTime: 0
@@ -142,13 +154,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 1, g: 0.47450984, b: 0.63529414, a: 0.27450982}
+    weaponId: 0
+    weaponLevel: 0
     weapon:
-      name: Slasher
+      name: MagicBall
       level: 0
-      startBulletId: 08000000
-      spawnPoint: {x: 0, y: 0.25}
-      type: 0
-      shootSpeed: 2
+      startBulletId: 00000000010000000200000003000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 1
+      localSpeed: 1
+      worldSpeed: 0
     isFriendly: 0
     move: 0
     moveTime: 0
@@ -169,13 +184,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 0.41960788, g: 0.8117648, b: 1, a: 0.27450982}
+    weaponId: 0
+    weaponLevel: 0
     weapon:
-      name: Slasher
+      name: MagicBall
       level: 0
-      startBulletId: 08000000
-      spawnPoint: {x: 0, y: 0.25}
-      type: 0
-      shootSpeed: 2
+      startBulletId: 00000000010000000200000003000000
+      spawnPoint: {x: 0, y: 0.5}
+      type: 1
+      localSpeed: 1
+      worldSpeed: 0
     isFriendly: 0
     move: 0
     moveTime: 0
@@ -196,13 +214,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 1, g: 0.99759674, b: 0.57254905, a: 1}
+    weaponId: 3
+    weaponLevel: 0
     weapon:
-      name: runner
+      name: HandGun
       level: 0
-      startBulletId: 00000000
-      spawnPoint: {x: 0, y: 0.5}
+      startBulletId: 0f000000
+      spawnPoint: {x: 0, y: 0.25}
       type: 1
-      shootSpeed: 1
+      localSpeed: 0
+      worldSpeed: 1
     isFriendly: 0
     move: 3
     moveTime: 1
@@ -224,13 +245,16 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    weaponId: 0
+    weaponLevel: 0
     weapon:
       name: 
       level: 0
       startBulletId: 
       spawnPoint: {x: 0, y: 0}
       type: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
     isFriendly: 0
     move: 0
     moveTime: 0
@@ -270,7 +294,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -293,7 +318,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -304,7 +330,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 1
       isEndWith: 1
@@ -327,7 +354,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -338,7 +366,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 1
       isEndWith: 1
@@ -349,7 +378,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 1
       isEndWith: 1
@@ -372,7 +402,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -383,7 +414,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 1
       isEndWith: 1
@@ -394,7 +426,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 1
       isEndWith: 1
@@ -405,7 +438,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 1
       isEndWith: 1
@@ -534,7 +568,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 20
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -545,7 +580,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: -20
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -570,7 +606,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: 120
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -581,7 +618,8 @@ MonoBehaviour:
       startTime: 0
       waitTime: 0
       angle: -120
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 0
       isStick: 0
       isEndWith: 0
@@ -593,20 +631,21 @@ MonoBehaviour:
     dmg: 1
     dealSpeed: 0.2
     size: 0.3
-    angle: 180
+    angle: 0
     controller: {fileID: 22100000, guid: 3cc82223d6d353f45a3a0ea0f817d44a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
-    - ability: 5
+    - ability: 4
       value: 1
     children:
     - name: MagicMissileTail
       bulletId: 14
       sortingOrder: -1
-      startTime: 0.5
-      waitTime: 0
+      startTime: 0
+      waitTime: 0.25
       angle: 0
-      shootSpeed: 0
+      localSpeed: 0
+      worldSpeed: 0
       isRepeat: 1
       isStick: 0
       isEndWith: 0
@@ -626,25 +665,49 @@ MonoBehaviour:
       value: 0
     children: []
     effects: []
+  - name: Bullet
+    id: 15
+    type: 0
+    dmg: 1
+    dealSpeed: 0
+    size: 0.08
+    angle: 0
+    controller: {fileID: 22100000, guid: bc7bd027e6806224c9b0ea4ef28eec8e, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 1
+      value: 720
+    children: []
+    effects: []
   weapons:
   - name: MagicBall
     level: 0
     startBulletId: 00000000010000000200000003000000
     spawnPoint: {x: 0, y: 0.5}
     type: 1
-    shootSpeed: 1
+    localSpeed: 3
+    worldSpeed: 0
   - name: MagicSlash
     level: 0
     startBulletId: 08000000090000000a0000000b0000000c000000
-    spawnPoint: {x: 0, y: 0.5}
+    spawnPoint: {x: 0, y: 0.3}
     type: 0
-    shootSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
   - name: MagicMissile
     level: 0
     startBulletId: 0d000000
     spawnPoint: {x: 0, y: 0.5}
     type: 1
-    shootSpeed: 1
+    localSpeed: 1
+    worldSpeed: 0
+  - name: HandGun
+    level: 0
+    startBulletId: 0f000000
+    spawnPoint: {x: 0, y: 0.25}
+    type: 1
+    localSpeed: 0
+    worldSpeed: 1
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1

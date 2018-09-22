@@ -25,7 +25,8 @@ public class Bullet : MonoBehaviour {
     private float dotTime;
     private float spinVelocity;
     private float spinValue;
-    private float shootSpeed;
+    private float localSpeed;
+    private float worldSpeed;
     private float angle;
     [SerializeField][ReadOnly]
     private bool isFriendly;
@@ -105,7 +106,8 @@ public class Bullet : MonoBehaviour {
         isSpin = false;
         spinVelocity = 0;
         spinValue = 0;
-        shootSpeed = 0;
+        localSpeed = 0;
+        worldSpeed = 0;
         angle = data.angle;
         effects = dt.effects;
         pierce = 1;
@@ -165,7 +167,7 @@ public class Bullet : MonoBehaviour {
             destroyChildren.Add(child);
         }
         var vForce = Quaternion.AngleAxis(childData.angle, Vector3.back) * vec;
-        child.ActiveTimer(pos, childData.spawnPoint, vForce.normalized, childData.waitTime, childData.shootSpeed);
+        child.ActiveTimer(pos, childData.spawnPoint, vForce.normalized, childData.waitTime, childData.localSpeed, childData.worldSpeed);
         //child.Attack(pos, vForce.normalized);
         if (childData.isRepeat && !isDestroy)
         {
@@ -187,24 +189,24 @@ public class Bullet : MonoBehaviour {
         transform.localPosition = Vector3.zero;
     }
 
-    public void ActiveTimer(Vector2 start, Vector2 move, Vector2 v, float waitTime, float shootSpeed)
+    public void ActiveTimer(Vector2 start, Vector2 move, Vector2 v, float waitTime, float localSpeed, float worldSpeed)
     {
         if (waitTime > 0)
         {
             renderer.enabled = false;
             isSleep = true;
-            StartCoroutine(ActiveTimerCoroutine(start, move, v, waitTime, shootSpeed));
+            StartCoroutine(ActiveTimerCoroutine(start, move, v, waitTime, localSpeed, worldSpeed));
         }
         else
-            Attack(start, move, v, shootSpeed);
+            Attack(start, move, v, localSpeed, worldSpeed);
     }
 
-    private IEnumerator ActiveTimerCoroutine(Vector2 start, Vector2 move, Vector2 v, float waitTime, float ShootSpeed)
+    private IEnumerator ActiveTimerCoroutine(Vector2 start, Vector2 move, Vector2 v, float waitTime, float localSpeed, float worldSpeed)
     {
         yield return new WaitForSeconds(waitTime);
         isSleep = false;
         renderer.enabled = true;
-        Attack(start, move, v, shootSpeed);
+        Attack(start, move, v, localSpeed, worldSpeed);
     }
 
     public void SetMask(LayerMask mask)
@@ -243,16 +245,17 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    public void Attack(Vector2 start, Vector2 move, Vector2 v, float shootSpeed)
+    public void Attack(Vector2 start, Vector2 move, Vector2 v, float localSpeed, float worldSpeed)
     {
-        this.shootSpeed = shootSpeed;
+        this.localSpeed = localSpeed;
+        this.worldSpeed = worldSpeed;
         //Abilities 체크
         AbilityCheck();
 
         Spawn(start, move, v);
         SetVec(v);
         RotateTo(v);
-        if (shootSpeed > 0)
+        if (localSpeed > 0 || worldSpeed > 0)
             Shoot(v);
         SpawnChildren();
     }
@@ -345,7 +348,8 @@ public class Bullet : MonoBehaviour {
         {
             if (isMoving)
             {
-                transform.Translate(new Vector3(-shootSpeed * basicSpeed * Time.deltaTime, 0, 0));
+                transform.Translate(new Vector3(-localSpeed * basicSpeed * Time.deltaTime, 0, 0));
+                transform.Translate(vec.normalized * worldSpeed * basicSpeed * Time.deltaTime, Space.World);
                 if (guideIncrease > 0)
                 {
                     Unit target = null;

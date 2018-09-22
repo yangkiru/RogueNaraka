@@ -462,7 +462,7 @@ public abstract class Unit : MonoBehaviour {
                 bullet.Init(bulletId, stat.dmg, isFriendly);
                 bullet.gameObject.SetActive(true);
                 Vector2 vec = (targetPosition - (Vector2)transform.position).normalized;
-                bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.shootSpeed);
+                bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed);
             }
             //else
                 //Debug.Log("targetDistance : " + targetDistance + " attackDistance : " + attackDistance);

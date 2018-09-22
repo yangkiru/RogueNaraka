@@ -86,6 +86,16 @@ public class GameDatabase : ScriptableObject
             stageCosts[i] = 3 + i * 2;
         }
     }
+
+    [ContextMenu("SyncWeapon")]
+    public void SyncWeapon()
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].weapon = weapons[enemies[i].weaponId];
+            enemies[i].weapon.level = enemies[i].weaponLevel;
+        }
+    }
 }
 
 [Serializable]
@@ -134,6 +144,8 @@ public struct UnitData
     public Stat stat;
     public RuntimeAnimatorController controller;
     public Color color;
+    public int weaponId;
+    public int weaponLevel;
     public Weapon weapon;
     public bool isFriendly;
     public MOVE_TYPE move;
@@ -151,12 +163,13 @@ public struct Weapon
     public int[] startBulletId;
     public Vector2 spawnPoint;
     public ATTACK_TYPE type;
-    public float shootSpeed;
+    public float localSpeed;
+    public float worldSpeed;
 
     public Weapon(Weapon w)
     {
-        name = w.name; level = w.level; startBulletId = w.startBulletId; spawnPoint = w.spawnPoint;
-        type = w.type; shootSpeed = w.shootSpeed;
+        name = w.name; level = w.level; startBulletId = (int[])w.startBulletId.Clone(); spawnPoint = w.spawnPoint;
+        type = w.type; localSpeed = w.localSpeed; worldSpeed = w.worldSpeed;
     }
 }
 
@@ -189,7 +202,7 @@ public enum BULLET_TYPE
 [Serializable]
 public enum ABILITY
 {
-    GRAVITY, SPIN, PIERCE, TIME, ORBIT, GUIDE
+    GRAVITY, SPIN, PIERCE, TIME, GUIDE
 }
 
 [Serializable]
@@ -208,7 +221,8 @@ public struct BulletChild
     public float startTime;
     public float waitTime;
     public float angle;
-    public float shootSpeed;
+    public float localSpeed;
+    public float worldSpeed;
     public bool isRepeat;
     public bool isStick;
     public bool isEndWith;

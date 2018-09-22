@@ -79,7 +79,7 @@ public class Enemy : Unit {
                     //Debug.Log("RUSH");
                     v = targetPosition - (Vector2)transform.position;
                     attackable = true;
-                    Move(v.normalized * minDistance);
+                    Move((Vector2)transform.position + v.normalized * minDistance);
                     break;
                 case MOVE_TYPE.STATUE:
                     break;
