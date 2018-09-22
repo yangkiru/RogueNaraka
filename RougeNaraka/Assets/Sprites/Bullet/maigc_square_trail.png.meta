@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: afabb6964bf2b8c4197ec0fbd96d5767
+guid: c762da82629d29f4a9a8f7bea9714227
 TextureImporter:
   fileIDToRecycleName:
-    21300000: magic_spin1_0
-    21300002: magic_spin1_1
-    21300004: magic_spin2_0
-    21300006: magic_spin2_1
+    21300000: maigc_square_trail_0
+    21300002: maigc_square_trail_1
+    21300004: maigc_square_trail_2
+    21300006: maigc_square_trail_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -84,67 +84,85 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: magic_spin2_0
+      name: maigc_square_trail_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 50
-        height: 50
+        width: 24
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65d1c96e07a7f014593b9a3ccf0dd729
+      spriteID: 20a6c2c44b6018d41b7007c3ea9ed3d3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: magic_spin2_1
+      name: maigc_square_trail_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 24
         y: 0
-        width: 50
-        height: 50
+        width: 24
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6452ed42a7f32314982625441529f03a
+      spriteID: 56e77f7eaa7cf374b80c5ed273fd94ad
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maigc_square_trail_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72a4e753a59b3a14592145a21a775259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maigc_square_trail_3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c046f5579b623064dacb8d2edb57eaa7
       vertices: []
       indices: 
       edges: []
@@ -152,7 +170,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 05b347bf5b62d1f4eb7b27533a463bde
     vertices: []
     indices: 
     edges: []

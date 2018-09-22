@@ -176,11 +176,6 @@ public class GameManager : MonoBehaviour {
         }
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
-        if(isBuy)
-        {
-            PlayerPrefs.SetString("weapon", JsonUtility.ToJson(player.weapon));
-        }
-
         if(isRun)
         {
             PlayerPrefs.SetFloat("dmg", player.stat.dmg);
@@ -195,6 +190,7 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("stage", boardManager.stage);
             SkillManager.instance.Save();
             Item.instance.Save();
+            PlayerPrefs.SetString("weapon", JsonUtility.ToJson(player.weapon));
         }
         if(isLevelUp)
             PlayerPrefs.SetInt("isLevelUp", 1);

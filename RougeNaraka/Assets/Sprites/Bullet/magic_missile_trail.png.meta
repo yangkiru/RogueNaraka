@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 351ae5d626b876b45a228347658ec0ab
+guid: 4844a103d81d2cf4c97ebc1b3a215ee4
 TextureImporter:
   fileIDToRecycleName:
-    21300000: monster1_att_ball_0
-    21300002: monster1_att_ball_1
-    21300004: monster1_att_ball_2
-    21300006: monster1_att_ball_3
-    21300008: magic_ball0_0
-    21300010: magic_ball0_1
-    21300012: magic_ball0_2
-    21300014: magic_ball0_3
+    21300000: magic_missile_trail_0
+    21300002: magic_missile_trail_1
+    21300004: magic_missile_trail_2
+    21300006: magic_missile_trail_3
+    21300008: magic_missile_trail_4
+    21300010: magic_missile_trail_5
+    21300012: magic_missile_trail_6
+    21300014: magic_missile_trail_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,107 +88,165 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: magic_ball0_0
+      name: magic_missile_trail_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 20
         height: 20
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f052b96f6d669fb4bbe27db793507255
+      spriteID: 8c1942ee44959fc46bf57f33713e0d61
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: magic_ball0_1
+      name: magic_missile_trail_1
       rect:
         serializedVersion: 2
         x: 20
         y: 0
         width: 20
         height: 20
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9192473746a09e4bb342b18b4347fbb
+      spriteID: 047ffb840275aa14fb8a96b23e7893ad
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: magic_ball0_2
+      name: magic_missile_trail_2
       rect:
         serializedVersion: 2
         x: 40
         y: 0
         width: 20
         height: 20
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ab81fdb7f3baee4c8d529ea59a11851
+      spriteID: 3d6068adf8c8e714f8db5815b1513651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: magic_ball0_3
+      name: magic_missile_trail_3
       rect:
         serializedVersion: 2
         x: 60
         y: 0
         width: 20
         height: 20
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ca35dab8f967674ebe5ba0eb44724bf
+      spriteID: 20a532566ff96cb4e9363c40954f65ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magic_missile_trail_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3a8bcbc237db9a44826857208fbb32a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magic_missile_trail_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dac7bf4fa3f7bda4dad7b23087f8110a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magic_missile_trail_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b09c6cf76a3cb34d9b136d9f47af466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magic_missile_trail_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 633a52aa2bb954845b1ae901e9163086
       vertices: []
       indices: 
       edges: []
@@ -196,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0d030c01836ce004fbd57d38e2663c3c
     vertices: []
     indices: 
     edges: []

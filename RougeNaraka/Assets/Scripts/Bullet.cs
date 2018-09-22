@@ -15,6 +15,9 @@ public class Bullet : MonoBehaviour {
     private int knockBack;
     [SerializeField][ReadOnly]
     private int pierce = 1;
+    [SerializeField]
+    private float guideIncrease;
+    private float guideSpeed;
     private float damage;
     private float unitDamage;
     private float size;
@@ -106,6 +109,8 @@ public class Bullet : MonoBehaviour {
         angle = data.angle;
         effects = dt.effects;
         pierce = 1;
+        guideIncrease = 0;
+        guideSpeed = 0;
     }
 
     public void SetFriendly(bool value)
@@ -160,7 +165,7 @@ public class Bullet : MonoBehaviour {
             destroyChildren.Add(child);
         }
         var vForce = Quaternion.AngleAxis(childData.angle, Vector3.back) * vec;
-        child.ActiveTimer(pos, childData.spawnPoint, vForce.normalized, childData.waitTime, childData.shootSpeed, childData.isShoot);
+        child.ActiveTimer(pos, childData.spawnPoint, vForce.normalized, childData.waitTime, childData.shootSpeed);
         //child.Attack(pos, vForce.normalized);
         if (childData.isRepeat && !isDestroy)
         {
@@ -182,24 +187,24 @@ public class Bullet : MonoBehaviour {
         transform.localPosition = Vector3.zero;
     }
 
-    public void ActiveTimer(Vector2 start, Vector2 move, Vector2 v, float waitTime, float shootSpeed, bool isShoot)
+    public void ActiveTimer(Vector2 start, Vector2 move, Vector2 v, float waitTime, float shootSpeed)
     {
         if (waitTime > 0)
         {
             renderer.enabled = false;
             isSleep = true;
-            StartCoroutine(ActiveTimerCoroutine(start, move, v, waitTime, shootSpeed, isShoot));
+            StartCoroutine(ActiveTimerCoroutine(start, move, v, waitTime, shootSpeed));
         }
         else
-            Attack(start, move, v, shootSpeed, isShoot);
+            Attack(start, move, v, shootSpeed);
     }
 
-    private IEnumerator ActiveTimerCoroutine(Vector2 start, Vector2 move, Vector2 v, float waitTime, float ShootSpeed, bool isShoot = true)
+    private IEnumerator ActiveTimerCoroutine(Vector2 start, Vector2 move, Vector2 v, float waitTime, float ShootSpeed)
     {
         yield return new WaitForSeconds(waitTime);
         isSleep = false;
         renderer.enabled = true;
-        Attack(start, move, v, shootSpeed, isShoot);
+        Attack(start, move, v, shootSpeed);
     }
 
     public void SetMask(LayerMask mask)
@@ -207,10 +212,8 @@ public class Bullet : MonoBehaviour {
         layerMask = mask;
     }
 
-    public void Attack(Vector2 start, Vector2 move, Vector2 v, float shootSpeed, bool isShoot = true)
+    private void AbilityCheck()
     {
-        this.shootSpeed = shootSpeed;
-        //Abilities 체크
         if (data.abilities != null)
         {
             for (int i = 0; i < data.abilities.Length; i++)
@@ -227,39 +230,29 @@ public class Bullet : MonoBehaviour {
                         pierce += (int)data.abilities[i].value;
                         break;
                     case ABILITY.TIME:
-                        if(data.abilities[i].ability > 0)
+                        if (data.abilities[i].value > 0)
                             StartCoroutine(TimeLimit(data.abilities[i].value));
+                        else
+                            StartCoroutine(DestroyCoroutine());
+                        break;
+                    case ABILITY.GUIDE:
+                        guideIncrease = data.abilities[i].value;
                         break;
                 }
             }
         }
+    }
 
-        //switch (data.type)
-        //{
-        //    case BULLET_TYPE.CIRCLECAST:
-        //        Spawn(start, v);
-        //        Shoot(v);
-        //        break;
-        //    case BULLET_TYPE.CIRCLEOVERLAP:
-        //        Spawn(start, v);
-        //        break;
-        //    case BULLET_TYPE.LINECAST:
-        //        break;
-        //    case BULLET_TYPE.LINECASTS:
-        //        Teleport(start);
-        //        SetVec(v);
-        //        break;
-        //    case BULLET_TYPE.TRIANGLE:
-        //        Teleport(start);
-        //        SetVec(v);
-        //        RotateTo(v);
-        //        break;
-        //}
+    public void Attack(Vector2 start, Vector2 move, Vector2 v, float shootSpeed)
+    {
+        this.shootSpeed = shootSpeed;
+        //Abilities 체크
+        AbilityCheck();
 
         Spawn(start, move, v);
         SetVec(v);
         RotateTo(v);
-        if (isShoot)
+        if (shootSpeed > 0)
             Shoot(v);
         SpawnChildren();
     }
@@ -353,6 +346,39 @@ public class Bullet : MonoBehaviour {
             if (isMoving)
             {
                 transform.Translate(new Vector3(-shootSpeed * basicSpeed * Time.deltaTime, 0, 0));
+                if (guideIncrease > 0)
+                {
+                    Unit target = null;
+                    if (layerMask == GameDatabase.instance.friendlyMask)
+                    {
+                        List<Enemy> enimies = BoardManager.instance.enemies;
+                        if (enimies.Count > 0)
+                        {
+                            Enemy closest = enimies[0];
+                            float distance = Vector2.SqrMagnitude(transform.position - enimies[0].transform.position);
+                            for (int i = 1; i < enimies.Count; i++)
+                            {
+                                float temp = Vector2.SqrMagnitude(transform.position - enimies[i].transform.position);
+                                if (temp < distance)
+                                {
+                                    distance = temp;
+                                    closest = enimies[i];
+                                }
+                            }
+                            target = closest;
+                        }
+                    }
+                    else
+                    {
+                        target = Player.instance;
+                    }
+                    if (target)
+                    {
+                        Vector3 targetVec = transform.position - target.transform.position;
+                        transform.right = Vector3.Slerp(transform.right, targetVec, guideSpeed * 0.01f);
+                        guideSpeed += guideIncrease * 0.01f;
+                    }
+                }
             }
 
             if (data.type == BULLET_TYPE.CIRCLECAST)//원형 데미지

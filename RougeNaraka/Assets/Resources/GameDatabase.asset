@@ -40,7 +40,6 @@ MonoBehaviour:
       startBulletId: 00000000
       spawnPoint: {x: 0, y: 0.5}
       type: 1
-      isShoot: 1
       shootSpeed: 2
     isFriendly: 0
     move: 2
@@ -68,7 +67,6 @@ MonoBehaviour:
       startBulletId: 00000000
       spawnPoint: {x: 0, y: 0.5}
       type: 1
-      isShoot: 1
       shootSpeed: 2
     isFriendly: 0
     move: 2
@@ -96,7 +94,6 @@ MonoBehaviour:
       startBulletId: 00000000
       spawnPoint: {x: 0, y: 0.5}
       type: 1
-      isShoot: 1
       shootSpeed: 2
     isFriendly: 0
     move: 2
@@ -124,7 +121,6 @@ MonoBehaviour:
       startBulletId: 08000000
       spawnPoint: {x: 0, y: 0.25}
       type: 0
-      isShoot: 0
       shootSpeed: 2
     isFriendly: 0
     move: 0
@@ -152,7 +148,6 @@ MonoBehaviour:
       startBulletId: 08000000
       spawnPoint: {x: 0, y: 0.25}
       type: 0
-      isShoot: 0
       shootSpeed: 2
     isFriendly: 0
     move: 0
@@ -180,7 +175,6 @@ MonoBehaviour:
       startBulletId: 08000000
       spawnPoint: {x: 0, y: 0.25}
       type: 0
-      isShoot: 0
       shootSpeed: 2
     isFriendly: 0
     move: 0
@@ -208,7 +202,6 @@ MonoBehaviour:
       startBulletId: 00000000
       spawnPoint: {x: 0, y: 0.5}
       type: 1
-      isShoot: 1
       shootSpeed: 1
     isFriendly: 0
     move: 3
@@ -237,7 +230,6 @@ MonoBehaviour:
       startBulletId: 
       spawnPoint: {x: 0, y: 0}
       type: 0
-      isShoot: 0
       shootSpeed: 0
     isFriendly: 0
     move: 0
@@ -282,7 +274,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     effects: []
   - name: MagicBall1
@@ -306,7 +297,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     - name: MagicSpin0
       bulletId: 4
@@ -318,7 +308,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 1
       isEndWith: 1
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     effects: []
   - name: MagicBall2
@@ -342,7 +331,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     - name: MagicSpin0
       bulletId: 4
@@ -354,7 +342,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 1
       isEndWith: 1
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     - name: MagicSpin1
       bulletId: 5
@@ -366,7 +353,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 1
       isEndWith: 1
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     effects: []
   - name: MagicBall3
@@ -390,7 +376,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     - name: MagicSpin0
       bulletId: 4
@@ -402,7 +387,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 1
       isEndWith: 1
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     - name: MagicSpin1
       bulletId: 5
@@ -414,7 +398,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 1
       isEndWith: 1
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     - name: MagicSpin2
       bulletId: 6
@@ -426,7 +409,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 1
       isEndWith: 1
-      isShoot: 0
       spawnPoint: {x: 0, y: 0}
     effects: []
   - name: MagicSpin0
@@ -556,7 +538,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: 1, y: 0}
     - name: MagicSlash0
       bulletId: 8
@@ -568,7 +549,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: -1, y: 0}
     effects: []
   - name: MagicSlash4
@@ -594,7 +574,6 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: 0.5, y: 0.9}
     - name: MagicSlash2
       bulletId: 10
@@ -606,8 +585,46 @@ MonoBehaviour:
       isRepeat: 0
       isStick: 0
       isEndWith: 0
-      isShoot: 0
       spawnPoint: {x: -0.5, y: 0.9}
+    effects: []
+  - name: MagicMissile
+    id: 13
+    type: 1
+    dmg: 1
+    dealSpeed: 0.2
+    size: 0.3
+    angle: 180
+    controller: {fileID: 22100000, guid: 3cc82223d6d353f45a3a0ea0f817d44a, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 5
+      value: 1
+    children:
+    - name: MagicMissileTail
+      bulletId: 14
+      sortingOrder: -1
+      startTime: 0.5
+      waitTime: 0
+      angle: 0
+      shootSpeed: 0
+      isRepeat: 1
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    effects: []
+  - name: MagicMissileTail
+    id: 14
+    type: 5
+    dmg: 0
+    dealSpeed: 0
+    size: 1
+    angle: 0
+    controller: {fileID: 22100000, guid: b6b1b324b3e8bd146b19ce5e9c98a4ae, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0
+    children: []
     effects: []
   weapons:
   - name: MagicBall
@@ -615,15 +632,19 @@ MonoBehaviour:
     startBulletId: 00000000010000000200000003000000
     spawnPoint: {x: 0, y: 0.5}
     type: 1
-    isShoot: 1
-    shootSpeed: 3
+    shootSpeed: 1
   - name: MagicSlash
     level: 0
     startBulletId: 08000000090000000a0000000b0000000c000000
     spawnPoint: {x: 0, y: 0.5}
     type: 0
-    isShoot: 0
     shootSpeed: 0
+  - name: MagicMissile
+    level: 0
+    startBulletId: 0d000000
+    spawnPoint: {x: 0, y: 0.5}
+    type: 1
+    shootSpeed: 1
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1

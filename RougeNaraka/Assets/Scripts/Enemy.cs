@@ -70,7 +70,7 @@ public class Enemy : Unit {
         {
             Move();
         }
-        else
+        else if(!isDeath)
         {
             Vector2 v;
             switch (move)

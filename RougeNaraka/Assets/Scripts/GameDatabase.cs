@@ -151,13 +151,12 @@ public struct Weapon
     public int[] startBulletId;
     public Vector2 spawnPoint;
     public ATTACK_TYPE type;
-    public bool isShoot;
     public float shootSpeed;
 
     public Weapon(Weapon w)
     {
         name = w.name; level = w.level; startBulletId = w.startBulletId; spawnPoint = w.spawnPoint;
-        type = w.type; isShoot = w.isShoot; shootSpeed = w.shootSpeed;
+        type = w.type; shootSpeed = w.shootSpeed;
     }
 }
 
@@ -190,7 +189,7 @@ public enum BULLET_TYPE
 [Serializable]
 public enum ABILITY
 {
-    GRAVITY, SPIN, PIERCE, TIME, ORBIT
+    GRAVITY, SPIN, PIERCE, TIME, ORBIT, GUIDE
 }
 
 [Serializable]
@@ -213,7 +212,6 @@ public struct BulletChild
     public bool isRepeat;
     public bool isStick;
     public bool isEndWith;
-    public bool isShoot;
     public Vector2 spawnPoint;
 }
 
