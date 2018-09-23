@@ -26,6 +26,7 @@ public class BoardManager : MonoBehaviour {
     { get { return _stage; } }
     [SerializeField][ReadOnly]
     private int _stage;
+    public bool isReady;
 
     private void Awake()
     {
@@ -95,6 +96,7 @@ public class BoardManager : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(1);
         GameManager.instance.SetPause(false);
+        isReady = true;
     }
     /// <summary>
     /// stage = value;
@@ -112,6 +114,7 @@ public class BoardManager : MonoBehaviour {
 
     private void InitStage(int stage)
     {
+        isReady = false;
         for (int i = 0; i < bulletPool.transform.childCount; i++)
         {
             GameObject obj = bulletPool.transform.GetChild(i).gameObject;

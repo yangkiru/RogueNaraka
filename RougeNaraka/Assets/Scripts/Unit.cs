@@ -438,7 +438,7 @@ public abstract class Unit : MonoBehaviour {
 
     protected virtual void Attack()
     {
-        if (attackable && target)
+        if (attackable && target && boardManager.isReady)
         {
             int bulletId = _weapon.startBulletId[_weapon.level];
 

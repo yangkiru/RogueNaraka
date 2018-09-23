@@ -4,13 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Unit {
-
     Vector2 moveVector = Vector2.zero;
-    //protected void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawLine(transform.position, (Vector2)transform.position + moveVector);
-    //}
 
     protected override void OnEnable()
     {
@@ -138,7 +132,6 @@ public class Enemy : Unit {
                     else //move forward
                     {
                         float d = targetDistance - moveDistance;//이동 후 타겟과의 거리
-                                                                //Debug.Log("d:" + d);
                         if (minDistance > d)
                         {
                             moveDistance = moveDistance - minDistance + d;//이동 후 거리가 최소 거리를 넘지 않게
