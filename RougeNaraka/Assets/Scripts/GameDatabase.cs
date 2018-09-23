@@ -224,6 +224,7 @@ public struct BulletChild
     public float localSpeed;
     public float worldSpeed;
     public bool isRepeat;
+    public bool isFirst;//반복의 첫 번째는 startTime 무시
     public bool isStick;
     public bool isEndWith;
     public Vector2 spawnPoint;
@@ -249,6 +250,7 @@ public struct SkillData
     public float coolTimeLeft;
     public float manaCost;
     public float distance;
+    public bool isCircleToPlayer;
     public bool isDeath;
     public EffectData[] effects;
     public ValueData[] values;

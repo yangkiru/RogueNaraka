@@ -139,7 +139,10 @@ public class Bullet : MonoBehaviour {
 
     private IEnumerator SpawnBulletTimer(BulletChild childData)
     {
-        yield return new WaitForSeconds(childData.startTime);
+        if(childData.isFirst)
+            childData.isFirst = false;
+        else
+            yield return new WaitForSeconds(childData.startTime);
         if (!isDestroy)
         {
             Vector2 pos = transform.position;
@@ -171,7 +174,7 @@ public class Bullet : MonoBehaviour {
         //child.Attack(pos, vForce.normalized);
         if (childData.isRepeat && !isDestroy)
         {
-            if (childData.startTime < 0)
+            if (childData.startTime <= 0)
                 SpawnBullet(childData, transform.position);
             else
                 StartCoroutine(SpawnBulletTimer(childData));

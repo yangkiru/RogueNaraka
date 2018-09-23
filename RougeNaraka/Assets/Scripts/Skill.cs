@@ -34,7 +34,11 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             skillManager.DrawLine(position, true);
             skillManager.SetLine(true);
-            skillManager.GetCircle().SetEnable(true);
+            if (data.distance > 0)
+            {
+                skillManager.GetCircle().SetCircle(data.distance);
+                skillManager.GetCircle().SetEnable(true);
+            }
         }
     }
 
@@ -43,12 +47,15 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         if (data.id != -1 && (!player.isDeath || data.isDeath))
         {
             SkillManager.instance.DrawLine(position, true);
-            switch(data.id)
+            if (data.isCircleToPlayer)
             {
-                case 0://Roll
-                    CircleToPlayer();
-                    skillManager.GetCircle().Spin(0.05f);
-                    break;
+                skillManager.GetCircle().SetParent(player.transform);
+                skillManager.GetCircle().Move(Vector2.zero);
+                skillManager.GetCircle().Spin(0.05f);
+            }
+            else
+            {
+                skillManager.GetCircle().MoveCircleToMouse();
             }
         }
     }
@@ -65,12 +72,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             else
                 Debug.Log(name + " CoolTime! : " + data.coolTimeLeft);
         }
-    }
-
-    private void CircleToPlayer()
-    {
-        skillManager.GetCircle().SetParent(player.transform);
-        skillManager.GetCircle().SetCircle(data.distance);
     }
     
     public void UseMana()
