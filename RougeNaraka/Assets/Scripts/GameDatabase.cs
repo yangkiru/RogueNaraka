@@ -187,6 +187,7 @@ public struct BulletData
     public Color color;
     public Ability[] abilities;
     public BulletChild[] children;
+    public BulletChild[] onDestroy;
     public EffectData[] effects;
 }
 

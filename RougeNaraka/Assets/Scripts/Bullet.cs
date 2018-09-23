@@ -124,16 +124,16 @@ public class Bullet : MonoBehaviour {
             SetMask(GameDatabase.instance.friendlyMask);
     }
 
-    public void SpawnChildren()
+    public void SpawnChildren(BulletChild[] children)
     {
-        for (int i = 0; i < data.children.Length; i++)
+        for (int i = 0; i < children.Length; i++)
         {
-            if (data.children[i].startTime != 0)
+            if (children[i].startTime != 0)
             {
-                StartCoroutine(SpawnBulletTimer(data.children[i]));
+                StartCoroutine(SpawnBulletTimer(children[i]));
             }
             else
-                SpawnBullet(data.children[i], transform.position);
+                SpawnBullet(children[i], transform.position);
         }
     }
 
@@ -260,7 +260,7 @@ public class Bullet : MonoBehaviour {
         RotateTo(v);
         if (localSpeed > 0 || worldSpeed > 0)
             Shoot(v);
-        SpawnChildren();
+        SpawnChildren(data.children);
     }
 
     public void Shoot(Vector2 v)
@@ -618,6 +618,7 @@ public class Bullet : MonoBehaviour {
         isDestroy = true;
         animator.SetBool("isDestroy", true);
         DestroyChildren();//자식들 죽이는 부모
+        SpawnChildren(data.onDestroy);
         //if (destroyTime <= 0)
         //    renderer.enabled = false;
 

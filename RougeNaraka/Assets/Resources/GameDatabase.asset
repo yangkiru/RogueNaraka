@@ -124,15 +124,15 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 1, g: 1, b: 1, a: 0.27450982}
-    weaponId: 0
+    weaponId: 1
     weaponLevel: 0
     weapon:
-      name: MagicBall
+      name: MagicSlash
       level: 0
-      startBulletId: 00000000010000000200000003000000
-      spawnPoint: {x: 0, y: 0.5}
-      type: 1
-      localSpeed: 1
+      startBulletId: 08000000090000000a0000000b0000000c000000
+      spawnPoint: {x: 0, y: 0.3}
+      type: 0
+      localSpeed: 0
       worldSpeed: 0
     isFriendly: 0
     move: 0
@@ -154,15 +154,15 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 1, g: 0.47450984, b: 0.63529414, a: 0.27450982}
-    weaponId: 0
+    weaponId: 1
     weaponLevel: 0
     weapon:
-      name: MagicBall
+      name: MagicSlash
       level: 0
-      startBulletId: 00000000010000000200000003000000
-      spawnPoint: {x: 0, y: 0.5}
-      type: 1
-      localSpeed: 1
+      startBulletId: 08000000090000000a0000000b0000000c000000
+      spawnPoint: {x: 0, y: 0.3}
+      type: 0
+      localSpeed: 0
       worldSpeed: 0
     isFriendly: 0
     move: 0
@@ -184,15 +184,15 @@ MonoBehaviour:
       mpRegen: 0
     controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
     color: {r: 0.41960788, g: 0.8117648, b: 1, a: 0.27450982}
-    weaponId: 0
+    weaponId: 1
     weaponLevel: 0
     weapon:
-      name: MagicBall
+      name: MagicSlash
       level: 0
-      startBulletId: 00000000010000000200000003000000
-      spawnPoint: {x: 0, y: 0.5}
-      type: 1
-      localSpeed: 1
+      startBulletId: 08000000090000000a0000000b0000000c000000
+      spawnPoint: {x: 0, y: 0.3}
+      type: 0
+      localSpeed: 0
       worldSpeed: 0
     isFriendly: 0
     move: 0
@@ -279,18 +279,32 @@ MonoBehaviour:
   bullets:
   - name: MagicBall0
     id: 0
-    type: 1
+    type: 0
     dmg: 1
     dealSpeed: 2
     size: 0.15
     angle: 0
-    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
     children:
     - name: MagicSpawn
       bulletId: 7
       sortingOrder: 1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    onDestroy:
+    - name: MagicBallDestroy
+      bulletId: 16
+      sortingOrder: -1
       startTime: 0
       waitTime: 0
       angle: 0
@@ -309,7 +323,7 @@ MonoBehaviour:
     dealSpeed: 2
     size: 0.15
     angle: 0
-    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
     children:
@@ -339,6 +353,7 @@ MonoBehaviour:
       isStick: 1
       isEndWith: 1
       spawnPoint: {x: 0, y: 0}
+    onDestroy: []
     effects: []
   - name: MagicBall2
     id: 2
@@ -347,7 +362,7 @@ MonoBehaviour:
     dealSpeed: 2
     size: 0.15
     angle: 0
-    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
     children:
@@ -390,6 +405,7 @@ MonoBehaviour:
       isStick: 1
       isEndWith: 1
       spawnPoint: {x: 0, y: 0}
+    onDestroy: []
     effects: []
   - name: MagicBall3
     id: 3
@@ -398,7 +414,7 @@ MonoBehaviour:
     dealSpeed: 2
     size: 0.15
     angle: 0
-    controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
+    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
     children:
@@ -454,6 +470,7 @@ MonoBehaviour:
       isStick: 1
       isEndWith: 1
       spawnPoint: {x: 0, y: 0}
+    onDestroy: []
     effects: []
   - name: MagicSpin0
     id: 4
@@ -470,6 +487,7 @@ MonoBehaviour:
     - ability: 2
       value: 100
     children: []
+    onDestroy: []
     effects: []
   - name: MagicSpin1
     id: 5
@@ -486,6 +504,7 @@ MonoBehaviour:
     - ability: 2
       value: 100
     children: []
+    onDestroy: []
     effects: []
   - name: MagicSpin2
     id: 6
@@ -502,6 +521,7 @@ MonoBehaviour:
     - ability: 2
       value: 100
     children: []
+    onDestroy: []
     effects: []
   - name: MagicSpawn
     id: 7
@@ -516,6 +536,7 @@ MonoBehaviour:
     - ability: 3
       value: 0.1
     children: []
+    onDestroy: []
     effects: []
   - name: MagicSlash0
     id: 8
@@ -530,6 +551,7 @@ MonoBehaviour:
     - ability: 3
       value: 0.4
     children: []
+    onDestroy: []
     effects: []
   - name: MagicSlash1
     id: 9
@@ -544,6 +566,7 @@ MonoBehaviour:
     - ability: 3
       value: 0.4
     children: []
+    onDestroy: []
     effects: []
   - name: MagicSlash2
     id: 10
@@ -558,6 +581,7 @@ MonoBehaviour:
     - ability: 3
       value: 0.4
     children: []
+    onDestroy: []
     effects: []
   - name: MagicSlash3
     id: 11
@@ -598,6 +622,7 @@ MonoBehaviour:
       isStick: 0
       isEndWith: 0
       spawnPoint: {x: -1, y: 0}
+    onDestroy: []
     effects: []
   - name: MagicSlash4
     id: 12
@@ -638,6 +663,7 @@ MonoBehaviour:
       isStick: 0
       isEndWith: 0
       spawnPoint: {x: -0.5, y: 0.9}
+    onDestroy: []
     effects: []
   - name: MagicMissile
     id: 13
@@ -665,6 +691,7 @@ MonoBehaviour:
       isStick: 0
       isEndWith: 0
       spawnPoint: {x: 0, y: 0}
+    onDestroy: []
     effects: []
   - name: MagicMissileTail
     id: 14
@@ -679,6 +706,7 @@ MonoBehaviour:
     - ability: 3
       value: 0
     children: []
+    onDestroy: []
     effects: []
   - name: Bullet
     id: 15
@@ -693,6 +721,22 @@ MonoBehaviour:
     - ability: 1
       value: 720
     children: []
+    onDestroy: []
+    effects: []
+  - name: MagicBallDestroy
+    id: 16
+    type: 1
+    dmg: 0.5
+    dealSpeed: 1
+    size: 0.5
+    angle: 0
+    controller: {fileID: 22100000, guid: de4f0b683ce4b29408b77ee3c074a43b, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.01
+    children: []
+    onDestroy: []
     effects: []
   weapons:
   - name: MagicBall

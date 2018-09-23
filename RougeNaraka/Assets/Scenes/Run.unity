@@ -6398,6 +6398,7 @@ MonoBehaviour:
     coolTimeLeft: 0
     manaCost: 0
     distance: 0
+    isCircleToPlayer: 0
     isDeath: 0
     effects: []
     values: []
@@ -7250,6 +7251,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   stageTxt: {fileID: 1906991404}
   _stage: 0
+  isReady: 0
 --- !u!4 &834756105
 Transform:
   m_ObjectHideFlags: 0
@@ -9672,7 +9674,7 @@ MonoBehaviour:
   - {fileID: 1686397862}
   - {fileID: 710444246}
   - {fileID: 633652486}
-  weaponId: 2
+  weaponId: 0
   weaponLevel: 0
   stage: 1
   isDebug: 1
@@ -10085,6 +10087,7 @@ MonoBehaviour:
     coolTimeLeft: 0
     manaCost: 0
     distance: 0
+    isCircleToPlayer: 0
     isDeath: 0
     effects: []
     values: []
@@ -10720,6 +10723,7 @@ MonoBehaviour:
     coolTimeLeft: 0
     manaCost: 0
     distance: 0
+    isCircleToPlayer: 0
     isDeath: 0
     effects: []
     values: []
