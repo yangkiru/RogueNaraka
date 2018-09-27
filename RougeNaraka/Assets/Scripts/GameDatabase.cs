@@ -224,10 +224,16 @@ public struct BulletChild
     public float angle;
     public float localSpeed;
     public float worldSpeed;
+    //부모를 기준으로 공전, RevolveHolder 사용x, 각자 회전
+    public float revolveDistance;
+    public float revolveSpeed;
+    //
+    public bool isRevolveTarget;//부모가 공전중인 타겟을 기준으로 공전, RevolveHolder 사용
     public bool isRepeat;
     public bool isFirst;//반복의 첫 번째는 startTime 무시
     public bool isStick;
     public bool isEndWith;
+    
     public Vector2 spawnPoint;
 }
 
@@ -334,14 +340,14 @@ public enum STAT
 [Serializable]
 public enum ATTACK_TYPE
 {
-    CLOSE, TARGET, NONTARGET
+    CLOSE, TARGET, NONTARGET, REVOLVE//근접 공전
 }
 
 [Serializable]
 public enum MOVE_TYPE
 {
-    RUSH,//근접 돌진
+    RUSH,//근접 공격
     STATUE,//원거리 고정
     DISTANCE,//원거리 도망 및 공격
-    RUN//도망 공격 X
+    RUN,//도망 공격 X
 }

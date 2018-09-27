@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour {
     //Debug params
     public int weaponId;
     public int weaponLevel;
-    private int _weaponId;
-    private int _weaponLevel;
+    private int _weaponId = 0;
+    private int _weaponLevel = 0;
     public int stage;
 
     public bool isDebug;

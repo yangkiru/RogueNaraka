@@ -3,12 +3,12 @@
 --- !u!221 &22100000
 AnimatorOverrideController:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MagicSpin2Controller
   m_Controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 13924e178168109498a9ce5e1d7aea03, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: fd654b831af1a6b4c9f2a4a309ecd475, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4ee1e37bd5784334890f850f47024232, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 76253f689302b3949a13c56052fead7c, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: fd654b831af1a6b4c9f2a4a309ecd475, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4ee1e37bd5784334890f850f47024232, type: 2}

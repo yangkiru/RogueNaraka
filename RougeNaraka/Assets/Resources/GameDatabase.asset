@@ -296,6 +296,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -310,6 +313,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -335,6 +341,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -348,12 +357,31 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 1
       isEndWith: 1
       spawnPoint: {x: 0, y: 0}
-    onDestroy: []
+    onDestroy:
+    - name: MagicBallDestroy
+      bulletId: 16
+      sortingOrder: -1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
     effects: []
   - name: MagicBall2
     id: 2
@@ -374,6 +402,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -387,6 +418,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 1
@@ -400,12 +434,31 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 1
       isEndWith: 1
       spawnPoint: {x: 0, y: 0}
-    onDestroy: []
+    onDestroy:
+    - name: MagicBallDestory
+      bulletId: 16
+      sortingOrder: -1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
     effects: []
   - name: MagicBall3
     id: 3
@@ -426,6 +479,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -439,6 +495,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 1
@@ -452,6 +511,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 1
@@ -465,12 +527,31 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 1
       isEndWith: 1
       spawnPoint: {x: 0, y: 0}
-    onDestroy: []
+    onDestroy:
+    - name: MagicBall
+      bulletId: 16
+      sortingOrder: -1
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
     effects: []
   - name: MagicSpin0
     id: 4
@@ -485,7 +566,7 @@ MonoBehaviour:
     - ability: 1
       value: -720
     - ability: 2
-      value: 100
+      value: 1000
     children: []
     onDestroy: []
     effects: []
@@ -502,7 +583,7 @@ MonoBehaviour:
     - ability: 1
       value: 720
     - ability: 2
-      value: 100
+      value: 1000
     children: []
     onDestroy: []
     effects: []
@@ -519,7 +600,7 @@ MonoBehaviour:
     - ability: 1
       value: -360
     - ability: 2
-      value: 100
+      value: 1000
     children: []
     onDestroy: []
     effects: []
@@ -604,6 +685,9 @@ MonoBehaviour:
       angle: 20
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -617,6 +701,9 @@ MonoBehaviour:
       angle: -20
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -645,6 +732,9 @@ MonoBehaviour:
       angle: 120
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -658,6 +748,9 @@ MonoBehaviour:
       angle: -120
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 0
       isFirst: 0
       isStick: 0
@@ -678,7 +771,7 @@ MonoBehaviour:
     - ability: 4
       value: 1
     children:
-    - name: MagicMissileTail
+    - name: MagicMissileTrail
       bulletId: 14
       sortingOrder: -1
       startTime: 0.25
@@ -686,6 +779,9 @@ MonoBehaviour:
       angle: 0
       localSpeed: 0
       worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
       isRepeat: 1
       isFirst: 1
       isStick: 0
@@ -693,7 +789,7 @@ MonoBehaviour:
       spawnPoint: {x: 0, y: 0}
     onDestroy: []
     effects: []
-  - name: MagicMissileTail
+  - name: MagicMissileTrail
     id: 14
     type: 5
     dmg: 0
@@ -735,6 +831,52 @@ MonoBehaviour:
     abilities:
     - ability: 3
       value: 0.01
+    children: []
+    onDestroy: []
+    effects: []
+  - name: MagicSquare
+    id: 17
+    type: 1
+    dmg: 0.25
+    dealSpeed: 0.1
+    size: 0.5
+    angle: 0
+    controller: {fileID: 22100000, guid: 6419740594e6c5343a82621f7c0793c3, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.01
+    children:
+    - name: MagicSquareTrail
+      bulletId: 18
+      sortingOrder: 1
+      startTime: 0.25
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
+      isRepeat: 1
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    onDestroy: []
+    effects: []
+  - name: MagicSquareTrail
+    id: 18
+    type: 5
+    dmg: 0
+    dealSpeed: 0
+    size: 0.5
+    angle: 0
+    controller: {fileID: 22100000, guid: 144e0c3002e44b44a8de299b3e4c28c4, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0
     children: []
     onDestroy: []
     effects: []

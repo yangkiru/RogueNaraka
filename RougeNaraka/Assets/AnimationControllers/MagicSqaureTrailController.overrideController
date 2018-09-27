@@ -5,10 +5,10 @@ AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MagicMissileTrailController
+  m_Name: MagicSqaureTrailController
   m_Controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
   m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 76253f689302b3949a13c56052fead7c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 66d639227e3b3404295d01cb85c65b15, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 13924e178168109498a9ce5e1d7aea03, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: bbc50bf140054f34c8ddc707fc233d3f, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 76253f689302b3949a13c56052fead7c, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 99ace93fdff569043ab7658290576746, type: 2}
