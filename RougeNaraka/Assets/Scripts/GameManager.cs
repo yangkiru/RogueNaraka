@@ -297,6 +297,9 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("stage", 1);
             PlayerPrefs.SetFloat("health", 1);
             PlayerPrefs.SetFloat("mana", 1);
+            Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
+            weapon.level = weaponLevel;
+            PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
             SoulShopOpen();
             SkillManager.instance.ResetSave();
             Item.instance.ResetSave();

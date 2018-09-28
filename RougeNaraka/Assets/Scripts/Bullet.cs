@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour {
     public Animator animator;
     public new SpriteRenderer renderer;
 
+    private RevolveHolder revolveHolder = null;
+
     [SerializeField]
     private LayerMask layerMask;
 
@@ -34,6 +36,7 @@ public class Bullet : MonoBehaviour {
     private bool isSpin;
     private bool isMoving;
     private bool isSleep;
+    private bool isSpawnedRevolveHolder;
 
     [SerializeField][ReadOnly]
     private BulletData data;
@@ -113,6 +116,7 @@ public class Bullet : MonoBehaviour {
         pierce = 1;
         guideIncrease = 0;
         guideSpeed = 0;
+        isSpawnedRevolveHolder = false;
     }
 
     public void SetFriendly(bool value)
@@ -160,6 +164,22 @@ public class Bullet : MonoBehaviour {
 
         child.Teleport(pos);
         child.renderer.sortingOrder = renderer.sortingOrder + childData.sortingOrder;
+        if(childData.isRevolveTarget)
+        {
+            if (revolveHolder)
+            {
+                child.revolveHolder = revolveHolder;
+                revolveHolder.Add(child.gameObject);
+            }
+            else
+            {
+                Debug.Log(name + " Spawn new RevolveHolder");
+                revolveHolder = Instantiate(BoardManager.instance.revolvePrefab, Vector3.zero, new Quaternion(0, 0, 0, 0), transform).GetComponent<RevolveHolder>();
+                isSpawnedRevolveHolder = true;
+                child.revolveHolder = revolveHolder;
+                revolveHolder.Add(child.gameObject);
+            }
+        }
         if (childData.isStick)
         {
             child.transform.SetParent(transform);
@@ -173,12 +193,7 @@ public class Bullet : MonoBehaviour {
         child.ActiveTimer(pos, childData.spawnPoint, vForce.normalized, childData.waitTime, childData.localSpeed, childData.worldSpeed);
         //child.Attack(pos, vForce.normalized);
         if (childData.isRepeat && !isDestroy)
-        {
-            if (childData.startTime <= 0)
-                SpawnBullet(childData, transform.position);
-            else
-                StartCoroutine(SpawnBulletTimer(childData));
-        }
+            StartCoroutine(SpawnBulletTimer(childData));
     }
 
     public void MoveToZero()
@@ -194,14 +209,9 @@ public class Bullet : MonoBehaviour {
 
     public void ActiveTimer(Vector2 start, Vector2 move, Vector2 v, float waitTime, float localSpeed, float worldSpeed)
     {
-        if (waitTime > 0)
-        {
-            renderer.enabled = false;
-            isSleep = true;
-            StartCoroutine(ActiveTimerCoroutine(start, move, v, waitTime, localSpeed, worldSpeed));
-        }
-        else
-            Attack(start, move, v, localSpeed, worldSpeed);
+        renderer.enabled = false;
+        isSleep = true;
+        StartCoroutine(ActiveTimerCoroutine(start, move, v, waitTime, localSpeed, worldSpeed));
     }
 
     private IEnumerator ActiveTimerCoroutine(Vector2 start, Vector2 move, Vector2 v, float waitTime, float localSpeed, float worldSpeed)
@@ -248,7 +258,7 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    public void Attack(Vector2 start, Vector2 move, Vector2 v, float localSpeed, float worldSpeed)
+    public void Attack(Vector2 start, Vector2 move, Vector2 v, float localSpeed, float worldSpeed, RevolveHolder revolve = null)
     {
         this.localSpeed = localSpeed;
         this.worldSpeed = worldSpeed;
@@ -260,6 +270,12 @@ public class Bullet : MonoBehaviour {
         RotateTo(v);
         if (localSpeed > 0 || worldSpeed > 0)
             Shoot(v);
+        if (revolve)
+        {
+            revolveHolder = revolve;
+            revolve.Add(gameObject);
+        }
+
         SpawnChildren(data.children);
     }
 
@@ -299,16 +315,6 @@ public class Bullet : MonoBehaviour {
     {
         //Debug.Log("RotateTo:" + v.ToString());
         transform.Rotate(new Vector3(0, 0, Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg + 180f));
-    }
-
-    public void Destroy()
-    {
-        StartCoroutine(DestroyCoroutine());
-    }
-
-    public void Destroy(float time)
-    {
-        StartCoroutine(TimeLimit(time));
     }
 
     private float Damage()
@@ -590,6 +596,16 @@ public class Bullet : MonoBehaviour {
         return true;
     }
 
+    public void Destroy()
+    {
+        StartCoroutine(DestroyCoroutine());
+    }
+
+    public void Destroy(float time)
+    {
+        StartCoroutine(TimeLimit(time));
+    }
+
     private void DestroyChildren()
     {
         for(int i = 0; i < destroyChildren.Count; i++)
@@ -636,6 +652,18 @@ public class Bullet : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         //Debug.Log("Destroy");
-        BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject);
+        RevolveFunction();
+        BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, true);
+    }
+
+    /// <summary>
+    /// Bullet이 초기화 인큐될 때 실행
+    /// </summary>
+    public void RevolveFunction()
+    {
+        if (revolveHolder)
+            revolveHolder.Remove(gameObject);
+        if (isSpawnedRevolveHolder)
+            BoardManager.instance.revolveHolderPool.EnqueueObjectPool(revolveHolder.gameObject, true);
     }
 }

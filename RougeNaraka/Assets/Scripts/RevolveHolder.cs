@@ -4,28 +4,45 @@ using UnityEngine;
 
 public class RevolveHolder : MonoBehaviour {
 
-    public GameObject[] test;
     public int segments;
     public Vector2 radius;
-    public Vector2[] points = new Vector2[0];
+    public Vector2[] points;
     public Vector2[] lastPoints;
     public List<GameObject> list = new List<GameObject>();
-    public float time;
+    private float speed = 180;
+    private float time = 0;
 
-    [ContextMenu("Test")]
-    public void TestFunction()
+    private void Awake()
     {
-        StartCoroutine(Test());
+        Init();
     }
 
-    private IEnumerator Test()
+    private void Update()
     {
-        for(int i = 0; i < test.Length; i++)
+        transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
+    }
+
+    public void Init()
+    {
+        transform.localPosition = Vector3.zero;
+        segments = 0;
+        points = new Vector2[0];
+        lastPoints = null;
+        if(list.Count > 0)
         {
-            yield return new WaitForSeconds(1);
-            Add(test[i]);
-            test[i].SetActive(true);
+            int count = list.Count;
+            for(int i = 0; i < count; i++)
+            {
+                list[i].SetActive(false);
+            }
         }
+        time = 0;
+        speed = 180;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
     }
 
     [ContextMenu("RemoveAll")]
@@ -34,14 +51,14 @@ public class RevolveHolder : MonoBehaviour {
         StartCoroutine(RemoveAllCoroutine(1));
     }
 
-    IEnumerator RemoveAllCoroutine(float time)
+    IEnumerator RemoveAllCoroutine(float t)
     {
         int count = list.Count;
         for (int i = 0; i < count; i++)
         {
             list[0].SetActive(false);
             Remove(list[0]);
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(t);
         }
     }
     [ContextMenu("CreatePoints")]

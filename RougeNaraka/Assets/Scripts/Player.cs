@@ -60,6 +60,7 @@ public class Player : Unit
             case ATTACK_TYPE.CLOSE:
             case ATTACK_TYPE.NONTARGET:
             case ATTACK_TYPE.TARGET:
+            case ATTACK_TYPE.REVOLVE:
                 //Debug.Log("player CloseType");
                 Enemy closest = null;
                 if (enemies.Count == 0)
@@ -79,24 +80,6 @@ public class Player : Unit
                 if (target.targetDistance == 1000)
                     target = null;
                 break;
-            //case ATTACK_TYPE.NONTARGET: case ATTACK_TYPE.TARGET:
-            //    //Debug.Log("player targetType");
-            //    Enemy least = null;
-            //    if (enemies.Count == 0)
-            //    {
-            //        //Debug.Log("No Enemy");
-            //        target = null;
-            //        return false;
-            //    }
-            //    least = enemies[0];
-            //    for (int i = 1; i < enemies.Count; i++)
-            //    {
-            //        if (least.stat.hp > enemies[i].stat.hp)
-            //            least = enemies[i];
-            //    }
-            //    target = least;
-            //    targetPosition = target.transform.position;
-            //    break;
         }
         return true;
     }
@@ -144,6 +127,7 @@ public class Player : Unit
         win = false;
         agent.SetDestination(boardManager.spawnPoint);
         transform.position = boardManager.spawnPoint;
+        attackCoolTime = 0;
     }
 
     public void Revive(float percent)

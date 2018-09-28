@@ -8,6 +8,7 @@ public class BoardManager : MonoBehaviour {
     public static BoardManager instance = null;
     public GameObject enemyPrefab;
     public GameObject bulletPrefab;
+    public GameObject revolvePrefab;
     public GameObject[] bossPrefabs;
     public List<Enemy> enemies = new List<Enemy>();
     public Player player;
@@ -17,6 +18,7 @@ public class BoardManager : MonoBehaviour {
     public Vector2[] boardRange;//0:min, 1:max
     public ObjectPool enemyPool;//basic 100 counts
     public ObjectPool bulletPool;//basic 200 counts
+    public ObjectPool revolveHolderPool;//basic 100 counts
     [ReadOnly]
     public Enemy boss;
 
@@ -52,15 +54,19 @@ public class BoardManager : MonoBehaviour {
 
     public GameObject SpawnEnemyObj()
     {
-        GameObject obj = Instantiate(enemyPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0));
-        obj.transform.SetParent(enemyPool.transform);
+        GameObject obj = Instantiate(enemyPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0), enemyPool.transform);
         return obj;
     }
 
     public GameObject SpawnBulletObj()
     {
-        GameObject obj = Instantiate(bulletPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0));
-        obj.transform.SetParent(bulletPool.transform);
+        GameObject obj = Instantiate(bulletPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0), bulletPool.transform);
+        return obj;
+    }
+
+    public GameObject SpawnRevolverHolderObj()
+    {
+        GameObject obj = Instantiate(revolvePrefab, Vector3.zero, new Quaternion(0, 0, 0, 0), revolveHolderPool.transform);
         return obj;
     }
 
@@ -68,21 +74,30 @@ public class BoardManager : MonoBehaviour {
     {
         //Debug.Log("InitBoard");
         int count = enemyPool.GetCount();
-        if (count < 500)//enemy Pooling
+        if (count < 100)//enemy Pooling
         {
-            for (int i = count; i < 500; i++)
+            for (int i = count; i < 100; i++)
             {
                 GameObject obj = SpawnEnemyObj();
                 enemyPool.EnqueueObjectPool(obj);
             }
         }
         count = bulletPool.GetCount();
-        if (count < 500)//bullet Pooling
+        if (count < 200)//bullet Pooling
         {
-            for (int i = count; i < 500; i++)
+            for (int i = count; i < 200; i++)
             {
                 GameObject obj = SpawnBulletObj();
                 bulletPool.EnqueueObjectPool(obj);
+            }
+        }
+        count = revolveHolderPool.GetCount();
+        if (count < 100)//revolveHolder Pooling
+        {
+            for (int i = count; i < 100; i++)
+            {
+                GameObject obj = SpawnRevolverHolderObj();
+                revolveHolderPool.EnqueueObjectPool(obj);
             }
         }
 
@@ -119,7 +134,10 @@ public class BoardManager : MonoBehaviour {
         {
             GameObject obj = bulletPool.transform.GetChild(i).gameObject;
             if (obj.activeSelf)
+            {
+                obj.GetComponent<Bullet>().RevolveFunction();
                 bulletPool.EnqueueObjectPool(obj);
+            }
         }
         //Debug.Log("SetStage(" + stage + ")");
         int cost = GameDatabase.instance.stageCosts[stage - 1];

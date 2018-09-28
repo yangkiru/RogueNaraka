@@ -32,6 +32,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1321347874533650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4708044894376624}
+  - component: {fileID: 114486050337940652}
+  m_Layer: 0
+  m_Name: RevolveHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4708044894376624
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1321347874533650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4914079174131040}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4914079174131040
 Transform:
   m_ObjectHideFlags: 1
@@ -41,7 +70,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4708044894376624}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,7 +87,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1.5
-  m_LinearDrag: 2.5
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -118,37 +148,38 @@ MonoBehaviour:
     mp: 0
     hpRegen: 0
     mpRegen: 0
-  _maxStat:
-    dmg: 0
-    spd: 0
-    luck: 0
-    hp: 0
-    mp: 0
-    hpRegen: 0
-    mpRegen: 0
   agent: {fileID: 114828541192764560}
   animator: {fileID: 95752331060267862}
   spriteRenderer: {fileID: 212071811527906632}
-  rigid: {fileID: 0}
-  attackDistance: 1
-  _health: 0
-  _mana: 0
-  isFriendly: 0
-  _isDeath: 0
+  rigid: {fileID: 50444502640560000}
+  revolveHolder: {fileID: 114486050337940652}
   _weapon:
     name: 
     level: 0
     startBulletId: 
     spawnPoint: {x: 0, y: 0}
     type: 0
-    isShoot: 0
-    shootSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
   target: {fileID: 0}
-  targetPosition: {x: 0, y: 0}
-  _targetDistance: 0
-  attackCoolTime: 1
   isMoveToAttack: 1
   isMoveToMouse: 0
+--- !u!114 &114486050337940652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1321347874533650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c68d957b1ec6346881082fe5edb4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segments: 0
+  radius: {x: 1, y: 1}
+  points: []
+  lastPoints: []
+  list: []
 --- !u!114 &114828541192764560
 MonoBehaviour:
   m_ObjectHideFlags: 1

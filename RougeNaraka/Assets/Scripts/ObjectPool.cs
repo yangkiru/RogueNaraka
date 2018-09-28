@@ -11,11 +11,14 @@ public class ObjectPool : MonoBehaviour
         objs = new Queue<GameObject>();
     }
 
-    public void EnqueueObjectPool(GameObject obj)
+    public void EnqueueObjectPool(GameObject obj, bool isRemoveChild = false)
     {
-        for(int i = 0; i < obj.transform.childCount; i++)
+        if (isRemoveChild)
         {
-            obj.transform.GetChild(i).SetParent(transform);
+            for (int i = 0; i < obj.transform.childCount; i++)
+            {
+                obj.transform.GetChild(i).SetParent(transform);
+            }
         }
         obj.transform.SetParent(transform);
         obj.SetActive(false);
