@@ -59,8 +59,10 @@ public abstract class Unit : MonoBehaviour {
     /// 자동으로 움직이는 것을 멈출지
     /// </summary>
     public bool isAutoMove
-    { get { return _isAutoMove; } set { _isAutoMove = value; } }
-    protected bool _isAutoMove;
+    { get { return _isAutoMove; } set { //Debug.Log("Before:"+_isAutoMove+" After:"+value);
+            _isAutoMove = value; } }
+    [SerializeField][ReadOnly]
+    protected bool _isAutoMove = true;
 
     public Weapon weapon
     { get { return _weapon; } }
@@ -132,7 +134,7 @@ public abstract class Unit : MonoBehaviour {
         if (data.weapon.startBulletId.Length != 0)
             EquipWeapon(data.weapon);
 
-        _isAutoMove = true;
+        isAutoMove = true;
     }
 
     public void Move(Vector2 pos)
@@ -507,8 +509,11 @@ public abstract class Unit : MonoBehaviour {
             switch (_weapon.type)
             {
                 case ATTACK_TYPE.CLOSE:
-                    Vector2 vec = (targetPosition - (Vector2)transform.position).normalized * attackDistance * 0.6f;
-                    Move(targetPosition - vec);
+                    if (target != null)
+                    {
+                        Vector2 vec = (targetPosition - (Vector2)transform.position).normalized * attackDistance * 0.6f;
+                        Move(targetPosition - vec);
+                    }
                     break;
                 case ATTACK_TYPE.TARGET:
                     break;

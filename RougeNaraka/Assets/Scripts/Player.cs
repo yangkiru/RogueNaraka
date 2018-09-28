@@ -103,6 +103,7 @@ public class Player : Unit
 
     private void MoveToGoal()
     {
+        Debug.Log("MoveToGoal");
         Move(boardManager.goalPoint);
         
         win = true;
