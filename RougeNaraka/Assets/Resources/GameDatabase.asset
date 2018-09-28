@@ -637,7 +637,7 @@ MonoBehaviour:
   - name: MagicSlash1
     id: 9
     type: 6
-    dmg: 0.1
+    dmg: 1
     dealSpeed: 0.2
     size: 1
     angle: 90
@@ -645,14 +645,14 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
-      value: 0.4
+      value: 0.2
     children: []
     onDestroy: []
     effects: []
   - name: MagicSlash2
     id: 10
     type: 6
-    dmg: 0.1
+    dmg: 1
     dealSpeed: 0.2
     size: 1
     angle: 90
@@ -660,14 +660,14 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
-      value: 0.4
+      value: 0.2
     children: []
     onDestroy: []
     effects: []
   - name: MagicSlash3
     id: 11
     type: 6
-    dmg: 0.1
+    dmg: 1
     dealSpeed: 0.2
     size: 0.62
     angle: 90
@@ -675,7 +675,7 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
-      value: 0.4
+      value: 0.2
     children:
     - name: MagicSlash0
       bulletId: 8
@@ -722,7 +722,7 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
-      value: 0.4
+      value: 0.2
     children:
     - name: MagicSlash2
       bulletId: 10
