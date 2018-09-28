@@ -81,7 +81,7 @@ public class CircleRenderer : MonoBehaviour {
 
     public void Move(Vector2 pos)
     {
-        transform.position = pos;
+        transform.localPosition = pos;
     }
 
     public bool GetEnabled()

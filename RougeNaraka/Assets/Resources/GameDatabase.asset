@@ -945,8 +945,8 @@ MonoBehaviour:
     coolTime: 5
     coolTimeLeft: 0
     manaCost: 0
-    distance: 0
-    isCircleToPlayer: 0
+    distance: 0.1
+    isCircleToPlayer: 1
     isDeath: 0
     effects: []
     values:
@@ -965,8 +965,8 @@ MonoBehaviour:
     coolTime: 0
     coolTimeLeft: 0
     manaCost: 0
-    distance: 0
-    isCircleToPlayer: 0
+    distance: 0.1
+    isCircleToPlayer: 1
     isDeath: 0
     effects: []
     values: []

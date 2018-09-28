@@ -51,7 +51,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 skillManager.GetCircle().SetParent(player.transform);
                 skillManager.GetCircle().Move(Vector2.zero);
-                skillManager.GetCircle().Spin(0.05f);
             }
             else
             {

@@ -28,11 +28,21 @@ public class RevolveHolder : MonoBehaviour {
         }
     }
 
-    [ContextMenu("RemoveFirst")]
-    public void RemoveFirst()
+    [ContextMenu("RemoveAll")]
+    public void RemoveAll()
     {
-        list[0].SetActive(false);
-        Remove(list[0]);
+        StartCoroutine(RemoveAllCoroutine(1));
+    }
+
+    IEnumerator RemoveAllCoroutine(float time)
+    {
+        int count = list.Count;
+        for (int i = 0; i < count; i++)
+        {
+            list[0].SetActive(false);
+            Remove(list[0]);
+            yield return new WaitForSeconds(time);
+        }
     }
     [ContextMenu("CreatePoints")]
     public void CreatePoints()
@@ -102,7 +112,8 @@ public class RevolveHolder : MonoBehaviour {
     {
         float time = 0;
         Vector2[] temp = new Vector2[points.Length];
-        for (int i = 0, j = 0; i < lastPoints.Length; i++)
+        Debug.Log("position = " + position);
+        for (int i = 0, j = 0; i < lastPoints.Length; i++)//삭제될 놈의 포인트 제외 복사
         {
             if (i != position)
             {
@@ -114,7 +125,7 @@ public class RevolveHolder : MonoBehaviour {
         {
             yield return null;
             time += Time.deltaTime;
-            for (int i = 0; i < list.Count - 1; i++)//삭제된 놈은 이동 제외
+            for (int i = 0; i < list.Count; i++)//삭제된 놈은 이동 제외
             {
                 list[i].transform.localPosition = Vector2.Lerp(temp[i], points[i], time * 2f);
             }
