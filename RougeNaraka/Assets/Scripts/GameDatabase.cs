@@ -340,7 +340,7 @@ public enum STAT
 [Serializable]
 public enum ATTACK_TYPE
 {
-    CLOSE, TARGET, NONTARGET, REVOLVE//근접 공전
+    CLOSE, TARGET, NONTARGET, REVOLVE
 }
 
 [Serializable]

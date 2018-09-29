@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class RevolveHolder : MonoBehaviour {
 
-    public int segments;
+    public int segments
+    {
+        get { return _segments; } set { Debug.Log(value); _segments = value; }
+    }
+    public int _segments;
     public Vector2 radius;
     public Vector2[] points;
     public Vector2[] lastPoints;
     public List<GameObject> list = new List<GameObject>();
+    public bool spin;
     private float speed = 180;
     private float time = 0;
+    private int added = 0;
+    private bool isAdding = false;
 
     private void Awake()
     {
@@ -19,7 +26,8 @@ public class RevolveHolder : MonoBehaviour {
 
     private void Update()
     {
-        transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
+        if(spin)
+            transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
     }
 
     public void Init()
@@ -38,6 +46,7 @@ public class RevolveHolder : MonoBehaviour {
         }
         time = 0;
         speed = 180;
+        spin = true;
     }
 
     public void SetSpeed(float speed)
@@ -46,20 +55,22 @@ public class RevolveHolder : MonoBehaviour {
     }
 
     [ContextMenu("RemoveAll")]
-    public void RemoveAll()
+    public void RemoveAll(float time)
     {
-        StartCoroutine(RemoveAllCoroutine(1));
+        StartCoroutine(RemoveAllCoroutine(time));
     }
 
     IEnumerator RemoveAllCoroutine(float t)
     {
         int count = list.Count;
-        for (int i = 0; i < count; i++)
+        float time = t / count;
+        for (int i = count-1; i >= 0; i--)
         {
-            list[0].SetActive(false);
-            Remove(list[0]);
-            yield return new WaitForSeconds(t);
+            list[i].SetActive(false);
+            Remove(list[i]);
+            yield return new WaitForSeconds(time);
         }
+        Init();
     }
     [ContextMenu("CreatePoints")]
     public void CreatePoints()
@@ -94,27 +105,38 @@ public class RevolveHolder : MonoBehaviour {
         CreatePoints();
     }
 
-    public void Add(GameObject obj)
+    public void Add(GameObject obj, float rotation = 0)
     {
         Increase();
         list.Add(obj);
         obj.transform.SetParent(transform);
         StartCoroutine(AddMove());
+        StartCoroutine(ResetRotation(obj, Quaternion.Euler(0, 0, rotation)));
     }
 
     public void Remove(GameObject obj)
     {
-        Decrease();
         int position = list.IndexOf(obj);
-        list.Remove(obj);
-        StartCoroutine(RemoveMove(position));
+        if(list.Remove(obj))
+        {
+            Decrease();
+            StartCoroutine(RemoveMove(position));
+        }
+    }
+
+    private IEnumerator ResetRotation(GameObject obj, Quaternion rot)
+    {
+        yield return null;
+        obj.transform.localRotation = rot;
     }
 
     private IEnumerator AddMove()
     {
-        list[list.Count - 1].transform.localPosition = points[points.Length - 1];//마지막 놈 이동
         float time = 0;
-        while(time <= 1f)
+        yield return new WaitForSeconds(0.0001f);
+        isAdding = true;
+        list[list.Count - 1].transform.localPosition = points[points.Length - 1];//마지막 놈 이동
+        while (time <= 1f)
         {
             yield return null;
             time += Time.deltaTime;
@@ -123,13 +145,13 @@ public class RevolveHolder : MonoBehaviour {
                 list[i].transform.localPosition = Vector2.Lerp(lastPoints[i], points[i], time * 2f);
             }
         }
+        isAdding = false;
     }
 
     private IEnumerator RemoveMove(int position)
     {
         float time = 0;
         Vector2[] temp = new Vector2[points.Length];
-        Debug.Log("position = " + position);
         for (int i = 0, j = 0; i < lastPoints.Length; i++)//삭제될 놈의 포인트 제외 복사
         {
             if (i != position)

@@ -839,7 +839,7 @@ MonoBehaviour:
     type: 1
     dmg: 0.25
     dealSpeed: 0.1
-    size: 0.5
+    size: 0.35
     angle: 0
     controller: {fileID: 22100000, guid: 6419740594e6c5343a82621f7c0793c3, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -880,6 +880,147 @@ MonoBehaviour:
     children: []
     onDestroy: []
     effects: []
+  - name: MagicSquare0
+    id: 19
+    type: 5
+    dmg: 0
+    dealSpeed: 0
+    size: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.1
+    children:
+    - name: MagicSquare0
+      bulletId: 17
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 1
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    onDestroy: []
+    effects: []
+  - name: MagicSquare1
+    id: 20
+    type: 5
+    dmg: 0
+    dealSpeed: 0
+    size: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.6
+    children:
+    - name: MagicSquare0
+      bulletId: 17
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 1
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSquare0
+      bulletId: 17
+      sortingOrder: 0
+      startTime: 0.5
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 1
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    onDestroy: []
+    effects: []
+  - name: MagicSquare2
+    id: 20
+    type: 5
+    dmg: 0
+    dealSpeed: 0
+    size: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 1.2
+    children:
+    - name: MagicSquare0
+      bulletId: 17
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 1
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSquare0
+      bulletId: 17
+      sortingOrder: 0
+      startTime: 0.5
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 1
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    - name: MagicSquare0
+      bulletId: 17
+      sortingOrder: 0
+      startTime: 1
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 1
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 0
+      spawnPoint: {x: 0, y: 0}
+    onDestroy: []
+    effects: []
   weapons:
   - name: MagicBall
     level: 0
@@ -911,7 +1052,7 @@ MonoBehaviour:
     worldSpeed: 1
   - name: MagicSqaure
     level: 0
-    startBulletId: 11000000
+    startBulletId: 130000001400000015000000
     spawnPoint: {x: 0, y: 0}
     type: 3
     localSpeed: 0

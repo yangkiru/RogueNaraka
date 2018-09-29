@@ -17,14 +17,13 @@ public class PointTxtManager : MonoBehaviour {
         {
             SpawnTxt();
         }
-
-        GameObject obj = Instantiate(txtObj, Vector3.zero, new Quaternion(0, 0, 0, 0));
     }
 
     public void SpawnTxt()
     {
         GameObject obj = Instantiate(txtObj, Vector3.zero, new Quaternion(0, 0, 0, 0));
         obj.transform.SetParent(transform);
+        obj.transform.localScale = new Vector3(1, 1, 1);
         txtPool.EnqueueObjectPool(obj);
     }
 
@@ -77,6 +76,7 @@ public class PointTxtManager : MonoBehaviour {
 
     public void TxtOnGold(float value, Transform tf, TxtHolder holder)
     {
+        Debug.Log("ScreenSize:" + Screen.width + " " + Screen.height);
         Text txt = TxtOn(tf, value, Color.yellow, new Vector2(0.5f, 0.3f + holder.position * 0.25f));
         holder.AddTxt(txt);
         StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));

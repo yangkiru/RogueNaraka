@@ -121,6 +121,7 @@ public abstract class Unit : MonoBehaviour {
         minDistance = data.minDistance;//Enemy Only
         maxDistance = data.maxDistance;//Enemy Only
         _targetDistance = 1000;
+        isAttackCool = false;
 
         if (data.weapon.startBulletId.Length != 0)
             EquipWeapon(data.weapon);
@@ -128,12 +129,6 @@ public abstract class Unit : MonoBehaviour {
         isAutoMove = true;
         if(revolveHolder)
         {
-            revolveHolder.Init();
-        }
-        if (!revolveHolder)
-        {
-            revolveHolder = boardManager.revolveHolderPool.DequeueObjectPool().GetComponent<RevolveHolder>();
-            revolveHolder.transform.SetParent(transform);
             revolveHolder.Init();
         }
     }
@@ -261,7 +256,22 @@ public abstract class Unit : MonoBehaviour {
     /// WaitForDeath에서 호출 함
     /// Player에서는 GameManager의 OnEnd()호출, Enemy에서는 오브젝트 풀 인큐
     /// </summary>
-    protected abstract void OnDeath();
+    protected virtual void OnDeath()
+    {
+        if(revolveHolder)
+        {
+            //int count = revolveHolder.transform.childCount;
+            //for (int i = 0; i < count; i++)
+            //{
+            //    boardManager.bulletPool.EnqueueObjectPool(revolveHolder.transform.GetChild(0).gameObject);
+            //}
+            if (revolveHolder.transform.childCount > 0)
+            {
+                revolveHolder.spin = false;
+                revolveHolder.RemoveAll(3);
+            }
+        }
+    }
 
     public void EquipWeapon(int index, int level)
     {
@@ -476,7 +486,7 @@ public abstract class Unit : MonoBehaviour {
                     holder = revolveHolder;
                     attackCoolTime = 10000;
                 }
-                bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed,holder);
+                bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
             }
             //else
                 //Debug.Log("targetDistance : " + targetDistance + " attackDistance : " + attackDistance);
@@ -494,7 +504,7 @@ public abstract class Unit : MonoBehaviour {
                 {
                     yield return null;
                     t -= Time.deltaTime;
-                    if (!boardManager.isReady)
+                    if (isDeath)
                         break;
                 }
                 isAttackCool = false;

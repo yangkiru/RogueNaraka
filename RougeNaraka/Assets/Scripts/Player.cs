@@ -24,6 +24,7 @@ public class Player : Unit
 
     protected override void OnDeath()
     {
+        base.OnDeath();
         gameManager.OnEnd();
     }
 
@@ -127,7 +128,6 @@ public class Player : Unit
         win = false;
         agent.SetDestination(boardManager.spawnPoint);
         transform.position = boardManager.spawnPoint;
-        attackCoolTime = 0;
     }
 
     public void Revive(float percent)

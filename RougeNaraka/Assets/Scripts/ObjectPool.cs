@@ -15,9 +15,10 @@ public class ObjectPool : MonoBehaviour
     {
         if (isRemoveChild)
         {
-            for (int i = 0; i < obj.transform.childCount; i++)
+            int count = obj.transform.childCount;
+            for (int i = 0; i < count; i++)
             {
-                obj.transform.GetChild(i).SetParent(transform);
+                obj.transform.GetChild(0).SetParent(transform);
             }
         }
         obj.transform.SetParent(transform);
