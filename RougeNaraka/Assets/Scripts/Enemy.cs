@@ -182,8 +182,11 @@ public class Enemy : Unit {
             CheckDeath();
             if (!isDeath)
             {
-                StunFunc();
-                KnockBackFunc();
+                if (effects.Count > 0)//상태 이상
+                {
+                    StunFunc();
+                    KnockBackFunc();
+                }
                 TargetUpdate();
                 Attack();
             }

@@ -35,8 +35,11 @@ public class Player : Unit
             CheckDeath();
             if (!isDeath)
             {
-                StunFunc();
-                KnockBackFunc();
+                if (effects.Count > 0)//상태 이상
+                {
+                    StunFunc();
+                    KnockBackFunc();
+                }
                 if (!SetTarget() && !win)
                     MoveToGoal();
                 else

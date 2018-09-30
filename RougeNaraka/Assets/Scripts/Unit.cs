@@ -553,6 +553,38 @@ public abstract class Unit : MonoBehaviour {
         }
     }
     //상태이상
+    public EffectStat effectStat
+    {
+        get { return _effectStat; }
+    }
+    private EffectStat _effectStat;
+
+    public void Fire(float damage, float time)
+    {
+        Effect effect = AddEffect(EFFECT.FIRE, damage, time);
+    }
+
+    /// <summary>
+    /// AddEffect에서 호출
+    /// </summary>
+    /// <param name="fire"></param>
+    /// <returns></returns>
+    protected IEnumerator FireFunc(Effect fire)
+    {
+        float time = 0;
+        while (fire.data.time > 0)
+        {
+            while (time < 0.5f * (1 + effectStat.fireResistance * 0.1f))
+            {
+                yield return null;
+                time += Time.deltaTime;
+                fire.data.time -= Time.deltaTime;
+            }
+            time = 0;
+            GetDamage(fire.data.value);
+        }
+    }
+
     public void KnockBack(Vector2 vec, float amount = 1)
     {
         AddEffect(EFFECT.KNOCKBACK, MathHelpers.Vector2ToDegree(vec), amount);
@@ -608,31 +640,38 @@ public abstract class Unit : MonoBehaviour {
     protected virtual void OnStunEnd() { }
     //상태이상
 
-    public void AddEffect(EffectData data)
+    public Effect AddEffect(EffectData data)
     {
         Effect effect = gameObject.AddComponent<Effect>();
         effect.SetData(data);
         effect.Active(true);
         _effects.Add(effect);
+        switch(data.type)
+        {
+            case EFFECT.FIRE:
+                StartCoroutine(FireFunc(effect));
+                break;
+        }
+        return effect;
     }
 
-    public void AddEffect(EFFECT type, float value, float time, bool isInfinity = false)
+    public Effect AddEffect(EFFECT type, float value, float time, bool isInfinity = false)
     {
-        Effect effect = gameObject.AddComponent<Effect>();
-        effect.SetData(new EffectData(type, value, time, isInfinity));
-        effect.Active(true);
-        _effects.Add(effect);
+        return AddEffect(new EffectData(type, value, time, isInfinity));
     }
 
-    public void AddEffect(EffectData[] datas)
+    public Effect[] AddEffect(EffectData[] datas)
     {
         if (datas != null)
         {
+            Effect[] _effects = new Effect[datas.Length];
             for (int i = 0; i < datas.Length; i++)
             {
-                AddEffect(datas[i]);
+                _effects[i] = AddEffect(datas[i]);
             }
+            return _effects;
         }
+        return null;
     }
 
     public void RemoveEffect(Effect ef)

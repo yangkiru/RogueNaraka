@@ -49,8 +49,6 @@ public class Effect : MonoBehaviour {
             yield return null;
             _data.time -= Time.deltaTime;
         }
-
-        coroutine = null;
         DestroySelf();
     }
 

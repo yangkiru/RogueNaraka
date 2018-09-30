@@ -135,6 +135,18 @@ public struct Stat
 }
 
 [Serializable]
+public struct EffectStat
+{
+    public float fireResistance;
+    public float iceResistance;
+    public float poisonResistance;
+    public float knockBackResistance;
+    public float stunResistance;
+    public float slowResistance;
+    public float gravityResistance;
+}
+
+[Serializable]
 public struct UnitData
 {
     public string name;
