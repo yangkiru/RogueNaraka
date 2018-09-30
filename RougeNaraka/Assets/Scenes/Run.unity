@@ -9654,7 +9654,7 @@ MonoBehaviour:
   - {fileID: 710444246}
   - {fileID: 633652486}
   weaponId: 4
-  weaponLevel: 2
+  weaponLevel: 0
   stage: 1
   isDebug: 1
   isReset: 0

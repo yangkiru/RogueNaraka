@@ -324,7 +324,7 @@ MonoBehaviour:
     effects: []
   - name: MagicBall1
     id: 1
-    type: 1
+    type: 0
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -385,7 +385,7 @@ MonoBehaviour:
     effects: []
   - name: MagicBall2
     id: 2
-    type: 1
+    type: 0
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -462,7 +462,7 @@ MonoBehaviour:
     effects: []
   - name: MagicBall3
     id: 3
-    type: 1
+    type: 0
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -555,7 +555,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSpin0
     id: 4
-    type: 1
+    type: 0
     dmg: 0.2
     dealSpeed: 0.1
     size: 0.3
@@ -572,7 +572,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSpin1
     id: 5
-    type: 1
+    type: 0
     dmg: 0.3
     dealSpeed: 0.1
     size: 0.5
@@ -589,7 +589,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSpin2
     id: 6
-    type: 1
+    type: 0
     dmg: 0.4
     dealSpeed: 0.2
     size: 0.8
@@ -606,7 +606,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSpawn
     id: 7
-    type: 5
+    type: 4
     dmg: 0
     dealSpeed: 0
     size: 0.3
@@ -621,7 +621,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSlash0
     id: 8
-    type: 6
+    type: 3
     dmg: 1
     dealSpeed: 0.2
     size: 0.5
@@ -636,7 +636,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSlash1
     id: 9
-    type: 6
+    type: 3
     dmg: 1
     dealSpeed: 0.2
     size: 1
@@ -651,7 +651,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSlash2
     id: 10
-    type: 6
+    type: 3
     dmg: 1
     dealSpeed: 0.2
     size: 1
@@ -666,7 +666,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSlash3
     id: 11
-    type: 6
+    type: 3
     dmg: 1
     dealSpeed: 0.2
     size: 0.62
@@ -713,7 +713,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSlash4
     id: 12
-    type: 6
+    type: 3
     dmg: 0.1
     dealSpeed: 0.2
     size: 1
@@ -760,7 +760,7 @@ MonoBehaviour:
     effects: []
   - name: MagicMissile
     id: 13
-    type: 1
+    type: 0
     dmg: 1
     dealSpeed: 0.2
     size: 0.3
@@ -791,7 +791,7 @@ MonoBehaviour:
     effects: []
   - name: MagicMissileTrail
     id: 14
-    type: 5
+    type: 4
     dmg: 0
     dealSpeed: 0
     size: 1
@@ -821,7 +821,7 @@ MonoBehaviour:
     effects: []
   - name: MagicBallDestroy
     id: 16
-    type: 1
+    type: 0
     dmg: 0.5
     dealSpeed: 1
     size: 0.5
@@ -836,9 +836,9 @@ MonoBehaviour:
     effects: []
   - name: MagicSquare
     id: 17
-    type: 1
-    dmg: 0.25
-    dealSpeed: 0.1
+    type: 0
+    dmg: 0.5
+    dealSpeed: 0.5
     size: 0.35
     angle: 0
     controller: {fileID: 22100000, guid: 6419740594e6c5343a82621f7c0793c3, type: 2}
@@ -867,7 +867,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSquareTrail
     id: 18
-    type: 5
+    type: 4
     dmg: 0
     dealSpeed: 0
     size: 0.5
@@ -882,7 +882,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSquare0
     id: 19
-    type: 5
+    type: 4
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -913,7 +913,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSquare1
     id: 20
-    type: 5
+    type: 4
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -960,7 +960,7 @@ MonoBehaviour:
     effects: []
   - name: MagicSquare2
     id: 20
-    type: 5
+    type: 4
     dmg: 0
     dealSpeed: 0
     size: 0

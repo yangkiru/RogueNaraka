@@ -24,7 +24,6 @@ public class Bullet : MonoBehaviour {
     private float unitDamage;
     private float size;
     private float basicSpeed = 1;
-    private float dotTime;
     private float spinVelocity;
     private float spinValue;
     private float localSpeed;
@@ -40,6 +39,8 @@ public class Bullet : MonoBehaviour {
     [SerializeField][ReadOnly]
     private BulletData data;
     private EffectData[] effects;
+    private List<int> records = new List<int>();
+    private List<float> dotTimes = new List<float>();
 
     [SerializeField][ReadOnly]
     private List<Bullet> destroyChildren = new List<Bullet>();
@@ -50,11 +51,9 @@ public class Bullet : MonoBehaviour {
         switch (data.type)
         {
             case BULLET_TYPE.CIRCLECAST:
-            case BULLET_TYPE.CIRCLEOVERLAP:
                 Gizmos.DrawWireSphere(transform.position, size);
                 break;
             case BULLET_TYPE.LINECAST:
-            case BULLET_TYPE.LINECASTS:
                 Gizmos.DrawLine(transform.position, vec);
                 break;
             case BULLET_TYPE.TRIANGLE:
@@ -337,7 +336,23 @@ public class Bullet : MonoBehaviour {
                     case EFFECT.STUN:
                         unit.Stun(effects[i].time);
                         break;
+                    case EFFECT.FIRE:
+                        unit.Fire(effects[i].value * unitDamage, effects[i].time);
+                        break;
                 }
+            }
+        }
+    }
+
+    private void DotTimeFunc()
+    {
+        for (int i = 0; i < dotTimes.Count; i++)
+        {
+            dotTimes[i] += Time.deltaTime;
+            if (dotTimes[i] >= data.dealSpeed)
+            {
+                records.RemoveAt(i);
+                dotTimes.RemoveAt(i);
             }
         }
     }
@@ -396,187 +411,117 @@ public class Bullet : MonoBehaviour {
                     }
                 }
 
-                if (data.type == BULLET_TYPE.CIRCLECAST)//원형 데미지
+                Collider2D[] hits = null;
+                switch (data.type)
                 {
-                    RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, size, Vector2.zero, 0, layerMask);
+                    case BULLET_TYPE.CIRCLECAST://원형 데미지
+                        hits = Physics2D.OverlapCircleAll(transform.position, size, layerMask);
 
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        if (!(hits[i].transform.gameObject.layer == GameDatabase.wallLayer))
+                        DotTimeFunc();
+                        bool isDeal = false;
+                        for (int i = 0; i < hits.Length; i++)
                         {
-                            //Debug.Log(name + " hit to " + hits[i].transform.name);
-                            Unit unit = hits[i].transform.GetComponent<Unit>();
-                            unit.GetDamage(Damage());
-                            EffectFunc(unit);
-                        }
-                    }
-                    if (hits.Length > 0)
-                    {
-                        if(pierce < 999)
-                            pierce -= hits.Length;
-                        if (pierce <= 0)
-                            Destroy();
-                    }
-                }
-                else if (data.type == BULLET_TYPE.CIRCLEOVERLAP)//원형 도트 데미지
-                {
-                    Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, size, layerMask);
-                    if (dotTime >= 0)
-                        dotTime -= Time.deltaTime;
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        if (hits[i].gameObject.layer != GameDatabase.wallLayer)
-                        {
-                            if (dotTime < 0)
+                            if (hits[i].gameObject.layer != GameDatabase.wallLayer)
                             {
-                                Debug.Log(name + " dot hit to " + hits[i].transform.name);
                                 Unit unit = hits[i].GetComponent<Unit>();
-                                unit.GetDamage(Damage());
-                                EffectFunc(unit);
-                            }
-                        }
-                        else if (hits[i].gameObject.layer == GameDatabase.wallLayer)
-                        {
-                            if (!revolveHolder)
-                                Destroy();
-                        }
-                    }
-                    if (dotTime < 0 && hits.Length > 0)
-                    {
-                        if (pierce < 999)
-                            pierce -= hits.Length;
-                        if (pierce <= 0)
-                            Destroy();
-                        dotTime += data.dealSpeed;
-                    }
-                    if (hits.Length <= 0)
-                        dotTime = 0;
-                }
-                else if (data.type == BULLET_TYPE.LINECAST)//직선 단일 데미지
-                {
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, vec, size, layerMask);
-
-                    if (hit)
-                    {
-                        if (hit.collider.gameObject.layer == GameDatabase.wallLayer)
-                        {
-                            Debug.Log(name + " hit to wall");
-                            Destroy();
-                        }
-                        else
-                        {
-                            Debug.Log(name + " hit to " + hit.transform.name);
-                            Unit unit = hit.transform.GetComponent<Unit>();
-                            unit.GetDamage(Damage());
-                            EffectFunc(unit);
-                            if (pierce < 999)
-                                pierce--;
-                            if (pierce <= 0)
-                                Destroy();
-                        }
-                    }
-                }
-                else if (data.type == BULLET_TYPE.LINECASTS)//직선 다중 데미지 (테스트 필요)
-                {
-                    RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, vec, size, layerMask);
-
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        Debug.Log(name + " hit to " + hits[i].transform.name);
-                        Unit unit = hits[i].transform.GetComponent<Unit>();
-                        unit.GetDamage(Damage());
-                        EffectFunc(unit);
-                    }
-
-                    if (hits.Length > 0)
-                    {
-                        if (pierce < 999)
-                            pierce -= hits.Length;
-                        if (pierce <= 0)
-                            Destroy();
-                    }
-                }
-                else if (data.type == BULLET_TYPE.TRIANGLE)//삼각형 도트 데미지
-                {
-
-                    float vecAngle = Vector2.Angle(Vector2.up, vec);
-                    if (vec.x < 0)
-                        vecAngle = 360 - vecAngle;
-                    Collider2D[] hits = Physics2D.OverlapBoxAll((Vector2)transform.position + (vec * size / 2), new Vector2(size, size), vecAngle, layerMask);
-                    if (dotTime >= 0)
-                    {
-                        dotTime -= Time.deltaTime;
-                    }
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        if (hits[i].gameObject.layer == GameDatabase.friendlyLayer ||
-                            hits[i].gameObject.layer == GameDatabase.enemyLayer)
-                        {
-                            if (dotTime < 0)
-                            {
-
-                                Unit unit = hits[i].GetComponent<Unit>();
-                                Vector2 v = unit.transform.position - transform.position;
-                                float unitAngle = Vector2.Angle(Vector2.up, v);
-                                if (v.x < 0)
-                                    unitAngle = 360 - unitAngle;
-
-                                //Debug.Log(hits[i].transform.name + " angle:" + vecAngle + " unit:" + unitAngle);
-                                if (IsInsideAngle(vecAngle, angle, unitAngle))
+                                int hash = unit.GetHashCode();
+                                int index = records.FindIndex(d => d == hash);
+                                if (index == -1)
                                 {
+                                    isDeal = true;
                                     Debug.Log(name + " dot hit to " + hits[i].transform.name);
                                     unit.GetDamage(Damage());
                                     EffectFunc(unit);
+                                    records.Add(hash);
+                                    dotTimes.Add(data.dealSpeed);
                                 }
-                                else
-                                    Debug.Log(name + " not inside of triangle" + hits[i].transform.name);
+                            }
+                            else if (hits[i].gameObject.layer == GameDatabase.wallLayer)
+                            {
+                                if (!revolveHolder)
+                                    Destroy();
                             }
                         }
-                    }
-                    if (dotTime < 0 && hits.Length > 0)
-                        dotTime += data.dealSpeed;
-                }
-                else if (data.type == BULLET_TYPE.SECTOR)//부채꼴 도트 데미지
-                {
-                    float vecAngle = Vector2.Angle(Vector2.up, vec);
-                    if (vec.x < 0)
-                        vecAngle = 360 - vecAngle;
-                    Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, size, layerMask);
-                    if (dotTime >= 0)
-                    {
-                        dotTime -= Time.deltaTime;
-                    }
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        if (hits[i].gameObject.layer == GameDatabase.friendlyLayer ||
-                            hits[i].gameObject.layer == GameDatabase.enemyLayer)
+                        if (isDeal)
                         {
-                            if (dotTime < 0)
+                            if (pierce < 999)
+                                pierce -= hits.Length;
+                            if (pierce <= 0)
+                                Destroy();
+                        }
+                        break;
+                    case BULLET_TYPE.LINECAST://직선 데미지
+                        RaycastHit2D[] _hits = Physics2D.RaycastAll(transform.position, vec, size, layerMask);
+
+                        DotTimeFunc();
+                        for (int i = 0; i < hits.Length; i++)
+                        {
+                            if (hits[i].gameObject.layer != GameDatabase.wallLayer)
                             {
-
-                                Unit unit = hits[i].GetComponent<Unit>();
-                                Vector2 v = unit.transform.position - transform.position;
-                                float unitAngle = Vector2.Angle(Vector2.up, v);
-                                if (v.x < 0)
-                                    unitAngle = 360 - unitAngle;
-
-                                //Debug.Log(hits[i].transform.name + " vecAngle:" + vecAngle + " unit:" + unitAngle + " angle: " + angle);
-                                if (IsInsideAngle(vecAngle, angle, unitAngle))
+                                Unit unit = _hits[i].transform.GetComponent<Unit>();
+                                int hash = unit.GetHashCode();
+                                int index = records.FindIndex(d => d == hash);
+                                if (index == -1)
                                 {
-                                    //Debug.Log(name + " dot hit to " + hits[i].transform.name);
+                                    isDeal = true;
+                                    Debug.Log(name + " dot hit to " + hits[i].transform.name);
                                     unit.GetDamage(Damage());
                                     EffectFunc(unit);
-                                }
-                                else
-                                {
-                                    //Debug.Log(name + " not inside of sector" + hits[i].transform.name);
-                                    //Debug.Log(hits[i].transform.name + " vecAngle:" + vecAngle + " unit:" + unitAngle + " angle: " + angle);
+                                    records.Add(hash);
+                                    dotTimes.Add(data.dealSpeed);
                                 }
                             }
                         }
-                    }
-                    if (dotTime < 0 && hits.Length > 0)
-                        dotTime += data.dealSpeed;
+
+                        if (hits.Length > 0)
+                        {
+                            if (pierce < 999)
+                                pierce -= hits.Length;
+                            if (pierce <= 0)
+                                Destroy();
+                        }
+                        break;
+                    case BULLET_TYPE.TRIANGLE://삼각형 도트 데미지
+                    case BULLET_TYPE.SECTOR:
+                        float vecAngle = Vector2.Angle(Vector2.up, vec);
+                        if (vec.x < 0)
+                            vecAngle = 360 - vecAngle;
+                        if (data.type == BULLET_TYPE.TRIANGLE)
+                            hits = Physics2D.OverlapBoxAll((Vector2)transform.position + (vec * size / 2), new Vector2(size, size), vecAngle, layerMask);
+                        else
+                            hits = Physics2D.OverlapCircleAll(transform.position, size, layerMask);
+                        DotTimeFunc();
+
+                        for (int i = 0; i < hits.Length; i++)
+                        {
+
+                            if (hits[i].gameObject.layer != GameDatabase.wallLayer)
+                            {
+                                Unit unit = hits[i].GetComponent<Unit>();
+                                int hash = unit.GetHashCode();
+                                int index = records.FindIndex(d => d == hash);
+                                if (index == -1)
+                                {
+                                    Vector2 v = unit.transform.position - transform.position;
+                                    float unitAngle = Vector2.Angle(Vector2.up, v);
+                                    if (v.x < 0)
+                                        unitAngle = 360 - unitAngle;
+
+                                    //Debug.Log(hits[i].transform.name + " angle:" + vecAngle + " unit:" + unitAngle);
+                                    if (IsInsideAngle(vecAngle, angle, unitAngle))
+                                    {
+                                        Debug.Log(name + " dot hit to " + hits[i].transform.name);
+                                        unit.GetDamage(Damage());
+                                        EffectFunc(unit);
+                                        records.Add(hash);
+                                        dotTimes.Add(data.dealSpeed);
+                                    }
+                                    else
+                                        Debug.Log(name + " not inside of triangle" + hits[i].transform.name);
+                                }
+                            }
+                        }
+                        break;
                 }
             }
         }

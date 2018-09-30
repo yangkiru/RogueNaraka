@@ -206,7 +206,7 @@ public struct BulletData
 [Serializable]
 public enum BULLET_TYPE
 {
-    CIRCLECAST, CIRCLEOVERLAP, LINECAST, LINECASTS, TRIANGLE, NONE, SECTOR
+    CIRCLECAST, LINECAST, TRIANGLE, SECTOR, NONE
 }
 
 /// <summary>

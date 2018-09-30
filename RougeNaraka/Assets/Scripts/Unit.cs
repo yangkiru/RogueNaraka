@@ -519,8 +519,11 @@ public abstract class Unit : MonoBehaviour {
     /// <param name="damage"></param>
     public void GetDamage(float damage)
     {
-        _health -= damage;
-        TxtOnHead(-damage, transform, Color.red);
+        if (damage > 0)
+        {
+            _health -= damage;
+            TxtOnHead(-damage, transform, Color.red);
+        }
     }
 
     public void HealHealth(float amount)
