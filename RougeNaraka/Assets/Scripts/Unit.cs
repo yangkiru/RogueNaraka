@@ -544,8 +544,8 @@ public abstract class Unit : MonoBehaviour {
                 case ATTACK_TYPE.REVOLVE:
                     if (target != null)
                     {
-                        Vector2 vec = (targetPosition - (Vector2)transform.position).normalized * attackDistance * 0.6f;
-                        Move(targetPosition - vec);
+                        Vector2 vec = (targetPosition - (Vector2)transform.position);
+                        Move(targetPosition - vec.normalized * attackDistance);
                     }
                     break;
                 case ATTACK_TYPE.TARGET:
