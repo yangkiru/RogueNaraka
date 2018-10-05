@@ -348,8 +348,8 @@ public class Bullet : MonoBehaviour {
     {
         for (int i = 0; i < dotTimes.Count; i++)
         {
-            dotTimes[i] += Time.deltaTime;
-            if (dotTimes[i] >= data.dealSpeed)
+            dotTimes[i] -= Time.deltaTime;
+            if (dotTimes[i] <= 0)
             {
                 records.RemoveAt(i);
                 dotTimes.RemoveAt(i);
@@ -434,6 +434,7 @@ public class Bullet : MonoBehaviour {
                                     EffectFunc(unit);
                                     records.Add(hash);
                                     dotTimes.Add(data.dealSpeed);
+                                    Debug.Log("records.Count:" + records.Count);
                                 }
                             }
                             else if (hits[i].gameObject.layer == GameDatabase.wallLayer)

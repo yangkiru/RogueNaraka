@@ -138,8 +138,8 @@ MonoBehaviour:
     move: 0
     moveTime: 0
     moveDistance: 2
-    minDistance: 1
-    maxDistance: 2
+    minDistance: 0.65
+    maxDistance: 0.4
   - name: SlasherRed
     id: 4
     cost: 2
@@ -168,8 +168,8 @@ MonoBehaviour:
     move: 0
     moveTime: 0
     moveDistance: 2
-    minDistance: 1
-    maxDistance: 2
+    minDistance: 0.65
+    maxDistance: 0.4
   - name: SlasherBlue
     id: 5
     cost: 2
@@ -198,8 +198,8 @@ MonoBehaviour:
     move: 0
     moveTime: 0
     moveDistance: 2
-    minDistance: 1
-    maxDistance: 2
+    minDistance: 0.65
+    maxDistance: 0.4
   - name: Runner
     id: 6
     cost: 1
