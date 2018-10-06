@@ -9659,7 +9659,7 @@ MonoBehaviour:
   - {fileID: 1686397862}
   - {fileID: 710444246}
   - {fileID: 633652486}
-  weaponId: 4
+  weaponId: 0
   weaponLevel: 0
   stage: 1
   isDebug: 1
