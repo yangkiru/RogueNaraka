@@ -73,6 +73,12 @@ public class PointTxtManager : MonoBehaviour {
         StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
         return txt;
     }
+    public Text TxtOnHead(float value, Transform tf, Color color)
+    {
+        Text txt = TxtOn(tf, value, color, new Vector2(2, 0.5f), "N2");
+        StartCoroutine(MoveUp(txt, 0.5f, 0.01f));
+        return txt;
+    }
 
     public void TxtOnGold(float value, Transform tf, TxtHolder holder)
     {
@@ -89,7 +95,7 @@ public class PointTxtManager : MonoBehaviour {
         StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
     }
 
-    private IEnumerator MoveUp(Text txt, float time, float speed, TxtHolder holder)
+    private IEnumerator MoveUp(Text txt, float time, float speed, TxtHolder holder = null)
     {
         float amount = 0.05f;
         for(float t = 0; t < time; t += amount)
@@ -97,6 +103,9 @@ public class PointTxtManager : MonoBehaviour {
             txt.transform.position = new Vector2(txt.transform.position.x, txt.transform.position.y + speed);
             yield return new WaitForSecondsRealtime(amount);
         }
-        holder.RemoveTxt(txt);
+        if (holder != null)
+            holder.RemoveTxt(txt);
+        else
+            txtPool.EnqueueObjectPool(txt.gameObject);
     }
 }

@@ -10,6 +10,8 @@ public class Player : Unit
     public bool isMoveToAttack;
     public bool isMoveToMouse;
 
+    private float _collectedDmg;
+
     private bool win;
 
     private List<Enemy> enemies;
@@ -20,6 +22,7 @@ public class Player : Unit
             instance = this;
 
         enemies = boardManager.enemies;
+        StartCoroutine(CollectedDmgFunc());
     }
 
     protected override void OnDeath()
@@ -54,6 +57,29 @@ public class Player : Unit
                     targetPosition = target.transform.position;
             }
             Animation();
+        }
+    }
+
+    public override void GetDamage(float damage)
+    {
+        if (damage > 0)
+        {
+            _collectedDmg += damage;
+            _health -= damage;
+        }
+    }
+
+
+    protected IEnumerator CollectedDmgFunc()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            if (_collectedDmg > 0)
+            {
+                PointTxtManager.instance.TxtOnHead(-_collectedDmg, transform, Color.red);
+                _collectedDmg = 0;
+            }
         }
     }
 

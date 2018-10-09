@@ -162,11 +162,6 @@ public abstract class Unit : MonoBehaviour {
         SyncSpeed();
     }
 
-    public void TxtOnHead(float amount, Transform transform, Color color)
-    {
-        PointTxtManager.instance.TxtOnHead(amount, transform, color, txtHolder);
-    }
-
     public void SetHealth(float value)
     {
         _health = value;
@@ -204,7 +199,7 @@ public abstract class Unit : MonoBehaviour {
         if (_health + amount > stat.hp)
             amount = stat.hp - _mana;
         AddMana(amount);
-        TxtOnHead(amount, transform, Color.blue);
+        PointTxtManager.instance.TxtOnHead(amount, transform, Color.blue);
     }
 
     public bool UseMana(float amount)
@@ -212,7 +207,7 @@ public abstract class Unit : MonoBehaviour {
         if (_mana - amount >= 0)
         {
             AddMana(-amount);
-            TxtOnHead(-amount, transform, Color.blue);
+            PointTxtManager.instance.TxtOnHead(-amount, transform, Color.blue);
             return true;
         }
         else
@@ -517,12 +512,12 @@ public abstract class Unit : MonoBehaviour {
     /// 데미지 입는 함수
     /// </summary>
     /// <param name="damage"></param>
-    public void GetDamage(float damage)
+    public virtual void GetDamage(float damage)
     {
         if (damage > 0)
         {
             _health -= damage;
-            TxtOnHead(-damage, transform, Color.red);
+            PointTxtManager.instance.TxtOnHead(-damage, transform, Color.red, txtHolder);
         }
     }
 
@@ -531,7 +526,7 @@ public abstract class Unit : MonoBehaviour {
         if (_health + amount > stat.hp)
             amount = stat.hp - _health;
         AddHealth(amount);
-        TxtOnHead(amount, transform, Color.green);
+        PointTxtManager.instance.TxtOnHead(amount, transform, Color.green, txtHolder);
     }
 
     public void MoveToAttack()
