@@ -47,7 +47,6 @@ public class Enemy : Unit {
     protected override void OnDeath()
     {
         base.OnDeath();
-        MoneyManager.instance.AddGold(MoneyFunction(cost, Player.instance.stat.luck));
         MoneyManager.instance.AddCollectedSoul(cost);
         //Debug.Log("cost:" + cost + " enemy dead");
         boardManager.enemyPool.EnqueueObjectPool(gameObject);

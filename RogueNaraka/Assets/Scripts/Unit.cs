@@ -306,8 +306,8 @@ public abstract class Unit : MonoBehaviour {
             case STAT.SPD:
                 _stat.spd = value;
                 break;
-            case STAT.LUCK:
-                _stat.luck = value;
+            case STAT.TEC:
+                _stat.tec = value;
                 break;
             case STAT.HP:
                 _stat.hp = value;
@@ -342,10 +342,10 @@ public abstract class Unit : MonoBehaviour {
                     return true;
                 }
                 else return false;
-            case STAT.LUCK:
-                if (_stat.luck + amount <= _maxStat.luck)
+            case STAT.TEC:
+                if (_stat.tec + amount <= _maxStat.tec)
                 {
-                    _stat.luck += amount;
+                    _stat.tec += amount;
                     return true;
                 }
                 else return false;
@@ -398,8 +398,8 @@ public abstract class Unit : MonoBehaviour {
             case STAT.SPD:
                 _maxStat.spd = value;
                 break;
-            case STAT.LUCK:
-                _maxStat.luck = value;
+            case STAT.TEC:
+                _maxStat.tec = value;
                 break;
             case STAT.HP:
                 _maxStat.hp = value;
@@ -426,8 +426,8 @@ public abstract class Unit : MonoBehaviour {
             case STAT.SPD:
                 _maxStat.spd += amount;
                 break;
-            case STAT.LUCK:
-                _maxStat.luck += amount;
+            case STAT.TEC:
+                _maxStat.tec += amount;
                 break;
             case STAT.HP:
                 _maxStat.hp += amount;

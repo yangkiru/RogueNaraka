@@ -5,17 +5,9 @@ using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour {
 
-    public Text goldTxt;
-    public Text soulTxt;
+    public TMPro.TextMeshProUGUI soulTxt;
 
-    private TxtHolder goldHolder = new TxtHolder();
     private TxtHolder soulHolder = new TxtHolder();
-    public int gold
-    {
-        get { return _gold; }
-    }
-    [SerializeField][ReadOnly]
-    private int _gold;
 
     public int collectedSoul
     {
@@ -38,35 +30,6 @@ public class MoneyManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-    }
-
-    public void SetGold(int value)
-    {
-        _gold = value;
-        MoneyUpdate();
-    }
-
-    public void AddGold(int value)
-    {
-        if (_gold + value >= 0)
-            _gold += value;
-        else
-            _gold = 0;
-        MoneyUpdate();
-        PointTxtManager.instance.TxtOnGold(value, goldTxt.transform, goldHolder);
-    }
-
-    public bool UseGold(int amount)
-    {
-        if (_gold - amount >= 0)
-        {
-            _gold -= amount;
-            MoneyUpdate();
-            PointTxtManager.instance.TxtOnGold(-amount, goldTxt.transform, goldHolder);
-            return true;
-        }
-        else
-            return false;
     }
 
     public void SetCollectedSoul(int value)
@@ -123,14 +86,12 @@ public class MoneyManager : MonoBehaviour {
 
     public void Save()
     {
-        PlayerPrefs.SetInt("gold", _gold);
         PlayerPrefs.SetInt("collectedSoul", _collectedSoul);
         PlayerPrefs.SetInt("soul", _soul);
     }
 
     public void Load()
     {
-        SetGold(PlayerPrefs.GetInt("gold"));
         SetCollectedSoul(PlayerPrefs.GetInt("collectedSoul"));
         SetSoul(PlayerPrefs.GetInt("soul"));
     }
@@ -144,7 +105,6 @@ public class MoneyManager : MonoBehaviour {
 
     public void MoneyUpdate()
     {
-        goldTxt.text = _gold.ToString();
         soulTxt.text = _soul.ToString() + "(" + collectedSoul + ")";
     }
 }

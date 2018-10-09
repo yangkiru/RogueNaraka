@@ -110,7 +110,7 @@ public struct Stat
 {
     public float dmg;
     public float spd;
-    public float luck;
+    public float tec;
     public float hp;
     public float mp;
     public float hpRegen;
@@ -118,20 +118,26 @@ public struct Stat
 
     public Stat(Stat s)
     {
-        dmg = s.dmg; spd = s.spd; luck = s.luck; hp = s.hp; mp = s.mp; hpRegen = s.hpRegen; mpRegen = s.mpRegen;
+        dmg = s.dmg; spd = s.spd; tec = s.tec; hp = s.hp; mp = s.mp; hpRegen = s.hpRegen; mpRegen = s.mpRegen;
     }
     public Stat(float value)
     {
-        dmg = value; spd = value; luck = value; hp = value; mp = value; hpRegen = value; mpRegen = value;
+        dmg = value; spd = value; tec = value; hp = value; mp = value; hpRegen = value; mpRegen = value;
     }
-    public Stat(float d, float s, float l, float h, float m, float hr, float mr)
+    public Stat(float d, float s, float t, float h, float m, float hr, float mr)
     {
-        dmg = d; spd = s; luck = l; hp = h; mp = m; hpRegen = hr; mpRegen = mr;
+        dmg = d; spd = s; tec = t; hp = h; mp = m; hpRegen = hr; mpRegen = mr;
     }
     public float sum
     {
-        get { return dmg + spd + luck + hp + mp + hpRegen + mpRegen; }
+        get { return dmg + spd + tec + hp + mp + hpRegen + mpRegen; }
     }
+}
+
+[Serializable]
+public enum STAT
+{
+    DMG, SPD, TEC, HP, MP, HPREGEN, MPREGEN, STATPOINT
 }
 
 [Serializable]
@@ -341,12 +347,6 @@ public struct ItemSpriteData
 {
     public int id;
     public Sprite spr;
-}
-
-[Serializable]
-public enum STAT
-{
-    DMG, SPD, LUCK, HP, MP, HPREGEN, MPREGEN, STATPOINT
 }
 
 [Serializable]

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
     public Text soulStatCheckTxt;
     public Text soulShopSoulTxt;
 
-    public Text[] statTxt;
+    public TMPro.TextMeshProUGUI[] statTxt;
     public Text[] upgradeTxt;
     public Text[] maxUpgradeTxt;
 
@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour {
         {
             PlayerPrefs.SetFloat("dmg", player.stat.dmg);
             PlayerPrefs.SetFloat("spd", player.stat.spd);
-            PlayerPrefs.SetFloat("luck", player.stat.luck);
+            PlayerPrefs.SetFloat("tec", player.stat.tec);
             PlayerPrefs.SetFloat("hp", player.stat.hp);
             PlayerPrefs.SetFloat("mp", player.stat.mp);
             PlayerPrefs.SetFloat("hpRegen", player.stat.hpRegen);
@@ -204,7 +204,6 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("isFirst") == 0)//reset
         {
             Debug.Log("First Run");
-            moneyManager.SetGold(0);
             moneyManager.Save();
             PlayerPrefs.SetFloat("isLevelUp", 0);
             Stat dbStat = GameDatabase.instance.playerBase;
@@ -214,7 +213,7 @@ public class GameManager : MonoBehaviour {
 
             PlayerPrefs.SetFloat("dmgMax", maxStat.dmg);
             PlayerPrefs.SetFloat("spdMax", maxStat.spd);
-            PlayerPrefs.SetFloat("luckMax", maxStat.luck);
+            PlayerPrefs.SetFloat("tecMax", maxStat.tec);
             PlayerPrefs.SetFloat("hpMax", maxStat.hp);
             PlayerPrefs.SetFloat("mpMax", maxStat.mp);
             PlayerPrefs.SetFloat("hpRegenMax", maxStat.hpRegen);
@@ -243,7 +242,7 @@ public class GameManager : MonoBehaviour {
             isRun = true;
             moneyManager.Load();
             Stat stat = new Stat(PlayerPrefs.GetFloat("dmg"), PlayerPrefs.GetFloat("spd"),
-            PlayerPrefs.GetFloat("luck"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
+            PlayerPrefs.GetFloat("tec"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
             PlayerPrefs.GetFloat("hpRegen"), PlayerPrefs.GetFloat("mpRegen"));
 
             player.SyncData(stat, true, false);
@@ -311,7 +310,7 @@ public class GameManager : MonoBehaviour {
         stat = GameDatabase.instance.playerBase;
         PlayerPrefs.SetFloat("dmg", stat.dmg);
         PlayerPrefs.SetFloat("spd", stat.spd);
-        PlayerPrefs.SetFloat("luck", stat.luck);
+        PlayerPrefs.SetFloat("tec", stat.tec);
         PlayerPrefs.SetFloat("hp", stat.hp);
         PlayerPrefs.SetFloat("mp", stat.mp);
         PlayerPrefs.SetFloat("hpRegen", stat.hpRegen);
@@ -322,10 +321,11 @@ public class GameManager : MonoBehaviour {
     {
         statTxt[0].text = player.stat.dmg.ToString();
         statTxt[1].text = player.stat.spd.ToString();
-        statTxt[2].text = player.stat.luck.ToString();
+        statTxt[2].text = player.stat.tec.ToString();
         statTxt[3].text = player.stat.hp.ToString();
-        statTxt[4].text = player.stat.mp.ToString();
-        statTxt[5].text = string.Format("{0} / {1}", player.stat.hpRegen.ToString(), player.stat.mpRegen.ToString());
+        statTxt[4].text = player.stat.hpRegen.ToString();
+        statTxt[5].text = player.stat.mp.ToString();
+        statTxt[6].text = player.stat.mpRegen.ToString();
     }
 
     public void SetPause(bool value)
@@ -463,8 +463,8 @@ public class GameManager : MonoBehaviour {
                 return PlayerPrefs.GetFloat("dmgMax");
             case STAT.SPD:
                 return PlayerPrefs.GetFloat("spdMax");
-            case STAT.LUCK:
-                return PlayerPrefs.GetFloat("luckMax");
+            case STAT.TEC:
+                return PlayerPrefs.GetFloat("tecMax");
             case STAT.HP:
                 return PlayerPrefs.GetFloat("hpMax");
             case STAT.MP:
@@ -489,8 +489,8 @@ public class GameManager : MonoBehaviour {
             case STAT.SPD:
                 PlayerPrefs.SetFloat("spdMax", value);
                 break;
-            case STAT.LUCK:
-                PlayerPrefs.SetFloat("luckMax", value);
+            case STAT.TEC:
+                PlayerPrefs.SetFloat("tecMax", value);
                 break;
             case STAT.HP:
                 PlayerPrefs.SetFloat("hpMax", value);
@@ -539,7 +539,7 @@ public class GameManager : MonoBehaviour {
     {
         upgradeTxt[0].text = string.Format("{0}/{1}", player.stat.dmg.ToString(), player.maxStat.dmg);
         upgradeTxt[1].text = string.Format("{0}/{1}", player.stat.spd.ToString(), player.maxStat.spd);
-        upgradeTxt[2].text = string.Format("{0}/{1}", player.stat.luck.ToString(), player.maxStat.luck);
+        upgradeTxt[2].text = string.Format("{0}/{1}", player.stat.tec.ToString(), player.maxStat.tec);
         upgradeTxt[3].text = string.Format("{0}/{1}", player.stat.hp.ToString(), player.maxStat.hp);
         upgradeTxt[4].text = string.Format("{0}/{1}", player.stat.mp.ToString(), player.maxStat.mp);
         upgradeTxt[5].text = string.Format("{0}/{1}", player.stat.hpRegen.ToString(), player.maxStat.hpRegen);
@@ -603,7 +603,6 @@ public class GameManager : MonoBehaviour {
     {
         //SetPause(true);
         moneyManager.CollectedSoulToSoul();
-        moneyManager.SetGold(0);
         PlayerPrefs.SetInt("isRun", 0);
         Save();
         Debug.Log("End");
