@@ -196,8 +196,9 @@ public class BoardManager : MonoBehaviour {
 
     public Vector2 GetRandomSpawn()
     {
-        float x = Random.Range(boardRange[0].x + 0.1f, boardRange[1].x - 0.1f);
-        float y = Random.Range(boardRange[0].y + 1f, boardRange[1].y - 0.1f);
+        float radius = PolyNav.PolyNav2D.current.radiusOffset;
+        float x = Random.Range(boardRange[0].x + radius, boardRange[1].x - radius);
+        float y = Random.Range(boardRange[0].y + radius, boardRange[1].y - radius);
         return new Vector2(x, y);
     }
 
