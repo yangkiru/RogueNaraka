@@ -49,7 +49,7 @@ public class Player : Unit
                 {
                     if (isMoveToMouse && Input.GetMouseButton(0))
                         Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    if (isMoveToAttack)
+                    if (isMoveToAttack && !win)
                         MoveToAttack();
                     Attack();
                 }

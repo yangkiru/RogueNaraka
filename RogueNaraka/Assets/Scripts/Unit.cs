@@ -544,10 +544,23 @@ public abstract class Unit : MonoBehaviour {
                     }
                     break;
                 case ATTACK_TYPE.TARGET:
+                    RandomMove();
                     break;
                 case ATTACK_TYPE.NONTARGET:
                     break;
             }
+        }
+    }
+
+    float t;
+    void RandomMove()
+    {
+        t += Time.deltaTime;
+        if(t > 1f)
+        {
+            t = 0;
+            Vector2 rnd = new Vector2(UnityEngine.Random.Range(-1f - stat.spd * 0.1f, 1f + stat.spd * 0.5f), UnityEngine.Random.Range(-1f - stat.spd * 0.1f, 1f + stat.spd * 0.5f));
+            Move((Vector2)transform.position + rnd.normalized);
         }
     }
     //상태이상
@@ -733,7 +746,7 @@ public abstract class Unit : MonoBehaviour {
         Vector2 velocity = agent.velocity;
         if (!isStun)
         {
-            if (velocity.x >= minSpeed || velocity.x <= -minSpeed || velocity.y >= minSpeed || velocity.x <= -minSpeed)
+            if (!isAutoMove || !target)
             {
                 animator.SetBool("isWalk", true);
                 lastVelocity = velocity;
@@ -742,17 +755,20 @@ public abstract class Unit : MonoBehaviour {
             }
             else
             {
-                animator.SetBool("isWalk", false);
-                if (isAttackCool)
+                if (velocity.x >= minSpeed || velocity.x <= -minSpeed || velocity.y >= minSpeed || velocity.x <= -minSpeed)
+                    animator.SetBool("isWalk", true);
+                else
+                    animator.SetBool("isWalk", false);
+                if (target)
                 {
                     animator.SetFloat("x", targetPosition.x - transform.position.x);
                     animator.SetFloat("y", targetPosition.y - transform.position.y);
                 }
-                else
-                {
-                    animator.SetFloat("x", lastVelocity.x);
-                    animator.SetFloat("y", lastVelocity.y);
-                }
+                //else
+                //{
+                //    animator.SetFloat("x", lastVelocity.x);
+                //    animator.SetFloat("y", lastVelocity.y);
+                //}
             }
         }
     }
