@@ -107,7 +107,9 @@ public class BoardManager : MonoBehaviour {
 
     public void StageUp()
     {
+        ClearStage();
         _stage++;
+        InitBoard();
     }
 
     private void InitStage(int stage)

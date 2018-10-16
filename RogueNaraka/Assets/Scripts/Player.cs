@@ -28,7 +28,7 @@ public class Player : Unit
     protected override void OnDeath()
     {
         base.OnDeath();
-        gameManager.OnEnd();
+        StartCoroutine(gameManager.OnEnd());
     }
 
     protected void Update()

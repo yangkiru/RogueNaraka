@@ -6,7 +6,7 @@ public class RevolveHolder : MonoBehaviour {
 
     public int segments
     {
-        get { return _segments; } set { Debug.Log(value); _segments = value; }
+        get { return _segments; } set { _segments = value; }
     }
     public int _segments;
     public Vector2 radius;

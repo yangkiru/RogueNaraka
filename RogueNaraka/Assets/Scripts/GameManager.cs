@@ -15,21 +15,12 @@ public class GameManager : MonoBehaviour {
 
     public GameObject selectPnl;
     public GameObject statPnl;
-    public GameObject soulShopPnl;
-    public GameObject soulStatPnl;
-    public GameObject soulStatCheckPnl;
 
     
     public Button cancelBtn;//stat Upgrade
-    public Button soulStatOkBtn;
-    public Button soulStatCancelBtn;
-
-    public Text soulStatCheckTxt;
-    public Text soulShopSoulTxt;
 
     public TMPro.TextMeshProUGUI[] statTxt;
     public Text[] upgradeTxt;
-    public Text[] maxUpgradeTxt;
 
     //Debug params
     public int weaponId;
@@ -126,7 +117,6 @@ public class GameManager : MonoBehaviour {
     {
         isRun = true;
         PlayerPrefs.SetInt("isRun", 1);
-        SoulShopClose();
         Load();
         RandomStat();
         PlayerPrefs.SetFloat("health", player.stat.hp);
@@ -251,8 +241,8 @@ public class GameManager : MonoBehaviour {
 
             StatTextUpdate();
 
-            player.SetMaxStat(new Stat(GetMaxStat((STAT)0), GetMaxStat((STAT)1), GetMaxStat((STAT)2),
-                GetMaxStat((STAT)3), GetMaxStat((STAT)4), GetMaxStat((STAT)5), GetMaxStat((STAT)6)));
+            player.SetMaxStat(new Stat(GetStat((STAT)0, true), GetStat((STAT)1, true), GetStat((STAT)2, true),
+                GetStat((STAT)3, true), GetStat((STAT)4, true), GetStat((STAT)5, true), GetStat((STAT)6, true)));
 
             player.EquipWeapon(JsonUtility.FromJson<Weapon>(PlayerPrefs.GetString("weapon")));
 
@@ -299,7 +289,6 @@ public class GameManager : MonoBehaviour {
             Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
             weapon.level = weaponLevel;
             PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
-            SoulShopOpen();
             SkillManager.instance.ResetSave();
             Item.instance.ResetSave();
         }
@@ -335,184 +324,6 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
-    }
-
-    public void SyncSoulShopSoulTxt()
-    {
-        soulShopSoulTxt.text = moneyManager.soul.ToString();
-    }
-
-    public void SoulShopOpen()
-    {
-        soulShopPnl.SetActive(true);
-        soulStatPnl.SetActive(true);
-        SoulStatOpen();
-        moneyManager.Load();
-        SyncSoulShopSoulTxt();
-    }
-
-    public void SoulStatOpen()
-    {
-        SyncMaxStatUpgradeTxt();
-        soulStatPnl.SetActive(true);
-        //스탯 외 다른 패널은 닫아야함
-    }
-    public void SoulShopClose()
-    {
-        soulShopPnl.SetActive(false);
-    }
-
-    private STAT upgrading;
-
-    /// <summary>
-    /// 업그레이드 버튼을 누르면 upgrading에 값이 전달됨
-    /// </summary>
-    /// <param name="type"></param>
-    public void SelectUpgrade(int type)
-    {
-        upgrading = (STAT)type;
-    }
-
-    public void SetSoulStatCheckPnl(bool value)
-    {
-        soulStatCheckPnl.SetActive(value);
-        if (value)
-        {
-            soulStatCancelBtn.interactable = true;
-            soulStatOkBtn.interactable = true;
-            soulStatCheckTxt.text = GetRequiredStat(upgrading).ToString() + " Soul이 필요합니다.\n업그레이드 하시겠습니까?";
-        }
-    }
-
-    /// <summary>
-    /// soulOkBtn을 누르면 upgrading의 스탯이 업그레이드 됨
-    /// 만약 MaxStatUpCheck에서 false를 받으면 알려주고 checkPnl을 닫음
-    /// </summary>
-    public void MaxStatUp()
-    {
-        if (!isUpgraded)
-        {
-            if (MaxStatUpCheck(upgrading))
-            {
-                
-                soulStatCancelBtn.interactable = false;
-                soulStatOkBtn.interactable = false;
-
-                Debug.Log("Max Stat Upgraded");
-                AddMaxStat(upgrading, 1);
-                moneyManager.Save();
-                soulShopSoulTxt.text = moneyManager.soul.ToString();
-                isUpgraded = true;
-                StartCoroutine(WaitForCloseStatSelectPnl());
-            }
-            else
-            {
-                Debug.Log("Not Enough Soul");
-                soulStatCancelBtn.interactable = false;
-                soulStatOkBtn.interactable = false;
-                soulStatCheckTxt.text = "Soul이 부족합니다!";
-                StartCoroutine(WaitForCloseStatSelectPnl());
-            }
-        }
-    }
-
-    public IEnumerator WaitForCloseStatSelectPnl()
-    {
-        yield return new WaitForSecondsRealtime(1);
-        SetSoulStatCheckPnl(false);
-        soulStatCancelBtn.interactable = true;
-        soulStatOkBtn.interactable = true;
-        isUpgraded = false;
-        SyncMaxStatUpgradeTxt();
-        SyncSoulShopSoulTxt();
-    }
-
-    public bool MaxStatUpCheck(STAT type)
-    {
-        int required = GetRequiredStat(type);
-        if (moneyManager.soul >= required)
-        {
-            moneyManager.AddSoul(-required);
-            return true;
-        }
-        else return false;
-    }
-
-    public int GetRequiredStat(STAT type)
-    {
-        return ((int)GetMaxStat(type) - 4) * 10;
-    }
-
-    public void SyncMaxStatUpgradeTxt()
-    {
-        maxUpgradeTxt[0].text = GetMaxStat((STAT)0).ToString();
-        maxUpgradeTxt[1].text = GetMaxStat((STAT)1).ToString();
-        maxUpgradeTxt[2].text = GetMaxStat((STAT)2).ToString();
-        maxUpgradeTxt[3].text = GetMaxStat((STAT)3).ToString();
-        maxUpgradeTxt[4].text = GetMaxStat((STAT)4).ToString();
-        maxUpgradeTxt[5].text = GetMaxStat((STAT)5).ToString();
-        maxUpgradeTxt[6].text = GetMaxStat((STAT)6).ToString();
-        maxUpgradeTxt[7].text = GetMaxStat((STAT)7).ToString();
-    }
-
-    public float GetMaxStat(STAT type)
-    {
-        switch (type)
-        {
-            case STAT.DMG:
-                return PlayerPrefs.GetFloat("dmgMax");
-            case STAT.SPD:
-                return PlayerPrefs.GetFloat("spdMax");
-            case STAT.TEC:
-                return PlayerPrefs.GetFloat("tecMax");
-            case STAT.HP:
-                return PlayerPrefs.GetFloat("hpMax");
-            case STAT.MP:
-                return PlayerPrefs.GetFloat("mpMax");
-            case STAT.HPREGEN:
-                return PlayerPrefs.GetFloat("hpRegenMax");
-            case STAT.MPREGEN:
-                return PlayerPrefs.GetFloat("mpRegenMax");
-            case STAT.STATPOINT:
-                return PlayerPrefs.GetInt("statPoint");
-        }
-        return -1;
-    }
-
-    public void SetMaxStat(STAT type, float value)
-    {
-        switch (type)
-        {
-            case STAT.DMG:
-                PlayerPrefs.SetFloat("dmgMax", value);
-                break;
-            case STAT.SPD:
-                PlayerPrefs.SetFloat("spdMax", value);
-                break;
-            case STAT.TEC:
-                PlayerPrefs.SetFloat("tecMax", value);
-                break;
-            case STAT.HP:
-                PlayerPrefs.SetFloat("hpMax", value);
-                break;
-            case STAT.MP:
-                PlayerPrefs.SetFloat("mpMax", value);
-                break;
-            case STAT.HPREGEN:
-                PlayerPrefs.SetFloat("hpRegenMax", value);
-                break;
-            case STAT.MPREGEN:
-                PlayerPrefs.SetFloat("mpRegenMax", value);
-                break;
-            case STAT.STATPOINT:
-                PlayerPrefs.SetInt("statPoint", (int)value);
-                break;
-        }
-    }
-
-    public void AddMaxStat(STAT type, float amount)
-    {
-        SetMaxStat(type, GetMaxStat(type) + amount);
     }
 
     /// <summary>
@@ -551,7 +362,7 @@ public class GameManager : MonoBehaviour {
         isLevelUp = false;
         SetSelectPnl(false);
         SetPause(false);
-        StageUp();
+        BoardManager.instance.StageUp();
         Save();
     }
 
@@ -576,13 +387,6 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void StageUp()
-    {
-        boardManager.ClearStage();
-        boardManager.StageUp();
-        boardManager.InitBoard();
-    }
-
     private IEnumerator WaitForStatUpClose()
     {
         yield return new WaitForSecondsRealtime(1);
@@ -599,24 +403,12 @@ public class GameManager : MonoBehaviour {
     /// 플레이어가 죽었을 시 호출
     /// Player의 OnDeath에서 호출 됨
     /// </summary>
-    public void OnEnd()
+    public IEnumerator OnEnd()
     {
-        //SetPause(true);
         moneyManager.CollectedSoulToSoul();
         PlayerPrefs.SetInt("isRun", 0);
         Save();
         Debug.Log("End");
-        StartCoroutine(WaitForEnd());
-        player.GetComponent<Collider2D>().enabled = true;
-    }
-
-    public static Vector2 GetMousePosition()
-    {
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    private IEnumerator WaitForEnd()
-    {
         yield return new WaitForSecondsRealtime(3);
         boardManager.ClearStage();
         player.SetDeath(false);
@@ -624,5 +416,76 @@ public class GameManager : MonoBehaviour {
         player.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         yield return new WaitForSecondsRealtime(1);
         player.animator.updateMode = AnimatorUpdateMode.Normal;
+    }
+
+    public static Vector2 GetMousePosition()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public static void AddStat(STAT type, float amount, bool isMax = false)
+    {
+        SetStat(type, GameManager.GetStat(type, isMax) + amount);
+    }
+
+    public static void SetStat(STAT type, float value, bool isMax = false)
+    {
+        string max = string.Empty;
+        if (isMax)
+            max = "Max";
+        switch (type)
+        {
+            case STAT.DMG:
+                PlayerPrefs.SetFloat("dmg" + max, value);
+                break;
+            case STAT.SPD:
+                PlayerPrefs.SetFloat("spd" + max, value);
+                break;
+            case STAT.TEC:
+                PlayerPrefs.SetFloat("tec" + max, value);
+                break;
+            case STAT.HP:
+                PlayerPrefs.SetFloat("hp" + max, value);
+                break;
+            case STAT.MP:
+                PlayerPrefs.SetFloat("mp" + max, value);
+                break;
+            case STAT.HPREGEN:
+                PlayerPrefs.SetFloat("hpRegen" + max, value);
+                break;
+            case STAT.MPREGEN:
+                PlayerPrefs.SetFloat("mpRegen" + max, value);
+                break;
+            case STAT.STATPOINT:
+                PlayerPrefs.SetInt("statPoint", (int)value);
+                break;
+        }
+    }
+
+    public static float GetStat(STAT type, bool isMax = false)
+    {
+        string max = string.Empty;
+        if (isMax)
+            max = "Max";
+        switch (type)
+        {
+            case STAT.DMG:
+                return PlayerPrefs.GetFloat("dmg" + max);
+            case STAT.SPD:
+                return PlayerPrefs.GetFloat("spd" + max);
+            case STAT.TEC:
+                return PlayerPrefs.GetFloat("tec" + max);
+            case STAT.HP:
+                return PlayerPrefs.GetFloat("hp" + max);
+            case STAT.MP:
+                return PlayerPrefs.GetFloat("mp" + max);
+            case STAT.HPREGEN:
+                return PlayerPrefs.GetFloat("hpRegen" + max);
+            case STAT.MPREGEN:
+                return PlayerPrefs.GetFloat("mpRegen" + max);
+            case STAT.STATPOINT:
+                return PlayerPrefs.GetInt("statPoint");
+        }
+        return -1;
     }
 }
