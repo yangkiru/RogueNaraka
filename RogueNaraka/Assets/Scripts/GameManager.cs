@@ -12,15 +12,11 @@ public class GameManager : MonoBehaviour {
     public BoardManager boardManager;
     public MoneyManager moneyManager;
     public Player player;
-
-    public GameObject selectPnl;
-    public GameObject statPnl;
-
     
     public Button cancelBtn;//stat Upgrade
 
     public TMPro.TextMeshProUGUI[] statTxt;
-    public Text[] upgradeTxt;
+
 
     //Debug params
     public int weaponId;
@@ -31,7 +27,6 @@ public class GameManager : MonoBehaviour {
 
     public bool isDebug;
     public bool isReset;
-    public bool levelUp;
     public bool isRun;
     public bool isStage;
     public bool spawnEffect;
@@ -81,12 +76,6 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
-        //test
-        if (levelUp)
-        {
-            levelUp = false;
-            LevelUp();
-        }
         if(autoSave)
         {
             if(autoSaveCoroutine == null)
@@ -268,7 +257,7 @@ public class GameManager : MonoBehaviour {
 
             if (PlayerPrefs.GetInt("isLevelUp") == 1)
             {
-                LevelUp();
+                LevelUpManager.instance.LevelUp();
                 SetPause(true);
             }
             else
@@ -324,75 +313,6 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
-    }
-
-    /// <summary>
-    /// Player가 Enemy를 모두 처치하고 화면 상단에 도착하면 호출
-    /// </summary>
-    public void LevelUp()
-    {
-        SetPause(true);
-        //player.agent.OnDestinationInvalid -= LevelUp;
-        //player.agent.OnDestinationReached -= LevelUp;
-        isLevelUp = true;
-        SyncStatUpgradeTxt();
-        SetSelectPnl(true);
-        Save();
-    }
-
-    public void SetSelectPnl(bool value)
-    {
-        selectPnl.SetActive(value);
-        //Debug.Log("SelectPnl " + value);
-    }
-
-    public void SyncStatUpgradeTxt()
-    {
-        upgradeTxt[0].text = string.Format("{0}/{1}", player.stat.dmg.ToString(), player.maxStat.dmg);
-        upgradeTxt[1].text = string.Format("{0}/{1}", player.stat.spd.ToString(), player.maxStat.spd);
-        upgradeTxt[2].text = string.Format("{0}/{1}", player.stat.tec.ToString(), player.maxStat.tec);
-        upgradeTxt[3].text = string.Format("{0}/{1}", player.stat.hp.ToString(), player.maxStat.hp);
-        upgradeTxt[4].text = string.Format("{0}/{1}", player.stat.mp.ToString(), player.maxStat.mp);
-        upgradeTxt[5].text = string.Format("{0}/{1}", player.stat.hpRegen.ToString(), player.maxStat.hpRegen);
-        upgradeTxt[6].text = string.Format("{0}/{1}", player.stat.mpRegen.ToString(), player.maxStat.mpRegen);
-    }
-
-    public void EndLevelUp()
-    {
-        isLevelUp = false;
-        SetSelectPnl(false);
-        SetPause(false);
-        BoardManager.instance.StageUp();
-        Save();
-    }
-
-    public void StatUp(int type)
-    {
-        if (!isUpgraded)
-        {
-            if (player.AddStat((STAT)type, 1))
-            {
-                Debug.Log("Stat Upgraded");
-                isUpgraded = true;
-                cancelBtn.interactable = false;
-                statPnl.SetActive(false);
-                StartCoroutine(WaitForStatUpClose());
-                StatTextUpdate();
-                EndLevelUp();
-            }
-            else
-            {
-                Debug.Log("Stat Maxed");
-            }
-        }
-    }
-
-    private IEnumerator WaitForStatUpClose()
-    {
-        yield return new WaitForSecondsRealtime(1);
-        isUpgraded = false;
-        cancelBtn.interactable = true;
-        SetPause(false);
     }
 
     public void Setting()

@@ -133,7 +133,7 @@ public class Player : Unit
             sqrDistance = Vector2.SqrMagnitude((Vector2)transform.position - boardManager.goalPoint);
         } while (sqrDistance > 0.1f);
         if(!_isDeath)
-            gameManager.LevelUp();
+            LevelUpManager.instance.LevelUp();
     }
 
     private IEnumerator MoveToGoalRepeat()

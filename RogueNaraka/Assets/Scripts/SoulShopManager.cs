@@ -31,6 +31,13 @@ public class SoulShopManager : MonoBehaviour
 
     private IEnumerator currentCoroutine;
 
+    public static SoulShopManager instance = null;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     /// <summary>
     /// 업그레이드 버튼을 누르면 upgrading에 값이 전달됨
     /// </summary>
