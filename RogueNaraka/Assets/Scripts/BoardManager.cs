@@ -27,11 +27,17 @@ public class BoardManager : MonoBehaviour {
     [SerializeField][ReadOnly]
     private int _stage;
     public bool isReady;
+    private bool isStart = false;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
+    }
+
+    private void Start()
+    {
+        isStart = true;
     }
 
     private void OnDrawGizmosSelected()
@@ -102,6 +108,7 @@ public class BoardManager : MonoBehaviour {
     /// <param name="value"></param>
     public void SetStage(int value)
     {
+        ClearStage();
         _stage = value;
     }
 
@@ -209,6 +216,9 @@ public class BoardManager : MonoBehaviour {
         float appearTime = 0.95f, disappearTime = 0.07f;
         string text = "STAGE " + _stage.ToString();
         stageTxt.text = string.Empty;
+        while (!isStart)
+            yield return new WaitForSecondsRealtime(0.1f);
+        stageTxt.color = Color.white;
         //Appear
         for (int i = 0; i < text.Length; i++)
         {

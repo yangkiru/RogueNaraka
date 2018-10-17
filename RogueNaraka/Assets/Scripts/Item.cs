@@ -24,7 +24,12 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (instance == null)
             instance = this;
-        Load();
+    }
+
+    public void InitItem()
+    {
+        data.id = -1;
+        img.color = Color.clear;
     }
 
     public void ResetSave()
@@ -40,7 +45,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         //현재 데이터 저장
         PlayerPrefs.SetInt("item", data.id);
         PlayerPrefs.SetString("itemSpr", JsonHelper.ToJson<int>(sprIds));
-        PlayerPrefs.SetString("itemIsKnow", JsonHelper.ToJson<bool>(isKnown));
+        PlayerPrefs.SetString("itemIsKnown", JsonHelper.ToJson<bool>(isKnown));
     }
 
     public void Load()
@@ -49,8 +54,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             SetRandomSprite();
             isKnown = new bool[GameDatabase.instance.items.Length];
-            data.id = -1;
-            img.color = Color.clear;
+            InitItem();
             Save();
             PlayerPrefs.SetInt("isItemFirst", 1);
         }
@@ -59,6 +63,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             int itemData = PlayerPrefs.GetInt("item");
             string sprData = PlayerPrefs.GetString("itemSpr");
             string isKnownData = PlayerPrefs.GetString("itemIsKnown");
+            Debug.Log(itemData);
             if (sprData != string.Empty)
             {
                 sprIds = JsonHelper.FromJson<int>(sprData);
@@ -92,6 +97,8 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 SyncData(GameDatabase.instance.items[itemData]);
                 SyncSprite();
             }
+            else
+                data.id = -1;
         }
     }
 
@@ -198,12 +205,6 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             }
         }
         InitItem();
-    }
-
-    public void InitItem()
-    {
-        data.id = -1;
-        img.color = Color.clear;
     }
 
     private void DrawLine()

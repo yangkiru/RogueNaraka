@@ -882,7 +882,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213261076}
+      - m_Target: {fileID: 1632865326}
         m_MethodName: StatUp
         m_Mode: 3
         m_Arguments:
@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213261076}
+      - m_Target: {fileID: 1632865326}
         m_MethodName: StatUp
         m_Mode: 3
         m_Arguments:
@@ -3511,8 +3511,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1797976757
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 737e7d086c7c37a4cb8b51c3b4300449, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4146,7 +4146,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213261076}
+      - m_Target: {fileID: 1632865326}
         m_MethodName: StatUp
         m_Mode: 3
         m_Arguments:
@@ -10804,8 +10804,6 @@ MonoBehaviour:
   boardManager: {fileID: 834756104}
   moneyManager: {fileID: 1903867069}
   player: {fileID: 1511858520}
-  selectPnl: {fileID: 965099691}
-  statPnl: {fileID: 1552022172}
   cancelBtn: {fileID: 1033553708}
   statTxt:
   - {fileID: 1516478512}
@@ -10815,20 +10813,11 @@ MonoBehaviour:
   - {fileID: 863049013}
   - {fileID: 1197888943}
   - {fileID: 379592476}
-  upgradeTxt:
-  - {fileID: 1616760661}
-  - {fileID: 283531300}
-  - {fileID: 701851895}
-  - {fileID: 2047384072}
-  - {fileID: 1138269590}
-  - {fileID: 1435143466}
-  - {fileID: 435309515}
   weaponId: 0
   weaponLevel: 0
   stage: 1
   isDebug: 1
   isReset: 0
-  levelUp: 0
   isRun: 0
   isStage: 0
   spawnEffect: 0
@@ -14703,6 +14692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1632865325}
+  - component: {fileID: 1632865326}
   - component: {fileID: 1632865324}
   - component: {fileID: 1632865323}
   - component: {fileID: 1632865322}
@@ -14792,6 +14782,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1632865326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1632865321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be55a40ed00e90e4bb4c24ef0ec58fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeTxt:
+  - {fileID: 1616760661}
+  - {fileID: 283531300}
+  - {fileID: 701851895}
+  - {fileID: 2047384072}
+  - {fileID: 1138269590}
+  - {fileID: 1435143466}
+  - {fileID: 435309515}
+  selectPnl: {fileID: 965099691}
+  statPnl: {fileID: 1552022172}
+  cancelBtn: {fileID: 1033553708}
+  player: {fileID: 1511858520}
 --- !u!1 &1656777487
 GameObject:
   m_ObjectHideFlags: 0
@@ -15142,7 +15155,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213261076}
+      - m_Target: {fileID: 1632865326}
         m_MethodName: StatUp
         m_Mode: 3
         m_Arguments:
@@ -16196,7 +16209,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213261076}
+      - m_Target: {fileID: 1632865326}
         m_MethodName: StatUp
         m_Mode: 3
         m_Arguments:
@@ -17743,7 +17756,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213261076}
+      - m_Target: {fileID: 1632865326}
         m_MethodName: StatUp
         m_Mode: 3
         m_Arguments:
@@ -19058,7 +19071,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1213261076}
+      - m_Target: {fileID: 1632865326}
         m_MethodName: StatUp
         m_Mode: 3
         m_Arguments:

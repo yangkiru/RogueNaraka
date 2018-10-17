@@ -13,8 +13,7 @@ public class LevelUpManager : MonoBehaviour {
     public Button cancelBtn;
 
 
-    private Player player
-    { get { return Player.instance; } }
+    public Player player;
 
     public static LevelUpManager instance = null;
     private void Awake()
@@ -32,6 +31,7 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SetSelectPnl(true);
+        PlayerPrefs.SetInt("isLevelUp", 1);
         GameManager.instance.Save();
     }
 
@@ -46,9 +46,7 @@ public class LevelUpManager : MonoBehaviour {
         if (player.AddStat((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");
-            cancelBtn.interactable = false;
-            statPnl.SetActive(false);
-            StartCoroutine(WaitForStatUpClose());
+            StartCoroutine(EndLevelUp());
             GameManager.instance.StatTextUpdate();
         }
         else
@@ -57,11 +55,14 @@ public class LevelUpManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator WaitForStatUpClose()
+    public IEnumerator EndLevelUp()
     {
-        yield return new WaitForSecondsRealtime(1);
-        cancelBtn.interactable = true;
+        cancelBtn.interactable = false;
+        statPnl.SetActive(false);
         SetSelectPnl(false);
+        yield return new WaitForSecondsRealtime(0.1f);
+        PlayerPrefs.SetInt("isLevelUp", 0);
+        cancelBtn.interactable = true;
         BoardManager.instance.StageUp();
         GameManager.instance.Save();
     }

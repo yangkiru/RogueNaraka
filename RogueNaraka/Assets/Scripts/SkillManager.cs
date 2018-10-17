@@ -161,7 +161,7 @@ public class SkillManager : MonoBehaviour {
                 SetAddOne(false);
         }
         //Save Here
-        int spin = Random.Range(4, 6);//3~5바퀴
+        int spin = Random.Range(2, 4);//2~3바퀴
         if(_selected != -1)
             scroll.Spin(spin * 10 + selected - _selected);
         else
@@ -335,9 +335,9 @@ public class SkillManager : MonoBehaviour {
         }
         else
         {
-            gameManager.SetSelectPnl(false);
+            LevelUpManager.instance.SetSelectPnl(false);
             skillPnl.SetActive(value);
-            gameManager.EndLevelUp();
+            StartCoroutine(LevelUpManager.instance.EndLevelUp());
         }
     }
 

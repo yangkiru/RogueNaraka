@@ -39,9 +39,6 @@ public class GameManager : MonoBehaviour {
     { get { return _isPause; } }
     [SerializeField][ReadOnly]
     private bool _isPause;
-    private bool isUpgraded;
-    private bool isLevelUp;
-    private bool isBuy;
 
     private IEnumerator autoSaveCoroutine;
 
@@ -102,18 +99,6 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void RunGame()
-    {
-        isRun = true;
-        PlayerPrefs.SetInt("isRun", 1);
-        Load();
-        RandomStat();
-        PlayerPrefs.SetFloat("health", player.stat.hp);
-        PlayerPrefs.SetFloat("mana", player.stat.mp);
-        Save();
-        StatTextUpdate();
-    }
-
     private void RandomStat()
     {
         int statPoint = PlayerPrefs.GetInt("statPoint");
@@ -171,115 +156,135 @@ public class GameManager : MonoBehaviour {
             Item.instance.Save();
             PlayerPrefs.SetString("weapon", JsonUtility.ToJson(player.weapon));
         }
-        if(isLevelUp)
-            PlayerPrefs.SetInt("isLevelUp", 1);
-        else
-            PlayerPrefs.SetInt("isLevelUp", 0);
         //Debug.Log("Saved");
+    }
+
+    public void RunGame()
+    {
+        isRun = true;
+        PlayerPrefs.SetInt("isRun", 1);
+        Load();
+        RandomStat();
+        PlayerPrefs.SetFloat("health", player.stat.hp);
+        PlayerPrefs.SetFloat("mana", player.stat.mp);
+        Save();
+        StatTextUpdate();
+    }
+
+    private void LoadFirst()
+    {
+        moneyManager.Save();
+        Stat dbStat = GameDatabase.instance.playerBase;
+        SyncStatToData(dbStat);
+
+        Stat maxStat = new Stat(5);
+        UnityEngine.PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetFloat("dmgMax", maxStat.dmg);
+        PlayerPrefs.SetFloat("spdMax", maxStat.spd);
+        PlayerPrefs.SetFloat("tecMax", maxStat.tec);
+        PlayerPrefs.SetFloat("hpMax", maxStat.hp);
+        PlayerPrefs.SetFloat("mpMax", maxStat.mp);
+        PlayerPrefs.SetFloat("hpRegenMax", maxStat.hpRegen);
+        PlayerPrefs.SetFloat("mpRegenMax", maxStat.mpRegen);
+
+        PlayerPrefs.SetInt("isFirst", 1);
+        PlayerPrefs.SetString("effect", string.Empty);
+        PlayerPrefs.SetInt("statPoint", 5);
+        PlayerPrefs.SetInt("isRun", 0);
+        PlayerPrefs.SetInt("isLevelUp", 0);
+        Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
+        weapon.level = weaponLevel;
+        PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
+
+        PlayerPrefs.SetInt("stage", 1);
+
+        SkillManager.instance.ResetSave();
+        Item.instance.ResetSave();
+        Item.instance.Load();
+    }
+
+    private void LoadRun()
+    {
+        isRun = true;
+        moneyManager.Load();
+        Stat stat = new Stat(PlayerPrefs.GetFloat("dmg"), PlayerPrefs.GetFloat("spd"),
+        PlayerPrefs.GetFloat("tec"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
+        PlayerPrefs.GetFloat("hpRegen"), PlayerPrefs.GetFloat("mpRegen"));
+
+        player.SyncData(stat, true, false);
+        player.SetHealth(PlayerPrefs.GetFloat("health"));
+        player.SetMana(PlayerPrefs.GetFloat("mana"));
+
+        StatTextUpdate();
+
+        player.SetMaxStat(new Stat(GetStat((STAT)0, true), GetStat((STAT)1, true), GetStat((STAT)2, true),
+            GetStat((STAT)3, true), GetStat((STAT)4, true), GetStat((STAT)5, true), GetStat((STAT)6, true)));
+
+        player.EquipWeapon(JsonUtility.FromJson<Weapon>(PlayerPrefs.GetString("weapon")));
+
+        if (PlayerPrefs.GetString("effect") != string.Empty)
+        {
+            EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
+            for (int i = 0; i < temp.Length; i++)
+            {
+                player.AddEffect(temp[i].type, temp[i].value, temp[i].time, temp[i].isInfinity);
+            }
+        }
+        if (autoSave)
+        {
+            autoSaveCoroutine = AutoSave(autoSaveTime);
+            StartCoroutine(autoSaveCoroutine);
+        }
+        boardManager.SetStage(PlayerPrefs.GetInt("stage"));
+        if (isStage)//디버깅용
+            boardManager.SetStage(stage);
+
+        SkillManager.instance.Load();
+        Item.instance.Load();
+
+        if (PlayerPrefs.GetInt("isLevelUp") == 1)
+        {
+            LevelUpManager.instance.LevelUp();
+        }
+        else
+        {
+            boardManager.InitBoard();
+        }
+    }
+
+    private void LoadInit()
+    {
+        moneyManager.Load();
+        Stat dbStat = GameDatabase.instance.playerBase;
+        SyncStatToData(dbStat);
+        PlayerPrefs.SetInt("stage", 1);
+        PlayerPrefs.SetFloat("health", 1);
+        PlayerPrefs.SetFloat("mana", 1);
+        Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
+        weapon.level = weaponLevel;
+        PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
+        SkillManager.instance.ResetSave();
+        Item.instance.ResetSave();
+        Item.instance.Load();
+        RunGame();
     }
 
     public void Load()
     {
         if (PlayerPrefs.GetInt("isFirst") == 0)//reset
         {
-            Debug.Log("First Run");
-            moneyManager.Save();
-            PlayerPrefs.SetFloat("isLevelUp", 0);
-            Stat dbStat = GameDatabase.instance.playerBase;
-            SyncStatToData(dbStat);
-
-            Stat maxStat = new Stat(5);
-
-            PlayerPrefs.SetFloat("dmgMax", maxStat.dmg);
-            PlayerPrefs.SetFloat("spdMax", maxStat.spd);
-            PlayerPrefs.SetFloat("tecMax", maxStat.tec);
-            PlayerPrefs.SetFloat("hpMax", maxStat.hp);
-            PlayerPrefs.SetFloat("mpMax", maxStat.mp);
-            PlayerPrefs.SetFloat("hpRegenMax", maxStat.hpRegen);
-            PlayerPrefs.SetFloat("mpRegenMax", maxStat.mpRegen);
-
-            PlayerPrefs.SetInt("isFirst", 1);
-            PlayerPrefs.SetString("effect", string.Empty);
-            PlayerPrefs.SetInt("statPoint", 5);
-            PlayerPrefs.SetInt("isRun", 0);
-            PlayerPrefs.SetInt("isLevelUp", 0);
-            Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
-            weapon.level = weaponLevel;
-            PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
-
-            PlayerPrefs.SetInt("stage", 1);
-
-            SkillManager.instance.ResetSave();
-            Item.instance.ResetSave();
+            Debug.Log("Load First");
+            LoadFirst();
         }
-
-        //Debug.Log("Load");
-
         if (PlayerPrefs.GetInt("isRun") == 1)
         {
             Debug.Log("Open Run");
-            isRun = true;
-            moneyManager.Load();
-            Stat stat = new Stat(PlayerPrefs.GetFloat("dmg"), PlayerPrefs.GetFloat("spd"),
-            PlayerPrefs.GetFloat("tec"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
-            PlayerPrefs.GetFloat("hpRegen"), PlayerPrefs.GetFloat("mpRegen"));
-
-            player.SyncData(stat, true, false);
-            player.SetHealth(PlayerPrefs.GetFloat("health"));
-            player.SetMana(PlayerPrefs.GetFloat("mana"));
-
-            StatTextUpdate();
-
-            player.SetMaxStat(new Stat(GetStat((STAT)0, true), GetStat((STAT)1, true), GetStat((STAT)2, true),
-                GetStat((STAT)3, true), GetStat((STAT)4, true), GetStat((STAT)5, true), GetStat((STAT)6, true)));
-
-            player.EquipWeapon(JsonUtility.FromJson<Weapon>(PlayerPrefs.GetString("weapon")));
-
-            if (PlayerPrefs.GetString("effect") != string.Empty)
-            {
-                EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    player.AddEffect(temp[i].type, temp[i].value, temp[i].time, temp[i].isInfinity);
-                }
-            }
-            if (autoSave)
-            {
-                autoSaveCoroutine = AutoSave(autoSaveTime);
-                StartCoroutine(autoSaveCoroutine);
-            }
-            boardManager.SetStage(PlayerPrefs.GetInt("stage"));
-            if (isStage)//디버깅용
-                boardManager.SetStage(stage);
-
-            SkillManager.instance.Load();
-            Item.instance.Load();
-
-            if (PlayerPrefs.GetInt("isLevelUp") == 1)
-            {
-                LevelUpManager.instance.LevelUp();
-                SetPause(true);
-            }
-            else
-            {
-                boardManager.InitBoard();
-            }
+            LoadRun();
         }
-        else//Open Shop, Init Run
+        else//Init Run
         {
-            Debug.Log("Open Shop");
-            SetPause(true);
-            moneyManager.Load();
-            Stat dbStat = GameDatabase.instance.playerBase;
-            SyncStatToData(dbStat);
-            PlayerPrefs.SetInt("stage", 1);
-            PlayerPrefs.SetFloat("health", 1);
-            PlayerPrefs.SetFloat("mana", 1);
-            Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
-            weapon.level = weaponLevel;
-            PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
-            SkillManager.instance.ResetSave();
-            Item.instance.ResetSave();
+            Debug.Log("Init Run");
+            LoadInit();
         }
     }
 

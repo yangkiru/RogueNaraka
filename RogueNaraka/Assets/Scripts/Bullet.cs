@@ -434,7 +434,7 @@ public class Bullet : MonoBehaviour {
                                     EffectFunc(unit);
                                     records.Add(hash);
                                     dotTimes.Add(data.dealSpeed);
-                                    Debug.Log("records.Count:" + records.Count);
+                                    //Debug.Log("records.Count:" + records.Count);
                                 }
                             }
                             else if (hits[i].gameObject.layer == GameDatabase.wallLayer)
