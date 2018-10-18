@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 
     public BoardManager boardManager;
     public MoneyManager moneyManager;
+    public LevelUpManager levelUpManager;
+    public SoulShopManager soulShopManager;
     public Player player;
     
     public Button cancelBtn;//stat Upgrade
@@ -201,6 +203,7 @@ public class GameManager : MonoBehaviour {
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
         Item.instance.Load();
+        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
     }
 
     private void LoadRun()
@@ -242,9 +245,11 @@ public class GameManager : MonoBehaviour {
         SkillManager.instance.Load();
         Item.instance.Load();
 
+        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SYNC);
+
         if (PlayerPrefs.GetInt("isLevelUp") == 1)
         {
-            LevelUpManager.instance.LevelUp();
+            levelUpManager.LevelUp();
         }
         else
         {
@@ -266,6 +271,7 @@ public class GameManager : MonoBehaviour {
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
         Item.instance.Load();
+        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
         RunGame();
     }
 

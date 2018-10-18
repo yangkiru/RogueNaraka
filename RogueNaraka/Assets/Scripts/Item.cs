@@ -63,7 +63,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             int itemData = PlayerPrefs.GetInt("item");
             string sprData = PlayerPrefs.GetString("itemSpr");
             string isKnownData = PlayerPrefs.GetString("itemIsKnown");
-            Debug.Log(itemData);
+            //Debug.Log(itemData);
             if (sprData != string.Empty)
             {
                 sprIds = JsonHelper.FromJson<int>(sprData);

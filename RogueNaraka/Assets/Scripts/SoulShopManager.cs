@@ -15,6 +15,7 @@ public class SoulShopManager : MonoBehaviour
     public Text checkTxt;
     public Text soulTxt;
     public Text[] statUpgradeTxt;
+    public int shopStage;
 
     /// <summary>
     /// Ok == true or Cancel == false
@@ -38,6 +39,30 @@ public class SoulShopManager : MonoBehaviour
             instance = this;
     }
 
+    public enum SHOPSTAGE
+    { RANDOM, DECREASE, SYNC}
+    /// <summary>
+    /// ShopStage 관련 함수
+    /// </summary>
+    /// <param name="act"></param>
+    public void ShopStage(SHOPSTAGE act)
+    {
+        switch(act)
+        {
+            case SHOPSTAGE.RANDOM:
+                shopStage = Random.Range(5, 11);
+                PlayerPrefs.SetInt("shopStage", shopStage);
+                break;
+            case SHOPSTAGE.DECREASE:
+                shopStage--;
+                PlayerPrefs.SetInt("shopStage", shopStage);
+                break;
+            case SHOPSTAGE.SYNC:
+                shopStage = PlayerPrefs.GetInt("shopStage");
+                break;
+        }
+    }
+
     /// <summary>
     /// 업그레이드 버튼을 누르면 upgrading에 값이 전달됨
     /// </summary>
@@ -59,13 +84,12 @@ public class SoulShopManager : MonoBehaviour
             shopPnl.SetActive(true);
             statPnl.SetActive(true);
             StatPnlOpen();
-            MoneyManager.instance.Load();
+            GameManager.instance.moneyManager.Load();
             SyncSoulTxt();
         }
         else
         {
             shopPnl.SetActive(false);
-            GameManager.instance.SetPause(false);
         }
     }
 
@@ -186,7 +210,7 @@ public class SoulShopManager : MonoBehaviour
     /// </summary>
     private void SyncSoulTxt()
     {
-        soulTxt.text = MoneyManager.instance.soul.ToString();
+        soulTxt.text = GameManager.instance.moneyManager.soul.ToString();
     }
 
     /// <summary>

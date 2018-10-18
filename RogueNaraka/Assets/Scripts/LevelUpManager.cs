@@ -31,6 +31,8 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SetSelectPnl(true);
+        if (GameManager.instance.soulShopManager.shopStage == 1)
+            GameManager.instance.soulShopManager.SetSoulShop(true);
         PlayerPrefs.SetInt("isLevelUp", 1);
         GameManager.instance.Save();
     }
@@ -61,10 +63,15 @@ public class LevelUpManager : MonoBehaviour {
         statPnl.SetActive(false);
         SetSelectPnl(false);
         yield return new WaitForSecondsRealtime(0.1f);
+        if(SoulShopManager.instance.shopStage == 1)
+            SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
+        else
+            SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.DECREASE);
         PlayerPrefs.SetInt("isLevelUp", 0);
         cancelBtn.interactable = true;
         BoardManager.instance.StageUp();
         GameManager.instance.Save();
+        GameManager.instance.SetPause(false);
     }
 
     public void SyncStatUpgradeTxt()
