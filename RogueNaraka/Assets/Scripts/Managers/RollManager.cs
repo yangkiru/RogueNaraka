@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,23 +9,69 @@ public class RollManager : MonoBehaviour {
     public Button rejectBtn;
     public Button reRollBtn;
     public Image[] showCases;
+    public GameObject rollPnl;
+    public GameObject selectPnl;
+    public Image selectedImg;
+    public TextMeshProUGUI typeTxt;
+    public TextMeshProUGUI nameTxt;
+    public TextMeshProUGUI descTxt;
 
-    private RollData[] datas;
-    private int selected;
+    public int selected;
+    public int stopped;
+    public bool isClickable;
+    public RollData[] datas;
     private int rollCount;
-    private bool isClickable;
+    
+
+    public static RollManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
+    public void Init()
+    {
+        datas = new RollData[showCases.Length];
+        for (int i = 0; i < 10; i++)
+        {
+            showCases[i].enabled = false;
+            datas[i].id = -1;
+        }
+        isClickable = false;
+        stopped = -1;
+        selected = -1;
+        rollCount = 0;
+        scroll.Init();
+    }
+
+    public void SetRollPnl(bool value)
+    {
+        if (value)
+        {
+            rollPnl.SetActive(value);
+            Init();
+            SetShowCase();
+        }
+        else
+        {
+            LevelUpManager.instance.SetSelectPnl(false);
+            rollPnl.SetActive(value);
+            StartCoroutine(LevelUpManager.instance.EndLevelUp());
+        }
+    }
 
     private void LoadRollCount()
     {
         rollCount = PlayerPrefs.GetInt("rollCount");
     }
 
-    private bool LoadSelected()
+    private bool LoadStopped()
     {
-        if (PlayerPrefs.GetInt("selected") != -1)
+        if (PlayerPrefs.GetInt("stopped") != -1)
         {
-            selected = PlayerPrefs.GetInt("selected");
-            Debug.Log("selected Loaded:" + selected);
+            selected = PlayerPrefs.GetInt("stopped");
+            Debug.Log("stopped Loaded:" + stopped);
             return true;
         }
         return false;
@@ -34,17 +81,63 @@ public class RollManager : MonoBehaviour {
     {
         PlayerPrefs.SetString("showCase", string.Empty);
         PlayerPrefs.SetInt("rollCount", 0);
-        ResetSelected();
+        ResetStopped();
     }
 
-    public void ResetSelected()
+    public void ResetStopped()
     {
-        PlayerPrefs.SetInt("selected", -1);
+        PlayerPrefs.SetInt("stopped", -1);
     }
 
     public SkillData GetSkillData(RollData data)
     {
         return GameDatabase.instance.skills[data.id];
+    }
+
+    public void Select(int position)
+    {
+        RollData data = datas[position];
+        switch (data.type)
+        {
+            case ROLL_TYPE.SKILL:
+                SkillData skill = GameDatabase.instance.skills[data.id];
+                selectedImg.sprite = GetSprite(data);
+                typeTxt.text = "Skill";
+                nameTxt.text = skill.name;
+                descTxt.text = skill.description;
+                break;
+            case ROLL_TYPE.STAT:
+                selectedImg.sprite = GetSprite(data);
+                typeTxt.text = "Stat";
+                string point = "Point";
+                if (data.id + 1 > 1)
+                    point += "s";
+                nameTxt.text = (data.id + 1).ToString() + point;
+                descTxt.text = "의 스탯 포인트를 획득한다.";
+                break;
+            case ROLL_TYPE.ITEM:
+                selectedImg.sprite = GetSprite(data);
+                typeTxt.text = "ITEM";
+                ItemData item = GameDatabase.instance.items[data.id];
+                ItemSpriteData itemSpr = GameDatabase.instance.itemSprites[Item.instance.sprIds[item.id]];
+                if (Item.instance.isKnown[item.id])
+                {
+                    nameTxt.text = item.name;
+                    descTxt.text = item.description;
+                }
+                else
+                {
+                    nameTxt.text = itemSpr.name;
+                    descTxt.text = itemSpr.description;
+                }
+                break;
+            case ROLL_TYPE.PASSIVE:
+                selectedImg.sprite = GetSprite(data);
+                typeTxt.text = "Passive";
+                nameTxt.text = "패시브";
+                descTxt.text = "패시브";
+                break;
+        }
     }
 
     public Sprite GetSprite(RollData data)
@@ -79,13 +172,14 @@ public class RollManager : MonoBehaviour {
                 result.id = Random.Range(0, GameDatabase.instance.skills.Length);
                 break;
             case ROLL_TYPE.STAT:
-                result.id = Random.Range(0, 2);//스탯 이미지의 길이로 수정
+                result.id = Random.Range(0, 2);
                 break;
             case ROLL_TYPE.ITEM:
                 result.id = Random.Range(0, GameDatabase.instance.items.Length);
                 break;
             case ROLL_TYPE.PASSIVE:
-                result.id = Random.Range(0, GameDatabase.instance.skills.Length);//패시브의 길이로 수정
+                result = GetRandom();
+                //result.id = Random.Range(0, GameDatabase.instance.skills.Length);//패시브의 길이로 수정
                 break;
         }
         return result;
@@ -96,12 +190,6 @@ public class RollManager : MonoBehaviour {
         showCases[position].sprite = spr;
     }
 
-    public void SyncShowCase(int position)
-    {
-        showCases[position].sprite = GetSprite(datas[position]);
-        //SetShowCaseEnable(position, true);
-    }
-
     public void SetShowCaseEnable(int position, bool value)
     {
         showCases[position].enabled = value;
@@ -110,20 +198,16 @@ public class RollManager : MonoBehaviour {
     /// <summary>
     /// RandomSelect Skills
     /// </summary>
-    public void RollSkill()
+    public void Roll()
     {
         isClickable = false;
         LoadRollCount();
-        if (!LoadSelected())//로드에 실패하면
+        if (!LoadStopped())//로드에 실패하면
         {
             selected = Random.Range(0, 10);//새로운 selected
             rollCount++;
             PlayerPrefs.SetInt("rollCount", rollCount);//Roll Count 저장
-            PlayerPrefs.SetInt("selected", selected);//저장
-            if (Random.Range(0, 100) < 1)//1%
-                SetAddOne(true);
-            else
-                SetAddOne(false);
+            PlayerPrefs.SetInt("stopped", selected);//저장
         }
         //Save Here
         int spin = Random.Range(2, 4);//2~3바퀴
@@ -132,14 +216,6 @@ public class RollManager : MonoBehaviour {
         else
             scroll.Spin(spin * 10 + selected);
         StartCoroutine(CheckRollEnd());
-    }
-
-    public void SetAddOne(bool value)
-    {
-        if (value)
-            PlayerPrefs.SetInt("isAddOne", 1);
-        else
-            PlayerPrefs.SetInt("isAddOne", 0);
     }
 
     /// <summary>
@@ -174,7 +250,7 @@ public class RollManager : MonoBehaviour {
                 SetSprite(i, GetSprite(datas[i]));
             }
         }
-        RollSkill();
+        Roll();
     }
 
     /// <summary>
@@ -215,19 +291,6 @@ public class RollManager : MonoBehaviour {
     public void OnRollEnd()
     {
         isClickable = true;
-        if (PlayerPrefs.GetInt("isAddOne") == 1)
-            AddOne();
-    }
-
-    /// <summary>
-    /// 랜덤 확률로 +1
-    /// </summary>
-    public void AddOne()
-    {
-        selected++;
-        StartCoroutine(SpeedUp());
-        scroll.Spin(1);
-        Debug.Log("addone");
     }
 
     /// <summary>
@@ -279,6 +342,26 @@ public class RollManager : MonoBehaviour {
     {
         public ROLL_TYPE type;
         public int id;
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RollData))
+            {
+                return false;
+            }
+
+            var data = (RollData)obj;
+            return type == data.type &&
+                   id == data.id;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 961388853;
+            hashCode = hashCode * -1521134295 + type.GetHashCode();
+            hashCode = hashCode * -1521134295 + id.GetHashCode();
+            return hashCode;
+        }
 
         public static bool operator ==(RollData d1, RollData d2)
         {

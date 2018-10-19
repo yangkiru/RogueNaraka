@@ -280,6 +280,7 @@ public struct SkillData
     public EffectData[] effects;
     public ValueData[] values;
     public SkillUpData levelUp;
+    public string description;
 
     public void Reset()
     {
@@ -340,13 +341,16 @@ public struct ItemData
     public float value;
     public float size;
     public int amount;
+    public string description;
 }
 
 [Serializable]
 public struct ItemSpriteData
 {
     public int id;
+    public string name;
     public Sprite spr;
+    public string description;
 }
 
 [Serializable]
