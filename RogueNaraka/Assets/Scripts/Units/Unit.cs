@@ -467,7 +467,7 @@ public abstract class Unit : MonoBehaviour {
             }
             if (!isAttackCool && (_targetDistance <= attackDistance || _weapon.type == ATTACK_TYPE.REVOLVE))
             {
-                Debug.Log(name + "Attacking");
+                //Debug.Log(name + "Attacking");
                 isAttackCool = true;
                 Bullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
                 if (!bullet)

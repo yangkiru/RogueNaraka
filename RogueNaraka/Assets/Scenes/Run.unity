@@ -9211,7 +9211,6 @@ MonoBehaviour:
   - {fileID: 1686397862}
   - {fileID: 710444246}
   - {fileID: 633652486}
-  shopStage: 0
 --- !u!1 &990179672
 GameObject:
   m_ObjectHideFlags: 0
@@ -12183,6 +12182,46 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1399100719}
   m_CullTransparentMesh: 0
+--- !u!1 &1399820096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399820098}
+  - component: {fileID: 1399820097}
+  m_Layer: 0
+  m_Name: RollManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1399820097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1399820096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be22f1139ccb34d43ac424a02dfdd052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1399820098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1399820096}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.99491256, y: -1.0357298, z: 822.875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1401950460
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,9 @@ public class SoulShopManager : MonoBehaviour
     public Text checkTxt;
     public Text soulTxt;
     public Text[] statUpgradeTxt;
-    public int shopStage;
+    public int shopStage
+    { get { return _shopStage; } }
+    private int _shopStage;
 
     /// <summary>
     /// Ok == true or Cancel == false
@@ -50,15 +52,15 @@ public class SoulShopManager : MonoBehaviour
         switch(act)
         {
             case SHOPSTAGE.RANDOM:
-                shopStage = Random.Range(5, 11);
+                _shopStage = Random.Range(5, 11);
                 PlayerPrefs.SetInt("shopStage", shopStage);
                 break;
             case SHOPSTAGE.DECREASE:
-                shopStage--;
+                _shopStage--;
                 PlayerPrefs.SetInt("shopStage", shopStage);
                 break;
             case SHOPSTAGE.SYNC:
-                shopStage = PlayerPrefs.GetInt("shopStage");
+                _shopStage = PlayerPrefs.GetInt("shopStage");
                 break;
         }
     }
