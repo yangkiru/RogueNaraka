@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LevelUpManager : MonoBehaviour {
 
+    public RollManager rollManager;
+
     public Text[] upgradeTxt;
 
     public GameObject selectPnl;
@@ -30,9 +32,13 @@ public class LevelUpManager : MonoBehaviour {
     {
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
-        SetSelectPnl(true);
+        SkillManager.instance.SetIsDragable(false);
         if (GameManager.instance.soulShopManager.shopStage == 1)
             GameManager.instance.soulShopManager.SetSoulShop(true);
+        else
+        {
+            rollManager.SetRollPnl(true);
+        }
         PlayerPrefs.SetInt("isLevelUp", 1);
         GameManager.instance.Save();
     }
@@ -59,9 +65,10 @@ public class LevelUpManager : MonoBehaviour {
 
     public IEnumerator EndLevelUp()
     {
+        Debug.Log("EndLevelUp");
         cancelBtn.interactable = false;
         statPnl.SetActive(false);
-        SetSelectPnl(false);
+        //SetSelectPnl(false);
         yield return new WaitForSecondsRealtime(0.1f);
         if(SoulShopManager.instance.shopStage == 1)
             SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);

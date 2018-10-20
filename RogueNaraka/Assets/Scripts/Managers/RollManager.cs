@@ -8,6 +8,7 @@ public class RollManager : MonoBehaviour {
     public InfiniteScroll scroll;
     public Button rejectBtn;
     public Button reRollBtn;
+    public Button okBtn;
     public Image[] showCases;
     public GameObject rollPnl;
     public GameObject selectPnl;
@@ -21,14 +22,11 @@ public class RollManager : MonoBehaviour {
     public bool isClickable;
     public RollData[] datas;
     private int rollCount;
+    private bool isSkillSelected;
+    private int target;
     
 
-    public static RollManager instance;
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-    }
+    //RollManager는 시작시 active상태가 false이기 때문에 instance를 사용할 수 없다.
 
     public void Init()
     {
@@ -43,6 +41,8 @@ public class RollManager : MonoBehaviour {
         selected = -1;
         rollCount = 0;
         scroll.Init();
+        okBtn.interactable = false;
+        SetSelectPnl(false);
     }
 
     public void SetRollPnl(bool value)
@@ -55,10 +55,31 @@ public class RollManager : MonoBehaviour {
         }
         else
         {
-            LevelUpManager.instance.SetSelectPnl(false);
+            Reset();
+            LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
             rollPnl.SetActive(value);
-            StartCoroutine(LevelUpManager.instance.EndLevelUp());
         }
+    }
+
+    public void SetSelectPnl(bool value)
+    {
+        selectPnl.SetActive(value);
+    }
+
+    /// <summary>
+    /// 데이터 로드
+    /// </summary>
+    /// <returns></returns>
+    private bool LoadDatas()
+    {
+        string datasJson = PlayerPrefs.GetString("rollDatas");
+        if (datasJson != string.Empty)
+        {
+            datas = JsonHelper.FromJson<RollData>(datasJson);
+            Debug.Log("RollDatas Loaded:" + datasJson);
+            return true;
+        }
+        return false;
     }
 
     private void LoadRollCount()
@@ -70,22 +91,17 @@ public class RollManager : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("stopped") != -1)
         {
-            selected = PlayerPrefs.GetInt("stopped");
+            stopped = PlayerPrefs.GetInt("stopped");
             Debug.Log("stopped Loaded:" + stopped);
             return true;
         }
         return false;
     }
 
-    public void ResetShowCase()
+    public void Reset()
     {
-        PlayerPrefs.SetString("showCase", string.Empty);
+        PlayerPrefs.SetString("rollDatas", string.Empty);
         PlayerPrefs.SetInt("rollCount", 0);
-        ResetStopped();
-    }
-
-    public void ResetStopped()
-    {
         PlayerPrefs.SetInt("stopped", -1);
     }
 
@@ -96,15 +112,77 @@ public class RollManager : MonoBehaviour {
 
     public void Select(int position)
     {
-        RollData data = datas[position];
+        if (isClickable)
+        {
+            RollData data = datas[position];
+            selected = position;
+            switch (data.type)
+            {
+                case ROLL_TYPE.SKILL:
+                    SkillData skill = GameDatabase.instance.skills[data.id];
+                    selectedImg.sprite = GetSprite(data);
+                    typeTxt.text = "Skill";
+                    nameTxt.text = skill.name;
+                    descTxt.text = skill.description;
+                    break;
+                case ROLL_TYPE.STAT:
+                    selectedImg.sprite = GetSprite(data);
+                    typeTxt.text = "Stat";
+                    string point = "Point";
+                    if (data.id + 1 > 1)
+                        point += "s";
+                    nameTxt.text = (data.id + 1).ToString() + point;
+                    descTxt.text = "의 스탯 포인트를 획득한다.";
+                    break;
+                case ROLL_TYPE.ITEM:
+                    selectedImg.sprite = GetSprite(data);
+                    typeTxt.text = "ITEM";
+                    ItemData item = GameDatabase.instance.items[data.id];
+                    ItemSpriteData itemSpr = GameDatabase.instance.itemSprites[Item.instance.sprIds[item.id]];
+                    if (Item.instance.isKnown[item.id])
+                    {
+                        nameTxt.text = item.name;
+                        descTxt.text = item.description;
+                    }
+                    else
+                    {
+                        nameTxt.text = itemSpr.name;
+                        descTxt.text = itemSpr.description;
+                    }
+                    break;
+                case ROLL_TYPE.PASSIVE:
+                    selectedImg.sprite = GetSprite(data);
+                    typeTxt.text = "Passive";
+                    nameTxt.text = "패시브";
+                    descTxt.text = "패시브";
+                    break;
+            }
+            SetSelectPnl(true);
+        }
+    }
+
+    /// <summary>
+    /// SkillUI를 클릭하면 호출
+    /// </summary>
+    /// <param name="position"></param>
+    public void SelectSkill(int position)
+    {
+        if (selected != -1 && datas[selected].type == ROLL_TYPE.SKILL)
+        {
+            Debug.Log("Skill Added,position:" + position + " id:" + datas[selected].id);
+            target = position;
+            okBtn.interactable = true;
+        }
+    }
+
+    public void Ok()
+    {
+        RollData data = datas[selected];
         switch (data.type)
         {
             case ROLL_TYPE.SKILL:
                 SkillData skill = GameDatabase.instance.skills[data.id];
-                selectedImg.sprite = GetSprite(data);
-                typeTxt.text = "Skill";
-                nameTxt.text = skill.name;
-                descTxt.text = skill.description;
+                SkillManager.instance.SetSkill(datas[selected].id, target);
                 break;
             case ROLL_TYPE.STAT:
                 selectedImg.sprite = GetSprite(data);
@@ -138,6 +216,7 @@ public class RollManager : MonoBehaviour {
                 descTxt.text = "패시브";
                 break;
         }
+        SetRollPnl(false);
     }
 
     public Sprite GetSprite(RollData data)
@@ -204,17 +283,17 @@ public class RollManager : MonoBehaviour {
         LoadRollCount();
         if (!LoadStopped())//로드에 실패하면
         {
-            selected = Random.Range(0, 10);//새로운 selected
+            stopped = Random.Range(0, 10);//새로운 selected
             rollCount++;
             PlayerPrefs.SetInt("rollCount", rollCount);//Roll Count 저장
-            PlayerPrefs.SetInt("stopped", selected);//저장
+            PlayerPrefs.SetInt("stopped", stopped);//저장
         }
         //Save Here
         int spin = Random.Range(2, 4);//2~3바퀴
-        if (selected != -1)
-            scroll.Spin(spin * 10 + selected - selected);
+        if (stopped != -1)
+            scroll.Spin(spin * 10 + stopped - stopped);
         else
-            scroll.Spin(spin * 10 + selected);
+            scroll.Spin(spin * 10 + stopped);
         StartCoroutine(CheckRollEnd());
     }
 
@@ -251,22 +330,6 @@ public class RollManager : MonoBehaviour {
             }
         }
         Roll();
-    }
-
-    /// <summary>
-    /// 데이터 로드
-    /// </summary>
-    /// <returns></returns>
-    private bool LoadDatas()
-    {
-        string datasJson = PlayerPrefs.GetString("rollDatas");
-        if (datasJson != string.Empty)
-        {
-            datas = JsonHelper.FromJson<RollData>(datasJson);
-            Debug.Log("RollDatas Loaded:" + datasJson);
-            return true;
-        }
-        return false;
     }
 
     /// <summary>

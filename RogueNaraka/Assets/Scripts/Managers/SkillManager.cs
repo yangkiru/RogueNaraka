@@ -28,7 +28,7 @@ public class SkillManager : MonoBehaviour {
     [ReadOnly]
     public int rollCount;
     [ReadOnly]
-    public bool isDragable;
+    private bool isDragable;
 
     public static SkillManager instance = null;
 
@@ -301,16 +301,19 @@ public class SkillManager : MonoBehaviour {
 
     public void SetSkill(SkillData data, int position)
     {
-        skills[position].SyncData(data);
+        if (data.id == skills[position].data.id)
+            skills[position].LevelUpOnce();
+        else
+            skills[position].SyncData(data);
     }
     /// <summary>
     /// 
     /// </summary>
     /// <param name="sc">showCaseId</param>
     /// <param name="position"></param>
-    public void SetSkill(int sc, int position)
+    public void SetSkill(int id, int position)
     {
-        SetSkill(GetSkillData(showCaseId[sc]), position);
+        SetSkill(GetSkillData(id), position);
     }
 
     /// <summary>
@@ -458,6 +461,7 @@ public class SkillManager : MonoBehaviour {
     {
         if(isRoll)
         {
+            Debug.Log("Ok, Roll");
                 if (MoneyManager.instance.UseSoul(rollCount * 10))
                 {
                     _selected = selected;//이전의 selected를 저장

@@ -92,6 +92,7 @@ public class SoulShopManager : MonoBehaviour
         else
         {
             shopPnl.SetActive(false);
+            ShopStage(SHOPSTAGE.DECREASE);
         }
     }
 
