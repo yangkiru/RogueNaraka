@@ -230,6 +230,36 @@ MonoBehaviour:
     moveDistance: 2.5
     minDistance: 1
     maxDistance: 2
+  - name: Bug0
+    id: 7
+    cost: 1
+    stage: 0
+    stat:
+      dmg: 0.4
+      spd: 2
+      tec: 0
+      hp: 5
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
+    color: {r: 1, g: 0.99759674, b: 0.57254905, a: 1}
+    weaponId: 5
+    weaponLevel: 0
+    weapon:
+      name: Claw
+      level: 0
+      startBulletId: 16000000
+      spawnPoint: {x: 0, y: 0}
+      type: 0
+      localSpeed: 0
+      worldSpeed: 0
+    isFriendly: 0
+    move: 0
+    moveTime: 2
+    moveDistance: 0.5
+    minDistance: 1
+    maxDistance: 2
   bosses:
   - name: Boss0
     id: 0
@@ -959,7 +989,7 @@ MonoBehaviour:
     onDestroy: []
     effects: []
   - name: MagicSquare2
-    id: 20
+    id: 21
     type: 4
     dmg: 0
     dealSpeed: 0
@@ -1021,6 +1051,21 @@ MonoBehaviour:
       spawnPoint: {x: 0, y: 0}
     onDestroy: []
     effects: []
+  - name: Claw
+    id: 22
+    type: 0
+    dmg: 1
+    dealSpeed: 0
+    size: 0.75
+    angle: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.3
+    children: []
+    onDestroy: []
+    effects: []
   weapons:
   - name: MagicBall
     level: 0
@@ -1057,10 +1102,17 @@ MonoBehaviour:
     type: 3
     localSpeed: 0
     worldSpeed: 0
+  - name: Claw
+    level: 0
+    startBulletId: 16000000
+    spawnPoint: {x: 0, y: 0.25}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1
-    unitId: 00000000010000000200000006000000
+    unitId: 0000000001000000020000000600000007000000
   - cost: 2
     unitId: 030000000400000005000000
   skills:
@@ -1086,6 +1138,7 @@ MonoBehaviour:
         time: 1
         isInfinity: 0
       values: []
+    description: 
   - name: Bandage
     spr: {fileID: 21300002, guid: 9b0fda0bc0ad6494e95c2bbbefd3a118, type: 3}
     id: 1
@@ -1106,6 +1159,7 @@ MonoBehaviour:
       distance: 0
       effects: []
       values: []
+    description: 
   - name: Meditation
     spr: {fileID: 21300008, guid: a1d7aa10f6bb3b448bc66afc830070ed, type: 3}
     id: 2
@@ -1124,6 +1178,7 @@ MonoBehaviour:
       distance: 0
       effects: []
       values: []
+    description: 
   - name: 3
     spr: {fileID: 21300008, guid: 351ae5d626b876b45a228347658ec0ab, type: 3}
     id: 3
@@ -1142,6 +1197,7 @@ MonoBehaviour:
       distance: 0
       effects: []
       values: []
+    description: 
   - name: 4
     spr: {fileID: 21300054, guid: 53b6b47620ef0d04388873788f5d20ed, type: 3}
     id: 4
@@ -1160,26 +1216,36 @@ MonoBehaviour:
       distance: 0
       effects: []
       values: []
+    description: 
   items:
   - name: HealPotion
     id: 0
     value: 3
     size: 1
     amount: 0
+    description: 
   - name: FragGrenade
     id: 1
     value: 3
     size: 1
     amount: 0
+    description: 
   - name: HighExplosive
     id: 2
     value: 3
     size: 1
     amount: 0
+    description: 
   itemSprites:
   - id: 0
+    name: 
     spr: {fileID: 21300000, guid: afabb6964bf2b8c4197ec0fbd96d5767, type: 3}
+    description: 
   - id: 1
+    name: 
     spr: {fileID: 21300000, guid: 02c111416a7e2d9498a3fd1f8b2b9053, type: 3}
+    description: 
   - id: 2
+    name: 
     spr: {fileID: 21300000, guid: 9d073f1b0befdcd499516a760c050d0a, type: 3}
+    description: 
