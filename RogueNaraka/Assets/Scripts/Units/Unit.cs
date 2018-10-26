@@ -7,10 +7,6 @@ public abstract class Unit : MonoBehaviour {
 
     public bool attackable;
 
-    public Stat stat
-    { get { return _stat; } }
-    [SerializeField]
-    protected Stat _stat;
     public Stat maxStat
     { get { return _maxStat; } }
     protected Stat _maxStat;
@@ -26,13 +22,12 @@ public abstract class Unit : MonoBehaviour {
     { get { return _effects; } }
     protected List<Effect> _effects = new List<Effect>();
 
-    protected int cost;
-    protected int id;
+    [SerializeField]
+    protected UnitData _data;
+    public UnitData data
+    { get { return _data; } }
+
     protected float attackDistance;
-    protected float moveTime;
-    protected float moveDistance;
-    protected float minDistance;
-    protected float maxDistance;
 
     public float health
     { get { return _health; } }
@@ -43,7 +38,6 @@ public abstract class Unit : MonoBehaviour {
     protected float _mana;
 
     protected bool isAttackCool = false;
-    protected bool isFriendly;
     protected bool isStun;
     public bool isDeath
     { get { return _isDeath; } }
@@ -102,64 +96,76 @@ public abstract class Unit : MonoBehaviour {
         StartCoroutine(Regen());
     }
 
-    /// <summary>
-    /// Enemy 전용
-    /// </summary>
-    /// <param name="data"></param>
-    public void SyncData(UnitData data)
+    public void SyncData(UnitData data, bool isHealthMana = true)
     {
         _isDeath = false;
-        id = data.id;
-        cost = data.cost;
         name = data.name;
-        SyncData(data.stat, data.isFriendly);
         animator.runtimeAnimatorController = data.controller;
         spriteRenderer.color = data.color;
-        move = data.move;//Enemy Only
-        moveTime = data.moveTime;//Enemy Only
-        moveDistance = data.moveDistance;//Enemy Only
-        minDistance = data.minDistance;//Enemy Only
-        maxDistance = data.maxDistance;//Enemy Only
+
+        _data = data;
         _targetDistance = 1000;
         isAttackCool = false;
 
-        if (data.weapon.startBulletId.Length != 0)
-            EquipWeapon(data.weapon);
+        if (data.weaponId != -1)
+            EquipWeapon(data.weaponId, data.weaponLevel);
 
         isAutoMove = true;
         if(revolveHolder)
         {
             revolveHolder.Init();
         }
-    }
 
-    public void Move(Vector2 pos)
-    {
-        agent.SetDestination(pos);
-    }
-
-    /// <summary>
-    /// Player전용
-    /// </summary>
-    /// <param name="stat"></param>
-    /// <param name="isFriendly"></param>
-    public void SyncData(Stat stat, bool isFriendly = false, bool isHealthMana = true)
-    {
+        isRandomMoved = false;
         GetComponent<Collider2D>().enabled = true;
-        _stat = new Stat(stat);
         if (isHealthMana)
         {
-            _health = _stat.hp;
-            _mana = _stat.mp;
+            _health = data.stat.hp;
+            _mana = data.stat.mp;
         }
         SyncData();
-        this.isFriendly = isFriendly;
     }
 
     public void SyncData()
     {
         SyncAttackCool();
         SyncSpeed();
+    }
+
+    public void Move(Vector2 pos)
+    {
+        Move(pos, null);
+    }
+
+    public void Move(Vector2 pos, Action<bool> callback)
+    {
+        agent.SetDestination(pos, callback);
+    }
+
+    IEnumerator stopMoveCoroutine = null;
+    /// <summary>
+    /// PolyNavAgent를 강제로 정지시키는 함수
+    /// true를 전달하면 코루틴을 탈출함
+    /// </summary>
+    /// <param name="value"></param>
+    public void Move(bool value)
+    {
+        _isAutoMove = value;
+        if(!value && stopMoveCoroutine == null)
+        {
+            stopMoveCoroutine = StopMove();
+            StartCoroutine(stopMoveCoroutine);
+        }
+
+    }
+
+    private IEnumerator StopMove()
+    {
+        while (!_isAutoMove)
+        {
+            agent.ResetVelocity();
+            yield return null;
+        }
     }
 
     public void SetHealth(float value)
@@ -169,12 +175,12 @@ public abstract class Unit : MonoBehaviour {
 
     public void AddHealth(float amount)
     {
-        if (_health + amount < stat.hp)
+        if (_health + amount < _data.stat.hp)
             _health += amount;
         else
         {
-            float remain = _health + amount - stat.hp;
-            _health = stat.hp;
+            float remain = _health + amount - _data.stat.hp;
+            _health = _data.stat.hp;
         }
     }
 
@@ -185,19 +191,19 @@ public abstract class Unit : MonoBehaviour {
 
     public void AddMana(float amount)
     {
-        if (_mana + amount < stat.mp)
+        if (_mana + amount < _data.stat.mp)
             _mana += amount;
         else
         {
-            float remain = _mana + amount - stat.mp;
-            _mana = stat.mp;
+            float remain = _mana + amount - _data.stat.mp;
+            _mana = _data.stat.mp;
         }
     }
 
     public void HealMana(float amount)
     {
-        if (_health + amount > stat.hp)
-            amount = stat.hp - _mana;
+        if (_health + amount > _data.stat.hp)
+            amount = _data.stat.hp - _mana;
         AddMana(amount);
         PointTxtManager.instance.TxtOnHead(amount, transform, Color.blue);
     }
@@ -293,7 +299,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void SetStat(Stat s)
     {
-        _stat = s;
+        _data.stat = s;
     }
 
     public void SetStat(STAT type, float value)
@@ -301,25 +307,25 @@ public abstract class Unit : MonoBehaviour {
         switch (type)
         {
             case STAT.DMG:
-                _stat.dmg = value;
+                _data.stat.dmg = value;
                 break;
             case STAT.SPD:
-                _stat.spd = value;
+                _data.stat.spd = value;
                 break;
             case STAT.TEC:
-                _stat.tec = value;
+                _data.stat.tec = value;
                 break;
             case STAT.HP:
-                _stat.hp = value;
+                _data.stat.hp = value;
                 break;
             case STAT.MP:
-                _stat.mp = value;
+                _data.stat.mp = value;
                 break;
             case STAT.HPREGEN:
-                _stat.hpRegen = value;
+                _data.stat.hpRegen = value;
                 break;
             case STAT.MPREGEN:
-                _stat.mpRegen = value;
+                _data.stat.mpRegen = value;
                 break;
         }
     }
@@ -329,53 +335,53 @@ public abstract class Unit : MonoBehaviour {
         switch (type)
         {
             case STAT.DMG:
-                if (_stat.dmg + amount <= _maxStat.dmg)
+                if (_data.stat.dmg + amount <= _maxStat.dmg)
                 {
-                    _stat.dmg += amount;
+                    _data.stat.dmg += amount;
                     return true;
                 }
                 else return false;
             case STAT.SPD:
-                if (_stat.spd + amount <= _maxStat.spd)
+                if (_data.stat.spd + amount <= _maxStat.spd)
                 {
-                    _stat.spd += amount;
+                    _data.stat.spd += amount;
                     return true;
                 }
                 else return false;
             case STAT.TEC:
-                if (_stat.tec + amount <= _maxStat.tec)
+                if (_data.stat.tec + amount <= _maxStat.tec)
                 {
-                    _stat.tec += amount;
+                    _data.stat.tec += amount;
                     return true;
                 }
                 else return false;
             case STAT.HP:
-                if (_stat.hp + amount <= _maxStat.hp)
+                if (_data.stat.hp + amount <= _maxStat.hp)
                 {
-                    _stat.hp += amount;
+                    _data.stat.hp += amount;
                     _health += amount;
                     return true;
                 }
                 else return false;
             case STAT.MP:
-                if (_stat.mp + amount <= _maxStat.mp)
+                if (_data.stat.mp + amount <= _maxStat.mp)
                 {
-                    _stat.mp += amount;
+                    _data.stat.mp += amount;
                     _mana += amount;
                     return true;
                 }
                 else return false;
             case STAT.HPREGEN:
-                if (_stat.hpRegen + amount <= _maxStat.hpRegen)
+                if (_data.stat.hpRegen + amount <= _maxStat.hpRegen)
                 {
-                    _stat.hpRegen += amount;
+                    _data.stat.hpRegen += amount;
                     return true;
                 }
                 else return false;
             case STAT.MPREGEN:
-                if (_stat.mpRegen + amount <= _maxStat.mpRegen)
+                if (_data.stat.mpRegen + amount <= _maxStat.mpRegen)
                 {
-                    _stat.mpRegen += amount;
+                    _data.stat.mpRegen += amount;
                     return true;
                 }
                 else return false;
@@ -472,20 +478,32 @@ public abstract class Unit : MonoBehaviour {
                 Bullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
                 if (!bullet)
                     bullet = boardManager.SpawnBulletObj().GetComponent<Bullet>();
-                bullet.Init(bulletId, stat.dmg, isFriendly);
+                bullet.Init(bulletId, _data.stat.dmg, _data.isFriendly);
                 bullet.gameObject.SetActive(true);
                 Vector2 vec = (targetPosition - (Vector2)transform.position).normalized;
                 RevolveHolder holder = null;
                 if (weapon.type == ATTACK_TYPE.REVOLVE)
                 {
                     holder = revolveHolder;
-                    attackCoolTime = 10000;
+                    attackCoolTime = 1000;
                 }
-                bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
+                //bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
+                StartCoroutine(BeforeAttackCool(bullet, vec, holder));
             }
             //else
                 //Debug.Log("targetDistance : " + targetDistance + " attackDistance : " + attackDistance);
         }
+    }
+
+    protected IEnumerator BeforeAttackCool(Bullet bullet, Vector2 vec, RevolveHolder holder)
+    {
+        float t = weapon.beforeAttackDelay;
+        while (t > 0)
+        {
+            yield return null;
+            t += Time.deltaTime;
+        }
+        bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
     }
 
     protected virtual IEnumerator AttackCool()
@@ -498,7 +516,8 @@ public abstract class Unit : MonoBehaviour {
                 while (t > 0)
                 {
                     yield return null;
-                    t -= Time.deltaTime;
+                    if(t < 1000)
+                        t -= Time.deltaTime;
                     if (isDeath)
                         break;
                 }
@@ -523,8 +542,8 @@ public abstract class Unit : MonoBehaviour {
 
     public void HealHealth(float amount)
     {
-        if (_health + amount > stat.hp)
-            amount = stat.hp - _health;
+        if (_health + amount > _data.stat.hp)
+            amount = _data.stat.hp - _health;
         AddHealth(amount);
         PointTxtManager.instance.TxtOnHead(amount, transform, Color.green, txtHolder);
     }
@@ -544,7 +563,8 @@ public abstract class Unit : MonoBehaviour {
                     }
                     break;
                 case ATTACK_TYPE.TARGET:
-                    RandomMove();
+                    if(!isRandomMoved)
+                        RandomMove();
                     break;
                 case ATTACK_TYPE.NONTARGET:
                     break;
@@ -552,16 +572,19 @@ public abstract class Unit : MonoBehaviour {
         }
     }
 
-    float t;
-    void RandomMove()
+    private bool isRandomMoved = false;
+    private void RandomMove(bool value = true)
     {
-        t += Time.deltaTime;
-        if(t > 1f)
-        {
-            t = 0;
-            Vector2 rnd = new Vector2(UnityEngine.Random.Range(-1f - stat.spd * 0.1f, 1f + stat.spd * 0.5f), UnityEngine.Random.Range(-1f - stat.spd * 0.1f, 1f + stat.spd * 0.5f));
-            Move((Vector2)transform.position + rnd.normalized);
-        }
+        isRandomMoved = true;
+        StartCoroutine(RandomMoveCorou());
+    }
+    private IEnumerator RandomMoveCorou()
+    {
+            yield return new WaitForSeconds(data.moveDelay);
+            Vector2 rnd = new Vector2(
+                UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance),
+                UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance));
+            Move((Vector2)transform.position + rnd.normalized, RandomMove);
     }
     //상태이상
     public EffectStat effectStat
@@ -755,7 +778,7 @@ public abstract class Unit : MonoBehaviour {
             }
             else
             {
-                if (velocity.x >= minSpeed || velocity.x <= -minSpeed || velocity.y >= minSpeed || velocity.x <= -minSpeed)
+                if (velocity.x != 0 || velocity.y != 0)
                     animator.SetBool("isWalk", true);
                 else
                     animator.SetBool("isWalk", false);
@@ -790,7 +813,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void SyncAttackCool()
     {
-        attackCoolTime = 1 - stat.spd * 0.01f;
+        attackCoolTime = weapon.afterAttackDelay * (1 - (_data.stat.spd - 1) * 0.1f);
     }
 
     public void SetSpeed(float value)
@@ -800,7 +823,7 @@ public abstract class Unit : MonoBehaviour {
 
     public float GetOriginSpeed()
     {
-        return 1 + stat.spd * 0.01f;
+        return 1 + _data.stat.spd * 0.01f;
     }
 
     public float GetSpeed()
@@ -810,7 +833,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void SyncSpeed()
     {
-        SetSpeed(1 + stat.spd * 0.01f);
+        SetSpeed(data.moveSpeed * (1 + ((_data.stat.spd - 1) * 0.1f)));
     }
 
     protected IEnumerator Regen()
@@ -821,8 +844,8 @@ public abstract class Unit : MonoBehaviour {
             yield return new WaitForSeconds(time);
             if (_health > 0)
             {
-                AddHealth(stat.hpRegen * 0.1f);
-                AddMana(stat.mpRegen * 0.1f);
+                AddHealth(_data.stat.hpRegen * 0.1f);
+                AddMana(_data.stat.mpRegen * 0.1f);
             }
         }
     }

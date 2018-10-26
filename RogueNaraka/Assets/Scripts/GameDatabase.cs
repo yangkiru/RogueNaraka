@@ -27,7 +27,7 @@ public class GameDatabase : ScriptableObject
     public static int friendlyLayer = 8;
     public static int enemyLayer = 9;
     public static int wallLayer = 10;
-    public Stat playerBase;
+    public UnitData playerBase;
     public UnitData[] enemies;
     public UnitData[] bosses;
     public LayerMask playerMask;
@@ -84,16 +84,6 @@ public class GameDatabase : ScriptableObject
         for(int i = 0; i < 50; i++)
         {
             stageCosts[i] = 3 + i * 2;
-        }
-    }
-
-    [ContextMenu("SyncWeapon")]
-    public void SyncWeapon()
-    {
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            enemies[i].weapon = weapons[enemies[i].weaponId];
-            enemies[i].weapon.level = enemies[i].weaponLevel;
         }
     }
 }
@@ -164,30 +154,38 @@ public struct UnitData
     public Color color;
     public int weaponId;
     public int weaponLevel;
-    public Weapon weapon;
     public bool isFriendly;
     public MOVE_TYPE move;
-    public float moveTime;
+    public float moveDelay;
     public float moveDistance;
     public float minDistance;
     public float maxDistance;
+    public float moveSpeed;
 }
 
 [Serializable]
 public struct Weapon
 {
     public string name;
+    public int id;
     public int level;
     public int[] startBulletId;
     public Vector2 spawnPoint;
     public ATTACK_TYPE type;
+    public float beforeAttackDelay;
+    public float afterAttackDelay;
     public float localSpeed;
     public float worldSpeed;
 
     public Weapon(Weapon w)
     {
-        name = w.name; level = w.level; startBulletId = (int[])w.startBulletId.Clone(); spawnPoint = w.spawnPoint;
-        type = w.type; localSpeed = w.localSpeed; worldSpeed = w.worldSpeed;
+        this = w;
+        startBulletId = (int[])w.startBulletId.Clone();
+    }
+
+    public Weapon(int id, int level):this(GameDatabase.instance.weapons[id])
+    {
+        this.level = level;
     }
 }
 
@@ -313,18 +311,14 @@ public class EffectData
     public float time;
     public bool isInfinity;
 
-    public EffectData()
-    {
-    }
+    public EffectData() { }
 
     public EffectData(EFFECT e, float v, float t, bool i = false)
     {
         type = e; value = v; time = t; isInfinity = i;
     }
 
-    public EffectData(EffectData ef) : this(ef.type, ef.value, ef.time, ef.isInfinity)
-    {
-    }
+    public EffectData(EffectData ef) : this(ef.type, ef.value, ef.time, ef.isInfinity) { }
 }
 
 [Serializable]

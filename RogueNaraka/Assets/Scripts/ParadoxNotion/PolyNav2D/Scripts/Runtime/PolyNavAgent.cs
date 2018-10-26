@@ -52,7 +52,9 @@ namespace PolyNav{
 		///Go to closer point if requested destination is invalid? Disable for performance.
 		public bool closerPointOnInvalid   = true;
 		///Will debug the path (gizmos). Disable for performance.
-		public bool debugPath            = true;
+		public bool debugPath              = true;
+        ///이동이 끝났는지
+        public bool isArrived                 = false;
 
 
 		///Raised when a new destination is started after path found
@@ -171,6 +173,10 @@ namespace PolyNav{
 			}
 		}
 
+        public void ResetVelocity()
+        {
+            _velocity = Vector3.zero;
+        }
 		///Set the destination for the agent. As a result the agent starts moving
 		public bool SetDestination(Vector2 goal){ return SetDestination(goal, null); }
 
@@ -378,7 +384,7 @@ namespace PolyNav{
 		void OnArrived(){
 
 			Stop();
-
+            isArrived = true;
 			if (reachedCallback != null){
 				reachedCallback(true);
 			}
@@ -392,7 +398,7 @@ namespace PolyNav{
 		void OnInvalid(){
 
 			Stop();
-
+            isArrived = true;
 			if (reachedCallback != null){
 				reachedCallback(false);
 			}

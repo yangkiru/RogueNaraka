@@ -83,12 +83,12 @@ public class LevelUpManager : MonoBehaviour {
 
     public void SyncStatUpgradeTxt()
     {
-        upgradeTxt[0].text = string.Format("{0}/{1}", player.stat.dmg.ToString(), player.maxStat.dmg);
-        upgradeTxt[1].text = string.Format("{0}/{1}", player.stat.spd.ToString(), player.maxStat.spd);
-        upgradeTxt[2].text = string.Format("{0}/{1}", player.stat.tec.ToString(), player.maxStat.tec);
-        upgradeTxt[3].text = string.Format("{0}/{1}", player.stat.hp.ToString(), player.maxStat.hp);
-        upgradeTxt[4].text = string.Format("{0}/{1}", player.stat.mp.ToString(), player.maxStat.mp);
-        upgradeTxt[5].text = string.Format("{0}/{1}", player.stat.hpRegen.ToString(), player.maxStat.hpRegen);
-        upgradeTxt[6].text = string.Format("{0}/{1}", player.stat.mpRegen.ToString(), player.maxStat.mpRegen);
+        upgradeTxt[0].text = string.Format("{0}/{1}", player.data.stat.dmg.ToString(), player.maxStat.dmg);
+        upgradeTxt[1].text = string.Format("{0}/{1}", player.data.stat.spd.ToString(), player.maxStat.spd);
+        upgradeTxt[2].text = string.Format("{0}/{1}", player.data.stat.tec.ToString(), player.maxStat.tec);
+        upgradeTxt[3].text = string.Format("{0}/{1}", player.data.stat.hp.ToString(), player.maxStat.hp);
+        upgradeTxt[4].text = string.Format("{0}/{1}", player.data.stat.mp.ToString(), player.maxStat.mp);
+        upgradeTxt[5].text = string.Format("{0}/{1}", player.data.stat.hpRegen.ToString(), player.maxStat.hpRegen);
+        upgradeTxt[6].text = string.Format("{0}/{1}", player.data.stat.mpRegen.ToString(), player.maxStat.mpRegen);
     }
 }

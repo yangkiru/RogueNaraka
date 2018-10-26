@@ -50,8 +50,8 @@ public class Fillable : MonoBehaviour
             }
             switch (type)
             {
-                case TYPE.HEALTH: goal = unit.health / unit.stat.hp; break;
-                case TYPE.MANA: goal = unit.mana / unit.stat.mp; break;
+                case TYPE.HEALTH: goal = unit.health / unit.data.stat.hp; break;
+                case TYPE.MANA: goal = unit.mana / unit.data.stat.mp; break;
             }
             t += Time.deltaTime;
             if (t > 1)

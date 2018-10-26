@@ -21,10 +21,6 @@ public class GameManager : MonoBehaviour {
 
 
     //Debug params
-    public int weaponId;
-    public int weaponLevel;
-    private int _weaponId = 0;
-    private int _weaponLevel = 0;
     public int stage;
 
     public bool isDebug;
@@ -92,13 +88,6 @@ public class GameManager : MonoBehaviour {
                 autoSaveCoroutine = null;
             }
         }
-
-        if(weaponId != _weaponId || weaponLevel != _weaponLevel)
-        {
-            _weaponId = weaponId;
-            _weaponLevel = weaponLevel;
-            player.EquipWeapon(weaponId, weaponLevel);
-        }
     }
 
     private void RandomStat()
@@ -113,7 +102,7 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
-                int current = (int)player.stat.sum;
+                int current = (int)player.data.stat.sum;
                 int max = (int)player.maxStat.sum;
                 if (current == max)
                     return;
@@ -144,19 +133,20 @@ public class GameManager : MonoBehaviour {
 
         if(isRun)
         {
-            PlayerPrefs.SetFloat("dmg", player.stat.dmg);
-            PlayerPrefs.SetFloat("spd", player.stat.spd);
-            PlayerPrefs.SetFloat("tec", player.stat.tec);
-            PlayerPrefs.SetFloat("hp", player.stat.hp);
-            PlayerPrefs.SetFloat("mp", player.stat.mp);
-            PlayerPrefs.SetFloat("hpRegen", player.stat.hpRegen);
-            PlayerPrefs.SetFloat("mpRegen", player.stat.mpRegen);
+            PlayerPrefs.SetFloat("dmg", player.data.stat.dmg);
+            PlayerPrefs.SetFloat("spd", player.data.stat.spd);
+            PlayerPrefs.SetFloat("tec", player.data.stat.tec);
+            PlayerPrefs.SetFloat("hp", player.data.stat.hp);
+            PlayerPrefs.SetFloat("mp", player.data.stat.mp);
+            PlayerPrefs.SetFloat("hpRegen", player.data.stat.hpRegen);
+            PlayerPrefs.SetFloat("mpRegen", player.data.stat.mpRegen);
             PlayerPrefs.SetFloat("health", player.health);
             PlayerPrefs.SetFloat("mana", player.mana);
             PlayerPrefs.SetInt("stage", boardManager.stage);
             SkillManager.instance.Save();
             Item.instance.Save();
-            PlayerPrefs.SetString("weapon", JsonUtility.ToJson(player.weapon));
+            PlayerPrefs.SetInt("weaponId", player.weapon.id);
+            PlayerPrefs.SetInt("weaponoLevel", player.weapon.level);
         }
         //Debug.Log("Saved");
     }
@@ -167,8 +157,8 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("isRun", 1);
         Load();
         RandomStat();
-        PlayerPrefs.SetFloat("health", player.stat.hp);
-        PlayerPrefs.SetFloat("mana", player.stat.mp);
+        PlayerPrefs.SetFloat("health", player.data.stat.hp);
+        PlayerPrefs.SetFloat("mana", player.data.stat.mp);
         Save();
         StatTextUpdate();
     }
@@ -176,7 +166,8 @@ public class GameManager : MonoBehaviour {
     private void LoadFirst()
     {
         moneyManager.Save();
-        Stat dbStat = GameDatabase.instance.playerBase;
+        UnitData playerBase = GameDatabase.instance.playerBase;
+        Stat dbStat = playerBase.stat;
         SyncStatToData(dbStat);
 
         Stat maxStat = new Stat(5);
@@ -194,9 +185,8 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("statPoint", 5);
         PlayerPrefs.SetInt("isRun", 0);
         PlayerPrefs.SetInt("isLevelUp", 0);
-        Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
-        weapon.level = weaponLevel;
-        PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
+        PlayerPrefs.SetInt("weaponId", playerBase.weaponId);
+        PlayerPrefs.SetInt("weaponLevel", playerBase.weaponLevel);
 
         PlayerPrefs.SetInt("stage", 1);
 
@@ -213,8 +203,9 @@ public class GameManager : MonoBehaviour {
         Stat stat = new Stat(PlayerPrefs.GetFloat("dmg"), PlayerPrefs.GetFloat("spd"),
         PlayerPrefs.GetFloat("tec"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
         PlayerPrefs.GetFloat("hpRegen"), PlayerPrefs.GetFloat("mpRegen"));
-
-        player.SyncData(stat, true, false);
+        UnitData playerData = GameDatabase.instance.playerBase;
+        playerData.stat = stat;
+        player.SyncData(playerData, false);
         player.SetHealth(PlayerPrefs.GetFloat("health"));
         player.SetMana(PlayerPrefs.GetFloat("mana"));
 
@@ -223,7 +214,7 @@ public class GameManager : MonoBehaviour {
         player.SetMaxStat(new Stat(GetStat((STAT)0, true), GetStat((STAT)1, true), GetStat((STAT)2, true),
             GetStat((STAT)3, true), GetStat((STAT)4, true), GetStat((STAT)5, true), GetStat((STAT)6, true)));
 
-        player.EquipWeapon(JsonUtility.FromJson<Weapon>(PlayerPrefs.GetString("weapon")));
+        player.EquipWeapon(PlayerPrefs.GetInt("weaponId"), PlayerPrefs.GetInt("weaponLevel"));
 
         if (PlayerPrefs.GetString("effect") != string.Empty)
         {
@@ -260,14 +251,13 @@ public class GameManager : MonoBehaviour {
     private void LoadInit()
     {
         moneyManager.Load();
-        Stat dbStat = GameDatabase.instance.playerBase;
-        SyncStatToData(dbStat);
+        UnitData playerBase = GameDatabase.instance.playerBase;
+        SyncStatToData(playerBase.stat);
         PlayerPrefs.SetInt("stage", 1);
         PlayerPrefs.SetFloat("health", 1);
         PlayerPrefs.SetFloat("mana", 1);
-        Weapon weapon = new Weapon(GameDatabase.instance.weapons[weaponId]);//weapon save data로 변경 필요
-        weapon.level = weaponLevel;
-        PlayerPrefs.SetString("weapon", JsonUtility.ToJson(weapon));
+        PlayerPrefs.SetInt("weaponId", playerBase.weaponId);
+        PlayerPrefs.SetInt("weaponLevel", playerBase.weaponLevel);
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
         Item.instance.Load();
@@ -296,7 +286,7 @@ public class GameManager : MonoBehaviour {
 
     public void SyncStatToData(Stat stat)
     {
-        stat = GameDatabase.instance.playerBase;
+        stat = GameDatabase.instance.playerBase.stat;
         PlayerPrefs.SetFloat("dmg", stat.dmg);
         PlayerPrefs.SetFloat("spd", stat.spd);
         PlayerPrefs.SetFloat("tec", stat.tec);
@@ -308,13 +298,13 @@ public class GameManager : MonoBehaviour {
 
     public void StatTextUpdate()
     {
-        statTxt[0].text = player.stat.dmg.ToString();
-        statTxt[1].text = player.stat.spd.ToString();
-        statTxt[2].text = player.stat.tec.ToString();
-        statTxt[3].text = player.stat.hp.ToString();
-        statTxt[4].text = player.stat.hpRegen.ToString();
-        statTxt[5].text = player.stat.mp.ToString();
-        statTxt[6].text = player.stat.mpRegen.ToString();
+        statTxt[0].text = player.data.stat.dmg.ToString();
+        statTxt[1].text = player.data.stat.spd.ToString();
+        statTxt[2].text = player.data.stat.tec.ToString();
+        statTxt[3].text = player.data.stat.hp.ToString();
+        statTxt[4].text = player.data.stat.hpRegen.ToString();
+        statTxt[5].text = player.data.stat.mp.ToString();
+        statTxt[6].text = player.data.stat.mpRegen.ToString();
     }
 
     public void SetPause(bool value)

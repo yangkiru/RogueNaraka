@@ -110,19 +110,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackable: 1
-  _stat:
-    dmg: 0
-    spd: 0
-    luck: 0
-    hp: 0
-    mp: 0
-    hpRegen: 0
-    mpRegen: 0
   agent: {fileID: 114847150215274254}
   animator: {fileID: 95502947379602740}
   spriteRenderer: {fileID: 212819646491190964}
   rigid: {fileID: 50147071480879430}
   revolveHolder: {fileID: 0}
+  _data:
+    name: 
+    id: 0
+    cost: 0
+    stage: 0
+    stat:
+      dmg: 0
+      spd: 0
+      tec: 0
+      hp: 0
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    weaponId: 0
+    weaponLevel: 0
+    isFriendly: 0
+    move: 0
+    beforeAttackDelay: 0
+    afterAttackDelay: 0
+    moveDelay: 0
+    moveDistance: 0
+    minDistance: 0
+    maxDistance: 0
+    moveSpeed: 0
   _weapon:
     name: 
     level: 0
@@ -144,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 0}
-  maxSpeed: 3.5
+  maxSpeed: 1
   mass: 20
   stoppingDistance: 0.1
   slowingDistance: 1
@@ -161,6 +179,7 @@ MonoBehaviour:
   restrict: 0
   closerPointOnInvalid: 1
   debugPath: 1
+  isArrived: 0
   _velocity: {x: 0, y: 0}
 --- !u!212 &212819646491190964
 SpriteRenderer:

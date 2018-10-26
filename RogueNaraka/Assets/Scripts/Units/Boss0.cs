@@ -28,16 +28,16 @@ public class Boss0 : Enemy {
 
     protected override void OnDeath()
     {
-        MoneyManager.instance.AddCollectedSoul(-cost);//soul을 지급했으니 취소
-        MoneyManager.instance.AddSoul(cost);
+        MoneyManager.instance.AddCollectedSoul(-data.cost);//soul을 지급했으니 취소
+        MoneyManager.instance.AddSoul(data.cost);
         base.OnDeath();
     }
 
     protected override void MoveCheck()
     {
-        agent.maxSpeed = 0.5f + stat.spd / 3;
-        float randX = Random.Range(-stat.spd * 2, stat.spd * 2);
-        float randY = Random.Range(-stat.spd * 0.5f, stat.spd * 3.5f);
+        agent.maxSpeed = 0.5f + data.stat.spd / 3;
+        float randX = Random.Range(-data.stat.spd * 2, data.stat.spd * 2);
+        float randY = Random.Range(-data.stat.spd * 0.5f, data.stat.spd * 3.5f);
 
         float x = transform.position.x + randX;
         float y = transform.position.y + randY;
@@ -116,7 +116,7 @@ public class Boss0 : Enemy {
                     if (Mathf.Abs(check.y) > boardManager.boardRange[0].y + bodySize && Mathf.Abs(check.x) < boardManager.boardRange[1].x - bodySize)
                     //if (transform.position.y > boardManager.boardRange[0].y + bodySize && transform.position.x > boardManager.boardRange[0].x + bodySize
                         //&& transform.position.x < boardManager.boardRange[1].x - bodySize)
-                        transform.Translate(vec.normalized * stat.spd * Time.deltaTime);
+                        transform.Translate(vec.normalized * data.stat.spd * Time.deltaTime);
                     else
                     {
                         Debug.Log("Target Lost");
@@ -128,13 +128,13 @@ public class Boss0 : Enemy {
                 else
                 {
                     Debug.Log("Hit");
-                    attackCoolTime = 3 - stat.spd * 0.1f;
+                    attackCoolTime = 3 - data.stat.spd * 0.1f;
                     isAttackCool = true;
                     isAttacking = false;
                     if (hit.transform.gameObject.layer == 8)//friendly hit
                     {
                         Debug.Log("Hit Player");
-                        hit.transform.GetComponent<Unit>().GetDamage(stat.dmg);
+                        hit.transform.GetComponent<Unit>().GetDamage(data.stat.dmg);
                     }
                     Stun(2);
                     isDetected = false;

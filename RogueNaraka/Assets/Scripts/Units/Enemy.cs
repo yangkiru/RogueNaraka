@@ -47,7 +47,7 @@ public class Enemy : Unit {
     protected override void OnDeath()
     {
         base.OnDeath();
-        MoneyManager.instance.AddCollectedSoul(cost);
+        MoneyManager.instance.AddCollectedSoul(data.cost);
         //Debug.Log("cost:" + cost + " enemy dead");
         boardManager.enemyPool.EnqueueObjectPool(gameObject);
     }
@@ -67,16 +67,18 @@ public class Enemy : Unit {
         else if(!isDeath)
         {
             Vector2 v;
+            float d;
             switch (move)
             {
                 case MOVE_TYPE.RUSH:
                     //Debug.Log("RUSH");
                     v = targetPosition - (Vector2)transform.position;
                     attackable = true;
-                    if (targetDistance <= attackDistance)
-                        Move((Vector2)transform.position - v.normalized * attackDistance);
-                    else
-                        Move((Vector2)targetPosition - v.normalized * attackDistance);
+                    d = data.moveDistance;
+                    float vM = v.magnitude;
+                    if (d > vM)
+                        d = vM;
+                    Move((Vector2)transform.position + v.normalized * d);
                     break;
                 case MOVE_TYPE.STATUE:
                     break;
@@ -86,8 +88,8 @@ public class Enemy : Unit {
                     if (v.x < 0)
                         vAngle = 360 - vAngle;
                     //Debug.Log("vAngle" + vAngle);
-
-                    if (targetDistance < minDistance)//move back
+                    float distance = data.moveDistance;
+                    if (targetDistance < data.minDistance)//move back
                     {
                         //Debug.Log("back");
                         float angle = vAngle - 180;
@@ -102,7 +104,7 @@ public class Enemy : Unit {
                         angle = 450 - angle;
 
                         v = MathHelpers.DegreeToVector2(angle);
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position, v, moveDistance, GameDatabase.instance.wallMask);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, v, distance, GameDatabase.instance.wallMask);
                         if (hit)
                         {
                             //Debug.Log("wall");
@@ -110,7 +112,7 @@ public class Enemy : Unit {
                         }
 
                     }
-                    else if (targetDistance < maxDistance)//inside
+                    else if (targetDistance < data.maxDistance)//inside
                     {
                         //Debug.Log("Inside");
                         if (UnityEngine.Random.Range(0, 2) == 0)//move left
@@ -134,29 +136,28 @@ public class Enemy : Unit {
                     }
                     else //move forward
                     {
-                        float d = targetDistance - moveDistance;//이동 후 타겟과의 거리
-                        if (minDistance > d)
+                        d = targetDistance - distance;//이동 후 타겟과의 거리
+                        if (data.minDistance > d)
                         {
-                            moveDistance = moveDistance - minDistance + d;//이동 후 거리가 최소 거리를 넘지 않게
+                            distance = distance - data.minDistance + d;//이동 후 거리가 최소 거리를 넘지 않게
                         }
                     }
-                    moveVector = v.normalized * moveDistance;
                     //Debug.Log(moveVector.ToString());
-                    Move((Vector2)transform.position + v.normalized * moveDistance);
+                    Move((Vector2)transform.position + v.normalized * distance);
                     break;
                 case MOVE_TYPE.RUN:
                     Vector2 vec = -(targetPosition - (Vector2)transform.position);
-                    RaycastHit2D hitt = Physics2D.Raycast(transform.position, vec, moveDistance, GameDatabase.instance.wallMask);
+                    RaycastHit2D hitt = Physics2D.Raycast(transform.position, vec, data.moveDistance, GameDatabase.instance.wallMask);
                     if (hitt)
                     {
-                        if (targetDistance < moveDistance)
+                        if (targetDistance < data.moveDistance)
                         {
                             Vector2 mid = new Vector2((boardManager.boardRange[0].x + boardManager.boardRange[1].x) / 2,
                                 (boardManager.boardRange[0].y + boardManager.boardRange[1].y) / 2);
                             vec = mid - (Vector2)transform.position;
                         }
                     }
-                    Move((Vector2)transform.position + vec.normalized * moveDistance);
+                    Move((Vector2)transform.position + vec.normalized * data.moveDistance);
                     break;
             }
         }
@@ -165,7 +166,7 @@ public class Enemy : Unit {
 
     protected void Move()
     {
-        StartCoroutine(MoveCoolTime(moveTime));
+        StartCoroutine(MoveCoolTime(data.moveDelay));
     }
 
     private IEnumerator MoveCoolTime(float time)

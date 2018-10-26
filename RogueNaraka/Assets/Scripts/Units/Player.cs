@@ -161,7 +161,7 @@ public class Player : Unit
 
     public void Revive(float percent)
     {
-        _health = stat.hp * percent * 0.01f;
+        _health = data.stat.hp * percent * 0.01f;
         _isDeath = false;
     }
 
