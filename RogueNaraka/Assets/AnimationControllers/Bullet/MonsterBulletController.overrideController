@@ -5,10 +5,10 @@ AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BulletController
+  m_Name: MonsterBulletController
   m_Controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 13924e178168109498a9ce5e1d7aea03, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 6e37fa5b8e7e31f4a85a483f161899ba, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 248e4eceb43eae24ba74d492d54e3722, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 76253f689302b3949a13c56052fead7c, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: bbc50bf140054f34c8ddc707fc233d3f, type: 2}

@@ -764,14 +764,14 @@ MonoBehaviour:
     children: []
     onDestroy: []
     effects: []
-  - name: Bullet
+  - name: MonsterBullet
     id: 15
     type: 0
     dmg: 1
     dealSpeed: 0
     size: 0.08
     angle: 0
-    controller: {fileID: 22100000, guid: bc7bd027e6806224c9b0ea4ef28eec8e, type: 2}
+    controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 1
