@@ -51,15 +51,13 @@ public abstract class Unit : MonoBehaviour {
     public bool isAutoMove
     { get { return _isAutoMove; } set { //Debug.Log("Before:"+_isAutoMove+" After:"+value);
             _isAutoMove = value; } }
+    [SerializeField]
     protected bool _isAutoMove = true;
 
     public Weapon weapon
     { get { return _weapon; } }
     [SerializeField]
     protected Weapon _weapon;
-
-    protected MOVE_TYPE move;
-
 
     private Vector2 lastVelocity;
     private float minSpeed = 0.1f;//For Animator Min speed
@@ -75,6 +73,7 @@ public abstract class Unit : MonoBehaviour {
 
     public float targetDistance
     { get { return _targetDistance; } }
+    [SerializeField]
     protected float _targetDistance = 1000;
     protected float attackCoolTime;
 
@@ -277,7 +276,7 @@ public abstract class Unit : MonoBehaviour {
     public void EquipWeapon(int index, int level)
     {
         _weapon = GameDatabase.instance.weapons[index];
-        Debug.Log(name + " Equiped " + _weapon.name);
+        //Debug.Log(name + " Equiped " + _weapon.name);
         _weapon.level = level;
     }
 
@@ -460,7 +459,7 @@ public abstract class Unit : MonoBehaviour {
 
             if (_weapon.type == ATTACK_TYPE.CLOSE)
             {
-                attackDistance = GameDatabase.instance.bullets[bulletId].size + _weapon.spawnPoint.y;
+                attackDistance = GameDatabase.instance.bullets[_weapon.startBulletId[_weapon.level]].size + _weapon.spawnPoint.y;
             }
             else if (_weapon.type == ATTACK_TYPE.REVOLVE)
             {
@@ -474,34 +473,35 @@ public abstract class Unit : MonoBehaviour {
             if (!isAttackCool && (_targetDistance <= attackDistance || _weapon.type == ATTACK_TYPE.REVOLVE))
             {
                 //Debug.Log(name + "Attacking");
-                isAttackCool = true;
-                Bullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-                if (!bullet)
-                    bullet = boardManager.SpawnBulletObj().GetComponent<Bullet>();
-                bullet.Init(bulletId, _data.stat.dmg, _data.isFriendly);
-                bullet.gameObject.SetActive(true);
-                Vector2 vec = (targetPosition - (Vector2)transform.position).normalized;
-                RevolveHolder holder = null;
-                if (weapon.type == ATTACK_TYPE.REVOLVE)
-                {
-                    holder = revolveHolder;
-                    attackCoolTime = 1000;
-                }
+
                 //bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
-                StartCoroutine(BeforeAttackCool(bullet, vec, holder));
+                isAttackCool = true;
+                StartCoroutine(BeforeAttackCool());
             }
             //else
                 //Debug.Log("targetDistance : " + targetDistance + " attackDistance : " + attackDistance);
         }
     }
 
-    protected IEnumerator BeforeAttackCool(Bullet bullet, Vector2 vec, RevolveHolder holder)
+    protected IEnumerator BeforeAttackCool()
     {
         float t = weapon.beforeAttackDelay;
         while (t > 0)
         {
             yield return null;
-            t += Time.deltaTime;
+            t -= Time.deltaTime;
+        }
+        Bullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        if (!bullet)
+            bullet = boardManager.SpawnBulletObj().GetComponent<Bullet>();
+        bullet.Init(_weapon.startBulletId[_weapon.level], _data.stat.dmg, _data.isFriendly);
+        bullet.gameObject.SetActive(true);
+        Vector2 vec = (targetPosition - (Vector2)transform.position).normalized;
+        RevolveHolder holder = null;
+        if (weapon.type == ATTACK_TYPE.REVOLVE)
+        {
+            holder = revolveHolder;
+            attackCoolTime = 1000;
         }
         bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
     }
@@ -580,11 +580,15 @@ public abstract class Unit : MonoBehaviour {
     }
     private IEnumerator RandomMoveCorou()
     {
-            yield return new WaitForSeconds(data.moveDelay);
+        yield return new WaitForSeconds(data.moveDelay);
+        if (isAutoMove)
+        {
             Vector2 rnd = new Vector2(
                 UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance),
                 UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance));
             Move((Vector2)transform.position + rnd.normalized, RandomMove);
+        }
+        else isRandomMoved = false;
     }
     //상태이상
     public EffectStat effectStat
@@ -769,29 +773,14 @@ public abstract class Unit : MonoBehaviour {
         Vector2 velocity = agent.velocity;
         if (!isStun)
         {
-            if (!isAutoMove || !target)
-            {
+            if (velocity.x != 0 || velocity.y != 0)
                 animator.SetBool("isWalk", true);
-                lastVelocity = velocity;
-                animator.SetFloat("x", velocity.x);
-                animator.SetFloat("y", velocity.y);
-            }
             else
+                animator.SetBool("isWalk", false);
+            if (target)
             {
-                if (velocity.x != 0 || velocity.y != 0)
-                    animator.SetBool("isWalk", true);
-                else
-                    animator.SetBool("isWalk", false);
-                if (target)
-                {
-                    animator.SetFloat("x", targetPosition.x - transform.position.x);
-                    animator.SetFloat("y", targetPosition.y - transform.position.y);
-                }
-                //else
-                //{
-                //    animator.SetFloat("x", lastVelocity.x);
-                //    animator.SetFloat("y", lastVelocity.y);
-                //}
+                animator.SetFloat("x", targetPosition.x - transform.position.x);
+                animator.SetFloat("y", targetPosition.y - transform.position.y);
             }
         }
     }
@@ -813,7 +802,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void SyncAttackCool()
     {
-        attackCoolTime = weapon.afterAttackDelay * (1 - (_data.stat.spd - 1) * 0.1f);
+        attackCoolTime = (weapon.beforeAttackDelay + weapon.afterAttackDelay) * (1 - (_data.stat.spd - 1) * 0.1f);
     }
 
     public void SetSpeed(float value)

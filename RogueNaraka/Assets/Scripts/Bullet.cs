@@ -429,7 +429,7 @@ public class Bullet : MonoBehaviour {
                                 if (index == -1)
                                 {
                                     isDeal = true;
-                                    Debug.Log(name + " dot hit to " + hits[i].transform.name);
+                                    //Debug.Log(name + " dot hit to " + hits[i].transform.name);
                                     unit.GetDamage(Damage());
                                     EffectFunc(unit);
                                     records.Add(hash);

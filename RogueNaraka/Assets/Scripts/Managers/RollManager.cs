@@ -132,7 +132,7 @@ public class RollManager : MonoBehaviour {
                     if (data.id + 1 > 1)
                         point += "s";
                     nameTxt.text = (data.id + 1).ToString() + point;
-                    descTxt.text = "의 스탯 포인트를 획득한다.";
+                    descTxt.text = (data.id + 1).ToString() + point + "의 스탯 포인트를 획득한다.";
                     break;
                 case ROLL_TYPE.ITEM:
                     selectedImg.sprite = GetSprite(data);

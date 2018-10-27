@@ -62,13 +62,14 @@ public class Enemy : Unit {
     {
         if (!target)
         {
+            agent.ResetVelocity();
             Move();
         }
         else if(!isDeath)
         {
             Vector2 v;
             float d;
-            switch (move)
+            switch (data.move)
             {
                 case MOVE_TYPE.RUSH:
                     //Debug.Log("RUSH");
@@ -81,8 +82,10 @@ public class Enemy : Unit {
                     Move((Vector2)transform.position + v.normalized * d);
                     break;
                 case MOVE_TYPE.STATUE:
+                    //Debug.Log("STATUE");
                     break;
                 case MOVE_TYPE.DISTANCE:
+                    //Debug.Log("DISTANCE");
                     v = (targetPosition - (Vector2)transform.position);
                     float vAngle = Vector2.Angle(Vector2.up, v);
                     if (v.x < 0)
@@ -104,13 +107,6 @@ public class Enemy : Unit {
                         angle = 450 - angle;
 
                         v = MathHelpers.DegreeToVector2(angle);
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position, v, distance, GameDatabase.instance.wallMask);
-                        if (hit)
-                        {
-                            //Debug.Log("wall");
-                            v = -v;
-                        }
-
                     }
                     else if (targetDistance < data.maxDistance)//inside
                     {
@@ -146,6 +142,7 @@ public class Enemy : Unit {
                     Move((Vector2)transform.position + v.normalized * distance);
                     break;
                 case MOVE_TYPE.RUN:
+                    //Debug.Log("RUN");
                     Vector2 vec = -(targetPosition - (Vector2)transform.position);
                     RaycastHit2D hitt = Physics2D.Raycast(transform.position, vec, data.moveDistance, GameDatabase.instance.wallMask);
                     if (hitt)

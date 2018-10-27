@@ -7,7 +7,6 @@ public class Player : Unit
 {
     public static Player instance = null;
 
-    public bool isMoveToAttack;
     public bool isMoveToMouse;
 
     private float _collectedDmg;
@@ -49,7 +48,7 @@ public class Player : Unit
                 {
                     if (isMoveToMouse && Input.GetMouseButton(0))
                         Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    if (isMoveToAttack && !win)
+                    if (isAutoMove && !win)
                         MoveToAttack();
                     Attack();
                 }

@@ -2119,7 +2119,6 @@ GameObject:
   - component: {fileID: 230862583}
   - component: {fileID: 230862588}
   - component: {fileID: 230862587}
-  - component: {fileID: 230862584}
   m_Layer: 5
   m_Name: Skill9
   m_TagString: Untagged
@@ -2145,17 +2144,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1023.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &230862584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 230862582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &230862587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4067,7 +4055,6 @@ GameObject:
   - component: {fileID: 443500122}
   - component: {fileID: 443500126}
   - component: {fileID: 443500125}
-  - component: {fileID: 443500123}
   m_Layer: 5
   m_Name: Skill1
   m_TagString: Untagged
@@ -4093,17 +4080,6 @@ RectTransform:
   m_AnchoredPosition: {x: 151.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &443500123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 443500121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &443500125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5785,6 +5761,16 @@ Prefab:
     - target: {fileID: 1068433391245634, guid: e94d87c0c56f8a240b7f56634ae5b43d, type: 2}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+        type: 2}
+      propertyPath: isMoveToAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+        type: 2}
+      propertyPath: attackable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e94d87c0c56f8a240b7f56634ae5b43d, type: 2}
@@ -9668,7 +9654,6 @@ GameObject:
   - component: {fileID: 841406303}
   - component: {fileID: 841406307}
   - component: {fileID: 841406306}
-  - component: {fileID: 841406309}
   m_Layer: 5
   m_Name: Skill2
   m_TagString: Untagged
@@ -9728,17 +9713,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 841406302}
   m_CullTransparentMesh: 0
---- !u!114 &841406309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 841406302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &863049010
 GameObject:
   m_ObjectHideFlags: 0
@@ -11167,7 +11141,6 @@ GameObject:
   - component: {fileID: 1031490288}
   - component: {fileID: 1031490292}
   - component: {fileID: 1031490291}
-  - component: {fileID: 1031490294}
   m_Layer: 5
   m_Name: Skill0
   m_TagString: Untagged
@@ -11227,17 +11200,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1031490287}
   m_CullTransparentMesh: 0
---- !u!114 &1031490294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1031490287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1033553706
 GameObject:
   m_ObjectHideFlags: 0
@@ -12881,7 +12843,6 @@ GameObject:
   - component: {fileID: 1178646448}
   - component: {fileID: 1178646453}
   - component: {fileID: 1178646452}
-  - component: {fileID: 1178646449}
   m_Layer: 5
   m_Name: Skill6
   m_TagString: Untagged
@@ -12907,17 +12868,6 @@ RectTransform:
   m_AnchoredPosition: {x: 696.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1178646449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1178646447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1178646452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13117,7 +13067,6 @@ GameObject:
   - component: {fileID: 1212411885}
   - component: {fileID: 1212411890}
   - component: {fileID: 1212411889}
-  - component: {fileID: 1212411886}
   m_Layer: 5
   m_Name: Skill4
   m_TagString: Untagged
@@ -13143,17 +13092,6 @@ RectTransform:
   m_AnchoredPosition: {x: 478.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1212411886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1212411884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1212411889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13229,8 +13167,6 @@ MonoBehaviour:
   - {fileID: 863049013}
   - {fileID: 1197888943}
   - {fileID: 379592476}
-  weaponId: 0
-  weaponLevel: 0
   stage: 1
   isDebug: 1
   isReset: 0
@@ -14235,7 +14171,6 @@ GameObject:
   - component: {fileID: 1309496914}
   - component: {fileID: 1309496919}
   - component: {fileID: 1309496918}
-  - component: {fileID: 1309496915}
   m_Layer: 5
   m_Name: Skill3
   m_TagString: Untagged
@@ -14261,17 +14196,6 @@ RectTransform:
   m_AnchoredPosition: {x: 369.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1309496915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1309496913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1309496918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17563,7 +17487,6 @@ GameObject:
   - component: {fileID: 1592595600}
   - component: {fileID: 1592595605}
   - component: {fileID: 1592595604}
-  - component: {fileID: 1592595601}
   m_Layer: 5
   m_Name: Skill5
   m_TagString: Untagged
@@ -17589,17 +17512,6 @@ RectTransform:
   m_AnchoredPosition: {x: 587.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1592595601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1592595599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1592595604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19798,7 +19710,6 @@ GameObject:
   - component: {fileID: 1769994487}
   - component: {fileID: 1769994492}
   - component: {fileID: 1769994491}
-  - component: {fileID: 1769994488}
   m_Layer: 5
   m_Name: Skill8
   m_TagString: Untagged
@@ -19824,17 +19735,6 @@ RectTransform:
   m_AnchoredPosition: {x: 914.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1769994488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1769994486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1769994491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21743,7 +21643,6 @@ GameObject:
   - component: {fileID: 1984827598}
   - component: {fileID: 1984827603}
   - component: {fileID: 1984827602}
-  - component: {fileID: 1984827599}
   m_Layer: 5
   m_Name: Skill7
   m_TagString: Untagged
@@ -21769,17 +21668,6 @@ RectTransform:
   m_AnchoredPosition: {x: 805.25, y: -50}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1984827599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1984827597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a164326b0d52447b335570211ad84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1984827602
 MonoBehaviour:
   m_ObjectHideFlags: 0
