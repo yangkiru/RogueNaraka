@@ -168,10 +168,7 @@ public class Enemy : Unit {
 
     private IEnumerator MoveCoolTime(float time)
     {
-        attackable = true;
         yield return new WaitForSeconds(time);
-        attackable = false;
-
         MoveCheck();
     }
 

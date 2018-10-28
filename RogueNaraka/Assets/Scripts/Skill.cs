@@ -166,7 +166,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         levelTxt.text = data.level.ToString();
         for(int i = 0; i < amount; i++)
         {
-            data.coolTime += data.levelUp.coolTime;
             data.manaCost += data.levelUp.manaCost;
             data.distance += data.levelUp.distance;
             AddEffect(data.effects, data.levelUp.effects);

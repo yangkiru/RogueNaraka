@@ -802,7 +802,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void SyncAttackCool()
     {
-        attackCoolTime = (weapon.beforeAttackDelay + weapon.afterAttackDelay) * (1 - (_data.stat.spd - 1) * 0.1f);
+        attackCoolTime = (weapon.beforeAttackDelay + weapon.afterAttackDelay) * (1 - (_data.stat.spd - 1) * 0.01f);
     }
 
     public void SetSpeed(float value)

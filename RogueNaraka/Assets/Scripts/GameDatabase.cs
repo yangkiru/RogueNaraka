@@ -22,6 +22,12 @@ public class GameDatabase : ScriptableObject
         if (!System.IO.Directory.Exists("Assets/Resources")) System.IO.Directory.CreateDirectory("Assets/Resources");
         UnityEditor.AssetDatabase.CreateAsset(instance, "Assets/Resources/GameDatabase.asset");
     }
+
+    private void Awake()
+    {
+        BulletIdToData();
+        UnitCostSync();
+    }
 #endif
 
     public static int friendlyLayer = 8;
@@ -289,7 +295,6 @@ public struct SkillData
 [Serializable]
 public struct SkillUpData
 {
-    public float coolTime;
     public float manaCost;
     public float distance;
     public EffectData[] effects;

@@ -5756,7 +5756,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300004, guid: 7d971cf5b0936f147ac6d667964ca254,
+      objectReference: {fileID: 21300000, guid: 2093fbf2739aa9247958397b65dea31b,
         type: 3}
     - target: {fileID: 1068433391245634, guid: e94d87c0c56f8a240b7f56634ae5b43d, type: 2}
       propertyPath: m_TagString
@@ -5770,7 +5770,12 @@ Prefab:
     - target: {fileID: 114290355890258750, guid: e94d87c0c56f8a240b7f56634ae5b43d,
         type: 2}
       propertyPath: attackable
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212071811527906632, guid: e94d87c0c56f8a240b7f56634ae5b43d,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e94d87c0c56f8a240b7f56634ae5b43d, type: 2}
@@ -8404,7 +8409,6 @@ MonoBehaviour:
     effects: []
     values: []
     levelUp:
-      coolTime: 0
       manaCost: 0
       distance: 0
       effects: []
@@ -13563,7 +13567,6 @@ MonoBehaviour:
     effects: []
     values: []
     levelUp:
-      coolTime: 0
       manaCost: 0
       distance: 0
       effects: []
@@ -14374,7 +14377,6 @@ MonoBehaviour:
     effects: []
     values: []
     levelUp:
-      coolTime: 0
       manaCost: 0
       distance: 0
       effects: []

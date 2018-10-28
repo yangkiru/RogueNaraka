@@ -36,146 +36,8 @@ MonoBehaviour:
     maxDistance: 0
     moveSpeed: 1
   enemies:
-  - name: RepeatShooterNormal
-    id: 0
-    cost: 1
-    stage: 0
-    stat:
-      dmg: 0.05
-      spd: 1
-      tec: 0
-      hp: 4
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    weaponId: 3
-    weaponLevel: 0
-    isFriendly: 0
-    move: 2
-    moveDelay: 1
-    moveDistance: 1
-    minDistance: 1
-    maxDistance: 2
-    moveSpeed: 1
-  - name: RepeatShooterRed
-    id: 1
-    cost: 1
-    stage: 1
-    stat:
-      dmg: 0.1
-      spd: 1
-      tec: 0
-      hp: 2
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
-    color: {r: 1, g: 0.4764151, b: 0.63653207, a: 1}
-    weaponId: 3
-    weaponLevel: 0
-    isFriendly: 0
-    move: 2
-    moveDelay: 0
-    moveDistance: 1
-    minDistance: 1
-    maxDistance: 2
-    moveSpeed: 1
-  - name: RepeatShooterBlue
-    id: 2
-    cost: 1
-    stage: 2
-    stat:
-      dmg: 0.025
-      spd: 1
-      tec: 0
-      hp: 8
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
-    color: {r: 0.4198113, g: 0.81014097, b: 1, a: 1}
-    weaponId: 3
-    weaponLevel: 0
-    isFriendly: 0
-    move: 2
-    moveDelay: 0
-    moveDistance: 1
-    minDistance: 1
-    maxDistance: 2
-    moveSpeed: 1
-  - name: Slasher
-    id: 3
-    cost: 2
-    stage: 3
-    stat:
-      dmg: 0.1
-      spd: 10
-      tec: 0
-      hp: 4
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 0.27450982}
-    weaponId: 1
-    weaponLevel: 0
-    isFriendly: 0
-    move: 0
-    moveDelay: 0
-    moveDistance: 2
-    minDistance: 0.65
-    maxDistance: 0.4
-    moveSpeed: 1.5
-  - name: SlasherRed
-    id: 4
-    cost: 2
-    stage: 4
-    stat:
-      dmg: 0.2
-      spd: 10
-      tec: 0
-      hp: 2
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
-    color: {r: 1, g: 0.47450984, b: 0.63529414, a: 0.27450982}
-    weaponId: 1
-    weaponLevel: 0
-    isFriendly: 0
-    move: 0
-    moveDelay: 0
-    moveDistance: 2
-    minDistance: 0.65
-    maxDistance: 0.4
-    moveSpeed: 1.5
-  - name: SlasherBlue
-    id: 5
-    cost: 2
-    stage: 5
-    stat:
-      dmg: 0.1
-      spd: 10
-      tec: 0
-      hp: 8
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-    controller: {fileID: 9100000, guid: b8532958fa58a034aa60182220c88844, type: 2}
-    color: {r: 0.41960788, g: 0.8117648, b: 1, a: 0.27450982}
-    weaponId: 1
-    weaponLevel: 0
-    isFriendly: 0
-    move: 0
-    moveDelay: 0
-    moveDistance: 2
-    minDistance: 0.65
-    maxDistance: 0.4
-    moveSpeed: 1.5
   - name: Bug0
-    id: 6
+    id: 0
     cost: 1
     stage: 0
     stat:
@@ -769,7 +631,7 @@ MonoBehaviour:
     type: 0
     dmg: 1
     dealSpeed: 0
-    size: 0.08
+    size: 0.09
     angle: 0
     controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -1013,8 +875,8 @@ MonoBehaviour:
     startBulletId: 08000000090000000a0000000b0000000c000000
     spawnPoint: {x: 0, y: 0.3}
     type: 0
-    beforeAttackDelay: 0
-    afterAttackDelay: 1
+    beforeAttackDelay: 1
+    afterAttackDelay: 2
     localSpeed: 0
     worldSpeed: 0
   - name: MagicMissile
@@ -1060,16 +922,12 @@ MonoBehaviour:
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1
-    unitId: 00000000010000000200000006000000
-  - cost: 2
-    unitId: 030000000400000005000000
+    unitId: 00000000
   skills:
   - name: Roll
     spr: {fileID: 21300008, guid: 253638be60f62b740ac1295e324fa08d, type: 3}
     id: 0
     level: 1
-    coolTime: 2
-    coolTimeLeft: 0
     manaCost: 0.5
     distance: 1
     isCircleToPlayer: 1
@@ -1077,7 +935,6 @@ MonoBehaviour:
     effects: []
     values: []
     levelUp:
-      coolTime: -0.1
       manaCost: 0.2
       distance: 0.1
       effects:
@@ -1091,8 +948,6 @@ MonoBehaviour:
     spr: {fileID: 21300002, guid: 9b0fda0bc0ad6494e95c2bbbefd3a118, type: 3}
     id: 1
     level: 1
-    coolTime: 5
-    coolTimeLeft: 0
     manaCost: 0
     distance: 0.1
     isCircleToPlayer: 1
@@ -1102,7 +957,6 @@ MonoBehaviour:
     - name: heal
       value: 2
     levelUp:
-      coolTime: 0
       manaCost: 0
       distance: 0
       effects: []
@@ -1112,8 +966,6 @@ MonoBehaviour:
     spr: {fileID: 21300008, guid: a1d7aa10f6bb3b448bc66afc830070ed, type: 3}
     id: 2
     level: 1
-    coolTime: 0
-    coolTimeLeft: 0
     manaCost: 0
     distance: 0.1
     isCircleToPlayer: 1
@@ -1121,18 +973,15 @@ MonoBehaviour:
     effects: []
     values: []
     levelUp:
-      coolTime: 0
       manaCost: 0
       distance: 0
       effects: []
       values: []
     description: 
-  - name: 3
-    spr: {fileID: 21300008, guid: 351ae5d626b876b45a228347658ec0ab, type: 3}
+  - name: ThunderStrike
+    spr: {fileID: 21300000, guid: 9ab6b26aa06c12e438c398969da44ba9, type: 3}
     id: 3
     level: 1
-    coolTime: 0
-    coolTimeLeft: 0
     manaCost: 0
     distance: 0
     isCircleToPlayer: 0
@@ -1140,18 +989,15 @@ MonoBehaviour:
     effects: []
     values: []
     levelUp:
-      coolTime: 0
       manaCost: 0
       distance: 0
       effects: []
       values: []
     description: 
-  - name: 4
-    spr: {fileID: 21300054, guid: 53b6b47620ef0d04388873788f5d20ed, type: 3}
+  - name: IceBreak
+    spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
     id: 4
     level: 1
-    coolTime: 0
-    coolTimeLeft: 0
     manaCost: 0
     distance: 0
     isCircleToPlayer: 0
@@ -1159,7 +1005,6 @@ MonoBehaviour:
     effects: []
     values: []
     levelUp:
-      coolTime: 0
       manaCost: 0
       distance: 0
       effects: []
