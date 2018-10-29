@@ -338,7 +338,7 @@ public class SkillManager : MonoBehaviour {
         }
         else
         {
-            LevelUpManager.instance.SetSelectPnl(false);
+            //LevelUpManager.instance.SetSelectPnl(false);
             skillPnl.SetActive(value);
             StartCoroutine(LevelUpManager.instance.EndLevelUp());
         }

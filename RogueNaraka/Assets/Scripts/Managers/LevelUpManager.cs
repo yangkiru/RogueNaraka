@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class LevelUpManager : MonoBehaviour {
     public RollManager rollManager;
 
     public Text[] upgradeTxt;
+    public TextMeshPro statPointsTxt;
 
     public GameObject selectPnl;
     public GameObject statPnl;
@@ -43,9 +45,20 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.Save();
     }
 
-    public void SetSelectPnl(bool value)
+    public void SetStatPnl(bool value, int leftStat)
     {
-        selectPnl.SetActive(value);
+        if(value)
+        {
+            if(leftStat > 0)
+                PlayerPrefs.SetInt("leftStat", leftStat);
+            statPointsTxt.text = leftStat + " Points";
+        }
+        statPnl.SetActive(value);
+    }
+
+    public void SetStatPnl(bool value)
+    {
+        SetStatPnl(value, 0);
     }
 
     public void StatUp(int type)

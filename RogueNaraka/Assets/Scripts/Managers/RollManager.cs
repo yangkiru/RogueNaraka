@@ -66,7 +66,12 @@ public class RollManager : MonoBehaviour {
     public void SetSelectPnl(bool value)
     {
         selectPnl.SetActive(value);
-        target = -1;
+        if (!value)
+        {
+            target = -1;
+            selected = -1;
+            okBtn.interactable = false;
+        }
     }
 
     /// <summary>
@@ -113,9 +118,17 @@ public class RollManager : MonoBehaviour {
         return GameDatabase.instance.skills[data.id];
     }
 
+    private bool IsSelectable(int position)
+    {
+        if (stopped == position || (stopped + 1) % 10 == position || (stopped + 2) % 10 == position)
+            return true;
+        else
+            return false;
+    }
+
     public void Select(int position)
     {
-        if (isClickable)
+        if (isClickable && IsSelectable(position))
         {
             RollData data = datas[position];
             selected = position;
@@ -129,13 +142,7 @@ public class RollManager : MonoBehaviour {
                     descTxt.text = skill.description;
                     break;
                 case ROLL_TYPE.STAT:
-                    selectedImg.sprite = GetSprite(data);
-                    typeTxt.text = "Stat";
-                    string point = "Point";
-                    if (data.id + 1 > 1)
-                        point += "s";
-                    nameTxt.text = (data.id + 1).ToString() + point;
-                    descTxt.text = (data.id + 1).ToString() + point + "의 스탯 포인트를 획득한다.";
+                    //LevelUpManager.instance.
                     break;
                 case ROLL_TYPE.ITEM:
                     selectedImg.sprite = GetSprite(data);
@@ -170,7 +177,7 @@ public class RollManager : MonoBehaviour {
     /// <param name="position"></param>
     public void SelectSkill(int position)
     {
-        if (selected != -1 && datas[selected].type == ROLL_TYPE.SKILL)
+        if (isClickable && selected != -1 && datas[selected].type == ROLL_TYPE.SKILL)
         {
             Debug.Log("Skill Added,position:" + position + " id:" + datas[selected].id);
             target = position;
@@ -215,8 +222,9 @@ public class RollManager : MonoBehaviour {
                 string point = "Point";
                 if (data.id + 1 > 1)
                     point += "s";
-                nameTxt.text = (data.id + 1).ToString() + point;
-                descTxt.text = "의 스탯 포인트를 획득한다.";
+                nameTxt.text = (data.id + 1) + point;
+                descTxt.text = "You will get " + (data.id + 1) + "Stat " + point.ToLower() + ".";
+                descTxt.text = (data.id + 1) + "의 스탯 포인트를 획득한다.";
                 break;
             case ROLL_TYPE.ITEM:
                 Item.instance.SyncData(data.id);

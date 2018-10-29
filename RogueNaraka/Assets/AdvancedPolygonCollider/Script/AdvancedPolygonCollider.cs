@@ -449,17 +449,19 @@ namespace DigitalRuby.AdvancedPolygonCollider
         {
             try
             {
-                if (p.Texture.format != TextureFormat.ARGB32 && p.Texture.format != TextureFormat.BGRA32 && p.Texture.format != TextureFormat.RGBA32 &&
-                    p.Texture.format != TextureFormat.RGB24 && p.Texture.format != TextureFormat.Alpha8 && p.Texture.format != TextureFormat.RGBAFloat &&
-                    p.Texture.format != TextureFormat.RGBAHalf && p.Texture.format != TextureFormat.RGB565)
-                {
-                    Debug.LogWarning("Advanced Polygon Collider works best with a non-compressed texture in ARGB32, BGRA32, RGB24, RGBA4444, RGB565, RGBAFloat or RGBAHalf format");
-                }
+                //if (p.Texture.format != TextureFormat.ARGB32 && p.Texture.format != TextureFormat.BGRA32 && p.Texture.format != TextureFormat.RGBA32 &&
+                //    p.Texture.format != TextureFormat.RGB24 && p.Texture.format != TextureFormat.Alpha8 && p.Texture.format != TextureFormat.RGBAFloat &&
+                //    p.Texture.format != TextureFormat.RGBAHalf && p.Texture.format != TextureFormat.RGB565)
+                //{
+                //    Debug.LogWarning("Advanced Polygon Collider works best with a non-compressed texture in ARGB32, BGRA32, RGB24, RGBA4444, RGB565, RGBAFloat or RGBAHalf format");
+                //}
                 int width = (int)p.Rect.width;
                 int height = (int)p.Rect.height;
                 int x = (int)p.Rect.x;
                 int y = (int)p.Rect.y;
                 UnityEngine.Color[] pixels = p.Texture.GetPixels(x, y, width, height, 0);
+                if (pixels.Length == 1)
+                    return;
                 List<Vertices> verts = geometryDetector.DetectVertices(pixels, width, p.AlphaTolerance);
                 int pathIndex = 0;
                 List<Vector2[]> list = new List<Vector2[]>();
@@ -494,7 +496,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
 #endif
 
-                Debug.Log("Updated polygon.");
+                //Debug.Log("Updated polygon.");
             }
             catch (Exception ex)
             {
