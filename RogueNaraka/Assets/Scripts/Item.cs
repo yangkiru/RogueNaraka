@@ -8,13 +8,15 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 {
 
     public static Item instance = null;
+    public ItemData data
+    { get { return _data; } }
     [SerializeField][ReadOnly]
-    private ItemData data;
+    private ItemData _data;
 
     public CircleRenderer circle;
     public LineRenderer line;
 
-    public Image img;
+    private Image img;
     public int[] sprIds;
     public bool[] isKnown;
 
@@ -24,11 +26,12 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (instance == null)
             instance = this;
+        img = GetComponent<Image>();
     }
 
     public void InitItem()
     {
-        data.id = -1;
+        _data.id = -1;
         img.color = Color.clear;
     }
 
@@ -43,7 +46,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public void Save()
     {
         //현재 데이터 저장
-        PlayerPrefs.SetInt("item", data.id);
+        PlayerPrefs.SetInt("item", _data.id);
         PlayerPrefs.SetString("itemSpr", JsonHelper.ToJson<int>(sprIds));
         PlayerPrefs.SetString("itemIsKnown", JsonHelper.ToJson<bool>(isKnown));
     }
@@ -98,7 +101,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 SyncSprite();
             }
             else
-                data.id = -1;
+                _data.id = -1;
         }
     }
 
@@ -154,7 +157,8 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void SyncData(ItemData dt)
     {
-        data = dt;
+        _data = dt;
+        SyncSprite();
     }
 
     public void SyncData(int id)
@@ -164,7 +168,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void SyncSprite()
     {
-        img.sprite = GameDatabase.instance.itemSprites[sprIds[data.id]].spr;
+        img.sprite = GameDatabase.instance.itemSprites[sprIds[_data.id]].spr;
         img.color = Color.white;
     }
 
@@ -173,34 +177,33 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         int rnd = Random.Range(0, GameDatabase.instance.items.Length);
         SyncData(rnd);
-        SyncSprite();
     }
 
     public void UseItem()
     {
-        circle.SetCircle(data.size);
+        circle.SetCircle(_data.size);
         circle.MoveCircleToMouse();
-        isKnown[data.id] = true;
+        isKnown[_data.id] = true;
         Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(
-            Input.mousePosition), data.size, GameDatabase.instance.unitMask);
+            Input.mousePosition), _data.size, GameDatabase.instance.unitMask);
         for (int i = 0; i < hits.Length; i++)
         {
             Unit unit = hits[i].GetComponent<Unit>();
-            switch (data.id)
+            switch (_data.id)
             {
                 case 0://HealPotion
                     Debug.Log("Heal");
-                    unit.HealHealth(data.value);
+                    unit.HealHealth(_data.value);
                     break;
                 case 1:
                     Debug.Log("FragGrenade");
-                    unit.GetDamage(data.value);
-                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)(data.value/2));
+                    unit.GetDamage(_data.value);
+                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)(_data.value/2));
                     break;
                 case 2:
                     Debug.Log("HighExplosive");
-                    unit.GetDamage(data.value / 2);
-                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)data.value);
+                    unit.GetDamage(_data.value / 2);
+                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)_data.value);
                     break;
             }
         }
@@ -218,10 +221,10 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (data.id != -1)
+        if (_data.id != -1)
         {
             circle.MoveCircleToMouse();
-            circle.SetCircle(data.size);
+            circle.SetCircle(_data.size);
             circle.SetEnable(true);
             line.enabled = true;
         }
@@ -229,7 +232,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (data.id != -1)
+        if (_data.id != -1)
         {
             circle.MoveCircleToMouse();
             DrawLine();
@@ -240,7 +243,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         line.enabled = false;
         circle.SetEnable(false);
-        if (data.id != -1)
+        if (_data.id != -1)
         {
             if(BoardManager.IsMouseInBoard())
             {

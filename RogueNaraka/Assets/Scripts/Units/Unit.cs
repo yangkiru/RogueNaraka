@@ -37,6 +37,7 @@ public abstract class Unit : MonoBehaviour {
     protected float _health;
     protected float _mana;
 
+    protected bool isWin;
     protected bool isAttackCool = false;
     protected bool isStun;
     public bool isDeath
@@ -571,17 +572,21 @@ public abstract class Unit : MonoBehaviour {
             }
         }
     }
-
+    [SerializeField]
     private bool isRandomMoved = false;
     private void RandomMove(bool value = true)
     {
-        isRandomMoved = true;
-        StartCoroutine(RandomMoveCorou());
+        if (!isRandomMoved && !isWin)
+            isRandomMoved = true;
+        else if (isWin)
+            isRandomMoved = false;
+        if(!isWin)
+            StartCoroutine(RandomMoveCorou());
     }
     private IEnumerator RandomMoveCorou()
     {
         yield return new WaitForSeconds(data.moveDelay);
-        if (isAutoMove)
+        if (isAutoMove && !isWin)
         {
             Vector2 rnd = new Vector2(
                 UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance),
@@ -612,7 +617,7 @@ public abstract class Unit : MonoBehaviour {
         float time = 0;
         while (fire.data.time > 0)
         {
-            while (time < 0.5f * (1 + effectStat.fireResistance * 0.1f))
+            while (time < 0.5f * (1 + effectStat.fireResistance * 0.01f))
             {
                 yield return null;
                 time += Time.deltaTime;

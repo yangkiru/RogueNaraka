@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212819646491190964}
   - component: {fileID: 114237565845228052}
   - component: {fileID: 114847150215274254}
-  - component: {fileID: 70923850594167416}
   - component: {fileID: 95502947379602740}
   - component: {fileID: 50147071480879430}
+  - component: {fileID: 60771739534490432}
+  - component: {fileID: 114526026301271146}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -55,8 +56,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.25
+  m_UseAutoMass: 1
+  m_Mass: 0.14697266
   m_LinearDrag: 2.5
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -65,8 +66,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &70923850594167416
-CapsuleCollider2D:
+--- !u!60 &60771739534490432
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -78,8 +79,29 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.378, y: 0.63}
-  m_Direction: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.75, y: 0.75}
+    newSize: {x: 0.75, y: 0.75}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.234375, y: -0.296875}
+      - {x: -0.109375, y: -0.296875}
+      - {x: -0.015625, y: -0.234375}
+      - {x: 0.109375, y: -0.109375}
+      - {x: 0.203125, y: 0.078125}
+      - {x: 0.234375, y: 0.140625}
+      - {x: 0.203125, y: 0.203125}
+      - {x: 0.078125, y: 0.203125}
+      - {x: -0.046875, y: 0.140625}
+      - {x: -0.203125, y: -0.015625}
+      - {x: -0.265625, y: -0.140625}
+      - {x: -0.265625, y: -0.234375}
 --- !u!95 &95502947379602740
 Animator:
   serializedVersion: 3
@@ -134,22 +156,59 @@ MonoBehaviour:
     weaponLevel: 0
     isFriendly: 0
     move: 0
-    beforeAttackDelay: 0
-    afterAttackDelay: 0
     moveDelay: 0
     moveDistance: 0
     minDistance: 0
     maxDistance: 0
     moveSpeed: 0
+  _isAutoMove: 1
   _weapon:
     name: 
+    id: 0
     level: 0
     startBulletId: 
     spawnPoint: {x: 0, y: 0}
     type: 0
+    beforeAttackDelay: 0
+    afterAttackDelay: 0
     localSpeed: 0
     worldSpeed: 0
   target: {fileID: 0}
+  _targetDistance: 1000
+  isRandomMoved: 0
+--- !u!114 &114526026301271146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1632993860360200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c55c83d4c4dd1145ad5fbbab3c3df36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlphaTolerance: 30
+  DistanceThreshold: 1
+  Scale: 1
+  Decompose: 0
+  RunInPlayMode: 1
+  UseCache: 0
+  lastAlphaTolerance: 30
+  lastScale: 1
+  lastDistanceThreshold: 1
+  lastDecompose: 0
+  lastSprite: {fileID: 0}
+  lastRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 24
+    height: 24
+  lastOffset: {x: 12, y: 12}
+  lastPixelsPerUnit: 32
+  lastFlipX: 0
+  lastFlipY: 0
+  editorCache: []
 --- !u!114 &114847150215274254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,7 +228,7 @@ MonoBehaviour:
   accelerationRate: 2
   decelerationRate: 2
   lookAheadDistance: 1
-  avoidRadius: 0
+  avoidRadius: 0.2
   avoidanceConsiderStuckedTime: 3
   avoidanceConsiderReachedDistance: 1
   rotateTransform: 0
@@ -216,12 +275,12 @@ SpriteRenderer:
   m_SortingLayerID: 1498647319
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b3c40786d0023934abb4de5f2b5f4ff5, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.75, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

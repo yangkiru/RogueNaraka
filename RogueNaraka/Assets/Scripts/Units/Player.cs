@@ -11,8 +11,6 @@ public class Player : Unit
 
     private float _collectedDmg;
 
-    private bool win;
-
     private List<Enemy> enemies;
 
     private void Awake()
@@ -42,13 +40,13 @@ public class Player : Unit
                     StunFunc();
                     KnockBackFunc();
                 }
-                if (!SetTarget() && !win)
+                if (!SetTarget() && !isWin)
                     MoveToGoal();
                 else
                 {
                     if (isMoveToMouse && Input.GetMouseButton(0))
                         Move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    if (isAutoMove && !win)
+                    if (isAutoMove && !isWin)
                         MoveToAttack();
                     Attack();
                 }
@@ -116,9 +114,10 @@ public class Player : Unit
     private void MoveToGoal()
     {
         Debug.Log("MoveToGoal");
+        agent.Stop();
         Move(boardManager.goalPoint);
         
-        win = true;
+        isWin = true;
         StartCoroutine(LevelUp());
         StartCoroutine(MoveToGoalRepeat());
     }
@@ -141,7 +140,7 @@ public class Player : Unit
         while (true)
         {
             yield return new WaitForSeconds(2);
-            if (win && !_isDeath)
+            if (isWin && !_isDeath)
             {
                 if (isAutoMove)
                     Move(boardManager.goalPoint);
@@ -153,7 +152,7 @@ public class Player : Unit
 
     public void Respawn()
     {
-        win = false;
+        isWin = false;
         agent.SetDestination(boardManager.spawnPoint);
         transform.position = boardManager.spawnPoint;
     }

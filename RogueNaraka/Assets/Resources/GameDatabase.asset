@@ -928,6 +928,8 @@ MonoBehaviour:
     spr: {fileID: 21300008, guid: 253638be60f62b740ac1295e324fa08d, type: 3}
     id: 0
     level: 1
+    coolTime: 0
+    coolTimeLeft: 0
     manaCost: 0.5
     distance: 1
     isCircleToPlayer: 1
@@ -948,6 +950,8 @@ MonoBehaviour:
     spr: {fileID: 21300002, guid: 9b0fda0bc0ad6494e95c2bbbefd3a118, type: 3}
     id: 1
     level: 1
+    coolTime: 0
+    coolTimeLeft: 0
     manaCost: 0
     distance: 0.1
     isCircleToPlayer: 1
@@ -966,6 +970,8 @@ MonoBehaviour:
     spr: {fileID: 21300008, guid: a1d7aa10f6bb3b448bc66afc830070ed, type: 3}
     id: 2
     level: 1
+    coolTime: 0
+    coolTimeLeft: 0
     manaCost: 0
     distance: 0.1
     isCircleToPlayer: 1
@@ -982,6 +988,8 @@ MonoBehaviour:
     spr: {fileID: 21300000, guid: 9ab6b26aa06c12e438c398969da44ba9, type: 3}
     id: 3
     level: 1
+    coolTime: 0
+    coolTimeLeft: 0
     manaCost: 0
     distance: 0
     isCircleToPlayer: 0
@@ -998,6 +1006,8 @@ MonoBehaviour:
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
     id: 4
     level: 1
+    coolTime: 0
+    coolTimeLeft: 0
     manaCost: 0
     distance: 0
     isCircleToPlayer: 0
@@ -1015,30 +1025,41 @@ MonoBehaviour:
     id: 0
     value: 3
     size: 1
-    amount: 0
-    description: 
+    description: 'Heal
+
+      Tec*Value = {0}*{1} = {2}'
   - name: FragGrenade
     id: 1
     value: 3
     size: 1
-    amount: 0
-    description: 
+    description: 'Dmg
+
+      Tec*Value = {0}*{1} = {2}
+
+      KnockBack
+
+      Value/2 = {3}'
   - name: HighExplosive
     id: 2
     value: 3
     size: 1
-    amount: 0
-    description: 
+    description: 'Dmg
+
+      Tec*Value/2 = {0}*{1} = {2}
+
+      KnockBack
+
+      Value = {3}'
   itemSprites:
   - id: 0
-    name: 
+    name: Red Potion
     spr: {fileID: 21300000, guid: afabb6964bf2b8c4197ec0fbd96d5767, type: 3}
-    description: 
+    description: It looks like blood
   - id: 1
-    name: 
+    name: Blue Potion
     spr: {fileID: 21300000, guid: 02c111416a7e2d9498a3fd1f8b2b9053, type: 3}
-    description: 
+    description: It looks like ocean
   - id: 2
-    name: 
+    name: Red Bomb
     spr: {fileID: 21300000, guid: 9d073f1b0befdcd499516a760c050d0a, type: 3}
-    description: 
+    description: It looks very dangerous and shining red

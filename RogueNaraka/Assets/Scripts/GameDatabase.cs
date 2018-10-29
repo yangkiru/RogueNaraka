@@ -339,8 +339,27 @@ public struct ItemData
     public int id;
     public float value;
     public float size;
-    public int amount;
+    [TextArea]
     public string description;
+
+    public string GetDescription()
+    {
+        float temp = 0;
+        switch (id)
+        {
+            case 0://HealPotion
+                temp = Player.instance.data.stat.tec;
+                return string.Format(description, temp, value, temp * value);
+            case 1://FragGrenade
+                temp = Player.instance.data.stat.tec;
+                return string.Format(description, temp, value, temp * value, value / 2);
+            case 2://HighExplosive
+                temp = Player.instance.data.stat.tec;
+                return string.Format(description, temp, value, temp * value / 2, value);
+            default:
+                return description;
+        }
+    }
 }
 
 [Serializable]
@@ -349,6 +368,7 @@ public struct ItemSpriteData
     public int id;
     public string name;
     public Sprite spr;
+    [TextArea]
     public string description;
 }
 

@@ -23,11 +23,12 @@ GameObject:
   - component: {fileID: 114290355890258750}
   - component: {fileID: 114828541192764560}
   - component: {fileID: 95752331060267862}
-  - component: {fileID: 70864847221334446}
   - component: {fileID: 50444502640560000}
+  - component: {fileID: 60483095560957560}
+  - component: {fileID: 114447178890787802}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,8 +86,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1.5
+  m_UseAutoMass: 1
+  m_Mass: 0.2163086
   m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -95,8 +96,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &70864847221334446
-CapsuleCollider2D:
+--- !u!60 &60483095560957560
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -108,8 +109,30 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.378, y: 0.63}
-  m_Direction: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.078125, y: -0.359375}
+      - {x: 0.046875, y: -0.359375}
+      - {x: 0.140625, y: -0.328125}
+      - {x: 0.171875, y: -0.296875}
+      - {x: 0.171875, y: 0.015625}
+      - {x: 0.234375, y: 0.078125}
+      - {x: 0.140625, y: 0.234375}
+      - {x: 0.078125, y: 0.296875}
+      - {x: 0.046875, y: 0.265625}
+      - {x: -0.078125, y: 0.296875}
+      - {x: -0.234375, y: 0.078125}
+      - {x: -0.171875, y: 0.015625}
+      - {x: -0.171875, y: -0.296875}
 --- !u!95 &95752331060267862
 Animator:
   serializedVersion: 3
@@ -140,30 +163,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackable: 1
-  _stat:
-    dmg: 0
-    spd: 0
-    luck: 0
-    hp: 0
-    mp: 0
-    hpRegen: 0
-    mpRegen: 0
   agent: {fileID: 114828541192764560}
   animator: {fileID: 95752331060267862}
   spriteRenderer: {fileID: 212071811527906632}
   rigid: {fileID: 50444502640560000}
   revolveHolder: {fileID: 114486050337940652}
+  _data:
+    name: 
+    id: 0
+    cost: 0
+    stage: 0
+    stat:
+      dmg: 0
+      spd: 0
+      tec: 0
+      hp: 0
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    weaponId: 0
+    weaponLevel: 0
+    isFriendly: 0
+    move: 0
+    moveDelay: 0
+    moveDistance: 0
+    minDistance: 0
+    maxDistance: 0
+    moveSpeed: 0
+  _isAutoMove: 1
   _weapon:
     name: 
+    id: 0
     level: 0
     startBulletId: 
     spawnPoint: {x: 0, y: 0}
     type: 0
+    beforeAttackDelay: 0
+    afterAttackDelay: 0
     localSpeed: 0
     worldSpeed: 0
   target: {fileID: 0}
-  isMoveToAttack: 1
+  _targetDistance: 1000
+  isRandomMoved: 0
   isMoveToMouse: 0
+--- !u!114 &114447178890787802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068433391245634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c55c83d4c4dd1145ad5fbbab3c3df36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlphaTolerance: 30
+  DistanceThreshold: 1
+  Scale: 1
+  Decompose: 0
+  RunInPlayMode: 1
+  UseCache: 0
+  lastAlphaTolerance: 30
+  lastScale: 1
+  lastDistanceThreshold: 1
+  lastDecompose: 0
+  lastSprite: {fileID: 21300000, guid: 2093fbf2739aa9247958397b65dea31b, type: 3}
+  lastRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 32
+    height: 32
+  lastOffset: {x: 16, y: 16}
+  lastPixelsPerUnit: 32
+  lastFlipX: 0
+  lastFlipY: 0
+  editorCache: []
 --- !u!114 &114486050337940652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,11 +252,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c68d957b1ec6346881082fe5edb4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segments: 0
+  _segments: 0
   radius: {x: 1, y: 1}
   points: []
   lastPoints: []
   list: []
+  spin: 0
 --- !u!114 &114828541192764560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,8 +276,8 @@ MonoBehaviour:
   slowingDistance: 1
   accelerationRate: 2
   decelerationRate: 2
-  lookAheadDistance: 1
-  avoidRadius: 0
+  lookAheadDistance: 0.1
+  avoidRadius: 0.2
   avoidanceConsiderStuckedTime: 3
   avoidanceConsiderReachedDistance: 1
   rotateTransform: 0
@@ -209,6 +287,7 @@ MonoBehaviour:
   restrict: 0
   closerPointOnInvalid: 1
   debugPath: 1
+  isArrived: 0
   _velocity: {x: 0, y: 0}
 --- !u!212 &212071811527906632
 SpriteRenderer:
@@ -245,7 +324,7 @@ SpriteRenderer:
   m_SortingLayerID: 1498647319
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7a197a65fea6c234fa398d1e6e5aa026, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2093fbf2739aa9247958397b65dea31b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

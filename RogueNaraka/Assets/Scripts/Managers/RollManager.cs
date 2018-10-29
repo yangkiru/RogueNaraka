@@ -23,6 +23,8 @@ public class RollManager : MonoBehaviour {
     public RollData[] datas;
     private int rollCount;
     private bool isSkillSelected;
+    /// <summary> 선택된 SkillUI 위치 및 아이템 획득 여부
+    /// </summary>
     private int target;
     
 
@@ -64,6 +66,7 @@ public class RollManager : MonoBehaviour {
     public void SetSelectPnl(bool value)
     {
         selectPnl.SetActive(value);
+        target = -1;
     }
 
     /// <summary>
@@ -142,7 +145,7 @@ public class RollManager : MonoBehaviour {
                     if (Item.instance.isKnown[item.id])
                     {
                         nameTxt.text = item.name;
-                        descTxt.text = item.description;
+                        descTxt.text = item.GetDescription();
                     }
                     else
                     {
@@ -175,6 +178,28 @@ public class RollManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// ItemUI를 클릭하면 호출
+    /// </summary>
+    public void SelectItem()
+    {
+        if (selected != -1 && datas[selected].type == ROLL_TYPE.ITEM)
+        {
+            if(target == -1)//선택 전
+            {
+                Debug.Log("Item Added");
+                target = 0;
+                okBtn.interactable = true;
+            }
+            else
+            {
+                Debug.Log("Item Canceled");
+                target = -1;
+                okBtn.interactable = false;
+            }
+        }
+    }
+
     public void Ok()
     {
         RollData data = datas[selected];
@@ -194,20 +219,7 @@ public class RollManager : MonoBehaviour {
                 descTxt.text = "의 스탯 포인트를 획득한다.";
                 break;
             case ROLL_TYPE.ITEM:
-                selectedImg.sprite = GetSprite(data);
-                typeTxt.text = "ITEM";
-                ItemData item = GameDatabase.instance.items[data.id];
-                ItemSpriteData itemSpr = GameDatabase.instance.itemSprites[Item.instance.sprIds[item.id]];
-                if (Item.instance.isKnown[item.id])
-                {
-                    nameTxt.text = item.name;
-                    descTxt.text = item.description;
-                }
-                else
-                {
-                    nameTxt.text = itemSpr.name;
-                    descTxt.text = itemSpr.description;
-                }
+                Item.instance.SyncData(data.id);
                 break;
             case ROLL_TYPE.PASSIVE:
                 selectedImg.sprite = GetSprite(data);
@@ -269,11 +281,6 @@ public class RollManager : MonoBehaviour {
         showCases[position].sprite = spr;
     }
 
-    public void SetShowCaseEnable(int position, bool value)
-    {
-        showCases[position].enabled = value;
-    }
-
     /// <summary>
     /// RandomSelect Skills
     /// </summary>
@@ -290,10 +297,7 @@ public class RollManager : MonoBehaviour {
         }
         //Save Here
         int spin = Random.Range(2, 4);//2~3바퀴
-        if (stopped != -1)
-            scroll.Spin(spin * 10 + stopped - stopped);
-        else
-            scroll.Spin(spin * 10 + stopped);
+        scroll.Spin(spin * 10 + stopped);
         StartCoroutine(CheckRollEnd());
     }
 
