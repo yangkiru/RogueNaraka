@@ -87,7 +87,6 @@ public class Boss0 : Enemy {
 
     protected override void Update()
     {
-        StunFunc();
         TargetUpdate();
         if (isWakeUp && !isAttackCool && !isStun)
         {
@@ -120,7 +119,7 @@ public class Boss0 : Enemy {
                     else
                     {
                         Debug.Log("Target Lost");
-                        Stun(2);
+                        AddEffect(EFFECT.STUN, 2, 2);
                         isAttacking = false;
                         isDetected = false;
                     }
@@ -136,7 +135,7 @@ public class Boss0 : Enemy {
                         Debug.Log("Hit Player");
                         hit.transform.GetComponent<Unit>().GetDamage(data.stat.dmg);
                     }
-                    Stun(2);
+                    AddEffect(EFFECT.STUN, 2, 2);
                     isDetected = false;
                 }
             }

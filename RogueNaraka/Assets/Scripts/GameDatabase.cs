@@ -22,12 +22,6 @@ public class GameDatabase : ScriptableObject
         if (!System.IO.Directory.Exists("Assets/Resources")) System.IO.Directory.CreateDirectory("Assets/Resources");
         UnityEditor.AssetDatabase.CreateAsset(instance, "Assets/Resources/GameDatabase.asset");
     }
-
-    private void Awake()
-    {
-        BulletIdToData();
-        UnitCostSync();
-    }
 #endif
 
     public static int friendlyLayer = 8;
@@ -137,15 +131,39 @@ public enum STAT
 }
 
 [Serializable]
-public struct EffectStat
+public struct KnowledgeData
 {
-    public float fireResistance;
-    public float iceResistance;
-    public float poisonResistance;
-    public float knockBackResistance;
-    public float stunResistance;
-    public float slowResistance;
-    public float gravityResistance;
+    public float fire;
+    public float ice;
+    public float poison;
+    public float knockBack;
+    public float stun;
+    public float slow;
+    public float gravity;
+
+    public KnowledgeData(float value)
+    {
+        fire = value; ice = value; poison = value; knockBack = value; stun = value; slow = value; gravity = value;
+    }
+    public KnowledgeData(KnowledgeData k, float value = 0) : this(value)
+    {
+        fire += k.fire; ice += k.ice; poison += k.poison; knockBack += k.knockBack; stun += k.stun; slow += k.slow; gravity += k.gravity;
+    }
+
+    public static float GetHalf(float know)
+    {
+        return (1 + know) * 0.5f;
+    }
+
+    public static float GetNegative(float know)
+    {
+        return 2 - know;
+    }
+
+    public static float GetAdditional(float know)
+    {
+        return know - 1;
+    }
 }
 
 [Serializable]
@@ -169,6 +187,7 @@ public struct UnitData
     public float maxDistance;
     public float moveSpeed;
     public Vector2 shadowPos;
+    public KnowledgeData knowledge;
 }
 
 [Serializable]
@@ -326,12 +345,17 @@ public class EffectData
     }
 
     public EffectData(EffectData ef) : this(ef.type, ef.value, ef.time, ef.isInfinity) { }
+
+    public EffectData Clone()
+    {
+        return new EffectData(this);
+    }
 }
 
 [Serializable]
 public enum EFFECT
 {
-    STUN, SLOW, FIRE, ICE, KNOCKBACK
+    STUN, SLOW, FIRE, ICE, KNOCKBACK, POISON
 }
 
 [Serializable]

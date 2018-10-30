@@ -14,7 +14,7 @@ public class Effect : MonoBehaviour {
     private bool _isActive;
 
     public bool isBuff
-    { get { return _data.value >= 0; } }
+    { get { return false; } }//버프를 추가 ex)switch(data.type){case EFFECT.someBuff:case EFFECT.someBuff2:return true;default:return false;};
 
     private IEnumerator coroutine;
 

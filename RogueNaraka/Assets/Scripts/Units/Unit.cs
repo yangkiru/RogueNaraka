@@ -35,8 +35,12 @@ public abstract class Unit : MonoBehaviour {
     public float mana
     { get { return _mana; } }
 
+    [SerializeField]
     protected float _health;
+    [SerializeField]
     protected float _mana;
+    [SerializeField]
+    protected float poison;
 
     protected bool isWin;
     protected bool isAttackCool = false;
@@ -534,13 +538,20 @@ public abstract class Unit : MonoBehaviour {
     /// 데미지 입는 함수
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void GetDamage(float damage)
+    public virtual float GetDamage(float damage, bool isTxtOnHead = true)
     {
-        if (damage > 0)
-        {
-            _health -= damage;
-            PointTxtManager.instance.TxtOnHead(-damage, transform, Color.red, txtHolder);
-        }
+        if (damage < 0)
+            damage = 0;
+        float additional = poison * KnowledgeData.GetHalf(knowledge.poison);
+        //Debug.Log(name + " knowledge.poison:" + knowledge.poison + " KnowledgeData.GetHalf(knowledge.poison):" + KnowledgeData.GetHalf(knowledge.poison));
+        if (additional <= 0)
+            additional = 0;
+        //else Debug.Log("additional:" + additional);
+        float sum = damage + additional;
+        _health -= sum;
+        if (isTxtOnHead)
+            PointTxtManager.instance.TxtOnHead(-sum, transform, Color.red, txtHolder);
+        return sum;
     }
 
     public void HealHealth(float amount)
@@ -597,16 +608,21 @@ public abstract class Unit : MonoBehaviour {
         }
         else isRandomMoved = false;
     }
-    //상태이상
-    public EffectStat effectStat
+    //상태이상 효율
+    public KnowledgeData knowledge
     {
-        get { return _effectStat; }
+        get { return new KnowledgeData(data.knowledge, 1); }
     }
-    private EffectStat _effectStat;
 
-    public void Fire(float damage, float time)
+    protected IEnumerator PoisonFunc(Effect poison)
     {
-        Effect effect = AddEffect(EFFECT.FIRE, damage, time);
+        this.poison += poison.data.value;
+        while (poison.data.time > 0)
+        {
+            poison.data.time -= Time.deltaTime * KnowledgeData.GetAdditional(knowledge.poison) * 0.5f;
+            yield return null;
+        }
+        this.poison -= poison.data.value;
     }
 
     /// <summary>
@@ -619,14 +635,14 @@ public abstract class Unit : MonoBehaviour {
         float time = 0;
         while (fire.data.time > 0)
         {
-            while (time < 0.5f * (1 + effectStat.fireResistance * 0.01f))
+            while (time < 0.5f * knowledge.fire)
             {
                 yield return null;
                 time += Time.deltaTime;
-                fire.data.time -= Time.deltaTime;
             }
             time = 0;
             GetDamage(fire.data.value);
+            yield return null;
         }
     }
 
@@ -635,47 +651,25 @@ public abstract class Unit : MonoBehaviour {
         AddEffect(EFFECT.KNOCKBACK, MathHelpers.Vector2ToDegree(vec), amount);
     }
 
-    protected void KnockBackFunc()
+    protected void KnockBackFunc(Effect knockBack)
     {
-        Effect[] knockBacks = GetEffects(EFFECT.KNOCKBACK);
-        for(int i = 0; i < knockBacks.Length; i++)
-        {
-            Vector2 vec = MathHelpers.DegreeToVector2(knockBacks[i].data.value);
-            rigid.AddForce(vec.normalized * knockBacks[i].data.time * 10);
-            //Debug.Log("angle:" + knockBacks[i].data.value + " vec:" + vec.x + "," + vec.y);
-        }
-
-        for (int i = knockBacks.Length - 1; i >= 0; i--)
-        {
-            RemoveEffect(knockBacks[i]);
-        }
+        Vector2 vec = MathHelpers.DegreeToVector2(knockBack.data.value);
+        if (knowledge.knockBack < 2)
+            rigid.AddForce(vec.normalized * knockBack.data.time * (KnowledgeData.GetNegative(knowledge.knockBack)));
+        //Debug.Log("angle:" + knockBacks[i].data.value + " vec:" + vec.x + "," + vec.y);
+        RemoveEffect(knockBack);
     }
 
-    public void Stun(float time)
+    protected IEnumerator StunFunc(Effect stun)
     {
-        AddEffect(EFFECT.STUN, 0, time);
-    }
-
-    protected void StunFunc()
-    {
-        Effect[] stuns = GetEffects(EFFECT.STUN);
-        Effect highest = null;
-        if (stuns.Length > 0)
-            highest = stuns[0];
-        for (int i = 1; i < stuns.Length; i++)
+        while(stun.data.time > 0)
         {
-            if (highest.data.time < stuns[i].data.time)
-                highest = stuns[i];
-            else
-                RemoveEffect(stuns[i]);
-        }
-
-        if (highest != null)
-        {
-            agent.Stop();
             isStun = true;
+            stun.data.time -= Time.deltaTime * KnowledgeData.GetAdditional(knowledge.stun);//시간 추가 감소
+            yield return null;
         }
-        else if(isStun)
+        RemoveEffect(stun);
+        if (GetEffect(EFFECT.STUN) == null)
         {
             OnStunEnd();
             isStun = false;
@@ -689,12 +683,21 @@ public abstract class Unit : MonoBehaviour {
     {
         Effect effect = gameObject.AddComponent<Effect>();
         effect.SetData(data);
-        effect.Active(true);
+        effect.Active(true);//이펙트 타이머 활성화
         _effects.Add(effect);
         switch(data.type)
         {
             case EFFECT.FIRE:
                 StartCoroutine(FireFunc(effect));
+                break;
+            case EFFECT.KNOCKBACK:
+                KnockBackFunc(effect);
+                break;
+            case EFFECT.POISON:
+                StartCoroutine(PoisonFunc(effect));
+                break;
+            case EFFECT.STUN:
+                StartCoroutine(StunFunc(effect));
                 break;
         }
         return effect;
@@ -742,18 +745,15 @@ public abstract class Unit : MonoBehaviour {
     public Effect GetEffect(EFFECT type)
     {
         Effect result = null;
-        int count = 0;
         for (int i = 0; i < _effects.Count; i++)
         {
             if (_effects[i].data.type == type)
             {
                 result = _effects[i];
-                count++;
+                return result;
             }
         }
-        if (count > 1)
-            Debug.Log("There are many Effects. Plz use GetEffects(string name)");
-        return result;
+        return null;
     }
 
     public Effect[] GetEffects(EFFECT type)

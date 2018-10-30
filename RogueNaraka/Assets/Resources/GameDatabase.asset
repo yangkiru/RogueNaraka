@@ -63,6 +63,31 @@ MonoBehaviour:
     maxDistance: 2
     moveSpeed: 0.5
     shadowPos: {x: 0.05, y: 0.05}
+  - name: Bug1
+    id: 1
+    cost: 2
+    stage: 1
+    weaponId: 5
+    weaponLevel: 1
+    stat:
+      dmg: 0.2
+      spd: 1
+      tec: 0
+      hp: 10
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    move: 0
+    moveDelay: 2
+    moveDistance: 1
+    minDistance: 0
+    maxDistance: 2
+    moveSpeed: 0.5
+    shadowPos: {x: 0.05, y: 0.05}
   bosses:
   - name: Boss0
     id: 0
@@ -864,6 +889,25 @@ MonoBehaviour:
     children: []
     onDestroy: []
     effects: []
+  - name: PoisonClaw
+    id: 23
+    type: 0
+    dmg: 1
+    dealSpeed: 1
+    size: 0.75
+    angle: 0
+    controller: {fileID: 22100000, guid: de4f0b683ce4b29408b77ee3c074a43b, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.3
+    children: []
+    onDestroy: []
+    effects:
+    - type: 5
+      value: 0.5
+      time: 4
+      isInfinity: 0
   weapons:
   - name: MagicBall
     id: 0
@@ -918,7 +962,7 @@ MonoBehaviour:
   - name: Claw
     id: 0
     level: 0
-    startBulletId: 16000000
+    startBulletId: 1600000017000000
     spawnPoint: {x: 0, y: 0.25}
     type: 0
     beforeAttackDelay: 2
@@ -929,6 +973,8 @@ MonoBehaviour:
   unitCosts:
   - cost: 1
     unitId: 00000000
+  - cost: 2
+    unitId: 01000000
   skills:
   - name: Roll
     spr: {fileID: 21300008, guid: 253638be60f62b740ac1295e324fa08d, type: 3}

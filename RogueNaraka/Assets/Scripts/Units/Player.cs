@@ -35,11 +35,6 @@ public class Player : Unit
             CheckDeath();
             if (!isDeath)
             {
-                if (effects.Count > 0)//상태 이상
-                {
-                    StunFunc();
-                    KnockBackFunc();
-                }
                 if (!SetTarget() && !isWin)
                     MoveToGoal();
                 else
@@ -57,13 +52,11 @@ public class Player : Unit
         }
     }
 
-    public override void GetDamage(float damage)
+    public override float GetDamage(float damage, bool isTxtOnHead = true)
     {
-        if (damage > 0)
-        {
-            _collectedDmg += damage;
-            _health -= damage;
-        }
+        float sum = base.GetDamage(damage, false);
+        _collectedDmg += sum;
+        return sum;
     }
 
 

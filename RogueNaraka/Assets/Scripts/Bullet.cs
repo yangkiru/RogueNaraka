@@ -327,19 +327,14 @@ public class Bullet : MonoBehaviour {
         {
             for (int i = 0; i < effects.Length; i++)
             {
+                EffectData temp = effects[i].Clone();
                 switch (effects[i].type)
                 {
                     case EFFECT.KNOCKBACK:
-                        for(int j = 0; j < effects[i].value; j++)
-                            unit.KnockBack(unit.transform.position - transform.position);
-                        break;
-                    case EFFECT.STUN:
-                        unit.Stun(effects[i].time);
-                        break;
-                    case EFFECT.FIRE:
-                        unit.Fire(effects[i].value * unitDamage, effects[i].time);
+                        temp = new EffectData(EFFECT.KNOCKBACK, MathHelpers.Vector2ToDegree(unit.transform.position - transform.position), effects[i].value);
                         break;
                 }
+                unit.AddEffect(temp);
             }
         }
     }
