@@ -9,16 +9,30 @@ public class LevelUpManager : MonoBehaviour {
     public RollManager rollManager;
 
     public Text[] upgradeTxt;
-    public TextMeshPro statPointsTxt;
+    public TextMeshProUGUI leftStatTxt;
 
     public GameObject selectPnl;
     public GameObject statPnl;
 
     public Button cancelBtn;
 
-
     public Player player;
 
+    public int leftStat
+    {   get { return PlayerPrefs.GetInt("leftStat"); }
+        set { if(leftStat == 0) _leftStat = value; PlayerPrefs.SetInt("leftStat", value); }
+    }
+
+    public int _leftStat
+    {
+        get { return PlayerPrefs.GetInt("_leftStat"); }
+        set { PlayerPrefs.SetInt("_leftStat", value); }
+    }
+
+    public bool isStatChanged
+    {
+        get { return leftStat != 0 && leftStat != _leftStat; }
+    }
     public static LevelUpManager instance = null;
     private void Awake()
     {
@@ -37,6 +51,8 @@ public class LevelUpManager : MonoBehaviour {
         SkillManager.instance.SetIsDragable(false);
         if (GameManager.instance.soulShopManager.shopStage == 1)
             GameManager.instance.soulShopManager.SetSoulShop(true);
+        if (isStatChanged)
+            SetStatPnl(true);
         else
         {
             rollManager.SetRollPnl(true);
@@ -49,9 +65,9 @@ public class LevelUpManager : MonoBehaviour {
     {
         if(value)
         {
-            if(leftStat > 0)
-                PlayerPrefs.SetInt("leftStat", leftStat);
-            statPointsTxt.text = leftStat + " Points";
+            if (leftStat > 0)
+                this.leftStat = leftStat;
+            leftStatTxt.text = leftStat + " Points";
         }
         statPnl.SetActive(value);
     }
@@ -67,7 +83,8 @@ public class LevelUpManager : MonoBehaviour {
         if (player.AddStat((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");
-            StartCoroutine(EndLevelUp());
+            if(--leftStat <= 0)
+                StartCoroutine(EndLevelUp());
             GameManager.instance.StatTextUpdate();
         }
         else

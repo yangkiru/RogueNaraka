@@ -142,7 +142,15 @@ public class RollManager : MonoBehaviour {
                     descTxt.text = skill.description;
                     break;
                 case ROLL_TYPE.STAT:
-                    //LevelUpManager.instance.
+                    selectedImg.sprite = GetSprite(data);
+                    typeTxt.text = "Stat";
+                    string point = "Point";
+                    if (data.id + 1 > 1)
+                        point += "s";
+                    nameTxt.text = (data.id + 1) + point;
+                    descTxt.text = "You will get " + (data.id + 1) + "Stat " + point.ToLower() + ".";
+                    //descTxt.text = (data.id + 1) + "의 스탯 포인트를 획득한다.";
+                    okBtn.interactable = true;
                     break;
                 case ROLL_TYPE.ITEM:
                     selectedImg.sprite = GetSprite(data);
@@ -169,6 +177,31 @@ public class RollManager : MonoBehaviour {
             }
             SetSelectPnl(true);
         }
+    }
+
+    public void Ok()
+    {
+        RollData data = datas[selected];
+        switch (data.type)
+        {
+            case ROLL_TYPE.SKILL:
+                SkillData skill = GameDatabase.instance.skills[data.id];
+                SkillManager.instance.SetSkill(datas[selected].id, target);
+                break;
+            case ROLL_TYPE.STAT:
+                LevelUpManager.instance.SetStatPnl(true, data.id + 1);
+                break;
+            case ROLL_TYPE.ITEM:
+                Item.instance.SyncData(data.id);
+                break;
+            case ROLL_TYPE.PASSIVE:
+                selectedImg.sprite = GetSprite(data);
+                typeTxt.text = "Passive";
+                nameTxt.text = "패시브";
+                descTxt.text = "패시브";
+                break;
+        }
+        SetRollPnl(false);
     }
 
     /// <summary>
@@ -205,38 +238,6 @@ public class RollManager : MonoBehaviour {
                 okBtn.interactable = false;
             }
         }
-    }
-
-    public void Ok()
-    {
-        RollData data = datas[selected];
-        switch (data.type)
-        {
-            case ROLL_TYPE.SKILL:
-                SkillData skill = GameDatabase.instance.skills[data.id];
-                SkillManager.instance.SetSkill(datas[selected].id, target);
-                break;
-            case ROLL_TYPE.STAT:
-                selectedImg.sprite = GetSprite(data);
-                typeTxt.text = "Stat";
-                string point = "Point";
-                if (data.id + 1 > 1)
-                    point += "s";
-                nameTxt.text = (data.id + 1) + point;
-                descTxt.text = "You will get " + (data.id + 1) + "Stat " + point.ToLower() + ".";
-                descTxt.text = (data.id + 1) + "의 스탯 포인트를 획득한다.";
-                break;
-            case ROLL_TYPE.ITEM:
-                Item.instance.SyncData(data.id);
-                break;
-            case ROLL_TYPE.PASSIVE:
-                selectedImg.sprite = GetSprite(data);
-                typeTxt.text = "Passive";
-                nameTxt.text = "패시브";
-                descTxt.text = "패시브";
-                break;
-        }
-        SetRollPnl(false);
     }
 
     public Sprite GetSprite(RollData data)
