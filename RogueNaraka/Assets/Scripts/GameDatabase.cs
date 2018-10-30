@@ -155,18 +155,20 @@ public struct UnitData
     public int id;
     public int cost;
     public int stage;
+    public int weaponId;
+    public int weaponLevel;
     public Stat stat;
     public RuntimeAnimatorController controller;
     public Color color;
-    public int weaponId;
-    public int weaponLevel;
     public bool isFriendly;
+    public bool isStanding;
     public MOVE_TYPE move;
     public float moveDelay;
     public float moveDistance;
     public float minDistance;
     public float maxDistance;
     public float moveSpeed;
+    public Vector2 shadowPos;
 }
 
 [Serializable]

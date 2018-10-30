@@ -14,6 +14,7 @@ public abstract class Unit : MonoBehaviour {
     ///인스펙터 캐싱
     public PolyNav.PolyNavAgent agent;
     public Animator animator;
+    public Shadow shadow;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rigid;
     public RevolveHolder revolveHolder;
@@ -123,6 +124,7 @@ public abstract class Unit : MonoBehaviour {
             _health = data.stat.hp;
             _mana = data.stat.mp;
         }
+        shadow.Init();
         SyncData();
     }
 
@@ -771,21 +773,33 @@ public abstract class Unit : MonoBehaviour {
         if (isDeath)
         {
             animator.SetBool("isDeath", true);
+            shadow.animator.SetBool("isDeath", true);
             return;
         }
         else
+        {
             animator.SetBool("isDeath", false);
+            shadow.animator.SetBool("isDeath", false);
+        }
         Vector2 velocity = agent.velocity;
         if (!isStun)
         {
             if (velocity.x != 0 || velocity.y != 0)
+            {
                 animator.SetBool("isWalk", true);
+                shadow.animator.SetBool("isWalk", true);
+            }
             else
+            {
                 animator.SetBool("isWalk", false);
+                shadow.animator.SetBool("isWalk", false);
+            }
             if (target)
             {
                 animator.SetFloat("x", targetPosition.x - transform.position.x);
                 animator.SetFloat("y", targetPosition.y - transform.position.y);
+                shadow.animator.SetFloat("x", targetPosition.x - transform.position.x);
+                shadow.animator.SetFloat("y", targetPosition.y - transform.position.y);
             }
         }
     }
@@ -847,5 +861,11 @@ public abstract class Unit : MonoBehaviour {
     public void Suicide()
     {
         GetDamage(_health);
+    }
+
+    [ContextMenu("InitShadow")]
+    private void InitShadow()
+    {
+        shadow.Init();
     }
 }

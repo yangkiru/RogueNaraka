@@ -187,12 +187,14 @@ public class RollManager : MonoBehaviour {
             case ROLL_TYPE.SKILL:
                 SkillData skill = GameDatabase.instance.skills[data.id];
                 SkillManager.instance.SetSkill(datas[selected].id, target);
+                SetRollPnl(false);
                 break;
             case ROLL_TYPE.STAT:
                 LevelUpManager.instance.SetStatPnl(true, data.id + 1);
                 break;
             case ROLL_TYPE.ITEM:
                 Item.instance.SyncData(data.id);
+                SetRollPnl(false);
                 break;
             case ROLL_TYPE.PASSIVE:
                 selectedImg.sprite = GetSprite(data);
@@ -201,7 +203,6 @@ public class RollManager : MonoBehaviour {
                 descTxt.text = "패시브";
                 break;
         }
-        SetRollPnl(false);
     }
 
     /// <summary>

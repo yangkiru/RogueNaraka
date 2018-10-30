@@ -29,7 +29,7 @@ public class LevelUpManager : MonoBehaviour {
         set { PlayerPrefs.SetInt("_leftStat", value); }
     }
 
-    public bool isStatChanged
+    public bool isLeftStatChanged
     {
         get { return leftStat != 0 && leftStat != _leftStat; }
     }
@@ -51,7 +51,7 @@ public class LevelUpManager : MonoBehaviour {
         SkillManager.instance.SetIsDragable(false);
         if (GameManager.instance.soulShopManager.shopStage == 1)
             GameManager.instance.soulShopManager.SetSoulShop(true);
-        if (isStatChanged)
+        if (isLeftStatChanged)
             SetStatPnl(true);
         else
         {
@@ -61,6 +61,8 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.Save();
     }
 
+    bool lastChance;
+
     public void SetStatPnl(bool value, int leftStat)
     {
         if(value)
@@ -68,6 +70,20 @@ public class LevelUpManager : MonoBehaviour {
             if (leftStat > 0)
                 this.leftStat = leftStat;
             leftStatTxt.text = leftStat + " Points";
+            statPnl.SetActive(value);
+        }
+        else
+        {
+            if(isLeftStatChanged)
+            {
+                if (lastChance)
+                {
+                    lastChance = false;
+                    return;
+                }
+                else
+                    StartCoroutine(EndLevelUp());
+            }
         }
         statPnl.SetActive(value);
     }
@@ -75,11 +91,13 @@ public class LevelUpManager : MonoBehaviour {
     public void SetStatPnl(bool value)
     {
         SetStatPnl(value, 0);
+        if (!value)
+            rollManager.SetRollPnl(false);
     }
 
     public void StatUp(int type)
     {
-
+        lastChance = true;
         if (player.AddStat((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");

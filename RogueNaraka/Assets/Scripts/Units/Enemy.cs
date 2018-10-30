@@ -48,14 +48,8 @@ public class Enemy : Unit {
     {
         base.OnDeath();
         MoneyManager.instance.AddCollectedSoul(data.cost);
-        //Debug.Log("cost:" + cost + " enemy dead");
+        //Debug.Log("cost:" + data.cost + " enemy dead");
         boardManager.enemyPool.EnqueueObjectPool(gameObject);
-    }
-
-    protected int MoneyFunction(int cost, float luck)
-    {
-        int money = UnityEngine.Random.Range(1, (int)((10 * cost) + luck));
-        return money;
     }
 
     protected virtual void MoveCheck()
