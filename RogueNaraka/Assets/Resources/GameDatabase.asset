@@ -911,13 +911,15 @@ MonoBehaviour:
     type: 0
     dmg: 1
     dealSpeed: 1
-    size: 0.75
+    size: 0.3
     angle: 0
     controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
       value: 0.3
+    - ability: 5
+      value: 1
     children: []
     onDestroy: []
     effects: []
@@ -926,13 +928,15 @@ MonoBehaviour:
     type: 0
     dmg: 1
     dealSpeed: 1
-    size: 0.75
+    size: 0.3
     angle: 0
     controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
       value: 0.3
+    - ability: 5
+      value: 1
     children: []
     onDestroy: []
     effects:

@@ -242,11 +242,12 @@ public enum BULLET_TYPE
 
 /// <summary>
 /// Bullet Ability
+/// 중력, 자전, 관통, 시간파괴, 유도, 주인 죽으면 파괴
 /// </summary>
 [Serializable]
 public enum ABILITY
 {
-    GRAVITY, SPIN, PIERCE, TIME, GUIDE
+    GRAVITY, SPIN, PIERCE, TIME, GUIDE, OWNER
 }
 
 [Serializable]

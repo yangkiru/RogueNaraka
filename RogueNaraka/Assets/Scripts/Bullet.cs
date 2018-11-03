@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour {
     private bool isSpin;
     private bool isMoving;
     private bool isSleep = false;
+    private bool isDestroyWithOwner;
 
     [SerializeField][ReadOnly]
     private BulletData data;
@@ -116,6 +117,7 @@ public class Bullet : MonoBehaviour {
         guideSpeed = 0;
         revolveHolder = null;
         owner = null;
+        isDestroyWithOwner = false;
     }
 
     public void SetFriendly(bool value)
@@ -250,6 +252,10 @@ public class Bullet : MonoBehaviour {
                     case ABILITY.GUIDE:
                         guideIncrease = data.abilities[i].value;
                         break;
+                    case ABILITY.OWNER:
+                        if(data.abilities[i].value > 0)
+                            isDestroyWithOwner = true;
+                        break;
                 }
             }
         }
@@ -354,7 +360,12 @@ public class Bullet : MonoBehaviour {
 
     private void Update()
     {
-        if (!isSleep)
+        if (isSleep)
+        {
+            if (isDestroyWithOwner && owner.isDeath)
+                Destroy();
+        }
+        else
         {
             if (transform.position.x > 50 || transform.position.x < -50 ||
                 transform.position.y > 50 || transform.position.y < -50)
