@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Fillable : MonoBehaviour
 {
+    public bool isPlayer;
     public Canvas canvas;
     public float current = 100;
     public float goal = 100;
@@ -20,16 +21,19 @@ public class Fillable : MonoBehaviour
 
     void Awake()
     {
-        Vector2 pos = gameObject.transform.position;  // get the game object position
-        Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);  //convert game object position to VievportPoint
+        if (!isPlayer)
+        {
+            Vector2 pos = gameObject.transform.position;  // get the game object position
+            Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);  //convert game object position to VievportPoint
 
-        // set MIN and MAX Anchor values(positions) to the same position (ViewportPoint)
-        rectTransform.anchorMin = viewportPoint;
-        rectTransform.anchorMax = viewportPoint;
+            // set MIN and MAX Anchor values(positions) to the same position (ViewportPoint)
+            rectTransform.anchorMin = viewportPoint;
+            rectTransform.anchorMax = viewportPoint;
+        }
     }
     void Update()
     {
-        if (unit)
+        if (!isPlayer && unit)
         {
             transform.parent.position = unit.transform.position + (Vector3)move;
         }
