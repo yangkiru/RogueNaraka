@@ -336,7 +336,7 @@ public class Bullet : MonoBehaviour {
         {
             for (int i = 0; i < effects.Length; i++)
             {
-                EffectData temp = effects[i].Clone();
+                EffectData temp = (EffectData)(effects[i].Clone());
                 switch (effects[i].type)
                 {
                     case EFFECT.KNOCKBACK:

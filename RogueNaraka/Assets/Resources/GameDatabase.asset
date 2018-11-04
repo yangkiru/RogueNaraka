@@ -1064,7 +1064,7 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
-      value: 0.5
+      value: 0.4
     - ability: 2
       value: 1000
     children: []
@@ -1082,12 +1082,34 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
-      value: 0.5
+      value: 0.4
     - ability: 2
       value: 1000
     children: []
     onDestroy: []
     effects: []
+  - name: Ice
+    id: 27
+    type: 5
+    dmg: 0
+    dealSpeed: 1
+    size: 0
+    angle: 0
+    shake: 0
+    controller: {fileID: 22100000, guid: 04290e155ba3f334da07ff9e0e3d3e10, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 5
+    - ability: 2
+      value: 1000
+    children: []
+    onDestroy: []
+    effects:
+    - type: 3
+      value: 1
+      time: 1
+      isInfinity: 0
   weapons:
   - name: MagicBall
     id: 0
@@ -1183,7 +1205,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: Repeat
-      value: 5
+      value: 10
     - name: Delay
       value: 0.25
     levelUp:
@@ -1192,29 +1214,39 @@ MonoBehaviour:
       effects: []
       values:
       - name: Repeat
-        value: 5
+        value: 10
       - name: Delay
-        value: -0.05
-    description: "\uBC88\uAC1C\uAC00 \uCE5C\uB2E4."
+        value: -0.5
+    description: 'Strike {0}Thunders.
+
+      Each Thunder has {1} deal.'
   - name: IceBreak
-    bulletIds: 
+    bulletIds: 1b000000
     unitIds: 
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
     id: 1
     level: 1
-    coolTime: 0
+    coolTime: 3
     coolTimeLeft: 0
-    manaCost: 0
-    size: 0
+    manaCost: 0.5
+    size: 1
     isCircleToPlayer: 0
     isDeath: 0
-    effects: []
-    values: []
+    effects:
+    - type: 3
+      value: 1
+      time: 1
+      isInfinity: 0
+    values:
+    - name: Time
+      value: 5
     levelUp:
-      manaCost: 0
+      manaCost: 0.25
       distance: 0
       effects: []
-      values: []
+      values:
+      - name: Time
+        value: 1
     description: 
   items:
   - name: HealPotion

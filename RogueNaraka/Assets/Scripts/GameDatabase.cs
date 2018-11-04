@@ -226,7 +226,7 @@ public struct ShakeData
 }
 
 [Serializable]
-public struct BulletData
+public struct BulletData : ICloneable
 {
     public string name;
     public int id;
@@ -242,6 +242,40 @@ public struct BulletData
     public BulletChild[] children;
     public BulletChild[] onDestroy;
     public EffectData[] effects;
+
+    public object Clone()
+    {
+        BulletData data = (BulletData)this.MemberwiseClone();
+        data.abilities = (Ability[])abilities.Clone();
+        data.children = (BulletChild[])children.Clone();
+        data.onDestroy = (BulletChild[])onDestroy.Clone();
+        data.effects = (EffectData[])effects.Clone();
+        return data;
+    }
+}
+
+[Serializable]
+public struct BulletChild
+{
+    public string name;
+    public int bulletId;
+    public int sortingOrder;
+    public float startTime;
+    public float waitTime;
+    public float angle;
+    public float localSpeed;
+    public float worldSpeed;
+    //부모를 기준으로 공전, RevolveHolder 사용x, 각자 회전
+    public float revolveDistance;
+    public float revolveSpeed;
+    //
+    public bool isRevolveTarget;//부모가 공전중인 타겟을 기준으로 공전, RevolveHolder 사용
+    public bool isRepeat;
+    public bool isFirst;//반복의 첫 번째는 startTime 무시
+    public bool isStick;
+    public bool isEndWith;
+
+    public Vector2 spawnPoint;
 }
 
 [Serializable]
@@ -268,30 +302,6 @@ public struct Ability
 }
 
 [Serializable]
-public struct BulletChild
-{
-    public string name;
-    public int bulletId;
-    public int sortingOrder;
-    public float startTime;
-    public float waitTime;
-    public float angle;
-    public float localSpeed;
-    public float worldSpeed;
-    //부모를 기준으로 공전, RevolveHolder 사용x, 각자 회전
-    public float revolveDistance;
-    public float revolveSpeed;
-    //
-    public bool isRevolveTarget;//부모가 공전중인 타겟을 기준으로 공전, RevolveHolder 사용
-    public bool isRepeat;
-    public bool isFirst;//반복의 첫 번째는 startTime 무시
-    public bool isStick;
-    public bool isEndWith;
-    
-    public Vector2 spawnPoint;
-}
-
-[Serializable]
 public struct ArmorData
 {
     public string name;
@@ -299,6 +309,10 @@ public struct ArmorData
     public float def;
     public Effect effect;
 }
+
+[Serializable]
+enum SKILL_ID
+{ THUNDER_STRIKE, ICE_BREAK }
 
 [Serializable]
 public struct SkillData:ICloneable
@@ -318,6 +332,7 @@ public struct SkillData:ICloneable
     public EffectData[] effects;
     public ValueData[] values;
     public SkillUpData levelUp;
+    [TextArea]
     public string description;
 
     public object Clone()
@@ -333,6 +348,27 @@ public struct SkillData:ICloneable
     public void Reset()
     {
         name = string.Empty; spr = null; id = -1; level = 1; coolTime = 0; coolTimeLeft = 0; manaCost = 0; effects = new EffectData[0]; values = new ValueData[0];
+    }
+
+    public string desc
+    {
+        get
+        {
+            {
+                SKILL_ID _id = (SKILL_ID)id;
+                if (id >= GameDatabase.instance.skills.Length)
+                    return string.Empty;
+                SkillData data = (SkillData)GameDatabase.instance.skills[id].Clone();
+                string des = data.description;
+                float tec = GameManager.GetStat(STAT.TEC);
+                switch (_id)
+                {
+                    case SKILL_ID.THUNDER_STRIKE:
+                        return string.Format(des, data.values[0].value, string.Format("{0:##0.##}({1:##0.##}TEC*0.1)", tec * 0.1f, tec));
+                }
+                return des;
+            }
+        }
     }
 }
 
@@ -362,7 +398,7 @@ public struct EffectSpriteData
 }
 
 [Serializable]
-public class EffectData
+public class EffectData:ICloneable
 {
     public EFFECT type;
     public float value;
@@ -378,9 +414,9 @@ public class EffectData
 
     public EffectData(EffectData ef) : this(ef.type, ef.value, ef.time, ef.isInfinity) { }
 
-    public EffectData Clone()
+    public object Clone()
     {
-        return new EffectData(this);
+        return this.MemberwiseClone();
     }
 }
 

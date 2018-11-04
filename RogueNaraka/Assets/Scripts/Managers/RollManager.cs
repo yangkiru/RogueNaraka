@@ -85,6 +85,24 @@ public class RollManager : MonoBehaviour {
         {
             datas = JsonHelper.FromJson<RollData>(datasJson);
             Debug.Log("RollDatas Loaded:" + datasJson);
+            for(int i = 0; i < datas.Length; i++)
+            {
+                switch(datas[i].type)
+                {
+                    case ROLL_TYPE.ITEM:
+                        if (datas[i].id > GameDatabase.instance.items.Length)
+                            return false;
+                        break;
+                    case ROLL_TYPE.SKILL:
+                        if (datas[i].id > GameDatabase.instance.skills.Length)
+                            return false;
+                        break;
+                    case ROLL_TYPE.STAT:
+                        break;
+                    case ROLL_TYPE.PASSIVE:
+                        break;
+                }
+            }
             return true;
         }
         return false;
@@ -139,7 +157,7 @@ public class RollManager : MonoBehaviour {
                     selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "Skill";
                     nameTxt.text = skill.name;
-                    descTxt.text = skill.description;
+                    descTxt.text = skill.desc;
                     break;
                 case ROLL_TYPE.STAT:
                     selectedImg.sprite = GetSprite(data);

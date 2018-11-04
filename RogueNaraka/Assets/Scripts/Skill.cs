@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler, 
+public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     IEndDragHandler
 {
 
@@ -72,7 +72,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
                 Debug.Log(name + " CoolTime! : " + data.coolTimeLeft);
         }
     }
-    
+
     public void UseMana()
     {
         player.UseMana(data.manaCost);
@@ -82,43 +82,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         return player.mana >= data.manaCost;
     }
-
-    public void UseSkill()
-    {
-        Vector3 mp = BoardManager.GetMousePosition();
-        float distance = Vector2.Distance(mp, player.transform.position);
-        Vector2 vec = mp - player.transform.position;
-        Vector2 pos = mp;
-
-        if (data.coolTime > 0)
-        {
-            data.coolTimeLeft = data.coolTime;
-            coolImg.enabled = true;
-            StartCoroutine(CoolTime());
-        }
-
-        UseMana();
-
-        if (distance > data.size)
-        {
-            distance = data.size;
-            pos = (Vector2)player.transform.position + vec.normalized * distance;
-        }
-        switch (data.id)
-        {
-            case (int)SKILL_ID.THUNDER_STRIKE:
-                StartCoroutine(ThunderStrike(mp));
-                break;
-            case 1://Bandage
-                Bandage(data.values[0].value);
-                break;
-        }
-
-        Debug.Log(data.name + " Skill Used!");
-    }
-
-    enum SKILL_ID
-    { THUNDER_STRIKE}
 
     public void Init()
     {
@@ -136,7 +99,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public void SyncData(SkillData dt)
     {
         data = dt;
-        
+
         img.sprite = data.spr;
         coolImg.sprite = data.spr;
 
@@ -167,16 +130,16 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         data.level += amount;
         levelTxt.text = data.level.ToString();
-        for(int i = 0; i < amount; i++)
+        for (int i = 0; i < amount; i++)
         {
             data.manaCost += data.levelUp.manaCost;
             data.size += data.levelUp.distance;
-            for(int j = 0; j < data.levelUp.values.Length; j++)
+            for (int j = 0; j < data.levelUp.values.Length; j++)
             {
                 bool isFind = false;
-                for(int k = 0; k < data.values.Length;k++)
+                for (int k = 0; k < data.values.Length; k++)
                 {
-                    if(data.values[k].name.CompareTo(data.levelUp.values[j].name) == 0)
+                    if (data.values[k].name.CompareTo(data.levelUp.values[j].name) == 0)
                     {
                         isFind = true;
                         data.values[k].value += data.levelUp.values[j].value;
@@ -194,31 +157,31 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         SyncCoolImg();
     }
 
-    public void AddEffect(EffectData[] def, EffectData[] ef)
+    public void AddEffect(EffectData[] def, EffectData[] lef)
     {
-        for (int i = 0; i < ef.Length; i++)
+        for (int i = 0; i < lef.Length; i++)
         {
             bool isFound = false;
             for (int j = 0; j < def.Length; j++)
             {
-                if (ef[i].type == def[j].type)
+                if (lef[i].type == def[j].type)
                 {
                     isFound = true;
-                    def[j].value += ef[i].value;
-                    def[j].time += ef[i].time;
-                    def[j].isInfinity = ef[i].isInfinity;
+                    def[j].value += lef[i].value;
+                    def[j].time += lef[i].time;
+                    def[j].isInfinity = lef[i].isInfinity;
                 }
                 if (!isFound)
                 {
-                    def = new EffectData[def.Length + 1];
-                    def[def.Length - 1] = ef[i];
+                    System.Array.Resize<EffectData>(ref data.effects, data.effects.Length + 1);
+                    def[def.Length - 1] = (EffectData)(lef[i].Clone());
                 }
             }
         }
     }
 
     private void SyncCoolImg()
-    { 
+    {
         if (data.coolTimeLeft > 0)
         {
             if (!coolImg.enabled)
@@ -255,8 +218,40 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         SyncCoolText();
     }
 
-    float originSpeed = 0;
-    
+    public void UseSkill()
+    {
+        Vector3 mp = BoardManager.GetMousePosition();
+        float distance = Vector2.Distance(mp, player.transform.position);
+        Vector2 vec = mp - player.transform.position;
+        Vector2 pos = mp;
+
+        if (data.coolTime > 0)
+        {
+            data.coolTimeLeft = data.coolTime;
+            coolImg.enabled = true;
+            StartCoroutine(CoolTime());
+        }
+
+        UseMana();
+
+        if (distance > data.size)
+        {
+            distance = data.size;
+            pos = (Vector2)player.transform.position + vec.normalized * distance;
+        }
+        switch (data.id)
+        {
+            case (int)SKILL_ID.THUNDER_STRIKE:
+                StartCoroutine(ThunderStrike(mp));
+                break;
+            case (int)SKILL_ID.ICE_BREAK:
+                IceBreak(mp);
+                break;
+        }
+
+        Debug.Log(data.name + " Skill Used!");
+    }
+
     IEnumerator ThunderStrike(Vector3 mp)
     {
         for (int i = 0; i < data.values[0].value; i++)
@@ -265,39 +260,23 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             int rndDirection = Random.Range(0, 2);
             thunder.Init(data.bulletIds[rndDirection], player.data.stat.tec, true);
+            float rndAngle = Random.Range(0, 360);
+            thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
             thunder.Attack((Vector2)mp + rnd, Vector2.zero, Vector2.zero, 0, 0, null, player);
             float delay = data.values[1].value > 0 ? data.values[1].value : 0;
-            
+
             yield return new WaitForSeconds(delay);
         }
     }
 
-    public void Roll(Vector3 mp)
+    void IceBreak(Vector3 mp)
     {
-        Debug.Log("Roll!");
-        Player player = Player.instance;
-        originSpeed = player.GetOriginSpeed();
-        player.attackable = false;
-        player.SetSpeed(originSpeed * 2);
-        player.isAutoMove = false;
-        player.Move(mp);
-        player.agent.OnDestinationInvalid += EndRoll;
-        player.agent.OnDestinationReached += EndRoll;
-    }
-
-    public void EndRoll()
-    {
-        Debug.Log("End Roll!");
-        Player player = Player.instance;
-        player.attackable = true;
-        player.SetSpeed(originSpeed);
-        player.isAutoMove = true;
-        player.agent.OnDestinationInvalid -= EndRoll;
-        player.agent.OnDestinationReached -= EndRoll;
-    }
-
-    public void Bandage(float amount)
-    {
-        Player.instance.HealHealth(amount);
+        Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
+        newData.abilities[0].value = data.values[0].value;
+        newData.effects[0].value = data.effects[0].value;
+        newData.effects[0].time = data.effects[0].time;
+        ice.Init(newData, player.data.stat.tec, true);
+        ice.Attack((Vector2)mp, Vector2.zero, Vector2.zero, 0, 0, null, player);
     }
 }

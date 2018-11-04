@@ -9818,7 +9818,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LUCK
+  m_Text: TEC
 --- !u!222 &820827641
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11607,6 +11607,7 @@ MonoBehaviour:
   - {fileID: 1686397862}
   - {fileID: 710444246}
   - {fileID: 633652486}
+  _shopStage: 0
 --- !u!1 &990179672
 GameObject:
   m_ObjectHideFlags: 0
@@ -19711,7 +19712,7 @@ GameObject:
   - component: {fileID: 1689080460}
   - component: {fileID: 1689080461}
   m_Layer: 5
-  m_Name: MaxLuckUpgradePnl
+  m_Name: MaxTecUpgradePnl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

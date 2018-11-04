@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour {
         EffectData[] effectDatas = new EffectData[player.effects.Count];
         for (int i = 0; i < effectDatas.Length; i++)
         {
-            effectDatas[i] = player.effects[i].data.Clone();
+            effectDatas[i] = (EffectData)(player.effects[i].data.Clone());
         }
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
@@ -247,7 +247,7 @@ public class GameManager : MonoBehaviour {
             EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
             for (int i = 0; i < temp.Length; i++)
             {
-                player.AddEffect(temp[i].Clone());
+                player.AddEffect((EffectData)temp[i].Clone());
             }
         }
     }
