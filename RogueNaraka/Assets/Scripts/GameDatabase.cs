@@ -27,6 +27,9 @@ public class GameDatabase : ScriptableObject
     public static int friendlyLayer = 8;
     public static int enemyLayer = 9;
     public static int wallLayer = 10;
+    public static int botLayer;
+    public static int midLayer;
+    public static int topLayer;
     public UnitData playerBase;
     public UnitData[] enemies;
     public UnitData[] bosses;
@@ -43,6 +46,15 @@ public class GameDatabase : ScriptableObject
     public ItemData[] items;
     public ItemSpriteData[] itemSprites;
     public EffectSpriteData[] effects;
+
+    void OnEnable()
+    {
+        botLayer = SortingLayer.NameToID("Bot");
+        midLayer = SortingLayer.NameToID("Mid");
+        topLayer = SortingLayer.NameToID("Top");
+        BulletIdToData();
+        UnitCostSync();
+    }
 
     [ContextMenu("BulletIdToData")]
     public void BulletIdToData()
@@ -225,12 +237,18 @@ public struct ShakeData
     float speed;
 }
 
+public enum SORTING_LAYER
+{
+    TOP, MID, BOT
+}
+
 [Serializable]
 public struct BulletData : ICloneable
 {
     public string name;
     public int id;
     public BULLET_TYPE type;
+    public SORTING_LAYER sortingLayer;
     public float dmg;
     public float dealSpeed;
     public float size;
@@ -247,15 +265,23 @@ public struct BulletData : ICloneable
     {
         BulletData data = (BulletData)this.MemberwiseClone();
         data.abilities = (Ability[])abilities.Clone();
+        for (int i = 0; i < data.abilities.Length; i++)
+            data.abilities[i] = (Ability)data.abilities[i].Clone();
         data.children = (BulletChild[])children.Clone();
+        for (int i = 0; i < data.children.Length; i++)
+            data.children[i] = (BulletChild)data.children[i].Clone();
         data.onDestroy = (BulletChild[])onDestroy.Clone();
+        for (int i = 0; i < data.onDestroy.Length; i++)
+            data.onDestroy[i] = (BulletChild)data.onDestroy[i].Clone();
         data.effects = (EffectData[])effects.Clone();
+        for (int i = 0; i < data.effects.Length; i++)
+            data.effects[i] = (EffectData)data.effects[i].Clone();
         return data;
     }
 }
 
 [Serializable]
-public struct BulletChild
+public struct BulletChild : ICloneable
 {
     public string name;
     public int bulletId;
@@ -276,6 +302,11 @@ public struct BulletChild
     public bool isEndWith;
 
     public Vector2 spawnPoint;
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }
 
 [Serializable]
@@ -295,10 +326,15 @@ public enum ABILITY
 }
 
 [Serializable]
-public struct Ability
+public struct Ability : ICloneable
 {
     public ABILITY ability;
     public float value;
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }
 
 [Serializable]

@@ -89,6 +89,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         img.sprite = null;
         img.color = Color.clear;
         coolImg.sprite = null;
+        coolImg.color = Color.clear;
         coolImg.enabled = false;
         coolTimeTxt.text = string.Empty;
         levelTxt.enabled = false;
@@ -186,6 +187,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             if (!coolImg.enabled)
             {
+                coolImg.color = new Color(coolImg.color.r, coolImg.color.g, coolImg.color.b, 1);
                 coolImg.enabled = true;
                 coolImg.type = Image.Type.Filled;
                 coolImg.fillOrigin = 2;
@@ -199,7 +201,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     private void SyncCoolText()
     {
-        coolTimeTxt.text = data.coolTimeLeft.ToString("N1") + "/" + data.coolTime.ToString("N1");
+        coolTimeTxt.text = data.coolTimeLeft.ToString("##0.00") + "/" + data.coolTime.ToString("##0.##");
         if (!coolTimeTxt.enabled)
             coolTimeTxt.enabled = true;
     }
@@ -228,7 +230,6 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         if (data.coolTime > 0)
         {
             data.coolTimeLeft = data.coolTime;
-            coolImg.enabled = true;
             StartCoroutine(CoolTime());
         }
 
@@ -259,7 +260,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
             Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             int rndDirection = Random.Range(0, 2);
-            thunder.Init(data.bulletIds[rndDirection], player.data.stat.tec, true);
+            thunder.Init(data.bulletIds[rndDirection], GameManager.GetStat(STAT.TEC), true);
             float rndAngle = Random.Range(0, 360);
             thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
             thunder.Attack((Vector2)mp + rnd, Vector2.zero, Vector2.zero, 0, 0, null, player);
@@ -273,10 +274,9 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
         BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
-        newData.abilities[0].value = data.values[0].value;
-        newData.effects[0].value = data.effects[0].value;
-        newData.effects[0].time = data.effects[0].time;
-        ice.Init(newData, player.data.stat.tec, true);
+        newData.abilities[0].value += data.values[0].value;
+        newData.effects[0].value += data.effects[0].value;
+        ice.Init(newData, 0, true);
         ice.Attack((Vector2)mp, Vector2.zero, Vector2.zero, 0, 0, null, player);
     }
 }

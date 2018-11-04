@@ -39,6 +39,10 @@ public abstract class Unit : MonoBehaviour {
     protected float _mana;
     [SerializeField]
     protected float poison;
+    [SerializeField]
+    protected float slow;
+    [SerializeField]
+    protected float ice;
 
     protected bool isWin;
     protected bool isAttackCool = false;
@@ -432,7 +436,8 @@ public abstract class Unit : MonoBehaviour {
         while (t > 0)
         {
             yield return null;
-            t -= Time.deltaTime;
+            float _ice = ice * 0.1f * KnowledgeData.GetNegative(knowledge.ice);
+            t -= Time.deltaTime * (1 - _ice);
         }
         Bullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
         if (!bullet)
@@ -460,8 +465,9 @@ public abstract class Unit : MonoBehaviour {
                 while (t > 0)
                 {
                     yield return null;
-                    if(t < 1000)
-                        t -= Time.deltaTime;
+                    float _ice = ice * 0.1f * KnowledgeData.GetNegative(knowledge.ice);
+                    if (t < 1000)
+                        t -= Time.deltaTime * (1 - _ice);
                     if (isDeath)
                         break;
                 }
@@ -487,7 +493,7 @@ public abstract class Unit : MonoBehaviour {
         //else Debug.Log("additional:" + additional);
         float sum = damage + additional;
         _health -= sum;
-        if (isTxtOnHead)
+        if (isTxtOnHead && damage != 0)
             PointTxtManager.instance.TxtOnHead(-sum, transform, Color.white);
         return sum;
     }
@@ -544,6 +550,17 @@ public abstract class Unit : MonoBehaviour {
         get { return new KnowledgeData(data.knowledge, 1); }
     }
 
+    protected IEnumerator SlowFunc(Effect slow)
+    {
+        this.slow += slow.data.value;
+        while (slow.data.time  > 0)
+        {
+            slow.data.time -= Time.deltaTime * KnowledgeData.GetAdditional(knowledge.slow) * 0.5f;
+            yield return null;
+        }
+        this.slow -= slow.data.value;
+    }
+
     protected IEnumerator PoisonFunc(Effect poison)
     {
         this.poison += poison.data.value;
@@ -553,6 +570,18 @@ public abstract class Unit : MonoBehaviour {
             yield return null;
         }
         this.poison -= poison.data.value;
+    }
+
+    protected IEnumerator IceFunc(Effect ice)
+    {
+        float time = 0;
+        this.ice += ice.data.value;
+        while (ice.data.time > 0)
+        {
+            ice.data.time -= Time.deltaTime * KnowledgeData.GetAdditional(knowledge.ice);
+            yield return null;
+        }
+        this.ice -= ice.data.value;
     }
 
     /// <summary>
@@ -571,7 +600,7 @@ public abstract class Unit : MonoBehaviour {
                 time += Time.deltaTime;
             }
             time = 0;
-            GetDamage(fire.data.value);
+            GetDamage(Mathf.Max(fire.data.value - ice, 0));
             yield return null;
         }
     }
@@ -630,6 +659,12 @@ public abstract class Unit : MonoBehaviour {
                 break;
             case EFFECT.STUN:
                 StartCoroutine(StunFunc(effect));
+                break;
+            case EFFECT.ICE:
+                StartCoroutine(IceFunc(effect));
+                break;
+            case EFFECT.SLOW:
+                StartCoroutine(SlowFunc(effect));
                 break;
         }
         return effect;
@@ -750,7 +785,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void SyncAttackCool()
     {
-        attackCoolTime = (weapon.beforeAttackDelay + weapon.afterAttackDelay) * (1 - (_data.stat.spd - 1) * 0.05f);//총 10%씩 증가
+        attackCoolTime = (weapon.beforeAttackDelay + weapon.afterAttackDelay) * (1 - ((_data.stat.spd - 1) * 0.05f));//총 10%씩 증가
     }
 
     public void SetSpeed(float value)
@@ -770,7 +805,9 @@ public abstract class Unit : MonoBehaviour {
 
     public void SyncSpeed()
     {
-        SetSpeed(data.moveSpeed * (1 + ((_data.stat.spd - 1) * 0.1f)));
+        float _slow = slow * 0.1f * KnowledgeData.GetNegative(knowledge.slow);
+        float _ice = ice * 0.1f * KnowledgeData.GetNegative(knowledge.ice);
+        SetSpeed(data.moveSpeed * (1 + ((_data.stat.spd - 1))) * Mathf.Max(0,(1 - _slow - _ice)));//slow마다 10%, ice마다 10% 속도 느려짐
     }
 
     protected IEnumerator Regen()

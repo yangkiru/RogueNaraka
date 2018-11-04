@@ -120,6 +120,18 @@ public class Bullet : MonoBehaviour {
         isDestroyWithOwner = false;
         coll.enabled = false;
         colliderRenderer.enabled = false;
+        switch(dt.sortingLayer)
+        {
+            case SORTING_LAYER.BOT:
+                renderer.sortingLayerID = GameDatabase.botLayer;
+                break;
+            case SORTING_LAYER.MID:
+                renderer.sortingLayerID = GameDatabase.midLayer;
+                break;
+            case SORTING_LAYER.TOP:
+                renderer.sortingLayerID = GameDatabase.topLayer;
+                break;
+        }
     }
 
     public void SetFriendly(bool value)

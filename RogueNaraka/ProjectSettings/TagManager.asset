@@ -45,11 +45,14 @@ TagManager:
   - name: Wall
     uniqueID: 4171345299
     locked: 0
-  - name: Unit
+  - name: Bot
+    uniqueID: 1655044563
+    locked: 0
+  - name: Mid
     uniqueID: 1498647319
     locked: 0
-  - name: Bullet
-    uniqueID: 3290537003
+  - name: Top
+    uniqueID: 329776949
     locked: 0
   - name: Bar
     uniqueID: 3373513963

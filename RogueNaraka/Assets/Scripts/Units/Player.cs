@@ -35,6 +35,7 @@ public class Player : Unit
             CheckDeath();
             if (!isDeath)
             {
+                SyncData();
                 if (!SetTarget() && !isWin)
                     MoveToGoal();
                 else

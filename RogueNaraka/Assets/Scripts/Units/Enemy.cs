@@ -194,6 +194,7 @@ public class Enemy : Unit {
     {
         if (!isPause)
         {
+            SyncData();
             CheckDeath();
             if (!isDeath)
             {
