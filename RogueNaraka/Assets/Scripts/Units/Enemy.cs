@@ -9,15 +9,15 @@ public class Enemy : Unit {
     protected override void OnEnable()
     {
         base.OnEnable();
-        agent.OnDestinationReached += Move;
-        agent.OnDestinationInvalid += Move;
-        Move();
+        agent.OnDestinationReached += OnMoveEnd;
+        agent.OnDestinationInvalid += OnMoveEnd;
+        StartCoroutine(MoveCorou());
     }
 
     protected virtual void OnDisable()
     {
-        agent.OnDestinationInvalid -= Move;
-        agent.OnDestinationReached -= Move;
+        agent.OnDestinationInvalid -= OnMoveEnd;
+        agent.OnDestinationReached -= OnMoveEnd;
     }
 
     public override bool SetTarget()
@@ -54,116 +54,140 @@ public class Enemy : Unit {
 
     protected virtual void MoveCheck()
     {
-        if (!target)
+        if(!isDeath)
         {
-            agent.ResetVelocity();
-            Move();
-        }
-        else if(!isDeath)
-        {
-            Vector2 v;
-            float d;
             switch (data.move)
             {
+                case MOVE_TYPE.REST_RUSH://맞으면 이동
+                    if(target && health < data.stat.hp)
+                    {
+                        Vector2 v = targetPosition - (Vector2)transform.position;
+                        attackable = true;
+                        float d = data.moveDistance;
+                        float vM = v.magnitude;
+                        if (d > vM)
+                            d = vM;
+                        Move((Vector2)transform.position + v.normalized * d);
+                    }
+                    break;
                 case MOVE_TYPE.RUSH:
                     //Debug.Log("RUSH");
-                    v = targetPosition - (Vector2)transform.position;
-                    attackable = true;
-                    d = data.moveDistance;
-                    float vM = v.magnitude;
-                    if (d > vM)
-                        d = vM;
-                    Move((Vector2)transform.position + v.normalized * d);
+                    if (target)
+                    {
+                        Vector2 v = targetPosition - (Vector2)transform.position;
+                        attackable = true;
+                        float d = data.moveDistance;
+                        float vM = v.magnitude;
+                        if (d > vM)
+                            d = vM;
+                        Move((Vector2)transform.position + v.normalized * d);
+                    }
                     break;
                 case MOVE_TYPE.STATUE:
                     //Debug.Log("STATUE");
                     break;
                 case MOVE_TYPE.DISTANCE:
                     //Debug.Log("DISTANCE");
-                    v = (targetPosition - (Vector2)transform.position);
-                    float vAngle = Vector2.Angle(Vector2.up, v);
-                    if (v.x < 0)
-                        vAngle = 360 - vAngle;
-                    //Debug.Log("vAngle" + vAngle);
-                    float distance = data.moveDistance;
-                    if (targetDistance < data.minDistance)//move back
+                    if (target)
                     {
-                        //Debug.Log("back");
-                        float angle = vAngle - 180;
-                        if (angle < 0)
-                            angle += 360;
-                        angle += (UnityEngine.Random.Range(-90, 91));
-                        if (angle < 0)
-                            angle += 360;
-                        else if (angle > 360)
-                            angle -= 360;
-
-                        angle = 450 - angle;
-
-                        v = MathHelpers.DegreeToVector2(angle);
-                    }
-                    else if (targetDistance < data.maxDistance)//inside
-                    {
-                        //Debug.Log("Inside");
-                        if (UnityEngine.Random.Range(0, 2) == 0)//move left
+                        Vector2 v = (targetPosition - (Vector2)transform.position);
+                        float vAngle = Vector2.Angle(Vector2.up, v);
+                        if (v.x < 0)
+                            vAngle = 360 - vAngle;
+                        //Debug.Log("vAngle" + vAngle);
+                        float distance = data.moveDistance;
+                        if (targetDistance < data.minDistance)//move back
                         {
-                            float angle = vAngle - 90;
+                            //Debug.Log("back");
+                            float angle = vAngle - 180;
                             if (angle < 0)
                                 angle += 360;
-                            //Debug.Log("vAngle : " + vAngle + "left : " + angle);
-                            angle = 450 - angle;
-                            v = MathHelpers.DegreeToVector2(angle);
-                        }
-                        else//move right
-                        {
-                            float angle = vAngle + 90;
-                            if (angle > 360)
+                            angle += (UnityEngine.Random.Range(-90, 91));
+                            if (angle < 0)
+                                angle += 360;
+                            else if (angle > 360)
                                 angle -= 360;
-                            //Debug.Log("vAngle : " + vAngle + "right : " + angle);
+
                             angle = 450 - angle;
+
                             v = MathHelpers.DegreeToVector2(angle);
                         }
-                    }
-                    else //move forward
-                    {
-                        d = targetDistance - distance;//이동 후 타겟과의 거리
-                        if (data.minDistance > d)
+                        else if (targetDistance < data.maxDistance)//inside
                         {
-                            distance = distance - data.minDistance + d;//이동 후 거리가 최소 거리를 넘지 않게
+                            //Debug.Log("Inside");
+                            if (UnityEngine.Random.Range(0, 2) == 0)//move left
+                            {
+                                float angle = vAngle - 90;
+                                if (angle < 0)
+                                    angle += 360;
+                                //Debug.Log("vAngle : " + vAngle + "left : " + angle);
+                                angle = 450 - angle;
+                                v = MathHelpers.DegreeToVector2(angle);
+                            }
+                            else//move right
+                            {
+                                float angle = vAngle + 90;
+                                if (angle > 360)
+                                    angle -= 360;
+                                //Debug.Log("vAngle : " + vAngle + "right : " + angle);
+                                angle = 450 - angle;
+                                v = MathHelpers.DegreeToVector2(angle);
+                            }
                         }
+                        else //move forward
+                        {
+                            float d = targetDistance - distance;//이동 후 타겟과의 거리
+                            if (data.minDistance > d)
+                            {
+                                distance = distance - data.minDistance + d;//이동 후 거리가 최소 거리를 넘지 않게
+                            }
+                        }
+                        //Debug.Log(moveVector.ToString());
+                        Move((Vector2)transform.position + v.normalized * distance);
                     }
-                    //Debug.Log(moveVector.ToString());
-                    Move((Vector2)transform.position + v.normalized * distance);
                     break;
                 case MOVE_TYPE.RUN:
                     //Debug.Log("RUN");
-                    Vector2 vec = -(targetPosition - (Vector2)transform.position);
-                    RaycastHit2D hitt = Physics2D.Raycast(transform.position, vec, data.moveDistance, GameDatabase.instance.wallMask);
-                    if (hitt)
+                    if (target)
                     {
-                        if (targetDistance < data.moveDistance)
+                        Vector2 v = -(targetPosition - (Vector2)transform.position);
+                        RaycastHit2D hitt = Physics2D.Raycast(transform.position, v, data.moveDistance, GameDatabase.instance.wallMask);
+                        if (hitt)
                         {
-                            Vector2 mid = new Vector2((boardManager.boardRange[0].x + boardManager.boardRange[1].x) / 2,
-                                (boardManager.boardRange[0].y + boardManager.boardRange[1].y) / 2);
-                            vec = mid - (Vector2)transform.position;
+                            if (targetDistance < data.moveDistance)
+                            {
+                                Vector2 mid = new Vector2((boardManager.boardRange[0].x + boardManager.boardRange[1].x) / 2,
+                                    (boardManager.boardRange[0].y + boardManager.boardRange[1].y) / 2);
+                                v = mid - (Vector2)transform.position;
+                            }
                         }
+                        Move((Vector2)transform.position + v.normalized * data.moveDistance);
                     }
-                    Move((Vector2)transform.position + vec.normalized * data.moveDistance);
                     break;
+
             }
         }
     }
-
-
-    protected void Move()
+    bool isMoveEnd;
+    bool isReadyToMove;
+    void OnMoveEnd()
     {
-        StartCoroutine(MoveCoolTime(data.moveDelay));
+        isMoveEnd = true;
     }
 
-    private IEnumerator MoveCoolTime(float time)
+    IEnumerator MoveCorou()
     {
-        yield return new WaitForSeconds(time);
-        MoveCheck();
+        while(true)
+        {
+            if(isMoveEnd)
+            {
+                yield return new WaitForSeconds(data.moveDelay);
+                isMoveEnd = false;
+            }
+            if(!isStun)
+                MoveCheck();
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     protected virtual void Update()

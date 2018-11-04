@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 212126601148893928}
   - component: {fileID: 114562081209512456}
   - component: {fileID: 95299430325908386}
+  - component: {fileID: 60478443021069952}
+  - component: {fileID: 114770297540155058}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -42,6 +44,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &60478443021069952
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040694008069246}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 1}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -0.5877852, y: -0.80901706}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 0.9510565, y: 0.30901712}
 --- !u!95 &95299430325908386
 Animator:
   serializedVersion: 3
@@ -73,6 +104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 95299430325908386}
   renderer: {fileID: 212126601148893928}
+  colliderRenderer: {fileID: 114770297540155058}
+  coll: {fileID: 60478443021069952}
   layerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -94,6 +127,39 @@ MonoBehaviour:
     onDestroy: []
     effects: []
   destroyChildren: []
+--- !u!114 &114770297540155058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040694008069246}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c55c83d4c4dd1145ad5fbbab3c3df36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlphaTolerance: 30
+  DistanceThreshold: 1
+  Scale: 1
+  Decompose: 0
+  RunInPlayMode: 1
+  UseCache: 0
+  lastAlphaTolerance: 0
+  lastScale: 0
+  lastDistanceThreshold: 0
+  lastDecompose: 0
+  lastSprite: {fileID: 0}
+  lastRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  lastOffset: {x: -99999, y: -99999}
+  lastPixelsPerUnit: 0
+  lastFlipX: 0
+  lastFlipY: 0
+  editorCache: []
 --- !u!212 &212126601148893928
 SpriteRenderer:
   m_ObjectHideFlags: 1

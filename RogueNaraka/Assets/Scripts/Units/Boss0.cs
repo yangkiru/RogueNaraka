@@ -15,7 +15,6 @@ public class Boss0 : Enemy {
 
     protected override void OnEnable()
     {
-        base.OnEnable();
         StartCoroutine(WakeUp());
     }
 
@@ -23,7 +22,7 @@ public class Boss0 : Enemy {
     {
         yield return new WaitForSeconds(3);
         isWakeUp = true;
-        Move();
+        base.OnEnable();
     }
 
     protected override void OnDeath()
@@ -76,7 +75,6 @@ public class Boss0 : Enemy {
     {
         base.OnStunEnd();
         Debug.Log("OnStunEnd");
-        Move();
     }
 
     private void OnDrawGizmosSelected()

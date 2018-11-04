@@ -118,6 +118,11 @@ public class SkillManager : MonoBehaviour {
 
     public Sprite GetSprite(int id)
     {
+        if (id >= GameDatabase.instance.skills.Length)
+        {
+            Debug.LogError("SaveData Not Matching With DataBase:Skill" + id);
+            return null;
+        }
         return GameDatabase.instance.skills[id].spr;
     }
 
@@ -414,8 +419,9 @@ public class SkillManager : MonoBehaviour {
                 skills[i].Init();
             else
             {
-                datas[i].spr = GetSprite(datas[i].id);
-                skills[i].SyncData(datas[i]);
+                SkillData database = GameDatabase.instance.skills[datas[i].id];
+                skills[i].SyncData(database);
+                skills[i].LevelUp(datas[i].level - 1);
             }
         }
         //Debug.Log("Load Skills : " + str);

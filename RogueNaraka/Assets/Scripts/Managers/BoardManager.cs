@@ -9,6 +9,7 @@ public class BoardManager : MonoBehaviour {
     public GameObject enemyPrefab;
     public GameObject bulletPrefab;
     public GameObject[] bossPrefabs;
+    public GameObject effectPrefab;
     public List<Enemy> enemies = new List<Enemy>();
     public Player player;
     public Vector2 spawnPoint;//player spawn
@@ -16,7 +17,8 @@ public class BoardManager : MonoBehaviour {
     public Vector2 bossPoint;
     public Vector2[] boardRange;//0:min, 1:max
     public ObjectPool enemyPool;//basic 100 counts
-    public ObjectPool bulletPool;//basic 200 counts
+    public ObjectPool bulletPool;//basic 500 counts
+    public ObjectPool effectPool;//basic 200 counts
     [ReadOnly]
     public Enemy boss;
 
@@ -58,13 +60,19 @@ public class BoardManager : MonoBehaviour {
 
     public GameObject SpawnEnemyObj()
     {
-        GameObject obj = Instantiate(enemyPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0), enemyPool.transform);
+        GameObject obj = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity, enemyPool.transform);
         return obj;
     }
 
     public GameObject SpawnBulletObj()
     {
-        GameObject obj = Instantiate(bulletPrefab, Vector3.zero, new Quaternion(0, 0, 0, 0), bulletPool.transform);
+        GameObject obj = Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity, bulletPool.transform);
+        return obj;
+    }
+
+    public GameObject SpawnEffectObj()
+    {
+        GameObject obj = Instantiate(effectPrefab, Vector3.zero, Quaternion.identity, effectPool.transform);
         return obj;
     }
 
@@ -81,12 +89,21 @@ public class BoardManager : MonoBehaviour {
             }
         }
         count = bulletPool.GetCount();
-        if (count < 200)//bullet Pooling
+        if (count < 500)//bullet Pooling
         {
-            for (int i = count; i < 200; i++)
+            for (int i = count; i < 500; i++)
             {
                 GameObject obj = SpawnBulletObj();
                 bulletPool.EnqueueObjectPool(obj);
+            }
+        }
+        count = effectPool.GetCount();
+        if (count < 200)//effect Pooling
+        {
+            for (int i = count; i < 200; i++)
+            {
+                GameObject obj = SpawnEffectObj();
+                effectPool.EnqueueObjectPool(obj);
             }
         }
 
@@ -119,6 +136,13 @@ public class BoardManager : MonoBehaviour {
         InitBoard();
     }
 
+    //void RandomEnemy(int leftCost)
+    //{
+    //    List<UnitData> list = new List<UnitData>();
+    //    int max = GameDatabase.instance.unitCosts[Unitcost]
+    //    int cost = Random.Range(1, leftCost)
+    //}
+
     private void InitStage(int stage)
     {
         isReady = false;
@@ -127,7 +151,6 @@ public class BoardManager : MonoBehaviour {
             GameObject obj = bulletPool.transform.GetChild(i).gameObject;
             if (obj.activeSelf)
             {
-                obj.GetComponent<Bullet>().RevolveFunction();
                 bulletPool.EnqueueObjectPool(obj);
             }
         }

@@ -15,10 +15,11 @@ public abstract class Unit : MonoBehaviour {
     public PolyNav.PolyNavAgent agent;
     public Animator animator;
     public Shadow shadow;
+    public ParticleSystem particle;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rigid;
     public RevolveHolder revolveHolder;
-
+    public Transform effectHolder;
     public List<Effect> effects
     { get { return _effects; } }
     protected List<Effect> _effects = new List<Effect>();
@@ -28,6 +29,7 @@ public abstract class Unit : MonoBehaviour {
     public UnitData data
     { get { return _data; } }
 
+    [SerializeField]
     protected float attackDistance;
 
     public float health
@@ -82,11 +84,6 @@ public abstract class Unit : MonoBehaviour {
     [SerializeField]
     protected float _targetDistance = 1000;
     protected float attackCoolTime;
-
-    /// <summary>
-    /// 텍스트가 안 겹치게 하는 홀더
-    /// </summary>
-    protected TxtHolder txtHolder = new TxtHolder();
 
     protected UnityEngine.UI.Text[] texts = new UnityEngine.UI.Text[5];
 
@@ -490,9 +487,13 @@ public abstract class Unit : MonoBehaviour {
         }
     }
 
+    //Animator로 전달 할 값들
+    protected bool isBeforeAttack;
+    protected bool isAfterAttack;
     protected IEnumerator BeforeAttackCool()
     {
         float t = weapon.beforeAttackDelay;
+        isBeforeAttack = true;
         while (t > 0)
         {
             yield return null;
@@ -502,7 +503,6 @@ public abstract class Unit : MonoBehaviour {
         if (!bullet)
             bullet = boardManager.SpawnBulletObj().GetComponent<Bullet>();
         bullet.Init(_weapon.startBulletId[_weapon.level], _data.stat.dmg, _data.isFriendly);
-        bullet.gameObject.SetActive(true);
         Vector2 vec = (targetPosition - (Vector2)transform.position).normalized;
         RevolveHolder holder = null;
         if (weapon.type == ATTACK_TYPE.REVOLVE)
@@ -511,6 +511,8 @@ public abstract class Unit : MonoBehaviour {
             attackCoolTime = 1000;
         }
         bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
+        isBeforeAttack = false;
+        isAfterAttack = true;
     }
 
     protected virtual IEnumerator AttackCool()
@@ -529,6 +531,7 @@ public abstract class Unit : MonoBehaviour {
                         break;
                 }
                 isAttackCool = false;
+                isAfterAttack = false;
             }
             yield return null;
         }
@@ -550,7 +553,7 @@ public abstract class Unit : MonoBehaviour {
         float sum = damage + additional;
         _health -= sum;
         if (isTxtOnHead)
-            PointTxtManager.instance.TxtOnHead(-sum, transform, Color.red, txtHolder);
+            PointTxtManager.instance.TxtOnHead(-sum, transform, Color.white);
         return sum;
     }
 
@@ -559,7 +562,7 @@ public abstract class Unit : MonoBehaviour {
         if (_health + amount > _data.stat.hp)
             amount = _data.stat.hp - _health;
         AddHealth(amount);
-        PointTxtManager.instance.TxtOnHead(amount, transform, Color.green, txtHolder);
+        PointTxtManager.instance.TxtOnHead(amount, transform, Color.green);
     }
 
     public void MoveToAttack()
@@ -578,7 +581,7 @@ public abstract class Unit : MonoBehaviour {
                     break;
                 case ATTACK_TYPE.TARGET:
                     if(!isRandomMoved)
-                        RandomMove();
+                        StartCoroutine(RandomMoveCorou());
                     break;
                 case ATTACK_TYPE.NONTARGET:
                     break;
@@ -586,27 +589,19 @@ public abstract class Unit : MonoBehaviour {
         }
     }
     [SerializeField]
-    private bool isRandomMoved = false;
-    private void RandomMove(bool value = true)
-    {
-        if (!isRandomMoved && !isWin)
-            isRandomMoved = true;
-        else if (isWin)
-            isRandomMoved = false;
-        if(!isWin)
-            StartCoroutine(RandomMoveCorou());
-    }
+    protected bool isRandomMoved = false;
     private IEnumerator RandomMoveCorou()
     {
-        yield return new WaitForSeconds(data.moveDelay);
         if (isAutoMove && !isWin)
         {
+            isRandomMoved = true;
             Vector2 rnd = new Vector2(
                 UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance),
                 UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance));
-            Move((Vector2)transform.position + rnd.normalized, RandomMove);
+            Move((Vector2)transform.position + rnd.normalized);
+            yield return new WaitForSeconds(data.moveDelay);
+            isRandomMoved = false;
         }
-        else isRandomMoved = false;
     }
     //상태이상 효율
     public KnowledgeData knowledge
@@ -678,11 +673,13 @@ public abstract class Unit : MonoBehaviour {
 
     protected virtual void OnStunEnd() { }
     //상태이상
-
     public Effect AddEffect(EffectData data)
     {
-        Effect effect = gameObject.AddComponent<Effect>();
+        Effect effect = boardManager.effectPool.DequeueObjectPool().GetComponent<Effect>();
+        effect.transform.SetParent(effectHolder);
         effect.SetData(data);
+        effect.SetOwner(this);
+        effect.gameObject.SetActive(true);
         effect.Active(true);//이펙트 타이머 활성화
         _effects.Add(effect);
         switch(data.type)
@@ -772,28 +769,23 @@ public abstract class Unit : MonoBehaviour {
     {
         if (isDeath)
         {
-            animator.SetBool("isDeath", true);
-            shadow.animator.SetBool("isDeath", true);
-            return;
-        }
-        else
-        {
-            animator.SetBool("isDeath", false);
-            shadow.animator.SetBool("isDeath", false);
+            animator.SetBool("isDeath", isDeath);
+            shadow.animator.SetBool("isDeath", isDeath);
+            animator.SetBool("isBeforeAttack", isBeforeAttack);
+            shadow.animator.SetBool("isBeforeAttack", isBeforeAttack);
+            animator.SetBool("isAfterAttack", isAfterAttack);
+            shadow.animator.SetBool("isAfterAttack", isAfterAttack);
         }
         Vector2 velocity = agent.velocity;
         if (!isStun)
         {
+            bool isWalk = false;
             if (velocity.x != 0 || velocity.y != 0)
-            {
-                animator.SetBool("isWalk", true);
-                shadow.animator.SetBool("isWalk", true);
-            }
+                isWalk = true;
             else
-            {
-                animator.SetBool("isWalk", false);
-                shadow.animator.SetBool("isWalk", false);
-            }
+                isWalk = false;
+            animator.SetBool("isWalk", isWalk);
+            shadow.animator.SetBool("isWalk", isWalk);
             if (target)
             {
                 animator.SetFloat("x", targetPosition.x - transform.position.x);
@@ -802,6 +794,8 @@ public abstract class Unit : MonoBehaviour {
                 shadow.animator.SetFloat("y", targetPosition.y - transform.position.y);
             }
         }
+        animator.SetBool("isStun", isStun);
+        shadow.animator.SetBool("isStun", isStun);
     }
 
     public void SetAttackCool(float value)
@@ -821,7 +815,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void SyncAttackCool()
     {
-        attackCoolTime = (weapon.beforeAttackDelay + weapon.afterAttackDelay) * (1 - (_data.stat.spd - 1) * 0.01f);
+        attackCoolTime = (weapon.beforeAttackDelay + weapon.afterAttackDelay) * (1 - (_data.stat.spd - 1) * 0.05f);//총 10%씩 증가
     }
 
     public void SetSpeed(float value)

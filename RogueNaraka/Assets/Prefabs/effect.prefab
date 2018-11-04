@@ -19,8 +19,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224070173085411338}
-  - component: {fileID: 212460954199981004}
+  - component: {fileID: 212509333719070474}
   - component: {fileID: 114375198385747794}
+  - component: {fileID: 114954822499179576}
+  - component: {fileID: 222770097948795430}
   m_Layer: 0
   m_Name: effect
   m_TagString: Untagged
@@ -47,7 +49,25 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!212 &212460954199981004
+--- !u!114 &114954822499179576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1797224367943760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc71d64c8b80f64fa9a6091ab43cdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    type: 0
+    value: 0
+    time: 0
+    isInfinity: 0
+  renderer: {fileID: 212509333719070474}
+  owner: {fileID: 0}
+--- !u!212 &212509333719070474
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,7 +82,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 549a95b46c5212b429f7e2d8abf68898, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,6 +113,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!222 &222770097948795430
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1797224367943760}
+  m_CullTransparentMesh: 0
 --- !u!224 &224070173085411338
 RectTransform:
   m_ObjectHideFlags: 1

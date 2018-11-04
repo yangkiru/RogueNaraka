@@ -31,7 +31,7 @@ MonoBehaviour:
     isFriendly: 1
     isStanding: 1
     move: 0
-    moveDelay: 1
+    moveDelay: 2
     moveDistance: 2
     minDistance: 0
     maxDistance: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
     minDistance: 0
     maxDistance: 2
     moveSpeed: 0.5
-    shadowPos: {x: 0.05, y: 0.05}
+    shadowPos: {x: 0.05, y: -0.05}
     knowledge:
       fire: 0
       ice: 0
@@ -103,7 +103,73 @@ MonoBehaviour:
     minDistance: 0
     maxDistance: 2
     moveSpeed: 0.5
-    shadowPos: {x: 0.05, y: 0.05}
+    shadowPos: {x: 0.05, y: -0.05}
+    knowledge:
+      fire: 0
+      ice: 0
+      poison: 0
+      knockBack: 0
+      stun: 0
+      slow: 0
+      gravity: 0
+  - name: Bat0
+    id: 2
+    cost: 2
+    stage: 1
+    weaponId: 6
+    weaponLevel: 0
+    stat:
+      dmg: 0.1
+      spd: 4
+      tec: 0
+      hp: 5
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    move: 4
+    moveDelay: 0.2
+    moveDistance: 2
+    minDistance: 0
+    maxDistance: 2
+    moveSpeed: 2
+    shadowPos: {x: 0.05, y: -0.3}
+    knowledge:
+      fire: 0
+      ice: 0
+      poison: 0
+      knockBack: 0
+      stun: 0
+      slow: 0
+      gravity: 0
+  - name: Bat1
+    id: 3
+    cost: 3
+    stage: 2
+    weaponId: 6
+    weaponLevel: 0
+    stat:
+      dmg: 0.3
+      spd: 1
+      tec: 0
+      hp: 8
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    move: 4
+    moveDelay: 0.2
+    moveDistance: 2
+    minDistance: 0
+    maxDistance: 2
+    moveSpeed: 2
+    shadowPos: {x: 0.05, y: -0.3}
     knowledge:
       fire: 0
       ice: 0
@@ -944,6 +1010,57 @@ MonoBehaviour:
       value: 0.5
       time: 4
       isInfinity: 0
+  - name: Tackle
+    id: 24
+    type: 0
+    dmg: 1
+    dealSpeed: 0.2
+    size: 0.5
+    angle: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.4
+    - ability: 5
+      value: 1
+    children: []
+    onDestroy: []
+    effects: []
+  - name: ThunderL
+    id: 25
+    type: 5
+    dmg: 1
+    dealSpeed: 0.2
+    size: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: a016a5d25f314554b9cda7aedd5996ee, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.5
+    - ability: 2
+      value: 1000
+    children: []
+    onDestroy: []
+    effects: []
+  - name: ThunderR
+    id: 26
+    type: 5
+    dmg: 1
+    dealSpeed: 0.2
+    size: 0
+    angle: 0
+    controller: {fileID: 22100000, guid: 30c0ba08d2084a845bbe1b4edde7d422, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 0.5
+    - ability: 2
+      value: 1000
+    children: []
+    onDestroy: []
+    effects: []
   weapons:
   - name: MagicBall
     id: 0
@@ -956,7 +1073,7 @@ MonoBehaviour:
     localSpeed: 3
     worldSpeed: 0
   - name: MagicSlash
-    id: 0
+    id: 1
     level: 0
     startBulletId: 08000000090000000a0000000b0000000c000000
     spawnPoint: {x: 0, y: 0.3}
@@ -966,7 +1083,7 @@ MonoBehaviour:
     localSpeed: 0
     worldSpeed: 0
   - name: MagicMissile
-    id: 0
+    id: 2
     level: 0
     startBulletId: 0d000000
     spawnPoint: {x: 0, y: 0.5}
@@ -976,7 +1093,7 @@ MonoBehaviour:
     localSpeed: 1
     worldSpeed: 0
   - name: HandGun
-    id: 0
+    id: 3
     level: 0
     startBulletId: 0f000000
     spawnPoint: {x: 0, y: 0.25}
@@ -986,7 +1103,7 @@ MonoBehaviour:
     localSpeed: 0
     worldSpeed: 1
   - name: MagicSqaure
-    id: 0
+    id: 4
     level: 0
     startBulletId: 130000001400000015000000
     spawnPoint: {x: 0, y: 0}
@@ -996,13 +1113,23 @@ MonoBehaviour:
     localSpeed: 0
     worldSpeed: 0
   - name: Bite
-    id: 0
+    id: 5
     level: 0
     startBulletId: 1600000017000000
-    spawnPoint: {x: 0, y: 0.25}
+    spawnPoint: {x: 0, y: 0.3}
     type: 0
     beforeAttackDelay: 2
     afterAttackDelay: 2
+    localSpeed: 0
+    worldSpeed: 0
+  - name: Tackle
+    id: 6
+    level: 0
+    startBulletId: 18000000
+    spawnPoint: {x: 0, y: 0}
+    type: 0
+    beforeAttackDelay: 0
+    afterAttackDelay: 3
     localSpeed: 0
     worldSpeed: 0
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
@@ -1010,94 +1137,46 @@ MonoBehaviour:
   - cost: 1
     unitId: 00000000
   - cost: 2
-    unitId: 01000000
+    unitId: 0100000002000000
+  - cost: 3
+    unitId: 03000000
   skills:
-  - name: Roll
-    spr: {fileID: 21300008, guid: 253638be60f62b740ac1295e324fa08d, type: 3}
+  - name: ThunderStrike
+    bulletIds: 190000001a000000
+    unitIds: 
+    spr: {fileID: 21300000, guid: 9ab6b26aa06c12e438c398969da44ba9, type: 3}
     id: 0
     level: 1
-    coolTime: 0
+    coolTime: 3
     coolTimeLeft: 0
-    manaCost: 0.5
-    distance: 1
-    isCircleToPlayer: 1
-    isDeath: 0
-    effects: []
-    values: []
-    levelUp:
-      manaCost: 0.2
-      distance: 0.1
-      effects:
-      - type: 0
-        value: 1
-        time: 1
-        isInfinity: 0
-      values: []
-    description: 
-  - name: Bandage
-    spr: {fileID: 21300002, guid: 9b0fda0bc0ad6494e95c2bbbefd3a118, type: 3}
-    id: 1
-    level: 1
-    coolTime: 0
-    coolTimeLeft: 0
-    manaCost: 0
-    distance: 0.1
-    isCircleToPlayer: 1
-    isDeath: 0
-    effects: []
-    values:
-    - name: heal
-      value: 2
-    levelUp:
-      manaCost: 0
-      distance: 0
-      effects: []
-      values: []
-    description: 
-  - name: Meditation
-    spr: {fileID: 21300008, guid: a1d7aa10f6bb3b448bc66afc830070ed, type: 3}
-    id: 2
-    level: 1
-    coolTime: 0
-    coolTimeLeft: 0
-    manaCost: 0
-    distance: 0.1
-    isCircleToPlayer: 1
-    isDeath: 0
-    effects: []
-    values: []
-    levelUp:
-      manaCost: 0
-      distance: 0
-      effects: []
-      values: []
-    description: 
-  - name: ThunderStrike
-    spr: {fileID: 21300000, guid: 9ab6b26aa06c12e438c398969da44ba9, type: 3}
-    id: 3
-    level: 1
-    coolTime: 0
-    coolTimeLeft: 0
-    manaCost: 0
-    distance: 0
+    manaCost: 1
+    size: 1
     isCircleToPlayer: 0
     isDeath: 0
     effects: []
-    values: []
+    values:
+    - name: Repeat
+      value: 4
+    - name: Delay
+      value: 0.25
     levelUp:
       manaCost: 0
       distance: 0
       effects: []
-      values: []
-    description: 
+      values:
+      - name: Repeat
+        value: 2
+    description: "\uBC88\uAC1C\uAC00 \uCE5C\uB2E4."
   - name: IceBreak
+    bulletIds: 
+    unitIds: 
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
     id: 4
     level: 1
     coolTime: 0
     coolTimeLeft: 0
     manaCost: 0
-    distance: 0
+    size: 0
     isCircleToPlayer: 0
     isDeath: 0
     effects: []
@@ -1151,3 +1230,36 @@ MonoBehaviour:
     name: Red Bomb
     spr: {fileID: 21300000, guid: 9d073f1b0befdcd499516a760c050d0a, type: 3}
     description: It looks very dangerous and shining red
+  effects:
+  - name: Stun
+    type: 0
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: Slow
+    type: 1
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: Fire
+    type: 2
+    spr: {fileID: 21300000, guid: 795840edeea4cd544855947dc0fcdd7e, type: 3}
+    particle: {fileID: 21300000, guid: d78d5871e29ce3447867ce545974593d, type: 3}
+  - name: Ice
+    type: 3
+    spr: {fileID: 21300000, guid: 003f2fc7c432bef48a792107bdd904c6, type: 3}
+    particle: {fileID: 21300000, guid: 62f999e0e7bd89943a06031ed0e92f51, type: 3}
+  - name: KnockBack
+    type: 4
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: Poison
+    type: 5
+    spr: {fileID: 21300000, guid: b42bad99a856aed40850608f922cd62a, type: 3}
+    particle: {fileID: 21300000, guid: 2f15c59958790984a860abd06c15be9b, type: 3}
+  - name: Heal
+    type: 6
+    spr: {fileID: 21300000, guid: d80dc8164a4fd244fa5e40996e273bdf, type: 3}
+    particle: {fileID: 21300000, guid: 7e00749b750801441b191912fd1b6016, type: 3}
+  - name: LifeSteal
+    type: 7
+    spr: {fileID: 21300000, guid: dc99ef82990bb11459fbd221c765d9fb, type: 3}
+    particle: {fileID: 0}

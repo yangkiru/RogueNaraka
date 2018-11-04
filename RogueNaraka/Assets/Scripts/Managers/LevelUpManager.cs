@@ -20,7 +20,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public int leftStat
     {   get { return PlayerPrefs.GetInt("leftStat"); }
-        set { if(leftStat == 0) _leftStat = value; PlayerPrefs.SetInt("leftStat", value); }
+        set { if(value == 0) _leftStat = value; PlayerPrefs.SetInt("leftStat", value); }
     }
 
     public int _leftStat
@@ -74,7 +74,7 @@ public class LevelUpManager : MonoBehaviour {
         }
         else
         {
-            if(isLeftStatChanged)
+            if (isLeftStatChanged)
             {
                 if (lastChance)
                 {
@@ -82,17 +82,23 @@ public class LevelUpManager : MonoBehaviour {
                     return;
                 }
                 else
-                    StartCoroutine(EndLevelUp());
+                {
+                    statPnl.SetActive(false);
+                    rollManager.SetRollPnl(false);
+                }
+            }
+            else
+            {
+                rollManager.SetRollPnl(true);
+                statPnl.SetActive(false);
             }
         }
-        statPnl.SetActive(value);
+        
     }
 
     public void SetStatPnl(bool value)
     {
         SetStatPnl(value, 0);
-        if (!value)
-            rollManager.SetRollPnl(false);
     }
 
     public void StatUp(int type)
@@ -101,8 +107,9 @@ public class LevelUpManager : MonoBehaviour {
         if (player.AddStat((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");
-            if(--leftStat <= 0)
-                StartCoroutine(EndLevelUp());
+            if (--leftStat <= 0)
+                rollManager.SetRollPnl(false);
+            SyncStatUpgradeTxt();
             GameManager.instance.StatTextUpdate();
         }
         else

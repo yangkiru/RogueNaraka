@@ -216,14 +216,7 @@ public class GameManager : MonoBehaviour {
 
         player.EquipWeapon(PlayerPrefs.GetInt("weaponId"), PlayerPrefs.GetInt("weaponLevel"));
 
-        if (PlayerPrefs.GetString("effect") != string.Empty)
-        {
-            EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
-            for (int i = 0; i < temp.Length; i++)
-            {
-                player.AddEffect(temp[i].type, temp[i].value, temp[i].time, temp[i].isInfinity);
-            }
-        }
+        StartCoroutine(WaitForEffectPoolInit());
         if (autoSave)
         {
             autoSaveCoroutine = AutoSave(autoSaveTime);
@@ -245,6 +238,20 @@ public class GameManager : MonoBehaviour {
         else
         {
             boardManager.InitBoard();
+        }
+    }
+
+    IEnumerator WaitForEffectPoolInit()
+    {
+        while (boardManager == null || boardManager.effectPool.GetCount() <= 100)
+            yield return null;
+        if (PlayerPrefs.GetString("effect") != string.Empty)
+        {
+            EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
+            for (int i = 0; i < temp.Length; i++)
+            {
+                player.AddEffect(temp[i].type, temp[i].value, temp[i].time, temp[i].isInfinity);
+            }
         }
     }
 

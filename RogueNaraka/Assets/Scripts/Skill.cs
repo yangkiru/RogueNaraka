@@ -34,9 +34,9 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             skillManager.DrawLine(position, true);
             skillManager.SetLine(true);
-            if (data.distance > 0)
+            if (data.size > 0)
             {
-                skillManager.GetCircle().SetCircle(data.distance);
+                skillManager.GetCircle().SetCircle(data.size);
                 skillManager.GetCircle().SetEnable(true);
             }
         }
@@ -99,15 +99,15 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         UseMana();
 
-        if (distance > data.distance)
+        if (distance > data.size)
         {
-            distance = data.distance;
+            distance = data.size;
             pos = (Vector2)player.transform.position + vec.normalized * distance;
         }
         switch (data.id)
         {
-            case 0://Roll
-                Roll(pos);
+            case (int)SKILL_ID.THUNDER_STRIKE:
+                StartCoroutine(ThunderStrike(mp));
                 break;
             case 1://Bandage
                 Bandage(data.values[0].value);
@@ -116,6 +116,9 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         Debug.Log(data.name + " Skill Used!");
     }
+
+    enum SKILL_ID
+    { THUNDER_STRIKE}
 
     public void Init()
     {
@@ -167,7 +170,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         for(int i = 0; i < amount; i++)
         {
             data.manaCost += data.levelUp.manaCost;
-            data.distance += data.levelUp.distance;
+            data.size += data.levelUp.distance;
             AddEffect(data.effects, data.levelUp.effects);
         }
         SyncCoolText();
@@ -236,6 +239,20 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     }
 
     float originSpeed = 0;
+    
+    IEnumerator ThunderStrike(Vector3 mp)
+    {
+        for (int i = 0; i < data.values[0].value; i++)
+        {
+            Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
+            Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+            int rndDirection = Random.Range(0, 2);
+            thunder.Init(data.bulletIds[rndDirection], player.data.stat.tec, true);
+            thunder.Attack((Vector2)mp + rnd, Vector2.zero, Vector2.zero, 0, 0, null, player);
+            yield return new WaitForSeconds(data.values[1].value);
+        }
+    }
+
     public void Roll(Vector3 mp)
     {
         Debug.Log("Roll!");

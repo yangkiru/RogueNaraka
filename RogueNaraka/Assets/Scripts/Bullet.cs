@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
 
     public Animator animator;
     public new SpriteRenderer renderer;
+    public DigitalRuby.AdvancedPolygonCollider.AdvancedPolygonCollider colliderRenderer;
+    public Collider2D coll;
 
     private RevolveHolder revolveHolder = null;
     private Unit owner;
@@ -15,7 +17,7 @@ public class Bullet : MonoBehaviour {
 
     private Vector2 vec;
     private int knockBack;
-    [SerializeField][ReadOnly]
+    [SerializeField] [ReadOnly]
     private int pierce = 1;
     [SerializeField]
     private float guideIncrease;
@@ -29,7 +31,7 @@ public class Bullet : MonoBehaviour {
     private float localSpeed;
     private float worldSpeed;
     private float angle;
-    [SerializeField][ReadOnly]
+    [SerializeField] [ReadOnly]
     private bool isFriendly;
     private bool isDestroy;
     private bool isSpin;
@@ -37,13 +39,13 @@ public class Bullet : MonoBehaviour {
     private bool isSleep = false;
     private bool isDestroyWithOwner;
 
-    [SerializeField][ReadOnly]
+    [SerializeField] [ReadOnly]
     private BulletData data;
     private EffectData[] effects;
     private List<int> records = new List<int>();
     private List<float> dotTimes = new List<float>();
 
-    [SerializeField][ReadOnly]
+    [SerializeField] [ReadOnly]
     private List<Bullet> destroyChildren = new List<Bullet>();
 
     private void OnDrawGizmos()
@@ -73,15 +75,13 @@ public class Bullet : MonoBehaviour {
 
                 Matrix4x4 origin = Gizmos.matrix;
                 Gizmos.matrix = transform.localToWorldMatrix;
-                
+
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(Vector2.zero, MathHelpers.DegreeToVector2(angle + 180).normalized * size);
 
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(Vector2.zero, MathHelpers.DegreeToVector2(180 - angle).normalized * size);
                 Gizmos.matrix = origin;
-
-
                 break;
         }
     }
@@ -118,12 +118,14 @@ public class Bullet : MonoBehaviour {
         revolveHolder = null;
         owner = null;
         isDestroyWithOwner = false;
+        coll.enabled = false;
+        colliderRenderer.enabled = false;
     }
 
     public void SetFriendly(bool value)
     {
         isFriendly = value;
-        if(!value)
+        if (!value)
             SetMask(GameDatabase.instance.enemyMask);
         else
             SetMask(GameDatabase.instance.friendlyMask);
@@ -144,7 +146,7 @@ public class Bullet : MonoBehaviour {
 
     private IEnumerator SpawnBulletTimer(BulletChild childData)
     {
-        if(childData.isFirst)
+        if (childData.isFirst)
             childData.isFirst = false;
         else
             yield return new WaitForSeconds(childData.startTime);
@@ -165,7 +167,7 @@ public class Bullet : MonoBehaviour {
 
         child.Teleport(pos);
         child.renderer.sortingOrder = renderer.sortingOrder + childData.sortingOrder;
-        if(childData.isRevolveTarget)
+        if (childData.isRevolveTarget)
         {
             if (revolveHolder)
             {
@@ -253,7 +255,7 @@ public class Bullet : MonoBehaviour {
                         guideIncrease = data.abilities[i].value;
                         break;
                     case ABILITY.OWNER:
-                        if(data.abilities[i].value > 0)
+                        if (data.abilities[i].value > 0)
                             isDestroyWithOwner = true;
                         break;
                 }
@@ -263,6 +265,7 @@ public class Bullet : MonoBehaviour {
 
     public void Attack(Vector2 start, Vector2 move, Vector2 v, float localSpeed, float worldSpeed, RevolveHolder revolve = null, Unit owner = null)
     {
+        gameObject.SetActive(true);
         if (owner)
             this.owner = owner;
         this.localSpeed = localSpeed;
@@ -360,6 +363,9 @@ public class Bullet : MonoBehaviour {
 
     private void Update()
     {
+        bool isDynamic = data.type == BULLET_TYPE.DYNAMIC;
+        coll.enabled = isDynamic;
+        colliderRenderer.enabled = isDynamic;
         if (isSleep)
         {
             if (isDestroyWithOwner && owner.isDeath)
@@ -529,10 +535,49 @@ public class Bullet : MonoBehaviour {
                             }
                         }
                         break;
+                    case BULLET_TYPE.DYNAMIC:
+                        DotTimeFunc();
+                        break;
                 }
             }
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (gameObject.activeSelf)
+        {
+            if (data.type == BULLET_TYPE.DYNAMIC)
+            {
+                int layer = !isFriendly ? GameDatabase.friendlyLayer : GameDatabase.enemyLayer;
+                if (collision.gameObject.layer == layer)
+                {
+                    Unit unit = collision.GetComponent<Unit>();
+                    if (!unit.isDeath)
+                    {
+                        int hash = unit.GetHashCode();
+                        int index = records.FindIndex(d => d == hash);
+                        if (index == -1)
+                        {
+                            //Debug.Log(name + "  hit to " + hits[i].transform.name);
+                            unit.GetDamage(Damage());
+                            EffectFunc(unit);
+                            records.Add(hash);
+                            dotTimes.Add(data.dealSpeed);
+                        }
+                    }
+
+                    if (pierce < 999)
+                        pierce--;
+                    if (pierce <= 0)
+                        Destroy();
+                }
+            }
+        }
+    }
+    
+
+            
 
     public bool IsInsideAngle(float mid, float range, float target)
     {
@@ -592,6 +637,8 @@ public class Bullet : MonoBehaviour {
 
     private IEnumerator DestroyCoroutine()
     {
+        coll.enabled = false;
+        colliderRenderer.enabled = false;
         vec = Vector2.zero;
         isMoving = false;
         isDestroy = true;
@@ -615,14 +662,10 @@ public class Bullet : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         //Debug.Log("Destroy");
-        RevolveFunction();
         BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, true);
     }
 
-    /// <summary>
-    /// Bullet이 초기화 인큐될 때 실행
-    /// </summary>
-    public void RevolveFunction()
+    public void OnDisable()
     {
         if (revolveHolder)
             revolveHolder.Remove(gameObject);

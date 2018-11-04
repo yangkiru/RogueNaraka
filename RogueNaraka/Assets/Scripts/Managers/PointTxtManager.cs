@@ -66,46 +66,49 @@ public class PointTxtManager : MonoBehaviour {
         return TxtOn((Vector2)tf.position + offset, value, color, cut);
     }
 
-    public Text TxtOnHead(float value, Transform tf, Color color, TxtHolder holder)
-    {
-        Text txt = TxtOn(tf, value, color, new Vector2(2, 0.5f + holder.position * 0.25f), "N2");
-        holder.AddTxt(txt);
-        StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
-        return txt;
-    }
     public Text TxtOnHead(float value, Transform tf, Color color)
     {
-        Text txt = TxtOn(tf, value, color, new Vector2(2, 0.5f), "N2");
-        StartCoroutine(MoveUp(txt, 0.5f, 0.01f));
+        Text txt = TxtOn(tf, value, color, "##0.##");
+        StartCoroutine(Shoot(txt, 0.75f));
+        StartCoroutine(AlphaDown(txt, 0.3f, 3));
+        //StartCoroutine(MoveUp(txt, 0.5f, 0.01f));
         return txt;
     }
 
-    public void TxtOnGold(float value, Transform tf, TxtHolder holder)
+    public void TxtOnSoul(float value, Transform tf, Vector2 offset)
     {
-        Debug.Log("ScreenSize:" + Screen.width + " " + Screen.height);
-        Text txt = TxtOn(tf, value, Color.yellow, new Vector2(0.5f, 0.3f + holder.position * 0.25f));
-        holder.AddTxt(txt);
-        StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
+        Text txt = TxtOn(tf, value, Color.cyan, offset);
+        StartCoroutine(MoveUp(txt, 0.5f, 0.01f));
     }
 
-    public void TxtOnSoul(float value, Transform tf, TxtHolder holder)
-    {
-        Text txt = TxtOn(tf, value, Color.cyan, new Vector2(0.5f, 0.3f + holder.position * 0.25f));
-        holder.AddTxt(txt);
-        StartCoroutine(MoveUp(txt, 0.5f, 0.01f, holder));
-    }
-
-    private IEnumerator MoveUp(Text txt, float time, float speed, TxtHolder holder = null)
+    private IEnumerator MoveUp(Text txt, float time, float speed)
     {
         float amount = 0.05f;
-        for(float t = 0; t < time; t += amount)
+        for (float t = 0; t < time; t += amount)
         {
             txt.transform.position = new Vector2(txt.transform.position.x, txt.transform.position.y + speed);
             yield return new WaitForSecondsRealtime(amount);
         }
-        if (holder != null)
-            holder.RemoveTxt(txt);
-        else
-            txtPool.EnqueueObjectPool(txt.gameObject);
+        txtPool.EnqueueObjectPool(txt.gameObject);
+    }
+
+    IEnumerator Shoot(Text txt, float time)
+    {
+        float rnd = Random.Range(-1f, 1f);
+        txt.GetComponent<Rigidbody2D>().AddForce(new Vector2(rnd * 100f, 100));
+        yield return new WaitForSeconds(time);
+        txtPool.EnqueueObjectPool(txt.gameObject);
+    }
+
+    IEnumerator AlphaDown(Text txt, float delay, float speed)
+    {
+        yield return new WaitForSeconds(delay);
+        while (txt.color.a > 0.1f)
+        {
+            yield return new WaitForSeconds(0.1f);
+            Color color = txt.color;
+            color.a = color.a -= 0.1f * speed;
+            txt.color = color;
+        }
     }
 }

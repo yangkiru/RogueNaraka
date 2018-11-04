@@ -42,6 +42,7 @@ public class GameDatabase : ScriptableObject
     public SkillData[] skills;
     public ItemData[] items;
     public ItemSpriteData[] itemSprites;
+    public EffectSpriteData[] effects;
 
     [ContextMenu("BulletIdToData")]
     public void BulletIdToData()
@@ -237,7 +238,7 @@ public struct BulletData
 [Serializable]
 public enum BULLET_TYPE
 {
-    CIRCLECAST, LINECAST, TRIANGLE, SECTOR, NONE
+    CIRCLECAST, LINECAST, TRIANGLE, SECTOR, NONE, DYNAMIC
 }
 
 /// <summary>
@@ -294,13 +295,15 @@ public struct ArmorData
 public struct SkillData
 {
     public string name;
+    public int[] bulletIds;
+    public int[] unitIds;
     public Sprite spr;
     public int id;
     public int level;
     public float coolTime;
     public float coolTimeLeft;
     public float manaCost;
-    public float distance;
+    public float size;
     public bool isCircleToPlayer;
     public bool isDeath;
     public EffectData[] effects;
@@ -331,6 +334,15 @@ public struct ValueData
 }
 
 [Serializable]
+public struct EffectSpriteData
+{
+    public string name;
+    public EFFECT type;
+    public Sprite spr;
+    public Sprite particle;
+}
+
+[Serializable]
 public class EffectData
 {
     public EFFECT type;
@@ -356,7 +368,7 @@ public class EffectData
 [Serializable]
 public enum EFFECT
 {
-    STUN, SLOW, FIRE, ICE, KNOCKBACK, POISON
+    STUN, SLOW, FIRE, ICE, KNOCKBACK, POISON, HEAL, LIFESTEAL
 }
 
 [Serializable]
@@ -409,7 +421,8 @@ public enum ATTACK_TYPE
 public enum MOVE_TYPE
 {
     RUSH,//근접 공격
-    STATUE,//원거리 고정
-    DISTANCE,//원거리 도망 및 공격
-    RUN,//도망 공격 X
+    STATUE,//고정
+    DISTANCE,//거리 유지
+    RUN,//도망
+    REST_RUSH,
 }

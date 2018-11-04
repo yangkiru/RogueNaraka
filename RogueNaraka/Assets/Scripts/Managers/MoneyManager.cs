@@ -7,7 +7,7 @@ public class MoneyManager : MonoBehaviour {
 
     public TMPro.TextMeshProUGUI soulTxt;
 
-    private TxtHolder soulHolder = new TxtHolder();
+    private Vector2 soulSpawnPosition;
 
     public int collectedSoul
     {
@@ -44,7 +44,7 @@ public class MoneyManager : MonoBehaviour {
         else
             _collectedSoul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulHolder);
+        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulSpawnPosition);
     }
 
     public void SetSoul(int value)
@@ -60,7 +60,7 @@ public class MoneyManager : MonoBehaviour {
         else
             _soul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulHolder);
+        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulSpawnPosition);
     }
 
     public bool UseSoul(int amount)
@@ -69,7 +69,7 @@ public class MoneyManager : MonoBehaviour {
         {
             _soul -= amount;
             MoneyUpdate();
-            PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform, soulHolder);
+            PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform, soulSpawnPosition);
             return true;
         }
         else

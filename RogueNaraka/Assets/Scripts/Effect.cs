@@ -9,6 +9,9 @@ public class Effect : MonoBehaviour {
     [SerializeField][ReadOnly]
     private EffectData _data;
 
+    public SpriteRenderer renderer;
+    public Unit owner;
+
     public bool isActive
     { get { return _isActive; } }
     private bool _isActive;
@@ -21,6 +24,14 @@ public class Effect : MonoBehaviour {
     public void SetData(EffectData dt)
     {
         _data = dt;
+        EffectSpriteData sprData = GameDatabase.instance.effects[(int)dt.type];
+        name = sprData.name;
+        renderer.sprite = sprData.spr;
+    }
+
+    public void SetOwner(Unit unit)
+    {
+        owner = unit;
     }
 
     public void Active(bool value)
@@ -54,8 +65,8 @@ public class Effect : MonoBehaviour {
 
     public void DestroySelf()
     {
-        if (coroutine != null)
-            StopCoroutine(coroutine);
-        Destroy(this);
+        owner.effects.Remove(this);
+        owner = null;
+        BoardManager.instance.effectPool.EnqueueObjectPool(gameObject, false);
     }
 }
