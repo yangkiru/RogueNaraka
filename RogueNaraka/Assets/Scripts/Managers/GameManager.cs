@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
-                int current = (int)player.data.stat.sum;
-                int max = (int)player.maxStat.sum;
+                int current = (int)GetStatSum(false);
+                int max = (int)GetStatSum(true);
                 if (current == max)
                     return;
                 //Maxed
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour {
         EffectData[] effectDatas = new EffectData[player.effects.Count];
         for (int i = 0; i < effectDatas.Length; i++)
         {
-            effectDatas[i] = player.effects[i].data;
+            effectDatas[i] = player.effects[i].data.Clone();
         }
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
@@ -211,9 +211,6 @@ public class GameManager : MonoBehaviour {
 
         StatTextUpdate();
 
-        player.SetMaxStat(new Stat(GetStat((STAT)0, true), GetStat((STAT)1, true), GetStat((STAT)2, true),
-            GetStat((STAT)3, true), GetStat((STAT)4, true), GetStat((STAT)5, true), GetStat((STAT)6, true)));
-
         player.EquipWeapon(PlayerPrefs.GetInt("weaponId"), PlayerPrefs.GetInt("weaponLevel"));
 
         StartCoroutine(WaitForEffectPoolInit());
@@ -250,7 +247,7 @@ public class GameManager : MonoBehaviour {
             EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
             for (int i = 0; i < temp.Length; i++)
             {
-                player.AddEffect(temp[i].type, temp[i].value, temp[i].time, temp[i].isInfinity);
+                player.AddEffect(temp[i].Clone());
             }
         }
     }
@@ -291,9 +288,22 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void SyncDataToSTat()
+    {
+        PlayerPrefs.SetFloat("dmg", player.data.stat.dmg);
+        PlayerPrefs.SetFloat("spd", player.data.stat.spd);
+        PlayerPrefs.SetFloat("tec", player.data.stat.tec);
+        PlayerPrefs.SetFloat("hp", player.data.stat.hp);
+        PlayerPrefs.SetFloat("mp", player.data.stat.mp);
+        PlayerPrefs.SetFloat("hpRegen", player.data.stat.hpRegen);
+        PlayerPrefs.SetFloat("mpRegen", player.data.stat.mpRegen);
+        PlayerPrefs.SetFloat("health", player.health);
+        PlayerPrefs.SetFloat("mana", player.mana);
+        PlayerPrefs.SetInt("stage", boardManager.stage);
+    }
+
     public void SyncStatToData(Stat stat)
     {
-        stat = GameDatabase.instance.playerBase.stat;
         PlayerPrefs.SetFloat("dmg", stat.dmg);
         PlayerPrefs.SetFloat("spd", stat.spd);
         PlayerPrefs.SetFloat("tec", stat.tec);
@@ -353,7 +363,7 @@ public class GameManager : MonoBehaviour {
 
     public static void AddStat(STAT type, float amount, bool isMax = false)
     {
-        SetStat(type, GameManager.GetStat(type, isMax) + amount);
+        SetStat(type, GameManager.GetStat(type, isMax) + amount, isMax);
     }
 
     public static void SetStat(STAT type, float value, bool isMax = false)
@@ -415,5 +425,22 @@ public class GameManager : MonoBehaviour {
                 return PlayerPrefs.GetInt("statPoint");
         }
         return -1;
+    }
+
+    public static float GetStatSum(bool isMax = false)
+    {
+        string max = string.Empty;
+        if (isMax)
+            max = "Max";
+        Stat temp = new Stat();
+        temp.dmg = PlayerPrefs.GetFloat("dmg" + max);
+        temp.spd = PlayerPrefs.GetFloat("spd" + max);
+        temp.tec = PlayerPrefs.GetFloat("tec" + max);
+        temp.hp = PlayerPrefs.GetFloat("hp" + max);
+        temp.mp = PlayerPrefs.GetFloat("mp" + max);
+        temp.hpRegen = PlayerPrefs.GetFloat("hpRegen" + max);
+        temp.mpRegen = PlayerPrefs.GetFloat("mpRegen" + max);
+
+        return temp.sum;
     }
 }

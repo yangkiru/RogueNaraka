@@ -7,10 +7,6 @@ public abstract class Unit : MonoBehaviour {
 
     public bool attackable;
 
-    public Stat maxStat
-    { get { return _maxStat; } }
-    protected Stat _maxStat;
-
     ///인스펙터 캐싱
     public PolyNav.PolyNavAgent agent;
     public Animator animator;
@@ -338,28 +334,28 @@ public abstract class Unit : MonoBehaviour {
         switch (type)
         {
             case STAT.DMG:
-                if (_data.stat.dmg + amount <= _maxStat.dmg)
+                if (_data.stat.dmg + amount <= GameManager.GetStat(STAT.DMG, true))
                 {
                     _data.stat.dmg += amount;
                     return true;
                 }
                 else return false;
             case STAT.SPD:
-                if (_data.stat.spd + amount <= _maxStat.spd)
+                if (_data.stat.spd + amount <= GameManager.GetStat(STAT.SPD, true))
                 {
                     _data.stat.spd += amount;
                     return true;
                 }
                 else return false;
             case STAT.TEC:
-                if (_data.stat.tec + amount <= _maxStat.tec)
+                if (_data.stat.tec + amount <= GameManager.GetStat(STAT.TEC, true))
                 {
                     _data.stat.tec += amount;
                     return true;
                 }
                 else return false;
             case STAT.HP:
-                if (_data.stat.hp + amount <= _maxStat.hp)
+                if (_data.stat.hp + amount <= GameManager.GetStat(STAT.HP, true))
                 {
                     _data.stat.hp += amount;
                     _health += amount;
@@ -367,7 +363,7 @@ public abstract class Unit : MonoBehaviour {
                 }
                 else return false;
             case STAT.MP:
-                if (_data.stat.mp + amount <= _maxStat.mp)
+                if (_data.stat.mp + amount <= GameManager.GetStat(STAT.MP, true))
                 {
                     _data.stat.mp += amount;
                     _mana += amount;
@@ -375,14 +371,14 @@ public abstract class Unit : MonoBehaviour {
                 }
                 else return false;
             case STAT.HPREGEN:
-                if (_data.stat.hpRegen + amount <= _maxStat.hpRegen)
+                if (_data.stat.hpRegen + amount <= GameManager.GetStat(STAT.HPREGEN, true))
                 {
                     _data.stat.hpRegen += amount;
                     return true;
                 }
                 else return false;
             case STAT.MPREGEN:
-                if (_data.stat.mpRegen + amount <= _maxStat.mpRegen)
+                if (_data.stat.mpRegen + amount <= GameManager.GetStat(STAT.MPREGEN, true))
                 {
                     _data.stat.mpRegen += amount;
                     return true;
@@ -390,67 +386,6 @@ public abstract class Unit : MonoBehaviour {
                 else return false;
         }
         return false;
-    }
-
-    public void SetMaxStat(Stat s)
-    {
-        _maxStat = s;
-    }
-
-    public void SetMaxStat(STAT type, float value)
-    {
-        switch (type)
-        {
-            case STAT.DMG:
-                _maxStat.dmg = value;
-                break;
-            case STAT.SPD:
-                _maxStat.spd = value;
-                break;
-            case STAT.TEC:
-                _maxStat.tec = value;
-                break;
-            case STAT.HP:
-                _maxStat.hp = value;
-                break;
-            case STAT.MP:
-                _maxStat.mp = value;
-                break;
-            case STAT.HPREGEN:
-                _maxStat.hpRegen = value;
-                break;
-            case STAT.MPREGEN:
-                _maxStat.mpRegen = value;
-                break;
-        }
-    }
-
-    public void AddMaxStat(STAT type, float amount)
-    {
-        switch (type)
-        {
-            case STAT.DMG:
-                _maxStat.dmg += amount;
-                break;
-            case STAT.SPD:
-                _maxStat.spd += amount;
-                break;
-            case STAT.TEC:
-                _maxStat.tec += amount;
-                break;
-            case STAT.HP:
-                _maxStat.hp += amount;
-                break;
-            case STAT.MP:
-                _maxStat.mp += amount;
-                break;
-            case STAT.HPREGEN:
-                _maxStat.hpRegen += amount;
-                break;
-            case STAT.MPREGEN:
-                _maxStat.mpRegen += amount;
-                break;
-        }
     }
 
     protected virtual void Attack()

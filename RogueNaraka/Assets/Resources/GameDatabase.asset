@@ -235,6 +235,7 @@ MonoBehaviour:
     dealSpeed: 2
     size: 0.15
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
@@ -280,6 +281,7 @@ MonoBehaviour:
     dealSpeed: 2
     size: 0.15
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
@@ -341,6 +343,7 @@ MonoBehaviour:
     dealSpeed: 2
     size: 0.15
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
@@ -418,6 +421,7 @@ MonoBehaviour:
     dealSpeed: 2
     size: 0.15
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities: []
@@ -511,6 +515,7 @@ MonoBehaviour:
     dealSpeed: 0.1
     size: 0.3
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 0f8b2066368d1ad43840304e871873a4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -528,6 +533,7 @@ MonoBehaviour:
     dealSpeed: 0.1
     size: 0.5
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 0e5bd7cad351be646aa837e110b135d1, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -545,6 +551,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 0.8
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: adb582aa48649df44af2868177d96176, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -562,6 +569,7 @@ MonoBehaviour:
     dealSpeed: 0
     size: 0.3
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: e0b825f9dc32100479242bc04e60e2b6, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -577,6 +585,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 0.5
     angle: 90
+    shake: 0
     controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -592,6 +601,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 1
     angle: 90
+    shake: 0
     controller: {fileID: 9100000, guid: e2ebdd70d9f6c2a49a5ade3aea94ea69, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -607,6 +617,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 1
     angle: 90
+    shake: 0
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -622,6 +633,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 0.62
     angle: 90
+    shake: 0
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -669,6 +681,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 1
     angle: 90
+    shake: 0
     controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -716,6 +729,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 0.3
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 3cc82223d6d353f45a3a0ea0f817d44a, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -747,6 +761,7 @@ MonoBehaviour:
     dealSpeed: 0
     size: 1
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: b6b1b324b3e8bd146b19ce5e9c98a4ae, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -762,6 +777,7 @@ MonoBehaviour:
     dealSpeed: 0
     size: 0.09
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -777,6 +793,7 @@ MonoBehaviour:
     dealSpeed: 1
     size: 0.5
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: de4f0b683ce4b29408b77ee3c074a43b, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -792,6 +809,7 @@ MonoBehaviour:
     dealSpeed: 0.5
     size: 0.35
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 6419740594e6c5343a82621f7c0793c3, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -823,6 +841,7 @@ MonoBehaviour:
     dealSpeed: 0
     size: 0.5
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 144e0c3002e44b44a8de299b3e4c28c4, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -838,6 +857,7 @@ MonoBehaviour:
     dealSpeed: 0
     size: 0
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -869,6 +889,7 @@ MonoBehaviour:
     dealSpeed: 0
     size: 0
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -916,6 +937,7 @@ MonoBehaviour:
     dealSpeed: 0
     size: 0
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -979,6 +1001,7 @@ MonoBehaviour:
     dealSpeed: 1
     size: 0.3
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -996,6 +1019,7 @@ MonoBehaviour:
     dealSpeed: 1
     size: 0.3
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -1017,6 +1041,7 @@ MonoBehaviour:
     dealSpeed: 0.2
     size: 0.5
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -1030,10 +1055,11 @@ MonoBehaviour:
   - name: ThunderL
     id: 25
     type: 5
-    dmg: 1
+    dmg: 0.1
     dealSpeed: 0.2
     size: 0
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: a016a5d25f314554b9cda7aedd5996ee, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -1047,10 +1073,11 @@ MonoBehaviour:
   - name: ThunderR
     id: 26
     type: 5
-    dmg: 1
+    dmg: 0.1
     dealSpeed: 0.2
     size: 0
     angle: 0
+    shake: 0
     controller: {fileID: 22100000, guid: 30c0ba08d2084a845bbe1b4edde7d422, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
@@ -1156,22 +1183,24 @@ MonoBehaviour:
     effects: []
     values:
     - name: Repeat
-      value: 4
+      value: 5
     - name: Delay
       value: 0.25
     levelUp:
-      manaCost: 0
+      manaCost: 0.5
       distance: 0
       effects: []
       values:
       - name: Repeat
-        value: 2
+        value: 5
+      - name: Delay
+        value: -0.05
     description: "\uBC88\uAC1C\uAC00 \uCE5C\uB2E4."
   - name: IceBreak
     bulletIds: 
     unitIds: 
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
-    id: 4
+    id: 1
     level: 1
     coolTime: 0
     coolTimeLeft: 0

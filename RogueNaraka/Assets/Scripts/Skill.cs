@@ -171,6 +171,23 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             data.manaCost += data.levelUp.manaCost;
             data.size += data.levelUp.distance;
+            for(int j = 0; j < data.levelUp.values.Length; j++)
+            {
+                bool isFind = false;
+                for(int k = 0; k < data.values.Length;k++)
+                {
+                    if(data.values[k].name.CompareTo(data.levelUp.values[j].name) == 0)
+                    {
+                        isFind = true;
+                        data.values[k].value += data.levelUp.values[j].value;
+                    }
+                }
+                if (!isFind)
+                {
+                    System.Array.Resize<ValueData>(ref data.values, data.values.Length + 1);
+                    data.values[data.values.Length - 1] = data.levelUp.values[j];
+                }
+            }
             AddEffect(data.effects, data.levelUp.effects);
         }
         SyncCoolText();
@@ -249,7 +266,9 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             int rndDirection = Random.Range(0, 2);
             thunder.Init(data.bulletIds[rndDirection], player.data.stat.tec, true);
             thunder.Attack((Vector2)mp + rnd, Vector2.zero, Vector2.zero, 0, 0, null, player);
-            yield return new WaitForSeconds(data.values[1].value);
+            float delay = data.values[1].value > 0 ? data.values[1].value : 0;
+            
+            yield return new WaitForSeconds(delay);
         }
     }
 

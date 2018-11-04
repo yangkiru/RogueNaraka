@@ -218,6 +218,14 @@ public struct Weapon
 }
 
 [Serializable]
+public struct ShakeData
+{
+    float time;
+    float power;
+    float speed;
+}
+
+[Serializable]
 public struct BulletData
 {
     public string name;
@@ -227,6 +235,7 @@ public struct BulletData
     public float dealSpeed;
     public float size;
     public float angle; //TRIANGLE, SECTOR 에서 타격 범위
+    public float shake;//터질 때 화면 흔드는 양
     public RuntimeAnimatorController controller;
     public Color color;
     public Ability[] abilities;
@@ -292,7 +301,7 @@ public struct ArmorData
 }
 
 [Serializable]
-public struct SkillData
+public struct SkillData:ICloneable
 {
     public string name;
     public int[] bulletIds;
@@ -310,6 +319,16 @@ public struct SkillData
     public ValueData[] values;
     public SkillUpData levelUp;
     public string description;
+
+    public object Clone()
+    {
+        SkillData clone = (SkillData)this.MemberwiseClone();
+        clone.bulletIds = (int[])bulletIds.Clone();
+        clone.unitIds = (int[])unitIds.Clone();
+        clone.effects = (EffectData[])effects.Clone();
+        clone.values = (ValueData[])values.Clone();
+        return clone;
+    }
 
     public void Reset()
     {

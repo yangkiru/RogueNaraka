@@ -20,7 +20,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public int leftStat
     {   get { return PlayerPrefs.GetInt("leftStat"); }
-        set { if(value == 0) _leftStat = value; PlayerPrefs.SetInt("leftStat", value); }
+        set { if(leftStat == 0) _leftStat = value; PlayerPrefs.SetInt("leftStat", value); }
     }
 
     public int _leftStat
@@ -49,10 +49,13 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SkillManager.instance.SetIsDragable(false);
-        if (GameManager.instance.soulShopManager.shopStage == 1)
+        if (GameManager.instance.soulShopManager.shopStage <= 1)
             GameManager.instance.soulShopManager.SetSoulShop(true);
         if (isLeftStatChanged)
+        {
+            Debug.Log("남은 스탯이 있따:" + leftStat + " " + _leftStat);
             SetStatPnl(true);
+        }
         else
         {
             rollManager.SetRollPnl(true);
@@ -76,9 +79,10 @@ public class LevelUpManager : MonoBehaviour {
         {
             if (isLeftStatChanged)
             {
-                if (lastChance)
+                Debug.Log("남은 스탯이 있따:" + this.leftStat + " " + _leftStat);
+                if (!lastChance)
                 {
-                    lastChance = false;
+                    lastChance = true;
                     return;
                 }
                 else
@@ -89,6 +93,7 @@ public class LevelUpManager : MonoBehaviour {
             }
             else
             {
+                Debug.Log("남은 스탯이 없따:" + leftStat + " " + _leftStat);
                 rollManager.SetRollPnl(true);
                 statPnl.SetActive(false);
             }
@@ -98,18 +103,19 @@ public class LevelUpManager : MonoBehaviour {
 
     public void SetStatPnl(bool value)
     {
-        SetStatPnl(value, 0);
+        SetStatPnl(value, leftStat);
     }
 
     public void StatUp(int type)
     {
-        lastChance = true;
         if (player.AddStat((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");
             if (--leftStat <= 0)
                 rollManager.SetRollPnl(false);
+            leftStatTxt.text = leftStat + " Points";
             SyncStatUpgradeTxt();
+            GameManager.instance.SyncDataToSTat();
             GameManager.instance.StatTextUpdate();
         }
         else
@@ -125,7 +131,7 @@ public class LevelUpManager : MonoBehaviour {
         statPnl.SetActive(false);
         //SetSelectPnl(false);
         yield return new WaitForSecondsRealtime(0.1f);
-        if(SoulShopManager.instance.shopStage == 1)
+        if(SoulShopManager.instance.shopStage <= 1)
             SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
         else
             SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.DECREASE);
@@ -134,16 +140,18 @@ public class LevelUpManager : MonoBehaviour {
         BoardManager.instance.StageUp();
         GameManager.instance.Save();
         GameManager.instance.SetPause(false);
+        leftStat = 0;
+        lastChance = false;
     }
 
     public void SyncStatUpgradeTxt()
     {
-        upgradeTxt[0].text = string.Format("{0}/{1}", player.data.stat.dmg.ToString(), player.maxStat.dmg);
-        upgradeTxt[1].text = string.Format("{0}/{1}", player.data.stat.spd.ToString(), player.maxStat.spd);
-        upgradeTxt[2].text = string.Format("{0}/{1}", player.data.stat.tec.ToString(), player.maxStat.tec);
-        upgradeTxt[3].text = string.Format("{0}/{1}", player.data.stat.hp.ToString(), player.maxStat.hp);
-        upgradeTxt[4].text = string.Format("{0}/{1}", player.data.stat.mp.ToString(), player.maxStat.mp);
-        upgradeTxt[5].text = string.Format("{0}/{1}", player.data.stat.hpRegen.ToString(), player.maxStat.hpRegen);
-        upgradeTxt[6].text = string.Format("{0}/{1}", player.data.stat.mpRegen.ToString(), player.maxStat.mpRegen);
+        upgradeTxt[0].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.DMG, false), GameManager.GetStat(STAT.DMG, true));
+        upgradeTxt[1].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.SPD, false), GameManager.GetStat(STAT.SPD, true));
+        upgradeTxt[2].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.TEC, false), GameManager.GetStat(STAT.TEC, true));
+        upgradeTxt[3].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.HP, false), GameManager.GetStat(STAT.HP, true));
+        upgradeTxt[4].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.MP, false), GameManager.GetStat(STAT.MP, true));
+        upgradeTxt[5].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.HPREGEN, false), GameManager.GetStat(STAT.HPREGEN, true));
+        upgradeTxt[6].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.MPREGEN, false), GameManager.GetStat(STAT.MPREGEN, true));
     }
 }

@@ -419,9 +419,14 @@ public class SkillManager : MonoBehaviour {
                 skills[i].Init();
             else
             {
-                SkillData database = GameDatabase.instance.skills[datas[i].id];
-                skills[i].SyncData(database);
-                skills[i].LevelUp(datas[i].level - 1);
+                if (GameDatabase.instance.skills.Length > datas[i].id)
+                {
+                    SkillData database = (SkillData)GameDatabase.instance.skills[datas[i].id].Clone();
+                    skills[i].SyncData(database);
+                    skills[i].LevelUp(datas[i].level - 1);
+                }
+                else
+                    Debug.LogError("SkillMissing:id too big" + datas[i].id);
             }
         }
         //Debug.Log("Load Skills : " + str);

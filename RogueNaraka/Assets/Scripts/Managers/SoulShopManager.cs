@@ -17,6 +17,7 @@ public class SoulShopManager : MonoBehaviour
     public Text[] statUpgradeTxt;
     public int shopStage
     { get { return _shopStage; } }
+    [SerializeField]
     private int _shopStage;
 
     /// <summary>
@@ -24,9 +25,9 @@ public class SoulShopManager : MonoBehaviour
     /// </summary>
     private bool selected;
     /// <summary>
-    /// 선택한 업그레이드
+    /// 선택한 Stat 업그레이드
     /// </summary>
-    private STAT upgrading;
+    private STAT statUpgrading;
     /// <summary>
     /// 업그레이드 클릭시 재클릭 금지
     /// </summary>
@@ -69,9 +70,9 @@ public class SoulShopManager : MonoBehaviour
     /// 업그레이드 버튼을 누르면 upgrading에 값이 전달됨
     /// </summary>
     /// <param name="type"></param>
-    public void SelectUpgrade(int type)
+    public void SelectStatUpgrade(int type)
     {
-        upgrading = (STAT)type;
+        statUpgrading = (STAT)type;
     }
     /// <summary>
     /// Soul 상점 패널을 열거나 닫는 함수
@@ -84,7 +85,6 @@ public class SoulShopManager : MonoBehaviour
         {
             GameManager.instance.SetPause(true);
             shopPnl.SetActive(true);
-            statPnl.SetActive(true);
             StatPnlOpen();
             GameManager.instance.moneyManager.Load();
             SyncSoulTxt();
@@ -103,6 +103,7 @@ public class SoulShopManager : MonoBehaviour
     {
         SyncStatUpgradeTxt();
         statPnl.SetActive(true);
+        SyncStatUpgradeTxt();
         //스탯 외 다른 패널은 닫아야함
     }
 
@@ -110,14 +111,13 @@ public class SoulShopManager : MonoBehaviour
     /// 업그레이드 선택 패널 설정
     /// </summary>
     /// <param name="value"></param>
-    public void SetCheckPnl(bool value, float amount = 0)
+    public void SetCheckPnl(bool value)
     {
         checkPnl.SetActive(value);
         if (value)
         {
             cancelBtn.interactable = true;
             okBtn.interactable = true;
-            checkTxt.text = amount + " Soul이 필요합니다.\n업그레이드 하시겠습니까?";
         }
     }
 
@@ -139,7 +139,7 @@ public class SoulShopManager : MonoBehaviour
     /// <returns></returns>
     private int GetRequiredStat(STAT type)
     {
-        return ((int)GameManager.GetStat(type) - 4) * 10;
+        return ((int)GameManager.GetStat(type, true) - 4) * 10;
     }
 
     /// <summary>
@@ -160,6 +160,7 @@ public class SoulShopManager : MonoBehaviour
         {
             case SOULCOROUTINE.STAT:
                 currentCoroutine = StatUp();
+                checkTxt.text = GetRequiredStat(statUpgrading) + " Soul이 필요합니다.\n업그레이드 하시겠습니까?";
                 break;
         }
     }
@@ -172,15 +173,16 @@ public class SoulShopManager : MonoBehaviour
     {
         if (selected)//Ok 버튼을 누름
         {
-            int required = GetRequiredStat(upgrading);
+            int required = GetRequiredStat(statUpgrading);
             isUpgrading = true;
             if (MoneyManager.instance.soul >= required)
             {
                 Debug.Log("Max Stat Upgraded");
-                GameManager.AddStat(upgrading, 1, true);
+                GameManager.AddStat(statUpgrading, 1, true);
                 MoneyManager.instance.AddSoul(-required);
                 MoneyManager.instance.Save();
                 SyncSoulTxt();
+                SyncStatUpgradeTxt();
             }
             else
             {
