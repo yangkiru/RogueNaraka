@@ -13,7 +13,7 @@ public class PointTxtManager : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 200; i++)
         {
             SpawnTxt();
         }
@@ -78,12 +78,15 @@ public class PointTxtManager : MonoBehaviour {
     public void TxtOnSoul(float value, Transform tf, Vector2 offset)
     {
         Text txt = TxtOn(tf, value, Color.cyan, offset);
-        StartCoroutine(MoveUp(txt, 0.5f, 0.01f));
+        StartCoroutine(MoveUp(txt, 1f, 0.03f));
+        StartCoroutine(AlphaDown(txt, 0.3f, 3));
     }
 
     private IEnumerator MoveUp(Text txt, float time, float speed)
     {
         float amount = 0.05f;
+        Rigidbody2D rigid = txt.GetComponent<Rigidbody2D>();
+        rigid.gravityScale = 0;
         for (float t = 0; t < time; t += amount)
         {
             txt.transform.position = new Vector2(txt.transform.position.x, txt.transform.position.y + speed);
@@ -95,7 +98,9 @@ public class PointTxtManager : MonoBehaviour {
     IEnumerator Shoot(Text txt, float time)
     {
         float rnd = Random.Range(-1f, 1f);
-        txt.GetComponent<Rigidbody2D>().AddForce(new Vector2(rnd * 100f, 100));
+        Rigidbody2D rigid = txt.GetComponent<Rigidbody2D>();
+        rigid.gravityScale = 10000;
+        rigid.AddForce(new Vector2(rnd * 100f, 100));
         yield return new WaitForSeconds(time);
         txtPool.EnqueueObjectPool(txt.gameObject);
     }

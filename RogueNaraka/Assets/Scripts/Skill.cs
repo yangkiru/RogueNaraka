@@ -134,7 +134,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         for (int i = 0; i < amount; i++)
         {
             data.manaCost += data.levelUp.manaCost;
-            data.size += data.levelUp.distance;
+            data.size += data.levelUp.size;
             for (int j = 0; j < data.levelUp.values.Length; j++)
             {
                 bool isFind = false;
@@ -248,6 +248,9 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             case (int)SKILL_ID.ICE_BREAK:
                 IceBreak(mp);
                 break;
+            case (int)SKILL_ID.BLOOD_SWAMP:
+                BloodSwamp(mp);
+                break;
         }
 
         Debug.Log(data.name + " Skill Used!");
@@ -274,9 +277,67 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
         BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
-        newData.abilities[0].value += data.values[0].value;
-        newData.effects[0].value += data.effects[0].value;
+        newData.abilities[0].value += data.values[0].value;//time
+        newData.effects[0].value += data.effects[0].value;//ice
         ice.Init(newData, 0, true);
+        StartCoroutine(MeltDown(ice.renderer, newData.abilities[0].value));
         ice.Attack((Vector2)mp, Vector2.zero, Vector2.zero, 0, 0, null, player);
+    }
+
+    void BloodSwamp(Vector3 mp)
+    {
+        for (int i = 0; i < data.values[1].value; i++)//values[1] == blood spawn amount
+        {
+            float rndAngle = Random.Range(0, 360);
+            Vector2 rndPos = new Vector2(Random.Range(-data.size * 0.5f, data.size * 0.5f), Random.Range(-data.size * 0.5f, data.size * 0.5f));
+            Bullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+            BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
+            newData.abilities[0].value += data.values[0].value;//time
+            newData.dealSpeed = data.values[2].value;//dealSpeed
+            blood.Init(newData, 0, true);
+            blood.OnDamaged += SpawnBloodBubble;
+            StartCoroutine(MeltDown(blood.renderer, newData.abilities[0].value));
+            blood.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
+            blood.Attack((Vector2)mp + rndPos, Vector2.zero, Vector2.zero, 0, 0, null, player);
+        }
+    }
+
+    void SpawnBloodBubble(Bullet parent, Unit target)
+    {
+        Bullet bubble = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        Vector2 rndPos = new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+        bubble.Init(data.bulletIds[1], 0, false);
+        bubble.OnDamaged += OnBloodBubbleHit;
+        bubble.Attack((Vector2)target.transform.position + rndPos, Vector2.zero, (player.transform.position - target.transform.position).normalized, 2, 0, null, target);
+    }
+
+    void OnBloodBubbleHit(Bullet parent, Unit target)
+    {
+        if (target != null)
+        {
+            if(!parent.owner.isDeath)
+                parent.owner.GetDamage(data.values[3].value);//values[3] == blood life steal
+            if(!target.isDeath)
+                target.HealHealth(data.values[3].value);
+        }
+    }
+
+    IEnumerator MeltDown(SpriteRenderer renderer, float time)
+    {
+        float alpha = 1;
+        float down = 1 / time;
+        Color color = Color.white;
+        while (time > 0)
+        {
+            color = renderer.color;
+            alpha -= down * Time.deltaTime;
+            color.a = alpha;
+            time -= Time.deltaTime;
+            renderer.color = color;
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.1f);
+        color.a = 1;
+        renderer.color = color;
     }
 }

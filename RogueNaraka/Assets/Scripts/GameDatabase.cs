@@ -232,9 +232,9 @@ public struct Weapon
 [Serializable]
 public struct ShakeData
 {
-    float time;
-    float power;
-    float speed;
+    public float time;
+    public float power;
+    public float gap;
 }
 
 public enum SORTING_LAYER
@@ -253,7 +253,7 @@ public struct BulletData : ICloneable
     public float dealSpeed;
     public float size;
     public float angle; //TRIANGLE, SECTOR 에서 타격 범위
-    public float shake;//터질 때 화면 흔드는 양
+    public ShakeData shake;//터질 때 화면 흔드는 양
     public RuntimeAnimatorController controller;
     public Color color;
     public Ability[] abilities;
@@ -348,7 +348,7 @@ public struct ArmorData
 
 [Serializable]
 enum SKILL_ID
-{ THUNDER_STRIKE, ICE_BREAK }
+{ THUNDER_STRIKE, ICE_BREAK, BLOOD_SWAMP }
 
 [Serializable]
 public struct SkillData:ICloneable
@@ -375,9 +375,17 @@ public struct SkillData:ICloneable
     {
         SkillData clone = (SkillData)this.MemberwiseClone();
         clone.bulletIds = (int[])bulletIds.Clone();
+        for (int i = 0; i < clone.bulletIds.Length; i++)
+            clone.bulletIds[i] = bulletIds[i];
         clone.unitIds = (int[])unitIds.Clone();
+        for (int i = 0; i < clone.unitIds.Length; i++)
+            clone.unitIds[i] = unitIds[i];
         clone.effects = (EffectData[])effects.Clone();
+        for (int i = 0; i < clone.effects.Length; i++)
+            clone.effects[i] = (EffectData)effects[i].Clone();
         clone.values = (ValueData[])values.Clone();
+        for (int i = 0; i < clone.values.Length; i++)
+            clone.values[i] = (ValueData)values[i].Clone();
         return clone;
     }
 
@@ -412,16 +420,21 @@ public struct SkillData:ICloneable
 public struct SkillUpData
 {
     public float manaCost;
-    public float distance;
+    public float size;
     public EffectData[] effects;
     public ValueData[] values;
 }
 
 [Serializable]
-public struct ValueData
+public struct ValueData : ICloneable
 {
     public string name;
     public float value;
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }
 
 [Serializable]

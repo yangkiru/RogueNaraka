@@ -333,65 +333,6 @@ public abstract class Unit : MonoBehaviour {
         }
     }
 
-    public bool AddStat(STAT type, float amount)
-    {
-        switch (type)
-        {
-            case STAT.DMG:
-                if (_data.stat.dmg + amount <= GameManager.GetStat(STAT.DMG, true))
-                {
-                    _data.stat.dmg += amount;
-                    return true;
-                }
-                else return false;
-            case STAT.SPD:
-                if (_data.stat.spd + amount <= GameManager.GetStat(STAT.SPD, true))
-                {
-                    _data.stat.spd += amount;
-                    return true;
-                }
-                else return false;
-            case STAT.TEC:
-                if (_data.stat.tec + amount <= GameManager.GetStat(STAT.TEC, true))
-                {
-                    _data.stat.tec += amount;
-                    return true;
-                }
-                else return false;
-            case STAT.HP:
-                if (_data.stat.hp + amount <= GameManager.GetStat(STAT.HP, true))
-                {
-                    _data.stat.hp += amount;
-                    _health += amount;
-                    return true;
-                }
-                else return false;
-            case STAT.MP:
-                if (_data.stat.mp + amount <= GameManager.GetStat(STAT.MP, true))
-                {
-                    _data.stat.mp += amount;
-                    _mana += amount;
-                    return true;
-                }
-                else return false;
-            case STAT.HPREGEN:
-                if (_data.stat.hpRegen + amount <= GameManager.GetStat(STAT.HPREGEN, true))
-                {
-                    _data.stat.hpRegen += amount;
-                    return true;
-                }
-                else return false;
-            case STAT.MPREGEN:
-                if (_data.stat.mpRegen + amount <= GameManager.GetStat(STAT.MPREGEN, true))
-                {
-                    _data.stat.mpRegen += amount;
-                    return true;
-                }
-                else return false;
-        }
-        return false;
-    }
-
     protected virtual void Attack()
     {
         if (attackable && target && boardManager.isReady)
@@ -503,7 +444,8 @@ public abstract class Unit : MonoBehaviour {
         if (_health + amount > _data.stat.hp)
             amount = _data.stat.hp - _health;
         AddHealth(amount);
-        PointTxtManager.instance.TxtOnHead(amount, transform, Color.green);
+        if(amount > 0)
+            PointTxtManager.instance.TxtOnHead(amount, transform, Color.green);
     }
 
     public void MoveToAttack()
@@ -763,6 +705,13 @@ public abstract class Unit : MonoBehaviour {
                 shadow.animator.SetFloat("x", targetPosition.x - transform.position.x);
                 shadow.animator.SetFloat("y", targetPosition.y - transform.position.y);
             }
+            else
+            {
+                animator.SetFloat("x", velocity.x);
+                animator.SetFloat("y", velocity.y);
+                shadow.animator.SetFloat("x", velocity.x);
+                shadow.animator.SetFloat("y", velocity.y);
+            }
         }
         animator.SetBool("isStun", isStun);
         shadow.animator.SetBool("isStun", isStun);
@@ -807,7 +756,7 @@ public abstract class Unit : MonoBehaviour {
     {
         float _slow = slow * 0.1f * KnowledgeData.GetNegative(knowledge.slow);
         float _ice = ice * 0.1f * KnowledgeData.GetNegative(knowledge.ice);
-        SetSpeed(data.moveSpeed * (1 + ((_data.stat.spd - 1))) * Mathf.Max(0,(1 - _slow - _ice)));//slow마다 10%, ice마다 10% 속도 느려짐
+        SetSpeed(data.moveSpeed * (1 + (0.1f * (_data.stat.spd - 1))) * Mathf.Max(0,(1 - _slow - _ice)));//slow마다 10%, ice마다 10% 속도 느려짐
     }
 
     protected IEnumerator Regen()

@@ -9,7 +9,7 @@ public class Effect : MonoBehaviour {
     [SerializeField][ReadOnly]
     private EffectData _data;
 
-    public SpriteRenderer renderer;
+    public new SpriteRenderer renderer;
     public Unit owner;
 
     public bool isActive
@@ -55,7 +55,7 @@ public class Effect : MonoBehaviour {
 
     private IEnumerator TimeCoroutine()
     {
-        while(_data.time > 0)
+        while(_data.time > 0 && !owner.isDeath)
         {
             yield return null;
             _data.time -= Time.deltaTime;

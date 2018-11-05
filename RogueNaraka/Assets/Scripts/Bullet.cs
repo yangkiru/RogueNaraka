@@ -10,7 +10,9 @@ public class Bullet : MonoBehaviour {
     public Collider2D coll;
 
     private RevolveHolder revolveHolder = null;
-    private Unit owner;
+    public Unit owner
+    { get { return _owner; } }
+    private Unit _owner;
 
     [SerializeField]
     private LayerMask layerMask;
@@ -38,6 +40,8 @@ public class Bullet : MonoBehaviour {
     private bool isMoving;
     private bool isSleep = false;
     private bool isDestroyWithOwner;
+
+    public event System.Action<Bullet, Unit> OnDamaged;
 
     [SerializeField] [ReadOnly]
     private BulletData data;
@@ -116,7 +120,7 @@ public class Bullet : MonoBehaviour {
         guideIncrease = 0;
         guideSpeed = 0;
         revolveHolder = null;
-        owner = null;
+        _owner = null;
         isDestroyWithOwner = false;
         coll.enabled = false;
         colliderRenderer.enabled = false;
@@ -188,7 +192,7 @@ public class Bullet : MonoBehaviour {
             }
             else
             {
-                child.revolveHolder = owner.revolveHolder;
+                child.revolveHolder = _owner.revolveHolder;
                 child.revolveHolder.Add(child.gameObject);
             }
 
@@ -279,7 +283,7 @@ public class Bullet : MonoBehaviour {
     {
         gameObject.SetActive(true);
         if (owner)
-            this.owner = owner;
+            this._owner = owner;
         this.localSpeed = localSpeed;
         this.worldSpeed = worldSpeed;
         //Abilities 체크
@@ -380,7 +384,7 @@ public class Bullet : MonoBehaviour {
         colliderRenderer.enabled = isDynamic;
         if (isSleep)
         {
-            if (isDestroyWithOwner && owner.isDeath)
+            if (isDestroyWithOwner && _owner.isDeath)
                 Destroy();
         }
         else
@@ -458,13 +462,17 @@ public class Bullet : MonoBehaviour {
                                     EffectFunc(unit);
                                     records.Add(hash);
                                     dotTimes.Add(data.dealSpeed);
+                                    OnDamage(unit);
                                     //Debug.Log("records.Count:" + records.Count);
                                 }
                             }
                             else if (hits[i].gameObject.layer == GameDatabase.wallLayer)
                             {
                                 if (!revolveHolder)
+                                {
+                                    OnDamage(null);
                                     Destroy();
+                                }
                             }
                         }
                         if (isDeal)
@@ -494,6 +502,7 @@ public class Bullet : MonoBehaviour {
                                     EffectFunc(unit);
                                     records.Add(hash);
                                     dotTimes.Add(data.dealSpeed);
+                                    OnDamage(unit);
                                 }
                             }
                         }
@@ -540,6 +549,7 @@ public class Bullet : MonoBehaviour {
                                         EffectFunc(unit);
                                         records.Add(hash);
                                         dotTimes.Add(data.dealSpeed);
+                                        OnDamage(unit);
                                     }
                                     else
                                         Debug.Log(name + " not inside of triangle" + hits[i].transform.name);
@@ -576,6 +586,7 @@ public class Bullet : MonoBehaviour {
                             EffectFunc(unit);
                             records.Add(hash);
                             dotTimes.Add(data.dealSpeed);
+                            OnDamage(unit);
                         }
                     }
 
@@ -588,7 +599,16 @@ public class Bullet : MonoBehaviour {
         }
     }
     
-
+    void OnDamage(Unit unit)
+    {
+        if(data.shake.power != 0)
+            Camera.main.GetComponent<CameraShake>().Shake(data.shake);
+        if (OnDamaged != null)
+        {
+            Debug.Log("?");
+            OnDamaged(this, unit);
+        }
+    }
             
 
     public bool IsInsideAngle(float mid, float range, float target)
@@ -674,6 +694,7 @@ public class Bullet : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         //Debug.Log("Destroy");
+        OnDamaged = null;
         BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, true);
     }
 

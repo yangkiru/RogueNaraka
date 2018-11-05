@@ -30,7 +30,7 @@ public class Player : Unit
 
     protected void Update()
     {
-        if (!isPause)
+        if (!isPause && boardManager.isReady)
         {
             CheckDeath();
             if (!isDeath)
@@ -147,8 +147,20 @@ public class Player : Unit
     public void Respawn()
     {
         isWin = false;
-        agent.SetDestination(boardManager.spawnPoint);
+        agent.Stop();
         transform.position = boardManager.spawnPoint;
+        StartCoroutine(WaitForRespawn());
+    }
+
+    IEnumerator WaitForRespawn()
+    {
+        bool isAuto = _isAutoMove;
+        bool isAttack = attackable;
+        _isAutoMove = false;
+        attackable = false;
+        yield return new WaitForSecondsRealtime(1.5f);
+        _isAutoMove = isAuto;
+        attackable = isAttack;
     }
 
     public void Revive(float percent)

@@ -74,6 +74,7 @@ public class LevelUpManager : MonoBehaviour {
                 this.leftStat = leftStat;
             leftStatTxt.text = leftStat + " Points";
             statPnl.SetActive(value);
+            SyncStatUpgradeTxt();
         }
         else
         {
@@ -108,14 +109,14 @@ public class LevelUpManager : MonoBehaviour {
 
     public void StatUp(int type)
     {
-        if (player.AddStat((STAT)type, 1))
+        if (GameManager.AddStat((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");
             if (--leftStat <= 0)
                 rollManager.SetRollPnl(false);
             leftStatTxt.text = leftStat + " Points";
             SyncStatUpgradeTxt();
-            GameManager.instance.SyncDataToSTat();
+            GameManager.instance.SyncPlayerStat();
             GameManager.instance.StatTextUpdate();
         }
         else

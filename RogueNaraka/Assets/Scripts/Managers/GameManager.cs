@@ -93,11 +93,13 @@ public class GameManager : MonoBehaviour {
     private void RandomStat()
     {
         int statPoint = PlayerPrefs.GetInt("statPoint");
+        Debug.Log("statPoint"+statPoint);
         while(statPoint > 0)
         {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
-            if(player.AddStat((STAT)type, 1))
+            if(AddStat((STAT)type, 1))
             {
+                Debug.Log("Yes:" + (STAT)type);
                 statPoint--;
             }
             else
@@ -105,10 +107,16 @@ public class GameManager : MonoBehaviour {
                 int current = (int)GetStatSum(false);
                 int max = (int)GetStatSum(true);
                 if (current == max)
+                {
+                    Debug.Log("Max");
                     return;
+                }
                 //Maxed
             }
         }
+        SyncPlayerStat();
+        player.SetHealth(GetStat(STAT.HP));
+        player.SetMana(GetStat(STAT.MP));
     }
 
     public IEnumerator AutoSave(float time)
@@ -288,19 +296,19 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void SyncDataToSTat()
-    {
-        PlayerPrefs.SetFloat("dmg", player.data.stat.dmg);
-        PlayerPrefs.SetFloat("spd", player.data.stat.spd);
-        PlayerPrefs.SetFloat("tec", player.data.stat.tec);
-        PlayerPrefs.SetFloat("hp", player.data.stat.hp);
-        PlayerPrefs.SetFloat("mp", player.data.stat.mp);
-        PlayerPrefs.SetFloat("hpRegen", player.data.stat.hpRegen);
-        PlayerPrefs.SetFloat("mpRegen", player.data.stat.mpRegen);
-        PlayerPrefs.SetFloat("health", player.health);
-        PlayerPrefs.SetFloat("mana", player.mana);
-        PlayerPrefs.SetInt("stage", boardManager.stage);
-    }
+    //public void SyncDataToStat()
+    //{
+    //    PlayerPrefs.SetFloat("dmg", player.data.stat.dmg);
+    //    PlayerPrefs.SetFloat("spd", player.data.stat.spd);
+    //    PlayerPrefs.SetFloat("tec", player.data.stat.tec);
+    //    PlayerPrefs.SetFloat("hp", player.data.stat.hp);
+    //    PlayerPrefs.SetFloat("mp", player.data.stat.mp);
+    //    PlayerPrefs.SetFloat("hpRegen", player.data.stat.hpRegen);
+    //    PlayerPrefs.SetFloat("mpRegen", player.data.stat.mpRegen);
+    //    PlayerPrefs.SetFloat("health", player.health);
+    //    PlayerPrefs.SetFloat("mana", player.mana);
+    //    PlayerPrefs.SetInt("stage", boardManager.stage);
+    //}
 
     public void SyncStatToData(Stat stat)
     {
@@ -311,6 +319,14 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetFloat("mp", stat.mp);
         PlayerPrefs.SetFloat("hpRegen", stat.hpRegen);
         PlayerPrefs.SetFloat("mpRegen", stat.mpRegen);
+    }
+
+    public void SyncPlayerStat(bool isMax = false)
+    {
+         for (int i = 0; i < (int)STAT.MPREGEN + 1; i++)
+        {
+            player.SetStat((STAT)i, GetStat((STAT)i, isMax));
+        }
     }
 
     public void StatTextUpdate()
@@ -425,6 +441,19 @@ public class GameManager : MonoBehaviour {
                 return PlayerPrefs.GetInt("statPoint");
         }
         return -1;
+    }
+
+    public static bool AddStat(STAT type, float amount)
+    {
+        float value;
+        value = GameManager.GetStat(type, false) + amount;
+        if (value <= GameManager.GetStat(type, true))
+        {
+            SetStat(type, value, false);
+            return true;
+        }
+        else
+            return false;
     }
 
     public static float GetStatSum(bool isMax = false)

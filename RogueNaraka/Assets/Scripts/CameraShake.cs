@@ -13,6 +13,11 @@ public class CameraShake : MonoBehaviour {
     {
         StartCoroutine(RandomMove(time, power, gap));
     }
+
+    public void Shake(ShakeData data)
+    {
+        Shake(data.time, data.power, data.gap);
+    }
     private IEnumerator RandomMove(float time, float power, float gap)
     {
         float t1 = 0, t2 = 0;
@@ -33,13 +38,6 @@ public class CameraShake : MonoBehaviour {
             t2 = 0;
             
             camera.transform.position = origin;
-        }
-    }
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(1))
-        {
-            Shake(time, power, speed);
         }
     }
 }
