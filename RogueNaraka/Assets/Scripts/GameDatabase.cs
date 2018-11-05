@@ -348,7 +348,7 @@ public struct ArmorData
 
 [Serializable]
 enum SKILL_ID
-{ THUNDER_STRIKE, ICE_BREAK, BLOOD_SWAMP }
+{ THUNDER_STRIKE, ICE_BREAK, GENESIS, BLOOD_SWAMP }
 
 [Serializable]
 public struct SkillData:ICloneable

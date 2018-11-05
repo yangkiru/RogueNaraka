@@ -12,6 +12,12 @@ public class IsometricSpriteRenderer : MonoBehaviour {
     {
         StartCoroutine(SetOrder());
     }
+
+    void OnDisable()
+    {
+        add = 0;
+    }
+
     IEnumerator SetOrder ()
     {
         while (true)

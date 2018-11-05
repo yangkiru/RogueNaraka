@@ -17,7 +17,7 @@ public class BoardManager : MonoBehaviour {
     public Vector2 bossPoint;
     public Vector2[] boardRange;//0:min, 1:max
     public ObjectPool enemyPool;//basic 100 counts
-    public ObjectPool bulletPool;//basic 500 counts
+    public ObjectPool bulletPool;//basic 750 counts
     public ObjectPool effectPool;//basic 200 counts
     [ReadOnly]
     public Enemy boss;
@@ -89,9 +89,9 @@ public class BoardManager : MonoBehaviour {
             }
         }
         count = bulletPool.GetCount();
-        if (count < 500)//bullet Pooling
+        if (count < 750)//bullet Pooling
         {
-            for (int i = count; i < 500; i++)
+            for (int i = count; i < 750; i++)
             {
                 GameObject obj = SpawnBulletObj();
                 bulletPool.EnqueueObjectPool(obj);

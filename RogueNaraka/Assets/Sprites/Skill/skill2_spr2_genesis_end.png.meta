@@ -1,13 +1,18 @@
 fileFormatVersion: 2
-guid: 908a962cc4ce35b48a8f80ac2ac4d141
+guid: 3dfba53409af1f641919feb47437490f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: skill3_spr_bloodBubble_0
-    21300002: skill3_spr_bloodBubble_1
-    21300004: skill3_spr_bloodBubble_2
-    21300006: skill3_spr_bloodBubble_3
-    21300008: skill3_spr_bloodBubble_4
-    21300010: skill3_spr_bloodBubble_5
+    21300000: skill2_spr2_genesis_end_0
+    21300002: skill2_spr2_genesis_end_1
+    21300004: skill2_spr2_genesis_end_2
+    21300006: skill2_spr2_genesis_end_3
+    21300008: skill2_spr2_genesis_end_4
+    21300010: skill2_spr2_genesis_end_5
+    21300012: skill2_spr2_genesis_end_6
+    21300014: skill2_spr2_genesis_end_7
+    21300016: skill2_spr2_genesis_end_8
+    21300018: skill2_spr2_genesis_end_9
+    21300020: skill2_spr2_genesis_end_10
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -26,7 +31,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
@@ -90,13 +95,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skill3_spr_bloodBubble_0
+      name: skill2_spr2_genesis_end_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
-        height: 8
+        width: 80
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,19 +109,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 952b4735d1e26d841b258fe9c8c8482e
+      spriteID: 214198f0b1a76834e815b9a5f1f53bb5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill3_spr_bloodBubble_1
+      name: skill2_spr2_genesis_end_1
       rect:
         serializedVersion: 2
-        x: 8
+        x: 80
         y: 0
-        width: 8
-        height: 8
+        width: 80
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +129,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37578f511c97490449bd1a3e7f2ac3c9
+      spriteID: 7315e3404bdafc24da054f6fca238b15
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill3_spr_bloodBubble_2
+      name: skill2_spr2_genesis_end_2
       rect:
         serializedVersion: 2
-        x: 16
+        x: 160
         y: 0
-        width: 8
-        height: 8
+        width: 80
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +149,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e65256ae2107ea14a842c4c12ba3a18c
+      spriteID: b6873bbf86318924ab18b7f57e761a45
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill3_spr_bloodBubble_3
+      name: skill2_spr2_genesis_end_3
       rect:
         serializedVersion: 2
-        x: 24
+        x: 240
         y: 0
-        width: 8
-        height: 8
+        width: 80
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,19 +169,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5eb826db3b7f8345bec97cee9cef846
+      spriteID: ea677b89876974c43987fd1f2a46a166
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill3_spr_bloodBubble_4
+      name: skill2_spr2_genesis_end_4
       rect:
         serializedVersion: 2
-        x: 32
+        x: 320
         y: 0
-        width: 8
-        height: 8
+        width: 80
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,19 +189,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c434cd4406bdb14fac0e35e76ad00d5
+      spriteID: e670048b0910a5445adfd9a1cdd6bea3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill3_spr_bloodBubble_5
+      name: skill2_spr2_genesis_end_5
       rect:
         serializedVersion: 2
-        x: 40
+        x: 400
         y: 0
-        width: 8
-        height: 8
+        width: 80
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +209,107 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebe3bd5f6b4524643b1b6fb8cd7741b3
+      spriteID: b2f7a0b20527d77489e3d9c4974f01b5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skill2_spr2_genesis_end_6
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 80
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2628950a7ab449f41817fcf3ea7d5429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skill2_spr2_genesis_end_7
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 0
+        width: 80
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f57ee9e89d0a22045a5bf280c80b2ca2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skill2_spr2_genesis_end_8
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 80
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1321fc6163c037a4ea79c0940cd4af52
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skill2_spr2_genesis_end_9
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 80
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2187aeae9d292d8459fcebf78012bea1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skill2_spr2_genesis_end_10
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 80
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61a7bc3e1740db74f948c0ad10f90621
       vertices: []
       indices: 
       edges: []
@@ -212,7 +317,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 725813000b5e6c340b8017ae42452232
+    spriteID: ba25acf4891a7b341881d5535289f512
     vertices: []
     indices: 
     edges: []

@@ -182,7 +182,9 @@ public class Bullet : MonoBehaviour {
         child.gameObject.SetActive(true);
 
         child.Teleport(pos);
-        child.renderer.sortingOrder = renderer.sortingOrder + childData.sortingOrder;
+        if(childData.sortingOrder != 0)
+            child.GetComponent<IsometricSpriteRenderer>().add = childData.sortingOrder;
+        
         if (childData.isRevolveTarget)
         {
             if (revolveHolder)
@@ -601,11 +603,10 @@ public class Bullet : MonoBehaviour {
     
     void OnDamage(Unit unit)
     {
-        if(data.shake.power != 0)
+        if (data.shake.power != 0)
             Camera.main.GetComponent<CameraShake>().Shake(data.shake);
         if (OnDamaged != null)
         {
-            Debug.Log("?");
             OnDamaged(this, unit);
         }
     }

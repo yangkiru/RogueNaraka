@@ -1250,7 +1250,7 @@ MonoBehaviour:
     sortingLayer: 0
     dmg: 0
     dealSpeed: 0.1
-    size: 0.15
+    size: 0.1
     angle: 0
     shake:
       time: 0
@@ -1260,7 +1260,83 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 4
-      value: 2
+      value: 5
+    children: []
+    onDestroy: []
+    effects: []
+  - name: beam
+    id: 30
+    type: 4
+    sortingLayer: 0
+    dmg: 0
+    dealSpeed: 0
+    size: 0
+    angle: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+    controller: {fileID: 9100000, guid: 309ae9a11ed36054f991dc2ee6e60bfc, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 1
+    children:
+    - name: beamHit
+      bulletId: 32
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      localSpeed: 0
+      worldSpeed: 0
+      revolveDistance: 0
+      revolveSpeed: 0
+      isRevolveTarget: 0
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isEndWith: 1
+      spawnPoint: {x: -1.766484, y: 0}
+    onDestroy: []
+    effects: []
+  - name: beamHole
+    id: 31
+    type: 4
+    sortingLayer: 2
+    dmg: 0
+    dealSpeed: 0
+    size: 0
+    angle: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+    controller: {fileID: 22100000, guid: ec09c21b7dd1396499cd30867ec46b60, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 3
+      value: 3
+    children: []
+    onDestroy: []
+    effects: []
+  - name: beamHit
+    id: 32
+    type: 5
+    sortingLayer: 2
+    dmg: 1
+    dealSpeed: 0.1
+    size: 0
+    angle: 0
+    shake:
+      time: 0.1
+      power: 0.1
+      gap: 0.1
+    controller: {fileID: 22100000, guid: 3cfb4967a84c4ba4986cf9daba6e75dd, type: 2}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    abilities:
+    - ability: 2
+      value: 1000
     children: []
     onDestroy: []
     effects: []
@@ -1406,11 +1482,37 @@ MonoBehaviour:
       - name: Time
         value: 1
     description: 
+  - name: Genesis
+    bulletIds: 1e0000001f000000
+    unitIds: 
+    spr: {fileID: 21300000, guid: 3c8be8ee2042a0e4bbb154b327514c01, type: 3}
+    id: 2
+    level: 1
+    coolTime: 3
+    coolTimeLeft: 0
+    manaCost: 1.5
+    size: 1
+    isCircleToPlayer: 0
+    isDeath: 0
+    effects: []
+    values:
+    - name: Time
+      value: 0
+    - name: Dmg
+      value: 0.1
+    levelUp:
+      manaCost: 0.5
+      size: 0
+      effects: []
+      values:
+      - name: Dmg
+        value: 0.1
+    description: 
   - name: BloodSwamp
     bulletIds: 1c0000001d000000
     unitIds: 
     spr: {fileID: 21300000, guid: 0b192675c393aa24bb17096185049b2f, type: 3}
-    id: 2
+    id: 3
     level: 1
     coolTime: 3
     coolTimeLeft: 0

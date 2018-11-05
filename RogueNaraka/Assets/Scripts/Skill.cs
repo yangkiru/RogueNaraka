@@ -248,6 +248,9 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             case (int)SKILL_ID.ICE_BREAK:
                 IceBreak(mp);
                 break;
+            case (int)SKILL_ID.GENESIS:
+                Genesis(mp);
+                break;
             case (int)SKILL_ID.BLOOD_SWAMP:
                 BloodSwamp(mp);
                 break;
@@ -289,7 +292,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         for (int i = 0; i < data.values[1].value; i++)//values[1] == blood spawn amount
         {
             float rndAngle = Random.Range(0, 360);
-            Vector2 rndPos = new Vector2(Random.Range(-data.size * 0.5f, data.size * 0.5f), Random.Range(-data.size * 0.5f, data.size * 0.5f));
+            Vector2 rndPos = new Vector2(Random.Range(-data.size * 0.3f, data.size * 0.3f), Random.Range(-data.size * 0.3f, data.size * 0.3f));
             Bullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
             newData.abilities[0].value += data.values[0].value;//time
@@ -305,7 +308,7 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     void SpawnBloodBubble(Bullet parent, Unit target)
     {
         Bullet bubble = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-        Vector2 rndPos = new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+        Vector2 rndPos = new Vector2(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f));
         bubble.Init(data.bulletIds[1], 0, false);
         bubble.OnDamaged += OnBloodBubbleHit;
         bubble.Attack((Vector2)target.transform.position + rndPos, Vector2.zero, (player.transform.position - target.transform.position).normalized, 2, 0, null, target);
@@ -322,10 +325,32 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         }
     }
 
-    IEnumerator MeltDown(SpriteRenderer renderer, float time)
+    void Genesis(Vector3 mp)
     {
-        float alpha = 1;
-        float down = 1 / time;
+        Bullet beam = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        BulletData beamData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
+
+        Bullet hole = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        BulletData holeData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[1]].Clone());
+
+        beamData.abilities[0].value += data.values[0].value;//time
+        float originalHoleTime = holeData.abilities[0].value;
+        holeData.abilities[0].value += beamData.abilities[0].value;
+
+        beam.Init(beamData, data.values[1].value * player.data.stat.tec, true);
+        hole.Init(holeData, 0, true);
+        //renderer, 기존 hole 시간, 빔 시간 - 기존 hole 시간
+        StartCoroutine(MeltDown(hole.renderer, originalHoleTime, beamData.abilities[0].value));
+
+        beam.Attack((Vector2)mp + new Vector2(0, 1.8f), Vector2.zero, Vector2.left, 0, 0, null, player);
+        hole.Attack((Vector2)mp + new Vector2(0, 0.5f), Vector2.zero, Vector2.left, 0, 0, null, player);
+    }
+
+    IEnumerator MeltDown(SpriteRenderer renderer, float time, float wait = 0)
+    {
+        yield return new WaitForSeconds(wait);
+        float alpha = renderer.color.a;
+        float down = alpha / time;
         Color color = Color.white;
         while (time > 0)
         {

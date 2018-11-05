@@ -9027,7 +9027,7 @@ MonoBehaviour:
     values: []
     levelUp:
       manaCost: 0
-      distance: 0
+      size: 0
       effects: []
       values: []
     description: 
@@ -14432,7 +14432,7 @@ MonoBehaviour:
     values: []
     levelUp:
       manaCost: 0
-      distance: 0
+      size: 0
       effects: []
       values: []
     description: 
@@ -15087,7 +15087,7 @@ MonoBehaviour:
     values: []
     levelUp:
       manaCost: 0
-      distance: 0
+      size: 0
       effects: []
       values: []
     description: 

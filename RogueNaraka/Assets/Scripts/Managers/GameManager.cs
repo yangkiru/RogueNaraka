@@ -71,6 +71,11 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerPrefs.SetInt("isFirst", 1);
+            player.Suicide();
+        }
         if(autoSave)
         {
             if(autoSaveCoroutine == null)
@@ -99,7 +104,6 @@ public class GameManager : MonoBehaviour {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
             if(AddStat((STAT)type, 1))
             {
-                Debug.Log("Yes:" + (STAT)type);
                 statPoint--;
             }
             else
