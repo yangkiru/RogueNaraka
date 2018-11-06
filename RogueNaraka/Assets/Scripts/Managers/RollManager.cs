@@ -7,12 +7,11 @@ using UnityEngine.UI;
 public class RollManager : MonoBehaviour {
     public InfiniteScroll scroll;
     public Button rejectBtn;
-    public Button reRollBtn;
     public Image[] showCases;
     public GameObject rollPnl;
     public GameObject selectPnl;
     public Image selectedImg;
-    public OnMouseButton selectedBtn;
+    public Image dragImg;
     public TextMeshProUGUI typeTxt;
     public TextMeshProUGUI nameTxt;
     public TextMeshProUGUI descTxt;
@@ -27,14 +26,15 @@ public class RollManager : MonoBehaviour {
     /// </summary>
     private int target;
 
-    //void Start()
-    //{
-    //    selectedBtn.onUp += Ok;
-    //}
-    
+    public static RollManager instance;
 
-    //RollManager는 시작시 active상태가 false이기 때문에 instance를 사용할 수 없다.
-
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
     public void Init()
     {
         datas = new RollData[showCases.Length];
@@ -65,6 +65,48 @@ public class RollManager : MonoBehaviour {
             LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
             rollPnl.SetActive(value);
         }
+    }
+
+    bool isReRoll;//참이면 ReRoll 재 호출시 ReRoll 진행
+    public void ReRoll(TextMeshProUGUI reRollTxt)
+    {
+        if (scroll.rolling <= 0)
+        {
+            if (!isReRoll)
+            {
+                LoadRollCount();
+                reRollTxt.text = string.Format("{0}Soul", rollCount * 10);
+                isReRoll = true;
+            }
+            else
+            {
+                reRollTxt.text = "ReRoll";
+                isReRoll = false;
+                MoneyManager.instance.UseSoul(rollCount * 10);
+                isClickable = false;
+                LoadRollCount();
+                int last = stopped;
+                stopped = Random.Range(0, 10);//새로운 selected
+                rollCount++;
+                PlayerPrefs.SetInt("rollCount", rollCount);//Roll Count 저장
+                PlayerPrefs.SetInt("stopped", stopped);//저장
+
+                int spin = Random.Range(2, 4);//2~3바퀴
+                scroll.Spin(spin * 10 + stopped - last);
+                StartCoroutine(CheckRollEnd());
+            }
+        }
+    }
+
+    bool isPassed;
+    public void Pass()
+    {
+        if (!isPassed)
+        {
+            isPassed = true;
+        }
+        else
+            SetRollPnl(false);
     }
 
     public void SetSelectPnl(bool value)
@@ -199,16 +241,43 @@ public class RollManager : MonoBehaviour {
         }
     }
 
+    void Update()
+    {
+        if (isMouseDown)
+            OnMouse();
+    }
+
     public void OnMouseClick()
     {
         if (datas[selected].type == ROLL_TYPE.STAT)
             Ok();
     }
 
+    bool isMouseDown;
+    public void OnMouseDown()
+    {
+        isMouseDown = true;
+        dragImg.sprite = GetSprite(datas[selected]);
+        dragImg.gameObject.SetActive(true);
+    }
+
+    public void OnMouse()
+    {
+        dragImg.sprite = GetSprite(datas[selected]);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        dragImg.rectTransform.position = pos;
+        Vector3 local = dragImg.rectTransform.localPosition;
+        local.z = 2;
+        dragImg.rectTransform.localPosition = local;
+    }
+
     public void OnMouseUp()
     {
         if(target != -1)
             Ok();
+        isMouseDown = false;
+        dragImg.sprite = null;
+        dragImg.gameObject.SetActive(false);
     }
 
     public void Ok()

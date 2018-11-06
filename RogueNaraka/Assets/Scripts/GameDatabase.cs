@@ -236,6 +236,7 @@ public struct ShakeData
     public float time;
     public float power;
     public float gap;
+    public bool isOnHit;
 }
 
 public enum SORTING_LAYER

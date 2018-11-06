@@ -402,6 +402,11 @@ public class Bullet : MonoBehaviour {
 
             if (!isDestroy)
             {
+                if (!data.shake.isOnHit && data.shake.power != 0)
+                {
+                    Camera.main.GetComponent<CameraShake>().Shake(data.shake);
+                }
+
                 if (isMoving)
                 {
                     transform.Translate(new Vector3(-localSpeed * basicSpeed * Time.deltaTime, 0, 0));
@@ -603,7 +608,7 @@ public class Bullet : MonoBehaviour {
     
     void OnDamage(Unit unit)
     {
-        if (data.shake.power != 0)
+        if (data.shake.isOnHit && data.shake.power != 0)
             Camera.main.GetComponent<CameraShake>().Shake(data.shake);
         if (OnDamaged != null)
         {

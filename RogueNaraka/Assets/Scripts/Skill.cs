@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Skill : MonoBehaviour
 {
-
+    public Pointer pointer;
     public Image img;
     public Image coolImg;
     public Text levelTxt;
@@ -37,7 +37,7 @@ public class Skill : MonoBehaviour
 
     public void OnMouse()
     {
-        if (data.id != -1 && (!player.isDeath || data.isDeath))
+        if (data.id != -1 && (!player.isDeath || data.isDeath) && !GameManager.instance.isPause)
         {
             //SkillManager.instance.DrawLine(position, true);
             if (data.isCircleToPlayer)
@@ -47,14 +47,15 @@ public class Skill : MonoBehaviour
             }
             else
             {
-                skillManager.GetCircle().MoveCircleToMouse();
+                skillManager.GetCircle().Move(GameManager.GetMousePosition() + new Vector2(0, pointer.offset));
             }
+            pointer.PositionToMouse();
         }
     }
 
     public void OnMouseDown()
     {
-        if (data.id != -1)
+        if (data.id != -1 && !GameManager.instance.isPause)
         {
             isMouseDown = true;
             //skillManager.DrawLine(position, true);
@@ -64,6 +65,7 @@ public class Skill : MonoBehaviour
                 skillManager.GetCircle().SetCircle(data.size);
                 skillManager.GetCircle().SetEnable(true);
             }
+            pointer.SetPointer(true);
         }
     }
 
@@ -80,6 +82,7 @@ public class Skill : MonoBehaviour
             else
                 Debug.Log(name + " CoolTime! : " + data.coolTimeLeft);
         }
+        pointer.SetPointer(false);
     }
 
     public void UseMana()
@@ -231,7 +234,7 @@ public class Skill : MonoBehaviour
 
     public void UseSkill()
     {
-        Vector3 mp = BoardManager.GetMousePosition();
+        Vector3 mp = BoardManager.GetMousePosition() + new Vector3(0, pointer.offset, 0);
         float distance = Vector2.Distance(mp, player.transform.position);
         Vector2 vec = mp - player.transform.position;
         Vector2 pos = mp;
