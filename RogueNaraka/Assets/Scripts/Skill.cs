@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
-    IEndDragHandler
+public class Skill : MonoBehaviour
 {
 
     public Image img;
@@ -15,6 +14,8 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public SkillData data;
     public int position;
     public bool isCool;
+
+    bool isMouseDown;
 
     private SkillManager skillManager
     { get { return SkillManager.instance; } }
@@ -28,25 +29,17 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
             StartCoroutine(CoolTime());
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    void Update()
     {
-        if (data.id != -1)
-        {
-            skillManager.DrawLine(position, true);
-            skillManager.SetLine(true);
-            if (data.size > 0)
-            {
-                skillManager.GetCircle().SetCircle(data.size);
-                skillManager.GetCircle().SetEnable(true);
-            }
-        }
+        if (isMouseDown)
+            OnMouse();
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnMouse()
     {
         if (data.id != -1 && (!player.isDeath || data.isDeath))
         {
-            SkillManager.instance.DrawLine(position, true);
+            //SkillManager.instance.DrawLine(position, true);
             if (data.isCircleToPlayer)
             {
                 skillManager.GetCircle().SetParent(player.transform);
@@ -59,8 +52,24 @@ public class Skill : MonoBehaviour, IBeginDragHandler, IDragHandler,
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnMouseDown()
     {
+        if (data.id != -1)
+        {
+            isMouseDown = true;
+            //skillManager.DrawLine(position, true);
+            //skillManager.SetLine(true);
+            if (data.size > 0)
+            {
+                skillManager.GetCircle().SetCircle(data.size);
+                skillManager.GetCircle().SetEnable(true);
+            }
+        }
+    }
+
+    public void OnMouseUp()
+    {
+        isMouseDown = false;
         skillManager.SetLine(false);
         skillManager.GetCircle().SetEnable(false);
         skillManager.GetCircle().transform.SetParent(null);

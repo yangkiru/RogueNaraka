@@ -46,6 +46,7 @@ public class GameDatabase : ScriptableObject
     public ItemData[] items;
     public ItemSpriteData[] itemSprites;
     public EffectSpriteData[] effects;
+    public Sprite statSprite;
 
     void OnEnable()
     {
@@ -530,3 +531,6 @@ public enum MOVE_TYPE
     RUN,//도망
     REST_RUSH,
 }
+
+[System.Serializable]
+public class ButtonEvent : UnityEngine.Events.UnityEvent { }

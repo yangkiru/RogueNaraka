@@ -81,8 +81,13 @@ public class LevelUpManager : MonoBehaviour {
             if (isLeftStatChanged)
             {
                 Debug.Log("남은 스탯이 있따:" + this.leftStat + " " + _leftStat);
+                
                 if (!lastChance)
                 {
+                    if (GameManager.instance.soulShopManager.shopStage <= 1)
+                    {
+                        GameManager.instance.soulShopManager.SetSoulShop(true);
+                    }
                     lastChance = true;
                     return;
                 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Item : MonoBehaviour
 {
 
     public static Item instance = null;
@@ -21,6 +21,8 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public bool[] isKnown;
 
     public RectTransform[] points;
+
+    bool isMouseDown;
 
     private void Awake()
     {
@@ -219,7 +221,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         points[1].position = new Vector3((mid + mp.x) / 2, (points[0].position.y + points[2].position.y) / 2, 0);
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnMouseDown()
     {
         if (_data.id != -1)
         {
@@ -227,10 +229,17 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             circle.SetCircle(_data.size);
             circle.SetEnable(true);
             line.enabled = true;
+            isMouseDown = true;
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    void Update()
+    {
+        if (isMouseDown)
+            OnMouse();
+    }
+
+    public void OnMouse()
     {
         if (_data.id != -1)
         {
@@ -239,7 +248,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnMouseUp()
     {
         line.enabled = false;
         circle.SetEnable(false);
@@ -250,5 +259,6 @@ public class Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 UseItem();
             }
         }
+        isMouseDown = false;
     }
 }

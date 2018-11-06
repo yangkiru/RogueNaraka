@@ -1620,3 +1620,4 @@ MonoBehaviour:
     type: 7
     spr: {fileID: 21300000, guid: dc99ef82990bb11459fbd221c765d9fb, type: 3}
     particle: {fileID: 0}
+  statSprite: {fileID: 21300000, guid: 708e1f81b47bee448a6f201ccf946acc, type: 3}

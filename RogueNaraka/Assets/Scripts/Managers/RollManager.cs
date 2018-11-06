@@ -8,11 +8,11 @@ public class RollManager : MonoBehaviour {
     public InfiniteScroll scroll;
     public Button rejectBtn;
     public Button reRollBtn;
-    public Button okBtn;
     public Image[] showCases;
     public GameObject rollPnl;
     public GameObject selectPnl;
     public Image selectedImg;
+    public OnMouseButton selectedBtn;
     public TextMeshProUGUI typeTxt;
     public TextMeshProUGUI nameTxt;
     public TextMeshProUGUI descTxt;
@@ -26,6 +26,11 @@ public class RollManager : MonoBehaviour {
     /// <summary> 선택된 SkillUI 위치 및 아이템 획득 여부
     /// </summary>
     private int target;
+
+    //void Start()
+    //{
+    //    selectedBtn.onUp += Ok;
+    //}
     
 
     //RollManager는 시작시 active상태가 false이기 때문에 instance를 사용할 수 없다.
@@ -43,7 +48,6 @@ public class RollManager : MonoBehaviour {
         selected = -1;
         rollCount = 0;
         scroll.Init();
-        okBtn.interactable = false;
         SetSelectPnl(false);
     }
 
@@ -70,7 +74,6 @@ public class RollManager : MonoBehaviour {
         {
             target = -1;
             selected = -1;
-            okBtn.interactable = false;
         }
     }
 
@@ -168,7 +171,6 @@ public class RollManager : MonoBehaviour {
                     nameTxt.text = (data.id + 1) + point;
                     descTxt.text = "You will get " + (data.id + 1) + "Stat " + point.ToLower() + ".";
                     //descTxt.text = (data.id + 1) + "의 스탯 포인트를 획득한다.";
-                    okBtn.interactable = true;
                     break;
                 case ROLL_TYPE.ITEM:
                     selectedImg.sprite = GetSprite(data);
@@ -195,6 +197,18 @@ public class RollManager : MonoBehaviour {
             }
             SetSelectPnl(true);
         }
+    }
+
+    public void OnMouseClick()
+    {
+        if (datas[selected].type == ROLL_TYPE.STAT)
+            Ok();
+    }
+
+    public void OnMouseUp()
+    {
+        if(target != -1)
+            Ok();
     }
 
     public void Ok()
@@ -233,28 +247,25 @@ public class RollManager : MonoBehaviour {
         {
             Debug.Log("Skill Added,position:" + position + " id:" + datas[selected].id);
             target = position;
-            okBtn.interactable = true;
         }
     }
 
     /// <summary>
     /// ItemUI를 클릭하면 호출
     /// </summary>
-    public void SelectItem()
+    public void SelectItem(bool value)
     {
         if (selected != -1 && datas[selected].type == ROLL_TYPE.ITEM)
         {
-            if(target == -1)//선택 전
+            if (value)//선택 전
             {
                 Debug.Log("Item Added");
                 target = 0;
-                okBtn.interactable = true;
             }
             else
             {
                 Debug.Log("Item Canceled");
                 target = -1;
-                okBtn.interactable = false;
             }
         }
     }
@@ -269,7 +280,7 @@ public class RollManager : MonoBehaviour {
                     result = GameDatabase.instance.skills[data.id].spr;
                     break;
                 case ROLL_TYPE.STAT:
-                    result = null;//수정 필요
+                    result = GameDatabase.instance.statSprite;
                     break;
                 case ROLL_TYPE.ITEM:
                     result = GameDatabase.instance.itemSprites[Item.instance.sprIds[data.id]].spr;
