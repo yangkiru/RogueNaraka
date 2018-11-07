@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class Skill : MonoBehaviour
     public Pointer pointer;
     public Image img;
     public Image coolImg;
-    public Text levelTxt;
+    public TextMeshProUGUI levelTxt;
     public Text coolTimeTxt;
     public SkillData data;
     public int position;
@@ -104,7 +105,7 @@ public class Skill : MonoBehaviour
         coolImg.color = Color.clear;
         coolImg.enabled = false;
         coolTimeTxt.text = string.Empty;
-        levelTxt.enabled = false;
+        levelTxt.gameObject.SetActive(false);
         ResetData();
         //Debug.Log(name + " Init");
     }
@@ -120,8 +121,8 @@ public class Skill : MonoBehaviour
         SyncCoolText();
         isCool = true;
         img.color = Color.white;
-        levelTxt.text = data.level.ToString();
-        levelTxt.enabled = true;
+        levelTxt.text = string.Format("+{0}", data.level);
+        levelTxt.gameObject.SetActive(true);
     }
 
     public void ResetData()
@@ -142,7 +143,7 @@ public class Skill : MonoBehaviour
     public void LevelUp(int amount)
     {
         data.level += amount;
-        levelTxt.text = data.level.ToString();
+        levelTxt.text = string.Format("+{0}", data.level);
         for (int i = 0; i < amount; i++)
         {
             data.manaCost += data.levelUp.manaCost;

@@ -1373,6 +1373,27 @@ MonoBehaviour:
     children: []
     onDestroy: []
     effects: []
+  - name: slash
+    id: 33
+    type: 0
+    sortingLayer: 2
+    dmg: 1
+    dealSpeed: 0.25
+    size: 0.75
+    angle: 0
+    shake:
+      time: 1.5
+      power: 0.1
+      gap: 0.01
+      isOnHit: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    color: {r: 0, g: 0, b: 0, a: 1}
+    abilities:
+    - ability: 2
+      value: 1000
+    children: []
+    onDestroy: []
+    effects: []
   weapons:
   - name: MagicBall
     id: 0

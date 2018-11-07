@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: fe99e3072370e984eb4bef3710959054
+guid: d2e8ce940a27a2b419bffa2c9f9a766b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: skill4_spr_scarecrowSoldier_0
-    21300002: skill4_spr_scarecrowSoldier_1
-    21300004: skill4_spr_scarecrowSoldier_2
-    21300006: skill4_spr_scarecrowSoldier_3
-    21300008: skill4_spr_scarecrowSoldier_4
-    21300010: skill4_spr_scarecrowSoldier_5
-    21300012: skill4_spr_scarecrowSoldier_6
-    21300014: skill4_spr_scarecrowSoldier_7
+    21300000: skill4_spr_scarecrowSoldier_hit_0
+    21300002: skill4_spr_scarecrowSoldier_hit_1
+    21300004: skill4_spr_scarecrowSoldier_hit_2
+    21300006: skill4_spr_scarecrowSoldier_hit_3
+    21300008: skill4_spr_scarecrowSoldier_hit_4
+    21300010: skill4_spr_scarecrowSoldier_hit_5
+    21300012: skill4_spr_scarecrowSoldier_hit_6
+    21300014: skill4_spr_scarecrowSoldier_hit_7
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -92,7 +92,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_0
+      name: skill4_spr_scarecrowSoldier_hit_0
       rect:
         serializedVersion: 2
         x: 0
@@ -106,13 +106,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00c00c8b317c6314f8a33ce18e8af058
+      spriteID: 220036d5dbf6ce341bc834ea1b30bd00
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_1
+      name: skill4_spr_scarecrowSoldier_hit_1
       rect:
         serializedVersion: 2
         x: 64
@@ -126,13 +126,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f83aedf96f813046b3f226a1ee31f8f
+      spriteID: df198b8686a97e542b75fd379aa36162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_2
+      name: skill4_spr_scarecrowSoldier_hit_2
       rect:
         serializedVersion: 2
         x: 128
@@ -146,13 +146,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 321a6b612ce05ae4b864d0ffec772387
+      spriteID: dae0136630bac44418384aeb23be010c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_3
+      name: skill4_spr_scarecrowSoldier_hit_3
       rect:
         serializedVersion: 2
         x: 192
@@ -166,13 +166,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f5ac49967a1ef44f90bf8220f9297f5
+      spriteID: cefb30096d673484e9e2867907834a1f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_4
+      name: skill4_spr_scarecrowSoldier_hit_4
       rect:
         serializedVersion: 2
         x: 256
@@ -186,13 +186,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59abedbce7ff05c4894c69ef9e5d96c1
+      spriteID: 99c905396dd50eb4abdb2cb9a091e7cb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_5
+      name: skill4_spr_scarecrowSoldier_hit_5
       rect:
         serializedVersion: 2
         x: 320
@@ -206,13 +206,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11077a3e1ae97b5468e674a10e7e35d8
+      spriteID: 93d344e6734c66e4892197a9133db3e4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_6
+      name: skill4_spr_scarecrowSoldier_hit_6
       rect:
         serializedVersion: 2
         x: 384
@@ -226,13 +226,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8781447ed0579fd44ab7cd3d90477854
+      spriteID: ab33e25de6f6e1a4db8eef4a51866222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill4_spr_scarecrowSoldier_7
+      name: skill4_spr_scarecrowSoldier_hit_7
       rect:
         serializedVersion: 2
         x: 448
@@ -246,7 +246,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96a00bfcf119d3b42acdb6ab05d25c66
+      spriteID: bdf47ee330eb1c641a2271cf6eeb3e2d
       vertices: []
       indices: 
       edges: []
@@ -254,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e0c4a903291c66b47ab5ad9256f7aa2a
+    spriteID: 07c54f1c7f62acb42a1ea8be5a2d6e14
     vertices: []
     indices: 
     edges: []

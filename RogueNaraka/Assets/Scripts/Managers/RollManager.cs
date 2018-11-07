@@ -15,6 +15,7 @@ public class RollManager : MonoBehaviour {
     public TextMeshProUGUI typeTxt;
     public TextMeshProUGUI nameTxt;
     public TextMeshProUGUI descTxt;
+    public TextMeshProUGUI[] statTxts;
 
     public int selected;
     public int stopped;
@@ -49,6 +50,32 @@ public class RollManager : MonoBehaviour {
         rollCount = 0;
         scroll.Init();
         SetSelectPnl(false);
+        SetStatTxt(false);
+    }
+
+    void SetStatTxt(bool active, int position = -1)
+    {
+        if (position == -1)
+        {
+            for (int i = 0; i < statTxts.Length; i++)
+            {
+                if (active && datas[i].type == ROLL_TYPE.STAT)
+                {
+                    statTxts[i].text = string.Format("+{0}", datas[i].id + 1);
+                    statTxts[i].gameObject.SetActive(true);
+                }
+                else
+                    statTxts[i].gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (active && datas[position].type == ROLL_TYPE.STAT)
+            {
+                statTxts[position].text = string.Format("+{0}", datas[position].id + 1);
+                statTxts[position].gameObject.SetActive(true);
+            }
+        }
     }
 
     public void SetRollPnl(bool value)
@@ -441,6 +468,7 @@ public class RollManager : MonoBehaviour {
                 SetSprite(i, GetSprite(datas[i]));
             }
         }
+        SetStatTxt(true);
         Roll();
     }
 
