@@ -23,8 +23,9 @@ public class RollManager : MonoBehaviour {
     public RollData[] datas;
     private int rollCount;
     private bool isSkillSelected;
-    /// <summary> 선택된 SkillUI 위치 및 아이템 획득 여부
-    /// </summary>
+
+    public bool isStatTxt;
+    //선택된 SkillUI 위치 및 아이템 획득 여부
     private int target;
 
     public static RollManager instance;
@@ -50,11 +51,12 @@ public class RollManager : MonoBehaviour {
         rollCount = 0;
         scroll.Init();
         SetSelectPnl(false);
-        SetStatTxt(false);
     }
 
     void SetStatTxt(bool active, int position = -1)
     {
+        if (!isStatTxt)
+            return;
         if (position == -1)
         {
             for (int i = 0; i < statTxts.Length; i++)
@@ -75,7 +77,10 @@ public class RollManager : MonoBehaviour {
                 statTxts[position].text = string.Format("+{0}", datas[position].id + 1);
                 statTxts[position].gameObject.SetActive(true);
             }
+            else
+                statTxts[position].gameObject.SetActive(false);
         }
+        Debug.Log("SetStatTxt");
     }
 
     public void SetRollPnl(bool value)
@@ -283,9 +288,12 @@ public class RollManager : MonoBehaviour {
     bool isMouseDown;
     public void OnMouseDown()
     {
-        isMouseDown = true;
-        dragImg.sprite = GetSprite(datas[selected]);
-        dragImg.gameObject.SetActive(true);
+        if (datas[selected].type != ROLL_TYPE.STAT)
+        {
+            isMouseDown = true;
+            dragImg.sprite = GetSprite(datas[selected]);
+            dragImg.gameObject.SetActive(true);
+        }
     }
 
     public void OnMouse()

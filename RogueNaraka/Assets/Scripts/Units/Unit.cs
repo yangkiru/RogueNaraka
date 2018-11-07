@@ -391,9 +391,14 @@ public abstract class Unit : MonoBehaviour {
             holder = revolveHolder;
             attackCoolTime = 1000;
         }
-        bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
+        AttackBullet(bullet, vec, holder);
         isBeforeAttack = false;
         isAfterAttack = true;
+    }
+
+    protected virtual void AttackBullet(Bullet bullet, Vector2 vec, RevolveHolder holder)
+    {
+        bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
     }
 
     protected virtual IEnumerator AttackCool()

@@ -16,7 +16,8 @@ public class Shadow : MonoBehaviour
 
         transform.localPosition = origin.data.shadowPos;
 
-        pixelRotation.isRotate = origin.data.isStanding;
+        //pixelRotation.isRotate = origin.data.isStanding;
+        pixelRotation.isRotate = true;
         if (!Application.isPlaying && pixelRotation.isRotate)
         {
             pixelRotation.Awake();

@@ -37,11 +37,6 @@ public class BoardManager : MonoBehaviour {
             instance = this;
     }
 
-    private void Start()
-    {
-        isStart = true;
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -240,7 +235,10 @@ public class BoardManager : MonoBehaviour {
         string text = "STAGE " + _stage.ToString();
         stageTxt.text = string.Empty;
         while (!isStart)
-            yield return new WaitForSecondsRealtime(0.1f);
+        {
+            isStart = true;
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
         stageTxt.color = Color.white;
         //Appear
         for (int i = 0; i < text.Length; i++)

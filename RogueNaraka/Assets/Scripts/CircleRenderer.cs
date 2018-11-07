@@ -96,15 +96,6 @@ public class CircleRenderer : MonoBehaviour {
         line.endWidth = endWidth;
     }
 
-    public void Spin()
-    {
-        transform.Rotate(0, 0, spinAmount);
-    }
-    public void Spin(float amount)
-    {
-        spinAmount = amount;
-        Spin();
-    }
 
     public void MoveCircleToMouse()
     {

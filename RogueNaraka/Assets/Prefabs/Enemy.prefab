@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861804c0f8ef0934fb4a6ba10ba7bc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Angle: 225
+  Angle: 135
   Filter: 0
   PixelsPerUnit: 32
   AllowResize: 0
@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb23cb9942db7bd469a59eb3594cac53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  add: 0
 --- !u!114 &114237565845228052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,6 +275,8 @@ MonoBehaviour:
   _health: 0
   _mana: 0
   poison: 0
+  slow: 0
+  ice: 0
   _isAutoMove: 1
   _weapon:
     name: 
@@ -427,7 +430,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.54901963}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -470,7 +473,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1498647319
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

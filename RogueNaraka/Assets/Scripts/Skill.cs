@@ -267,6 +267,9 @@ public class Skill : MonoBehaviour
             case (int)SKILL_ID.BLOOD_SWAMP:
                 BloodSwamp(mp);
                 break;
+            case (int)SKILL_ID.SCARECROWSOLDIER:
+                ScarecrowSoldier(mp);
+                break;
         }
 
         Debug.Log(data.name + " Skill Used!");
@@ -347,6 +350,7 @@ public class Skill : MonoBehaviour
         BulletData holeData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[1]].Clone());
 
         beamData.abilities[0].value += data.values[0].value;//time
+        beamData.shake.time = beamData.abilities[0].value;
         float originalHoleTime = holeData.abilities[0].value;
         holeData.abilities[0].value += beamData.abilities[0].value;
 
@@ -357,6 +361,15 @@ public class Skill : MonoBehaviour
 
         beam.Attack((Vector2)mp + new Vector2(0, 1.8f), Vector2.zero, Vector2.left, 0, 0, null, player);
         hole.Attack((Vector2)mp + new Vector2(0, 0.5f), Vector2.zero, Vector2.left, 0, 0, null, player);
+    }
+
+    void ScarecrowSoldier(Vector3 mp)
+    {
+        Unit soldier = BoardManager.instance.enemyPool.DequeueObjectPool().GetComponent<Unit>();
+
+        soldier.transform.position = mp;
+        soldier.SyncData(GameDatabase.instance.spawnables[data.unitIds[0]], true);
+        soldier.gameObject.SetActive(true);
     }
 
     IEnumerator MeltDown(SpriteRenderer renderer, float time, float wait = 0)

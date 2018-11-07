@@ -341,17 +341,17 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         private void OnDrawGizmos()
         {
-            UnityEditor.Handles.BeginGUI();
-            GUI.color = Color.white;
-            string text = " Vertices: " + VerticesCount + " ";
-            var view = UnityEditor.SceneView.currentDrawingSceneView;
-            Vector3 screenPos = view.camera.WorldToScreenPoint(gameObject.transform.position);
-            Vector2 size = GUI.skin.label.CalcSize(new GUIContent(text));
-            GUI.skin.box.normal.background = blackBackground;
-            Rect rect = new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y);
-            GUI.Box(rect, GUIContent.none);
-            GUI.Label(rect, text);
-            UnityEditor.Handles.EndGUI();
+            //UnityEditor.Handles.BeginGUI();
+            //GUI.color = Color.white;
+            //string text = " Vertices: " + VerticesCount + " ";
+            //var view = UnityEditor.SceneView.currentDrawingSceneView;
+            //Vector3 screenPos = view.camera.WorldToScreenPoint(gameObject.transform.position);
+            //Vector2 size = GUI.skin.label.CalcSize(new GUIContent(text));
+            //GUI.skin.box.normal.background = blackBackground;
+            //Rect rect = new Rect(screenPos.x - (size.x / 2), -screenPos.y + view.position.height + 4, size.x, size.y);
+            //GUI.Box(rect, GUIContent.none);
+            //GUI.Label(rect, text);
+            //UnityEditor.Handles.EndGUI();
         }
 
         private void AddEditorCache(ref PolygonParameters p, List<Vector2[]> list)

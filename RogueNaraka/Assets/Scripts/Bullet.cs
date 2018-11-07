@@ -302,7 +302,10 @@ public class Bullet : MonoBehaviour {
             if (data.type != BULLET_TYPE.NONE)//NONE 인 경우는 holder.Add 생략
                 revolve.Add(gameObject);
         }
-
+        if (!data.shake.isOnHit && data.shake.power != 0)
+        {
+            Camera.main.GetComponent<CameraShake>().Shake(data.shake);
+        }
         SpawnChildren(data.children);
     }
 
@@ -402,11 +405,6 @@ public class Bullet : MonoBehaviour {
 
             if (!isDestroy)
             {
-                if (!data.shake.isOnHit && data.shake.power != 0)
-                {
-                    Camera.main.GetComponent<CameraShake>().Shake(data.shake);
-                }
-
                 if (isMoving)
                 {
                     transform.Translate(new Vector3(-localSpeed * basicSpeed * Time.deltaTime, 0, 0));

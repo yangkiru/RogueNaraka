@@ -212,6 +212,40 @@ MonoBehaviour:
       stun: 0
       slow: 0
       gravity: 0
+  spawnables:
+  - name: ScarecrowSoldier
+    id: 0
+    cost: 0
+    stage: 0
+    weaponId: 7
+    weaponLevel: 0
+    stat:
+      dmg: 1
+      spd: 0
+      tec: 0
+      hp: 5
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: 184c384e313182a43afa874a8da647ce, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 1
+    isStanding: 1
+    move: 1
+    moveDelay: 0
+    moveDistance: 0
+    minDistance: 0
+    maxDistance: 0
+    moveSpeed: 0
+    shadowPos: {x: 0, y: -1}
+    knowledge:
+      fire: 0
+      ice: 0
+      poison: 0
+      knockBack: 0
+      stun: 0
+      slow: 0
+      gravity: 0
   playerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -1186,7 +1220,7 @@ MonoBehaviour:
     size: 0
     angle: 0
     shake:
-      time: 0.1
+      time: 0.2
       power: 0.025
       gap: 0.01
       isOnHit: 1
@@ -1209,7 +1243,7 @@ MonoBehaviour:
     size: 0
     angle: 0
     shake:
-      time: 0.1
+      time: 0.2
       power: 0.025
       gap: 0.01
       isOnHit: 1
@@ -1303,9 +1337,9 @@ MonoBehaviour:
     size: 0
     angle: 0
     shake:
-      time: 0
-      power: 0
-      gap: 0
+      time: 0.5
+      power: 0.1
+      gap: 0.01
       isOnHit: 0
     controller: {fileID: 9100000, guid: 309ae9a11ed36054f991dc2ee6e60bfc, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -1361,12 +1395,12 @@ MonoBehaviour:
     size: 0
     angle: 0
     shake:
-      time: 1.5
-      power: 0.1
+      time: 0
+      power: 0
       gap: 0.01
       isOnHit: 0
     controller: {fileID: 22100000, guid: 3cfb4967a84c4ba4986cf9daba6e75dd, type: 2}
-    color: {r: 0, g: 0, b: 0, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 0}
     abilities:
     - ability: 2
       value: 1000
@@ -1375,22 +1409,22 @@ MonoBehaviour:
     effects: []
   - name: slash
     id: 33
-    type: 0
-    sortingLayer: 2
+    type: 5
+    sortingLayer: 0
     dmg: 1
     dealSpeed: 0.25
     size: 0.75
     angle: 0
     shake:
-      time: 1.5
-      power: 0.1
-      gap: 0.01
+      time: 0
+      power: 0
+      gap: 0
       isOnHit: 0
-    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
-    color: {r: 0, g: 0, b: 0, a: 1}
+    controller: {fileID: 22100000, guid: 7769a4238a4f50a4abd5ed0659961ab8, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
-    - ability: 2
-      value: 1000
+    - ability: 3
+      value: 1
     children: []
     onDestroy: []
     effects: []
@@ -1463,6 +1497,16 @@ MonoBehaviour:
     type: 0
     beforeAttackDelay: 0
     afterAttackDelay: 3
+    localSpeed: 0
+    worldSpeed: 0
+  - name: ScarecrowSlash
+    id: 7
+    level: 0
+    startBulletId: 21000000
+    spawnPoint: {x: 0, y: 0}
+    type: 0
+    beforeAttackDelay: 0
+    afterAttackDelay: 0.5
     localSpeed: 0
     worldSpeed: 0
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
@@ -1597,6 +1641,26 @@ MonoBehaviour:
         value: 1
       - name: LifeSteal
         value: 0.1
+    description: 
+  - name: ScarecrowSoldier
+    bulletIds: 21000000
+    unitIds: 00000000
+    spr: {fileID: 21300000, guid: caaeff1be02fc8144845d3e17ffe77b9, type: 3}
+    id: 4
+    level: 1
+    coolTime: 3
+    coolTimeLeft: 0
+    manaCost: 1
+    size: 1
+    isCircleToPlayer: 1
+    isDeath: 0
+    effects: []
+    values: []
+    levelUp:
+      manaCost: 0.25
+      size: 0.25
+      effects: []
+      values: []
     description: 
   items:
   - name: HealPotion

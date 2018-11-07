@@ -33,6 +33,7 @@ public class GameDatabase : ScriptableObject
     public UnitData playerBase;
     public UnitData[] enemies;
     public UnitData[] bosses;
+    public UnitData[] spawnables;
     public LayerMask playerMask;
     public LayerMask unitMask;
     public LayerMask friendlyMask;
@@ -350,7 +351,7 @@ public struct ArmorData
 
 [Serializable]
 enum SKILL_ID
-{ THUNDER_STRIKE, ICE_BREAK, GENESIS, BLOOD_SWAMP }
+{ THUNDER_STRIKE, ICE_BREAK, GENESIS, BLOOD_SWAMP, SCARECROWSOLDIER }
 
 [Serializable]
 public struct SkillData:ICloneable

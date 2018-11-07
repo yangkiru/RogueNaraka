@@ -32,8 +32,8 @@ public class CameraShake : MonoBehaviour {
             while (t2 <= gap)
             {
                 yield return null;
-                t1 += Time.fixedUnscaledDeltaTime;
-                t2 += Time.fixedUnscaledDeltaTime;
+                t1 += Time.deltaTime;
+                t2 += Time.deltaTime;
             }
             t2 = 0;
             
