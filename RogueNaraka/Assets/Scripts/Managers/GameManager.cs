@@ -275,6 +275,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("weaponId", playerBase.weaponId);
         PlayerPrefs.SetInt("weaponLevel", playerBase.weaponLevel);
         SkillManager.instance.ResetSave();
+        MoneyManager.instance.Reset();
         Item.instance.ResetSave();
         Item.instance.Load();
         soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
@@ -363,7 +364,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public IEnumerator OnEnd()
     {
-        moneyManager.CollectedSoulToSoul();
+        moneyManager.RefineSoul();
         PlayerPrefs.SetInt("isRun", 0);
         Save();
         Debug.Log("End");

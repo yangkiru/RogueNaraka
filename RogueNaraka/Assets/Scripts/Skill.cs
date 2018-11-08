@@ -76,7 +76,7 @@ public class Skill : MonoBehaviour
         skillManager.SetLine(false);
         skillManager.GetCircle().SetEnable(false);
         skillManager.GetCircle().transform.SetParent(null);
-        if (data.id != -1 && BoardManager.IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
+        if (data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
         {
             if (data.coolTimeLeft <= 0)
                 UseSkill();
@@ -93,7 +93,13 @@ public class Skill : MonoBehaviour
 
     public bool IsMana()
     {
-        return player.mana >= data.manaCost;
+        bool result = player.mana >= data.manaCost;
+        if (!result)
+        {
+            ManaScript.instance.StartCoroutine(ManaScript.instance.NeedMana(data.manaCost));
+            ManaScript.instance.StartCoroutine(ManaScript.instance.NoMana());
+        }
+        return result;
     }
 
     public void Init()

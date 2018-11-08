@@ -27,9 +27,9 @@ public class Boss0 : Enemy {
 
     protected override void OnDeath()
     {
-        MoneyManager.instance.AddCollectedSoul(-data.cost);//soul을 지급했으니 취소
         MoneyManager.instance.AddSoul(data.cost);
-        base.OnDeath();
+        //Debug.Log("cost:" + data.cost + " enemy dead");
+        boardManager.enemyPool.EnqueueObjectPool(gameObject);
     }
 
     protected override void MoveCheck()

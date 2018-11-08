@@ -64,11 +64,10 @@ public class RollManager : MonoBehaviour {
                 if (active && datas[i].type == ROLL_TYPE.STAT)
                 {
                     statTxts[i].text = string.Format("+{0}", datas[i].id + 1);
-                    statTxts[i].gameObject.SetActive(true);
-                    StartCoroutine(ResetPosition(statTxts[i].rectTransform));
+                    statTxts[i].alpha = 1;
                 }
                 else
-                    statTxts[i].gameObject.SetActive(false);
+                    statTxts[i].alpha = 0;
             }
         }
         else
@@ -76,20 +75,10 @@ public class RollManager : MonoBehaviour {
             if (active && datas[position].type == ROLL_TYPE.STAT)
             {
                 statTxts[position].text = string.Format("+{0}", datas[position].id + 1);
-                statTxts[position].gameObject.SetActive(true);
-                StartCoroutine(ResetPosition(statTxts[position].rectTransform));
+                statTxts[position].alpha = 1;
             }
             else
-                statTxts[position].gameObject.SetActive(false);
-        }
-    }
-
-    IEnumerator ResetPosition(RectTransform r)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            yield return null;
-            r.localPosition = Vector3.zero;
+                statTxts[position].alpha = 0;
         }
     }
 

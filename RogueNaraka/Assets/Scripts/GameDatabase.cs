@@ -265,6 +265,7 @@ public struct BulletData : ICloneable
     public int id;
     public BULLET_TYPE type;
     public SORTING_LAYER sortingLayer;
+    public float animationSpeed;
     public float dmg;
     public float dealSpeed;
     public float size;

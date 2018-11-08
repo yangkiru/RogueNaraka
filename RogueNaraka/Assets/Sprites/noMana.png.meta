@@ -8,6 +8,12 @@ TextureImporter:
     21300006: manaNo_3
     21300008: manaNo_4
     21300010: manaNo_5
+    21300012: noMana_0
+    21300014: noMana_1
+    21300016: noMana_2
+    21300018: noMana_3
+    21300020: noMana_4
+    21300022: noMana_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,7 +96,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: manaNo_0
+      name: noMana_0
       rect:
         serializedVersion: 2
         x: 0
@@ -104,13 +110,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65f9538de7e62dc4ca9e07dc7c9a5170
+      spriteID: 8082d9b4780c4f045b4e5747938f4f03
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: manaNo_1
+      name: noMana_1
       rect:
         serializedVersion: 2
         x: 103
@@ -124,13 +130,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c3a8968b8858b14bb8d5090670b3f58
+      spriteID: 28b0b208d5a8094459270232a573333f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: manaNo_2
+      name: noMana_2
       rect:
         serializedVersion: 2
         x: 206
@@ -144,13 +150,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af53efa4487dd9f40b5a0b567d3231a7
+      spriteID: 4c0eb0b38635e0a4ba7e5610f09566d2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: manaNo_3
+      name: noMana_3
       rect:
         serializedVersion: 2
         x: 309
@@ -164,13 +170,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08923590a34322746abb888f1b494098
+      spriteID: dc29f3fb4824bc549a1462a40495052f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: manaNo_4
+      name: noMana_4
       rect:
         serializedVersion: 2
         x: 412
@@ -184,13 +190,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc4c55f4466e0c14c8da956f31fc2c88
+      spriteID: c9575e785057f8f44aed949a9a0af2f2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: manaNo_5
+      name: noMana_5
       rect:
         serializedVersion: 2
         x: 515
@@ -204,7 +210,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd5c4448547f34743bf9f2eac74523e4
+      spriteID: e2630a23dbb32534fa4d4823e3baae79
       vertices: []
       indices: 
       edges: []

@@ -60,7 +60,7 @@ public class Enemy : Unit {
     protected override void OnDeath()
     {
         base.OnDeath();
-        MoneyManager.instance.AddCollectedSoul(data.cost);
+        MoneyManager.instance.AddUnrefinedSoul(data.cost);
         //Debug.Log("cost:" + data.cost + " enemy dead");
         boardManager.enemyPool.EnqueueObjectPool(gameObject);
     }

@@ -299,6 +299,7 @@ MonoBehaviour:
     id: 0
     type: 0
     sortingLayer: 0
+    animationSpeed: 1
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -350,6 +351,7 @@ MonoBehaviour:
     id: 1
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -417,6 +419,7 @@ MonoBehaviour:
     id: 2
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -500,6 +503,7 @@ MonoBehaviour:
     id: 3
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -599,6 +603,7 @@ MonoBehaviour:
     id: 4
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.2
     dealSpeed: 0.1
     size: 0.3
@@ -622,6 +627,7 @@ MonoBehaviour:
     id: 5
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.3
     dealSpeed: 0.1
     size: 0.5
@@ -645,6 +651,7 @@ MonoBehaviour:
     id: 6
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.4
     dealSpeed: 0.2
     size: 0.8
@@ -668,6 +675,7 @@ MonoBehaviour:
     id: 7
     type: 4
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 0.3
@@ -689,6 +697,7 @@ MonoBehaviour:
     id: 8
     type: 3
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.2
     size: 0.5
@@ -710,6 +719,7 @@ MonoBehaviour:
     id: 9
     type: 3
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.2
     size: 1
@@ -731,6 +741,7 @@ MonoBehaviour:
     id: 10
     type: 3
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.2
     size: 1
@@ -752,6 +763,7 @@ MonoBehaviour:
     id: 11
     type: 3
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.2
     size: 0.62
@@ -805,6 +817,7 @@ MonoBehaviour:
     id: 12
     type: 3
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.1
     dealSpeed: 0.2
     size: 1
@@ -858,6 +871,7 @@ MonoBehaviour:
     id: 13
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.2
     size: 0.3
@@ -895,6 +909,7 @@ MonoBehaviour:
     id: 14
     type: 4
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 1
@@ -916,6 +931,7 @@ MonoBehaviour:
     id: 15
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0
     size: 0.09
@@ -937,6 +953,7 @@ MonoBehaviour:
     id: 16
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.5
     dealSpeed: 1
     size: 0.5
@@ -946,7 +963,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    controller: {fileID: 22100000, guid: de4f0b683ce4b29408b77ee3c074a43b, type: 2}
+    controller: {fileID: 9100000, guid: 236f9fcbffc638c428d2dab3b5530725, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     abilities:
     - ability: 3
@@ -958,6 +975,7 @@ MonoBehaviour:
     id: 17
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.5
     dealSpeed: 0.5
     size: 0.35
@@ -995,6 +1013,7 @@ MonoBehaviour:
     id: 18
     type: 4
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 0.5
@@ -1016,6 +1035,7 @@ MonoBehaviour:
     id: 19
     type: 4
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1053,6 +1073,7 @@ MonoBehaviour:
     id: 20
     type: 4
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1106,6 +1127,7 @@ MonoBehaviour:
     id: 21
     type: 4
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1175,6 +1197,7 @@ MonoBehaviour:
     id: 22
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 1
     size: 0.3
@@ -1198,6 +1221,7 @@ MonoBehaviour:
     id: 23
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 1
     size: 0.3
@@ -1225,6 +1249,7 @@ MonoBehaviour:
     id: 24
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.2
     size: 0.5
@@ -1248,6 +1273,7 @@ MonoBehaviour:
     id: 25
     type: 5
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.1
     dealSpeed: 0.2
     size: 0
@@ -1271,6 +1297,7 @@ MonoBehaviour:
     id: 26
     type: 5
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0.1
     dealSpeed: 0.2
     size: 0
@@ -1294,6 +1321,7 @@ MonoBehaviour:
     id: 27
     type: 5
     sortingLayer: 2
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 1
     size: 0
@@ -1321,6 +1349,7 @@ MonoBehaviour:
     id: 28
     type: 5
     sortingLayer: 2
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 1
     size: 0
@@ -1344,6 +1373,7 @@ MonoBehaviour:
     id: 29
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0.1
     size: 0.1
@@ -1365,6 +1395,7 @@ MonoBehaviour:
     id: 30
     type: 4
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1402,6 +1433,7 @@ MonoBehaviour:
     id: 31
     type: 4
     sortingLayer: 2
+    animationSpeed: 0
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1423,6 +1455,7 @@ MonoBehaviour:
     id: 32
     type: 5
     sortingLayer: 2
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.1
     size: 0
@@ -1444,6 +1477,7 @@ MonoBehaviour:
     id: 33
     type: 0
     sortingLayer: 0
+    animationSpeed: 0
     dmg: 1
     dealSpeed: 0.25
     size: 0.75
@@ -1501,7 +1535,7 @@ MonoBehaviour:
     beforeAttackDelay: 0
     afterAttackDelay: 1
     localSpeed: 0
-    worldSpeed: 1
+    worldSpeed: 2
   - name: MagicSqaure
     id: 4
     level: 0

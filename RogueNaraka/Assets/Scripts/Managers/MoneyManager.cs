@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MoneyManager : MonoBehaviour {
 
-    public TMPro.TextMeshProUGUI soulTxt;
+    public TextMeshProUGUI soulTxt;
+    public TextMeshProUGUI unrefinedSoulTxt;
 
     private Vector2 soulSpawnPosition;
 
-    public int collectedSoul
+    public int unrefinedSoul
     {
-        get { return _collectedSoul; }
+        get { return _unrefinedSoul; }
     }
     [SerializeField][ReadOnly]
-    private int _collectedSoul;
+    private int _unrefinedSoul;
     public int soul
     {
         get { return _soul; }
@@ -32,19 +34,19 @@ public class MoneyManager : MonoBehaviour {
             Destroy(gameObject);
     }
 
-    public void SetCollectedSoul(int value)
+    public void SetUnrefinedSoul(int value)
     {
-        _collectedSoul = value;
+        _unrefinedSoul = value;
     }
 
-    public void AddCollectedSoul(int value)
+    public void AddUnrefinedSoul(int value)
     {
-        if (_collectedSoul + value >= 0)
-            _collectedSoul += value;
+        if (_unrefinedSoul + value >= 0)
+            _unrefinedSoul += value;
         else
-            _collectedSoul = 0;
+            _unrefinedSoul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulSpawnPosition);
+        PointTxtManager.instance.TxtOnSoul(value, unrefinedSoulTxt.transform, soulSpawnPosition);
     }
 
     public void SetSoul(int value)
@@ -76,24 +78,30 @@ public class MoneyManager : MonoBehaviour {
             return false;
     }
 
-    public void CollectedSoulToSoul()
+    public void RefineSoul()
     {
-        if(_collectedSoul > 0)
-            AddSoul(_collectedSoul);
-        SetCollectedSoul(0);
+        if(_unrefinedSoul > 0)
+            AddSoul(_unrefinedSoul);
+        SetUnrefinedSoul(0);
         Save();
     }
 
     public void Save()
     {
-        PlayerPrefs.SetInt("collectedSoul", _collectedSoul);
+        PlayerPrefs.SetInt("unrefinedSoul", _unrefinedSoul);
         PlayerPrefs.SetInt("soul", _soul);
     }
 
     public void Load()
     {
-        SetCollectedSoul(PlayerPrefs.GetInt("collectedSoul"));
+        SetUnrefinedSoul(PlayerPrefs.GetInt("unrefinedSoul"));
         SetSoul(PlayerPrefs.GetInt("soul"));
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.SetInt("unrefinedSoul", 0);
+        PlayerPrefs.SetInt("soul", 0);
     }
 
     [ContextMenu("SoulUp")]
@@ -105,6 +113,7 @@ public class MoneyManager : MonoBehaviour {
 
     public void MoneyUpdate()
     {
-        soulTxt.text = _soul.ToString() + "(" + collectedSoul + ")";
+        soulTxt.text = _soul.ToString();
+        unrefinedSoulTxt.text = _unrefinedSoul.ToString();
     }
 }
