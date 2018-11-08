@@ -65,6 +65,7 @@ public class RollManager : MonoBehaviour {
                 {
                     statTxts[i].text = string.Format("+{0}", datas[i].id + 1);
                     statTxts[i].gameObject.SetActive(true);
+                    StartCoroutine(ResetPosition(statTxts[i].rectTransform));
                 }
                 else
                     statTxts[i].gameObject.SetActive(false);
@@ -76,11 +77,20 @@ public class RollManager : MonoBehaviour {
             {
                 statTxts[position].text = string.Format("+{0}", datas[position].id + 1);
                 statTxts[position].gameObject.SetActive(true);
+                StartCoroutine(ResetPosition(statTxts[position].rectTransform));
             }
             else
                 statTxts[position].gameObject.SetActive(false);
         }
-        Debug.Log("SetStatTxt");
+    }
+
+    IEnumerator ResetPosition(RectTransform r)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            yield return null;
+            r.localPosition = Vector3.zero;
+        }
     }
 
     public void SetRollPnl(bool value)
@@ -167,11 +177,11 @@ public class RollManager : MonoBehaviour {
                 switch(datas[i].type)
                 {
                     case ROLL_TYPE.ITEM:
-                        if (datas[i].id > GameDatabase.instance.items.Length)
+                        if (datas[i].id >= GameDatabase.instance.items.Length)
                             return false;
                         break;
                     case ROLL_TYPE.SKILL:
-                        if (datas[i].id > GameDatabase.instance.skills.Length)
+                        if (datas[i].id >= GameDatabase.instance.skills.Length)
                             return false;
                         break;
                     case ROLL_TYPE.STAT:
@@ -378,22 +388,29 @@ public class RollManager : MonoBehaviour {
     {
         {
             Sprite result = null;
-            switch (data.type)
+            try
             {
-                case ROLL_TYPE.SKILL:
-                    result = GameDatabase.instance.skills[data.id].spr;
-                    break;
-                case ROLL_TYPE.STAT:
-                    result = GameDatabase.instance.statSprite;
-                    break;
-                case ROLL_TYPE.ITEM:
-                    result = GameDatabase.instance.itemSprites[Item.instance.sprIds[data.id]].spr;
-                    break;
-                case ROLL_TYPE.PASSIVE:
-                    result = null;//수정 필요
-                    break;
+                switch (data.type)
+                {
+                    case ROLL_TYPE.SKILL:
+                        result = GameDatabase.instance.skills[data.id].spr;
+                        break;
+                    case ROLL_TYPE.STAT:
+                        result = GameDatabase.instance.statSprite;
+                        break;
+                    case ROLL_TYPE.ITEM:
+                        result = GameDatabase.instance.itemSprites[Item.instance.sprIds[data.id]].spr;
+                        break;
+                    case ROLL_TYPE.PASSIVE:
+                        result = null;//수정 필요
+                        break;
+                }
+                return result;
             }
-            return result;
+            catch
+            {
+                return null;
+            }
         }
     }
     public RollData GetRandom()
@@ -406,7 +423,7 @@ public class RollManager : MonoBehaviour {
                 result.id = Random.Range(0, GameDatabase.instance.skills.Length);
                 break;
             case ROLL_TYPE.STAT:
-                result.id = Random.Range(0, 2);
+                result.id = Random.Range(0, 3);
                 break;
             case ROLL_TYPE.ITEM:
                 result.id = Random.Range(0, GameDatabase.instance.items.Length);
@@ -419,9 +436,12 @@ public class RollManager : MonoBehaviour {
         return result;
     }
 
-    public void SetSprite(int position, Sprite spr)
+    public bool SetSprite(int position, Sprite spr)
     {
+        if (spr == null)
+            return false;
         showCases[position].sprite = spr;
+        return true;
     }
 
     /// <summary>

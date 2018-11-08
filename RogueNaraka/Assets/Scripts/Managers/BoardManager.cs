@@ -19,6 +19,7 @@ public class BoardManager : MonoBehaviour {
     public ObjectPool enemyPool;//basic 100 counts
     public ObjectPool bulletPool;//basic 750 counts
     public ObjectPool effectPool;//basic 200 counts
+    public List<ScarecrowSoldier> scarecorws = new List<ScarecrowSoldier>();
     [ReadOnly]
     public Enemy boss;
 

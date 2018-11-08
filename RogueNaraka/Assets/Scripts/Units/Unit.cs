@@ -264,11 +264,6 @@ public abstract class Unit : MonoBehaviour {
     {
         if(revolveHolder)
         {
-            //int count = revolveHolder.transform.childCount;
-            //for (int i = 0; i < count; i++)
-            //{
-            //    boardManager.bulletPool.EnqueueObjectPool(revolveHolder.transform.GetChild(0).gameObject);
-            //}
             if (revolveHolder.transform.childCount > 0)
             {
                 revolveHolder.spin = false;
@@ -305,6 +300,11 @@ public abstract class Unit : MonoBehaviour {
         _data.stat = s;
     }
 
+    public void AddStat(STAT type, float amount)
+    {
+        SetStat(type, GetStat(type) + amount);
+    }
+
     public void SetStat(STAT type, float value)
     {
         switch (type)
@@ -330,6 +330,30 @@ public abstract class Unit : MonoBehaviour {
             case STAT.MPREGEN:
                 _data.stat.mpRegen = value;
                 break;
+        }
+    }
+
+    public float GetStat(STAT type)
+    {
+        switch (type)
+        {
+            case STAT.DMG:
+                return _data.stat.dmg;
+            case STAT.SPD:
+                return _data.stat.spd;
+            case STAT.TEC:
+                return _data.stat.tec;
+            case STAT.HP:
+                return _data.stat.hp;
+            case STAT.MP:
+                return _data.stat.mp;
+            case STAT.HPREGEN:
+                return _data.stat.hpRegen;
+            case STAT.MPREGEN:
+                return _data.stat.mpRegen;
+            default:
+                Debug.Log("ERROR!");
+                return -9999;
         }
     }
 
@@ -687,11 +711,14 @@ public abstract class Unit : MonoBehaviour {
         if (isDeath)
         {
             animator.SetBool("isDeath", isDeath);
-            shadow.animator.SetBool("isDeath", isDeath);
             animator.SetBool("isBeforeAttack", isBeforeAttack);
-            shadow.animator.SetBool("isBeforeAttack", isBeforeAttack);
             animator.SetBool("isAfterAttack", isAfterAttack);
-            shadow.animator.SetBool("isAfterAttack", isAfterAttack);
+            if (shadow.gameObject.activeSelf)
+            {
+                shadow.animator.SetBool("isDeath", isDeath);
+                shadow.animator.SetBool("isBeforeAttack", isBeforeAttack);
+                shadow.animator.SetBool("isAfterAttack", isAfterAttack);
+            }
         }
         Vector2 velocity = agent.velocity;
         if (!isStun)
@@ -702,24 +729,34 @@ public abstract class Unit : MonoBehaviour {
             else
                 isWalk = false;
             animator.SetBool("isWalk", isWalk);
-            shadow.animator.SetBool("isWalk", isWalk);
+            animator.SetBool("isStun", isStun);
+            if (shadow.gameObject.activeSelf)
+            {
+                shadow.animator.SetBool("isWalk", isWalk);
+                shadow.animator.SetBool("isStun", isStun);
+            }
             if (target)
             {
                 animator.SetFloat("x", targetPosition.x - transform.position.x);
                 animator.SetFloat("y", targetPosition.y - transform.position.y);
-                shadow.animator.SetFloat("x", targetPosition.x - transform.position.x);
-                shadow.animator.SetFloat("y", targetPosition.y - transform.position.y);
+                if (shadow.gameObject.activeSelf)
+                {
+                    shadow.animator.SetFloat("x", targetPosition.x - transform.position.x);
+                    shadow.animator.SetFloat("y", targetPosition.y - transform.position.y);
+                }
             }
             else
             {
                 animator.SetFloat("x", velocity.x);
                 animator.SetFloat("y", velocity.y);
-                shadow.animator.SetFloat("x", velocity.x);
-                shadow.animator.SetFloat("y", velocity.y);
+                if (shadow.gameObject.activeSelf)
+                {
+                    shadow.animator.SetFloat("x", velocity.x);
+                    shadow.animator.SetFloat("y", velocity.y);
+                }
             }
         }
-        animator.SetBool("isStun", isStun);
-        shadow.animator.SetBool("isStun", isStun);
+        
     }
 
     public void SetAttackCool(float value)

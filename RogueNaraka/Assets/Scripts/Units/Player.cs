@@ -93,7 +93,7 @@ public class Player : Unit
                 closest = enemies[0];
                 for (int i = 1; i < enemies.Count; i++)
                 {
-                    if (closest.targetDistance > enemies[i].targetDistance)
+                    if (Vector2.SqrMagnitude(closest.transform.position - transform.position) > Vector2.SqrMagnitude(boardManager.enemies[i].transform.position - transform.position))
                         closest = enemies[i];
                 }
                 target = closest;

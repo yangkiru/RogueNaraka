@@ -221,9 +221,9 @@ MonoBehaviour:
     weaponLevel: 0
     stat:
       dmg: 1
-      spd: 0
+      spd: 1
       tec: 0
-      hp: 5
+      hp: 1
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -1409,7 +1409,7 @@ MonoBehaviour:
     effects: []
   - name: slash
     id: 33
-    type: 5
+    type: 0
     sortingLayer: 0
     dmg: 1
     dealSpeed: 0.25
@@ -1421,7 +1421,7 @@ MonoBehaviour:
       gap: 0
       isOnHit: 0
     controller: {fileID: 22100000, guid: 7769a4238a4f50a4abd5ed0659961ab8, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 0}
     abilities:
     - ability: 3
       value: 1
@@ -1437,7 +1437,7 @@ MonoBehaviour:
     type: 1
     beforeAttackDelay: 0
     afterAttackDelay: 1
-    localSpeed: 3
+    localSpeed: 4
     worldSpeed: 0
   - name: MagicSlash
     id: 1
@@ -1503,7 +1503,7 @@ MonoBehaviour:
     id: 7
     level: 0
     startBulletId: 21000000
-    spawnPoint: {x: 0, y: 0}
+    spawnPoint: {x: 0, y: 0.25}
     type: 0
     beforeAttackDelay: 0
     afterAttackDelay: 0.5
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   skills:
   - name: ThunderStrike
     bulletIds: 190000001a000000
-    unitIds: 
+    units: []
     spr: {fileID: 21300000, guid: 9ab6b26aa06c12e438c398969da44ba9, type: 3}
     id: 0
     level: 1
@@ -1550,7 +1550,7 @@ MonoBehaviour:
       Each Thunder has {1} deal.'
   - name: IceBreak
     bulletIds: 1b000000
-    unitIds: 
+    units: []
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
     id: 1
     level: 1
@@ -1582,7 +1582,7 @@ MonoBehaviour:
     description: 
   - name: Genesis
     bulletIds: 1e0000001f000000
-    unitIds: 
+    units: []
     spr: {fileID: 21300000, guid: 3c8be8ee2042a0e4bbb154b327514c01, type: 3}
     id: 2
     level: 1
@@ -1608,7 +1608,7 @@ MonoBehaviour:
     description: 
   - name: BloodSwamp
     bulletIds: 1c0000001d000000
-    unitIds: 
+    units: []
     spr: {fileID: 21300000, guid: 0b192675c393aa24bb17096185049b2f, type: 3}
     id: 3
     level: 1
@@ -1644,7 +1644,8 @@ MonoBehaviour:
     description: 
   - name: ScarecrowSoldier
     bulletIds: 21000000
-    unitIds: 00000000
+    units:
+    - {fileID: 1129751844161108, guid: 086df998df5f67b41897e6b0d85ab4e5, type: 2}
     spr: {fileID: 21300000, guid: caaeff1be02fc8144845d3e17ffe77b9, type: 3}
     id: 4
     level: 1
@@ -1655,56 +1656,55 @@ MonoBehaviour:
     isCircleToPlayer: 1
     isDeath: 0
     effects: []
-    values: []
+    values:
+    - name: Time
+      value: 3
+    - name: Dmg
+      value: 0.5
+    - name: Hp
+      value: 3
     levelUp:
-      manaCost: 0.25
+      manaCost: 0.5
       size: 0.25
       effects: []
-      values: []
+      values:
+      - name: Time
+        value: 1
+      - name: Dmg
+        value: 0.5
+      - name: Hp
+        value: 1
     description: 
   items:
   - name: HealPotion
     id: 0
-    value: 3
-    size: 1
+    value: 1
+    size: 0
     description: 'Heal
 
-      Tec*Value = {0}*{1} = {2}'
-  - name: FragGrenade
+      Value = Tec : {0} = {1}'
+  - name: ManaPotion
     id: 1
-    value: 3
-    size: 1
-    description: 'Dmg
+    value: 1
+    size: 0
+    description: 'ManaHeal
 
-      Tec*Value = {0}*{1} = {2}
+      (Can be over the max)
 
-      KnockBack
-
-      Value/2 = {3}'
-  - name: HighExplosive
-    id: 2
-    value: 3
-    size: 1
-    description: 'Dmg
-
-      Tec*Value/2 = {0}*{1} = {2}
-
-      KnockBack
-
-      Value = {3}'
+      Value = Tec : {0} = {1}'
   itemSprites:
   - id: 0
-    name: Red Potion
-    spr: {fileID: 21300000, guid: afabb6964bf2b8c4197ec0fbd96d5767, type: 3}
-    description: It looks like blood
+    name: HealPotion
+    spr: {fileID: 21300000, guid: 7996f203b076baa4197fa80b71dbba8a, type: 3}
+    description: 'Heal
+
+      Value = Tec : {0} = {1}'
   - id: 1
-    name: Blue Potion
-    spr: {fileID: 21300000, guid: 02c111416a7e2d9498a3fd1f8b2b9053, type: 3}
-    description: It looks like ocean
-  - id: 2
-    name: Red Bomb
-    spr: {fileID: 21300000, guid: 9d073f1b0befdcd499516a760c050d0a, type: 3}
-    description: It looks very dangerous and shining red
+    name: ManaPotion
+    spr: {fileID: 21300000, guid: 8f9ff21c71e685341bda4e59e6afabc9, type: 3}
+    description: 'ManaHeal(Can be over the max)
+
+      Value = Tec : {0} = {1}'
   effects:
   - name: Stun
     type: 0

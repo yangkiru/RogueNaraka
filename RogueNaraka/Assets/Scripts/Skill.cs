@@ -102,7 +102,9 @@ public class Skill : MonoBehaviour
         img.sprite = null;
         img.color = Color.clear;
         coolImg.sprite = null;
-        coolImg.color = Color.clear;
+        Color c = coolImg.color;
+        c.a = 0;
+        coolImg.color = c;
         coolImg.enabled = false;
         coolTimeTxt.text = string.Empty;
         levelTxt.gameObject.SetActive(false);
@@ -238,7 +240,6 @@ public class Skill : MonoBehaviour
         Vector3 mp = BoardManager.GetMousePosition() + new Vector3(0, pointer.offset, 0);
         float distance = Vector2.Distance(mp, player.transform.position);
         Vector2 vec = mp - player.transform.position;
-        Vector2 pos = mp;
 
         if (data.coolTime > 0)
         {
@@ -248,10 +249,10 @@ public class Skill : MonoBehaviour
 
         UseMana();
 
-        if (distance > data.size)
+        if (data.isCircleToPlayer && distance > data.size)
         {
             distance = data.size;
-            pos = (Vector2)player.transform.position + vec.normalized * distance;
+            mp = (Vector2)player.transform.position + vec.normalized * distance;
         }
         switch (data.id)
         {
@@ -365,11 +366,16 @@ public class Skill : MonoBehaviour
 
     void ScarecrowSoldier(Vector3 mp)
     {
-        Unit soldier = BoardManager.instance.enemyPool.DequeueObjectPool().GetComponent<Unit>();
+        //Unit soldier = BoardManager.instance.enemyPool.DequeueObjectPool().GetComponent<Unit>();
+        ScarecrowSoldier soldier = Instantiate(data.units[0], mp, Quaternion.identity).GetComponent<ScarecrowSoldier>();
+        UnitData newData = (UnitData)GameDatabase.instance.spawnables[0].Clone();
 
-        soldier.transform.position = mp;
-        soldier.SyncData(GameDatabase.instance.spawnables[data.unitIds[0]], true);
+        newData.stat.dmg = data.values[1].value;//dmg
+        newData.stat.hp = data.values[2].value;//hp
+        //soldier.transform.position = mp;
+        soldier.SyncData(newData, true);
         soldier.gameObject.SetActive(true);
+        soldier.StartCoroutine(soldier.TimeLimit(data.values[0].value));//time
     }
 
     IEnumerator MeltDown(SpriteRenderer renderer, float time, float wait = 0)

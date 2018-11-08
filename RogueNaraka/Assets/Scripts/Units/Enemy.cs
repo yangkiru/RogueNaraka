@@ -24,7 +24,20 @@ public class Enemy : Unit {
     {
         try
         {
-            if (!Player.instance.isDeath)
+            if (boardManager.scarecorws.Count > 0)
+            {
+                Unit closest = boardManager.scarecorws[0];
+                for(int i = 1; i < boardManager.scarecorws.Count;i++)
+                {
+                    if(Vector2.SqrMagnitude(closest.transform.position - transform.position) > Vector2.SqrMagnitude(boardManager.scarecorws[i].transform.position - transform.position))
+                    {
+                        closest = boardManager.scarecorws[i];
+                    }
+                }
+                target = closest;
+                targetPosition = target.transform.position;
+            }
+            else if (!Player.instance.isDeath)
             {
                 target = Player.instance;
                 targetPosition = target.transform.position;

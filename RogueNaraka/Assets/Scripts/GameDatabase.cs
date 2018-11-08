@@ -111,7 +111,7 @@ public struct UnitCost
 }
 
 [Serializable]
-public struct Stat
+public struct Stat : ICloneable
 {
     public float dmg;
     public float spd;
@@ -136,6 +136,11 @@ public struct Stat
     public float sum
     {
         get { return dmg + spd + tec + hp + mp + hpRegen + mpRegen; }
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 }
 
@@ -182,7 +187,7 @@ public struct KnowledgeData
 }
 
 [Serializable]
-public struct UnitData
+public struct UnitData : ICloneable
 {
     public string name;
     public int id;
@@ -203,6 +208,14 @@ public struct UnitData
     public float moveSpeed;
     public Vector2 shadowPos;
     public KnowledgeData knowledge;
+
+    public object Clone()
+    {
+        UnitData clone = (UnitData)this.MemberwiseClone();
+
+        clone.stat = (Stat)stat.Clone();
+        return clone;
+    }
 }
 
 [Serializable]
@@ -358,7 +371,7 @@ public struct SkillData:ICloneable
 {
     public string name;
     public int[] bulletIds;
-    public int[] unitIds;
+    public GameObject[] units;
     public Sprite spr;
     public int id;
     public int level;
@@ -380,9 +393,9 @@ public struct SkillData:ICloneable
         clone.bulletIds = (int[])bulletIds.Clone();
         for (int i = 0; i < clone.bulletIds.Length; i++)
             clone.bulletIds[i] = bulletIds[i];
-        clone.unitIds = (int[])unitIds.Clone();
-        for (int i = 0; i < clone.unitIds.Length; i++)
-            clone.unitIds[i] = unitIds[i];
+        //clone.units = (GameObject[])units.Clone();
+        //for (int i = 0; i < clone.units.Length; i++)
+        //    clone.units[i] = units[i];
         clone.effects = (EffectData[])effects.Clone();
         for (int i = 0; i < clone.effects.Length; i++)
             clone.effects[i] = (EffectData)effects[i].Clone();
@@ -495,13 +508,10 @@ public struct ItemData
         {
             case 0://HealPotion
                 temp = Player.instance.data.stat.tec;
-                return string.Format(description, temp, value, temp * value);
-            case 1://FragGrenade
+                return string.Format(description, temp, temp);
+            case 1://ManaPotion
                 temp = Player.instance.data.stat.tec;
-                return string.Format(description, temp, value, temp * value, value / 2);
-            case 2://HighExplosive
-                temp = Player.instance.data.stat.tec;
-                return string.Format(description, temp, value, temp * value / 2, value);
+                return string.Format(description, temp, temp);
             default:
                 return description;
         }

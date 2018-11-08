@@ -60,6 +60,8 @@ public class Item : MonoBehaviour
             SetRandomSprite();
             isKnown = new bool[GameDatabase.instance.items.Length];
             InitItem();
+            //확정 아이템
+            isKnown[0] = true; isKnown[1] = true;
             Save();
             PlayerPrefs.SetInt("isItemFirst", 1);
         }
@@ -93,11 +95,11 @@ public class Item : MonoBehaviour
                     isKnown = temp.ToArray();
                 }
             }
-            else//isKnown은 항상 값이 있어야하는데 아마도 이건 오류가 아닐까
+            else//초기화됨?
             {
                 isKnown = new bool[GameDatabase.instance.items.Length];
             }
-            if (itemData != -1)
+            if (itemData != -1 && GameDatabase.instance.items.Length > itemData)
             {
                 SyncData(GameDatabase.instance.items[itemData]);
                 SyncSprite();
@@ -110,11 +112,14 @@ public class Item : MonoBehaviour
     private void SetRandomSprite()
     {
         sprIds = new int[GameDatabase.instance.itemSprites.Length];
+        //확정
+        sprIds[0] = 0;
+        sprIds[1] = 1;
         List<int> temp = new List<int>();
-        for (int i = 0; i < sprIds.Length; i++)
+        for (int i = 2; i < sprIds.Length; i++)
             temp.Add(i);
         int leng = temp.Count;
-        for (int i = 0; i < leng; i++)
+        for (int i = 2; i < leng; i++)
         {
             int rnd = Random.Range(0, temp.Count);
             sprIds[i] = temp[rnd];
@@ -186,31 +191,50 @@ public class Item : MonoBehaviour
         circle.SetCircle(_data.size);
         circle.MoveCircleToMouse();
         isKnown[_data.id] = true;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(
-            Input.mousePosition), _data.size, GameDatabase.instance.unitMask);
-        for (int i = 0; i < hits.Length; i++)
+
+        if (_data.size != 0)//size 값이 있으면 서클 캐스트
         {
-            Unit unit = hits[i].GetComponent<Unit>();
-            switch (_data.id)
+            Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(
+                Input.mousePosition), _data.size, GameDatabase.instance.unitMask);
+            for (int i = 0; i < hits.Length; i++)
             {
-                case 0://HealPotion
-                    Debug.Log("Heal");
-                    unit.HealHealth(_data.value);
+                Unit unit = hits[i].GetComponent<Unit>();
+                switch (_data.id)
+                {
+                    case 0://HealPotion
+                        Debug.Log("HealPotion");
+                        unit.HealHealth(_data.value);
+                        break;
+                    case 1:
+                        Debug.Log("FragGrenade");
+                        unit.GetDamage(_data.value);
+                        unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)(_data.value / 2));
+                        break;
+                    case 2:
+                        Debug.Log("HighExplosive");
+                        unit.GetDamage(_data.value / 2);
+                        unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)_data.value);
+                        break;
+                }
+            }
+        }
+        else
+        {
+            switch(_data.id)
+            {
+                case 0:
+                    Debug.Log("HealPotion");
+                    Player.instance.HealHealth(_data.value * Player.instance.GetStat(STAT.TEC));
                     break;
                 case 1:
-                    Debug.Log("FragGrenade");
-                    unit.GetDamage(_data.value);
-                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)(_data.value/2));
-                    break;
-                case 2:
-                    Debug.Log("HighExplosive");
-                    unit.GetDamage(_data.value / 2);
-                    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)_data.value);
+                    Debug.Log("ManaPotion");
+                    Player.instance.HealMana(_data.value * Player.instance.GetStat(STAT.TEC));
                     break;
             }
         }
         InitItem();
     }
+
 
     private void DrawLine()
     {
