@@ -8,7 +8,6 @@ public class SkillManager : MonoBehaviour {
     { get { return GameManager.instance; } }
     public RectTransform[] points;
     public LineRenderer lr;
-    public Sprite Pointer;
     public CircleRenderer circle;
     public InfiniteScroll scroll;
 

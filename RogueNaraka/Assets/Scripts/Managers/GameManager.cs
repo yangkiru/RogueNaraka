@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     public MoneyManager moneyManager;
     public LevelUpManager levelUpManager;
     public SoulShopManager soulShopManager;
+    public SkillManager skillManager;
+    public DeathEffectPool deathEffectPool; 
     public Player player;
     
     public Button cancelBtn;//stat Upgrade
@@ -71,11 +73,13 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            PlayerPrefs.SetInt("isFirst", 1);
-            player.Suicide();
+            PlayerPrefs.SetInt("isFirst", 0);
+            SceneManager.LoadScene(0);
         }
+        else if (Input.GetKeyDown(KeyCode.S))
+            player.Suicide();
         if(autoSave)
         {
             if(autoSaveCoroutine == null)
@@ -177,7 +181,7 @@ public class GameManager : MonoBehaviour {
 
     private void LoadFirst()
     {
-        moneyManager.Save();
+        moneyManager.Reset();
         UnitData playerBase = GameDatabase.instance.playerBase;
         Stat dbStat = playerBase.stat;
         SyncStatToData(dbStat);
@@ -274,8 +278,8 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetFloat("mana", 1);
         PlayerPrefs.SetInt("weaponId", playerBase.weaponId);
         PlayerPrefs.SetInt("weaponLevel", playerBase.weaponLevel);
-        SkillManager.instance.ResetSave();
-        MoneyManager.instance.Reset();
+        skillManager.ResetSave();
+        moneyManager.Reset();
         Item.instance.ResetSave();
         Item.instance.Load();
         soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);

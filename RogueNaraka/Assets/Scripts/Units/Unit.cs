@@ -262,6 +262,8 @@ public abstract class Unit : MonoBehaviour {
     /// </summary>
     protected virtual void OnDeath()
     {
+        for (int i = 0; i < effects.Count; i++)
+            effects[i].DestroySelf();
         if(revolveHolder)
         {
             if (revolveHolder.transform.childCount > 0)
@@ -270,6 +272,7 @@ public abstract class Unit : MonoBehaviour {
                 revolveHolder.RemoveAll(3);
             }
         }
+        gameManager.deathEffectPool.Play(transform);
     }
 
     public void EquipWeapon(int index, int level)
@@ -398,6 +401,7 @@ public abstract class Unit : MonoBehaviour {
     {
         float t = weapon.beforeAttackDelay;
         isBeforeAttack = true;
+        Debug.Log(name + " beforeAttack" + weapon.beforeAttackDelay);
         while (t > 0)
         {
             yield return null;
@@ -454,8 +458,8 @@ public abstract class Unit : MonoBehaviour {
     /// <param name="damage"></param>
     public virtual float GetDamage(float damage, bool isTxtOnHead = true)
     {
-        if (damage < 0)
-            damage = 0;
+        if (damage <= 0)
+            return 0;
         float additional = poison * KnowledgeData.GetHalf(knowledge.poison);
         //Debug.Log(name + " knowledge.poison:" + knowledge.poison + " KnowledgeData.GetHalf(knowledge.poison):" + KnowledgeData.GetHalf(knowledge.poison));
         if (additional <= 0)
@@ -710,8 +714,14 @@ public abstract class Unit : MonoBehaviour {
     {
         if (isDeath)
         {
+            animator.SetBool("isDeath", true);
+            if (shadow.gameObject.activeSelf)
+                shadow.animator.SetBool("isDeath", true);
+        }
+        else
+        {
+
             bool isBA = false, isAA = false;
-            animator.SetBool("isDeath", isDeath);
             if (HasParameter("isBeforeAttack", animator))
             {
                 animator.SetBool("isBeforeAttack", isBeforeAttack);
@@ -722,11 +732,12 @@ public abstract class Unit : MonoBehaviour {
                 animator.SetBool("isAfterAttack", isAfterAttack);
                 isAA = true;
             }
+            animator.SetBool("isDeath", false);
             if (shadow.gameObject.activeSelf)
             {
-                shadow.animator.SetBool("isDeath", isDeath);
-                if(isBA)shadow.animator.SetBool("isBeforeAttack", isBeforeAttack);
-                if(isAA)shadow.animator.SetBool("isAfterAttack", isAfterAttack);
+                if (isBA) shadow.animator.SetBool("isBeforeAttack", isBeforeAttack);
+                if (isAA) shadow.animator.SetBool("isAfterAttack", isAfterAttack);
+                shadow.animator.SetBool("isDeath", false);
             }
         }
         Vector2 velocity = agent.velocity;

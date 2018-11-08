@@ -56,7 +56,7 @@ MonoBehaviour:
       dmg: 0.4
       spd: 1
       tec: 0
-      hp: 5
+      hp: 4
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
       gravity: 0
   - name: Bug1
     id: 1
-    cost: 2
-    stage: 1
+    cost: 1
+    stage: 3
     weaponId: 5
     weaponLevel: 1
     stat:
@@ -114,8 +114,8 @@ MonoBehaviour:
       gravity: 0
   - name: Bat0
     id: 2
-    cost: 3
-    stage: 2
+    cost: 2
+    stage: 6
     weaponId: 6
     weaponLevel: 0
     stat:
@@ -147,15 +147,15 @@ MonoBehaviour:
       gravity: 0
   - name: Bat1
     id: 3
-    cost: 4
-    stage: 3
+    cost: 2
+    stage: 10
     weaponId: 6
     weaponLevel: 0
     stat:
       dmg: 0.5
-      spd: 1
+      spd: 4
       tec: 0
-      hp: 8
+      hp: 10
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -180,19 +180,52 @@ MonoBehaviour:
       gravity: 0
   - name: Bone0
     id: 4
-    cost: 5
-    stage: 4
-    weaponId: 3
+    cost: 3
+    stage: 14
+    weaponId: 6
     weaponLevel: 0
     stat:
-      dmg: 0.5
+      dmg: 0.7
       spd: 1
       tec: 0
-      hp: 8
+      hp: 15
       mp: 0
       hpRegen: 0
       mpRegen: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    move: 0
+    moveDelay: 1
+    moveDistance: 0.5
+    minDistance: 0
+    maxDistance: 2
+    moveSpeed: 1
+    shadowPos: {x: 0.05, y: -0.3}
+    knowledge:
+      fire: 0
+      ice: 0
+      poison: 0
+      knockBack: 0
+      stun: 0
+      slow: 0
+      gravity: 0
+  - name: BoneHead0
+    id: 5
+    cost: 3
+    stage: 18
+    weaponId: 3
+    weaponLevel: 1
+    stat:
+      dmg: 1
+      spd: 1
+      tec: 0
+      hp: 20
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
@@ -299,7 +332,7 @@ MonoBehaviour:
     id: 0
     type: 0
     sortingLayer: 0
-    animationSpeed: 1
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -351,7 +384,7 @@ MonoBehaviour:
     id: 1
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -419,7 +452,7 @@ MonoBehaviour:
     id: 2
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -503,7 +536,7 @@ MonoBehaviour:
     id: 3
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 2
     size: 0.15
@@ -603,7 +636,7 @@ MonoBehaviour:
     id: 4
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.2
     dealSpeed: 0.1
     size: 0.3
@@ -627,7 +660,7 @@ MonoBehaviour:
     id: 5
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.3
     dealSpeed: 0.1
     size: 0.5
@@ -651,7 +684,7 @@ MonoBehaviour:
     id: 6
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.4
     dealSpeed: 0.2
     size: 0.8
@@ -675,7 +708,7 @@ MonoBehaviour:
     id: 7
     type: 4
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 0.3
@@ -697,7 +730,7 @@ MonoBehaviour:
     id: 8
     type: 3
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.2
     size: 0.5
@@ -719,7 +752,7 @@ MonoBehaviour:
     id: 9
     type: 3
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.2
     size: 1
@@ -741,7 +774,7 @@ MonoBehaviour:
     id: 10
     type: 3
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.2
     size: 1
@@ -763,7 +796,7 @@ MonoBehaviour:
     id: 11
     type: 3
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.2
     size: 0.62
@@ -817,7 +850,7 @@ MonoBehaviour:
     id: 12
     type: 3
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.1
     dealSpeed: 0.2
     size: 1
@@ -871,7 +904,7 @@ MonoBehaviour:
     id: 13
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.2
     size: 0.3
@@ -909,7 +942,7 @@ MonoBehaviour:
     id: 14
     type: 4
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 1
@@ -927,11 +960,11 @@ MonoBehaviour:
     children: []
     onDestroy: []
     effects: []
-  - name: MonsterBullet
+  - name: MonsterBullet0
     id: 15
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0
     size: 0.09
@@ -953,7 +986,7 @@ MonoBehaviour:
     id: 16
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.5
     dealSpeed: 1
     size: 0.5
@@ -975,7 +1008,7 @@ MonoBehaviour:
     id: 17
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.5
     dealSpeed: 0.5
     size: 0.35
@@ -1013,7 +1046,7 @@ MonoBehaviour:
     id: 18
     type: 4
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 0.5
@@ -1035,7 +1068,7 @@ MonoBehaviour:
     id: 19
     type: 4
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1073,7 +1106,7 @@ MonoBehaviour:
     id: 20
     type: 4
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1127,7 +1160,7 @@ MonoBehaviour:
     id: 21
     type: 4
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1197,7 +1230,7 @@ MonoBehaviour:
     id: 22
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 1
     size: 0.3
@@ -1221,7 +1254,7 @@ MonoBehaviour:
     id: 23
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 1
     size: 0.3
@@ -1249,7 +1282,7 @@ MonoBehaviour:
     id: 24
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.2
     size: 0.5
@@ -1273,7 +1306,7 @@ MonoBehaviour:
     id: 25
     type: 5
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.1
     dealSpeed: 0.2
     size: 0
@@ -1297,7 +1330,7 @@ MonoBehaviour:
     id: 26
     type: 5
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0.1
     dealSpeed: 0.2
     size: 0
@@ -1321,7 +1354,7 @@ MonoBehaviour:
     id: 27
     type: 5
     sortingLayer: 2
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 1
     size: 0
@@ -1349,7 +1382,7 @@ MonoBehaviour:
     id: 28
     type: 5
     sortingLayer: 2
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 1
     size: 0
@@ -1373,7 +1406,7 @@ MonoBehaviour:
     id: 29
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0.1
     size: 0.1
@@ -1395,7 +1428,7 @@ MonoBehaviour:
     id: 30
     type: 4
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1433,7 +1466,7 @@ MonoBehaviour:
     id: 31
     type: 4
     sortingLayer: 2
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 0
     dealSpeed: 0
     size: 0
@@ -1455,7 +1488,7 @@ MonoBehaviour:
     id: 32
     type: 5
     sortingLayer: 2
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.1
     size: 0
@@ -1477,7 +1510,7 @@ MonoBehaviour:
     id: 33
     type: 0
     sortingLayer: 0
-    animationSpeed: 0
+    flightSpeed: 1
     dmg: 1
     dealSpeed: 0.25
     size: 0.75
@@ -1495,6 +1528,28 @@ MonoBehaviour:
     children: []
     onDestroy: []
     effects: []
+  - name: MonsterBullet1
+    id: 34
+    type: 0
+    sortingLayer: 0
+    flightSpeed: 2
+    dmg: 1
+    dealSpeed: 0
+    size: 0.09
+    angle: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    abilities:
+    - ability: 1
+      value: 720
+    children: []
+    onDestroy: []
+    effects: []
   weapons:
   - name: MagicBall
     id: 0
@@ -1504,7 +1559,7 @@ MonoBehaviour:
     type: 1
     beforeAttackDelay: 0
     afterAttackDelay: 1
-    localSpeed: 4
+    localSpeed: 6.5
     worldSpeed: 0
   - name: MagicSlash
     id: 1
@@ -1526,13 +1581,13 @@ MonoBehaviour:
     afterAttackDelay: 1
     localSpeed: 1
     worldSpeed: 0
-  - name: HandGun
+  - name: MonsterBullet
     id: 3
     level: 0
-    startBulletId: 0f000000
+    startBulletId: 0f00000022000000
     spawnPoint: {x: 0, y: 0.25}
     type: 1
-    beforeAttackDelay: 0
+    beforeAttackDelay: 2
     afterAttackDelay: 1
     localSpeed: 0
     worldSpeed: 2
@@ -1579,15 +1634,11 @@ MonoBehaviour:
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1
-    unitId: 00000000
+    unitId: 0000000001000000
   - cost: 2
-    unitId: 01000000
+    unitId: 0200000003000000
   - cost: 3
-    unitId: 02000000
-  - cost: 4
-    unitId: 03000000
-  - cost: 5
-    unitId: 04000000
+    unitId: 0400000005000000
   skills:
   - name: ThunderStrike
     bulletIds: 190000001a000000
@@ -1604,9 +1655,9 @@ MonoBehaviour:
     effects: []
     values:
     - name: Repeat
-      value: 40
+      value: 50
     - name: Delay
-      value: -0.033200003
+      value: -0.099800006
     levelUp:
       manaCost: 0.5
       size: 0.1
@@ -1668,7 +1719,7 @@ MonoBehaviour:
     - name: Time
       value: 0
     - name: Dmg
-      value: 0.1
+      value: 0.2
     levelUp:
       manaCost: 0.5
       size: 0
@@ -1729,20 +1780,20 @@ MonoBehaviour:
     effects: []
     values:
     - name: Time
-      value: 3
+      value: 4
     - name: Dmg
       value: 0.5
     - name: Hp
-      value: 3
+      value: 4
     levelUp:
       manaCost: 0.5
       size: 0.25
       effects: []
       values:
       - name: Time
-        value: 1
-      - name: Dmg
         value: 0.5
+      - name: Dmg
+        value: 0.25
       - name: Hp
         value: 1
     description: 
@@ -1759,8 +1810,6 @@ MonoBehaviour:
     value: 1
     size: 0
     description: 'ManaHeal
-
-      (Can be over the max)
 
       Value = Tec : {0} = {1}'
   itemSprites:

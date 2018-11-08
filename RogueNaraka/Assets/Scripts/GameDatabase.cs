@@ -101,6 +101,21 @@ public class GameDatabase : ScriptableObject
             stageCosts[i] = 3 + i * 2;
         }
     }
+
+    [ContextMenu("BulletSpeed")]
+    void BulletSpeed()
+    {
+        for(int i = 0; i < bullets.Length;i++)
+        {
+            if(bullets[i].flightSpeed == 0)
+                bullets[i].flightSpeed = 1;
+        }
+    }
+    [ContextMenu("Temp")]
+    void Temp()
+    {
+        //bullets[34] = (BulletData)bullets[15].Clone();
+    }
 }
 
 [Serializable]
@@ -265,7 +280,7 @@ public struct BulletData : ICloneable
     public int id;
     public BULLET_TYPE type;
     public SORTING_LAYER sortingLayer;
-    public float animationSpeed;
+    public float flightSpeed;
     public float dmg;
     public float dealSpeed;
     public float size;

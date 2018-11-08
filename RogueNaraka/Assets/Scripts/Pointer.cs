@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Pointer : MonoBehaviour {
 
+    public static Pointer instance = null;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
     public float offset = 1;
 	public void SetPointer(bool value)
     {

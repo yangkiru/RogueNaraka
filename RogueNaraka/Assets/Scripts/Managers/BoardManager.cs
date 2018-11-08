@@ -269,7 +269,7 @@ public class BoardManager : MonoBehaviour {
 
     public static bool IsMouseInBoard()
     {
-        Vector3 mp = GetMousePosition();
+        Vector3 mp = GetMousePosition() + new Vector3(0, Pointer.instance.offset, 0);
         Vector3 min = BoardManager.instance.boardRange[0];
         Vector3 max = BoardManager.instance.boardRange[1];
         return mp.x > min.x && mp.y > min.y && mp.x < max.x && mp.y < max.y;

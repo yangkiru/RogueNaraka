@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if UNITYE_EDITOR
 [CustomEditor(typeof(OnMouseButton), true)]
 public class OnMouseButtonEditor : Editor
 {
@@ -26,3 +27,4 @@ public class OnMouseButtonEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

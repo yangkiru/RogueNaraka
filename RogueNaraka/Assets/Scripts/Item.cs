@@ -188,6 +188,8 @@ public class Item : MonoBehaviour
 
     public void UseItem()
     {
+        if (Player.instance.isDeath)
+            return;
         circle.SetCircle(_data.size);
         circle.MoveCircleToMouse();
         isKnown[_data.id] = true;
@@ -201,20 +203,20 @@ public class Item : MonoBehaviour
                 Unit unit = hits[i].GetComponent<Unit>();
                 switch (_data.id)
                 {
-                    case 0://HealPotion
-                        Debug.Log("HealPotion");
-                        unit.HealHealth(_data.value);
-                        break;
-                    case 1:
-                        Debug.Log("FragGrenade");
-                        unit.GetDamage(_data.value);
-                        unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)(_data.value / 2));
-                        break;
-                    case 2:
-                        Debug.Log("HighExplosive");
-                        unit.GetDamage(_data.value / 2);
-                        unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)_data.value);
-                        break;
+                    //case 0://HealPotion
+                    //    Debug.Log("HealPotion");
+                    //    unit.HealHealth(_data.value);
+                    //    break;
+                    //case 1:
+                    //    Debug.Log("FragGrenade");
+                    //    unit.GetDamage(_data.value);
+                    //    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)(_data.value / 2));
+                    //    break;
+                    //case 2:
+                    //    Debug.Log("HighExplosive");
+                    //    unit.GetDamage(_data.value / 2);
+                    //    unit.KnockBack(unit.transform.position - BoardManager.GetMousePosition(), (int)_data.value);
+                    //    break;
                 }
             }
         }
@@ -252,7 +254,7 @@ public class Item : MonoBehaviour
             circle.MoveCircleToMouse();
             circle.SetCircle(_data.size);
             circle.SetEnable(true);
-            line.enabled = true;
+            //line.enabled = true;
             isMouseDown = true;
         }
     }
@@ -268,13 +270,13 @@ public class Item : MonoBehaviour
         if (_data.id != -1)
         {
             circle.MoveCircleToMouse();
-            DrawLine();
+            //DrawLine();
         }
     }
 
     public void OnMouseUp()
     {
-        line.enabled = false;
+        //line.enabled = false;
         circle.SetEnable(false);
         if (_data.id != -1)
         {

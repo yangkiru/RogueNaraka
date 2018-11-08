@@ -24,7 +24,6 @@ public class RollManager : MonoBehaviour {
     private int rollCount;
     private bool isSkillSelected;
 
-    public bool isStatTxt;
     //선택된 SkillUI 위치 및 아이템 획득 여부
     private int target;
 
@@ -55,8 +54,6 @@ public class RollManager : MonoBehaviour {
 
     void SetStatTxt(bool active, int position = -1)
     {
-        if (!isStatTxt)
-            return;
         if (position == -1)
         {
             for (int i = 0; i < statTxts.Length; i++)

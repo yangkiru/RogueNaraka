@@ -49,8 +49,8 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SkillManager.instance.SetIsDragable(false);
-        if (GameManager.instance.soulShopManager.shopStage <= 1)
-            GameManager.instance.soulShopManager.SetSoulShop(true);
+        //if (GameManager.instance.soulShopManager.shopStage <= 1)
+        //    GameManager.instance.soulShopManager.SetSoulShop(true);
         if (isLeftStatChanged)
         {
             Debug.Log("남은 스탯이 있따:" + leftStat + " " + _leftStat);

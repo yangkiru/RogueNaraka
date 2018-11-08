@@ -85,8 +85,6 @@ public class PointTxtManager : MonoBehaviour {
     private IEnumerator MoveUp(Text txt, float time, float speed)
     {
         float amount = 0.05f;
-        Rigidbody2D rigid = txt.GetComponent<Rigidbody2D>();
-        rigid.gravityScale = 0;
         for (float t = 0; t < time; t += amount)
         {
             txt.transform.position = new Vector2(txt.transform.position.x, txt.transform.position.y + speed);
@@ -97,18 +95,22 @@ public class PointTxtManager : MonoBehaviour {
 
     IEnumerator Shoot(Text txt, float time)
     {
-        float rnd = Random.Range(-1f, 1f);
-        Rigidbody2D rigid = txt.GetComponent<Rigidbody2D>();
-        rigid.gravityScale = 10000;
-        rigid.AddForce(new Vector2(rnd * 100f, 100));
-        yield return new WaitForSeconds(time);
+        float rnd = Random.Range(-1f, 1f) * 0.01f;
+        float acel = 0.1f;
+        while (time > 0)
+        {
+            txt.transform.Translate(new Vector2(rnd * acel, 0.01f * acel));
+            acel += 0.1f;
+            time -= 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
     IEnumerator AlphaDown(Text txt, float delay, float speed)
     {
         yield return new WaitForSeconds(delay);
-        while (txt.color.a > 0.1f)
+        while (txt.color.a > float.Epsilon)
         {
             yield return new WaitForSeconds(0.1f);
             Color color = txt.color;

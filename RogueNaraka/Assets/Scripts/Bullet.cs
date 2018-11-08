@@ -407,8 +407,8 @@ public class Bullet : MonoBehaviour {
             {
                 if (isMoving)
                 {
-                    transform.Translate(new Vector3(-localSpeed * basicSpeed * Time.deltaTime, 0, 0));
-                    transform.Translate(vec.normalized * worldSpeed * basicSpeed * Time.deltaTime, Space.World);
+                    transform.Translate(new Vector3(-localSpeed * basicSpeed * data.flightSpeed * Time.deltaTime, 0, 0));
+                    transform.Translate(vec.normalized * worldSpeed * basicSpeed * data.flightSpeed *  Time.deltaTime, Space.World);
                     if (guideIncrease > 0)
                     {
                         Unit target = null;
