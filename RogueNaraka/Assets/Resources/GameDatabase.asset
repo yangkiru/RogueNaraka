@@ -53,10 +53,10 @@ MonoBehaviour:
     weaponId: 5
     weaponLevel: 0
     stat:
-      dmg: 0.2
+      dmg: 0.4
       spd: 1
       tec: 0
-      hp: 10
+      hp: 5
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -86,10 +86,10 @@ MonoBehaviour:
     weaponId: 5
     weaponLevel: 1
     stat:
-      dmg: 0.2
+      dmg: 0.6
       spd: 1
       tec: 0
-      hp: 10
+      hp: 8
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -114,12 +114,12 @@ MonoBehaviour:
       gravity: 0
   - name: Bat0
     id: 2
-    cost: 2
-    stage: 1
+    cost: 3
+    stage: 2
     weaponId: 6
     weaponLevel: 0
     stat:
-      dmg: 0.1
+      dmg: 0.4
       spd: 4
       tec: 0
       hp: 5
@@ -147,12 +147,12 @@ MonoBehaviour:
       gravity: 0
   - name: Bat1
     id: 3
-    cost: 3
-    stage: 2
+    cost: 4
+    stage: 3
     weaponId: 6
     weaponLevel: 0
     stat:
-      dmg: 0.3
+      dmg: 0.5
       spd: 1
       tec: 0
       hp: 8
@@ -169,6 +169,39 @@ MonoBehaviour:
     minDistance: 0
     maxDistance: 2
     moveSpeed: 2
+    shadowPos: {x: 0.05, y: -0.3}
+    knowledge:
+      fire: 0
+      ice: 0
+      poison: 0
+      knockBack: 0
+      stun: 0
+      slow: 0
+      gravity: 0
+  - name: Bone0
+    id: 4
+    cost: 5
+    stage: 4
+    weaponId: 3
+    weaponLevel: 0
+    stat:
+      dmg: 0.5
+      spd: 1
+      tec: 0
+      hp: 8
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+    controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    move: 2
+    moveDelay: 0.5
+    moveDistance: 0.5
+    minDistance: 0
+    maxDistance: 2
+    moveSpeed: 1.5
     shadowPos: {x: 0.05, y: -0.3}
     knowledge:
       fire: 0
@@ -1514,9 +1547,13 @@ MonoBehaviour:
   - cost: 1
     unitId: 00000000
   - cost: 2
-    unitId: 0100000002000000
+    unitId: 01000000
   - cost: 3
+    unitId: 02000000
+  - cost: 4
     unitId: 03000000
+  - cost: 5
+    unitId: 04000000
   skills:
   - name: ThunderStrike
     bulletIds: 190000001a000000

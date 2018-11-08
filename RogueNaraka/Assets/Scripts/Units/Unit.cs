@@ -710,14 +710,23 @@ public abstract class Unit : MonoBehaviour {
     {
         if (isDeath)
         {
+            bool isBA = false, isAA = false;
             animator.SetBool("isDeath", isDeath);
-            animator.SetBool("isBeforeAttack", isBeforeAttack);
-            animator.SetBool("isAfterAttack", isAfterAttack);
+            if (HasParameter("isBeforeAttack", animator))
+            {
+                animator.SetBool("isBeforeAttack", isBeforeAttack);
+                isBA = true;
+            }
+            if (HasParameter("isAfterAttack", animator))
+            {
+                animator.SetBool("isAfterAttack", isAfterAttack);
+                isAA = true;
+            }
             if (shadow.gameObject.activeSelf)
             {
                 shadow.animator.SetBool("isDeath", isDeath);
-                shadow.animator.SetBool("isBeforeAttack", isBeforeAttack);
-                shadow.animator.SetBool("isAfterAttack", isAfterAttack);
+                if(isBA)shadow.animator.SetBool("isBeforeAttack", isBeforeAttack);
+                if(isAA)shadow.animator.SetBool("isAfterAttack", isAfterAttack);
             }
         }
         Vector2 velocity = agent.velocity;
@@ -728,12 +737,17 @@ public abstract class Unit : MonoBehaviour {
                 isWalk = true;
             else
                 isWalk = false;
-            animator.SetBool("isWalk", isWalk);
-            animator.SetBool("isStun", isStun);
-            if (shadow.gameObject.activeSelf)
+            if (HasParameter("isWalk", animator))
             {
-                shadow.animator.SetBool("isWalk", isWalk);
-                shadow.animator.SetBool("isStun", isStun);
+                animator.SetBool("isWalk", isWalk);
+                if (shadow.gameObject.activeSelf)
+                    shadow.animator.SetBool("isWalk", isWalk);
+            }
+            if (HasParameter("isStun", animator))
+            {
+                animator.SetBool("isStun", isStun);
+                if (shadow.gameObject.activeSelf)
+                    shadow.animator.SetBool("isStun", isStun);
             }
             if (target)
             {
@@ -757,6 +771,15 @@ public abstract class Unit : MonoBehaviour {
             }
         }
         
+    }
+
+    public static bool HasParameter(string paramName, Animator animator)
+    {
+        for(int i = 0; i < animator.parameterCount; i++)
+        {
+            if (animator.parameters[i].name.CompareTo(paramName) == 0) return true;
+        }
+        return false;
     }
 
     public void SetAttackCool(float value)
