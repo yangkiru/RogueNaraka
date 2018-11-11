@@ -50,7 +50,7 @@ public class InfiniteScroll : MonoBehaviour {
         _rolling++;
         while (true)
         {
-            yield return null;
+            yield return new WaitForSecondsRealtime(0.01f);
             float moving = _speed;
             bool isLast = false;
             if (moved + moving >= distance)

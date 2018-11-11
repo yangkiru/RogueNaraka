@@ -12,12 +12,22 @@ public class Enemy : Unit {
         agent.OnDestinationReached += OnMoveEnd;
         agent.OnDestinationInvalid += OnMoveEnd;
         StartCoroutine(MoveCorou());
+        StartCoroutine(TargetCorou());
     }
 
     protected virtual void OnDisable()
     {
         agent.OnDestinationInvalid -= OnMoveEnd;
         agent.OnDestinationReached -= OnMoveEnd;
+    }
+
+    protected IEnumerator TargetCorou()
+    {
+        while (!isDeath)
+        {
+            SetTarget();
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     public override bool SetTarget()
@@ -211,7 +221,6 @@ public class Enemy : Unit {
             CheckDeath();
             if (!isDeath)
             {
-                TargetUpdate();
                 Attack();
             }
             Animation();

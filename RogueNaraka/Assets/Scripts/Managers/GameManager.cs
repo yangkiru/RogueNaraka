@@ -279,7 +279,6 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("weaponId", playerBase.weaponId);
         PlayerPrefs.SetInt("weaponLevel", playerBase.weaponLevel);
         skillManager.ResetSave();
-        moneyManager.Reset();
         Item.instance.ResetSave();
         Item.instance.Load();
         soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);

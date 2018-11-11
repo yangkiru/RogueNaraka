@@ -13,7 +13,7 @@ public class PointTxtManager : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 500; i++)
         {
             SpawnTxt();
         }
@@ -34,13 +34,17 @@ public class PointTxtManager : MonoBehaviour {
     /// <returns></returns>
     public Text TxtOn(Vector2 pos, float value, string cut = null)
     {
-        Text txt = txtPool.DequeueObjectPool().GetComponent<Text>();
-        txt.transform.position = pos;
-        txt.gameObject.SetActive(true);
-        if (value < 0)
-            txt.text = value.ToString(cut);
-        else
-            txt.text = "+" + value.ToString(cut);
+        GameObject obj = txtPool.DequeueObjectPool();
+        Text txt = obj ? obj.GetComponent<Text>() : null;
+        if (txt)
+        {
+            txt.transform.position = pos;
+            txt.gameObject.SetActive(true);
+            if (value < 0)
+                txt.text = value.ToString(cut);
+            else
+                txt.text = "+" + value.ToString(cut);
+        }
         return txt;
     }
 
@@ -69,17 +73,23 @@ public class PointTxtManager : MonoBehaviour {
     public Text TxtOnHead(float value, Transform tf, Color color)
     {
         Text txt = TxtOn(tf, value, color, "##0.##");
-        StartCoroutine(Shoot(txt, 0.75f));
-        StartCoroutine(AlphaDown(txt, 0.3f, 3));
-        //StartCoroutine(MoveUp(txt, 0.5f, 0.01f));
+        if (txt)
+        {
+            StartCoroutine(Shoot(txt, 0.75f));
+            StartCoroutine(AlphaDown(txt, 0.3f, 3));
+            //StartCoroutine(MoveUp(txt, 0.5f, 0.01f));
+        }
         return txt;
     }
 
     public void TxtOnSoul(float value, Transform tf, Vector2 offset)
     {
         Text txt = TxtOn(tf, value, Color.cyan, offset);
-        StartCoroutine(MoveUp(txt, 1f, 0.03f));
-        StartCoroutine(AlphaDown(txt, 0.3f, 3));
+        if (txt)
+        {
+            StartCoroutine(MoveUp(txt, 1f, 0.03f));
+            StartCoroutine(AlphaDown(txt, 0.3f, 3));
+        }
     }
 
     private IEnumerator MoveUp(Text txt, float time, float speed)

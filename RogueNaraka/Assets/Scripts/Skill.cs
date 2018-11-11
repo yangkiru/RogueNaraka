@@ -315,7 +315,7 @@ public class Skill : MonoBehaviour
         for (int i = 0; i < data.values[1].value; i++)//values[1] == blood spawn amount
         {
             float rndAngle = Random.Range(0, 360);
-            Vector2 rndPos = new Vector2(Random.Range(-data.size * 0.3f, data.size * 0.3f), Random.Range(-data.size * 0.3f, data.size * 0.3f));
+            Vector2 rndPos = new Vector2(Random.Range(-data.size +1.5f, data.size -1.5f), Random.Range(-data.size +1.5f, data.size -1.5f));
             Bullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
             newData.abilities[0].value += data.values[0].value;//time

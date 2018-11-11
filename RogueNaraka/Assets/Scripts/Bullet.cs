@@ -570,6 +570,11 @@ public class Bullet : MonoBehaviour {
         }
     }
 
+    private void OnTriggetEnter2D(Collider2D collision)
+    {
+
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (gameObject.activeSelf)
