@@ -15,6 +15,7 @@ public class RollManager : MonoBehaviour {
     public TextMeshProUGUI typeTxt;
     public TextMeshProUGUI nameTxt;
     public TextMeshProUGUI descTxt;
+    public TextMeshProUGUI reRollTxt;
     public TextMeshProUGUI[] statTxts;
 
     public int selected;
@@ -96,7 +97,7 @@ public class RollManager : MonoBehaviour {
     }
 
     bool isReRoll;//참이면 ReRoll 재 호출시 ReRoll 진행
-    public void ReRoll(TextMeshProUGUI reRollTxt)
+    public void ReRoll()
     {
         if (scroll.rolling <= 0)
         {
@@ -104,9 +105,13 @@ public class RollManager : MonoBehaviour {
             {
                 LoadRollCount();
                 int amount = rollCount * 10;
-                reRollTxt.text = string.Format("{0}Soul", amount);
+                
                 if(MoneyManager.instance.soul >= amount)
-                isReRoll = true;
+                    isReRoll = true;
+                if (reRollTxt.text.CompareTo("ReRoll") == 0)
+                    reRollTxt.text = string.Format("{0}Soul", amount);
+                else
+                    reRollTxt.text = "Fail";
             }
             else
             {

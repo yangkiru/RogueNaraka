@@ -85,11 +85,11 @@ public class PointTxtManager : MonoBehaviour {
 
     public void TxtOnSoul(float value, Transform tf, Vector2 offset)
     {
-        Text txt = TxtOn(tf, value, Color.cyan, offset);
+        Text txt = TxtOn(tf, value, Color.white, offset);
         if (txt)
         {
-            StartCoroutine(MoveUp(txt, 1f, 0.03f));
-            StartCoroutine(AlphaDown(txt, 0.3f, 4));
+            StartCoroutine(MoveUp(txt, 2f, 0.005f));
+            StartCoroutine(AlphaDown(txt, 0.1f, 5));
         }
     }
 
@@ -116,7 +116,7 @@ public class PointTxtManager : MonoBehaviour {
         while (time > 0)
         {
             txt.transform.Translate(new Vector2(rnd, 0.01f * acel));
-            acel += 0.1f;
+            acel += 0.01f;
             time -= 0.01f;
 #if DELAY
             yield return GameManager.instance.delayPointOneReal;
