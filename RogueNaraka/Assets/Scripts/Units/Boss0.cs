@@ -23,7 +23,12 @@ public class Boss0 : Enemy {
 #if DELAY
         yield return GameManager.instance.delayOneReal; yield return GameManager.instance.delayOneReal; yield return GameManager.instance.delayOneReal;
 #else
-        yield return new WaitForSecondsRealtime(3);
+        float t = 0;
+        while (t < 3)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
 #endif
         isWakeUp = true;
         base.OnEnable();

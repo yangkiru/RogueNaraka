@@ -96,11 +96,15 @@ public class PointTxtManager : MonoBehaviour {
     private IEnumerator MoveUp(Text txt, float time, float speed)
     {
         float amount = 0.05f;
-        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(amount);
         for (float t = 0; t < time; t += amount)
         {
             txt.transform.position = new Vector2(txt.transform.position.x, txt.transform.position.y + speed);
-            yield return delay;
+            float _t = 0;
+            while (_t < amount)
+            {
+                _t += Time.unscaledDeltaTime;
+                yield return null;
+            }
         }
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
@@ -109,9 +113,6 @@ public class PointTxtManager : MonoBehaviour {
     {
         float rnd = Random.Range(-0.01f, 0.01f);
         float acel = 1f;
-#if !DELAY
-        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.1f);
-#endif
 
         while (time > 0)
         {
@@ -121,7 +122,12 @@ public class PointTxtManager : MonoBehaviour {
 #if DELAY
             yield return GameManager.instance.delayPointOneReal;
 #else
-            yield return delay;
+            float t = 0;
+            while (t < 0.1f)
+            {
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
 #endif
         }
         txtPool.EnqueueObjectPool(txt.gameObject);
@@ -131,14 +137,18 @@ public class PointTxtManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(delay);
 #if !DELAY
-        WaitForSecondsRealtime _delay = new WaitForSecondsRealtime(0.1f); 
 #endif
         while (txt.color.a > float.Epsilon)
         {
 #if DELAY
             yield return GameManager.instance.delayPointOneReal;
 #else
-            yield return _delay;
+            float t = 0;
+            while (t < 0.1f)
+            {
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
 #endif
             Color color = txt.color;
             color.a = color.a -= 0.1f * speed;

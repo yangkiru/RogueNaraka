@@ -501,12 +501,16 @@ public class RollManager : MonoBehaviour {
     public IEnumerator CheckRollEnd()
     {
 #if !DELAY
-        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.1f);
 #endif
 #if DELAY
         yield return GameManager.instance.delayOneReal;
 #else
-        yield return new WaitForSecondsRealtime(1);
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
 #endif
         while (true)
         {
@@ -515,7 +519,12 @@ public class RollManager : MonoBehaviour {
 #if DELAY
             yield return GameManager.instance.delayPointOneReal;
 #else
-            yield return delay;
+            t = 0;
+            while (t < 0.1)
+            {
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
 #endif
         }
         OnRollEnd();
@@ -539,7 +548,12 @@ public class RollManager : MonoBehaviour {
 #if DELAY
         yield return GameManager.instance.delayPointOneReal;
 #else
-        yield return new WaitForSecondsRealtime(0.1f);
+        float t = 0;
+        while (t < 0.1f)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
 #endif
         while (scroll.rolling > 0)
         {

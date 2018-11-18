@@ -62,13 +62,10 @@ public class GameManager : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        //if (isDebug)
-        //{
-        //    if (boardManager != null)
-        //        boardManager.InitBoard();
-        //}
         if (isReset)
             PlayerPrefs.SetInt("isFirst", 0);
+
+        Application.targetFrameRate = 60;
 #if DELAY
         delayPointOne = new WaitForSeconds(0.1f);
         delayPointOneReal = new WaitForSecondsRealtime(0.1f);
@@ -139,7 +136,12 @@ public class GameManager : MonoBehaviour {
         while (true)
         {
             Save();
-            yield return new WaitForSecondsRealtime(time);
+            float t = 0;
+            while (t < time)
+            {
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
         }
     }
 
@@ -389,13 +391,23 @@ public class GameManager : MonoBehaviour {
         moneyManager.RefineSoul();
         PlayerPrefs.SetInt("isRun", 0);
         Debug.Log("End");
-        yield return new WaitForSecondsRealtime(3);
+        float t = 0;
+        while (t < 3)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
         Debug.Log("Waited");
         boardManager.ClearStage();
         player.SetDeath(false);
         Load();
         player.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-        yield return new WaitForSecondsRealtime(1);
+        t = 0;
+        while (t < 1)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
         player.animator.updateMode = AnimatorUpdateMode.Normal;
     }
 

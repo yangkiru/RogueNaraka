@@ -1376,7 +1376,7 @@ MonoBehaviour:
     effects:
     - type: 3
       value: 1
-      time: 1.005
+      time: 1
       isInfinity: 0
   - name: blood
     id: 28
@@ -1684,12 +1684,12 @@ MonoBehaviour:
     isDeath: 0
     effects:
     - type: 3
-      value: 2
+      value: 4
       time: 0
       isInfinity: 0
     values:
     - name: Time
-      value: 2
+      value: 4
     levelUp:
       manaCost: 0.25
       size: 0
@@ -1778,7 +1778,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: Time
-      value: 4
+      value: 2
     - name: Dmg
       value: 0.25
     - name: Hp

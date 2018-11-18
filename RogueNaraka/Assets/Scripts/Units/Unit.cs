@@ -125,6 +125,10 @@ public abstract class Unit : MonoBehaviour {
             _health = data.stat.hp;
             _mana = data.stat.mp;
         }
+
+        poison = 0;
+        slow = 0;
+        ice = 0;
         shadow.Init();
         SyncData();
     }

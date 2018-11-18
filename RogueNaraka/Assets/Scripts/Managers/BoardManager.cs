@@ -75,7 +75,7 @@ public class BoardManager : MonoBehaviour {
     {
         //Debug.Log("InitBoard");
         int count = enemyPool.GetCount();
-        if (count < 100)//enemy Pooling
+        if (count < 20)//enemy Pooling
         {
             for (int i = count; i < 100; i++)
             {
@@ -206,7 +206,7 @@ public class BoardManager : MonoBehaviour {
             }
         }
 
-        //StartCoroutine(StageTxtEffect());
+        StartCoroutine(StageTxtEffect());
     }
 
     public void SpawnEnemy(int id)
@@ -248,7 +248,7 @@ public class BoardManager : MonoBehaviour {
             stageTxt.text = string.Format("{0}{1}", stageTxt.text, text[i]);
         }
         float alpha = 1;
-        float amount = 10 / 255f;
+        float amount = 5 / 255f;
         while (alpha >= 0)
         {
             alpha -= amount;

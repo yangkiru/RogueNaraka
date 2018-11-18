@@ -65,6 +65,8 @@ public class Effect : MonoBehaviour {
 
     public void DestroySelf()
     {
+        StopCoroutine(coroutine);
+        coroutine = null;
         owner.effects.Remove(this);
         owner = null;
         BoardManager.instance.effectPool.EnqueueObjectPool(gameObject, false);

@@ -222,12 +222,22 @@ public class SkillManager : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator CheckRollEnd()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
-        while(true)
+        float t = 0;
+        while (t < 0.5f)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        while (true)
         {
             if (scroll.rolling <= 0)//회전하는 코루틴 개수
                 break;
-            yield return new WaitForSecondsRealtime(0.1f);
+            t = 0;
+            while (t < 0.1f)
+            {
+                t += Time.unscaledDeltaTime;
+                yield return null;
+            }
         }
         OnRollEnd();
     }
@@ -260,7 +270,12 @@ public class SkillManager : MonoBehaviour {
     public IEnumerator SpeedUp()
     {
         Debug.Log("SpeedUp");
-        yield return new WaitForSecondsRealtime(0.1f);
+        float t = 0;
+        while (t < 0.1f)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
         while (scroll.rolling > 0)
         {
             scroll.SpeedUp(1.02f);
@@ -499,7 +514,12 @@ public class SkillManager : MonoBehaviour {
 #if DELAY
         yield return GameManager.instance.delayOneReal;
 #else
-        yield return new WaitForSecondsRealtime(1);
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
 #endif
         okBtn.interactable = true;
         cancelBtn.interactable = true;

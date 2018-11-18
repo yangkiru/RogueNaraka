@@ -135,14 +135,16 @@ public class LevelUpManager : MonoBehaviour {
         Debug.Log("EndLevelUp");
         cancelBtn.interactable = false;
         statPnl.SetActive(false);
-#if !DELAY
-        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.1f);
-#endif
         //SetSelectPnl(false);
 #if DELAY
         yield return GameManager.instance.delayPointOneReal;
 #else
-        yield return delay;
+        float t = 0;
+        while (t < 0.1f)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
 #endif
         if (SoulShopManager.instance.shopStage <= 1)
             SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.SET);

@@ -82,6 +82,13 @@ public class SoulShopManager : MonoBehaviour
             statUpgrading = (STAT)type;
             statUpgradeBtnTxt[type].text = GetRequiredStat((STAT)type).ToString();
             isStatUpgrading = true;
+            for(int i = 0; i < statUpgradeBtn.Length;i++)
+            {
+                if (i == type)
+                    continue;
+                statUpgradeBtn[i].interactable = true;
+                statUpgradeBtnTxt[i].text = "Up";
+            }
         }
     }
     /// <summary>
@@ -201,16 +208,27 @@ public class SoulShopManager : MonoBehaviour
         //버튼 잠금
         //cancelBtn.interactable = false;
         //okBtn.interactable = false;
-        statUpgradeBtn[(int)statUpgrading].interactable = false;
+        for (int i = 0; i < statUpgradeBtn.Length; i++)
+        {
+            statUpgradeBtn[i].interactable = false;
+        }
 #if DELAY
             yield return GameManager.instance.delayOneReal;
 #else
-        yield return new WaitForSecondsRealtime(1);
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
 #endif
         //SetCheckPnl(false);
         //cancelBtn.interactable = true;
         //okBtn.interactable = true;
-        statUpgradeBtn[(int)statUpgrading].interactable = true;
+        for (int i = 0; i < statUpgradeBtn.Length; i++)
+        {
+            statUpgradeBtn[i].interactable = true;
+        }
         statUpgradeBtnTxt[(int)statUpgrading].text = "Up";
         isUpgrading = false;
         SyncStatUpgradeTxt();
