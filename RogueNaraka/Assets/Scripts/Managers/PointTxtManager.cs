@@ -43,7 +43,7 @@ public class PointTxtManager : MonoBehaviour {
             if (value < 0)
                 txt.text = value.ToString(cut);
             else
-                txt.text = "+" + value.ToString(cut);
+                txt.text = string.Format("+{0}",value.ToString(cut));
         }
         return txt;
     }
@@ -56,7 +56,8 @@ public class PointTxtManager : MonoBehaviour {
     public Text TxtOn(Vector2 pos, float value, Color color, string cut = null)
     {
         Text txt = TxtOn(pos, value, cut);
-        txt.color = color;
+        if(txt)
+            txt.color = color;
         return txt;
     }
 
@@ -88,31 +89,40 @@ public class PointTxtManager : MonoBehaviour {
         if (txt)
         {
             StartCoroutine(MoveUp(txt, 1f, 0.03f));
-            StartCoroutine(AlphaDown(txt, 0.3f, 3));
+            StartCoroutine(AlphaDown(txt, 0.3f, 4));
         }
     }
 
     private IEnumerator MoveUp(Text txt, float time, float speed)
     {
         float amount = 0.05f;
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(amount);
         for (float t = 0; t < time; t += amount)
         {
             txt.transform.position = new Vector2(txt.transform.position.x, txt.transform.position.y + speed);
-            yield return new WaitForSecondsRealtime(amount);
+            yield return delay;
         }
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
     IEnumerator Shoot(Text txt, float time)
     {
-        float rnd = Random.Range(-1f, 1f) * 0.01f;
-        float acel = 0.1f;
+        float rnd = Random.Range(-0.01f, 0.01f);
+        float acel = 1f;
+#if !DELAY
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.1f);
+#endif
+
         while (time > 0)
         {
-            txt.transform.Translate(new Vector2(rnd * acel, 0.01f * acel));
+            txt.transform.Translate(new Vector2(rnd, 0.01f * acel));
             acel += 0.1f;
             time -= 0.01f;
-            yield return new WaitForSeconds(0.01f);
+#if DELAY
+            yield return GameManager.instance.delayPointOneReal;
+#else
+            yield return delay;
+#endif
         }
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
@@ -120,9 +130,16 @@ public class PointTxtManager : MonoBehaviour {
     IEnumerator AlphaDown(Text txt, float delay, float speed)
     {
         yield return new WaitForSeconds(delay);
+#if !DELAY
+        WaitForSecondsRealtime _delay = new WaitForSecondsRealtime(0.1f); 
+#endif
         while (txt.color.a > float.Epsilon)
         {
-            yield return new WaitForSeconds(0.1f);
+#if DELAY
+            yield return GameManager.instance.delayPointOneReal;
+#else
+            yield return _delay;
+#endif
             Color color = txt.color;
             color.a = color.a -= 0.1f * speed;
             txt.color = color;

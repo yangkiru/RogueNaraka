@@ -37,6 +37,7 @@ public class MoneyManager : MonoBehaviour {
     public void SetUnrefinedSoul(int value)
     {
         _unrefinedSoul = value;
+        MoneyUpdate();
     }
 
     public void AddUnrefinedSoul(int value)
@@ -84,6 +85,7 @@ public class MoneyManager : MonoBehaviour {
             AddSoul(_unrefinedSoul);
         SetUnrefinedSoul(0);
         Save();
+        Debug.Log("RefineSoul");
     }
 
     public void Save()

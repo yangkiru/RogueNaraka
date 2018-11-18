@@ -382,7 +382,7 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         bool isDynamic = data.type == BULLET_TYPE.DYNAMIC;
         coll.enabled = isDynamic;
@@ -442,6 +442,11 @@ public class Bullet : MonoBehaviour {
                             guideSpeed += guideIncrease * 0.01f;
                         }
                     }
+                }
+
+                for(int i = 0; i < this.hits.Count;i++)
+                {
+                    Hit(this.hits[i]);
                 }
 
                 Collider2D[] hits = null;
@@ -570,12 +575,17 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    private void OnTriggetEnter2D(Collider2D collision)
+    List<Collider2D> hits = new List<Collider2D>();
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        hits.Add(collision);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        hits.Remove(collision);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void Hit(Collider2D collision)
     {
         if (gameObject.activeSelf)
         {

@@ -1380,12 +1380,12 @@ MonoBehaviour:
       isInfinity: 0
   - name: blood
     id: 28
-    type: 5
+    type: 0
     sortingLayer: 2
     flightSpeed: 1
     dmg: 0
     dealSpeed: 1
-    size: 0
+    size: 1
     angle: 0
     shake:
       time: 0
@@ -1742,8 +1742,6 @@ MonoBehaviour:
     isDeath: 0
     effects: []
     values:
-    - name: Time
-      value: 4
     - name: BloodAmount
       value: 3
     - name: BubbleSpawnSpeed
@@ -1782,16 +1780,16 @@ MonoBehaviour:
     - name: Time
       value: 4
     - name: Dmg
-      value: 0.5
+      value: 0.25
     - name: Hp
-      value: 4
+      value: 2
     levelUp:
       manaCost: 0.5
       size: 0.25
       effects: []
       values:
       - name: Time
-        value: 0.5
+        value: 0.25
       - name: Dmg
         value: 0.25
       - name: Hp

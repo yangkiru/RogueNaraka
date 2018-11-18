@@ -27,10 +27,9 @@ public class BoardManager : MonoBehaviour {
 
     public int stage
     { get { return _stage; } }
-    [SerializeField][ReadOnly]
+    [SerializeField]
     private int _stage;
     public bool isReady;
-    private bool isStart = false;
 
     private void Awake()
     {
@@ -102,6 +101,7 @@ public class BoardManager : MonoBehaviour {
                 effectPool.EnqueueObjectPool(obj);
             }
         }
+        GameManager.instance.PlayerEffect();
 
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
@@ -111,7 +111,7 @@ public class BoardManager : MonoBehaviour {
 
     private IEnumerator WaitForLoad()
     {
-        yield return new WaitForSecondsRealtime(1);
+        yield return null;
         GameManager.instance.SetPause(false);
         isReady = true;
     }
@@ -151,6 +151,12 @@ public class BoardManager : MonoBehaviour {
             }
         }
         //Debug.Log("SetStage(" + stage + ")");
+        if(stage > GameDatabase.instance.stageCosts.Length)
+        {
+            Debug.Log("NoMoreStage");
+            GameManager.instance.StartCoroutine(GameManager.instance.OnEnd());
+            return;
+        }
         int cost = GameDatabase.instance.stageCosts[stage - 1];
         UnitCost[] unitCosts = GameDatabase.instance.unitCosts;
         List<int> able = new List<int>();
@@ -200,7 +206,7 @@ public class BoardManager : MonoBehaviour {
             }
         }
 
-        StartCoroutine(StageTxtEffect());
+        //StartCoroutine(StageTxtEffect());
     }
 
     public void SpawnEnemy(int id)
@@ -232,34 +238,30 @@ public class BoardManager : MonoBehaviour {
 
     private IEnumerator StageTxtEffect()
     {
-        float appearTime = 0.95f, disappearTime = 0.07f;
-        string text = "STAGE " + _stage.ToString();
+        string text = string.Format("STAGE {0}", _stage);
         stageTxt.text = string.Empty;
-        while (!isStart)
-        {
-            isStart = true;
-            yield return new WaitForSecondsRealtime(0.5f);
-        }
         stageTxt.color = Color.white;
         //Appear
         for (int i = 0; i < text.Length; i++)
         {
-            stageTxt.text += text[i];
-            yield return new WaitForSecondsRealtime(appearTime / text.Length);
+            yield return null;
+            stageTxt.text = string.Format("{0}{1}", stageTxt.text, text[i]);
         }
-        int alpha = 255;
+        float alpha = 1;
+        float amount = 10 / 255f;
         while (alpha >= 0)
         {
-            alpha -= 10;
-            stageTxt.color = new Color(stageTxt.color.r, stageTxt.color.g, stageTxt.color.b, alpha / 255f);
-            yield return new WaitForSecondsRealtime(disappearTime);
+            alpha -= amount;
+            stageTxt.color = new Color(stageTxt.color.r, stageTxt.color.g, stageTxt.color.b, alpha);
+            yield return null;
         }
     }
 
     public void ClearStage()
     {
-        enemies.Clear();
-        enemyPool.Clear();
+        Enemy[] temp = enemies.ToArray();
+        for(int i = 0; i < temp.Length; i++)
+            enemyPool.EnqueueObjectPool(temp[i].gameObject);
     }
     public static Vector3 GetMousePosition()
     {

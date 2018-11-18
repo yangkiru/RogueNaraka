@@ -1,14 +1,20 @@
-﻿using System.Collections;
+﻿//#define DELAY
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using GoogleMobileAds.Api;
 
 public class GameManager : MonoBehaviour {
     [SerializeField][ReadOnly]
     public static GameManager instance = null;
-
+#if DELAY
+    public WaitForSeconds delayPointOne;
+    public WaitForSecondsRealtime delayPointOneReal;
+    public WaitForSeconds delayOne;
+    public WaitForSecondsRealtime delayOneReal;
+#endif
     public BoardManager boardManager;
     public MoneyManager moneyManager;
     public LevelUpManager levelUpManager;
@@ -27,7 +33,6 @@ public class GameManager : MonoBehaviour {
 
     public bool isDebug;
     public bool isReset;
-    public bool isRun;
     public bool isStage;
     public bool spawnEffect;
     public bool autoSave = true;
@@ -62,12 +67,14 @@ public class GameManager : MonoBehaviour {
         //    if (boardManager != null)
         //        boardManager.InitBoard();
         //}
-        if(isReset)
+        if (isReset)
             PlayerPrefs.SetInt("isFirst", 0);
-
-        if(isRun)
-            PlayerPrefs.SetInt("isRun", 1);
-
+#if DELAY
+        delayPointOne = new WaitForSeconds(0.1f);
+        delayPointOneReal = new WaitForSecondsRealtime(0.1f);
+        delayOne = new WaitForSeconds(1f);
+        delayOneReal = new WaitForSecondsRealtime(1f);
+#endif
         Load();
     }
 
@@ -114,7 +121,7 @@ public class GameManager : MonoBehaviour {
             {
                 int current = (int)GetStatSum(false);
                 int max = (int)GetStatSum(true);
-                if (current == max)
+                if (current >= max)
                 {
                     Debug.Log("Max");
                     return;
@@ -136,7 +143,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void Save()
+    public void Save(bool isRun = true)
     {
         moneyManager.Save();
 
@@ -147,7 +154,7 @@ public class GameManager : MonoBehaviour {
         }
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
-        if(isRun)
+        if (isRun)
         {
             PlayerPrefs.SetFloat("dmg", player.data.stat.dmg);
             PlayerPrefs.SetFloat("spd", player.data.stat.spd);
@@ -169,9 +176,9 @@ public class GameManager : MonoBehaviour {
 
     public void RunGame()
     {
-        isRun = true;
+        Debug.Log("RunGame");
         PlayerPrefs.SetInt("isRun", 1);
-        Load();
+        LoadRun();
         RandomStat();
         PlayerPrefs.SetFloat("health", player.data.stat.hp);
         PlayerPrefs.SetFloat("mana", player.data.stat.mp);
@@ -182,7 +189,7 @@ public class GameManager : MonoBehaviour {
     private void LoadFirst()
     {
         moneyManager.Reset();
-        UnitData playerBase = GameDatabase.instance.playerBase;
+        UnitData playerBase = (UnitData)GameDatabase.instance.playerBase.Clone();
         Stat dbStat = playerBase.stat;
         SyncStatToData(dbStat);
 
@@ -209,17 +216,16 @@ public class GameManager : MonoBehaviour {
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
         Item.instance.Load();
-        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
+        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
     }
 
     private void LoadRun()
     {
-        isRun = true;
         moneyManager.Load();
         Stat stat = new Stat(PlayerPrefs.GetFloat("dmg"), PlayerPrefs.GetFloat("spd"),
         PlayerPrefs.GetFloat("tec"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
         PlayerPrefs.GetFloat("hpRegen"), PlayerPrefs.GetFloat("mpRegen"));
-        UnitData playerData = GameDatabase.instance.playerBase;
+        UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
         playerData.stat = stat;
         player.SyncData(playerData, false);
         player.SetHealth(PlayerPrefs.GetFloat("health"));
@@ -229,7 +235,7 @@ public class GameManager : MonoBehaviour {
 
         player.EquipWeapon(PlayerPrefs.GetInt("weaponId"), PlayerPrefs.GetInt("weaponLevel"));
 
-        StartCoroutine(WaitForEffectPoolInit());
+        //StartCoroutine(WaitForEffectPoolInit());
         if (autoSave)
         {
             autoSaveCoroutine = AutoSave(autoSaveTime);
@@ -254,10 +260,8 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    IEnumerator WaitForEffectPoolInit()
+    public void PlayerEffect()
     {
-        while (boardManager == null || boardManager.effectPool.GetCount() <= 100)
-            yield return null;
         if (PlayerPrefs.GetString("effect") != string.Empty)
         {
             EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
@@ -268,10 +272,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    //IEnumerator WaitForEffectPoolInit()
+    //{
+    //    while (boardManager == null || boardManager.effectPool.GetCount() <= 100)
+    //        yield return null;
+    //    if (PlayerPrefs.GetString("effect") != string.Empty)
+    //    {
+    //        EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
+    //        for (int i = 0; i < temp.Length; i++)
+    //        {
+    //            player.AddEffect((EffectData)temp[i].Clone());
+    //        }
+    //    }
+    //}
+
     private void LoadInit()
     {
         moneyManager.Load();
-        UnitData playerBase = GameDatabase.instance.playerBase;
+        UnitData playerBase = (UnitData)GameDatabase.instance.playerBase.Clone();
         SyncStatToData(playerBase.stat);
         PlayerPrefs.SetInt("stage", 1);
         PlayerPrefs.SetFloat("health", 1);
@@ -281,7 +299,7 @@ public class GameManager : MonoBehaviour {
         skillManager.ResetSave();
         Item.instance.ResetSave();
         Item.instance.Load();
-        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
+        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
         RunGame();
     }
 
@@ -367,11 +385,12 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public IEnumerator OnEnd()
     {
+        yield return null;
         moneyManager.RefineSoul();
         PlayerPrefs.SetInt("isRun", 0);
-        Save();
         Debug.Log("End");
         yield return new WaitForSecondsRealtime(3);
+        Debug.Log("Waited");
         boardManager.ClearStage();
         player.SetDeath(false);
         Load();

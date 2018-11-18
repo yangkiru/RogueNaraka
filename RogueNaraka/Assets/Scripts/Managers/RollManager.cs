@@ -103,7 +103,9 @@ public class RollManager : MonoBehaviour {
             if (!isReRoll)
             {
                 LoadRollCount();
-                reRollTxt.text = string.Format("{0}Soul", rollCount * 10);
+                int amount = rollCount * 10;
+                reRollTxt.text = string.Format("{0}Soul", amount);
+                if(MoneyManager.instance.soul >= amount)
                 isReRoll = true;
             }
             else
@@ -282,6 +284,7 @@ public class RollManager : MonoBehaviour {
     }
 
     bool isMouseDown;
+    
     public void OnMouseDown()
     {
         if (datas[selected].type != ROLL_TYPE.STAT)
@@ -492,12 +495,23 @@ public class RollManager : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator CheckRollEnd()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+#if !DELAY
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.1f);
+#endif
+#if DELAY
+        yield return GameManager.instance.delayOneReal;
+#else
+        yield return new WaitForSecondsRealtime(1);
+#endif
         while (true)
         {
             if (scroll.rolling <= 0)//회전하는 코루틴 개수
                 break;
-            yield return new WaitForSecondsRealtime(0.1f);
+#if DELAY
+            yield return GameManager.instance.delayPointOneReal;
+#else
+            yield return delay;
+#endif
         }
         OnRollEnd();
     }
@@ -517,7 +531,11 @@ public class RollManager : MonoBehaviour {
     public IEnumerator SpeedUp()
     {
         Debug.Log("SpeedUp");
+#if DELAY
+        yield return GameManager.instance.delayPointOneReal;
+#else
         yield return new WaitForSecondsRealtime(0.1f);
+#endif
         while (scroll.rolling > 0)
         {
             scroll.SpeedUp(1.02f);

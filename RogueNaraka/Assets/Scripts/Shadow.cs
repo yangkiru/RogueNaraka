@@ -12,6 +12,11 @@ public class Shadow : MonoBehaviour
     [ContextMenu("Init")]
     public void Init()
     {
+        if (QualitySettings.GetQualityLevel() == 0)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         animator.runtimeAnimatorController = origin.animator.runtimeAnimatorController;
 
         transform.localPosition = origin.data.shadowPos;

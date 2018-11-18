@@ -496,7 +496,11 @@ public class SkillManager : MonoBehaviour {
         skillSelectTxt.text = "Soul이 부족합니다.";
         okBtn.interactable = false;
         cancelBtn.interactable = false;
+#if DELAY
+        yield return GameManager.instance.delayOneReal;
+#else
         yield return new WaitForSecondsRealtime(1);
+#endif
         okBtn.interactable = true;
         cancelBtn.interactable = true;
         SetSkillSelectPnl(false);

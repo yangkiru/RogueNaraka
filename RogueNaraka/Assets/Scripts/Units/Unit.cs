@@ -159,15 +159,15 @@ public abstract class Unit : MonoBehaviour {
             stopMoveCoroutine = StopMove();
             StartCoroutine(stopMoveCoroutine);
         }
-
     }
 
     private IEnumerator StopMove()
     {
+        WaitForEndOfFrame delay = new WaitForEndOfFrame();
         while (!_isAutoMove)
         {
             agent.ResetVelocity();
-            yield return null;
+            yield return delay;
         }
     }
 
@@ -239,16 +239,16 @@ public abstract class Unit : MonoBehaviour {
 
     protected IEnumerator WaitForDeath()
     {
+        WaitForEndOfFrame delay = new WaitForEndOfFrame();
         //Debug.Log(name +"Death");
         AnimatorStateInfo animationState;
         AnimatorClipInfo[] clips;
         do
         {
-            yield return null;
+            yield return delay;
             animationState = animator.GetCurrentAnimatorStateInfo(0);
             clips = animator.GetCurrentAnimatorClipInfo(0);
         } while (!animationState.IsName("Death"));
-        
         float time = clips[0].clip.length * animationState.speed;
         //Debug.Log(clips[0].clip.name + " " + clips[0].clip.length + "*" + animationState.speed + "=" + time);
         yield return new WaitForSeconds(time);
@@ -362,7 +362,7 @@ public abstract class Unit : MonoBehaviour {
 
     protected virtual void Attack()
     {
-        if (attackable && target && boardManager.isReady)
+        if (attackable && boardManager.isReady)
         {
             int bulletId = _weapon.startBulletId[_weapon.level];
 
@@ -381,13 +381,17 @@ public abstract class Unit : MonoBehaviour {
             {
                 attackDistance = 1000;
             }
-            if (!isAttackCool && (_targetDistance <= attackDistance || _weapon.type == ATTACK_TYPE.REVOLVE))
+            if (!isAttackCool)
             {
-                //Debug.Log(name + "Attacking");
+                SetTarget();
+                if (target && (_targetDistance <= attackDistance || _weapon.type == ATTACK_TYPE.REVOLVE))
+                {
+                    //Debug.Log(name + "Attacking");
 
-                //bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
-                isAttackCool = true;
-                StartCoroutine(BeforeAttackCool());
+                    //bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
+                    isAttackCool = true;
+                    StartCoroutine(BeforeAttackCool());
+                }
             }
             //else
                 //Debug.Log("targetDistance : " + targetDistance + " attackDistance : " + attackDistance);
@@ -399,12 +403,13 @@ public abstract class Unit : MonoBehaviour {
     protected bool isAfterAttack;
     protected IEnumerator BeforeAttackCool()
     {
+        WaitForEndOfFrame delay = new WaitForEndOfFrame();
         float t = weapon.beforeAttackDelay;
         isBeforeAttack = true;
-        Debug.Log(name + " beforeAttack" + weapon.beforeAttackDelay);
+        //Debug.Log(name + " beforeAttack" + weapon.beforeAttackDelay);
         while (t > 0)
         {
-            yield return null;
+            yield return delay;
             float _ice = ice * 0.1f * KnowledgeData.GetNegative(knowledge.ice);
             t -= Time.deltaTime * (1 - _ice);
         }
@@ -431,7 +436,7 @@ public abstract class Unit : MonoBehaviour {
 
     protected virtual IEnumerator AttackCool()
     {
-        while(true)
+        while (true)
         {
             if (isAttackCool && !isStun)
             {
@@ -508,6 +513,8 @@ public abstract class Unit : MonoBehaviour {
     protected bool isRandomMoved = false;
     private IEnumerator RandomMoveCorou()
     {
+        WaitForSeconds delay = new WaitForSeconds(data.moveDelay);
+        float moveDelay = data.moveDelay;
         if (isAutoMove && !isWin)
         {
             isRandomMoved = true;
@@ -515,7 +522,12 @@ public abstract class Unit : MonoBehaviour {
                 UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance),
                 UnityEngine.Random.Range(-_data.moveDistance, _data.moveDistance));
             Move((Vector2)transform.position + rnd.normalized);
-            yield return new WaitForSeconds(data.moveDelay);
+            if (moveDelay != data.moveDelay)
+            {
+                moveDelay = data.moveDelay;
+                delay = new WaitForSeconds(data.moveDelay);
+            }
+            yield return delay;
             isRandomMoved = false;
         }
     }
@@ -596,7 +608,7 @@ public abstract class Unit : MonoBehaviour {
 
     protected IEnumerator StunFunc(Effect stun)
     {
-        while(stun.data.time > 0)
+        while (stun.data.time > 0)
         {
             isStun = true;
             stun.data.time -= Time.deltaTime * KnowledgeData.GetAdditional(knowledge.stun);//시간 추가 감소
@@ -838,9 +850,16 @@ public abstract class Unit : MonoBehaviour {
     protected IEnumerator Regen()
     {
         float time = 1f;
-        while(true)
+#if !DELAY
+        WaitForSeconds delay = new WaitForSeconds(1);
+#endif
+        while (true)
         {
-            yield return new WaitForSeconds(time);
+#if DELAY
+            yield return GameManager.instance.delayOne;
+#else
+            yield return delay;
+#endif
             if (_health > 0)
             {
                 AddHealth(_data.stat.hpRegen * 0.1f);

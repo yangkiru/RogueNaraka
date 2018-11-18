@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITYE_EDITOR
+#if UNITY_EDITOR
 [CustomEditor(typeof(OnMouseButton), true)]
 public class OnMouseButtonEditor : Editor
 {

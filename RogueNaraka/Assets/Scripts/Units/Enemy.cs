@@ -12,22 +12,13 @@ public class Enemy : Unit {
         agent.OnDestinationReached += OnMoveEnd;
         agent.OnDestinationInvalid += OnMoveEnd;
         StartCoroutine(MoveCorou());
-        StartCoroutine(TargetCorou());
     }
 
     protected virtual void OnDisable()
     {
         agent.OnDestinationInvalid -= OnMoveEnd;
         agent.OnDestinationReached -= OnMoveEnd;
-    }
-
-    protected IEnumerator TargetCorou()
-    {
-        while (!isDeath)
-        {
-            SetTarget();
-            yield return new WaitForSeconds(0.01f);
-        }
+        boardManager.enemies.Remove(this);
     }
 
     public override bool SetTarget()
@@ -37,13 +28,13 @@ public class Enemy : Unit {
             if (boardManager.scarecorws.Count > 0)
             {
                 Unit closest = boardManager.scarecorws[0];
-                for(int i = 1; i < boardManager.scarecorws.Count;i++)
-                {
-                    if(Vector2.SqrMagnitude(closest.transform.position - transform.position) > Vector2.SqrMagnitude(boardManager.scarecorws[i].transform.position - transform.position))
-                    {
-                        closest = boardManager.scarecorws[i];
-                    }
-                }
+                //for(int i = 1; i < boardManager.scarecorws.Count;i++)
+                //{
+                //    if(Vector2.SqrMagnitude(closest.transform.position - transform.position) > Vector2.SqrMagnitude(boardManager.scarecorws[i].transform.position - transform.position))
+                //    {
+                //        closest = boardManager.scarecorws[i];
+                //    }
+                //}
                 target = closest;
                 targetPosition = target.transform.position;
             }
@@ -200,16 +191,27 @@ public class Enemy : Unit {
 
     IEnumerator MoveCorou()
     {
+        WaitForSeconds delay = new WaitForSeconds(data.moveDelay);
+        float moveDelay = data.moveDelay;
         while(true)
         {
             if(isMoveEnd)
             {
-                yield return new WaitForSeconds(data.moveDelay);
+                if (moveDelay != data.moveDelay)//update
+                {
+                    moveDelay = data.moveDelay;
+                    delay = new WaitForSeconds(data.moveDelay);
+                }
+                yield return delay;
                 isMoveEnd = false;
             }
             if(!isStun)
                 MoveCheck();
+#if DELAY
+            yield return GameManager.instance.delayPointOne;
+#else
             yield return new WaitForSeconds(0.1f);
+#endif
         }
     }
 
@@ -225,12 +227,5 @@ public class Enemy : Unit {
             }
             Animation();
         }
-    }
-
-    protected virtual void TargetUpdate()
-    {
-        SetTarget();
-        if (target != null)
-            targetPosition = target.transform.position;
     }
 }

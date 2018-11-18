@@ -469,7 +469,7 @@ namespace PolyNav{
 					if (!isAvoiding){ isAvoiding = steer.magnitude > 0; }
 					_velocity += (Vector2)steer;
 
-					Debug.DrawLine(otherAgent.position, otherAgent.position + str, new Color(1,0,0,0.1f));
+					//Debug.DrawLine(otherAgent.position, otherAgent.position + str, new Color(1,0,0,0.1f));
 				}
 
 				if (isAvoiding){

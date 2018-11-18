@@ -48,9 +48,16 @@ public class InfiniteScroll : MonoBehaviour {
         float distance = size + spacing;
         float moved = 0;
         _rolling++;
+#if !DELAY
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.5f);
+#endif
         while (true)
         {
-            yield return new WaitForSecondsRealtime(0.01f);
+#if DELAY
+            yield return GameManager.instance.delayPointOneReal;
+#else
+            yield return delay;
+#endif
             float moving = _speed;
             bool isLast = false;
             if (moved + moving >= distance)
@@ -95,10 +102,17 @@ public class InfiniteScroll : MonoBehaviour {
 
     public IEnumerator SpinCoroutine(int count)
     {
+#if !DELAY
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.1f);
+#endif
         for (int i = 0; i < count; i++)
         {
             StartCoroutine(MoveNext());
-            yield return new WaitForSecondsRealtime(0.1f);
+#if DELAY
+            yield return GameManager.instance.delayPointOneReal;
+#else
+            yield return delay;
+#endif
         }
     }
 

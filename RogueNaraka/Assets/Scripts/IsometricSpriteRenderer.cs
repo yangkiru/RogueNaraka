@@ -7,10 +7,12 @@ public class IsometricSpriteRenderer : MonoBehaviour {
     private float pos;
     private float _pos;
     public int add;
+    new SpriteRenderer renderer;
 
     void Start()
     {
-        StartCoroutine(SetOrder());
+        renderer = GetComponent<SpriteRenderer>();
+        //StartCoroutine(SetOrder());
     }
 
     void OnDisable()
@@ -22,13 +24,13 @@ public class IsometricSpriteRenderer : MonoBehaviour {
     {
         while (true)
         {
-            pos = transform.position.y;
-            if (pos != _pos)
-            {
-                GetComponent<SpriteRenderer>().sortingOrder = (int)(transform.position.y * -10);
-            }
-            _pos = pos;
-            yield return new WaitForSeconds(0.1f);
+            //pos = transform.position.y;
+            //if (pos != _pos)
+            //{
+            //    //renderer.sortingOrder = (int)(transform.position.y * -10);
+            //}
+            //_pos = pos;
+            yield return new WaitForSeconds(0.5f);
         }
 	}
 }

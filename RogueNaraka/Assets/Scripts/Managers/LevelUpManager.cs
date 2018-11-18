@@ -49,8 +49,8 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SkillManager.instance.SetIsDragable(false);
-        //if (GameManager.instance.soulShopManager.shopStage <= 1)
-        //    GameManager.instance.soulShopManager.SetSoulShop(true);
+        if (GameManager.instance.soulShopManager.shopStage <= 1)
+            GameManager.instance.soulShopManager.SetSoulShop(true);
         if (isLeftStatChanged)
         {
             Debug.Log("남은 스탯이 있따:" + leftStat + " " + _leftStat);
@@ -135,10 +135,17 @@ public class LevelUpManager : MonoBehaviour {
         Debug.Log("EndLevelUp");
         cancelBtn.interactable = false;
         statPnl.SetActive(false);
+#if !DELAY
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.1f);
+#endif
         //SetSelectPnl(false);
-        yield return new WaitForSecondsRealtime(0.1f);
-        if(SoulShopManager.instance.shopStage <= 1)
-            SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.RANDOM);
+#if DELAY
+        yield return GameManager.instance.delayPointOneReal;
+#else
+        yield return delay;
+#endif
+        if (SoulShopManager.instance.shopStage <= 1)
+            SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.SET);
         else
             SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.DECREASE);
         PlayerPrefs.SetInt("isLevelUp", 0);

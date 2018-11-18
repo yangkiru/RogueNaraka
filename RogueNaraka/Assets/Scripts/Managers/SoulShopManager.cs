@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SoulShopManager : MonoBehaviour
 {
@@ -11,10 +12,11 @@ public class SoulShopManager : MonoBehaviour
 
     public Button okBtn;
     public Button cancelBtn;
+    public Button[] statUpgradeBtn;
 
     public Text checkTxt;
-    public Text soulTxt;
-    public Text[] statUpgradeTxt;
+    public TextMeshProUGUI[] statUpgradeTxt;
+    public TextMeshProUGUI[] statUpgradeBtnTxt;
     public int shopStage
     { get { return _shopStage; } }
     [SerializeField]
@@ -43,7 +45,7 @@ public class SoulShopManager : MonoBehaviour
     }
 
     public enum SHOPSTAGE
-    { RANDOM, DECREASE, SYNC}
+    { SET, DECREASE, SYNC}
     /// <summary>
     /// ShopStage 관련 함수
     /// </summary>
@@ -52,8 +54,8 @@ public class SoulShopManager : MonoBehaviour
     {
         switch(act)
         {
-            case SHOPSTAGE.RANDOM:
-                _shopStage = Random.Range(5, 11);
+            case SHOPSTAGE.SET:
+                _shopStage = 5;
                 PlayerPrefs.SetInt("shopStage", shopStage);
                 break;
             case SHOPSTAGE.DECREASE:
@@ -66,13 +68,21 @@ public class SoulShopManager : MonoBehaviour
         }
     }
 
+    bool isStatUpgrading = false;
     /// <summary>
     /// 업그레이드 버튼을 누르면 upgrading에 값이 전달됨
     /// </summary>
     /// <param name="type"></param>
     public void SelectStatUpgrade(int type)
     {
-        statUpgrading = (STAT)type;
+        if (isStatUpgrading && statUpgrading == (STAT)type)
+            StartCoroutine(StatUp());
+        else
+        {
+            statUpgrading = (STAT)type;
+            statUpgradeBtnTxt[type].text = GetRequiredStat((STAT)type).ToString();
+            isStatUpgrading = true;
+        }
     }
     /// <summary>
     /// Soul 상점 패널을 열거나 닫는 함수
@@ -87,7 +97,6 @@ public class SoulShopManager : MonoBehaviour
             shopPnl.SetActive(true);
             StatPnlOpen();
             GameManager.instance.moneyManager.Load();
-            SyncSoulTxt();
         }
         else
         {
@@ -171,52 +180,43 @@ public class SoulShopManager : MonoBehaviour
     /// </summary>
     public IEnumerator StatUp()
     {
-        if (selected)//Ok 버튼을 누름
+        int required = GetRequiredStat(statUpgrading);
+        isUpgrading = true;
+        if (MoneyManager.instance.soul >= required)
         {
-            int required = GetRequiredStat(statUpgrading);
-            isUpgrading = true;
-            if (MoneyManager.instance.soul >= required)
-            {
-                Debug.Log("Max Stat Upgraded");
-                GameManager.AddStat(statUpgrading, 1, true);
-                MoneyManager.instance.AddSoul(-required);
-                MoneyManager.instance.Save();
-                SyncSoulTxt();
-                SyncStatUpgradeTxt();
-            }
-            else
-            {
-                Debug.Log("Not Enough Soul");
-                checkTxt.text = "Soul이 부족합니다!";
-            }
-            //버튼 잠금
-            cancelBtn.interactable = false;
-            okBtn.interactable = false;
-            yield return new WaitForSecondsRealtime(1);
-
-            SetCheckPnl(false);
-            cancelBtn.interactable = true;
-            okBtn.interactable = true;
-            isUpgrading = false;
+            Debug.Log("Max Stat Upgraded");
+            GameManager.AddStat(statUpgrading, 1, true);
+            MoneyManager.instance.AddSoul(-required);
+            MoneyManager.instance.Save();
             SyncStatUpgradeTxt();
-            SyncSoulTxt();
-            //버튼 잠금 해제
+            statUpgradeBtnTxt[(int)statUpgrading].text = "Done";
+            isStatUpgrading = false;
         }
-        else//Cancel 버튼을 누름
+        else
         {
-            SetCheckPnl(false);
-            cancelBtn.interactable = true;
-            okBtn.interactable = true;
+            Debug.Log("Not Enough Soul");
+            statUpgradeBtnTxt[(int)statUpgrading].text = "Fail";
+            isStatUpgrading = false;
         }
+        //버튼 잠금
+        //cancelBtn.interactable = false;
+        //okBtn.interactable = false;
+        statUpgradeBtn[(int)statUpgrading].interactable = false;
+#if DELAY
+            yield return GameManager.instance.delayOneReal;
+#else
+        yield return new WaitForSecondsRealtime(1);
+#endif
+        //SetCheckPnl(false);
+        //cancelBtn.interactable = true;
+        //okBtn.interactable = true;
+        statUpgradeBtn[(int)statUpgrading].interactable = true;
+        statUpgradeBtnTxt[(int)statUpgrading].text = "Up";
+        isUpgrading = false;
+        SyncStatUpgradeTxt();
+        //버튼 잠금 해제
     }
 
-    /// <summary>
-    /// 소울 값 업데이트
-    /// </summary>
-    private void SyncSoulTxt()
-    {
-        soulTxt.text = GameManager.instance.moneyManager.soul.ToString();
-    }
 
     /// <summary>
     /// 맥스 스탯 값 업데이트

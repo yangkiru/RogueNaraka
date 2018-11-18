@@ -25,7 +25,7 @@ public class Player : Unit
     protected override void OnDeath()
     {
         base.OnDeath();
-        StartCoroutine(gameManager.OnEnd());
+        gameManager.StartCoroutine(gameManager.OnEnd());
     }
 
     protected void Update()
@@ -36,7 +36,7 @@ public class Player : Unit
             if (!isDeath)
             {
                 SyncData();
-                if (!SetTarget() && !isWin)
+                if (!isWin && boardManager.enemies.Count == 0)
                     MoveToGoal();
                 else
                 {
@@ -46,8 +46,6 @@ public class Player : Unit
                         MoveToAttack();
                     Attack();
                 }
-                if (target != null)
-                    targetPosition = target.transform.position;
             }
             Animation();
         }
@@ -63,9 +61,10 @@ public class Player : Unit
 
     protected IEnumerator CollectedDmgFunc()
     {
+        WaitForSeconds delay = new WaitForSeconds(0.5f);
         while (true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return delay;
             if (_collectedDmg > 0)
             {
                 PointTxtManager.instance.TxtOnHead(-_collectedDmg, transform, Color.red);
@@ -119,9 +118,16 @@ public class Player : Unit
     private IEnumerator LevelUp()
     {
         float sqrDistance = 0;
+#if !DELAY
+        WaitForSeconds delay = new WaitForSeconds(0.1f); ;
+#endif
         do
         {
-            yield return new WaitForSeconds(0.1f);
+#if DELAY
+            yield return GameManager.instance.delayPointOne;
+#else
+            yield return delay;
+#endif
             sqrDistance = Vector2.SqrMagnitude((Vector2)transform.position - boardManager.goalPoint);
         } while (sqrDistance > 0.1f);
         if(!_isDeath)
@@ -130,10 +136,11 @@ public class Player : Unit
 
     private IEnumerator MoveToGoalRepeat()
     {
+        WaitForSeconds delay = new WaitForSeconds(0.5f);
         yield return null;
         while (true)
         {
-            yield return new WaitForSeconds(2);
+            yield return delay ;
             if (isWin && !_isDeath)
             {
                 if (isAutoMove)
@@ -154,11 +161,12 @@ public class Player : Unit
 
     IEnumerator WaitForRespawn()
     {
+        WaitForSeconds delay = new WaitForSeconds(1.5f);
         bool isAuto = _isAutoMove;
         bool isAttack = attackable;
         _isAutoMove = false;
         attackable = false;
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return delay;
         _isAutoMove = isAuto;
         attackable = isAttack;
     }

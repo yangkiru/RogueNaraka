@@ -126,7 +126,7 @@ public struct UnitCost
 }
 
 [Serializable]
-public struct Stat : ICloneable
+public class Stat : ICloneable
 {
     public float dmg;
     public float spd;
@@ -136,6 +136,8 @@ public struct Stat : ICloneable
     public float hpRegen;
     public float mpRegen;
 
+    public Stat()
+    { }
     public Stat(Stat s)
     {
         dmg = s.dmg; spd = s.spd; tec = s.tec; hp = s.hp; mp = s.mp; hpRegen = s.hpRegen; mpRegen = s.mpRegen;
@@ -202,7 +204,7 @@ public struct KnowledgeData
 }
 
 [Serializable]
-public struct UnitData : ICloneable
+public class UnitData : ICloneable
 {
     public string name;
     public int id;
@@ -559,6 +561,3 @@ public enum MOVE_TYPE
     RUN,//도망
     REST_RUSH,
 }
-
-[System.Serializable]
-public class ButtonEvent : UnityEngine.Events.UnityEvent { }

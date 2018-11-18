@@ -10,7 +10,7 @@ public class DeathEffectPool : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 200; i++)
         {
             GameObject obj = Instantiate(effectPrefab, Vector3.zero, Quaternion.identity, pool.transform);
             pool.EnqueueObjectPool(obj);

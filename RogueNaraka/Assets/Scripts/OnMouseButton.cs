@@ -81,3 +81,6 @@ public class OnMouseButton : Button {
         set { _onExit = value; }
     }
 }
+
+[System.Serializable]
+public class ButtonEvent : UnityEngine.Events.UnityEvent { }

@@ -20,7 +20,11 @@ public class Boss0 : Enemy {
 
     private IEnumerator WakeUp()
     {
-        yield return new WaitForSeconds(3);
+#if DELAY
+        yield return GameManager.instance.delayOneReal; yield return GameManager.instance.delayOneReal; yield return GameManager.instance.delayOneReal;
+#else
+        yield return new WaitForSecondsRealtime(3);
+#endif
         isWakeUp = true;
         base.OnEnable();
     }
@@ -85,7 +89,6 @@ public class Boss0 : Enemy {
 
     protected override void Update()
     {
-        TargetUpdate();
         if (isWakeUp && !isAttackCool && !isStun)
         {
             if (!isDetected)

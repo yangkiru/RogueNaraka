@@ -316,24 +316,35 @@ namespace DigitalRuby.AdvancedPolygonCollider
             }
         }
 
-        private void Update()
+        void OnEnable()
         {
-            if (Application.isPlaying)
-            {
-                if (!RunInPlayMode)
-                {
-                    return;
-                }
-            }
-            else if (!UseCache)
-            {
-                editorCache.Clear();
-            }
+            StartCoroutine(Check());
+        }
 
-            UpdateDirtyState();
-            if (dirty)
+        private IEnumerator Check()
+        {
+            WaitForSeconds delay = new WaitForSeconds(0.5f);
+            yield return null;
+            while (true)
             {
-                RecalculatePolygon();
+                if (Application.isPlaying)
+                {
+                    if (!RunInPlayMode)
+                    {
+                        yield break;
+                    }
+                }
+                else if (!UseCache)
+                {
+                    editorCache.Clear();
+                }
+
+                UpdateDirtyState();
+                if (dirty)
+                {
+                    RecalculatePolygon();
+                }
+                yield return null;
             }
         }
 

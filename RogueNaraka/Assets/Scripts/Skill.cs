@@ -312,14 +312,13 @@ public class Skill : MonoBehaviour
 
     void BloodSwamp(Vector3 mp)
     {
-        for (int i = 0; i < data.values[1].value; i++)//values[1] == blood spawn amount
+        for (int i = 0; i < data.values[0].value; i++)//values[1] == blood spawn amount
         {
             float rndAngle = Random.Range(0, 360);
             Vector2 rndPos = new Vector2(Random.Range(-data.size +1.5f, data.size -1.5f), Random.Range(-data.size +1.5f, data.size -1.5f));
             Bullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
-            newData.abilities[0].value += data.values[0].value;//time
-            newData.dealSpeed = data.values[2].value;//dealSpeed
+            newData.dealSpeed = data.values[1].value;//dealSpeed
             blood.Init(newData, 0, true);
             blood.OnDamaged += SpawnBloodBubble;
             StartCoroutine(MeltDown(blood.renderer, newData.abilities[0].value));
@@ -342,9 +341,9 @@ public class Skill : MonoBehaviour
         if (target != null)
         {
             if(!parent.owner.isDeath)
-                parent.owner.GetDamage(data.values[3].value);//values[3] == blood life steal
+                parent.owner.GetDamage(data.values[2].value);//values[2] == blood life steal
             if(!target.isDeath)
-                target.HealHealth(data.values[3].value);
+                target.HealHealth(data.values[2].value);
         }
     }
 
