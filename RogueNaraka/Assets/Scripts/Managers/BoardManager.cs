@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RogueNaraka.UnitScripts;
 
 public class BoardManager : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class BoardManager : MonoBehaviour {
     public GameObject bulletPrefab;
     public GameObject[] bossPrefabs;
     public GameObject effectPrefab;
-    public List<Enemy> enemies = new List<Enemy>();
+
     public Player player;
     public Vector2 spawnPoint;//player spawn
     public Vector2 goalPoint;//next Stage
@@ -19,7 +20,9 @@ public class BoardManager : MonoBehaviour {
     public ObjectPool enemyPool;//basic 100 counts
     public ObjectPool bulletPool;//basic 750 counts
     public ObjectPool effectPool;//basic 200 counts
-    public List<ScarecrowSoldier> scarecorws = new List<ScarecrowSoldier>();
+
+    public List<Unit> enemies = new List<Unit>();
+    public List<Unit> friendlies = new List<Unit>();
     [ReadOnly]
     public Enemy boss;
 
