@@ -53,7 +53,7 @@ public class ScarecrowSoldier : Unit
         }
     }
 
-    protected override void AttackBullet(Bullet bullet, Vector2 vec, RevolveHolder holder)
+    protected override void AttackBullet(OldBullet bullet, Vector2 vec, RevolveHolder holder)
     {
         Debug.Log("Bullet Attack!");
         bullet.Attack(transform.position, weapon.spawnPoint, Vector2.down, weapon.localSpeed, weapon.worldSpeed, holder, this);

@@ -14,10 +14,10 @@ TagManager:
   - UI
   - 
   - 
-  - friendly
-  - enemy
-  - wall
-  - bullet
+  - Friendly
+  - Enemy
+  - Wall
+  - Bullet
   - 
   - 
   - 

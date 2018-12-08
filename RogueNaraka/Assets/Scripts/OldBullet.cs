@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class OldBullet : MonoBehaviour {
 
     public Animator animator;
     public new SpriteRenderer renderer;
@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour {
     private bool isSleep = false;
     private bool isDestroyWithOwner;
 
-    public event System.Action<Bullet, Unit> OnDamaged;
+    public event System.Action<OldBullet, Unit> OnDamaged;
 
     [SerializeField] [ReadOnly]
     private BulletData data;
@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour {
     private List<float> dotTimes = new List<float>();
 
     [SerializeField] [ReadOnly]
-    private List<Bullet> destroyChildren = new List<Bullet>();
+    private List<OldBullet> destroyChildren = new List<OldBullet>();
 
     private void OnDrawGizmos()
     {
@@ -60,7 +60,7 @@ public class Bullet : MonoBehaviour {
             case BULLET_TYPE.CIRCLECAST:
                 Gizmos.DrawWireSphere(transform.position, size);
                 break;
-            case BULLET_TYPE.LINECAST:
+            case BULLET_TYPE.RAYCAST:
                 Gizmos.DrawLine(transform.position, vec);
                 break;
             case BULLET_TYPE.TRIANGLE:
@@ -177,7 +177,7 @@ public class Bullet : MonoBehaviour {
 
     public void SpawnBullet(BulletChild childData, Vector2 pos)
     {
-        Bullet child = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        OldBullet child = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
         child.Init(childData.bulletId, unitDamage, isFriendly);
         child.gameObject.SetActive(true);
 
@@ -493,7 +493,7 @@ public class Bullet : MonoBehaviour {
                                 Destroy();
                         }
                         break;
-                    case BULLET_TYPE.LINECAST://직선 데미지
+                    case BULLET_TYPE.RAYCAST://직선 데미지
                         RaycastHit2D[] _hits = Physics2D.RaycastAll(transform.position, vec, size, layerMask);
 
                         DotTimeFunc();
@@ -670,7 +670,7 @@ public class Bullet : MonoBehaviour {
     {
         for(int i = 0; i < destroyChildren.Count; i++)
         {
-            Bullet child = destroyChildren[i];
+            OldBullet child = destroyChildren[i];
             destroyChildren.RemoveAt(i);
             i--;
             if(child.gameObject.activeSelf)

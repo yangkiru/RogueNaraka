@@ -4,22 +4,33 @@ using UnityEngine;
 
 namespace RogueNaraka.Bullet
 {
-    public abstract class Hitable : MonoBehaviour
+    public abstract class HitableBullet : MonoBehaviour
     {
-        DamageableBullet damageableBullet;
+        DamageableBullet damageable;
+        OwnerableBullet ownerable;
         List<int> hitList = new List<int>();
         List<Unit> hitUnitList = new List<Unit>();
 
+        [SerializeField]
+        protected LayerMask layerMask;
+        public LayerMask wallLayerMask;
+
         private void Awake()
         {
-            damageableBullet = GetComponent<DamageableBullet>();
+            damageable = GetComponent<DamageableBullet>();
+            ownerable = GetComponent<OwnerableBullet>();
         }
         void Update()
         {
             GetHitUnits(hitUnitList);
-            for(int i = 0; i < hitUnitList.Count; i++)
-                damageableBullet.Damage(hitUnitList[i]);
+            for (int i = 0; i < hitUnitList.Count; i++)
+            {
+                if(damageable)
+                    damageable.Damage(hitUnitList[i]);
+            }
         }
+
+        public abstract void Init(NewBulletData data);
 
         public abstract void GetHitUnits(List<Unit> hitList);
 
@@ -47,6 +58,14 @@ namespace RogueNaraka.Bullet
                 return true;
             }
             return false;
+        }
+
+        protected LayerMask GetlayerMask()
+        {
+            if (ownerable)
+                return ownerable.layerMask + wallLayerMask;
+            else
+                return LayerMask.GetMask("Friendly", "Enemy") + wallLayerMask;
         }
     }
 }

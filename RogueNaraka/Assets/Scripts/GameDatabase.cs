@@ -40,7 +40,7 @@ public class GameDatabase : ScriptableObject
     public LayerMask enemyMask;
     public LayerMask wallMask;
     public BulletData[] bullets;
-    public Weapon[] weapons;
+    public WeaponData[] weapons;
     public int[] stageCosts;
     public UnitCost[] unitCosts;
     public SkillData[] skills;
@@ -276,16 +276,51 @@ public enum SORTING_LAYER
 }
 
 [Serializable]
+public class WeaponData : ICloneable
+{
+    public string name;
+    public int id;
+    public ATTACK_TYPE type;
+    public int startBulletId;
+    public float beforeAttackDelay;
+    public float afterAttackDelay;
+    public float attackDistance;
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+}
+
+[Serializable]
+public class NewBulletData : ICloneable
+{
+    public string name;
+    public int id;
+    public BULLET_TYPE type;
+    public float speed;
+    public float accel;
+    public float size;
+    
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+}
+
+[Serializable]
 public struct BulletData : ICloneable
 {
     public string name;
     public int id;
     public BULLET_TYPE type;
     public SORTING_LAYER sortingLayer;
+    
     public float flightSpeed;
     public float dmg;
     public float dealSpeed;
     public float size;
+    
     public float angle; //TRIANGLE, SECTOR 에서 타격 범위
     public ShakeData shake;//터질 때 화면 흔드는 양
     public RuntimeAnimatorController controller;
@@ -346,7 +381,7 @@ public struct BulletChild : ICloneable
 [Serializable]
 public enum BULLET_TYPE
 {
-    CIRCLECAST, LINECAST, TRIANGLE, SECTOR, NONE, DYNAMIC
+    CIRCLECAST, RAYCAST, TRIANGLE, SECTOR, NONE, DYNAMIC
 }
 
 /// <summary>

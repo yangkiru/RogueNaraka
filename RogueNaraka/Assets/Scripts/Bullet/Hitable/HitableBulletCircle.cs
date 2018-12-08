@@ -4,19 +4,21 @@ using UnityEngine;
 
 namespace RogueNaraka.Bullet
 {
-    public class HitableCircle : Hitable
+    public class HitableBulletCircle : HitableBullet
     {
-        float distance;
-        float angle;
-        Vector2 size;
-        Vector2 castDirection = Vector2.zero;
-        CapsuleDirection2D circleDirection = CapsuleDirection2D.Horizontal;
-        
+        [SerializeField]
+        float size;
+
+        public override void Init(NewBulletData data)
+        {
+            size = data.size;
+            layerMask = GetlayerMask();
+        }
 
         public override void GetHitUnits(List<Unit> hitUnitList)
         {
             RaycastHit2D[] hits;
-            hits = Physics2D.CapsuleCastAll(transform.position, size, circleDirection, angle, castDirection, distance);
+            hits = Physics2D.CircleCastAll(transform.position, size, Vector2.zero, 0, layerMask);
             for(int i = 0; i < hits.Length; i++)
             {
                 if(CheckHitList(hits[i].GetHashCode()))

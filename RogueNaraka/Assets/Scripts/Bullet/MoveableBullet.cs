@@ -2,29 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveableBullet : MonoBehaviour {
-
-    [SerializeField]
-    float speed;
-    [SerializeField]
-    float accel;
-    [SerializeField]
-    Vector3 velocity;
-    [SerializeField]
-    Space space;
-
-    public void SetVelocity(Vector3 velocity)
+namespace RogueNaraka.Bullet
+{
+    public class MoveableBullet : MonoBehaviour
     {
-        this.velocity = velocity;
-    }
+        /// <summary>
+        /// 매 프레임 속력 증가 값
+        /// </summary>
+        [SerializeField]
+        Vector3 accel;
+        [SerializeField]
+        Vector3 velocity;
 
-    public void SetSpace(Space space)
-    {
-        this.space = space;
-    }
+        public void SetVelocity(Vector3 velocity)
+        {
+            this.velocity = velocity;
+        }
 
-    private void Update()
-    {
-        transform.Translate(velocity * Time.deltaTime, space);
+        public void SetVelocity(Vector3 velocity, Vector3 accel)
+        {
+            this.velocity = velocity;
+            this.accel = accel;
+        }
+
+        public void SetAccel(Vector3 accel)
+        {
+            this.accel = accel;
+        }
+
+        private void Update()
+        {
+            velocity += accel;
+            transform.Translate(velocity * Time.deltaTime, Space.Self);
+        }
     }
 }

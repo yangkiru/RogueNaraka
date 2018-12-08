@@ -62,10 +62,10 @@ public abstract class Unit : MonoBehaviour {
     [SerializeField]
     protected bool _isAutoMove = true;
 
-    public Weapon weapon
+    public WeaponData weapon
     { get { return _weapon; } }
     [SerializeField]
-    protected Weapon _weapon;
+    protected WeaponData _weapon;
 
     private Vector2 lastVelocity;
     private float minSpeed = 0.1f;//For Animator Min speed
@@ -110,7 +110,7 @@ public abstract class Unit : MonoBehaviour {
         isAttackCool = false;
 
         if (data.weaponId != -1)
-            EquipWeapon(data.weaponId, data.weaponLevel);
+            EquipWeapon(data.weaponId);
 
         isAutoMove = true;
         if(revolveHolder)
@@ -279,14 +279,12 @@ public abstract class Unit : MonoBehaviour {
         gameManager.deathEffectPool.Play(transform);
     }
 
-    public void EquipWeapon(int index, int level)
+    public void EquipWeapon(int index)
     {
         _weapon = GameDatabase.instance.weapons[index];
-        //Debug.Log(name + " Equiped " + _weapon.name);
-        _weapon.level = level;
     }
 
-    public void EquipWeapon(Weapon w)
+    public void EquipWeapon(WeaponData w)
     {
         _weapon = w;
         //Debug.Log(name + " Equiped " + _weapon.name);
@@ -368,13 +366,13 @@ public abstract class Unit : MonoBehaviour {
     {
         if (attackable && boardManager.isReady)
         {
-            int bulletId = _weapon.startBulletId[_weapon.level];
+            int bulletId = _weapon.startBulletId;
 
             SyncData();
 
             if (_weapon.type == ATTACK_TYPE.CLOSE)
             {
-                attackDistance = GameDatabase.instance.bullets[_weapon.startBulletId[_weapon.level]].size + _weapon.spawnPoint.y;
+                attackDistance = weapon.attackDistance;
             }
             else if (_weapon.type == ATTACK_TYPE.REVOLVE)
             {
@@ -390,15 +388,10 @@ public abstract class Unit : MonoBehaviour {
                 SetTarget();
                 if (target && (_targetDistance <= attackDistance || _weapon.type == ATTACK_TYPE.REVOLVE))
                 {
-                    //Debug.Log(name + "Attacking");
-
-                    //bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
                     isAttackCool = true;
                     StartCoroutine(BeforeAttackCool());
                 }
             }
-            //else
-                //Debug.Log("targetDistance : " + targetDistance + " attackDistance : " + attackDistance);
         }
     }
 
@@ -417,10 +410,10 @@ public abstract class Unit : MonoBehaviour {
             float _ice = ice * 0.1f * KnowledgeData.GetNegative(knowledge.ice);
             t -= Time.deltaTime * (1 - _ice);
         }
-        Bullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        OldBullet bullet = boardManager.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
         if (!bullet)
-            bullet = boardManager.SpawnBulletObj().GetComponent<Bullet>();
-        bullet.Init(_weapon.startBulletId[_weapon.level], _data.stat.dmg, _data.isFriendly);
+            bullet = boardManager.SpawnBulletObj().GetComponent<OldBullet>();
+        bullet.Init(_weapon.startBulletId, _data.stat.dmg, _data.isFriendly);
         Vector2 vec = (targetPosition - (Vector2)transform.position).normalized;
         RevolveHolder holder = null;
         if (weapon.type == ATTACK_TYPE.REVOLVE)
@@ -433,7 +426,7 @@ public abstract class Unit : MonoBehaviour {
         isAfterAttack = true;
     }
 
-    protected virtual void AttackBullet(Bullet bullet, Vector2 vec, RevolveHolder holder)
+    protected virtual void AttackBullet(OldBullet bullet, Vector2 vec, RevolveHolder holder)
     {
         bullet.Attack(transform.position, weapon.spawnPoint, vec, weapon.localSpeed, weapon.worldSpeed, holder, this);
     }

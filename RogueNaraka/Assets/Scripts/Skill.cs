@@ -287,7 +287,7 @@ public class Skill : MonoBehaviour
         for (int i = 0; i < data.values[0].value; i++)
         {
             Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
-            Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+            OldBullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
             int rndDirection = Random.Range(0, 2);
             thunder.Init(data.bulletIds[rndDirection], GameManager.GetStat(STAT.TEC), true);
             float rndAngle = Random.Range(0, 360);
@@ -301,7 +301,7 @@ public class Skill : MonoBehaviour
 
     void IceBreak(Vector3 mp)
     {
-        Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        OldBullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
         BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
         newData.abilities[0].value += data.values[0].value;//time
         newData.effects[0].value += data.effects[0].value;//ice
@@ -316,7 +316,7 @@ public class Skill : MonoBehaviour
         {
             float rndAngle = Random.Range(0, 360);
             Vector2 rndPos = new Vector2(Random.Range(-data.size +1.5f, data.size -1.5f), Random.Range(-data.size +1.5f, data.size -1.5f));
-            Bullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+            OldBullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
             BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
             newData.dealSpeed = data.values[1].value;//dealSpeed
             blood.Init(newData, 0, true);
@@ -327,16 +327,16 @@ public class Skill : MonoBehaviour
         }
     }
 
-    void SpawnBloodBubble(Bullet parent, Unit target)
+    void SpawnBloodBubble(OldBullet parent, Unit target)
     {
-        Bullet bubble = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        OldBullet bubble = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
         Vector2 rndPos = new Vector2(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f));
         bubble.Init(data.bulletIds[1], 0, false);
         bubble.OnDamaged += OnBloodBubbleHit;
         bubble.Attack((Vector2)target.transform.position + rndPos, Vector2.zero, (player.transform.position - target.transform.position).normalized, 2, 0, null, target);
     }
 
-    void OnBloodBubbleHit(Bullet parent, Unit target)
+    void OnBloodBubbleHit(OldBullet parent, Unit target)
     {
         if (target != null)
         {
@@ -349,10 +349,10 @@ public class Skill : MonoBehaviour
 
     void Genesis(Vector3 mp)
     {
-        Bullet beam = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        OldBullet beam = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
         BulletData beamData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
 
-        Bullet hole = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+        OldBullet hole = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
         BulletData holeData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[1]].Clone());
 
         beamData.abilities[0].value += data.values[0].value;//time
