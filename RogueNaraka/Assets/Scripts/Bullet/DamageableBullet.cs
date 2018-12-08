@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RogueNaraka.UnitScripts;
 
-namespace RogueNaraka.Bullet
+namespace RogueNaraka.BulletScripts
 {
     public class DamageableBullet : MonoBehaviour
     {
         [SerializeField]
         float damage;
 
-        public void Damage(Unit unit)
+        public void Damage(OldUnit unit)
         {
             unit.GetDamage(damage);
         }

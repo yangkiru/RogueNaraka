@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RogueNaraka.UnitScripts;
 
-namespace RogueNaraka.Bullet
+namespace RogueNaraka.BulletScripts.Hitable
 {
     public abstract class HitableBullet : MonoBehaviour
     {
         DamageableBullet damageable;
         OwnerableBullet ownerable;
         List<int> hitList = new List<int>();
-        List<Unit> hitUnitList = new List<Unit>();
+        List<OldUnit> hitUnitList = new List<OldUnit>();
 
         [SerializeField]
         protected LayerMask layerMask;
@@ -30,11 +31,14 @@ namespace RogueNaraka.Bullet
             }
         }
 
-        public abstract void Init(NewBulletData data);
+        public virtual void Init(NewBulletData data)
+        {
+            layerMask = GetLayerMask();
+        }
 
-        public abstract void GetHitUnits(List<Unit> hitList);
+        public abstract void GetHitUnits(List<OldUnit> hitList);
 
-        public bool CheckHitList(Unit unit)
+        public bool CheckHitList(OldUnit unit)
         {
             int hashCode = unit.GetHashCode();
             if (hitList.Contains(hashCode))
@@ -49,7 +53,7 @@ namespace RogueNaraka.Bullet
             return true;
         }
 
-        public bool AddHitList(Unit unit)
+        public bool AddHitList(OldUnit unit)
         {
             int hashCode = unit.GetHashCode();
             if(CheckHitList(hashCode))
@@ -60,7 +64,7 @@ namespace RogueNaraka.Bullet
             return false;
         }
 
-        protected LayerMask GetlayerMask()
+        protected LayerMask GetLayerMask()
         {
             if (ownerable)
                 return ownerable.layerMask + wallLayerMask;

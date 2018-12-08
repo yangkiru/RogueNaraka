@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RogueNaraka.UnitScripts;
 
-namespace RogueNaraka.Bullet
+namespace RogueNaraka.BulletScripts.Hitable
 {
     public class HitableBulletRay : HitableBullet
     {
@@ -14,17 +15,17 @@ namespace RogueNaraka.Bullet
         float distance;
         public override void Init(NewBulletData data)
         {
-            throw new System.NotImplementedException();
+            base.Init(data);
         }
 
-        public override void GetHitUnits(List<Unit> hitUnitList)
+        public override void GetHitUnits(List<OldUnit> hitUnitList)
         {
             RaycastHit2D[] hits;
             hits = Physics2D.RaycastAll((Vector2)transform.position + offset, direction, distance, layerMask);
             for (int i = 0; i < hits.Length; i++)
             {
                 if (CheckHitList(hits[i].GetHashCode()))
-                    hitUnitList.Add(hits[i].transform.GetComponent<Unit>());
+                    hitUnitList.Add(hits[i].transform.GetComponent<OldUnit>());
             }
         }
     }

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RogueNaraka.UnitScripts;
+using RogueNaraka.BulletScripts.Hitable;
 
-namespace RogueNaraka.Bullet
+namespace RogueNaraka.BulletScripts
 {
     public class Bullet : MonoBehaviour
     {
@@ -22,7 +24,7 @@ namespace RogueNaraka.Bullet
             shootable = GetComponent<ShootableBullet>();
         }
 
-        public void Init(Unit owner, NewBulletData data)
+        public void Init(OldUnit owner, NewBulletData data)
         {
             ownerable.SetOwner(owner);
 
@@ -47,7 +49,7 @@ namespace RogueNaraka.Bullet
             hitableCircle.enabled = false;
         }
 
-        public void Spawn(Unit owner, NewBulletData data, Vector3 position)
+        public void Spawn(OldUnit owner, NewBulletData data, Vector2 position)
         {
             Init(owner, data);
             transform.position = position;

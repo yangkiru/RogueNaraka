@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RogueNaraka.Bullet
+namespace RogueNaraka.BulletScripts
 {
     public class MoveableBullet : MonoBehaviour
     {

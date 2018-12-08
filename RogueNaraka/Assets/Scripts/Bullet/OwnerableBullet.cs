@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace RogueNaraka.Bullet
+using RogueNaraka.UnitScripts;
+
+namespace RogueNaraka.BulletScripts
 {
     public class OwnerableBullet : MonoBehaviour
     {
         [SerializeField]
-        Unit owner;
-        public LayerMask layerMask
-        { get { return owner.gameObject.layer; } }
+        OldUnit owner;
+        public LayerMask layerMask { get { return owner.gameObject.layer; } }
         
-        public void SetOwner(Unit owner)
+        public void SetOwner(OldUnit owner)
         {
             this.owner = owner;
         }
