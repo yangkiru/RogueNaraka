@@ -7,10 +7,13 @@ namespace RogueNaraka.UnitScripts.Targetable
     public abstract class TargetableUnit : MonoBehaviour
     {
         Unit owner;
-        Unit target;
+        public Unit target { get { return _target; } }
+        Unit _target;
 
         float delay;
         float leftDelay;
+
+        public Vector2 direction { get { return target.transform.position - transform.position; } }
 
         void Awake()
         {
@@ -26,15 +29,12 @@ namespace RogueNaraka.UnitScripts.Targetable
             }
             else if (leftDelay < 0)
                 leftDelay = 0;
-            target = GetTarget();
+            _target = GetTarget();
         }
 
-        protected int Compare(Unit a, Unit b)
+        protected float Distance(Unit target)
         {
-            float aDistance = Vector2.SqrMagnitude(a.transform.position - transform.position);
-            float bDistance = Vector2.SqrMagnitude(b.transform.position - transform.position);
-
-            return bDistance.CompareTo(aDistance);
+            return Vector2.SqrMagnitude(target.transform.position - transform.position);
         }
 
         abstract protected Unit GetTarget();

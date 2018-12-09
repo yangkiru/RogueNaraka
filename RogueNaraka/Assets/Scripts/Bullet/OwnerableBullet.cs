@@ -8,10 +8,10 @@ namespace RogueNaraka.BulletScripts
     public class OwnerableBullet : MonoBehaviour
     {
         [SerializeField]
-        OldUnit owner;
+        Unit owner;
         public LayerMask layerMask { get { return owner.gameObject.layer; } }
         
-        public void SetOwner(OldUnit owner)
+        public void SetOwner(Unit owner)
         {
             this.owner = owner;
         }

@@ -10,11 +10,14 @@ namespace RogueNaraka.BulletScripts
     {
         HitableBullet hitableRay = null;
         HitableBullet hitableCircle = null;
-        HitableBullet hitable = null;
+        public HitableBullet hitable = null;
 
-        ShootableBullet shootable = null;
-        MoveableBullet moveable = null;
-        OwnerableBullet ownerable = null;
+        public ShootableBullet shootable = null;
+        public MoveableBullet moveable = null;
+        public OwnerableBullet ownerable = null;
+
+        public NewBulletData data { get { return _data; } }
+        NewBulletData _data;
 
         void Awake()
         {
@@ -24,9 +27,10 @@ namespace RogueNaraka.BulletScripts
             shootable = GetComponent<ShootableBullet>();
         }
 
-        public void Init(OldUnit owner, NewBulletData data)
+        void Init(Unit owner, NewBulletData data)
         {
             ownerable.SetOwner(owner);
+            _data = data;
 
             //Hitable
             DisableAllHitable();
@@ -49,15 +53,17 @@ namespace RogueNaraka.BulletScripts
             hitableCircle.enabled = false;
         }
 
-        public void Spawn(OldUnit owner, NewBulletData data, Vector2 position)
+        public void Spawn(Unit owner, NewBulletData data, Vector3 position)
         {
             Init(owner, data);
             transform.position = position;
+            gameObject.SetActive(true);
         }
 
         public void Spawn(Vector3 position)
         {
             transform.position = position;
+            gameObject.SetActive(true);
         }
     }
 }

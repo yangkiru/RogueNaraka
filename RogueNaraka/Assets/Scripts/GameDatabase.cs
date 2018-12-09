@@ -39,6 +39,7 @@ public class GameDatabase : ScriptableObject
     public LayerMask friendlyMask;
     public LayerMask enemyMask;
     public LayerMask wallMask;
+    public NewBulletData[] newBullets;
     public BulletData[] bullets;
     public WeaponData[] weapons;
     public int[] stageCosts;
@@ -235,31 +236,31 @@ public class UnitData : ICloneable
     }
 }
 
-[Serializable]
-public struct Weapon
-{
-    public string name;
-    public int id;
-    public int level;
-    public int[] startBulletId;
-    public Vector2 spawnPoint;
-    public ATTACK_TYPE type;
-    public float beforeAttackDelay;
-    public float afterAttackDelay;
-    public float localSpeed;
-    public float worldSpeed;
+//[Serializable]
+//public struct Weapon
+//{
+//    public string name;
+//    public int id;
+//    public int level;
+//    public int[] startBulletId;
+//    public Vector2 spawnPoint;
+//    public ATTACK_TYPE type;
+//    public float beforeAttackDelay;
+//    public float afterAttackDelay;
+//    public float localSpeed;
+//    public float worldSpeed;
 
-    public Weapon(Weapon w)
-    {
-        this = w;
-        startBulletId = (int[])w.startBulletId.Clone();
-    }
+//    public Weapon(Weapon w)
+//    {
+//        this = w;
+//        startBulletId = (int[])w.startBulletId.Clone();
+//    }
 
-    public Weapon(int id, int level):this(GameDatabase.instance.weapons[id])
-    {
-        this.level = level;
-    }
-}
+//    public Weapon(int id, int level):this(GameDatabase.instance.weapons[id])
+//    {
+//        this.level = level;
+//    }
+//}
 
 [Serializable]
 public struct ShakeData
@@ -282,6 +283,7 @@ public class WeaponData : ICloneable
     public int id;
     public ATTACK_TYPE type;
     public int startBulletId;
+    public Vector3 offset;
     public float beforeAttackDelay;
     public float afterAttackDelay;
     public float attackDistance;
@@ -560,10 +562,10 @@ public struct ItemData
         switch (id)
         {
             case 0://HealPotion
-                temp = Player.instance.data.stat.tec;
+                //temp = Player.instance.data.stat.tec;
                 return string.Format(description, temp, temp);
             case 1://ManaPotion
-                temp = Player.instance.data.stat.tec;
+                //temp = Player.instance.data.stat.tec;
                 return string.Format(description, temp, temp);
             default:
                 return description;
