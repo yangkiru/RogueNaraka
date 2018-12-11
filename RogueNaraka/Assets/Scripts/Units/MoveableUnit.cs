@@ -8,6 +8,7 @@ namespace RogueNaraka.UnitScripts
 {
     public class MoveableUnit : MonoBehaviour
     {
+        Unit unit;
         public PolyNavAgent agent
         { get { return _agent; } }
         PolyNavAgent _agent;
@@ -17,6 +18,7 @@ namespace RogueNaraka.UnitScripts
 
         void Awake()
         {
+            unit = GetComponent<Unit>();
             _agent = GetComponent<PolyNavAgent>();
         }
 

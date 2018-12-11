@@ -12,6 +12,7 @@ namespace RogueNaraka.UnitScripts.Targetable
 
         float delay;
         float leftDelay;
+        bool isDeath;
 
         public Vector2 direction { get { return target.transform.position - transform.position; } }
 

@@ -10,7 +10,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         DamageableBullet damageable;
         OwnerableBullet ownerable;
         List<int> hitList = new List<int>();
-        List<OldUnit> hitUnitList = new List<OldUnit>();
+        List<Unit> hitUnitList = new List<Unit>();
 
         [SerializeField]
         protected LayerMask layerMask;
@@ -36,9 +36,9 @@ namespace RogueNaraka.BulletScripts.Hitable
             layerMask = GetLayerMask();
         }
 
-        public abstract void GetHitUnits(List<OldUnit> hitList);
+        public abstract void GetHitUnits(List<Unit> hitList);
 
-        public bool CheckHitList(OldUnit unit)
+        public bool CheckHitList(Unit unit)
         {
             int hashCode = unit.GetHashCode();
             if (hitList.Contains(hashCode))
@@ -53,7 +53,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             return true;
         }
 
-        public bool AddHitList(OldUnit unit)
+        public bool AddHitList(Unit unit)
         {
             int hashCode = unit.GetHashCode();
             if(CheckHitList(hashCode))

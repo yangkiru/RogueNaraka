@@ -16,14 +16,14 @@ namespace RogueNaraka.BulletScripts.Hitable
             size = data.size;
         }
 
-        public override void GetHitUnits(List<OldUnit> hitUnitList)
+        public override void GetHitUnits(List<Unit> hitUnitList)
         {
             RaycastHit2D[] hits;
             hits = Physics2D.CircleCastAll(transform.position, size, Vector2.zero, 0, layerMask);
             for(int i = 0; i < hits.Length; i++)
             {
                 if(CheckHitList(hits[i].GetHashCode()))
-                    hitUnitList.Add(hits[i].transform.GetComponent<OldUnit>());
+                    hitUnitList.Add(hits[i].transform.GetComponent<Unit>());
             }
         }
     }

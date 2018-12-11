@@ -6,10 +6,12 @@ namespace RogueNaraka.UnitScripts
 {
     public class DamageableUnit : MonoBehaviour
     {
+        Unit unit;
         HpableUnit hpable;
         private void Awake()
         {
-            hpable = GetComponent<HpableUnit>();
+            unit = GetComponent<Unit>();
+            hpable = unit.hpable;
         }
 
         public void Damage(float amount)

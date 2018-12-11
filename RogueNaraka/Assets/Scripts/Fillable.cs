@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RogueNaraka.UnitScripts;
 
 public class Fillable : MonoBehaviour
 {
@@ -48,14 +49,14 @@ public class Fillable : MonoBehaviour
             {
                 switch (type)
                 {
-                    case TYPE.HEALTH: current = unit.health; break;
-                    case TYPE.MANA: current = unit.mana; break;
+                    case TYPE.HEALTH: current = unit.hpable.currentHp; break;
+                    case TYPE.MANA: current = unit.mpable.currentMp; break;
                 }
             }
             switch (type)
             {
-                case TYPE.HEALTH: goal = unit.health / unit.data.stat.hp; break;
-                case TYPE.MANA: goal = unit.mana / unit.data.stat.mp; break;
+                case TYPE.HEALTH: goal = unit.hpable.currentHp / unit.hpable.maxHp; break;
+                case TYPE.MANA: goal = unit.mpable.currentMp / unit.mpable.maxMp; break;
             }
             t += Time.deltaTime;
             if (t > 1)

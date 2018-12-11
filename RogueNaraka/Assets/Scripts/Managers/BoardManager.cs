@@ -12,7 +12,7 @@ public class BoardManager : MonoBehaviour {
     public GameObject[] bossPrefabs;
     public GameObject effectPrefab;
 
-    public Player player;
+    public Unit player;
     public Vector2 spawnPoint;//player spawn
     public Vector2 goalPoint;//next Stage
     public Vector2 bossPoint;
@@ -23,8 +23,6 @@ public class BoardManager : MonoBehaviour {
 
     public List<Unit> enemies = new List<Unit>();
     public List<Unit> friendlies = new List<Unit>();
-    [ReadOnly]
-    public Enemy boss;
 
     public Text stageTxt;
 
@@ -108,7 +106,7 @@ public class BoardManager : MonoBehaviour {
 
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
-        player.Respawn();
+        player.Spawn(spawnPoint);
         StartCoroutine(WaitForLoad());
     }
 
@@ -215,21 +213,21 @@ public class BoardManager : MonoBehaviour {
     public void SpawnEnemy(int id)
     {
         //Debug.Log(id + " Enemies Spawned");
-        Enemy spawn = enemyPool.DequeueObjectPool().GetComponent<Enemy>();
+        Unit spawn = enemyPool.DequeueObjectPool().GetComponent<Unit>();
         spawn.transform.position = GetRandomSpawn();
-        spawn.SyncData(GameDatabase.instance.enemies[id]);
+        spawn.Init(GameDatabase.instance.enemies[id]);
         spawn.gameObject.SetActive(true);
         enemies.Add(spawn);
     }
 
-    public void SpawnBoss(int id)
-    {
-        Debug.Log(id + " Boss Spawned");
-        boss = Instantiate(bossPrefabs[id], bossPoint, new Quaternion(0, 0, 0, 0)).GetComponent<Enemy>();
-        boss.SyncData(GameDatabase.instance.bosses[id]);
-        boss.gameObject.SetActive(true);
-        enemies.Add(boss);
-    }
+    //public void SpawnBoss(int id)
+    //{
+    //    Debug.Log(id + " Boss Spawned");
+    //    boss = Instantiate(bossPrefabs[id], bossPoint, new Quaternion(0, 0, 0, 0)).GetComponent<Enemy>();
+    //    boss.SyncData(GameDatabase.instance.bosses[id]);
+    //    boss.gameObject.SetActive(true);
+    //    enemies.Add(boss);
+    //}
 
     public Vector2 GetRandomSpawn()
     {
@@ -262,9 +260,9 @@ public class BoardManager : MonoBehaviour {
 
     public void ClearStage()
     {
-        Enemy[] temp = enemies.ToArray();
-        for(int i = 0; i < temp.Length; i++)
-            enemyPool.EnqueueObjectPool(temp[i].gameObject);
+        for(int i = 0; i < enemies.Count; i++)
+            enemyPool.EnqueueObjectPool(enemies[i].gameObject);
+        enemies.Clear();
     }
     public static Vector3 GetMousePosition()
     {

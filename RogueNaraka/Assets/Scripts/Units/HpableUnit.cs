@@ -6,6 +6,8 @@ namespace RogueNaraka.UnitScripts
 {
     public class HpableUnit : MonoBehaviour
     {
+        Unit unit;
+
         public float currentHp { get { return _currentHp; } }
         float _currentHp;
         public float maxHp { get { return stat.hp; } }
@@ -17,6 +19,11 @@ namespace RogueNaraka.UnitScripts
 
         Stat stat;
 
+        void Awake()
+        {
+            unit = GetComponent<Unit>();
+        }
+
         public void Init(Stat stat)
         {
             this.stat = stat;
@@ -27,10 +34,13 @@ namespace RogueNaraka.UnitScripts
         {
             if (value > maxHp)
                 _currentHp = maxHp;
-            else if (value < 0)
-                _currentHp = 0;
-            else
+            else if (value >= 0)
                 _currentHp = value;
+            else
+            {
+                _currentHp = 0;
+                unit.deathable.Death();
+            }
         }
 
         public void AddHp(float amount)
@@ -39,13 +49,19 @@ namespace RogueNaraka.UnitScripts
 
             if (amount > 0 && result > maxHp)
                 result = maxHp;
-            else if (result < 0)
+            else if (result >= 0)
+                _currentHp = result;
+            else
+            {
                 result = 0;
-            _currentHp = result;
+                unit.deathable.Death();
+            }
         }
 
         void Regen()
         {
+            if (unit.deathable.isDeath)
+                return;
             currentTime += Time.deltaTime;
             if(currentTime >= regenTime)
             {

@@ -6,6 +6,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 {
     public abstract class AutoMoveableUnit : MonoBehaviour
     {
+        protected Unit unit;
         protected MoveableUnit moveable;
 
         protected float distance;
@@ -15,7 +16,8 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         void Awake()
         {
-            moveable = GetComponent<MoveableUnit>();
+            unit = GetComponent<Unit>();
+            moveable = unit.moveable;
         }
 
         public virtual void Init(UnitData data)

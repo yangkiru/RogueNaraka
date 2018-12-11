@@ -6,6 +6,7 @@ namespace RogueNaraka.UnitScripts
 {
     public class MpableUnit : MonoBehaviour
     {
+        Unit unit;
 
         public float currentMp { get { return _currentMp; } }
         float _currentMp;
@@ -17,6 +18,11 @@ namespace RogueNaraka.UnitScripts
         public float regenMp { get { return stat.mpRegen; } }
 
         Stat stat;
+
+        void Awake()
+        {
+            unit = GetComponent<Unit>();
+        }
 
         public void Init(Stat stat)
         {
@@ -47,6 +53,8 @@ namespace RogueNaraka.UnitScripts
 
         void Regen()
         {
+            if (unit.deathable.isDeath)
+                return;
             currentTime += Time.deltaTime;
             if (currentTime >= regenTime)
             {
