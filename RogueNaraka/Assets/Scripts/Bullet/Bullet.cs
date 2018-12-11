@@ -16,8 +16,8 @@ namespace RogueNaraka.BulletScripts
         public MoveableBullet moveable = null;
         public OwnerableBullet ownerable = null;
 
-        public NewBulletData data { get { return _data; } }
-        NewBulletData _data;
+        public BulletData data { get { return _data; } }
+        BulletData _data;
 
         void Awake()
         {
@@ -27,7 +27,7 @@ namespace RogueNaraka.BulletScripts
             shootable = GetComponent<ShootableBullet>();
         }
 
-        void Init(Unit owner, NewBulletData data)
+        void Init(Unit owner, BulletData data)
         {
             ownerable.SetOwner(owner);
             _data = data;
@@ -53,7 +53,7 @@ namespace RogueNaraka.BulletScripts
             hitableCircle.enabled = false;
         }
 
-        public void Spawn(Unit owner, NewBulletData data, Vector3 position)
+        public void Spawn(Unit owner, BulletData data, Vector3 position)
         {
             Init(owner, data);
             transform.position = position;

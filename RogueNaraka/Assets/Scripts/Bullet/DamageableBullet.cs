@@ -10,9 +10,9 @@ namespace RogueNaraka.BulletScripts
         [SerializeField]
         float damage;
 
-        public void Damage(OldUnit unit)
+        public void Damage(Unit unit)
         {
-            unit.GetDamage(damage);
+            unit.damageable.Damage(damage);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         Vector2 direction;
         [SerializeField]
         float distance;
-        public override void Init(NewBulletData data)
+        public override void Init(BulletData data)
         {
             base.Init(data);
         }

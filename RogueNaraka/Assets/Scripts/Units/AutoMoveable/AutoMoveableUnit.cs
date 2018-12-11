@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RogueNaraka.UnitScripts.AutoMoveableUnit
+namespace RogueNaraka.UnitScripts.AutoMoveable
 {
     public abstract class AutoMoveableUnit : MonoBehaviour
     {
         protected MoveableUnit moveable;
+
+        protected float distance;
 
         float delay;
         float leftDelay;
@@ -18,6 +20,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveableUnit
 
         public virtual void Init(UnitData data)
         {
+            distance = data.moveDistance;
             delay = data.moveDelay;
         }
 

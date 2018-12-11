@@ -31,7 +31,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             }
         }
 
-        public virtual void Init(NewBulletData data)
+        public virtual void Init(BulletData data)
         {
             layerMask = GetLayerMask();
         }

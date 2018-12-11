@@ -10,7 +10,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         [SerializeField]
         float size;
 
-        public override void Init(NewBulletData data)
+        public override void Init(BulletData data)
         {
             base.Init(data);
             size = data.size;

@@ -17,10 +17,15 @@ namespace RogueNaraka.UnitScripts
             owner = GetComponent<Unit>();
         }
 
+        public void Init(UnitData data)
+        {
+            weapon = GameDatabase.instance.weapons[data.weaponId];
+        }
+
         public void Attack()
         {
             Bullet bullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-            bullet.Spawn(owner, GameDatabase.instance.newBullets[weapon.startBulletId], transform.position + weapon.offset);
+            bullet.Spawn(owner, GameDatabase.instance.bullets[weapon.startBulletId], transform.position + weapon.offset);
             bullet.shootable.Shoot(owner.targetable.direction, bullet.data.speed, bullet.data.accel);
         }
     }
