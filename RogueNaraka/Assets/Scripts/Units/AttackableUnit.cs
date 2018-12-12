@@ -9,7 +9,8 @@ namespace RogueNaraka.UnitScripts
     public class AttackableUnit : MonoBehaviour
     {
 
-        WeaponData weapon;
+        public WeaponData weapon { get { return _weapon; } }
+        WeaponData _weapon;
         Unit owner;
 
         void Awake()
@@ -19,13 +20,18 @@ namespace RogueNaraka.UnitScripts
 
         public void Init(UnitData data)
         {
-            weapon = GameDatabase.instance.weapons[data.weaponId];
+            _weapon = GameDatabase.instance.weapons[data.weapon];
+        }
+
+        public void Init(WeaponData data)
+        {
+            _weapon = data;
         }
 
         public void Attack()
         {
             Bullet bullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-            bullet.Spawn(owner, GameDatabase.instance.bullets[weapon.startBulletId], transform.position + weapon.offset);
+            bullet.Spawn(owner, GameDatabase.instance.bullets[_weapon.startBulletId], transform.position + _weapon.offset);
             bullet.shootable.Shoot(owner.targetable.direction, bullet.data.speed, bullet.data.accel);
         }
     }

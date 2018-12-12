@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using RogueNaraka.UnitScripts;
+using RogueNaraka.BulletScripts;
 
 public class Skill : MonoBehaviour
 {
@@ -20,8 +22,8 @@ public class Skill : MonoBehaviour
 
     private SkillManager skillManager
     { get { return SkillManager.instance; } }
-    private Player player
-    { get { return Player.instance; } }
+    private Unit player
+    { get { return BoardManager.instance.player; } }
     //public bool isEnter;
 
     public void OnEnable()
@@ -38,7 +40,7 @@ public class Skill : MonoBehaviour
 
     public void OnMouse()
     {
-        if (data.id != -1 && (!player.isDeath || data.isDeath) && !GameManager.instance.isPause)
+        if (data.id != -1 && (!player.deathable.isDeath || data.isDeath) && !GameManager.instance.isPause)
         {
             //SkillManager.instance.DrawLine(position, true);
             if (data.isCircleToPlayer)
@@ -76,7 +78,7 @@ public class Skill : MonoBehaviour
         skillManager.SetLine(false);
         skillManager.GetCircle().SetEnable(false);
         skillManager.GetCircle().transform.SetParent(null);
-        if (data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.isDeath || data.isDeath) && IsMana())
+        if (data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.deathable.isDeath || data.isDeath) && IsMana())
         {
             if (data.coolTimeLeft <= 0)
                 UseSkill();
@@ -88,12 +90,12 @@ public class Skill : MonoBehaviour
 
     public void UseMana()
     {
-        player.UseMana(data.manaCost);
+        player.mpable.AddMp(-data.manaCost);
     }
 
     public bool IsMana()
     {
-        bool result = player.mana >= data.manaCost;
+        bool result = player.mpable.currentMp >= data.manaCost;
         if (!result)
         {
             ManaScript.instance.StartCoroutine(ManaScript.instance.NeedMana(data.manaCost));
@@ -260,146 +262,146 @@ public class Skill : MonoBehaviour
             distance = data.size;
             mp = (Vector2)player.transform.position + vec.normalized * distance;
         }
-        switch (data.id)
-        {
-            case (int)SKILL_ID.THUNDER_STRIKE:
-                StartCoroutine(ThunderStrike(mp));
-                break;
-            case (int)SKILL_ID.ICE_BREAK:
-                IceBreak(mp);
-                break;
-            case (int)SKILL_ID.GENESIS:
-                Genesis(mp);
-                break;
-            case (int)SKILL_ID.BLOOD_SWAMP:
-                BloodSwamp(mp);
-                break;
-            case (int)SKILL_ID.SCARECROWSOLDIER:
-                ScarecrowSoldier(mp);
-                break;
-        }
+        //switch (data.id)
+        //{
+        //    case (int)SKILL_ID.THUNDER_STRIKE:
+        //        StartCoroutine(ThunderStrike(mp));
+        //        break;
+        //    case (int)SKILL_ID.ICE_BREAK:
+        //        IceBreak(mp);
+        //        break;
+        //    case (int)SKILL_ID.GENESIS:
+        //        Genesis(mp);
+        //        break;
+        //    case (int)SKILL_ID.BLOOD_SWAMP:
+        //        BloodSwamp(mp);
+        //        break;
+        //    case (int)SKILL_ID.SCARECROWSOLDIER:
+        //        ScarecrowSoldier(mp);
+        //        break;
+        //}
 
         Debug.Log(data.name + " Skill Used!");
     }
 
-    IEnumerator ThunderStrike(Vector3 mp)
-    {
-        for (int i = 0; i < data.values[0].value; i++)
-        {
-            Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
-            OldBullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
-            int rndDirection = Random.Range(0, 2);
-            thunder.Init(data.bulletIds[rndDirection], GameManager.GetStat(STAT.TEC), true);
-            float rndAngle = Random.Range(0, 360);
-            thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
-            thunder.Attack((Vector2)mp + rnd, Vector2.zero, Vector2.zero, 0, 0, null, player);
-            float delay = data.values[1].value > 0 ? data.values[1].value : 0;
+    //IEnumerator ThunderStrike(Vector3 mp)
+    //{
+    //    for (int i = 0; i < data.values[0].value; i++)
+    //    {
+    //        Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
+    //        Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+    //        int rndDirection = Random.Range(0, 2);
+    //        thunder.Init(player, GameDatabase.instance.bullets[data.bulletIds[rndDirection]]);
+    //        float rndAngle = Random.Range(0, 360);
+    //        thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
+    //        thunder.Attack((Vector2)mp + rnd, Vector2.zero, Vector2.zero, 0, 0, null, player);
+    //        float delay = data.values[1].value > 0 ? data.values[1].value : 0;
 
-            yield return new WaitForSeconds(delay);
-        }
-    }
+    //        yield return new WaitForSeconds(delay);
+    //    }
+    //}
 
-    void IceBreak(Vector3 mp)
-    {
-        OldBullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
-        BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
-        newData.abilities[0].value += data.values[0].value;//time
-        newData.effects[0].value += data.effects[0].value;//ice
-        ice.Init(newData, 0, true);
-        StartCoroutine(MeltDown(ice.renderer, newData.abilities[0].value));
-        ice.Attack((Vector2)mp, Vector2.zero, Vector2.zero, 0, 0, null, player);
-    }
+    //void IceBreak(Vector3 mp)
+    //{
+    //    Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+    //    BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
+    //    newData.abilities[0].value += data.values[0].value;//time
+    //    newData.effects[0].value += data.effects[0].value;//ice
+    //    ice.Init(newData, 0, true);
+    //    StartCoroutine(MeltDown(ice.renderer, newData.abilities[0].value));
+    //    ice.Attack((Vector2)mp, Vector2.zero, Vector2.zero, 0, 0, null, player);
+    //}
 
-    void BloodSwamp(Vector3 mp)
-    {
-        for (int i = 0; i < data.values[0].value; i++)//values[1] == blood spawn amount
-        {
-            float rndAngle = Random.Range(0, 360);
-            Vector2 rndPos = new Vector2(Random.Range(-data.size +1.5f, data.size -1.5f), Random.Range(-data.size +1.5f, data.size -1.5f));
-            OldBullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
-            BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
-            newData.dealSpeed = data.values[1].value;//dealSpeed
-            blood.Init(newData, 0, true);
-            blood.OnDamaged += SpawnBloodBubble;
-            StartCoroutine(MeltDown(blood.renderer, newData.abilities[0].value));
-            blood.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
-            blood.Attack((Vector2)mp + rndPos, Vector2.zero, Vector2.zero, 0, 0, null, player);
-        }
-    }
+    //void BloodSwamp(Vector3 mp)
+    //{
+    //    for (int i = 0; i < data.values[0].value; i++)//values[1] == blood spawn amount
+    //    {
+    //        float rndAngle = Random.Range(0, 360);
+    //        Vector2 rndPos = new Vector2(Random.Range(-data.size +1.5f, data.size -1.5f), Random.Range(-data.size +1.5f, data.size -1.5f));
+    //        Bullet blood = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
+    //        BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
+    //        newData.dealSpeed = data.values[1].value;//dealSpeed
+    //        blood.Init(newData, 0, true);
+    //        blood.OnDamaged += SpawnBloodBubble;
+    //        StartCoroutine(MeltDown(blood.renderer, newData.abilities[0].value));
+    //        blood.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
+    //        blood.Attack((Vector2)mp + rndPos, Vector2.zero, Vector2.zero, 0, 0, null, player);
+    //    }
+    //}
 
-    void SpawnBloodBubble(OldBullet parent, Unit target)
-    {
-        OldBullet bubble = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
-        Vector2 rndPos = new Vector2(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f));
-        bubble.Init(data.bulletIds[1], 0, false);
-        bubble.OnDamaged += OnBloodBubbleHit;
-        bubble.Attack((Vector2)target.transform.position + rndPos, Vector2.zero, (player.transform.position - target.transform.position).normalized, 2, 0, null, target);
-    }
+    //void SpawnBloodBubble(Bullet parent, Unit target)
+    //{
+    //    Bullet bubble = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+    //    Vector2 rndPos = new Vector2(Random.Range(-0.25f, 0.25f), Random.Range(-0.25f, 0.25f));
+    //    bubble.Init(data.bulletIds[1], 0, false);
+    //    bubble.OnDamaged += OnBloodBubbleHit;
+    //    bubble.Attack((Vector2)target.transform.position + rndPos, Vector2.zero, (player.transform.position - target.transform.position).normalized, 2, 0, null, target);
+    //}
 
-    void OnBloodBubbleHit(OldBullet parent, Unit target)
-    {
-        if (target != null)
-        {
-            if(!parent.owner.isDeath)
-                parent.owner.GetDamage(data.values[2].value);//values[2] == blood life steal
-            if(!target.isDeath)
-                target.HealHealth(data.values[2].value);
-        }
-    }
+    //void OnBloodBubbleHit(Bullet parent, Unit target)
+    //{
+    //    if (target != null)
+    //    {
+    //        if(!parent.owner.isDeath)
+    //            parent.owner.GetDamage(data.values[2].value);//values[2] == blood life steal
+    //        if(!target.isDeath)
+    //            target.HealHealth(data.values[2].value);
+    //    }
+    //}
 
-    void Genesis(Vector3 mp)
-    {
-        OldBullet beam = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
-        BulletData beamData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
+    //void Genesis(Vector3 mp)
+    //{
+    //    Bullet beam = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
+    //    BulletData beamData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
 
-        OldBullet hole = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
-        BulletData holeData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[1]].Clone());
+    //    Bullet hole = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<OldBullet>();
+    //    BulletData holeData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[1]].Clone());
 
-        beamData.abilities[0].value += data.values[0].value;//time
-        beamData.shake.time = beamData.abilities[0].value;
-        float originalHoleTime = holeData.abilities[0].value;
-        holeData.abilities[0].value += beamData.abilities[0].value;
+    //    beamData.abilities[0].value += data.values[0].value;//time
+    //    beamData.shake.time = beamData.abilities[0].value;
+    //    float originalHoleTime = holeData.abilities[0].value;
+    //    holeData.abilities[0].value += beamData.abilities[0].value;
 
-        beam.Init(beamData, data.values[1].value * player.data.stat.tec, true);
-        hole.Init(holeData, 0, true);
-        //renderer, 기존 hole 시간, 빔 시간 - 기존 hole 시간
-        StartCoroutine(MeltDown(hole.renderer, originalHoleTime, beamData.abilities[0].value));
+    //    beam.Init(beamData, data.values[1].value * player.data.stat.tec, true);
+    //    hole.Init(holeData, 0, true);
+    //    //renderer, 기존 hole 시간, 빔 시간 - 기존 hole 시간
+    //    StartCoroutine(MeltDown(hole.renderer, originalHoleTime, beamData.abilities[0].value));
 
-        beam.Attack((Vector2)mp + new Vector2(0, 1.8f), Vector2.zero, Vector2.left, 0, 0, null, player);
-        hole.Attack((Vector2)mp + new Vector2(0, 0.5f), Vector2.zero, Vector2.left, 0, 0, null, player);
-    }
+    //    beam.Attack((Vector2)mp + new Vector2(0, 1.8f), Vector2.zero, Vector2.left, 0, 0, null, player);
+    //    hole.Attack((Vector2)mp + new Vector2(0, 0.5f), Vector2.zero, Vector2.left, 0, 0, null, player);
+    //}
 
-    void ScarecrowSoldier(Vector3 mp)
-    {
-        //Unit soldier = BoardManager.instance.enemyPool.DequeueObjectPool().GetComponent<Unit>();
-        ScarecrowSoldier soldier = Instantiate(data.units[0], mp, Quaternion.identity).GetComponent<ScarecrowSoldier>();
-        UnitData newData = (UnitData)GameDatabase.instance.spawnables[0].Clone();
+    //void ScarecrowSoldier(Vector3 mp)
+    //{
+    //    //Unit soldier = BoardManager.instance.enemyPool.DequeueObjectPool().GetComponent<Unit>();
+    //    Unit soldier = Instantiate(data.units[0], mp, Quaternion.identity).GetComponent<Unit>();
+    //    UnitData newData = (UnitData)GameDatabase.instance.spawnables[0].Clone();
 
-        newData.stat.dmg = data.values[1].value;//dmg
-        newData.stat.hp = data.values[2].value;//hp
-        //soldier.transform.position = mp;
-        soldier.SyncData(newData, true);
-        soldier.gameObject.SetActive(true);
-        soldier.StartCoroutine(soldier.TimeLimit(data.values[0].value));//time
-    }
+    //    newData.stat.dmg = data.values[1].value;//dmg
+    //    newData.stat.hp = data.values[2].value;//hp
+    //    //soldier.transform.position = mp;
+    //    soldier.SyncData(newData, true);
+    //    soldier.gameObject.SetActive(true);
+    //    soldier.StartCoroutine(soldier.TimeLimit(data.values[0].value));//time
+    //}
 
-    IEnumerator MeltDown(SpriteRenderer renderer, float time, float wait = 0)
-    {
-        yield return new WaitForSeconds(wait);
-        float alpha = renderer.color.a;
-        float down = alpha / time;
-        Color color = Color.white;
-        while (time > 0)
-        {
-            color = renderer.color;
-            alpha -= down * Time.deltaTime;
-            color.a = alpha;
-            time -= Time.deltaTime;
-            renderer.color = color;
-            yield return null;
-        }
-        yield return new WaitForSeconds(0.1f);
-        color.a = 1;
-        renderer.color = color;
-    }
+    //IEnumerator MeltDown(SpriteRenderer renderer, float time, float wait = 0)
+    //{
+    //    yield return new WaitForSeconds(wait);
+    //    float alpha = renderer.color.a;
+    //    float down = alpha / time;
+    //    Color color = Color.white;
+    //    while (time > 0)
+    //    {
+    //        color = renderer.color;
+    //        alpha -= down * Time.deltaTime;
+    //        color.a = alpha;
+    //        time -= Time.deltaTime;
+    //        renderer.color = color;
+    //        yield return null;
+    //    }
+    //    yield return new WaitForSeconds(0.1f);
+    //    color.a = 1;
+    //    renderer.color = color;
+    //}
 }

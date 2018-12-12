@@ -195,8 +195,7 @@ public class UnitData : ICloneable
     public int id;
     public int cost;
     public int stage;
-    public int weaponId;
-    public int weaponLevel;
+    public int weapon;
     public Stat stat;
     public RuntimeAnimatorController controller;
     public Color color;

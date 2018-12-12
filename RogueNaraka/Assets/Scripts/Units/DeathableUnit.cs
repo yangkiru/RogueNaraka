@@ -16,6 +16,11 @@ namespace RogueNaraka.UnitScripts
             unit = GetComponent<Unit>();
         }
 
+        public void Init()
+        {
+            _isDeath = false;
+        }
+
         public void Death()
         {
             _isDeath = true;

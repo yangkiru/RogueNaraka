@@ -35,8 +35,14 @@ namespace RogueNaraka.UnitScripts
         public DeathableUnit deathable { get { return _deathable; } }
         protected DeathableUnit _deathable;
 
+        public EffectableUnit effectable { get { return _effectable; } }
+        protected EffectableUnit _effectable;
+
         public Animator animator { get { return _animator; } }
         Animator _animator;
+
+        public UnitData data { get { return _data; } }
+        UnitData _data;
 
         void Awake()
         {
@@ -50,13 +56,15 @@ namespace RogueNaraka.UnitScripts
             _hpable = GetComponent<HpableUnit>();
             _mpable = GetComponent<MpableUnit>();
             _deathable = GetComponent<DeathableUnit>();
+            _effectable = GetComponent<EffectableUnit>();
 
             _animator = GetComponent<Animator>();
         }
 
         public void Init(UnitData data)
         {
-            _isDeath = false;
+            _data = data;
+            deathable.Init();
             _animator.runtimeAnimatorController = data.controller;
 
             _moveable.Init(data);

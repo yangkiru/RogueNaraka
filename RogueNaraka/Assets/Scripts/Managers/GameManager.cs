@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GoogleMobileAds.Api;
+using RogueNaraka.UnitScripts;
 
 public class GameManager : MonoBehaviour {
     [SerializeField][ReadOnly]
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
     public SoulShopManager soulShopManager;
     public SkillManager skillManager;
     public DeathEffectPool deathEffectPool; 
-    public Player player;
+    public Unit player;
     
     public Button cancelBtn;//stat Upgrade
 
@@ -82,8 +83,7 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("isFirst", 0);
             SceneManager.LoadScene(0);
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-            player.Suicide();
+
         if(autoSave)
         {
             if(autoSaveCoroutine == null)
@@ -127,8 +127,8 @@ public class GameManager : MonoBehaviour {
             }
         }
         SyncPlayerStat();
-        player.SetHealth(GetStat(STAT.HP));
-        player.SetMana(GetStat(STAT.MP));
+        player.hpable.SetHp(GetStat(STAT.HP));
+        player.mpable.SetMp(GetStat(STAT.MP));
     }
 
     public IEnumerator AutoSave(float time)
@@ -165,13 +165,12 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetFloat("mp", player.data.stat.mp);
             PlayerPrefs.SetFloat("hpRegen", player.data.stat.hpRegen);
             PlayerPrefs.SetFloat("mpRegen", player.data.stat.mpRegen);
-            PlayerPrefs.SetFloat("health", player.health);
-            PlayerPrefs.SetFloat("mana", player.mana);
+            PlayerPrefs.SetFloat("health", player.hpable.currentHp);
+            PlayerPrefs.SetFloat("mana", player.mpable.currentMp);
             PlayerPrefs.SetInt("stage", boardManager.stage);
+            PlayerPrefs.SetInt("weapon", player.attackable.weapon.id);
             SkillManager.instance.Save();
             Item.instance.Save();
-            PlayerPrefs.SetInt("weaponId", player.weapon.id);
-            PlayerPrefs.SetInt("weaponoLevel", player.weapon.level);
         }
         //Debug.Log("Saved");
     }
@@ -210,8 +209,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("statPoint", 5);
         PlayerPrefs.SetInt("isRun", 0);
         PlayerPrefs.SetInt("isLevelUp", 0);
-        PlayerPrefs.SetInt("weaponId", playerBase.weaponId);
-        PlayerPrefs.SetInt("weaponLevel", playerBase.weaponLevel);
+        PlayerPrefs.SetInt("weapon", playerBase.weapon);
 
         PlayerPrefs.SetInt("stage", 1);
 
@@ -228,14 +226,13 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.GetFloat("tec"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
         PlayerPrefs.GetFloat("hpRegen"), PlayerPrefs.GetFloat("mpRegen"));
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
+        playerData.weapon = PlayerPrefs.GetInt("weapon");
         playerData.stat = stat;
-        player.SyncData(playerData, false);
-        player.SetHealth(PlayerPrefs.GetFloat("health"));
-        player.SetMana(PlayerPrefs.GetFloat("mana"));
+        player.Init(playerData);
+        player.hpable.SetHp(PlayerPrefs.GetFloat("currentHp"));
+        player.mpable.SetMp(PlayerPrefs.GetFloat("currentMp"));
 
         StatTextUpdate();
-
-        player.EquipWeapon(PlayerPrefs.GetInt("weaponId"), PlayerPrefs.GetInt("weaponLevel"));
 
         //StartCoroutine(WaitForEffectPoolInit());
         if (autoSave)
@@ -296,8 +293,8 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("stage", 1);
         PlayerPrefs.SetFloat("health", 1);
         PlayerPrefs.SetFloat("mana", 1);
-        PlayerPrefs.SetInt("weaponId", playerBase.weaponId);
-        PlayerPrefs.SetInt("weaponLevel", playerBase.weaponLevel);
+        PlayerPrefs.SetInt("weapon", playerBase.weapon);
+  
         skillManager.ResetSave();
         Item.instance.ResetSave();
         Item.instance.Load();
@@ -399,7 +396,7 @@ public class GameManager : MonoBehaviour {
         }
         Debug.Log("Waited");
         boardManager.ClearStage();
-        player.SetDeath(false);
+        player.deathable.Revive();
         Load();
         player.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         t = 0;

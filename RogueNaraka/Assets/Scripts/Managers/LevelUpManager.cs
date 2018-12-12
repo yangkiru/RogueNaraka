@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using RogueNaraka.UnitScripts;
 
 public class LevelUpManager : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public Button cancelBtn;
 
-    public Player player;
+    public Unit player;
 
     public int leftStat
     {   get { return PlayerPrefs.GetInt("leftStat"); }

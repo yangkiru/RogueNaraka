@@ -13,62 +13,26 @@ public class Effect : MonoBehaviour {
     public new SpriteRenderer renderer;
     public Unit owner;
 
-    public bool isActive
-    { get { return _isActive; } }
-    private bool _isActive;
-
-    public bool isBuff
-    { get { return false; } }//버프를 추가 ex)switch(data.type){case EFFECT.someBuff:case EFFECT.someBuff2:return true;default:return false;};
-
-    private IEnumerator coroutine;
-
-    public void SetData(EffectData dt)
+    public void Init(Unit owner, EffectData data)
     {
-        _data = dt;
+        _data = data;
         EffectSpriteData sprData = GameDatabase.instance.effects[(int)dt.type];
         name = sprData.name;
         renderer.sprite = sprData.spr;
+        this.owner = owner;
     }
 
-    public void SetOwner(Unit unit)
+    void Update()
     {
-        owner = unit;
-    }
-
-    public void Active(bool value)
-    {
-        if(value)
-        {
-            _isActive = true;
-            if (coroutine == null && !_data.isInfinity)
-            {
-                coroutine = TimeCoroutine();
-                StartCoroutine(coroutine);
-            }
-        }
-        else
-        {
-            _isActive = false;
-            if (coroutine != null)
-                StopCoroutine(coroutine);
-        }
-    }
-
-    private IEnumerator TimeCoroutine()
-    {
-        while(_data.time > 0 && !owner.isDeath)
-        {
-            yield return null;
+        if(_data.time > 0 && !owner.deathable.isDeath)
             _data.time -= Time.deltaTime;
-        }
-        DestroySelf();
+        else
+            Destroy();
     }
 
-    public void DestroySelf()
+    public void Destroy()
     {
-        StopCoroutine(coroutine);
-        coroutine = null;
-        owner.effects.Remove(this);
+        owner.effectable.effects.Remove(this);
         owner = null;
         BoardManager.instance.effectPool.EnqueueObjectPool(gameObject, false);
     }
