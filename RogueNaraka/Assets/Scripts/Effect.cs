@@ -16,7 +16,7 @@ public class Effect : MonoBehaviour {
     public void Init(Unit owner, EffectData data)
     {
         _data = data;
-        EffectSpriteData sprData = GameDatabase.instance.effects[(int)dt.type];
+        EffectSpriteData sprData = GameDatabase.instance.effects[(int)data.type];
         name = sprData.name;
         renderer.sprite = sprData.spr;
         this.owner = owner;

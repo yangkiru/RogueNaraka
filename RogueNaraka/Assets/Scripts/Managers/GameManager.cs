@@ -107,6 +107,8 @@ public class GameManager : MonoBehaviour {
     {
         int statPoint = PlayerPrefs.GetInt("statPoint");
         Debug.Log("statPoint"+statPoint);
+
+        Stat newStat = (Stat)GameDatabase.instance.playerBase.stat.Clone();
         while(statPoint > 0)
         {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
@@ -149,10 +151,10 @@ public class GameManager : MonoBehaviour {
     {
         moneyManager.Save();
 
-        EffectData[] effectDatas = new EffectData[player.effects.Count];
+        EffectData[] effectDatas = new EffectData[player.effectable.effects.Count];
         for (int i = 0; i < effectDatas.Length; i++)
         {
-            effectDatas[i] = (EffectData)(player.effects[i].data.Clone());
+            effectDatas[i] = (EffectData)(player.effectable.effects[i].data.Clone());
         }
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
@@ -266,7 +268,7 @@ public class GameManager : MonoBehaviour {
             EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
             for (int i = 0; i < temp.Length; i++)
             {
-                player.AddEffect((EffectData)temp[i].Clone());
+                player.effectable.AddEffect((EffectData)temp[i].Clone());
             }
         }
     }
@@ -346,14 +348,6 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetFloat("mpRegen", stat.mpRegen);
     }
 
-    public void SyncPlayerStat(bool isMax = false)
-    {
-         for (int i = 0; i < (int)STAT.MPREGEN + 1; i++)
-        {
-            player.SetStat((STAT)i, GetStat((STAT)i, isMax));
-        }
-    }
-
     public void StatTextUpdate()
     {
         statTxt[0].text = player.data.stat.dmg.ToString();
@@ -411,101 +405,5 @@ public class GameManager : MonoBehaviour {
     public static Vector2 GetMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    public static void AddStat(STAT type, float amount, bool isMax = false)
-    {
-        SetStat(type, GameManager.GetStat(type, isMax) + amount, isMax);
-    }
-
-    public static void SetStat(STAT type, float value, bool isMax = false)
-    {
-        string max = string.Empty;
-        if (isMax)
-            max = "Max";
-        switch (type)
-        {
-            case STAT.DMG:
-                PlayerPrefs.SetFloat("dmg" + max, value);
-                break;
-            case STAT.SPD:
-                PlayerPrefs.SetFloat("spd" + max, value);
-                break;
-            case STAT.TEC:
-                PlayerPrefs.SetFloat("tec" + max, value);
-                break;
-            case STAT.HP:
-                PlayerPrefs.SetFloat("hp" + max, value);
-                break;
-            case STAT.MP:
-                PlayerPrefs.SetFloat("mp" + max, value);
-                break;
-            case STAT.HPREGEN:
-                PlayerPrefs.SetFloat("hpRegen" + max, value);
-                break;
-            case STAT.MPREGEN:
-                PlayerPrefs.SetFloat("mpRegen" + max, value);
-                break;
-            case STAT.STATPOINT:
-                PlayerPrefs.SetInt("statPoint", (int)value);
-                break;
-        }
-    }
-
-    public static float GetStat(STAT type, bool isMax = false)
-    {
-        string max = string.Empty;
-        if (isMax)
-            max = "Max";
-        switch (type)
-        {
-            case STAT.DMG:
-                return PlayerPrefs.GetFloat("dmg" + max);
-            case STAT.SPD:
-                return PlayerPrefs.GetFloat("spd" + max);
-            case STAT.TEC:
-                return PlayerPrefs.GetFloat("tec" + max);
-            case STAT.HP:
-                return PlayerPrefs.GetFloat("hp" + max);
-            case STAT.MP:
-                return PlayerPrefs.GetFloat("mp" + max);
-            case STAT.HPREGEN:
-                return PlayerPrefs.GetFloat("hpRegen" + max);
-            case STAT.MPREGEN:
-                return PlayerPrefs.GetFloat("mpRegen" + max);
-            case STAT.STATPOINT:
-                return PlayerPrefs.GetInt("statPoint");
-        }
-        return -1;
-    }
-
-    public static bool AddStat(STAT type, float amount)
-    {
-        float value;
-        value = GameManager.GetStat(type, false) + amount;
-        if (value <= GameManager.GetStat(type, true))
-        {
-            SetStat(type, value, false);
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public static float GetStatSum(bool isMax = false)
-    {
-        string max = string.Empty;
-        if (isMax)
-            max = "Max";
-        Stat temp = new Stat();
-        temp.dmg = PlayerPrefs.GetFloat("dmg" + max);
-        temp.spd = PlayerPrefs.GetFloat("spd" + max);
-        temp.tec = PlayerPrefs.GetFloat("tec" + max);
-        temp.hp = PlayerPrefs.GetFloat("hp" + max);
-        temp.mp = PlayerPrefs.GetFloat("mp" + max);
-        temp.hpRegen = PlayerPrefs.GetFloat("hpRegen" + max);
-        temp.mpRegen = PlayerPrefs.GetFloat("mpRegen" + max);
-
-        return temp.sum;
     }
 }

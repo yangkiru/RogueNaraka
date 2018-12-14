@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using RogueNaraka.UnitScripts;
 
 public class Item : MonoBehaviour
 {
@@ -188,7 +189,7 @@ public class Item : MonoBehaviour
 
     public void UseItem()
     {
-        if (Player.instance.isDeath)
+        if (BoardManager.instance.player.deathable.isDeath)
             return;
         circle.SetCircle(_data.size);
         circle.MoveCircleToMouse();
@@ -226,11 +227,11 @@ public class Item : MonoBehaviour
             {
                 case 0:
                     Debug.Log("HealPotion");
-                    Player.instance.HealHealth(_data.value * Player.instance.GetStat(STAT.TEC));
+                    BoardManager.instance.player.hpable.AddHp(_data.value * BoardManager.instance.player.data.stat.tec);
                     break;
                 case 1:
                     Debug.Log("ManaPotion");
-                    Player.instance.HealMana(_data.value * Player.instance.GetStat(STAT.TEC));
+                    BoardManager.instance.player.mpable.AddMp(_data.value * BoardManager.instance.player.data.stat.tec);
                     break;
             }
         }

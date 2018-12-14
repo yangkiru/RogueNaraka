@@ -61,9 +61,14 @@ namespace RogueNaraka.UnitScripts
             _animator = GetComponent<Animator>();
         }
 
+        public void SetStat(Stat stat)
+        {
+            _data.stat = (Stat)stat.Clone();
+        }
+
         public void Init(UnitData data)
         {
-            _data = data;
+            _data = (UnitData)data.Clone();
             deathable.Init();
             _animator.runtimeAnimatorController = data.controller;
 

@@ -110,83 +110,41 @@ public struct UnitCost
     public int[] unitId;
 }
 
-[Serializable]
-public class Stat : ICloneable
-{
-    public float dmg;
-    public float spd;
-    public float tec;
-    public float hp;
-    public float mp;
-    public float hpRegen;
-    public float mpRegen;
+//[Serializable]
+//public struct KnowledgeData
+//{
+//    public float fire;
+//    public float ice;
+//    public float poison;
+//    public float knockBack;
+//    public float stun;
+//    public float slow;
+//    public float gravity;
 
-    public Stat()
-    { }
-    public Stat(Stat s)
-    {
-        dmg = s.dmg; spd = s.spd; tec = s.tec; hp = s.hp; mp = s.mp; hpRegen = s.hpRegen; mpRegen = s.mpRegen;
-    }
-    public Stat(float value)
-    {
-        dmg = value; spd = value; tec = value; hp = value; mp = value; hpRegen = value; mpRegen = value;
-    }
-    public Stat(float d, float s, float t, float h, float m, float hr, float mr)
-    {
-        dmg = d; spd = s; tec = t; hp = h; mp = m; hpRegen = hr; mpRegen = mr;
-    }
-    public float sum
-    {
-        get { return dmg + spd + tec + hp + mp + hpRegen + mpRegen; }
-    }
+//    public KnowledgeData(float value)
+//    {
+//        fire = value; ice = value; poison = value; knockBack = value; stun = value; slow = value; gravity = value;
+//    }
+//    public KnowledgeData(KnowledgeData k, float value = 0) : this(value)
+//    {
+//        fire += k.fire; ice += k.ice; poison += k.poison; knockBack += k.knockBack; stun += k.stun; slow += k.slow; gravity += k.gravity;
+//    }
 
-    public object Clone()
-    {
-        return this.MemberwiseClone();
-    }
-}
+//    public static float GetHalf(float know)
+//    {
+//        return (1 + know) * 0.5f;
+//    }
 
-[Serializable]
-public enum STAT
-{
-    DMG, SPD, TEC, HP, MP, HPREGEN, MPREGEN, STATPOINT
-}
+//    public static float GetNegative(float know)
+//    {
+//        return 2 - know;
+//    }
 
-[Serializable]
-public struct KnowledgeData
-{
-    public float fire;
-    public float ice;
-    public float poison;
-    public float knockBack;
-    public float stun;
-    public float slow;
-    public float gravity;
-
-    public KnowledgeData(float value)
-    {
-        fire = value; ice = value; poison = value; knockBack = value; stun = value; slow = value; gravity = value;
-    }
-    public KnowledgeData(KnowledgeData k, float value = 0) : this(value)
-    {
-        fire += k.fire; ice += k.ice; poison += k.poison; knockBack += k.knockBack; stun += k.stun; slow += k.slow; gravity += k.gravity;
-    }
-
-    public static float GetHalf(float know)
-    {
-        return (1 + know) * 0.5f;
-    }
-
-    public static float GetNegative(float know)
-    {
-        return 2 - know;
-    }
-
-    public static float GetAdditional(float know)
-    {
-        return know - 1;
-    }
-}
+//    public static float GetAdditional(float know)
+//    {
+//        return know - 1;
+//    }
+//}
 
 [Serializable]
 public class UnitData : ICloneable
@@ -208,7 +166,6 @@ public class UnitData : ICloneable
     public float maxDistance;
     public float moveSpeed;
     public Vector2 shadowPos;
-    public KnowledgeData knowledge;
 
     public object Clone()
     {
