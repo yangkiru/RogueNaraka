@@ -12,7 +12,7 @@ namespace RogueNaraka.UnitScripts.Targetable
 
             Unit min = list[0];
             float minDistance = Distance(list[0]);
-            for(int i = 1; i < list.Count; i++)
+            for (int i = 1; i < list.Count; i++)
             {
                 float newDistance = Distance(list[i]);
                 if (minDistance > newDistance)

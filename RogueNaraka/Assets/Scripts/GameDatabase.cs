@@ -239,10 +239,15 @@ public class BulletData : ICloneable
 {
     public string name;
     public int id;
+    public RuntimeAnimatorController controller;
     public BULLET_TYPE type;
-    public float speed;
-    public float accel;
+    public float localSpeed;
+    public float worldSpeed;
+    public float localAccel;
+    public float worldAccel;
     public float size;
+    public float delay;
+    public float limitTime;
     
     public object Clone()
     {
@@ -415,7 +420,8 @@ public struct SkillData:ICloneable
                     return string.Empty;
                 SkillData data = (SkillData)GameDatabase.instance.skills[id].Clone();
                 string des = data.description;
-                float tec = GameManager.GetStat(STAT.TEC);
+                
+                float tec = BoardManager.instance.player.data.stat.GetCurrent(STAT.TEC);
                 switch (_id)
                 {
                     case SKILL_ID.THUNDER_STRIKE:
@@ -526,7 +532,7 @@ public struct ItemSpriteData
 [Serializable]
 public enum ATTACK_TYPE
 {
-    CLOSE, TARGET, NONTARGET, REVOLVE
+    STOP_BEFORE, STOP_AFTER, DONT_STOP
 }
 
 [Serializable]

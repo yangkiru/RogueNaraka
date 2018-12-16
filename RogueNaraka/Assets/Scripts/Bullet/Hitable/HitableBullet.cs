@@ -9,12 +9,16 @@ namespace RogueNaraka.BulletScripts.Hitable
     {
         DamageableBullet damageable;
         OwnerableBullet ownerable;
+        [SerializeField]
         List<int> hitList = new List<int>();
-        List<Unit> hitUnitList = new List<Unit>();
+        [SerializeField]
+        protected List<Unit> hitUnitList = new List<Unit>();
 
         [SerializeField]
         protected LayerMask layerMask;
-        public LayerMask wallLayerMask;
+
+        float delay;
+        float leftDelay;
 
         private void Awake()
         {
@@ -23,7 +27,14 @@ namespace RogueNaraka.BulletScripts.Hitable
         }
         void Update()
         {
-            GetHitUnits(hitUnitList);
+            if (delay > 0)
+            {
+                leftDelay -= Time.deltaTime;
+                return;
+            }
+            else
+                leftDelay = delay;
+            GetHitUnits();
             for (int i = 0; i < hitUnitList.Count; i++)
             {
                 if(damageable)
@@ -34,9 +45,11 @@ namespace RogueNaraka.BulletScripts.Hitable
         public virtual void Init(BulletData data)
         {
             layerMask = GetLayerMask();
+            delay = data.delay;
+            leftDelay = 0;
         }
 
-        public abstract void GetHitUnits(List<Unit> hitList);
+        public abstract void GetHitUnits();
 
         public bool CheckHitList(Unit unit)
         {
@@ -55,6 +68,8 @@ namespace RogueNaraka.BulletScripts.Hitable
 
         public bool AddHitList(Unit unit)
         {
+            if (!unit)
+                return false;
             int hashCode = unit.GetHashCode();
             if(CheckHitList(hashCode))
             {
@@ -67,9 +82,9 @@ namespace RogueNaraka.BulletScripts.Hitable
         protected LayerMask GetLayerMask()
         {
             if (ownerable)
-                return ownerable.layerMask + wallLayerMask;
+                return (1 << ownerable.layer) | (1 << GameDatabase.wallLayer);
             else
-                return LayerMask.GetMask("Friendly", "Enemy") + wallLayerMask;
+                return  (1 << GameDatabase.friendlyLayer) | (1 << GameDatabase.enemyLayer) | (1 << GameDatabase.wallLayer);
         }
     }
 }

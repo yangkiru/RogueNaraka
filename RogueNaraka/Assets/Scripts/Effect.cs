@@ -20,6 +20,7 @@ public class Effect : MonoBehaviour {
         name = sprData.name;
         renderer.sprite = sprData.spr;
         this.owner = owner;
+        transform.SetParent(owner.effectable.holder);
     }
 
     void Update()
@@ -34,6 +35,7 @@ public class Effect : MonoBehaviour {
     {
         owner.effectable.effects.Remove(this);
         owner = null;
-        BoardManager.instance.effectPool.EnqueueObjectPool(gameObject, false);
+        _data = null;
+        BoardManager.instance.effectPool.EnqueueObjectPool(gameObject);
     }
 }

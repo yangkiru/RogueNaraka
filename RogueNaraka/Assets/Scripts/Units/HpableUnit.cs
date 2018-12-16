@@ -6,9 +6,11 @@ namespace RogueNaraka.UnitScripts
 {
     public class HpableUnit : MonoBehaviour
     {
+        [SerializeField]
         Unit unit;
 
         public float currentHp { get { return _currentHp; } }
+        [SerializeField]
         float _currentHp;
         public float maxHp { get { return stat.hp; } }
 
@@ -19,7 +21,7 @@ namespace RogueNaraka.UnitScripts
 
         Stat stat;
 
-        void Awake()
+        void Reset()
         {
             unit = GetComponent<Unit>();
         }

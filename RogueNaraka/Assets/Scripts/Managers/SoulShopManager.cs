@@ -80,7 +80,7 @@ public class SoulShopManager : MonoBehaviour
         else
         {
             statUpgrading = (STAT)type;
-            statUpgradeBtnTxt[type].text = GetRequiredStat((STAT)type).ToString();
+            statUpgradeBtnTxt[type].text = GetRequiredSoul((STAT)type).ToString();
             isStatUpgrading = true;
             for(int i = 0; i < statUpgradeBtn.Length;i++)
             {
@@ -153,32 +153,39 @@ public class SoulShopManager : MonoBehaviour
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    private int GetRequiredStat(STAT type)
+    private int GetRequiredSoul(STAT type)
     {
-        return ((int)GameManager.GetStat(type, true) - 4) * 10;
-    }
-
-    /// <summary>
-    /// 소울 업그레이드의 도메인
-    /// </summary>
-    [SerializeField]
-    public enum SOULCOROUTINE
-    { STAT }
-
-    /// <summary>
-    /// 무엇을 업그레이드 할 지 선택하는 함수
-    /// UGUI에서 호출
-    /// </summary>
-    /// <param name="soulCoroutine"></param>
-    public void SelectCoroutine(int soulCoroutine)
-    {
-        switch((SOULCOROUTINE)soulCoroutine)
+        Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("statMax")).Clone();
+        float target = 0;
+        switch(type)
         {
-            case SOULCOROUTINE.STAT:
-                currentCoroutine = StatUp();
-                checkTxt.text = GetRequiredStat(statUpgrading) + " Soul이 필요합니다.\n업그레이드 하시겠습니까?";
+            case STAT.DMG:
+                target = stat.dmgMax;
+                break;
+            case STAT.SPD:
+                target = stat.spdMax;
+                break;
+            case STAT.TEC:
+                target = stat.tecMax;
+                break;
+            case STAT.HP:
+                target = stat.hpMax;
+                break;
+            case STAT.MP:
+                target = stat.mpMax;
+                break;
+            case STAT.HPREGEN:
+                target = stat.hpRegenMax;
+                break;
+            case STAT.MPREGEN:
+                target = stat.mpRegenMax;
+                break;
+            case STAT.STATPOINT:
+                target = stat.statPoints;
                 break;
         }
+
+        return (int)((target - 4) * 10);
     }
 
     /// <summary>
@@ -187,12 +194,15 @@ public class SoulShopManager : MonoBehaviour
     /// </summary>
     public IEnumerator StatUp()
     {
-        int required = GetRequiredStat(statUpgrading);
+        int required = GetRequiredSoul(statUpgrading);
         isUpgrading = true;
         if (MoneyManager.instance.soul >= required)
         {
             Debug.Log("Max Stat Upgraded");
-            GameManager.AddStat(statUpgrading, 1, true);
+
+            Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("statMax")).Clone();
+            stat.AddMax(statUpgrading, 1);
+            PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
             MoneyManager.instance.AddSoul(-required);
             MoneyManager.instance.Save();
             SyncStatUpgradeTxt();
@@ -241,7 +251,9 @@ public class SoulShopManager : MonoBehaviour
     /// </summary>
     private void SyncStatUpgradeTxt()
     {
+        Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("statMax")).Clone();
+
         for (int i = 0; i < statUpgradeTxt.Length; i++)
-            statUpgradeTxt[i].text = GameManager.GetStat((STAT)i, true).ToString();
+            statUpgradeTxt[i].text = stat.GetMax((STAT)i).ToString();
     }
 }

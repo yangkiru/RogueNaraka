@@ -115,14 +115,13 @@ public class LevelUpManager : MonoBehaviour {
 
     public void StatUp(int type)
     {
-        if (GameManager.AddStat((STAT)type, 1))
+        if (player.data.stat.AddCurrent((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");
             if (--leftStat <= 0)
                 rollManager.SetRollPnl(false);
             leftStatTxt.text = leftStat + " Points";
             SyncStatUpgradeTxt();
-            GameManager.instance.SyncPlayerStat();
             GameManager.instance.StatTextUpdate();
         }
         else
@@ -162,12 +161,12 @@ public class LevelUpManager : MonoBehaviour {
 
     public void SyncStatUpgradeTxt()
     {
-        upgradeTxt[0].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.DMG, false), GameManager.GetStat(STAT.DMG, true));
-        upgradeTxt[1].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.SPD, false), GameManager.GetStat(STAT.SPD, true));
-        upgradeTxt[2].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.TEC, false), GameManager.GetStat(STAT.TEC, true));
-        upgradeTxt[3].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.HP, false), GameManager.GetStat(STAT.HP, true));
-        upgradeTxt[4].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.MP, false), GameManager.GetStat(STAT.MP, true));
-        upgradeTxt[5].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.HPREGEN, false), GameManager.GetStat(STAT.HPREGEN, true));
-        upgradeTxt[6].text = string.Format("{0}/{1}", GameManager.GetStat(STAT.MPREGEN, false), GameManager.GetStat(STAT.MPREGEN, true));
+        upgradeTxt[0].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.DMG), player.data.stat.GetMax(STAT.DMG));
+        upgradeTxt[1].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.SPD), player.data.stat.GetMax(STAT.SPD));
+        upgradeTxt[2].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.TEC), player.data.stat.GetMax(STAT.TEC));
+        upgradeTxt[3].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.HP), player.data.stat.GetMax(STAT.HP));
+        upgradeTxt[4].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.MP), player.data.stat.GetMax(STAT.MP));
+        upgradeTxt[5].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.HPREGEN), player.data.stat.GetMax(STAT.HPREGEN));
+        upgradeTxt[6].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.MPREGEN), player.data.stat.GetMax(STAT.MPREGEN));
     }
 }

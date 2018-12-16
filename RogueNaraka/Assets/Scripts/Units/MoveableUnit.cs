@@ -11,12 +11,13 @@ namespace RogueNaraka.UnitScripts
         Unit unit;
         public PolyNavAgent agent
         { get { return _agent; } }
+        [SerializeField]
         PolyNavAgent _agent;
 
         public float speed { get { return unitSpeed; } }
         float unitSpeed;
 
-        void Awake()
+        void Reset()
         {
             unit = GetComponent<Unit>();
             _agent = GetComponent<PolyNavAgent>();
@@ -24,7 +25,13 @@ namespace RogueNaraka.UnitScripts
 
         public void Init(UnitData data)
         {
-            unitSpeed = data.moveSpeed;
+            SetSpeed(data.moveSpeed);
+        }
+
+        public void SetSpeed(float speed)
+        {
+            unitSpeed = speed;
+            agent.maxSpeed = speed;
         }
 
         public void Move(Vector3 pos, Action<bool> callback = null)

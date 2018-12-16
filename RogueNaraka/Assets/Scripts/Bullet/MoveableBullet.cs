@@ -10,30 +10,50 @@ namespace RogueNaraka.BulletScripts
         /// 매 프레임 속력 증가 값
         /// </summary>
         [SerializeField]
-        Vector3 accel;
+        Vector3 localAccel;
         [SerializeField]
-        Vector3 velocity;
+        Vector3 worldAccel;
+        [SerializeField]
+        Vector3 localVelocity;
+        [SerializeField]
+        Vector3 worldVelocity;
 
-        public void SetVelocity(Vector3 velocity)
+        public void SetVelocity(Vector3 velocity, Space space)
         {
-            this.velocity = velocity;
+            if (space == Space.Self)
+                localVelocity = velocity;
+            else
+                worldVelocity = velocity;
         }
 
-        public void SetVelocity(Vector3 velocity, Vector3 accel)
+        public void SetVelocity(Vector3 velocity, Vector3 accel, Space space)
         {
-            this.velocity = velocity;
-            this.accel = accel;
+            if (space == Space.Self)
+            {
+                localVelocity = velocity;
+                localAccel = accel;
+            }
+            else
+            {
+                worldVelocity = velocity;
+                worldAccel = accel;
+            }
         }
 
-        public void SetAccel(Vector3 accel)
+        public void SetAccel(Vector3 accel, Space space)
         {
-            this.accel = accel;
+            if (space == Space.Self)
+                localAccel = accel;
+            else
+                worldAccel = accel;
         }
 
         private void Update()
         {
-            velocity += accel;
-            transform.Translate(velocity * Time.deltaTime, Space.Self);
+            localVelocity += localAccel;
+            worldVelocity += worldAccel;
+            transform.Translate(localVelocity * Time.deltaTime, Space.Self);
+            transform.Translate(worldVelocity * Time.deltaTime, Space.World);
         }
     }
 }

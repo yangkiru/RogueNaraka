@@ -8,7 +8,11 @@ namespace RogueNaraka.UnitScripts.Targetable
     {
         Unit owner;
         public Unit target { get { return _target; } }
+        [SerializeField]
         Unit _target;
+
+        public float targetDistance { get { return _targetDistance; } }
+        float _targetDistance;
 
         float delay;
         float leftDelay;
@@ -16,7 +20,7 @@ namespace RogueNaraka.UnitScripts.Targetable
 
         public Vector2 direction { get { return target.transform.position - transform.position; } }
 
-        void Awake()
+        void Reset()
         {
             owner = GetComponent<Unit>();
         }
@@ -31,10 +35,13 @@ namespace RogueNaraka.UnitScripts.Targetable
             else if (leftDelay < 0)
                 leftDelay = 0;
             _target = GetTarget();
+            _targetDistance = Distance(target);
         }
 
         protected float Distance(Unit target)
         {
+            if (!target)
+                return float.PositiveInfinity;
             return Vector2.SqrMagnitude(target.transform.position - transform.position);
         }
 

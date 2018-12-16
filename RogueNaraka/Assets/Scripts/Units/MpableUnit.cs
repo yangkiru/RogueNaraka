@@ -6,9 +6,11 @@ namespace RogueNaraka.UnitScripts
 {
     public class MpableUnit : MonoBehaviour
     {
+        [SerializeField]
         Unit unit;
 
         public float currentMp { get { return _currentMp; } }
+        [SerializeField]
         float _currentMp;
         public float maxMp { get { return stat.mp; } }
 
@@ -19,7 +21,7 @@ namespace RogueNaraka.UnitScripts
 
         Stat stat;
 
-        void Awake()
+        void Reset()
         {
             unit = GetComponent<Unit>();
         }

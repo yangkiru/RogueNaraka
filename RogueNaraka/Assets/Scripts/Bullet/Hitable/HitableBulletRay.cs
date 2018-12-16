@@ -18,7 +18,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             base.Init(data);
         }
 
-        public override void GetHitUnits(List<Unit> hitUnitList)
+        public override void GetHitUnits()
         {
             RaycastHit2D[] hits;
             hits = Physics2D.RaycastAll((Vector2)transform.position + offset, direction, distance, layerMask);

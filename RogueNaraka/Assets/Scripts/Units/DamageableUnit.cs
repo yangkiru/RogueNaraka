@@ -8,7 +8,7 @@ namespace RogueNaraka.UnitScripts
     {
         Unit unit;
         HpableUnit hpable;
-        private void Awake()
+        private void Reset()
         {
             unit = GetComponent<Unit>();
             hpable = unit.hpable;

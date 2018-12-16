@@ -16,8 +16,7 @@ MonoBehaviour:
     id: 0
     cost: 0
     stage: 0
-    weaponId: 0
-    weaponLevel: 0
+    weapon: 0
     stat:
       dmg: 1
       spd: 1
@@ -26,6 +25,14 @@ MonoBehaviour:
       mp: 1
       hpRegen: 1
       mpRegen: 1
+      dmgMax: 5
+      spdMax: 5
+      tecMax: 5
+      hpMax: 5
+      mpMax: 5
+      hpRegenMax: 5
+      mpRegenMax: 5
+      statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
@@ -37,62 +44,60 @@ MonoBehaviour:
     maxDistance: 0
     moveSpeed: 1
     shadowPos: {x: 0.2, y: -0.45}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   enemies:
   - name: Bug0
     id: 0
     cost: 1
     stage: 0
-    weaponId: 5
-    weaponLevel: 0
+    weapon: 0
     stat:
-      dmg: 0.4
-      spd: 1
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 4
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
-    move: 0
+    move: 1
     moveDelay: 2
     moveDistance: 1
     minDistance: 0
     maxDistance: 2
     moveSpeed: 1
     shadowPos: {x: 0.05, y: -0.05}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   - name: Bug1
     id: 1
     cost: 1
     stage: 3
-    weaponId: 5
-    weaponLevel: 1
+    weapon: 0
     stat:
-      dmg: 0.6
-      spd: 1
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 8
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -104,28 +109,27 @@ MonoBehaviour:
     maxDistance: 2
     moveSpeed: 1
     shadowPos: {x: 0.05, y: -0.05}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   - name: Bat0
     id: 2
     cost: 2
     stage: 6
-    weaponId: 6
-    weaponLevel: 0
+    weapon: 0
     stat:
-      dmg: 0.4
-      spd: 4
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 5
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -137,28 +141,27 @@ MonoBehaviour:
     maxDistance: 2
     moveSpeed: 2
     shadowPos: {x: 0.05, y: -0.3}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   - name: Bat1
     id: 3
     cost: 2
     stage: 10
-    weaponId: 6
-    weaponLevel: 0
+    weapon: 0
     stat:
-      dmg: 0.5
-      spd: 4
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 10
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -170,28 +173,27 @@ MonoBehaviour:
     maxDistance: 2
     moveSpeed: 2
     shadowPos: {x: 0.05, y: -0.3}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   - name: Bone0
     id: 4
     cost: 3
     stage: 14
-    weaponId: 6
-    weaponLevel: 0
+    weapon: 0
     stat:
-      dmg: 0.7
-      spd: 1
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 15
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -203,28 +205,27 @@ MonoBehaviour:
     maxDistance: 2
     moveSpeed: 1
     shadowPos: {x: 0.05, y: -0.3}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   - name: BoneHead0
     id: 5
     cost: 3
     stage: 18
-    weaponId: 3
-    weaponLevel: 1
+    weapon: 0
     stat:
-      dmg: 1
-      spd: 1
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 20
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -236,29 +237,28 @@ MonoBehaviour:
     maxDistance: 2
     moveSpeed: 1.5
     shadowPos: {x: 0.05, y: -0.3}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   bosses:
   - name: Boss0
     id: 0
     cost: 0
     stage: 0
-    weaponId: 0
-    weaponLevel: 0
+    weapon: 0
     stat:
-      dmg: 5
-      spd: 3
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 20
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -270,29 +270,28 @@ MonoBehaviour:
     maxDistance: 0
     moveSpeed: 0
     shadowPos: {x: 0, y: 0}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   spawnables:
   - name: ScarecrowSoldier
     id: 0
     cost: 0
     stage: 0
-    weaponId: 7
-    weaponLevel: 0
+    weapon: 0
     stat:
-      dmg: 1
-      spd: 1
+      dmg: 0
+      spd: 0
       tec: 0
-      hp: 1
+      hp: 0
       mp: 0
       hpRegen: 0
       mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      statPoints: 0
     controller: {fileID: 9100000, guid: 184c384e313182a43afa874a8da647ce, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
@@ -304,14 +303,6 @@ MonoBehaviour:
     maxDistance: 0
     moveSpeed: 0
     shadowPos: {x: 0, y: -1}
-    knowledge:
-      fire: 0
-      ice: 0
-      poison: 0
-      knockBack: 0
-      stun: 0
-      slow: 0
-      gravity: 0
   playerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -330,1307 +321,406 @@ MonoBehaviour:
   bullets:
   - name: MagicBall0
     id: 0
-    type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 2
-    size: 0.15
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
     controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities: []
-    children:
-    - name: MagicSpawn
-      bulletId: 7
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    onDestroy:
-    - name: MagicBallDestroy
-      bulletId: 16
-      sortingOrder: -1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    effects: []
+    type: 0
+    localSpeed: 3
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    size: 0.15
+    delay: 0
+    limitTime: 0
   - name: MagicBall1
     id: 1
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.15
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities: []
-    children:
-    - name: MagicSpawn
-      bulletId: 7
-      sortingOrder: 2
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSpin0
-      bulletId: 4
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 1
-      isEndWith: 1
-      spawnPoint: {x: 0, y: 0}
-    onDestroy:
-    - name: MagicBallDestroy
-      bulletId: 16
-      sortingOrder: -1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicBall2
     id: 2
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.15
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities: []
-    children:
-    - name: MagicSpawn
-      bulletId: 7
-      sortingOrder: 2
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSpin0
-      bulletId: 4
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 1
-      isEndWith: 1
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSpin1
-      bulletId: 5
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 1
-      isEndWith: 1
-      spawnPoint: {x: 0, y: 0}
-    onDestroy:
-    - name: MagicBallDestory
-      bulletId: 16
-      sortingOrder: -1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicBall3
     id: 3
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.15
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities: []
-    children:
-    - name: MagicSpawn
-      bulletId: 7
-      sortingOrder: 2
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSpin0
-      bulletId: 4
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 1
-      isEndWith: 1
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSpin1
-      bulletId: 5
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 1
-      isEndWith: 1
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSpin2
-      bulletId: 6
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 1
-      isEndWith: 1
-      spawnPoint: {x: 0, y: 0}
-    onDestroy:
-    - name: MagicBall
-      bulletId: 16
-      sortingOrder: -1
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSpin0
     id: 4
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.2
-    dealSpeed: 0.1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.3
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 0f8b2066368d1ad43840304e871873a4, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 1
-      value: -720
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSpin1
     id: 5
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.3
-    dealSpeed: 0.1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.5
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 0e5bd7cad351be646aa837e110b135d1, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 1
-      value: 720
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSpin2
     id: 6
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.4
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.8
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: adb582aa48649df44af2868177d96176, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 1
-      value: -360
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSpawn
     id: 7
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.3
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: e0b825f9dc32100479242bc04e60e2b6, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.1
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSlash0
     id: 8
+    controller: {fileID: 0}
     type: 3
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.5
-    angle: 90
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.2
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSlash1
     id: 9
+    controller: {fileID: 0}
     type: 3
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 1
-    angle: 90
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 9100000, guid: e2ebdd70d9f6c2a49a5ade3aea94ea69, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.2
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSlash2
     id: 10
+    controller: {fileID: 0}
     type: 3
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 1
-    angle: 90
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.2
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSlash3
     id: 11
+    controller: {fileID: 0}
     type: 3
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.62
-    angle: 90
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.2
-    children:
-    - name: MagicSlash0
-      bulletId: 8
-      sortingOrder: -1
-      startTime: 0
-      waitTime: 0
-      angle: 20
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 1, y: 0}
-    - name: MagicSlash0
-      bulletId: 8
-      sortingOrder: -1
-      startTime: 0
-      waitTime: 0
-      angle: -20
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: -1, y: 0}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSlash4
     id: 12
+    controller: {fileID: 0}
     type: 3
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 1
-    angle: 90
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 96da564393ac12b4b968a9370bfd59b4, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.2
-    children:
-    - name: MagicSlash2
-      bulletId: 10
-      sortingOrder: 2
-      startTime: 0
-      waitTime: 0
-      angle: 120
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0.5, y: 0.9}
-    - name: MagicSlash2
-      bulletId: 10
-      sortingOrder: 1
-      startTime: 0
-      waitTime: 0
-      angle: -120
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: -0.5, y: 0.9}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicMissile
     id: 13
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.3
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 3cc82223d6d353f45a3a0ea0f817d44a, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 4
-      value: 1
-    children:
-    - name: MagicMissileTrail
-      bulletId: 14
-      sortingOrder: -1
-      startTime: 0.25
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 1
-      isFirst: 1
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicMissileTrail
     id: 14
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 1
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: b6b1b324b3e8bd146b19ce5e9c98a4ae, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MonsterBullet0
     id: 15
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.09
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 1
-      value: 720
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicBallDestroy
     id: 16
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.5
-    dealSpeed: 1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.5
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 9100000, guid: 236f9fcbffc638c428d2dab3b5530725, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.01
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSquare
     id: 17
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.5
-    dealSpeed: 0.5
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.35
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 6419740594e6c5343a82621f7c0793c3, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 2
-      value: 1000
-    children:
-    - name: MagicSquareTrail
-      bulletId: 18
-      sortingOrder: 1
-      startTime: 0.25
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 1
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSquareTrail
     id: 18
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.5
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 144e0c3002e44b44a8de299b3e4c28c4, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSquare0
     id: 19
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.1
-    children:
-    - name: MagicSquare0
-      bulletId: 17
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 1
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSquare1
     id: 20
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.6
-    children:
-    - name: MagicSquare0
-      bulletId: 17
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 1
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSquare0
-      bulletId: 17
-      sortingOrder: 0
-      startTime: 0.5
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 1
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MagicSquare2
     id: 21
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 1.2
-    children:
-    - name: MagicSquare0
-      bulletId: 17
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 1
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSquare0
-      bulletId: 17
-      sortingOrder: 0
-      startTime: 0.5
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 1
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    - name: MagicSquare0
-      bulletId: 17
-      sortingOrder: 0
-      startTime: 1
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 1
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 0
-      spawnPoint: {x: 0, y: 0}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: Bite
     id: 22
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.3
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.3
-    - ability: 5
-      value: 1
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: PoisonBite
     id: 23
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.3
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.3
-    - ability: 5
-      value: 1
-    children: []
-    onDestroy: []
-    effects:
-    - type: 5
-      value: 0.1
-      time: 2
-      isInfinity: 0
+    delay: 0
+    limitTime: 0
   - name: Tackle
     id: 24
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.5
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.4
-    - ability: 5
-      value: 1
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: ThunderL
     id: 25
+    controller: {fileID: 0}
     type: 5
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0.2
-      power: 0.025
-      gap: 0.01
-      isOnHit: 1
-    controller: {fileID: 22100000, guid: a016a5d25f314554b9cda7aedd5996ee, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.4
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: ThunderR
     id: 26
+    controller: {fileID: 0}
     type: 5
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0.1
-    dealSpeed: 0.2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0.2
-      power: 0.025
-      gap: 0.01
-      isOnHit: 1
-    controller: {fileID: 22100000, guid: 30c0ba08d2084a845bbe1b4edde7d422, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 0.4
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: Ice
     id: 27
+    controller: {fileID: 0}
     type: 5
-    sortingLayer: 2
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 04290e155ba3f334da07ff9e0e3d3e10, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 2
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects:
-    - type: 3
-      value: 1
-      time: 1
-      isInfinity: 0
+    delay: 0
+    limitTime: 0
   - name: blood
     id: 28
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 2
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 1
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 5f47fc0e211f0c740bb16188c846c4e7, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 2
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: bloodBubble
     id: 29
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0.1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.1
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 743522a24d1f9114b9b6464c01a7fe38, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 4
-      value: 5
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: beam
     id: 30
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0.5
-      power: 0.1
-      gap: 0.01
-      isOnHit: 0
-    controller: {fileID: 9100000, guid: 309ae9a11ed36054f991dc2ee6e60bfc, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 1
-    children:
-    - name: beamHit
-      bulletId: 32
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      localSpeed: 0
-      worldSpeed: 0
-      revolveDistance: 0
-      revolveSpeed: 0
-      isRevolveTarget: 0
-      isRepeat: 0
-      isFirst: 0
-      isStick: 0
-      isEndWith: 1
-      spawnPoint: {x: -1.766484, y: 0}
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: beamHole
     id: 31
+    controller: {fileID: 0}
     type: 4
-    sortingLayer: 2
-    flightSpeed: 1
-    dmg: 0
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: ec09c21b7dd1396499cd30867ec46b60, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 3
-      value: 3
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: beamHit
     id: 32
+    controller: {fileID: 0}
     type: 5
-    sortingLayer: 2
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.1
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0.01
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 3cfb4967a84c4ba4986cf9daba6e75dd, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 0}
-    abilities:
-    - ability: 2
-      value: 1000
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: slash
     id: 33
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 1
-    dmg: 1
-    dealSpeed: 0.25
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.75
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 7769a4238a4f50a4abd5ed0659961ab8, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 0}
-    abilities:
-    - ability: 3
-      value: 1
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   - name: MonsterBullet1
     id: 34
+    controller: {fileID: 0}
     type: 0
-    sortingLayer: 0
-    flightSpeed: 2
-    dmg: 1
-    dealSpeed: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
     size: 0.09
-    angle: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    abilities:
-    - ability: 1
-      value: 720
-    children: []
-    onDestroy: []
-    effects: []
+    delay: 0
+    limitTime: 0
   weapons:
   - name: MagicBall
     id: 0
-    level: 0
-    startBulletId: 00000000010000000200000003000000
-    spawnPoint: {x: 0, y: 0.5}
-    type: 1
+    type: 2
+    startBulletId: 0
+    offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 1
-    localSpeed: 6.5
-    worldSpeed: 0
-  - name: MagicSlash
-    id: 1
-    level: 0
-    startBulletId: 08000000090000000a0000000b0000000c000000
-    spawnPoint: {x: 0, y: 0.3}
-    type: 0
-    beforeAttackDelay: 1
-    afterAttackDelay: 2
-    localSpeed: 0
-    worldSpeed: 0
-  - name: MagicMissile
-    id: 2
-    level: 0
-    startBulletId: 0d000000
-    spawnPoint: {x: 0, y: 0.5}
-    type: 1
-    beforeAttackDelay: 0
-    afterAttackDelay: 1
-    localSpeed: 1
-    worldSpeed: 0
+    attackDistance: 0
   - name: MonsterBullet
-    id: 3
-    level: 0
-    startBulletId: 0f00000022000000
-    spawnPoint: {x: 0, y: 0.25}
-    type: 1
-    beforeAttackDelay: 2
+    id: 1
+    type: 2
+    startBulletId: 0
+    offset: {x: 0, y: 0, z: 0}
+    beforeAttackDelay: 0
     afterAttackDelay: 1
-    localSpeed: 0
-    worldSpeed: 2
-  - name: MagicSqaure
-    id: 4
-    level: 0
-    startBulletId: 130000001400000015000000
-    spawnPoint: {x: 0, y: 0}
-    type: 3
-    beforeAttackDelay: 0
-    afterAttackDelay: 0
-    localSpeed: 0
-    worldSpeed: 0
-  - name: Bite
-    id: 5
-    level: 0
-    startBulletId: 1600000017000000
-    spawnPoint: {x: 0, y: 0.3}
-    type: 0
-    beforeAttackDelay: 2
-    afterAttackDelay: 2
-    localSpeed: 0
-    worldSpeed: 0
-  - name: Tackle
-    id: 6
-    level: 0
-    startBulletId: 18000000
-    spawnPoint: {x: 0, y: 0}
-    type: 0
-    beforeAttackDelay: 0
-    afterAttackDelay: 3
-    localSpeed: 0
-    worldSpeed: 0
-  - name: ScarecrowSlash
-    id: 7
-    level: 0
-    startBulletId: 21000000
-    spawnPoint: {x: 0, y: 0.25}
-    type: 0
-    beforeAttackDelay: 0
-    afterAttackDelay: 0.5
-    localSpeed: 0
-    worldSpeed: 0
+    attackDistance: 0
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1

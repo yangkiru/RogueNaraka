@@ -10,21 +10,29 @@ namespace RogueNaraka.BulletScripts
     {
         HitableBullet hitableRay = null;
         HitableBullet hitableCircle = null;
+        [HideInInspector]
         public HitableBullet hitable = null;
 
+        [HideInInspector]
         public ShootableBullet shootable = null;
+        [HideInInspector]
         public MoveableBullet moveable = null;
+        [HideInInspector]
         public OwnerableBullet ownerable = null;
 
         public BulletData data { get { return _data; } }
         BulletData _data;
 
+        Animator animator;
+
         void Awake()
         {
             hitableRay = GetComponent<HitableBulletRay>();
             hitableCircle = GetComponent<HitableBulletCircle>();
-            moveable = GetComponent<MoveableBullet>();
             shootable = GetComponent<ShootableBullet>();
+            moveable = GetComponent<MoveableBullet>();
+            ownerable = GetComponent<OwnerableBullet>();
+            animator = GetComponent<Animator>();
         }
 
         void Init(Unit owner, BulletData data)
@@ -45,6 +53,7 @@ namespace RogueNaraka.BulletScripts
             }
             hitable.enabled = true;
             hitable.Init(data);
+            animator.runtimeAnimatorController = data.controller;
         }
 
         void DisableAllHitable()
@@ -64,6 +73,11 @@ namespace RogueNaraka.BulletScripts
         {
             transform.position = position;
             gameObject.SetActive(true);
+        }
+
+        public void Destroy(bool isRemoveChild)
+        {
+            BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, isRemoveChild);
         }
     }
 }

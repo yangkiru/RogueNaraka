@@ -15,7 +15,8 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         }
         protected override void AutoMove()
         {
-            moveable.Move(targetable.target.transform.position);
+            if(targetable?.target)
+                moveable.Move(targetable.target.transform.position);
         }
     }
 }

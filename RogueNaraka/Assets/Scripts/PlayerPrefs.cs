@@ -54,4 +54,12 @@ public class PlayerPrefs : MonoBehaviour {
         Aes128PlayerPrefs.SetString(key, value);
 #endif
     }
+    public static void DeleteAll()
+    {
+#if USE_DEBUGING
+        UnityEngine.PlayerPrefs.DeleteAll();
+#else
+        Aes128PlayerPrefs.DeleteAll();
+#endif
+    }
 }

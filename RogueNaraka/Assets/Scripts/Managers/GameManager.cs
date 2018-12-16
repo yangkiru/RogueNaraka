@@ -8,36 +8,26 @@ using GoogleMobileAds.Api;
 using RogueNaraka.UnitScripts;
 
 public class GameManager : MonoBehaviour {
+
+    const string version = "1.0.0";
+    const bool isReset = true;
+
     [SerializeField][ReadOnly]
     public static GameManager instance = null;
-#if DELAY
-    public WaitForSeconds delayPointOne;
-    public WaitForSecondsRealtime delayPointOneReal;
-    public WaitForSeconds delayOne;
-    public WaitForSecondsRealtime delayOneReal;
-#endif
     public BoardManager boardManager;
     public MoneyManager moneyManager;
     public LevelUpManager levelUpManager;
     public SoulShopManager soulShopManager;
     public SkillManager skillManager;
     public DeathEffectPool deathEffectPool; 
-    public Unit player;
+    public Unit player
+    {
+        get { return boardManager.player; }
+    }
     
     public Button cancelBtn;//stat Upgrade
 
     public TMPro.TextMeshProUGUI[] statTxt;
-
-
-    //Debug params
-    public int stage;
-
-    public bool isDebug;
-    public bool isReset;
-    public bool isStage;
-    public bool spawnEffect;
-    public bool autoSave = true;
-    public bool removeFirst;
 
     public float autoSaveTime = 1;
 
@@ -63,44 +53,18 @@ public class GameManager : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        if (isReset)
-            PlayerPrefs.SetInt("isFirst", 0);
+        //업데이트된 버전이 초기화가 필요하면
+        if (isReset && PlayerPrefs.GetInt(version) == 0)
+        {
+            PlayerPrefs.SetInt("isReset", 0);
+        }
 
         Application.targetFrameRate = 60;
-#if DELAY
-        delayPointOne = new WaitForSeconds(0.1f);
-        delayPointOneReal = new WaitForSecondsRealtime(0.1f);
-        delayOne = new WaitForSeconds(1f);
-        delayOneReal = new WaitForSecondsRealtime(1f);
-#endif
-        Load();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PlayerPrefs.SetInt("isFirst", 0);
-            SceneManager.LoadScene(0);
-        }
-
-        if(autoSave)
-        {
-            if(autoSaveCoroutine == null)
-            {
-                autoSaveCoroutine = AutoSave(autoSaveTime);
-                StartCoroutine(autoSaveCoroutine);
-            }
-        }
-        else
-        {
-            if(autoSaveCoroutine != null)
-            {
-                Debug.Log("Stop AutoSave");
-                StopCoroutine(autoSaveCoroutine);
-                autoSaveCoroutine = null;
-            }
-        }
+        Load();
     }
 
     private void RandomStat()
@@ -108,29 +72,31 @@ public class GameManager : MonoBehaviour {
         int statPoint = PlayerPrefs.GetInt("statPoint");
         Debug.Log("statPoint"+statPoint);
 
-        Stat newStat = (Stat)GameDatabase.instance.playerBase.stat.Clone();
+        Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
+        Stat statBase = (Stat)GameDatabase.instance.playerBase.stat.Clone();
+        stat.SetCurrent(statBase);
         while(statPoint > 0)
         {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
-            if(AddStat((STAT)type, 1))
+            if(stat.AddCurrent((STAT)type, 1))
             {
                 statPoint--;
             }
             else
             {
-                int current = (int)GetStatSum(false);
-                int max = (int)GetStatSum(true);
+                int current = (int)stat.sumCurrent;
+                int max = (int)stat.sumMax;
                 if (current >= max)
                 {
-                    Debug.Log("Max");
                     return;
                 }
                 //Maxed
             }
         }
-        SyncPlayerStat();
-        player.hpable.SetHp(GetStat(STAT.HP));
-        player.mpable.SetMp(GetStat(STAT.MP));
+
+        PlayerPrefs.SetFloat("currentHp", stat.hp);
+        PlayerPrefs.SetFloat("currentMp", stat.mp);
+        PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
     }
 
     public IEnumerator AutoSave(float time)
@@ -147,7 +113,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void Save(bool isRun = true)
+    public void Save()
     {
         moneyManager.Save();
 
@@ -158,75 +124,50 @@ public class GameManager : MonoBehaviour {
         }
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
-        if (isRun)
-        {
-            PlayerPrefs.SetFloat("dmg", player.data.stat.dmg);
-            PlayerPrefs.SetFloat("spd", player.data.stat.spd);
-            PlayerPrefs.SetFloat("tec", player.data.stat.tec);
-            PlayerPrefs.SetFloat("hp", player.data.stat.hp);
-            PlayerPrefs.SetFloat("mp", player.data.stat.mp);
-            PlayerPrefs.SetFloat("hpRegen", player.data.stat.hpRegen);
-            PlayerPrefs.SetFloat("mpRegen", player.data.stat.mpRegen);
-            PlayerPrefs.SetFloat("health", player.hpable.currentHp);
-            PlayerPrefs.SetFloat("mana", player.mpable.currentMp);
-            PlayerPrefs.SetInt("stage", boardManager.stage);
-            PlayerPrefs.SetInt("weapon", player.attackable.weapon.id);
-            SkillManager.instance.Save();
-            Item.instance.Save();
-        }
+        PlayerPrefs.SetString("stat", Stat.StatToJson(player.data.stat));
+        PlayerPrefs.SetFloat("currentHp", player.hpable.currentHp);
+        PlayerPrefs.SetFloat("currentMp", player.mpable.currentMp);
+        PlayerPrefs.SetInt("stage", boardManager.stage);
+        PlayerPrefs.SetInt("weapon", player.attackable.weapon.id);
+        SkillManager.instance.Save();
+        Item.instance.Save();
+
         //Debug.Log("Saved");
     }
 
-    public void RunGame()
+    private void ResetData()
     {
-        Debug.Log("RunGame");
-        PlayerPrefs.SetInt("isRun", 1);
-        LoadRun();
-        RandomStat();
-        PlayerPrefs.SetFloat("health", player.data.stat.hp);
-        PlayerPrefs.SetFloat("mana", player.data.stat.mp);
-        Save();
-        StatTextUpdate();
-    }
-
-    private void LoadFirst()
-    {
-        moneyManager.Reset();
-        UnitData playerBase = (UnitData)GameDatabase.instance.playerBase.Clone();
-        Stat dbStat = playerBase.stat;
-        SyncStatToData(dbStat);
-
-        Stat maxStat = new Stat(5);
         UnityEngine.PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetFloat("dmgMax", maxStat.dmg);
-        PlayerPrefs.SetFloat("spdMax", maxStat.spd);
-        PlayerPrefs.SetFloat("tecMax", maxStat.tec);
-        PlayerPrefs.SetFloat("hpMax", maxStat.hp);
-        PlayerPrefs.SetFloat("mpMax", maxStat.mp);
-        PlayerPrefs.SetFloat("hpRegenMax", maxStat.hpRegen);
-        PlayerPrefs.SetFloat("mpRegenMax", maxStat.mpRegen);
 
-        PlayerPrefs.SetInt("isFirst", 1);
+        PlayerPrefs.SetInt(version, 1);
+
+        moneyManager.Reset();
+        SkillManager.instance.ResetSave();
+        Item.instance.ResetSave();
+        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
+
+        UnitData playerBase = GameDatabase.instance.playerBase;
+
+        Stat dbStat = (Stat)playerBase.stat.Clone();
+        Stat.StatToData(dbStat);
+       
+        PlayerPrefs.SetString("stat", Stat.StatToJson(dbStat));
+        
         PlayerPrefs.SetString("effect", string.Empty);
-        PlayerPrefs.SetInt("statPoint", 5);
         PlayerPrefs.SetInt("isRun", 0);
         PlayerPrefs.SetInt("isLevelUp", 0);
         PlayerPrefs.SetInt("weapon", playerBase.weapon);
 
         PlayerPrefs.SetInt("stage", 1);
 
-        SkillManager.instance.ResetSave();
-        Item.instance.ResetSave();
-        Item.instance.Load();
-        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
+        PlayerPrefs.SetInt("isReset", 1);
     }
 
-    private void LoadRun()
+    private void RunGame()
     {
+        Debug.Log("RunGame");
         moneyManager.Load();
-        Stat stat = new Stat(PlayerPrefs.GetFloat("dmg"), PlayerPrefs.GetFloat("spd"),
-        PlayerPrefs.GetFloat("tec"), PlayerPrefs.GetFloat("hp"), PlayerPrefs.GetFloat("mp"),
-        PlayerPrefs.GetFloat("hpRegen"), PlayerPrefs.GetFloat("mpRegen"));
+        Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
         playerData.weapon = PlayerPrefs.GetInt("weapon");
         playerData.stat = stat;
@@ -236,15 +177,7 @@ public class GameManager : MonoBehaviour {
 
         StatTextUpdate();
 
-        //StartCoroutine(WaitForEffectPoolInit());
-        if (autoSave)
-        {
-            autoSaveCoroutine = AutoSave(autoSaveTime);
-            StartCoroutine(autoSaveCoroutine);
-        }
         boardManager.SetStage(PlayerPrefs.GetInt("stage"));
-        if (isStage)//디버깅용
-            boardManager.SetStage(stage);
 
         SkillManager.instance.Load();
         Item.instance.Load();
@@ -289,37 +222,35 @@ public class GameManager : MonoBehaviour {
 
     private void LoadInit()
     {
-        moneyManager.Load();
         UnitData playerBase = (UnitData)GameDatabase.instance.playerBase.Clone();
-        SyncStatToData(playerBase.stat);
+        Stat.StatToData(playerBase.stat);
         PlayerPrefs.SetInt("stage", 1);
-        PlayerPrefs.SetFloat("health", 1);
-        PlayerPrefs.SetFloat("mana", 1);
         PlayerPrefs.SetInt("weapon", playerBase.weapon);
   
         skillManager.ResetSave();
         Item.instance.ResetSave();
-        Item.instance.Load();
         soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
-        RunGame();
     }
 
     public void Load()
     {
-        if (PlayerPrefs.GetInt("isFirst") == 0)//reset
+        if (PlayerPrefs.GetInt("isReset") == 0)//reset
         {
             Debug.Log("Load First");
-            LoadFirst();
+            ResetData();
         }
         if (PlayerPrefs.GetInt("isRun") == 1)
         {
             Debug.Log("Open Run");
-            LoadRun();
+            RunGame();
         }
         else//Init Run
         {
-            Debug.Log("Init Run");
+            Debug.Log("RunReset");
             LoadInit();
+            PlayerPrefs.SetInt("isRun", 1);
+            RandomStat();
+            RunGame();
         }
     }
 
@@ -336,17 +267,6 @@ public class GameManager : MonoBehaviour {
     //    PlayerPrefs.SetFloat("mana", player.mana);
     //    PlayerPrefs.SetInt("stage", boardManager.stage);
     //}
-
-    public void SyncStatToData(Stat stat)
-    {
-        PlayerPrefs.SetFloat("dmg", stat.dmg);
-        PlayerPrefs.SetFloat("spd", stat.spd);
-        PlayerPrefs.SetFloat("tec", stat.tec);
-        PlayerPrefs.SetFloat("hp", stat.hp);
-        PlayerPrefs.SetFloat("mp", stat.mp);
-        PlayerPrefs.SetFloat("hpRegen", stat.hpRegen);
-        PlayerPrefs.SetFloat("mpRegen", stat.mpRegen);
-    }
 
     public void StatTextUpdate()
     {
@@ -391,7 +311,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Waited");
         boardManager.ClearStage();
         player.deathable.Revive();
-        Load();
+        
         player.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         t = 0;
         while (t < 1)
@@ -400,6 +320,7 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         player.animator.updateMode = AnimatorUpdateMode.Normal;
+        Load();
     }
 
     public static Vector2 GetMousePosition()

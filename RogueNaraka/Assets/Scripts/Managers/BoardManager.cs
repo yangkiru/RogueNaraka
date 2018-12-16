@@ -7,7 +7,7 @@ using RogueNaraka.UnitScripts;
 public class BoardManager : MonoBehaviour {
 
     public static BoardManager instance = null;
-    public GameObject enemyPrefab;
+    public GameObject unitPrefab;
     public GameObject bulletPrefab;
     public GameObject[] bossPrefabs;
     public GameObject effectPrefab;
@@ -34,8 +34,8 @@ public class BoardManager : MonoBehaviour {
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        instance = this;
+        SpawnPlayer();
     }
 
     private void OnDrawGizmosSelected()
@@ -56,7 +56,7 @@ public class BoardManager : MonoBehaviour {
 
     public GameObject SpawnEnemyObj()
     {
-        GameObject obj = Instantiate(enemyPrefab, Vector3.zero, Quaternion.identity, enemyPool.transform);
+        GameObject obj = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity, enemyPool.transform);
         return obj;
     }
 
@@ -74,7 +74,7 @@ public class BoardManager : MonoBehaviour {
 
     public void InitBoard()
     {
-        //Debug.Log("InitBoard");
+        Debug.Log("InitBoard");
         int count = enemyPool.GetCount();
         if (count < 20)//enemy Pooling
         {
@@ -210,14 +210,20 @@ public class BoardManager : MonoBehaviour {
         StartCoroutine(StageTxtEffect());
     }
 
+    public void SpawnPlayer()
+    {
+        Unit player = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity).GetComponent<Unit>();
+        player.Init(GameDatabase.instance.playerBase);
+        player.Spawn(spawnPoint);
+        this.player = player;
+    }
+
     public void SpawnEnemy(int id)
     {
         //Debug.Log(id + " Enemies Spawned");
-        Unit spawn = enemyPool.DequeueObjectPool().GetComponent<Unit>();
-        spawn.transform.position = GetRandomSpawn();
-        spawn.Init(GameDatabase.instance.enemies[id]);
-        spawn.gameObject.SetActive(true);
-        enemies.Add(spawn);
+        Unit enemy = enemyPool.DequeueObjectPool().GetComponent<Unit>();
+        enemy.Init(GameDatabase.instance.enemies[id]);
+        enemy.Spawn(GetRandomSpawn());
     }
 
     //public void SpawnBoss(int id)
@@ -239,6 +245,7 @@ public class BoardManager : MonoBehaviour {
 
     private IEnumerator StageTxtEffect()
     {
+        Debug.Log("stageTxt");
         string text = string.Format("STAGE {0}", _stage);
         stageTxt.text = string.Empty;
         stageTxt.color = Color.white;

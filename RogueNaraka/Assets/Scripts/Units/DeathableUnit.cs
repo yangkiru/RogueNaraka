@@ -11,7 +11,7 @@ namespace RogueNaraka.UnitScripts
         public bool isDeath { get { return _isDeath; } }
         bool _isDeath;
 
-        void Awake()
+        void Reset()
         {
             unit = GetComponent<Unit>();
         }

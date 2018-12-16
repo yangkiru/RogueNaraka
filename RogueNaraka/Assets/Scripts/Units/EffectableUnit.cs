@@ -6,12 +6,13 @@ namespace RogueNaraka.UnitScripts
 {
     public class EffectableUnit : MonoBehaviour
     {
-
+        public Transform holder;
         Unit unit;
         public List<Effect> effects { get { return _effects; } }
+        [SerializeField]
         List<Effect> _effects = new List<Effect>();
 
-        void Awake()
+        void Reset()
         {
             unit = GetComponent<Unit>();
         }

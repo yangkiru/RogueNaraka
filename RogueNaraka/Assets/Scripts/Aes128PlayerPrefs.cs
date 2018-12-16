@@ -1,4 +1,5 @@
-﻿//#define USE_DEBUGING
+﻿//출처 : https://blog.naver.com/inus_7373/220987000764
+//#define USE_DEBUGING
 
 using UnityEngine;
 using System.Collections;
@@ -40,14 +41,6 @@ namespace Du3Core
 #else
             return true;
 #endif
-
-            if (ISOnlyDebugUse &&
-                Debug.isDebugBuild)
-            {
-                return false;
-            }
-
-            return true;
         }
 
 
@@ -504,77 +497,10 @@ namespace Du3Core
             return m_Value;
         }
 
-
-
-
-
-        // 오브젝트 단위로 그냥 serialize 해버리도록 하기
-        //         static public void SavePlayerPrefsDatas(string p_keyval, System.Object p_obj)
-        //         {
-        //             if (p_obj == null)
-        //             {
-        //                 Debug.LogError(" SavePlayerPrefsData Null Object : " + p_keyval);
-        //                 return;
-        //             }
-        // 
-        // 
-        //             var binary = new BinaryFormatter();
-        //             var mem = new MemoryStream();
-        //             binary.Serialize(mem, p_obj);
-        // 
-        //             UnityEngine.PlayerPrefs.SetString(p_keyval, System.Convert.ToBase64String(mem.GetBuffer()));
-        //         }
-        // 
-        // 
-        //         // 이것이 안전함 
-        //         static public System.Object LoadPlayerPrefsDatas(string p_keyval)
-        //         {
-        //             var playerdata = UnityEngine.PlayerPrefs.GetString(p_keyval);
-        // 
-        //             if (!string.IsNullOrEmpty(playerdata))
-        //             {
-        //                 var binary = new BinaryFormatter();
-        //                 var mem = new MemoryStream(System.Convert.FromBase64String(playerdata));
-        // 
-        //                 System.Object outdata = binary.Deserialize(mem);
-        //                 return binary.Deserialize(mem);
-        //             }
-        //             else
-        //             {
-        //                 Debug.LogError("LoadPlayerPrefs Null Data : " + p_keyval);
-        //             }
-        // 
-        //             return null;
-        //         }
-        // 
-        // 
-        //         // as 가 안되기때문에 문제가 있을수 있음 where 절을 사용하면 되는데 처리가 안됨 class와 struct 가 중복으로 사용안됨
-        //         static public T LoadPlayerPrefsDatas<T>(string p_keyval) where T : class
-        //         {
-        //             var playerdata = UnityEngine.PlayerPrefs.GetString(p_keyval);
-        // 
-        //             if (!string.IsNullOrEmpty(playerdata))
-        //             {
-        //                 var binary = new BinaryFormatter();
-        //                 var mem = new MemoryStream(System.Convert.FromBase64String(playerdata));
-        // 
-        //                 System.Object outdata = binary.Deserialize(mem);// as T;
-        //                 T outd = outdata as T;
-        //                 return (T)binary.Deserialize(mem);// as T;
-        //             }
-        //             else
-        //             {
-        //                 Debug.LogError("LoadPlayerPrefs Null Data : " + p_keyval);
-        //             }
-        // 
-        //             // 자료형에 따라서 0이나 , null 을 반환해준다고함
-        //             return default(T);
-        //         }
-
-
-
+        public static void DeleteAll()
+        {
+            UnityEngine.PlayerPrefs.DeleteAll();
+        }
     }
-
-
 }
 
