@@ -6,12 +6,11 @@ namespace RogueNaraka.UnitScripts
 {
     public class DamageableUnit : MonoBehaviour
     {
-        Unit unit;
+        [SerializeField]
         HpableUnit hpable;
         private void Reset()
         {
-            unit = GetComponent<Unit>();
-            hpable = unit.hpable;
+            hpable = GetComponent<HpableUnit>();
         }
 
         public void Damage(float amount)

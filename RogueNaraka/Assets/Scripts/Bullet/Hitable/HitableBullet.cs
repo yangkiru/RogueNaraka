@@ -11,26 +11,22 @@ namespace RogueNaraka.BulletScripts.Hitable
         protected Bullet bullet;
 
         [SerializeField]
-        DamageableBullet damageable;
-        [SerializeField]
         OwnerableBullet ownerable;
         [SerializeField]
-        List<int> hitList = new List<int>();
-        [SerializeField]
-        protected List<Unit> hitUnitList = new List<Unit>();
+        protected List<Unit> hitList = new List<Unit>();
 
         [SerializeField]
         protected LayerMask layerMask;
 
         float delay;
         float leftDelay;
-
+        
+        [SerializeField]
         protected int pierce;
 
         private void Reset()
         {
             bullet = GetComponent<Bullet>();
-            damageable = GetComponent<DamageableBullet>();
             ownerable = GetComponent<OwnerableBullet>();
         }
 
@@ -44,10 +40,12 @@ namespace RogueNaraka.BulletScripts.Hitable
             else
                 leftDelay = delay;
             GetHitUnits();
-            for (int i = 0; i < hitUnitList.Count; i++)
+            for (int i = 0; i < hitList.Count; i++)
             {
-                damageable.Damage(hitUnitList[i]);
+                Debug.Log(name + " hit " + hitList[i].name);
+                bullet.damageable.Damage(hitList[i]);
             }
+            hitList.Clear();
         }
 
         public virtual void Init(BulletData data)
@@ -55,7 +53,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             layerMask = GetLayerMask();
             delay = data.delay;
             leftDelay = 0;
-            
+            pierce = data.pierce;
         }
 
         protected abstract void GetHitUnits();
@@ -68,16 +66,9 @@ namespace RogueNaraka.BulletScripts.Hitable
 
         protected bool CheckHitList(Unit unit)
         {
-            int hashCode = unit.GetHashCode();
-            if (hitList.Contains(hashCode))
-                return false;
-            return true;
-        }
-
-        protected bool CheckHitList(int hashCode)
-        {
-            if (hitList.Contains(hashCode))
-                return false;
+            for (int i = 0; i < hitList.Count; i++)
+                if (hitList[i].Equals(unit))
+                    return false;
             return true;
         }
 
@@ -88,10 +79,9 @@ namespace RogueNaraka.BulletScripts.Hitable
                 bullet.Destroy();
                 return false;
             }
-            int hashCode = unit.GetHashCode();
-            if(CheckHitList(hashCode))
+            if(CheckHitList(unit))
             {
-                hitList.Add(hashCode);
+                hitList.Add(unit);
                 return true;
             }
             return false;

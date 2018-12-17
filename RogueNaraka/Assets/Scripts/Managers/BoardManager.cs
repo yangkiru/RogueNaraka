@@ -17,7 +17,7 @@ public class BoardManager : MonoBehaviour {
     public Vector2 goalPoint;//next Stage
     public Vector2 bossPoint;
     public Vector2[] boardRange;//0:min, 1:max
-    public ObjectPool enemyPool;//basic 100 counts
+    public ObjectPool unitPool;//basic 100 counts
     public ObjectPool bulletPool;//basic 750 counts
     public ObjectPool effectPool;//basic 200 counts
 
@@ -54,9 +54,9 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    public GameObject SpawnEnemyObj()
+    public GameObject SpawnUnitObj()
     {
-        GameObject obj = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity, enemyPool.transform);
+        GameObject obj = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity, unitPool.transform);
         return obj;
     }
 
@@ -75,13 +75,13 @@ public class BoardManager : MonoBehaviour {
     public void InitBoard()
     {
         Debug.Log("InitBoard");
-        int count = enemyPool.GetCount();
-        if (count < 20)//enemy Pooling
+        int count = unitPool.GetCount();
+        if (count < 20)//unit Pooling
         {
             for (int i = count; i < 100; i++)
             {
-                GameObject obj = SpawnEnemyObj();
-                enemyPool.EnqueueObjectPool(obj);
+                GameObject obj = SpawnUnitObj();
+                unitPool.EnqueueObjectPool(obj);
             }
         }
         count = bulletPool.GetCount();
@@ -221,7 +221,7 @@ public class BoardManager : MonoBehaviour {
     public void SpawnEnemy(int id)
     {
         //Debug.Log(id + " Enemies Spawned");
-        Unit enemy = enemyPool.DequeueObjectPool().GetComponent<Unit>();
+        Unit enemy = unitPool.DequeueObjectPool().GetComponent<Unit>();
         enemy.Init(GameDatabase.instance.enemies[id]);
         enemy.Spawn(GetRandomSpawn());
     }
@@ -268,7 +268,7 @@ public class BoardManager : MonoBehaviour {
     public void ClearStage()
     {
         for(int i = 0; i < enemies.Count; i++)
-            enemyPool.EnqueueObjectPool(enemies[i].gameObject);
+            unitPool.EnqueueObjectPool(enemies[i].gameObject);
         enemies.Clear();
     }
     public static Vector3 GetMousePosition()

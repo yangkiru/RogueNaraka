@@ -107,6 +107,7 @@ namespace RogueNaraka.UnitScripts
             _animator.runtimeAnimatorController = _data.controller;
 
             _moveable.Init(_data);
+            _moveable.agent.enabled = true;
 
             DisableAttackables();
             switch(GameDatabase.instance.weapons[_data.weapon].type)
@@ -177,6 +178,17 @@ namespace RogueNaraka.UnitScripts
         {
             _stopAfterAttackable.enabled = false;
             _stopBeforeAttackable.enabled = false;
+        }
+
+        public void DisableAll()
+        {
+            hpable.enabled = false;
+            mpable.enabled = false;
+            moveable.enabled = false;
+            autoMoveable.enabled = false;
+            attackable.enabled = false;
+            targetable.enabled = false;
+            moveable.agent.enabled = false;
         }
     }
 }

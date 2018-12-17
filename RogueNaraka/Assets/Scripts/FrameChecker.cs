@@ -39,7 +39,6 @@ public class FrameChecker : MonoBehaviour
                 yield return null;
             }
             worstFps = 100f;
-            Debug.Log("worst");
         }
     }
 

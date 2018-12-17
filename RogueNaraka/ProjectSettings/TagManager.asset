@@ -57,12 +57,6 @@ TagManager:
   - name: Bar
     uniqueID: 3373513963
     locked: 0
-  - name: Top
-    uniqueID: 3622223597
-    locked: 0
-  - name: Bot
-    uniqueID: 1413553473
-    locked: 0
   - name: UI
     uniqueID: 1797976757
     locked: 0

@@ -18,12 +18,16 @@ namespace RogueNaraka.BulletScripts
         public ShootableBullet shootable;
         public MoveableBullet moveable;
         public OwnerableBullet ownerable;
+        public TimeLimitableBullet timeLimitable;
+        public DamageableBullet damageable;
 
         public BulletData data { get { return _data; } }
         BulletData _data;
 
         [SerializeField]
         Animator animator;
+
+        IEnumerator deathCorou;
 
         void Reset()
         {
@@ -33,16 +37,19 @@ namespace RogueNaraka.BulletScripts
             moveable = GetComponent<MoveableBullet>();
             ownerable = GetComponent<OwnerableBullet>();
             animator = GetComponent<Animator>();
+            timeLimitable = GetComponent<TimeLimitableBullet>();
+            damageable = GetComponent<DamageableBullet>();
         }
 
         void Init(Unit owner, BulletData data)
         {
             ownerable.SetOwner(owner);
-            _data = data;
+            _data = (BulletData)data.Clone();
+            name = _data.name;
 
             //Hitable
             DisableAllHitable();
-            switch(data.type)
+            switch(_data.type)
             {
                 case BULLET_TYPE.CIRCLECAST:
                     hitable = hitableCircle;
@@ -52,10 +59,17 @@ namespace RogueNaraka.BulletScripts
                     break;
             }
             hitable.enabled = true;
-            hitable.Init(data);
+            hitable.Init(_data);
 
             moveable.enabled = true;
             animator.runtimeAnimatorController = data.controller;
+
+            if (_data.limitTime != 0)
+                timeLimitable.enabled = true;
+            else
+                timeLimitable.enabled = false;
+
+            deathCorou = null;
         }
 
         void DisableAllHitable()
@@ -79,7 +93,11 @@ namespace RogueNaraka.BulletScripts
 
         public void Destroy()
         {
-            StartCoroutine(DestroyCorou());
+            if (deathCorou == null)
+            {
+                deathCorou = DestroyCorou();
+                StartCoroutine(deathCorou);
+            }
         }
 
         public void DisableAll()
@@ -90,13 +108,20 @@ namespace RogueNaraka.BulletScripts
 
         IEnumerator DestroyCorou()
         {
-            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
-            DisableAll();
             animator.SetBool("isDestroy", true);
+            AnimatorStateInfo state;
             do
             {
                 yield return null;
-            } while (state.normalizedTime < 1);
+                state = animator.GetCurrentAnimatorStateInfo(0);
+            } while (!state.IsName("Destroy"));
+            
+            DisableAll();
+            
+            do
+            {
+                yield return null;
+            } while (state.normalizedTime < 1 && animator.IsInTransition(0));
             BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, true);
         }
     }

@@ -8,6 +8,7 @@ namespace RogueNaraka.UnitScripts
 {
     public class MoveableUnit : MonoBehaviour
     {
+        [SerializeField]
         Unit unit;
         public PolyNavAgent agent
         { get { return _agent; } }
@@ -16,6 +17,9 @@ namespace RogueNaraka.UnitScripts
 
         public float speed { get { return unitSpeed; } }
         float unitSpeed;
+
+        bool isWalk;
+        bool _isWalk;
 
         void Reset()
         {
@@ -42,6 +46,21 @@ namespace RogueNaraka.UnitScripts
         public void StopMove()
         {
             _agent.Stop();
+        }
+
+        void Update()
+        {
+            if (_agent.velocity.x >= 0.01f || _agent.velocity.y >= 0.01f)
+            {
+                unit.animator.SetFloat("x", _agent.velocity.x);
+                unit.animator.SetFloat("y", _agent.velocity.y);
+                isWalk = true;
+            }
+            else
+                isWalk = false;
+            if (isWalk != _isWalk)
+                unit.animator.SetBool("isWalk", isWalk);
+            _isWalk = isWalk;
         }
     }
 }

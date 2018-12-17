@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -38,7 +39,8 @@ MonoBehaviour:
     isFriendly: 1
     isStanding: 1
     move: 0
-    moveDelay: 2
+    size: 0.37
+    moveDelay: 0.5
     moveDistance: 2
     minDistance: 0
     maxDistance: 0
@@ -51,10 +53,10 @@ MonoBehaviour:
     stage: 0
     weapon: 0
     stat:
-      dmg: 0
+      dmg: 0.1
       spd: 0
       tec: 0
-      hp: 0
+      hp: 3
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -71,11 +73,12 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 1
+    size: 0
     moveDelay: 2
     moveDistance: 1
     minDistance: 0
     maxDistance: 2
-    moveSpeed: 1
+    moveSpeed: 0.5
     shadowPos: {x: 0.05, y: -0.05}
   - name: Bug1
     id: 1
@@ -103,6 +106,7 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 0
+    size: 0
     moveDelay: 2
     moveDistance: 1
     minDistance: 0
@@ -135,6 +139,7 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 4
+    size: 0
     moveDelay: 0.2
     moveDistance: 2
     minDistance: 0
@@ -167,6 +172,7 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 4
+    size: 0
     moveDelay: 0.2
     moveDistance: 2
     minDistance: 0
@@ -199,6 +205,7 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 0
+    size: 0
     moveDelay: 1
     moveDistance: 0.5
     minDistance: 0
@@ -231,6 +238,7 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 2
+    size: 0
     moveDelay: 0.5
     moveDistance: 0.5
     minDistance: 0
@@ -264,6 +272,7 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 0
+    size: 0
     moveDelay: 0
     moveDistance: 0
     minDistance: 0
@@ -297,6 +306,7 @@ MonoBehaviour:
     isFriendly: 1
     isStanding: 1
     move: 1
+    size: 0
     moveDelay: 0
     moveDistance: 0
     minDistance: 0
@@ -321,6 +331,7 @@ MonoBehaviour:
   bullets:
   - name: MagicBall0
     id: 0
+    dmg: 1
     controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     type: 0
     localSpeed: 3
@@ -330,9 +341,10 @@ MonoBehaviour:
     size: 0.15
     delay: 0
     limitTime: 0
-    pierce: 0
+    pierce: 1
   - name: MagicBall1
     id: 1
+    dmg: 0
     controller: {fileID: 0}
     type: 0
     localSpeed: 0
@@ -340,402 +352,6 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     size: 0.15
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicBall2
-    id: 2
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.15
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicBall3
-    id: 3
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.15
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSpin0
-    id: 4
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.3
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSpin1
-    id: 5
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.5
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSpin2
-    id: 6
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.8
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSpawn
-    id: 7
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.3
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSlash0
-    id: 8
-    controller: {fileID: 0}
-    type: 3
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.5
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSlash1
-    id: 9
-    controller: {fileID: 0}
-    type: 3
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 1
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSlash2
-    id: 10
-    controller: {fileID: 0}
-    type: 3
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 1
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSlash3
-    id: 11
-    controller: {fileID: 0}
-    type: 3
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.62
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSlash4
-    id: 12
-    controller: {fileID: 0}
-    type: 3
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 1
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicMissile
-    id: 13
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.3
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicMissileTrail
-    id: 14
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 1
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MonsterBullet0
-    id: 15
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.09
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicBallDestroy
-    id: 16
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.5
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSquare
-    id: 17
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.35
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSquareTrail
-    id: 18
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.5
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSquare0
-    id: 19
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSquare1
-    id: 20
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MagicSquare2
-    id: 21
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: Bite
-    id: 22
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.3
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: PoisonBite
-    id: 23
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.3
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: Tackle
-    id: 24
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.5
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: ThunderL
-    id: 25
-    controller: {fileID: 0}
-    type: 5
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: ThunderR
-    id: 26
-    controller: {fileID: 0}
-    type: 5
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: Ice
-    id: 27
-    controller: {fileID: 0}
-    type: 5
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: blood
-    id: 28
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 1
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: bloodBubble
-    id: 29
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.1
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: beam
-    id: 30
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: beamHole
-    id: 31
-    controller: {fileID: 0}
-    type: 4
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: beamHit
-    id: 32
-    controller: {fileID: 0}
-    type: 5
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: slash
-    id: 33
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.75
-    delay: 0
-    limitTime: 0
-    pierce: 0
-  - name: MonsterBullet1
-    id: 34
-    controller: {fileID: 0}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    size: 0.09
     delay: 0
     limitTime: 0
     pierce: 0
@@ -890,7 +506,7 @@ MonoBehaviour:
   - name: ScarecrowSoldier
     bulletIds: 21000000
     units:
-    - {fileID: 1129751844161108, guid: 086df998df5f67b41897e6b0d85ab4e5, type: 2}
+    - {fileID: 1129751844161108, guid: 086df998df5f67b41897e6b0d85ab4e5, type: 3}
     spr: {fileID: 21300000, guid: caaeff1be02fc8144845d3e17ffe77b9, type: 3}
     id: 4
     level: 1

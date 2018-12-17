@@ -24,8 +24,8 @@ namespace RogueNaraka.BulletScripts.Hitable
             hits = Physics2D.RaycastAll((Vector2)transform.position + offset, direction, distance, layerMask);
             for (int i = 0; i < hits.Length; i++)
             {
-                if (CheckHitList(hits[i].GetHashCode()))
-                    hitUnitList.Add(hits[i].transform.GetComponent<Unit>());
+                Unit hit = hits[i].collider.GetComponent<Unit>();
+                AddHitList(hit);
             }
         }
     }

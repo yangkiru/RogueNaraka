@@ -13,7 +13,9 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         protected float distance;
 
+        [SerializeField]
         float delay;
+        [SerializeField]
         float leftDelay;
 
         void Reset()
@@ -31,15 +33,15 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         void Update()
         {
-            if (moveable.agent.velocity != Vector2.zero)
+            if (moveable.agent.velocity.x >= 0.1f || moveable.agent.velocity.y >= 0.1f)
                 return;
             if (leftDelay > 0)
             {
                 leftDelay -= Time.deltaTime;
                 return;
             }
-            else if (leftDelay < 0)
-                leftDelay = 0;
+            else if (leftDelay <= 0)
+                leftDelay = delay;
             AutoMove();
         }
 

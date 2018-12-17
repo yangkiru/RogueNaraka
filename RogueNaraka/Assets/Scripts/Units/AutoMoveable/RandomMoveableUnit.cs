@@ -9,7 +9,8 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         protected override void AutoMove()
         {
             Vector2 rnd = new Vector2(Random.Range(-distance, distance), Random.Range(-distance, distance));
-            moveable.Move(rnd);
+
+            moveable.Move((Vector2)transform.position + rnd);
         }
     }
 }

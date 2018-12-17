@@ -160,6 +160,7 @@ public class UnitData : ICloneable
     public bool isFriendly;
     public bool isStanding;
     public MOVE_TYPE move;
+    public float size;
     public float moveDelay;
     public float moveDistance;
     public float minDistance;
@@ -239,6 +240,7 @@ public class BulletData : ICloneable
 {
     public string name;
     public int id;
+    public float dmg;
     public RuntimeAnimatorController controller;
     public BULLET_TYPE type;
     public float localSpeed;
