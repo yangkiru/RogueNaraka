@@ -108,6 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234a2e72ff8b9c448b49bddc1bc15624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 114481818113872668}
+  damageable: {fileID: 114697676651531626}
+  ownerable: {fileID: 114574027343910540}
   hitList: 
   hitUnitList: []
   layerMask:
@@ -142,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b80006bd059b4a40b3a2ce38425ddaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveable: {fileID: 114163797499506304}
 --- !u!114 &114481818113872668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,10 +157,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140b4409e51482248803355ebf213cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitableRay: {fileID: 114074712408519438}
+  hitableCircle: {fileID: 114973545258806562}
   hitable: {fileID: 0}
-  shootable: {fileID: 0}
-  moveable: {fileID: 0}
-  ownerable: {fileID: 0}
+  shootable: {fileID: 114180939160881066}
+  moveable: {fileID: 114163797499506304}
+  ownerable: {fileID: 114574027343910540}
+  animator: {fileID: 95887579399525280}
 --- !u!114 &114574027343910540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -237,12 +244,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca4e32c0c6833b49bb11b83237d3107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 114481818113872668}
+  damageable: {fileID: 114697676651531626}
+  ownerable: {fileID: 114574027343910540}
   hitList: 
   hitUnitList: []
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  size: NaN
+  size: 0
 --- !u!212 &212126601148893928
 SpriteRenderer:
   m_ObjectHideFlags: 1

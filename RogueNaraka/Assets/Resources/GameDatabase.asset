@@ -311,10 +311,10 @@ MonoBehaviour:
     m_Bits: 768
   friendlyMask:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 1280
   enemyMask:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1536
   wallMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -330,6 +330,7 @@ MonoBehaviour:
     size: 0.15
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicBall1
     id: 1
     controller: {fileID: 0}
@@ -341,6 +342,7 @@ MonoBehaviour:
     size: 0.15
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicBall2
     id: 2
     controller: {fileID: 0}
@@ -352,6 +354,7 @@ MonoBehaviour:
     size: 0.15
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicBall3
     id: 3
     controller: {fileID: 0}
@@ -363,6 +366,7 @@ MonoBehaviour:
     size: 0.15
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSpin0
     id: 4
     controller: {fileID: 0}
@@ -374,6 +378,7 @@ MonoBehaviour:
     size: 0.3
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSpin1
     id: 5
     controller: {fileID: 0}
@@ -385,6 +390,7 @@ MonoBehaviour:
     size: 0.5
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSpin2
     id: 6
     controller: {fileID: 0}
@@ -396,6 +402,7 @@ MonoBehaviour:
     size: 0.8
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSpawn
     id: 7
     controller: {fileID: 0}
@@ -407,6 +414,7 @@ MonoBehaviour:
     size: 0.3
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSlash0
     id: 8
     controller: {fileID: 0}
@@ -418,6 +426,7 @@ MonoBehaviour:
     size: 0.5
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSlash1
     id: 9
     controller: {fileID: 0}
@@ -429,6 +438,7 @@ MonoBehaviour:
     size: 1
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSlash2
     id: 10
     controller: {fileID: 0}
@@ -440,6 +450,7 @@ MonoBehaviour:
     size: 1
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSlash3
     id: 11
     controller: {fileID: 0}
@@ -451,6 +462,7 @@ MonoBehaviour:
     size: 0.62
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSlash4
     id: 12
     controller: {fileID: 0}
@@ -462,6 +474,7 @@ MonoBehaviour:
     size: 1
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicMissile
     id: 13
     controller: {fileID: 0}
@@ -473,6 +486,7 @@ MonoBehaviour:
     size: 0.3
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicMissileTrail
     id: 14
     controller: {fileID: 0}
@@ -484,6 +498,7 @@ MonoBehaviour:
     size: 1
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MonsterBullet0
     id: 15
     controller: {fileID: 0}
@@ -495,6 +510,7 @@ MonoBehaviour:
     size: 0.09
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicBallDestroy
     id: 16
     controller: {fileID: 0}
@@ -506,6 +522,7 @@ MonoBehaviour:
     size: 0.5
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSquare
     id: 17
     controller: {fileID: 0}
@@ -517,6 +534,7 @@ MonoBehaviour:
     size: 0.35
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSquareTrail
     id: 18
     controller: {fileID: 0}
@@ -528,6 +546,7 @@ MonoBehaviour:
     size: 0.5
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSquare0
     id: 19
     controller: {fileID: 0}
@@ -539,6 +558,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSquare1
     id: 20
     controller: {fileID: 0}
@@ -550,6 +570,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MagicSquare2
     id: 21
     controller: {fileID: 0}
@@ -561,6 +582,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: Bite
     id: 22
     controller: {fileID: 0}
@@ -572,6 +594,7 @@ MonoBehaviour:
     size: 0.3
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: PoisonBite
     id: 23
     controller: {fileID: 0}
@@ -583,6 +606,7 @@ MonoBehaviour:
     size: 0.3
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: Tackle
     id: 24
     controller: {fileID: 0}
@@ -594,6 +618,7 @@ MonoBehaviour:
     size: 0.5
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: ThunderL
     id: 25
     controller: {fileID: 0}
@@ -605,6 +630,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: ThunderR
     id: 26
     controller: {fileID: 0}
@@ -616,6 +642,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: Ice
     id: 27
     controller: {fileID: 0}
@@ -627,6 +654,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: blood
     id: 28
     controller: {fileID: 0}
@@ -638,6 +666,7 @@ MonoBehaviour:
     size: 1
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: bloodBubble
     id: 29
     controller: {fileID: 0}
@@ -649,6 +678,7 @@ MonoBehaviour:
     size: 0.1
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: beam
     id: 30
     controller: {fileID: 0}
@@ -660,6 +690,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: beamHole
     id: 31
     controller: {fileID: 0}
@@ -671,6 +702,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: beamHit
     id: 32
     controller: {fileID: 0}
@@ -682,6 +714,7 @@ MonoBehaviour:
     size: 0
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: slash
     id: 33
     controller: {fileID: 0}
@@ -693,6 +726,7 @@ MonoBehaviour:
     size: 0.75
     delay: 0
     limitTime: 0
+    pierce: 0
   - name: MonsterBullet1
     id: 34
     controller: {fileID: 0}
@@ -704,6 +738,7 @@ MonoBehaviour:
     size: 0.09
     delay: 0
     limitTime: 0
+    pierce: 0
   weapons:
   - name: MagicBall
     id: 0

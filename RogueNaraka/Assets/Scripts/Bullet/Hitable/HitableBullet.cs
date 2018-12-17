@@ -7,7 +7,12 @@ namespace RogueNaraka.BulletScripts.Hitable
 {
     public abstract class HitableBullet : MonoBehaviour
     {
+        [SerializeField]
+        protected Bullet bullet;
+
+        [SerializeField]
         DamageableBullet damageable;
+        [SerializeField]
         OwnerableBullet ownerable;
         [SerializeField]
         List<int> hitList = new List<int>();
@@ -20,11 +25,15 @@ namespace RogueNaraka.BulletScripts.Hitable
         float delay;
         float leftDelay;
 
-        private void Awake()
+        protected int pierce;
+
+        private void Reset()
         {
+            bullet = GetComponent<Bullet>();
             damageable = GetComponent<DamageableBullet>();
             ownerable = GetComponent<OwnerableBullet>();
         }
+
         void Update()
         {
             if (delay > 0)
@@ -37,8 +46,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             GetHitUnits();
             for (int i = 0; i < hitUnitList.Count; i++)
             {
-                if(damageable)
-                    damageable.Damage(hitUnitList[i]);
+                damageable.Damage(hitUnitList[i]);
             }
         }
 
@@ -47,11 +55,18 @@ namespace RogueNaraka.BulletScripts.Hitable
             layerMask = GetLayerMask();
             delay = data.delay;
             leftDelay = 0;
+            
         }
 
-        public abstract void GetHitUnits();
+        protected abstract void GetHitUnits();
 
-        public bool CheckHitList(Unit unit)
+        protected void SubPierce()
+        {
+            if (pierce-- == 1)
+                bullet.Destroy();
+        }
+
+        protected bool CheckHitList(Unit unit)
         {
             int hashCode = unit.GetHashCode();
             if (hitList.Contains(hashCode))
@@ -59,17 +74,20 @@ namespace RogueNaraka.BulletScripts.Hitable
             return true;
         }
 
-        public bool CheckHitList(int hashCode)
+        protected bool CheckHitList(int hashCode)
         {
             if (hitList.Contains(hashCode))
                 return false;
             return true;
         }
 
-        public bool AddHitList(Unit unit)
+        protected bool AddHitList(Unit unit)
         {
             if (!unit)
+            {
+                bullet.Destroy();
                 return false;
+            }
             int hashCode = unit.GetHashCode();
             if(CheckHitList(hashCode))
             {
@@ -82,9 +100,11 @@ namespace RogueNaraka.BulletScripts.Hitable
         protected LayerMask GetLayerMask()
         {
             if (ownerable)
-                return (1 << ownerable.layer) | (1 << GameDatabase.wallLayer);
+            {
+                return (ownerable.layer == GameDatabase.friendlyLayer) ? GameDatabase.instance.enemyMask : GameDatabase.instance.friendlyMask;
+            }
             else
-                return  (1 << GameDatabase.friendlyLayer) | (1 << GameDatabase.enemyLayer) | (1 << GameDatabase.wallLayer);
+                return (1 << GameDatabase.friendlyLayer) | (1 << GameDatabase.enemyLayer) | (1 << GameDatabase.wallLayer);
         }
     }
 }

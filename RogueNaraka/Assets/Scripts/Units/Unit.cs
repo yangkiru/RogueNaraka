@@ -63,6 +63,25 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         UnitData _data;
 
+        void Reset()
+        {
+            _moveable = GetComponent<MoveableUnit>();
+            _stopBeforeAttackable = GetComponent<StopBeforeAttackableUnit>();
+            _stopAfterAttackable = GetComponent<StopAfterAttackableUnit>();
+            _dontStopAttackable = GetComponent<DontStopAttackableUnit>();
+            _enemyTargetable = GetComponent<EnemyTargetableUnit>();
+            _friendlyTargetable = GetComponent<FriendlyTargetableUnit>();
+            _randomMoveable = GetComponent<RandomMoveableUnit>();
+            _rushMoveable = GetComponent<RushMoveableUnit>();
+            _damageable = GetComponent<DamageableUnit>();
+            _hpable = GetComponent<HpableUnit>();
+            _mpable = GetComponent<MpableUnit>();
+            _deathable = GetComponent<DeathableUnit>();
+            _effectable = GetComponent<EffectableUnit>();
+
+            _animator = GetComponent<Animator>();
+        }
+
         void OnDisable()
         {
             BoardManager.instance.friendlies.Remove(this);
@@ -158,25 +177,6 @@ namespace RogueNaraka.UnitScripts
         {
             _stopAfterAttackable.enabled = false;
             _stopBeforeAttackable.enabled = false;
-        }
-
-        void Reset()
-        {
-            _moveable = GetComponent<MoveableUnit>();
-            _stopBeforeAttackable = GetComponent<StopBeforeAttackableUnit>();
-            _stopAfterAttackable = GetComponent<StopAfterAttackableUnit>();
-            _dontStopAttackable = GetComponent<DontStopAttackableUnit>();
-            _enemyTargetable = GetComponent<EnemyTargetableUnit>();
-            _friendlyTargetable = GetComponent<FriendlyTargetableUnit>();
-            _randomMoveable = GetComponent<RandomMoveableUnit>();
-            _rushMoveable = GetComponent<RushMoveableUnit>();
-            _damageable = GetComponent<DamageableUnit>();
-            _hpable = GetComponent<HpableUnit>();
-            _mpable = GetComponent<MpableUnit>();
-            _deathable = GetComponent<DeathableUnit>();
-            _effectable = GetComponent<EffectableUnit>();
-
-            _animator = GetComponent<Animator>();
         }
     }
 }

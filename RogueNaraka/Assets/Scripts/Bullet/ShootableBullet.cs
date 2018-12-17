@@ -6,8 +6,9 @@ namespace RogueNaraka.BulletScripts
 {
     public class ShootableBullet : MonoBehaviour
     {
+        [SerializeField]
         MoveableBullet moveable;
-        void Awake()
+        void Reset()
         {
             moveable = GetComponent<MoveableBullet>();
         }

@@ -248,6 +248,7 @@ public class BulletData : ICloneable
     public float size;
     public float delay;
     public float limitTime;
+    public int pierce;
     
     public object Clone()
     {

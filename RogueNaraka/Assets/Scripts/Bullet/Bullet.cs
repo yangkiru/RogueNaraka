@@ -8,24 +8,24 @@ namespace RogueNaraka.BulletScripts
 {
     public class Bullet : MonoBehaviour
     {
-        HitableBullet hitableRay = null;
-        HitableBullet hitableCircle = null;
+        [SerializeField]
+        HitableBullet hitableRay;
+        [SerializeField]
+        HitableBullet hitableCircle;
         [HideInInspector]
-        public HitableBullet hitable = null;
+        public HitableBullet hitable;
 
-        [HideInInspector]
-        public ShootableBullet shootable = null;
-        [HideInInspector]
-        public MoveableBullet moveable = null;
-        [HideInInspector]
-        public OwnerableBullet ownerable = null;
+        public ShootableBullet shootable;
+        public MoveableBullet moveable;
+        public OwnerableBullet ownerable;
 
         public BulletData data { get { return _data; } }
         BulletData _data;
 
+        [SerializeField]
         Animator animator;
 
-        void Awake()
+        void Reset()
         {
             hitableRay = GetComponent<HitableBulletRay>();
             hitableCircle = GetComponent<HitableBulletCircle>();
@@ -53,6 +53,8 @@ namespace RogueNaraka.BulletScripts
             }
             hitable.enabled = true;
             hitable.Init(data);
+
+            moveable.enabled = true;
             animator.runtimeAnimatorController = data.controller;
         }
 
@@ -75,9 +77,27 @@ namespace RogueNaraka.BulletScripts
             gameObject.SetActive(true);
         }
 
-        public void Destroy(bool isRemoveChild)
+        public void Destroy()
         {
-            BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, isRemoveChild);
+            StartCoroutine(DestroyCorou());
+        }
+
+        public void DisableAll()
+        {
+            hitable.enabled = false;
+            moveable.enabled = false;
+        }
+
+        IEnumerator DestroyCorou()
+        {
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+            DisableAll();
+            animator.SetBool("isDestroy", true);
+            do
+            {
+                yield return null;
+            } while (state.normalizedTime < 1);
+            BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, true);
         }
     }
 }

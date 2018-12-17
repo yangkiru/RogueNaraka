@@ -16,7 +16,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             size = data.size;
         }
 
-        public override void GetHitUnits()
+        protected override void GetHitUnits()
         {
             RaycastHit2D[] hits;
             hits = Physics2D.CircleCastAll(transform.position, size, Vector2.zero, 0, layerMask);
@@ -25,6 +25,8 @@ namespace RogueNaraka.BulletScripts.Hitable
                 Unit hit = hits[i].collider.GetComponent<Unit>();
                 AddHitList(hit);
             }
+            if (hits.Length > 0)
+                SubPierce();
         }
     }
 }
