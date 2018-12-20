@@ -69,10 +69,10 @@ public class GameManager : MonoBehaviour {
 
     private void RandomStat()
     {
-        int statPoint = PlayerPrefs.GetInt("statPoint");
+        Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
+        int statPoint = stat.statPoints;
         Debug.Log("statPoint"+statPoint);
 
-        Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
         Stat statBase = (Stat)GameDatabase.instance.playerBase.stat.Clone();
         stat.SetCurrent(statBase);
         while(statPoint > 0)
@@ -94,8 +94,8 @@ public class GameManager : MonoBehaviour {
             }
         }
 
-        PlayerPrefs.SetFloat("currentHp", stat.hp);
-        PlayerPrefs.SetFloat("currentMp", stat.mp);
+        stat.currentHp = stat.hp;
+        stat.currentMp = stat.mp;
         PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
     }
 
@@ -125,8 +125,6 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
         PlayerPrefs.SetString("stat", Stat.StatToJson(player.data.stat));
-        PlayerPrefs.SetFloat("currentHp", player.hpable.currentHp);
-        PlayerPrefs.SetFloat("currentMp", player.mpable.currentMp);
         PlayerPrefs.SetInt("stage", boardManager.stage);
         PlayerPrefs.SetInt("weapon", player.attackable.weapon.id);
         SkillManager.instance.Save();
@@ -167,13 +165,15 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("RunGame");
         moneyManager.Load();
+
         Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
         playerData.weapon = PlayerPrefs.GetInt("weapon");
         playerData.stat = stat;
-        player.Init(playerData);
-        player.hpable.SetHp(PlayerPrefs.GetFloat("currentHp"));
-        player.mpable.SetMp(PlayerPrefs.GetFloat("currentMp"));
+        string effect = PlayerPrefs.GetString("effect");
+        if (effect != string.Empty)
+            playerData.effects = JsonHelper.FromJson<EffectData>(effect);
+        boardManager.SpawnPlayer(playerData);
 
         StatTextUpdate();
 
@@ -191,18 +191,6 @@ public class GameManager : MonoBehaviour {
         else
         {
             boardManager.InitBoard();
-        }
-    }
-
-    public void PlayerEffect()
-    {
-        if (PlayerPrefs.GetString("effect") != string.Empty)
-        {
-            EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
-            for (int i = 0; i < temp.Length; i++)
-            {
-                player.effectable.AddEffect((EffectData)temp[i].Clone());
-            }
         }
     }
 
@@ -309,7 +297,6 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         Debug.Log("Waited");
-        boardManager.ClearStage();
         player.deathable.Revive();
         
         player.animator.updateMode = AnimatorUpdateMode.UnscaledTime;

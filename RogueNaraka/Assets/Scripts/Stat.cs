@@ -23,6 +23,9 @@ public class Stat : ICloneable
     public float hpRegenMax;
     public float mpRegenMax;
 
+    public float currentHp;
+    public float currentMp;
+
     public int statPoints;
 
     public float sumCurrent
@@ -190,6 +193,11 @@ public class Stat : ICloneable
     public static void StatToData(Stat stat)
     {
         PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
+    }
+
+    public static Stat DataToStat()
+    {
+        return JsonToStat(PlayerPrefs.GetString("stat"));
     }
 
     public object Clone()

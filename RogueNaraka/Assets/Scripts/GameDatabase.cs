@@ -163,10 +163,9 @@ public class UnitData : ICloneable
     public float size;
     public float moveDelay;
     public float moveDistance;
-    public float minDistance;
-    public float maxDistance;
     public float moveSpeed;
     public Vector2 shadowPos;
+    public EffectData[] effects;
 
     public object Clone()
     {
@@ -251,82 +250,44 @@ public class BulletData : ICloneable
     public float delay;
     public float limitTime;
     public int pierce;
+
+    public BulletChildData[] children;
+    public BulletChildData[] onDestroy;
     
+    public object Clone()
+    {
+        BulletData data = (BulletData)this.MemberwiseClone();
+        data.children = new BulletChildData[children.Length];
+        for (int i = 0; i < children.Length;i++)
+        {
+            data.children[i] = (BulletChildData)children[i].Clone();
+        }
+        return data;
+    }
+}
+
+[Serializable]
+public struct BulletChildData : ICloneable
+{
+    public string name;
+    public int bulletId;
+    public int sortingOrder;
+    public float startTime;
+    public float waitTime;
+    public float angle;
+
+    public bool isRepeat;
+    public bool isFirst;//반복의 첫 번째는 startTime 무시
+    public bool isStick;
+    public bool isDestroyWith;
+
+    public Vector3 offset;
+
     public object Clone()
     {
         return this.MemberwiseClone();
     }
 }
-
-//[Serializable]
-//public struct BulletData : ICloneable
-//{
-//    public string name;
-//    public int id;
-//    public BULLET_TYPE type;
-//    public SORTING_LAYER sortingLayer;
-    
-//    public float flightSpeed;
-//    public float dmg;
-//    public float dealSpeed;
-//    public float size;
-    
-//    public float angle; //TRIANGLE, SECTOR 에서 타격 범위
-//    public ShakeData shake;//터질 때 화면 흔드는 양
-//    public RuntimeAnimatorController controller;
-//    public Color color;
-//    public Ability[] abilities;
-//    public BulletChild[] children;
-//    public BulletChild[] onDestroy;
-//    public EffectData[] effects;
-
-//    public object Clone()
-//    {
-//        BulletData data = (BulletData)this.MemberwiseClone();
-//        data.abilities = (Ability[])abilities.Clone();
-//        for (int i = 0; i < data.abilities.Length; i++)
-//            data.abilities[i] = (Ability)data.abilities[i].Clone();
-//        data.children = (BulletChild[])children.Clone();
-//        for (int i = 0; i < data.children.Length; i++)
-//            data.children[i] = (BulletChild)data.children[i].Clone();
-//        data.onDestroy = (BulletChild[])onDestroy.Clone();
-//        for (int i = 0; i < data.onDestroy.Length; i++)
-//            data.onDestroy[i] = (BulletChild)data.onDestroy[i].Clone();
-//        data.effects = (EffectData[])effects.Clone();
-//        for (int i = 0; i < data.effects.Length; i++)
-//            data.effects[i] = (EffectData)data.effects[i].Clone();
-//        return data;
-//    }
-//}
-
-//[Serializable]
-//public struct BulletChild : ICloneable
-//{
-//    public string name;
-//    public int bulletId;
-//    public int sortingOrder;
-//    public float startTime;
-//    public float waitTime;
-//    public float angle;
-//    public float localSpeed;
-//    public float worldSpeed;
-//    //부모를 기준으로 공전, RevolveHolder 사용x, 각자 회전
-//    public float revolveDistance;
-//    public float revolveSpeed;
-//    //
-//    public bool isRevolveTarget;//부모가 공전중인 타겟을 기준으로 공전, RevolveHolder 사용
-//    public bool isRepeat;
-//    public bool isFirst;//반복의 첫 번째는 startTime 무시
-//    public bool isStick;
-//    public bool isEndWith;
-
-//    public Vector2 spawnPoint;
-
-//    public object Clone()
-//    {
-//        return this.MemberwiseClone();
-//    }
-//}
 
 [Serializable]
 public enum BULLET_TYPE

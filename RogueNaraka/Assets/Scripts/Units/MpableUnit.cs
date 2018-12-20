@@ -29,6 +29,7 @@ namespace RogueNaraka.UnitScripts
         public void Init(Stat stat)
         {
             this.stat = stat;
+            _currentMp = stat.currentMp;
             currentTime = 0;
         }
 
@@ -36,10 +37,12 @@ namespace RogueNaraka.UnitScripts
         {
             if (value > maxMp)
                 _currentMp = maxMp;
-            else if (value < 0)
-                _currentMp = 0;
-            else
+            else if (value >= 0)
                 _currentMp = value;
+
+            else
+                _currentMp = 0;
+            stat.currentMp = _currentMp;
         }
 
         public void AddMp(float amount)
@@ -48,9 +51,11 @@ namespace RogueNaraka.UnitScripts
 
             if (amount > 0 && result > maxMp)
                 result = maxMp;
-            else if (result < 0)
+            else if (result <= 0)
                 result = 0;
+
             _currentMp = result;
+            stat.currentMp = _currentMp;
         }
 
         void Regen()

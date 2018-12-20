@@ -35,6 +35,8 @@ namespace RogueNaraka.UnitScripts
         protected RandomMoveableUnit _randomMoveable;
         [SerializeField]
         protected RushMoveableUnit _rushMoveable;
+        [SerializeField]
+        protected RestRushMoveableUnit _restRushMoveable;
 
         public DamageableUnit damageable { get { return _damageable; } }
         [SerializeField]
@@ -73,6 +75,7 @@ namespace RogueNaraka.UnitScripts
             _friendlyTargetable = GetComponent<FriendlyTargetableUnit>();
             _randomMoveable = GetComponent<RandomMoveableUnit>();
             _rushMoveable = GetComponent<RushMoveableUnit>();
+            _restRushMoveable = GetComponent<RestRushMoveableUnit>();
             _damageable = GetComponent<DamageableUnit>();
             _hpable = GetComponent<HpableUnit>();
             _mpable = GetComponent<MpableUnit>();
@@ -84,8 +87,11 @@ namespace RogueNaraka.UnitScripts
 
         void OnDisable()
         {
-            BoardManager.instance.friendlies.Remove(this);
-            BoardManager.instance.enemies.Remove(this);
+            if(_data.isFriendly)
+                BoardManager.instance.friendlies.Remove(this);
+            else
+                BoardManager.instance.enemies.Remove(this);
+            Debug.Log(name + " disabled");
         }
 
         public void SetStat(Stat stat)
@@ -107,7 +113,7 @@ namespace RogueNaraka.UnitScripts
             _animator.runtimeAnimatorController = _data.controller;
 
             _moveable.Init(_data);
-            _moveable.agent.enabled = true;
+            _moveable.enabled = true;
 
             DisableAttackables();
             switch(GameDatabase.instance.weapons[_data.weapon].type)
@@ -141,6 +147,12 @@ namespace RogueNaraka.UnitScripts
                 case MOVE_TYPE.RUSH:
                     _autoMoveable = _rushMoveable;
                     break;
+                case MOVE_TYPE.REST_RUSH:
+                    _autoMoveable = _restRushMoveable;
+                    break;
+                default:
+                    _autoMoveable = _randomMoveable;
+                    break;
             }
             _autoMoveable.Init(_data);
             _autoMoveable.enabled = true;
@@ -149,6 +161,10 @@ namespace RogueNaraka.UnitScripts
             _mpable.Init(_data.stat);
             _hpable.enabled = true;
             _mpable.enabled = true;
+
+            if(_data.effects != null)
+                for (int i = 0; i < _data.effects.Length; i++)
+                    _effectable.AddEffect(_data.effects[i]);
         }
 
         public void Spawn(Vector3 position)
@@ -156,9 +172,9 @@ namespace RogueNaraka.UnitScripts
             transform.position = position;
 
             gameObject.SetActive(true);
-            if (_data.isFriendly)
+            if (_data.isFriendly && !BoardManager.instance.friendlies.Contains(this))
                 BoardManager.instance.friendlies.Add(this);
-            else
+            else if (!_data.isFriendly && !BoardManager.instance.enemies.Contains(this))
                 BoardManager.instance.enemies.Add(this);
         }
 
@@ -189,6 +205,11 @@ namespace RogueNaraka.UnitScripts
             attackable.enabled = false;
             targetable.enabled = false;
             moveable.agent.enabled = false;
+        }
+
+        public void Kill()
+        {
+            hpable.AddHp(-hpable.currentHp);
         }
     }
 }

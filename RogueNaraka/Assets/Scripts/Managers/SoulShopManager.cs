@@ -222,16 +222,12 @@ public class SoulShopManager : MonoBehaviour
         {
             statUpgradeBtn[i].interactable = false;
         }
-#if DELAY
-            yield return GameManager.instance.delayOneReal;
-#else
         float t = 0;
         while (t < 1)
         {
             t += Time.unscaledDeltaTime;
             yield return null;
         }
-#endif
         //SetCheckPnl(false);
         //cancelBtn.interactable = true;
         //okBtn.interactable = true;
@@ -251,7 +247,7 @@ public class SoulShopManager : MonoBehaviour
     /// </summary>
     private void SyncStatUpgradeTxt()
     {
-        Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("statMax")).Clone();
+        Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("stat")).Clone();
 
         for (int i = 0; i < statUpgradeTxt.Length; i++)
             statUpgradeTxt[i].text = stat.GetMax((STAT)i).ToString();

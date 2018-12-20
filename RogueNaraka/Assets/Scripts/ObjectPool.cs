@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    GameObject prefab;
     private Queue<GameObject> objs;
 
     public ObjectPool()
@@ -13,6 +14,8 @@ public class ObjectPool : MonoBehaviour
 
     public void EnqueueObjectPool(GameObject obj, bool isRemoveChild = false)
     {
+        if (prefab == null)
+            prefab = obj;
         if (isRemoveChild)
         {
             int count = obj.transform.childCount;
@@ -37,7 +40,7 @@ public class ObjectPool : MonoBehaviour
         }
         catch
         {
-            return null;
+            return Instantiate(prefab);
         }
     }
 

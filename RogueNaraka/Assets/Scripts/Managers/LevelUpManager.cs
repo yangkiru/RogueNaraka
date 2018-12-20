@@ -17,7 +17,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public Button cancelBtn;
 
-    public Unit player;
+    public Unit player { get { return BoardManager.instance.player; } }
 
     public int leftStat
     {   get { return PlayerPrefs.GetInt("leftStat"); }
@@ -41,12 +41,36 @@ public class LevelUpManager : MonoBehaviour {
             instance = this;
     }
 
+    float time;
+    bool isLevelUp;
+
+    void Update()
+    {
+        if (!isLevelUp && player && BoardManager.instance.enemies.Count <= 0)
+        {
+            time -= Time.deltaTime;
+            if (time > 0)
+                return;
+            else
+                time = 0.5f;
+            player.autoMoveable.enabled = false;
+            player.moveable.Move(BoardManager.instance.goalPoint);
+            float distance = Vector2.Distance(player.transform.position, BoardManager.instance.goalPoint);
+            if (distance <= 0.5f)
+            {
+                LevelUp();
+            }
+        }
+    }
+
     /// <summary>
     /// Player가 Enemy를 모두 처치하고 화면 상단에 도착하면 호출
     /// </summary>
     /// 
     public void LevelUp()
     {
+        isLevelUp = true;
+        Debug.Log("LevelUp");
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SkillManager.instance.SetIsDragable(false);
@@ -63,6 +87,9 @@ public class LevelUpManager : MonoBehaviour {
         }
         PlayerPrefs.SetInt("isLevelUp", 1);
         GameManager.instance.Save();
+        time = 0;
+        player.autoMoveable.enabled = true;
+        player.moveable.agent.Stop();
     }
 
     bool lastChance;
@@ -153,10 +180,12 @@ public class LevelUpManager : MonoBehaviour {
         PlayerPrefs.SetInt("isLevelUp", 0);
         cancelBtn.interactable = true;
         BoardManager.instance.StageUp();
+        BoardManager.instance.InitBoard();
         GameManager.instance.Save();
         GameManager.instance.SetPause(false);
         leftStat = 0;
         lastChance = false;
+        isLevelUp = false;
     }
 
     public void SyncStatUpgradeTxt()

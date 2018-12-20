@@ -13,7 +13,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         [SerializeField]
         OwnerableBullet ownerable;
         [SerializeField]
-        protected List<Unit> hitList = new List<Unit>();
+        protected List<Unit> hitList;
 
         [SerializeField]
         protected LayerMask layerMask;
@@ -54,6 +54,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             delay = data.delay;
             leftDelay = 0;
             pierce = data.pierce;
+            hitList = new List<Unit>();
         }
 
         protected abstract void GetHitUnits();

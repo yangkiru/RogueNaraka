@@ -18,7 +18,7 @@ namespace RogueNaraka.UnitScripts.Targetable
         float leftDelay;
         bool isDeath;
 
-        public Vector2 direction { get { return target.transform.position - transform.position; } }
+        public Vector2 direction { get { if (target) return target.transform.position - transform.position; else return Vector2.zero; } }
 
         void Reset()
         {
@@ -33,7 +33,7 @@ namespace RogueNaraka.UnitScripts.Targetable
                 return;
             }
             else if (leftDelay < 0)
-                leftDelay = 0;
+                leftDelay = 0.1f;
             _target = GetTarget();
             _targetDistance = Distance(target);
         }

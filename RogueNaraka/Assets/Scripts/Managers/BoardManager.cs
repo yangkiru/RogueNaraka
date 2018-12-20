@@ -35,7 +35,6 @@ public class BoardManager : MonoBehaviour {
     private void Awake()
     {
         instance = this;
-        SpawnPlayer();
     }
 
     private void OnDrawGizmosSelected()
@@ -85,9 +84,9 @@ public class BoardManager : MonoBehaviour {
             }
         }
         count = bulletPool.GetCount();
-        if (count < 750)//bullet Pooling
+        if (count < 500)//bullet Pooling
         {
-            for (int i = count; i < 750; i++)
+            for (int i = count; i < 500; i++)
             {
                 GameObject obj = SpawnBulletObj();
                 bulletPool.EnqueueObjectPool(obj);
@@ -102,8 +101,7 @@ public class BoardManager : MonoBehaviour {
                 effectPool.EnqueueObjectPool(obj);
             }
         }
-        GameManager.instance.PlayerEffect();
-
+        
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
         player.Spawn(spawnPoint);
@@ -128,9 +126,7 @@ public class BoardManager : MonoBehaviour {
 
     public void StageUp()
     {
-        ClearStage();
         _stage++;
-        InitBoard();
     }
 
     //void RandomEnemy(int leftCost)
@@ -210,12 +206,12 @@ public class BoardManager : MonoBehaviour {
         StartCoroutine(StageTxtEffect());
     }
 
-    public void SpawnPlayer()
+    public void SpawnPlayer(UnitData data)
     {
-        Unit player = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity).GetComponent<Unit>();
-        player.Init(GameDatabase.instance.playerBase);
+        if(player == null)
+            player = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity).GetComponent<Unit>();
+        player.Init(data);
         player.Spawn(spawnPoint);
-        this.player = player;
     }
 
     public void SpawnEnemy(int id)
@@ -249,6 +245,7 @@ public class BoardManager : MonoBehaviour {
         string text = string.Format("STAGE {0}", _stage);
         stageTxt.text = string.Empty;
         stageTxt.color = Color.white;
+        yield return null;
         //Appear
         for (int i = 0; i < text.Length; i++)
         {
@@ -267,9 +264,10 @@ public class BoardManager : MonoBehaviour {
 
     public void ClearStage()
     {
-        for(int i = 0; i < enemies.Count; i++)
-            unitPool.EnqueueObjectPool(enemies[i].gameObject);
-        enemies.Clear();
+        Debug.Log("Clear stage " + enemies.Count + " enemies");
+        Unit[] clear = enemies.ToArray();
+        for(int i = 0; i < clear.Length; i++)
+            unitPool.EnqueueObjectPool(clear[i].gameObject);
     }
     public static Vector3 GetMousePosition()
     {

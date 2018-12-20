@@ -6198,6 +6198,11 @@ MonoBehaviour:
   reset: 0
   setStage: 0
   stage: 0
+  killPlayer: 0
+  killEnemies: 0
+  setShopStage: 0
+  shopStage: 0
+  levelUp: 0
 --- !u!1 &459273217
 GameObject:
   m_ObjectHideFlags: 0
@@ -23761,7 +23766,6 @@ MonoBehaviour:
   selectPnl: {fileID: 965099691}
   statPnl: {fileID: 1552022172}
   cancelBtn: {fileID: 1033553708}
-  player: {fileID: 0}
 --- !u!1 &1643724012
 GameObject:
   m_ObjectHideFlags: 0

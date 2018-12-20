@@ -5,7 +5,7 @@ using RogueNaraka.UnitScripts.Targetable;
 
 namespace RogueNaraka.UnitScripts.AutoMoveable
 {
-    public class RushMoveableUnit : AutoMoveableUnit
+    public class RestRushMoveableUnit : AutoMoveableUnit
     {
         TargetableUnit targetable;
         public override void Init(UnitData data)
@@ -16,10 +16,13 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         protected override void AutoMove()
         {
-            if (targetable?.target)
+            if(unit.hpable.currentHp <= unit.hpable.maxHp)
             {
-                Vector2 vec = targetable.target.transform.position - transform.position;
-                moveable.Move((Vector2)transform.position + vec.normalized * Mathf.Min(distance, targetable.targetDistance));
+                if (targetable?.target)
+                {
+                    Vector2 vec = targetable.target.transform.position - transform.position;
+                    moveable.Move((Vector2)transform.position + vec.normalized * Mathf.Min(distance, targetable.targetDistance));
+                }
             }
         }
     }

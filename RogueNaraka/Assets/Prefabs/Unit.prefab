@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 114798437530957502}
   - component: {fileID: 114116071741596666}
   - component: {fileID: 114847344676331612}
+  - component: {fileID: 5803475585598790251}
   - component: {fileID: 114189907379417390}
   - component: {fileID: 114517530178566646}
   - component: {fileID: 114519388432992828}
@@ -171,6 +172,7 @@ MonoBehaviour:
   _friendlyTargetable: {fileID: 114675008330108068}
   _randomMoveable: {fileID: 114847344676331612}
   _rushMoveable: {fileID: 114116071741596666}
+  _restRushMoveable: {fileID: 5803475585598790251}
   _damageable: {fileID: 114360932324936328}
   _hpable: {fileID: 114504902211139030}
   _mpable: {fileID: 114946238239239822}
@@ -198,6 +200,8 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 0
+      currentMp: 0
       statPoints: 0
     controller: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
@@ -211,6 +215,7 @@ MonoBehaviour:
     maxDistance: 0
     moveSpeed: 0
     shadowPos: {x: 0, y: 0}
+    effects: []
 --- !u!114 &114504902211139030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b2f39d098e831419d6cec3087b9a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unit: {fileID: 114302036002021230}
   hpable: {fileID: 114504902211139030}
 --- !u!114 &114598801868555584
 MonoBehaviour:
@@ -325,6 +331,22 @@ MonoBehaviour:
   moveable: {fileID: 114798437530957502}
   delay: 0
   leftDelay: 0
+--- !u!114 &5803475585598790251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380923796952252}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd2f34ecbd8c984b8851c099fa06b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 114302036002021230}
+  moveable: {fileID: 114798437530957502}
+  delay: 0
+  leftDelay: 0
 --- !u!114 &114189907379417390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +368,7 @@ MonoBehaviour:
     beforeAttackDelay: 0
     afterAttackDelay: 0
     attackDistance: 0
-  owner: {fileID: 114302036002021230}
+  unit: {fileID: 114302036002021230}
 --- !u!114 &114517530178566646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +390,7 @@ MonoBehaviour:
     beforeAttackDelay: 0
     afterAttackDelay: 0
     attackDistance: 0
-  owner: {fileID: 114302036002021230}
+  unit: {fileID: 114302036002021230}
 --- !u!114 &114519388432992828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +412,7 @@ MonoBehaviour:
     beforeAttackDelay: 0
     afterAttackDelay: 0
     attackDistance: 0
-  owner: {fileID: 114302036002021230}
+  unit: {fileID: 114302036002021230}
 --- !u!114 &114581098381244704
 MonoBehaviour:
   m_ObjectHideFlags: 0

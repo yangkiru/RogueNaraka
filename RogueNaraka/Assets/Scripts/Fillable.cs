@@ -66,5 +66,9 @@ public class Fillable : MonoBehaviour
             current = Mathf.Lerp(current, goal, t);
             img.fillAmount = current;
         }
+        else
+        {
+            unit = BoardManager.instance.player;
+        }
     }
 }

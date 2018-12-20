@@ -20,12 +20,16 @@ namespace RogueNaraka.BulletScripts
         public OwnerableBullet ownerable;
         public TimeLimitableBullet timeLimitable;
         public DamageableBullet damageable;
+        public SpawnableBullet spawnable;
 
         public BulletData data { get { return _data; } }
         BulletData _data;
 
         [SerializeField]
         Animator animator;
+
+        [SerializeField]
+        new SpriteRenderer renderer;
 
         IEnumerator deathCorou;
 
@@ -39,10 +43,16 @@ namespace RogueNaraka.BulletScripts
             animator = GetComponent<Animator>();
             timeLimitable = GetComponent<TimeLimitableBullet>();
             damageable = GetComponent<DamageableBullet>();
+            spawnable = GetComponent<SpawnableBullet>();
+            renderer = GetComponent<SpriteRenderer>();
         }
 
-        void Init(Unit owner, BulletData data)
+        public void Init(Unit owner, BulletData data)
         {
+            gameObject.SetActive(true);
+
+            moveable.enabled = false;
+
             ownerable.SetOwner(owner);
             _data = (BulletData)data.Clone();
             name = _data.name;
@@ -58,18 +68,17 @@ namespace RogueNaraka.BulletScripts
                     hitable = hitableRay;
                     break;
             }
-            hitable.enabled = true;
+            
             hitable.Init(_data);
 
-            moveable.enabled = true;
             animator.runtimeAnimatorController = data.controller;
 
-            if (_data.limitTime != 0)
-                timeLimitable.enabled = true;
-            else
-                timeLimitable.enabled = false;
+            renderer.enabled = false;
+            animator.enabled = false;
 
             deathCorou = null;
+
+            timeLimitable.enabled = false;
         }
 
         void DisableAllHitable()
@@ -81,14 +90,21 @@ namespace RogueNaraka.BulletScripts
         public void Spawn(Unit owner, BulletData data, Vector3 position)
         {
             Init(owner, data);
-            transform.position = position;
-            gameObject.SetActive(true);
+            Spawn(position);
         }
 
         public void Spawn(Vector3 position)
         {
+            hitable.enabled = true;
+            moveable.enabled = true;
+            if (_data.limitTime != 0)
+                timeLimitable.enabled = true;                
+            renderer.enabled = true;
+            animator.enabled = true;
+
             transform.position = position;
-            gameObject.SetActive(true);
+            
+            spawnable.Init(_data);
         }
 
         public void Destroy()
@@ -100,7 +116,7 @@ namespace RogueNaraka.BulletScripts
             }
         }
 
-        public void DisableAll()
+        public void DisableOnDestroy()
         {
             hitable.enabled = false;
             moveable.enabled = false;
@@ -109,19 +125,14 @@ namespace RogueNaraka.BulletScripts
         IEnumerator DestroyCorou()
         {
             animator.SetBool("isDestroy", true);
+            DisableOnDestroy();
+            spawnable.OnDestroy();
             AnimatorStateInfo state;
             do
             {
                 yield return null;
                 state = animator.GetCurrentAnimatorStateInfo(0);
-            } while (!state.IsName("Destroy"));
-            
-            DisableAll();
-            
-            do
-            {
-                yield return null;
-            } while (state.normalizedTime < 1 && animator.IsInTransition(0));
+            } while (state.normalizedTime < 1 || !state.IsName("Destroy"));
             BoardManager.instance.bulletPool.EnqueueObjectPool(gameObject, true);
         }
     }

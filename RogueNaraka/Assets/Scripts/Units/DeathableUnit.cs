@@ -12,6 +12,8 @@ namespace RogueNaraka.UnitScripts
         public bool isDeath { get { return _isDeath; } }
         bool _isDeath;
 
+        IEnumerator deathCorou;
+
         void Reset()
         {
             unit = GetComponent<Unit>();
@@ -24,12 +26,17 @@ namespace RogueNaraka.UnitScripts
 
         public void Death()
         {
-            _isDeath = true;
-            unit.animator.SetBool("isDeath", true);
+            if (deathCorou == null)
+            {
+                Debug.Log(name + " death");
+                deathCorou = DeathCorou();
+                StartCoroutine(deathCorou);
+            }
         }
 
         IEnumerator DeathCorou()
         {
+            _isDeath = true;
             unit.animator.SetBool("isDeath", true);
             AnimatorStateInfo state;
             do
@@ -44,10 +51,15 @@ namespace RogueNaraka.UnitScripts
             {
                 yield return null;
             } while (state.normalizedTime < 1 && unit.animator.IsInTransition(0));
-            if (unit != BoardManager.instance.player)
-                BoardManager.instance.unitPool.EnqueueObjectPool(gameObject, true);
-            else
-                GameManager.instance.OnEnd();
+
+            DeathEffectPool.instance.Play(transform);
+
+            if (unit == BoardManager.instance.player)
+                GameManager.instance.StartCoroutine(GameManager.instance.OnEnd());
+            else if (!unit.data.isFriendly)
+                MoneyManager.instance.AddUnrefinedSoul(unit.data.cost);
+            BoardManager.instance.unitPool.EnqueueObjectPool(gameObject, false);
+            deathCorou = null;
         }
 
         public void Revive()

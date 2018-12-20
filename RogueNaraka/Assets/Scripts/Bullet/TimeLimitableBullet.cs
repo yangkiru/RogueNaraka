@@ -22,8 +22,8 @@ namespace RogueNaraka.BulletScripts
                 leftTime -= Time.deltaTime;
             else
             {
-                Debug.Log(name + " time limited");
                 bullet.Destroy();
+                enabled = false;
             }
         }
 

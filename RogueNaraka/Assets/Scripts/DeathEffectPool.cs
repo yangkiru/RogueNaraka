@@ -7,9 +7,11 @@ public class DeathEffectPool : MonoBehaviour
 
     public ObjectPool pool;
     public GameObject effectPrefab;
+    public static DeathEffectPool instance;
     // Use this for initialization
     void Awake()
     {
+        instance = this;
         for (int i = 0; i < 200; i++)
         {
             GameObject obj = Instantiate(effectPrefab, Vector3.zero, Quaternion.identity, pool.transform);

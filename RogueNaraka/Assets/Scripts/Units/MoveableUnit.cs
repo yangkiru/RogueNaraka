@@ -30,6 +30,7 @@ namespace RogueNaraka.UnitScripts
         public void Init(UnitData data)
         {
             SetSpeed(data.moveSpeed);
+            agent.enabled = true;
         }
 
         public void SetSpeed(float speed)
@@ -43,21 +44,28 @@ namespace RogueNaraka.UnitScripts
             _agent.SetDestination(pos, callback);
         }
 
-        public void StopMove()
-        {
-            _agent.Stop();
-        }
-
         void Update()
         {
+            float x = 0, y = 0;
             if (_agent.velocity.x >= 0.01f || _agent.velocity.y >= 0.01f)
             {
-                unit.animator.SetFloat("x", _agent.velocity.x);
-                unit.animator.SetFloat("y", _agent.velocity.y);
+                x = _agent.velocity.x;
+                y = _agent.velocity.y;
                 isWalk = true;
             }
             else
                 isWalk = false;
+
+            if (unit.targetable.target)
+            {
+                x = unit.targetable.direction.x;
+                y = unit.targetable.direction.y;
+            }
+
+            unit.animator.SetFloat("x", x);
+            unit.animator.SetFloat("y", y);
+            
+            
             if (isWalk != _isWalk)
                 unit.animator.SetBool("isWalk", isWalk);
             _isWalk = isWalk;

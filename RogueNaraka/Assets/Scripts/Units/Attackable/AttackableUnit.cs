@@ -13,9 +13,9 @@ namespace RogueNaraka.UnitScripts.Attackable
         [SerializeField]
         WeaponData _weapon;
         [SerializeField]
-        protected Unit owner;
+        protected Unit unit;
 
-        float targetDistance { get { return owner.targetable?.target ? owner.targetable.targetDistance : float.PositiveInfinity; } }
+        float targetDistance { get { return unit.targetable?.target ? unit.targetable.targetDistance : float.PositiveInfinity; } }
 
         IEnumerator beforeAttackCorou;
         IEnumerator afterAttackCorou;
@@ -28,11 +28,13 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         void Reset()
         {
-            owner = GetComponent<Unit>();
+            unit = GetComponent<Unit>();
         }
 
         public void Init(UnitData data)
         {
+            beforeAttackCorou = null;
+            afterAttackCorou = null;
             WeaponData weapon = GameDatabase.instance.weapons[data.weapon];
             Init(weapon);
         }
@@ -51,15 +53,15 @@ namespace RogueNaraka.UnitScripts.Attackable
         void Attack()
         {
             Bullet bullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-            bullet.Spawn(owner, GameDatabase.instance.bullets[_weapon.startBulletId], transform.position + _weapon.offset);
-            bullet.shootable.Shoot(owner.targetable.direction, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
+            bullet.Spawn(unit, GameDatabase.instance.bullets[_weapon.startBulletId], transform.position);
+            bullet.shootable.Shoot(unit.targetable.direction, _weapon.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
         } 
 
         IEnumerator BeforeAttack()
         {
             float leftDelay = beforeDelay;
             if(isBeforeAnimation)
-                owner.animator.SetBool("isBeforeAttack", true);
+                unit.animator.SetBool("isBeforeAttack", true);
             OnBeforeAttackStart();
 
             do
@@ -68,7 +70,7 @@ namespace RogueNaraka.UnitScripts.Attackable
                 leftDelay -= Time.deltaTime;
             } while (leftDelay > 0);
             if (isBeforeAnimation)
-                owner.animator.SetBool("isBeforeAttack", false);
+                unit.animator.SetBool("isBeforeAttack", false);
 
             OnBeforeAttackEnd();
 
@@ -82,7 +84,7 @@ namespace RogueNaraka.UnitScripts.Attackable
         {
             float leftDelay = afterDelay;
             if (isAfterAnimation)
-                owner.animator.SetBool("isAfterAttack", true);
+                unit.animator.SetBool("isAfterAttack", true);
 
             OnAfterAttackStart();
 
@@ -93,7 +95,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             } while (leftDelay > 0);
 
             if (isAfterAnimation)
-                owner.animator.SetBool("isAfterAttack", false);
+                unit.animator.SetBool("isAfterAttack", false);
 
             OnAfterAttackEnd();
 
@@ -102,7 +104,7 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         private void OnEnable()
         {
-            AnimatorControllerParameter[] parameters = owner.animator.parameters;
+            AnimatorControllerParameter[] parameters = unit.animator.parameters;
 
             for (int i = 0; i < parameters.Length; i++)
             {
@@ -115,15 +117,26 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         private void Update()
         {
-            if (owner.targetable.target && _weapon.attackDistance == 0 || targetDistance <= _weapon.attackDistance)
+            if (unit.targetable.target && (_weapon.attackDistance == 0 || targetDistance <= _weapon.attackDistance))
             {
-                if(beforeAttackCorou == null && afterAttackCorou == null)
+                if (beforeAttackCorou == null && afterAttackCorou == null)
                 {
                     beforeAttackCorou = BeforeAttack();
                     StartCoroutine(beforeAttackCorou);
                 }
+                else if (beforeAttackCorou == null)
+                    LookTarget();
             }
         }
+
+        protected void LookTarget()
+        {
+            Debug.Log("LookTarget");
+            unit.animator.SetFloat("x", unit.targetable.direction.x);
+            unit.animator.SetFloat("y", unit.targetable.direction.y);
+            unit.animator.SetBool("isWalk", true);
+        }
+
 
         protected abstract void OnBeforeAttackStart();
         protected abstract void OnBeforeAttackEnd();

@@ -29,6 +29,7 @@ namespace RogueNaraka.UnitScripts
         public void Init(Stat stat)
         {
             this.stat = stat;
+            _currentHp = stat.currentHp;
             currentTime = 0;
         }
 
@@ -38,11 +39,12 @@ namespace RogueNaraka.UnitScripts
                 _currentHp = maxHp;
             else if (value >= 0)
                 _currentHp = value;
+
             else
-            {
                 _currentHp = 0;
+            stat.currentHp = _currentHp;
+            if(_currentHp <= 0)
                 unit.deathable.Death();
-            }
         }
 
         public void AddHp(float amount)
@@ -51,18 +53,21 @@ namespace RogueNaraka.UnitScripts
 
             if (amount > 0 && result > maxHp)
                 result = maxHp;
-            else if (result >= 0)
-                _currentHp = result;
-            else
-            {
+            else if (result <= 0)
                 result = 0;
+
+            _currentHp = result;
+            stat.currentHp = _currentHp;
+
+            if (result <= 0)
+            {
                 unit.deathable.Death();
             }
         }
 
         void Regen()
         {
-            if (unit.deathable.isDeath)
+            if (unit.deathable.isDeath || stat == null)
                 return;
             currentTime += Time.deltaTime;
             if(currentTime >= regenTime)

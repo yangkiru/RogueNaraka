@@ -33,6 +33,8 @@ MonoBehaviour:
       mpMax: 5
       hpRegenMax: 5
       mpRegenMax: 5
+      currentHp: 1
+      currentMp: 0
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -42,18 +44,51 @@ MonoBehaviour:
     size: 0.37
     moveDelay: 0.5
     moveDistance: 2
-    minDistance: 0
-    maxDistance: 0
     moveSpeed: 1
     shadowPos: {x: 0.2, y: -0.45}
+    effects: []
   enemies:
   - name: Bug0
     id: 0
     cost: 1
     stage: 0
-    weapon: 0
+    weapon: 2
     stat:
-      dmg: 0.1
+      dmg: 1
+      spd: 0
+      tec: 0
+      hp: 2
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      currentHp: 8
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    move: 1
+    size: 0
+    moveDelay: 2
+    moveDistance: 1
+    moveSpeed: 0.7
+    shadowPos: {x: 0.05, y: -0.05}
+    effects: []
+  - name: Bug1
+    id: 1
+    cost: 1
+    stage: 3
+    weapon: 2
+    stat:
+      dmg: 1
       spd: 0
       tec: 0
       hp: 3
@@ -67,8 +102,10 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 3
+      currentMp: 0
       statPoints: 0
-    controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
+    controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
@@ -76,53 +113,19 @@ MonoBehaviour:
     size: 0
     moveDelay: 2
     moveDistance: 1
-    minDistance: 0
-    maxDistance: 2
-    moveSpeed: 0.5
+    moveSpeed: 0.7
     shadowPos: {x: 0.05, y: -0.05}
-  - name: Bug1
-    id: 1
-    cost: 1
-    stage: 3
-    weapon: 0
-    stat:
-      dmg: 0
-      spd: 0
-      tec: 0
-      hp: 0
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-      dmgMax: 0
-      spdMax: 0
-      tecMax: 0
-      hpMax: 0
-      mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
-      statPoints: 0
-    controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    isFriendly: 0
-    isStanding: 0
-    move: 0
-    size: 0
-    moveDelay: 2
-    moveDistance: 1
-    minDistance: 0
-    maxDistance: 2
-    moveSpeed: 1
-    shadowPos: {x: 0.05, y: -0.05}
+    effects: []
   - name: Bat0
     id: 2
     cost: 2
     stage: 6
-    weapon: 0
+    weapon: 3
     stat:
       dmg: 0
       spd: 0
       tec: 0
-      hp: 0
+      hp: 2
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -133,19 +136,20 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 2
+      currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
-    move: 4
+    move: 5
     size: 0
     moveDelay: 0.2
     moveDistance: 2
-    minDistance: 0
-    maxDistance: 2
     moveSpeed: 2
     shadowPos: {x: 0.05, y: -0.3}
+    effects: []
   - name: Bat1
     id: 3
     cost: 2
@@ -166,6 +170,8 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 0
+      currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,10 +181,9 @@ MonoBehaviour:
     size: 0
     moveDelay: 0.2
     moveDistance: 2
-    minDistance: 0
-    maxDistance: 2
     moveSpeed: 2
     shadowPos: {x: 0.05, y: -0.3}
+    effects: []
   - name: Bone0
     id: 4
     cost: 3
@@ -199,6 +204,8 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 0
+      currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -208,10 +215,9 @@ MonoBehaviour:
     size: 0
     moveDelay: 1
     moveDistance: 0.5
-    minDistance: 0
-    maxDistance: 2
     moveSpeed: 1
     shadowPos: {x: 0.05, y: -0.3}
+    effects: []
   - name: BoneHead0
     id: 5
     cost: 3
@@ -232,6 +238,8 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 0
+      currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -241,10 +249,9 @@ MonoBehaviour:
     size: 0
     moveDelay: 0.5
     moveDistance: 0.5
-    minDistance: 0
-    maxDistance: 2
     moveSpeed: 1.5
     shadowPos: {x: 0.05, y: -0.3}
+    effects: []
   bosses:
   - name: Boss0
     id: 0
@@ -266,6 +273,8 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 0
+      currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -275,10 +284,9 @@ MonoBehaviour:
     size: 0
     moveDelay: 0
     moveDistance: 0
-    minDistance: 0
-    maxDistance: 0
     moveSpeed: 0
     shadowPos: {x: 0, y: 0}
+    effects: []
   spawnables:
   - name: ScarecrowSoldier
     id: 0
@@ -300,6 +308,8 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      currentHp: 0
+      currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 184c384e313182a43afa874a8da647ce, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -309,10 +319,9 @@ MonoBehaviour:
     size: 0
     moveDelay: 0
     moveDistance: 0
-    minDistance: 0
-    maxDistance: 0
     moveSpeed: 0
     shadowPos: {x: 0, y: -1}
+    effects: []
   playerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -329,9 +338,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   bullets:
-  - name: MagicBall0
+  - name: MagicBall
     id: 0
-    dmg: 1
+    dmg: 0.4
     controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
     type: 0
     localSpeed: 3
@@ -342,19 +351,64 @@ MonoBehaviour:
     delay: 0
     limitTime: 0
     pierce: 1
-  - name: MagicBall1
+    children: []
+    onDestroy:
+    - name: MagicBallDestroy
+      bulletId: 1
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      isRepeat: 0
+      isFirst: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+  - name: MagicBallDestroy
     id: 1
-    dmg: 0
-    controller: {fileID: 0}
+    dmg: 0.2
+    controller: {fileID: 9100000, guid: 236f9fcbffc638c428d2dab3b5530725, type: 2}
     type: 0
     localSpeed: 0
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
-    size: 0.15
+    size: 0.5
     delay: 0
-    limitTime: 0
-    pierce: 0
+    limitTime: 0.01
+    pierce: 1
+    children: []
+    onDestroy: []
+  - name: Bite
+    id: 2
+    dmg: 0.5
+    controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    size: 0.3
+    delay: 0
+    limitTime: 0.01
+    pierce: 1
+    children: []
+    onDestroy: []
+  - name: Bite
+    id: 3
+    dmg: 0.5
+    controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    size: 0.3
+    delay: 0
+    limitTime: 0.01
+    pierce: 1
+    children: []
+    onDestroy: []
   weapons:
   - name: MagicBall
     id: 0
@@ -372,6 +426,14 @@ MonoBehaviour:
     beforeAttackDelay: 0
     afterAttackDelay: 1
     attackDistance: 0
+  - name: Bite
+    id: 2
+    type: 0
+    startBulletId: 2
+    offset: {x: 0, y: 0.5, z: 0}
+    beforeAttackDelay: 1
+    afterAttackDelay: 1
+    attackDistance: 0.2
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1

@@ -73,7 +73,7 @@ public class PointTxtManager : MonoBehaviour {
 
     public Text TxtOnHead(float value, Transform tf, Color color)
     {
-        Text txt = TxtOn(tf, value, color, "##0.##");
+        Text txt = TxtOn((Vector2)tf.position + new Vector2(0, 0.3f), value, color, "##0.##");
         if (txt)
         {
             StartCoroutine(Shoot(txt, 0.75f));
@@ -112,23 +112,20 @@ public class PointTxtManager : MonoBehaviour {
     IEnumerator Shoot(Text txt, float time)
     {
         float rnd = Random.Range(-0.01f, 0.01f);
-        float acel = 1f;
+        float acel = Random.Range(0.75f, 1f);
 
         while (time > 0)
         {
             txt.transform.Translate(new Vector2(rnd, 0.01f * acel));
             acel += 0.01f;
             time -= 0.01f;
-#if DELAY
-            yield return GameManager.instance.delayPointOneReal;
-#else
+
             float t = 0;
-            while (t < 0.1f)
+            while (t < 0.01f)
             {
                 t += Time.unscaledDeltaTime;
                 yield return null;
             }
-#endif
         }
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
