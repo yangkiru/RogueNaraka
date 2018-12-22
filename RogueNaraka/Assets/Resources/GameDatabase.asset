@@ -353,6 +353,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
+    effects: []
     children: []
     onDestroy:
     - name: MagicBallDestroy
@@ -384,6 +385,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
+    effects: []
     children: []
     onDestroy: []
   - name: Bite
@@ -404,6 +406,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
+    effects: []
     children: []
     onDestroy: []
   - name: Tackle
@@ -424,6 +427,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
+    effects: []
     children: []
     onDestroy: []
   - name: ScarecrowAttack
@@ -444,6 +448,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
+    effects: []
     children: []
     onDestroy: []
   - name: ThunderL
@@ -464,6 +469,7 @@ MonoBehaviour:
       power: 2
       gap: 0.01
       isOnHit: 0
+    effects: []
     children: []
     onDestroy: []
   - name: ThunderR
@@ -484,6 +490,31 @@ MonoBehaviour:
       power: 1
       gap: 0.01
       isOnHit: 0
+    effects: []
+    children: []
+    onDestroy: []
+  - name: Ice
+    id: 7
+    dmg: 0
+    controller: {fileID: 22100000, guid: 30c0ba08d2084a845bbe1b4edde7d422, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    size: 1.5
+    delay: 1
+    limitTime: 3
+    pierce: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    effects:
+    - type: 3
+      value: 1
+      time: 0
     children: []
     onDestroy: []
   weapons:

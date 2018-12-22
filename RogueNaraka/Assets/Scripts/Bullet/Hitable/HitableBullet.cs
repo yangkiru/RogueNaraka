@@ -13,6 +13,8 @@ namespace RogueNaraka.BulletScripts.Hitable
         [SerializeField]
         OwnerableBullet ownerable;
         [SerializeField]
+        ShakeableBullet shakeable;
+        [SerializeField]
         protected List<Unit> hitList;
 
         [SerializeField]
@@ -28,6 +30,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         {
             bullet = GetComponent<Bullet>();
             ownerable = GetComponent<OwnerableBullet>();
+            shakeable = GetComponent<ShakeableBullet>();
         }
 
         void Update()
@@ -44,6 +47,8 @@ namespace RogueNaraka.BulletScripts.Hitable
             {
                 Debug.Log(name + " hit " + hitList[i].name);
                 bullet.damageable.Damage(hitList[i]);
+                if(shakeable.shake.isOnHit)
+                    shakeable.Shake();
             }
             hitList.Clear();
         }

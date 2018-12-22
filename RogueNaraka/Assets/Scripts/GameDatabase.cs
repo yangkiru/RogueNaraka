@@ -251,6 +251,7 @@ public class BulletData : ICloneable
     public float limitTime;
     public int pierce;
     public ShakeData shake;
+    public EffectData[] effects;
 
     public BulletChildData[] children;
     public BulletChildData[] onDestroy;
@@ -258,12 +259,29 @@ public class BulletData : ICloneable
     public object Clone()
     {
         BulletData data = (BulletData)this.MemberwiseClone();
+
+        data.effects = new EffectData[effects.Length];
+        for (int i = 0; i < children.Length; i++)
+        {
+            data.effects[i] = (EffectData)effects[i].Clone();
+        }
+
         data.children = new BulletChildData[children.Length];
         for (int i = 0; i < children.Length;i++)
         {
             data.children[i] = (BulletChildData)children[i].Clone();
         }
         return data;
+    }
+
+    public EffectData GetEffect(EFFECT type)
+    {
+        for(int i = 0; i < effects.Length;i++)
+        {
+            if (effects[i].type == type)
+                return effects[i];
+        }
+        return null;
     }
 }
 
@@ -419,7 +437,7 @@ public struct SkillSaveData
 [Serializable]
 public enum SKILL_VALUE
 {
-    AMOUNT
+    AMOUNT, TIME
 }
 
 [Serializable]

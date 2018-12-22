@@ -15,41 +15,67 @@ namespace RogueNaraka.BulletScripts
         [HideInInspector]
         public HitableBullet hitable;
 
-        public ShootableBullet shootable;
-        public MoveableBullet moveable;
-        public OwnerableBullet ownerable;
-        public TimeLimitableBullet timeLimitable;
-        public DamageableBullet damageable;
-        public SpawnableBullet spawnable;
+        public ShootableBullet shootable { get { return _shootable; } }
+        [SerializeField]
+        ShootableBullet _shootable;
+        public MoveableBullet moveable { get { return _moveable; } }
+        [SerializeField]
+        MoveableBullet _moveable;
+        public OwnerableBullet ownerable { get { return _ownerable; } }
+        [SerializeField]
+        OwnerableBullet _ownerable;
+        public TimeLimitableBullet timeLimitable { get { return _timeLimitable; } }
+        [SerializeField]
+        TimeLimitableBullet _timeLimitable;
+        public DamageableBullet damageable { get { return _damageable; } }
+        [SerializeField]
+        DamageableBullet _damageable;
+        public SpawnableBullet spawnable { get { return _spawnable; } }
+        [SerializeField]
+        SpawnableBullet _spawnable;
+        public ShakeableBullet shakeable { get { return _shakeable; } }
+        [SerializeField]
+        ShakeableBullet _shakeable;
+        public DisapearableBullet disapearable { get { return _disapearable; } }
+        [SerializeField]
+        DisapearableBullet _disapearable;
 
         public BulletData data { get { return _data; } }
         BulletData _data;
 
+        public Animator animator { get { return _animator; } }
         [SerializeField]
-        Animator animator;
+        Animator _animator;
 
+        public new SpriteRenderer renderer { get { return _renderer; } }
         [SerializeField]
-        new SpriteRenderer renderer;
+        SpriteRenderer _renderer;
 
         IEnumerator deathCorou;
 
         void Reset()
         {
+            _animator = GetComponent<Animator>();
+            _renderer = GetComponent<SpriteRenderer>();
+
             hitableRay = GetComponent<HitableBulletRay>();
             hitableCircle = GetComponent<HitableBulletCircle>();
-            shootable = GetComponent<ShootableBullet>();
-            moveable = GetComponent<MoveableBullet>();
-            ownerable = GetComponent<OwnerableBullet>();
-            animator = GetComponent<Animator>();
-            timeLimitable = GetComponent<TimeLimitableBullet>();
-            damageable = GetComponent<DamageableBullet>();
-            spawnable = GetComponent<SpawnableBullet>();
-            renderer = GetComponent<SpriteRenderer>();
+
+            _shootable = GetComponent<ShootableBullet>();
+            _moveable = GetComponent<MoveableBullet>();
+            _ownerable = GetComponent<OwnerableBullet>();
+            _timeLimitable = GetComponent<TimeLimitableBullet>();
+            _damageable = GetComponent<DamageableBullet>();
+            _spawnable = GetComponent<SpawnableBullet>();
+            _shakeable = GetComponent<ShakeableBullet>();
+            _disapearable = GetComponent<DisapearableBullet>();
         }
 
         public void Init(Unit owner, BulletData data)
         {
             gameObject.SetActive(true);
+
+            renderer.color = Color.white;
 
             moveable.enabled = false;
 
@@ -80,6 +106,9 @@ namespace RogueNaraka.BulletScripts
 
             timeLimitable.Init(data);
             timeLimitable.enabled = false;
+
+            shakeable.Init(data.shake);
+            shakeable.enabled = false;
         }
 
         void DisableAllHitable()
@@ -102,6 +131,9 @@ namespace RogueNaraka.BulletScripts
                 timeLimitable.enabled = true;                
             renderer.enabled = true;
             animator.enabled = true;
+
+            if (shakeable.shake.power != 0 || shakeable.shake.time != 0)
+                shakeable.enabled = true;
 
             transform.position = position;
             

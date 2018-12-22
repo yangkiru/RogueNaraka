@@ -119,12 +119,10 @@ public class SkillGUI : MonoBehaviour
         {
             Destroy(_skill);
         }
-        switch((SKILL_ID)dt.id)
-        {
-            case SKILL_ID.ThunderStrike:
-                _skill = gameObject.AddComponent<ThunderStrike>();
-                break;
-        }
+
+        System.Type type = System.Type.GetType(((SKILL_ID)dt.id).ToString());
+        _skill = gameObject.AddComponent(type) as Skill;
+
         _skill.Init((SkillData)dt.Clone());
 
         img.sprite = _skill.data.spr;
@@ -211,16 +209,7 @@ public class SkillGUI : MonoBehaviour
         Debug.Log(_skill.data.name + " Skill Used!");
     }
 
-    //void IceBreak(Vector3 mp)
-    //{
-    //    Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-    //    BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
-    //    newData.abilities[0].value += data.values[0].value;//time
-    //    newData.effects[0].value += data.effects[0].value;//ice
-    //    ice.Init(newData, 0, true);
-    //    StartCoroutine(MeltDown(ice.renderer, newData.abilities[0].value));
-    //    ice.Attack((Vector2)mp, Vector2.zero, Vector2.zero, 0, 0, null, player);
-    //}
+    
 
     //void BloodSwamp(Vector3 mp)
     //{

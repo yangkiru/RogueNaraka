@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
 
+    static public CameraShake instance;
     public Camera camera;
     public float time;
     public float power;
     public float speed;
     private Vector3 origin;
-	public void Shake(float time, float power, float gap)
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    public void Shake(float time, float power, float gap)
     {
         StartCoroutine(RandomMove(time, power, gap));
     }
