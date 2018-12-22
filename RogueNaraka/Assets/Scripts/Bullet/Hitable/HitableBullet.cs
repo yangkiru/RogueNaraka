@@ -32,7 +32,7 @@ namespace RogueNaraka.BulletScripts.Hitable
 
         void Update()
         {
-            if (delay > 0)
+            if (leftDelay > 0)
             {
                 leftDelay -= Time.deltaTime;
                 return;

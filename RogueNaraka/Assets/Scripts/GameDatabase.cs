@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using RogueNaraka.SkillScripts;
 
 public class GameDatabase : ScriptableObject
 {
@@ -31,7 +32,6 @@ public class GameDatabase : ScriptableObject
     public UnitData[] enemies;
     public UnitData[] bosses;
     public UnitData[] spawnables;
-    public LayerMask playerMask;
     public LayerMask unitMask;
     public LayerMask friendlyMask;
     public LayerMask enemyMask;
@@ -250,6 +250,7 @@ public class BulletData : ICloneable
     public float delay;
     public float limitTime;
     public int pierce;
+    public ShakeData shake;
 
     public BulletChildData[] children;
     public BulletChildData[] onDestroy;
@@ -328,14 +329,14 @@ public struct ArmorData
 
 [Serializable]
 enum SKILL_ID
-{ THUNDER_STRIKE, ICE_BREAK, GENESIS, BLOOD_SWAMP, SCARECROWSOLDIER }
+{ ThunderStrike, IceBreak, Genesis, BloodSwamp, ScarecrowSoldier }
 
 [Serializable]
-public struct SkillData:ICloneable
+public class SkillData:ICloneable
 {
     public string name;
     public int[] bulletIds;
-    public GameObject[] units;
+    public int[] unitIds;
     public Sprite spr;
     public int id;
     public int level;
@@ -354,17 +355,18 @@ public struct SkillData:ICloneable
     public object Clone()
     {
         SkillData clone = (SkillData)this.MemberwiseClone();
-        clone.bulletIds = (int[])bulletIds.Clone();
-        for (int i = 0; i < clone.bulletIds.Length; i++)
+        clone.bulletIds = new int[bulletIds.Length];
+        for (int i = 0; i < bulletIds.Length; i++)
             clone.bulletIds[i] = bulletIds[i];
-        //clone.units = (GameObject[])units.Clone();
-        //for (int i = 0; i < clone.units.Length; i++)
-        //    clone.units[i] = units[i];
-        clone.effects = (EffectData[])effects.Clone();
-        for (int i = 0; i < clone.effects.Length; i++)
+
+        clone.unitIds = new int[unitIds.Length];
+        for (int i = 0; i < unitIds.Length; i++)
+            clone.unitIds[i] = unitIds[i];
+        clone.effects = new EffectData[effects.Length];
+        for (int i = 0; i < effects.Length; i++)
             clone.effects[i] = (EffectData)effects[i].Clone();
-        clone.values = (ValueData[])values.Clone();
-        for (int i = 0; i < clone.values.Length; i++)
+        clone.values = new ValueData[values.Length];
+        for (int i = 0; i < values.Length; i++)
             clone.values[i] = (ValueData)values[i].Clone();
         return clone;
     }
@@ -382,13 +384,13 @@ public struct SkillData:ICloneable
                 SKILL_ID _id = (SKILL_ID)id;
                 if (id >= GameDatabase.instance.skills.Length)
                     return string.Empty;
-                SkillData data = (SkillData)GameDatabase.instance.skills[id].Clone();
+                SkillData data = GameDatabase.instance.skills[id];
                 string des = data.description;
                 
                 float tec = BoardManager.instance.player.data.stat.GetCurrent(STAT.TEC);
                 switch (_id)
                 {
-                    case SKILL_ID.THUNDER_STRIKE:
+                    case SKILL_ID.ThunderStrike:
                         return string.Format(des, data.values[0].value, string.Format("{0:##0.##}({1:##0.##}TEC*0.1)", tec * 0.1f, tec));
                 }
                 return des;
@@ -398,18 +400,57 @@ public struct SkillData:ICloneable
 }
 
 [Serializable]
-public struct SkillUpData
+public struct SkillSaveData
+{
+    public int id;
+    public int level;
+    public float coolTimeLeft;
+
+    public static SkillSaveData SkillToSave(SkillData data)
+    {
+        SkillSaveData saveData = new SkillSaveData();
+        saveData.id = data.id;
+        saveData.level = data.level;
+        saveData.coolTimeLeft = data.coolTimeLeft;
+        return saveData;
+    }
+}
+
+[Serializable]
+public enum SKILL_VALUE
+{
+    AMOUNT
+}
+
+[Serializable]
+public class SkillUpData : ICloneable
 {
     public float manaCost;
     public float size;
     public EffectData[] effects;
     public ValueData[] values;
+
+    public object Clone()
+    {
+        SkillUpData clone = (SkillUpData)this.MemberwiseClone();
+        clone.effects = new EffectData[effects.Length];
+        for(int i = 0; i < effects.Length; i++)
+        {
+            clone.effects[i] = (EffectData)effects[i].Clone();
+        }
+        clone.values = new ValueData[values.Length];
+        for (int i = 0; i < values.Length; i++)
+        {
+            clone.values[i] = (ValueData)values[i].Clone();
+        }
+        return clone;
+    }
 }
 
 [Serializable]
-public struct ValueData : ICloneable
+public class ValueData : ICloneable
 {
-    public string name;
+    public SKILL_VALUE name;
     public float value;
 
     public object Clone()
@@ -433,16 +474,15 @@ public class EffectData:ICloneable
     public EFFECT type;
     public float value;
     public float time;
-    public bool isInfinity;
 
     public EffectData() { }
 
-    public EffectData(EFFECT e, float v, float t, bool i = false)
+    public EffectData(EFFECT e, float v, float t)
     {
-        type = e; value = v; time = t; isInfinity = i;
+        type = e; value = v; time = t;
     }
 
-    public EffectData(EffectData ef) : this(ef.type, ef.value, ef.time, ef.isInfinity) { }
+    public EffectData(EffectData ef) : this(ef.type, ef.value, ef.time) { }
 
     public object Clone()
     {

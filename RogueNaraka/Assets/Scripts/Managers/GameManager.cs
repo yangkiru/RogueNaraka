@@ -307,6 +307,10 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         player.animator.updateMode = AnimatorUpdateMode.Normal;
+        for(int i = 0; i < 3; i++)
+        {
+            SkillManager.instance.skills[i].ResetSkill();
+        }
         Load();
     }
 

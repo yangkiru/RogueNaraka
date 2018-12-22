@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using RogueNaraka.SkillScripts;
 
 public class SkillManager : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class SkillManager : MonoBehaviour {
     public Button okBtn;
     public Button cancelBtn;
 
-    public Skill[] skills;
+    public SkillGUI[] skills;
     public int[] showCaseId;
     public Image[] showCase;
     [ReadOnly]
@@ -29,6 +30,9 @@ public class SkillManager : MonoBehaviour {
     public int rollCount;
     [ReadOnly]
     private bool isDragable;
+
+    [SerializeField]
+    ThunderStrike thunderStrike;
 
     public static SkillManager instance = null;
 
@@ -319,12 +323,17 @@ public class SkillManager : MonoBehaviour {
         return showCaseId[position];
     }
 
+    /// <summary>
+    /// 스킬 설정
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="position"></param>
     public void SetSkill(SkillData data, int position)
     {
-        if (data.id == skills[position].data.id)
-            skills[position].LevelUpOnce();
+        if (skills[position].skill == null || data.id != skills[position].skill.data.id)
+            skills[position].Init(data);
         else
-            skills[position].SyncData(data);
+            skills[position].LevelUp(1);
     }
     /// <summary>
     /// 
@@ -387,19 +396,19 @@ public class SkillManager : MonoBehaviour {
 
     public bool HasSkill(int id)
     {
-        return skills[0].data.id == id || skills[1].data.id == id || skills[2].data.id == id;
+        return skills[0].skill.data.id == id || skills[1].skill.data.id == id || skills[2].skill.data.id == id;
     }
 
     public bool EqualSkill(int position)
     {
-        return skills[position].data.id == GetId(position);
+        return skills[position].skill.data.id == GetId(position);
     }
 
     public void InitSkills()
     {
         for (int i = 0; i < 3; i++)
         {
-            skills[i].Init();
+            skills[i].ResetSkill();
         }
     }
 
@@ -408,13 +417,21 @@ public class SkillManager : MonoBehaviour {
     /// </summary>
     public void Save()
     {
-        SkillData[] datas = new SkillData[3];
+        SkillSaveData[] datas = new SkillSaveData[3];
         for(int i = 0; i < 3; i++)
         {
-            datas[i] = skills[i].data;
-            datas[i].spr = null;
+            if (skills[i].skill)
+            {
+                datas[i] = SkillSaveData.SkillToSave(skills[i].skill.data);
+                Debug.Log("Skill Saved" + datas[i].id + "id " + datas[i].level + "level");
+            }
+            else
+            {
+                datas[i] = new SkillSaveData();
+                datas[i].id = -1;
+            }
         }
-        string str = JsonHelper.ToJson<SkillData>(datas);
+        string str = JsonHelper.ToJson<SkillSaveData>(datas);
         PlayerPrefs.SetString("skill", str);
         //Debug.Log("Save Skills : " + str);
     }
@@ -425,19 +442,32 @@ public class SkillManager : MonoBehaviour {
     public void Load()
     {
         string str = PlayerPrefs.GetString("skill");
-        SkillData[] datas = JsonHelper.FromJson<SkillData>(str);
+        SkillSaveData[] datas = JsonHelper.FromJson<SkillSaveData>(str);
+        Debug.Log("SkillSaveData : " + str);
+  
+        if (datas == null)
+        {
+            for(int i = 0; i < 3; i++)
+            {
+                skills[i].ResetSkill();
+            }
+            return;
+        }
+            
 
         for (int i = 0; i < 3; i++)
         {
             //Debug.Log(datas[i].id);
             if (datas[i].id == -1)
-                skills[i].Init();
+                skills[i].ResetSkill();
             else
             {
                 if (GameDatabase.instance.skills.Length > datas[i].id)
                 {
-                    SkillData database = (SkillData)GameDatabase.instance.skills[datas[i].id].Clone();
-                    skills[i].SyncData(database);
+                    Debug.Log("Skill Loaded" + datas[i].id + "id " + datas[i].level + "level");
+                    SkillData skill = (SkillData)GameDatabase.instance.skills[datas[i].id].Clone();
+                    skill.coolTimeLeft = datas[i].coolTimeLeft;
+                    skills[i].Init(skill);
                     skills[i].LevelUp(datas[i].level - 1);
                 }
                 else
@@ -454,7 +484,7 @@ public class SkillManager : MonoBehaviour {
     {
         for(int i = 0; i < 3; i++)
         {
-            skills[i].ResetData();
+            skills[i].ResetSkill();
         }
         ResetShowCase();
         Save();

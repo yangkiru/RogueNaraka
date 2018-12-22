@@ -36,7 +36,7 @@ namespace RogueNaraka.UnitScripts
         void Update()
         {
             time += Time.deltaTime;
-            if(time >= 1f && damaged != 0)
+            if(time >= 0.1f && damaged != 0)
             {
                 Color color;
                 if (unit.data.isFriendly)

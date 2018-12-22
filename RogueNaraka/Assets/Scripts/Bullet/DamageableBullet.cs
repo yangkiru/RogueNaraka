@@ -15,7 +15,7 @@ namespace RogueNaraka.BulletScripts
             bullet = GetComponent<Bullet>();
         }
 
-        public void Damage(Unit unit)
+        public void Damage(Unit unit, STAT related = STAT.DMG)
         {
             float ownerDmg = bullet.ownerable.owner ? bullet.ownerable.owner.data.stat.dmg : 1;
             float damage = bullet.data.dmg * ownerDmg;

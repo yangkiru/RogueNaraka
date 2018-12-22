@@ -47,7 +47,8 @@ namespace RogueNaraka.BulletScripts
         {
             Bullet child = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             child.Init(bullet.ownerable.owner, GameDatabase.instance.bullets[data.bulletId]);
-            child.spawnable.StartCoroutine(child.spawnable.BulletSpawn(bullet, data));
+            if(gameObject.activeSelf)
+                child.spawnable.StartCoroutine(child.spawnable.BulletSpawn(bullet, data));
         }
 
         public IEnumerator BulletSpawn(Bullet parent, BulletChildData data)

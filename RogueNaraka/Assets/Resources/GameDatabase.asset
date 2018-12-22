@@ -122,7 +122,7 @@ MonoBehaviour:
     stage: 6
     weapon: 3
     stat:
-      dmg: 0
+      dmg: 1
       spd: 0
       tec: 0
       hp: 2
@@ -142,7 +142,7 @@ MonoBehaviour:
     controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
-    isStanding: 0
+    isStanding: 1
     move: 5
     size: 0
     moveDelay: 0.2
@@ -153,13 +153,13 @@ MonoBehaviour:
   - name: Bat1
     id: 3
     cost: 2
-    stage: 10
-    weapon: 0
+    stage: 8
+    weapon: 3
     stat:
-      dmg: 0
+      dmg: 2
       spd: 0
       tec: 0
-      hp: 0
+      hp: 3
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -170,14 +170,14 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      currentHp: 0
+      currentHp: 3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
-    isStanding: 0
-    move: 4
+    isStanding: 1
+    move: 5
     size: 0
     moveDelay: 0.2
     moveDistance: 2
@@ -187,13 +187,13 @@ MonoBehaviour:
   - name: Bone0
     id: 4
     cost: 3
-    stage: 14
-    weapon: 0
+    stage: 10
+    weapon: 3
     stat:
-      dmg: 0
+      dmg: 3
       spd: 0
       tec: 0
-      hp: 0
+      hp: 4
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -204,14 +204,14 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      currentHp: 0
+      currentHp: 4
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
-    isStanding: 0
-    move: 0
+    isStanding: 1
+    move: 4
     size: 0
     moveDelay: 1
     moveDistance: 0.5
@@ -220,14 +220,14 @@ MonoBehaviour:
     effects: []
   - name: BoneHead0
     id: 5
-    cost: 3
-    stage: 18
+    cost: 4
+    stage: 14
     weapon: 0
     stat:
-      dmg: 0
+      dmg: 2
       spd: 0
       tec: 0
-      hp: 0
+      hp: 3
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -238,14 +238,14 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      currentHp: 0
+      currentHp: 3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
-    isStanding: 0
-    move: 2
+    isStanding: 1
+    move: 0
     size: 0
     moveDelay: 0.5
     moveDistance: 0.5
@@ -292,12 +292,12 @@ MonoBehaviour:
     id: 0
     cost: 0
     stage: 0
-    weapon: 0
+    weapon: 4
     stat:
-      dmg: 0
+      dmg: 1
       spd: 0
       tec: 0
-      hp: 0
+      hp: 2
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -308,23 +308,20 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      currentHp: 0
+      currentHp: 2
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 184c384e313182a43afa874a8da647ce, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
-    move: 1
+    move: 2
     size: 0
     moveDelay: 0
     moveDistance: 0
     moveSpeed: 0
     shadowPos: {x: 0, y: -1}
     effects: []
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 256
   unitMask:
     serializedVersion: 2
     m_Bits: 768
@@ -351,6 +348,11 @@ MonoBehaviour:
     delay: 0
     limitTime: 0
     pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
     children: []
     onDestroy:
     - name: MagicBallDestroy
@@ -377,6 +379,11 @@ MonoBehaviour:
     delay: 0
     limitTime: 0.01
     pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
     children: []
     onDestroy: []
   - name: Bite
@@ -392,12 +399,17 @@ MonoBehaviour:
     delay: 0
     limitTime: 0.01
     pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
     children: []
     onDestroy: []
-  - name: Bite
+  - name: Tackle
     id: 3
-    dmg: 0.5
-    controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
+    dmg: 0.3
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
     type: 0
     localSpeed: 0
     worldSpeed: 0
@@ -407,6 +419,71 @@ MonoBehaviour:
     delay: 0
     limitTime: 0.01
     pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    children: []
+    onDestroy: []
+  - name: ScarecrowAttack
+    id: 4
+    dmg: 0.1
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    size: 0.5
+    delay: 0
+    limitTime: 0.01
+    pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    children: []
+    onDestroy: []
+  - name: ThunderL
+    id: 5
+    dmg: 0.05
+    controller: {fileID: 22100000, guid: a016a5d25f314554b9cda7aedd5996ee, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    size: 0.3
+    delay: 0.1
+    limitTime: 0.1
+    pierce: 0
+    shake:
+      time: 0.1
+      power: 2
+      gap: 0.01
+      isOnHit: 0
+    children: []
+    onDestroy: []
+  - name: ThunderR
+    id: 6
+    dmg: 0.05
+    controller: {fileID: 22100000, guid: 30c0ba08d2084a845bbe1b4edde7d422, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    size: 0.3
+    delay: 0.1
+    limitTime: 0.2
+    pierce: 0
+    shake:
+      time: 0.1
+      power: 1
+      gap: 0.01
+      isOnHit: 0
     children: []
     onDestroy: []
   weapons:
@@ -434,6 +511,22 @@ MonoBehaviour:
     beforeAttackDelay: 1
     afterAttackDelay: 1
     attackDistance: 0.2
+  - name: Tackle
+    id: 3
+    type: 1
+    startBulletId: 3
+    offset: {x: 0, y: 0, z: 0}
+    beforeAttackDelay: 0
+    afterAttackDelay: 1
+    attackDistance: 0.1
+  - name: ScarecrowAttack
+    id: 4
+    type: 2
+    startBulletId: 3
+    offset: {x: 0, y: 0, z: 0}
+    beforeAttackDelay: 0
+    afterAttackDelay: 0.1
+    attackDistance: 0
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1
@@ -441,11 +534,13 @@ MonoBehaviour:
   - cost: 2
     unitId: 0200000003000000
   - cost: 3
-    unitId: 0400000005000000
+    unitId: 04000000
+  - cost: 4
+    unitId: 05000000
   skills:
   - name: ThunderStrike
-    bulletIds: 190000001a000000
-    units: []
+    bulletIds: 0500000006000000
+    unitIds: 
     spr: {fileID: 21300000, guid: 9ab6b26aa06c12e438c398969da44ba9, type: 3}
     id: 0
     level: 1
@@ -457,25 +552,25 @@ MonoBehaviour:
     isDeath: 0
     effects: []
     values:
-    - name: Repeat
+    - name: 0
       value: 50
-    - name: Delay
+    - name: 0
       value: -0.099800006
     levelUp:
       manaCost: 0.5
       size: 0.1
       effects: []
       values:
-      - name: Repeat
+      - name: 0
         value: 10
-      - name: Delay
+      - name: 0
         value: -0.0666
     description: 'Strike {0}Thunders.
 
       Each Thunder has {1} deal.'
   - name: IceBreak
     bulletIds: 1b000000
-    units: []
+    unitIds: 
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
     id: 1
     level: 1
@@ -489,9 +584,8 @@ MonoBehaviour:
     - type: 3
       value: 4
       time: 0
-      isInfinity: 0
     values:
-    - name: Time
+    - name: 0
       value: 4
     levelUp:
       manaCost: 0.25
@@ -500,14 +594,13 @@ MonoBehaviour:
       - type: 3
         value: 1
         time: 0
-        isInfinity: 0
       values:
-      - name: Time
+      - name: 0
         value: 1
     description: 
   - name: Genesis
     bulletIds: 1e0000001f000000
-    units: []
+    unitIds: 
     spr: {fileID: 21300000, guid: 3c8be8ee2042a0e4bbb154b327514c01, type: 3}
     id: 2
     level: 1
@@ -519,21 +612,21 @@ MonoBehaviour:
     isDeath: 0
     effects: []
     values:
-    - name: Time
+    - name: 0
       value: 0
-    - name: Dmg
+    - name: 0
       value: 0.2
     levelUp:
       manaCost: 0.5
       size: 0
       effects: []
       values:
-      - name: Dmg
+      - name: 0
         value: 0.1
     description: 
   - name: BloodSwamp
     bulletIds: 1c0000001d000000
-    units: []
+    unitIds: 
     spr: {fileID: 21300000, guid: 0b192675c393aa24bb17096185049b2f, type: 3}
     id: 3
     level: 1
@@ -545,30 +638,29 @@ MonoBehaviour:
     isDeath: 0
     effects: []
     values:
-    - name: BloodAmount
+    - name: 0
       value: 3
-    - name: BubbleSpawnSpeed
+    - name: 0
       value: 1
-    - name: LifeSteal
+    - name: 0
       value: 0.1
     levelUp:
       manaCost: 0.25
       size: 0.25
       effects: []
       values:
-      - name: Time
+      - name: 0
         value: 1
-      - name: BloodAmount
+      - name: 0
         value: 1
-      - name: BubbleAmount
+      - name: 0
         value: 1
-      - name: LifeSteal
+      - name: 0
         value: 0.1
     description: 
   - name: ScarecrowSoldier
     bulletIds: 21000000
-    units:
-    - {fileID: 1129751844161108, guid: 086df998df5f67b41897e6b0d85ab4e5, type: 3}
+    unitIds: 
     spr: {fileID: 21300000, guid: caaeff1be02fc8144845d3e17ffe77b9, type: 3}
     id: 4
     level: 1
@@ -580,22 +672,22 @@ MonoBehaviour:
     isDeath: 0
     effects: []
     values:
-    - name: Time
+    - name: 0
       value: 2
-    - name: Dmg
+    - name: 0
       value: 0.25
-    - name: Hp
+    - name: 0
       value: 2
     levelUp:
       manaCost: 0.5
       size: 0.25
       effects: []
       values:
-      - name: Time
+      - name: 0
         value: 0.25
-      - name: Dmg
+      - name: 0
         value: 0.25
-      - name: Hp
+      - name: 0
         value: 1
     description: 
   items:

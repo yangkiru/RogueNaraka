@@ -78,6 +78,7 @@ namespace RogueNaraka.BulletScripts
 
             deathCorou = null;
 
+            timeLimitable.Init(data);
             timeLimitable.enabled = false;
         }
 

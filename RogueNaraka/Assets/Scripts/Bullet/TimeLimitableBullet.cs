@@ -7,7 +7,9 @@ namespace RogueNaraka.BulletScripts
     {
         [SerializeField]
         Bullet bullet;
+        [SerializeField]
         float time;
+        [SerializeField]
         float leftTime;
 
         public void Init(BulletData data)
@@ -20,7 +22,7 @@ namespace RogueNaraka.BulletScripts
         {
             if (leftTime > 0)
                 leftTime -= Time.deltaTime;
-            else
+            else if (time != 0)
             {
                 bullet.Destroy();
                 enabled = false;

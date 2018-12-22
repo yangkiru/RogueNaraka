@@ -10,7 +10,14 @@ namespace RogueNaraka.BulletScripts
         public Unit owner { get { return _owner; } }
         [SerializeField]
         Unit _owner;
-        public int layer { get { return owner.gameObject.layer; } }
+        public int layer
+        {
+            get
+            {
+                if (owner) return owner.gameObject.layer;
+                else return -1;
+            }
+        }
         
         public void SetOwner(Unit owner)
         {

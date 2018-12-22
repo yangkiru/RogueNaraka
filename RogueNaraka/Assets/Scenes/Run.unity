@@ -10906,29 +10906,9 @@ MonoBehaviour:
   coolImg: {fileID: 2012663759}
   levelTxt: {fileID: 1766055364}
   coolTimeTxt: {fileID: 691089283}
-  data:
-    name: 
-    bulletIds: 
-    units: []
-    spr: {fileID: 0}
-    id: -1
-    level: 0
-    coolTime: 0
-    coolTimeLeft: 0
-    manaCost: 0
-    size: 0
-    isCircleToPlayer: 0
-    isDeath: 0
-    effects: []
-    values: []
-    levelUp:
-      manaCost: 0
-      size: 0
-      effects: []
-      values: []
-    description: 
   position: 1
   isCool: 0
+  _thunderStrike: {fileID: 0}
 --- !u!114 &755337021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17639,29 +17619,9 @@ MonoBehaviour:
   coolImg: {fileID: 1461390769}
   levelTxt: {fileID: 1565530707}
   coolTimeTxt: {fileID: 520458425}
-  data:
-    name: 
-    bulletIds: 
-    units: []
-    spr: {fileID: 0}
-    id: -1
-    level: 0
-    coolTime: 0
-    coolTimeLeft: 0
-    manaCost: 0
-    size: 0
-    isCircleToPlayer: 0
-    isDeath: 0
-    effects: []
-    values: []
-    levelUp:
-      manaCost: 0
-      size: 0
-      effects: []
-      values: []
-    description: 
   position: 2
   isCool: 0
+  _thunderStrike: {fileID: 0}
 --- !u!114 &1255047361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18533,29 +18493,9 @@ MonoBehaviour:
   coolImg: {fileID: 303138773}
   levelTxt: {fileID: 732413325}
   coolTimeTxt: {fileID: 2038715241}
-  data:
-    name: 
-    bulletIds: 
-    units: []
-    spr: {fileID: 0}
-    id: -1
-    level: 0
-    coolTime: 0
-    coolTimeLeft: 0
-    manaCost: 0
-    size: 0
-    isCircleToPlayer: 0
-    isDeath: 0
-    effects: []
-    values: []
-    levelUp:
-      manaCost: 0
-      size: 0
-      effects: []
-      values: []
-    description: 
   position: 0
   isCool: 0
+  _thunderStrike: {fileID: 0}
 --- !u!114 &1329915887
 MonoBehaviour:
   m_ObjectHideFlags: 0
