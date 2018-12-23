@@ -120,9 +120,15 @@ public class SkillGUI : MonoBehaviour
             Destroy(_skill);
         }
 
-        System.Type type = System.Type.GetType(((SKILL_ID)dt.id).ToString());
-        _skill = gameObject.AddComponent(type) as Skill;
-
+        switch((SKILL_ID)dt.id)
+        {
+            case SKILL_ID.ThunderStrike:
+                _skill = gameObject.AddComponent<ThunderStrike>();
+                break;
+            case SKILL_ID.IceBreak:
+                _skill = gameObject.AddComponent<IceBreak>();
+                break;
+        }
         _skill.Init((SkillData)dt.Clone());
 
         img.sprite = _skill.data.spr;

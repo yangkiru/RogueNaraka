@@ -40,7 +40,10 @@ public class ObjectPool : MonoBehaviour
         }
         catch
         {
-            return Instantiate(prefab);
+            if (prefab)
+                return Instantiate(prefab);
+            else
+                return null;
         }
     }
 

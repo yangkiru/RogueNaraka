@@ -34,7 +34,7 @@ namespace RogueNaraka.BulletScripts
             }
         }
 
-        public void OnDestroy()
+        public void OnDestroyBullet()
         {
             for(int i = 0; i < _onDestroyList.Count; i++)
             {
@@ -47,8 +47,7 @@ namespace RogueNaraka.BulletScripts
         {
             Bullet child = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             child.Init(bullet.ownerable.owner, GameDatabase.instance.bullets[data.bulletId]);
-            if(gameObject.activeSelf)
-                child.spawnable.StartCoroutine(child.spawnable.BulletSpawn(bullet, data));
+            child.spawnable.StartCoroutine(child.spawnable.BulletSpawn(bullet, data));
         }
 
         public IEnumerator BulletSpawn(Bullet parent, BulletChildData data)

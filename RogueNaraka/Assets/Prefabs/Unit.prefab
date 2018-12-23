@@ -200,6 +200,13 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
+      tmpDmg: 0
+      tmpSpd: 0
+      tmpTec: 0
+      tmpHp: 0
+      tmpMp: 0
+      tmpHpRegen: 0
+      tmpMpRegen: 0
       currentHp: 0
       currentMp: 0
       statPoints: 0
@@ -211,8 +218,6 @@ MonoBehaviour:
     size: 0
     moveDelay: 0
     moveDistance: 0
-    minDistance: 0
-    maxDistance: 0
     moveSpeed: 0
     shadowPos: {x: 0, y: 0}
     effects: []
@@ -284,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 224339251782192074}
+  unit: {fileID: 114302036002021230}
   _effects: []
 --- !u!114 &114798437530957502
 MonoBehaviour:

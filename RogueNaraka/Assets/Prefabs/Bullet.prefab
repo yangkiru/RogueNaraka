@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 114481818113872668}
   ownerable: {fileID: 114574027343910540}
-  shakeable: {fileID: 0}
+  shakeable: {fileID: 1119521292092267351}
   hitList: []
   layerMask:
     serializedVersion: 2
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 114481818113872668}
   ownerable: {fileID: 114574027343910540}
-  shakeable: {fileID: 0}
+  shakeable: {fileID: 1119521292092267351}
   hitList: []
   layerMask:
     serializedVersion: 2

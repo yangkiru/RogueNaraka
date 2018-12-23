@@ -20,7 +20,9 @@ namespace RogueNaraka.BulletScripts.Hitable
         [SerializeField]
         protected LayerMask layerMask;
 
+        [SerializeField]
         float delay;
+        [SerializeField]
         float leftDelay;
         
         [SerializeField]
@@ -42,10 +44,16 @@ namespace RogueNaraka.BulletScripts.Hitable
             }
             else
                 leftDelay = delay;
+            Debug.Log(name + " GetHitUnits" + leftDelay + "/" + delay);
             GetHitUnits();
             for (int i = 0; i < hitList.Count; i++)
             {
                 Debug.Log(name + " hit " + hitList[i].name);
+                
+                for(int j = 0; j < bullet.data.effects.Length; j++)
+                {
+                    hitList[i].effectable.AddEffect(bullet.data.effects[j]);
+                }
                 bullet.damageable.Damage(hitList[i]);
                 if(shakeable.shake.isOnHit)
                     shakeable.Shake();
@@ -80,12 +88,12 @@ namespace RogueNaraka.BulletScripts.Hitable
 
         protected bool AddHitList(Unit unit)
         {
-            if (!unit)
+            if (!unit && pierce >= 0)
             {
                 bullet.Destroy();
                 return false;
             }
-            if(CheckHitList(unit))
+            if(unit && CheckHitList(unit))
             {
                 hitList.Add(unit);
                 return true;

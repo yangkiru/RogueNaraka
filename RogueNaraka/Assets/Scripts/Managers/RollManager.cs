@@ -36,6 +36,8 @@ public class RollManager : MonoBehaviour {
             instance = this;
         else
             Destroy(gameObject);
+
+        Init();
     }
     public void Init()
     {

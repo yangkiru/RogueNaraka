@@ -261,7 +261,7 @@ public class BulletData : ICloneable
         BulletData data = (BulletData)this.MemberwiseClone();
 
         data.effects = new EffectData[effects.Length];
-        for (int i = 0; i < children.Length; i++)
+        for (int i = 0; i < effects.Length; i++)
         {
             data.effects[i] = (EffectData)effects[i].Clone();
         }
@@ -336,14 +336,14 @@ public struct Ability : ICloneable
     }
 }
 
-[Serializable]
-public struct ArmorData
-{
-    public string name;
-    public int level;
-    public float def;
-    public Effect effect;
-}
+//[Serializable]
+//public struct ArmorData
+//{
+//    public string name;
+//    public int level;
+//    public float def;
+//    public Effect effect;
+//}
 
 [Serializable]
 enum SKILL_ID

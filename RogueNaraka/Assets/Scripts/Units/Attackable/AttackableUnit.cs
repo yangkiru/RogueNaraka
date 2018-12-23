@@ -67,7 +67,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             do
             {
                 yield return null;
-                leftDelay -= Time.deltaTime;
+                leftDelay -= Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
             } while (leftDelay > 0);
             if (isBeforeAnimation)
                 unit.animator.SetBool("isBeforeAttack", false);
@@ -91,7 +91,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             do
             {
                 yield return null;
-                leftDelay -= Time.deltaTime;
+                leftDelay -= Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
             } while (leftDelay > 0);
 
             if (isAfterAnimation)
@@ -131,7 +131,7 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         protected void LookTarget()
         {
-            Debug.Log("LookTarget");
+            //Debug.Log("LookTarget");
             unit.animator.SetFloat("x", unit.targetable.direction.x);
             unit.animator.SetFloat("y", unit.targetable.direction.y);
             unit.animator.SetBool("isWalk", true);

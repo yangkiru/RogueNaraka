@@ -142,7 +142,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public void StatUp(int type)
     {
-        if (player.data.stat.AddCurrent((STAT)type, 1))
+        if (player.data.stat.AddOrigin((STAT)type, 1))
         {
             Debug.Log("Stat Upgraded");
             if (--leftStat <= 0)

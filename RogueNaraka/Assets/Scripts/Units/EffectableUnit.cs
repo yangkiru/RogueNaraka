@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RogueNaraka.EffectScripts;
 
 namespace RogueNaraka.UnitScripts
 {
     public class EffectableUnit : MonoBehaviour
     {
         public Transform holder;
+        [SerializeField]
         Unit unit;
         public List<Effect> effects { get { return _effects; } }
         [SerializeField]
@@ -17,6 +19,7 @@ namespace RogueNaraka.UnitScripts
         public List<Effect> slow { get { return _slow; } }
         List<Effect> _slow = new List<Effect>();
         public List<Effect> ice { get { return _ice; } }
+        [SerializeField]
         List<Effect> _ice = new List<Effect>();
         public List<Effect> fire { get { return _fire; } }
         List<Effect> _fire = new List<Effect>();
@@ -51,37 +54,94 @@ namespace RogueNaraka.UnitScripts
             _lifeSteal.Clear();
         }
 
-        public void AddEffect(EffectData data)
+        public Effect GetSameEffect(EffectData data)
         {
-            Effect effect = BoardManager.instance.effectPool.DequeueObjectPool().GetComponent<Effect>();
-            switch(data.type)
+            
+            switch (data.type)
             {
                 case EFFECT.STUN:
-                    _stun.Add(effect);
-                    break;
+                    if (_stun.Count > 0)
+                        return _stun[0];
+                    else
+                        return null;
                 case EFFECT.SLOW:
-                    _slow.Add(effect);
-                    break;
+                    return null;
                 case EFFECT.FIRE:
-                    _fire.Add(effect);
-                    break;
+                    return null;
                 case EFFECT.ICE:
-                    _ice.Add(effect);
-                    break;
+                    for (int i = 0; i < _ice.Count; i++)
+                    {
+                        if (_ice[i].data.value == data.value)
+                            return _ice[i];
+                    }
+                    return null;
                 case EFFECT.KNOCKBACK:
-                    _knockback.Add(effect);
-                    break;
+                    for (int i = 0; i < _knockback.Count; i++)
+                    {
+                        if (_knockback[i].data.time == data.time)
+                            return _knockback[i];
+                    }
+                    return null;
                 case EFFECT.POISON:
-                    _poison.Add(effect);
-                    break;
+                    return null;
                 case EFFECT.HEAL:
-                    _heal.Add(effect);
-                    break;
+                    return null;
                 case EFFECT.LIFESTEAL:
-                    _lifeSteal.Add(effect);
-                    break;
+                    return null;
+                default:
+                    return null;
             }
-            effect.Init(unit, (EffectData)data.Clone());
+        }
+
+        public void AddEffect(EffectData data)
+        {
+            Effect effect = GetSameEffect(data);
+            GameObject obj = effect == null ? BoardManager.instance.effectPool.DequeueObjectPool() : null;
+            List<Effect> list = null;
+            if (!effect)
+            {
+                switch (data.type)
+                {
+                    case EFFECT.STUN:
+                        //effect = obj.AddComponent<Stun>();
+                        list = _stun;
+                        break;
+                    case EFFECT.SLOW:
+                        //effect = obj.AddComponent<Slow>();
+                        list = _slow;
+                        break;
+                    case EFFECT.FIRE:
+                        //effect = obj.AddComponent<Fire>();
+                        list = _fire;
+                        break;
+                    case EFFECT.ICE:
+                        effect = obj.AddComponent<Ice>();
+                        list = _ice;
+                        break;
+                    case EFFECT.KNOCKBACK:
+                        //effect = obj.AddComponent<Knockback>();
+                        list = _knockback;
+                        break;
+                    case EFFECT.POISON:
+                        //effect = obj.AddComponent<Poison>();
+                        list = _poison;
+                        break;
+                    case EFFECT.HEAL:
+                        //effect = obj.AddComponent<Heal>();
+                        list = _heal;
+                        break;
+                    case EFFECT.LIFESTEAL:
+                        //effect = obj.AddComponent<LifeSteal>();
+                        list = _lifeSteal;
+                        break;
+                }
+
+                effect.Init(unit, (EffectData)data.Clone(), list);
+            }
+            else
+            {
+                effect.Combine(data);
+            }
         }
     }
 }

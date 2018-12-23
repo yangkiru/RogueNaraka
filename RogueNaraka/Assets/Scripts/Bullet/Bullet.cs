@@ -41,6 +41,7 @@ namespace RogueNaraka.BulletScripts
         DisapearableBullet _disapearable;
 
         public BulletData data { get { return _data; } }
+        [SerializeField]
         BulletData _data;
 
         public Animator animator { get { return _animator; } }
@@ -159,7 +160,7 @@ namespace RogueNaraka.BulletScripts
         {
             animator.SetBool("isDestroy", true);
             DisableOnDestroy();
-            spawnable.OnDestroy();
+            spawnable.OnDestroyBullet();
             AnimatorStateInfo state;
             do
             {

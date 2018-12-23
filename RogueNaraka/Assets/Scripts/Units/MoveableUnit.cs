@@ -15,7 +15,7 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         PolyNavAgent _agent;
 
-        public float speed { get { return unitSpeed; } }
+        public float speed { get { return unitSpeed * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f); } }
         float unitSpeed;
 
         bool isWalk;
@@ -36,7 +36,6 @@ namespace RogueNaraka.UnitScripts
         public void SetSpeed(float speed)
         {
             unitSpeed = speed;
-            agent.maxSpeed = speed;
         }
 
         public void Move(Vector3 pos, Action<bool> callback = null)
@@ -46,8 +45,9 @@ namespace RogueNaraka.UnitScripts
 
         void Update()
         {
+            agent.maxSpeed = speed;
             float x = 0, y = 0;
-            if (_agent.velocity.x >= 0.01f || _agent.velocity.y >= 0.01f)
+            if (_agent.velocity.x != 0 || _agent.velocity.y != 0)
             {
                 x = _agent.velocity.x;
                 y = _agent.velocity.y;

@@ -17,7 +17,7 @@ namespace RogueNaraka.UnitScripts
         public float regenTime { get { return 1; } }
         float currentTime;
 
-        public float regenMp { get { return stat.mpRegen; } }
+        public float regenMp { get { return stat.mpRegen * 0.1f; } }
 
         Stat stat;
 

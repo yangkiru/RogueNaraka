@@ -65,6 +65,8 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         UnitData _data;
 
+        public Stat stat { get { return _data.stat; } }
+
         void Reset()
         {
             _moveable = GetComponent<MoveableUnit>();

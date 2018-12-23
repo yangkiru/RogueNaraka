@@ -74,17 +74,17 @@ public class GameManager : MonoBehaviour {
         Debug.Log("statPoint"+statPoint);
 
         Stat statBase = (Stat)GameDatabase.instance.playerBase.stat.Clone();
-        stat.SetCurrent(statBase);
+        stat.SetOrigin(statBase);
         while(statPoint > 0)
         {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
-            if(stat.AddCurrent((STAT)type, 1))
+            if(stat.AddOrigin((STAT)type, 1))
             {
                 statPoint--;
             }
             else
             {
-                int current = (int)stat.sumCurrent;
+                int current = (int)stat.sumOrigin;
                 int max = (int)stat.sumMax;
                 if (current >= max)
                 {

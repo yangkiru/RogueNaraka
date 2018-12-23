@@ -9,7 +9,7 @@ namespace RogueNaraka.SkillScripts
     {
         public override void Use(Vector3 mp)
         {
-            throw new System.NotImplementedException();
+            SpawnIce(mp);
         }
 
         void SpawnIce(Vector3 mp)
@@ -21,7 +21,7 @@ namespace RogueNaraka.SkillScripts
             ice.Init(BoardManager.instance.player, newData);
             ice.Spawn(mp);
             float time = ice.data.limitTime / 2;
-            ice.disapearable.Disapear(time, time);
+            ice.disapearable.StartCoroutine(ice.disapearable.Disapear(time, time));
         }
     }
 }

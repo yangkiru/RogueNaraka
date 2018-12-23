@@ -23,12 +23,31 @@ public class Stat : ICloneable
     public float hpRegenMax;
     public float mpRegenMax;
 
+    public float tmpDmg;
+    public float tmpSpd;
+    public float tmpTec;
+    public float tmpHp;
+    public float tmpMp;
+    public float tmpHpRegen;
+    public float tmpMpRegen;
+
     public float currentHp;
     public float currentMp;
 
     public int statPoints;
 
-    public float sumCurrent
+    public void Init()
+    {
+        tmpDmg = 0;
+        tmpSpd = 0;
+        tmpTec = 0;
+        tmpHp = 0;
+        tmpMp = 0;
+        tmpHpRegen = 0;
+        tmpMpRegen = 0;
+    }
+
+    public float sumOrigin
     {
         get { return dmg + spd + tec + hp + mp + hpRegen + mpRegen; }
     }
@@ -38,7 +57,7 @@ public class Stat : ICloneable
         get { return dmgMax + spdMax + tecMax + hpMax + mpMax + hpRegenMax + mpRegenMax; }
     }
 
-    public bool AddCurrent(STAT type, float amount)
+    public bool AddOrigin(STAT type, float amount)
     {
         switch(type)
         {
@@ -112,7 +131,7 @@ public class Stat : ICloneable
         }
     }
 
-    public void SetCurrent(Stat s)
+    public void SetOrigin(Stat s)
     {
         dmg = s.dmg;
         spd = s.spd;
@@ -134,7 +153,7 @@ public class Stat : ICloneable
         mpRegenMax = s.mpRegenMax;
     }
 
-    public float GetCurrent(STAT type)
+    public float GetOrigin(STAT type)
     {
         switch (type)
         {
@@ -152,6 +171,28 @@ public class Stat : ICloneable
                 return hpRegen;
             case STAT.MPREGEN:
                 return mpRegen;
+        }
+        return -1;
+    }
+
+    public float GetCurrent(STAT type)
+    {
+        switch (type)
+        {
+            case STAT.DMG:
+                return dmg + tmpDmg;
+            case STAT.SPD:
+                return spd + tmpSpd;
+            case STAT.TEC:
+                return tec + tmpTec;
+            case STAT.HP:
+                return hp + tmpHp;
+            case STAT.MP:
+                return mp + tmpMp;
+            case STAT.HPREGEN:
+                return hpRegen + tmpHpRegen;
+            case STAT.MPREGEN:
+                return mpRegen + tmpMpRegen;
         }
         return -1;
     }
