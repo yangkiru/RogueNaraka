@@ -47,6 +47,7 @@ namespace RogueNaraka.BulletScripts
         {
             Bullet child = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             child.Init(bullet.ownerable.owner, GameDatabase.instance.bullets[data.bulletId]);
+            child.renderer.sortingOrder = bullet.renderer.sortingOrder + data.sortingOrder;
             child.spawnable.StartCoroutine(child.spawnable.BulletSpawn(bullet, data));
         }
 

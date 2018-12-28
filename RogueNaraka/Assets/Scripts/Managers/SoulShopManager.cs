@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
+using RogueNaraka.ScrollScripts;
 
 public class SoulShopManager : MonoBehaviour
 {
     public GameObject shopPnl;
     public GameObject statPnl;
-    public GameObject checkPnl;
+    public GameObject skillPnl;
+    public GameObject weaponPnl;
+    public SkillScrollView skillScrollView;
 
-    public Button okBtn;
-    public Button cancelBtn;
     public Button[] statUpgradeBtn;
 
-    public Text checkTxt;
     public TextMeshProUGUI[] statUpgradeTxt;
     public TextMeshProUGUI[] statUpgradeBtnTxt;
     public int shopStage
@@ -22,20 +23,7 @@ public class SoulShopManager : MonoBehaviour
     [SerializeField]
     private int _shopStage;
 
-    /// <summary>
-    /// Ok == true or Cancel == false
-    /// </summary>
-    private bool selected;
-    /// <summary>
-    /// 선택한 Stat 업그레이드
-    /// </summary>
     private STAT statUpgrading;
-    /// <summary>
-    /// 업그레이드 클릭시 재클릭 금지
-    /// </summary>
-    private bool isUpgrading;
-
-    private IEnumerator currentCoroutine;
 
     public static SoulShopManager instance = null;
     private void Awake()
@@ -68,29 +56,6 @@ public class SoulShopManager : MonoBehaviour
         }
     }
 
-    bool isStatUpgrading = false;
-    /// <summary>
-    /// 업그레이드 버튼을 누르면 upgrading에 값이 전달됨
-    /// </summary>
-    /// <param name="type"></param>
-    public void SelectStatUpgrade(int type)
-    {
-        if (isStatUpgrading && statUpgrading == (STAT)type)
-            StartCoroutine(StatUp());
-        else
-        {
-            statUpgrading = (STAT)type;
-            statUpgradeBtnTxt[type].text = GetRequiredSoul((STAT)type).ToString();
-            isStatUpgrading = true;
-            for(int i = 0; i < statUpgradeBtn.Length;i++)
-            {
-                if (i == type)
-                    continue;
-                statUpgradeBtn[i].interactable = true;
-                statUpgradeBtnTxt[i].text = "Up";
-            }
-        }
-    }
     /// <summary>
     /// Soul 상점 패널을 열거나 닫는 함수
     /// 외부에서 접근 가능함
@@ -115,37 +80,57 @@ public class SoulShopManager : MonoBehaviour
     /// <summary>
     /// 스탯 패널만 여는 함수
     /// </summary>
-    private void StatPnlOpen()
+    public void StatPnlOpen()
     {
         SyncStatUpgradeTxt();
+        skillPnl.SetActive(false);
+        weaponPnl.SetActive(false);
+
         statPnl.SetActive(true);
         SyncStatUpgradeTxt();
-        //스탯 외 다른 패널은 닫아야함
     }
 
-    /// <summary>
-    /// 업그레이드 선택 패널 설정
-    /// </summary>
-    /// <param name="value"></param>
-    public void SetCheckPnl(bool value)
+    public void SkillPnlOpen()
     {
-        checkPnl.SetActive(value);
-        if (value)
+        statPnl.SetActive(false);
+        weaponPnl.SetActive(false);
+
+        InitSkillPnl();
+        skillPnl.SetActive(true);
+    }
+
+    public void WeaponPnlOpen()
+    {
+        statPnl.SetActive(false);
+        skillPnl.SetActive(false);
+
+        weaponPnl.SetActive(true);
+    }
+
+    #region stat
+
+    bool isStatUpgrading = false;
+    /// <summary>
+    /// 업그레이드 버튼을 누르면 upgrading에 값이 전달됨
+    /// </summary>
+    /// <param name="type"></param>
+    public void SelectStatUpgrade(int type)
+    {
+        if (isStatUpgrading && statUpgrading == (STAT)type)
+            StartCoroutine(StatUp());
+        else
         {
-            cancelBtn.interactable = true;
-            okBtn.interactable = true;
+            statUpgrading = (STAT)type;
+            statUpgradeBtnTxt[type].text = GetRequiredSoul((STAT)type).ToString();
+            isStatUpgrading = true;
+            for(int i = 0; i < statUpgradeBtn.Length;i++)
+            {
+                if (i == type)
+                    continue;
+                statUpgradeBtn[i].interactable = true;
+                statUpgradeBtnTxt[i].text = "Up";
+            }
         }
-    }
-
-    /// <summary>
-    /// Ok와 Cancel 중에 선택하는 함수
-    /// UGUI에서 호출, 해당 코루틴을 호출함
-    /// </summary>
-    /// <param name="value"></param>
-    public void Select(bool value)
-    {
-        selected = value;
-        StartCoroutine(currentCoroutine);
     }
 
     /// <summary>
@@ -155,7 +140,7 @@ public class SoulShopManager : MonoBehaviour
     /// <returns></returns>
     private int GetRequiredSoul(STAT type)
     {
-        Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("statMax")).Clone();
+        Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("stat")).Clone();
         float target = 0;
         switch(type)
         {
@@ -188,19 +173,14 @@ public class SoulShopManager : MonoBehaviour
         return (int)((target - 4) * 10);
     }
 
-    /// <summary>
-    /// okBtn을 누르면 selected 가 참이됨upgrading의 스탯이 업그레이드 됨
-    /// 만약 MaxStatUpCheck에서 false를 받으면 알려주고 checkPnl을 닫음
-    /// </summary>
     public IEnumerator StatUp()
     {
         int required = GetRequiredSoul(statUpgrading);
-        isUpgrading = true;
         if (MoneyManager.instance.soul >= required)
         {
             Debug.Log("Max Stat Upgraded");
 
-            Stat stat = (Stat)Stat.JsonToStat(PlayerPrefs.GetString("statMax")).Clone();
+            Stat stat = BoardManager.instance.player.stat;
             stat.AddMax(statUpgrading, 1);
             PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
             MoneyManager.instance.AddSoul(-required);
@@ -236,7 +216,6 @@ public class SoulShopManager : MonoBehaviour
             statUpgradeBtn[i].interactable = true;
         }
         statUpgradeBtnTxt[(int)statUpgrading].text = "Up";
-        isUpgrading = false;
         SyncStatUpgradeTxt();
         //버튼 잠금 해제
     }
@@ -252,4 +231,71 @@ public class SoulShopManager : MonoBehaviour
         for (int i = 0; i < statUpgradeTxt.Length; i++)
             statUpgradeTxt[i].text = stat.GetMax((STAT)i).ToString();
     }
+
+    #endregion
+    #region skill
+
+    void InitSkillPnl()
+    {
+        var cellData = GetUnBoughtSkills();
+        skillScrollView.UpdateData(cellData);
+    }
+
+    public List<SkillData> GetUnBoughtSkills()
+    {
+        List<SkillData> list = new List<SkillData>();
+
+        bool[] boughts = SkillData.GetBoughtSkills();
+        for (int i = 0; i < GameDatabase.instance.skills.Length; i++)
+        {
+            if (!boughts[i])
+                list.Add((SkillData)GameDatabase.instance.skills[i].Clone());
+        }
+        return list;
+    }
+
+    public void BuySkill(Button btn, TextMeshProUGUI txt, int id)
+    {
+        SkillData skill = GameDatabase.instance.skills[id];
+        if (txt.text.CompareTo("Buy") == 0)
+        {
+            Debug.Log("Buying skill " + skill.GetName() + skill.cost + " soul");
+            txt.text = skill.cost.ToString();
+        }
+        else
+        {
+            Debug.Log(skill.GetName() + "bought " + skill.cost + " soul");
+            if (MoneyManager.instance.UseSoul(skill.cost))
+            {
+                SkillData.Buy(skill.id);
+                txt.text = "Done";
+            }
+            else
+                txt.text = "Fail";
+            StartCoroutine(BtnCorou(btn, txt));
+        }
+    }
+
+    IEnumerator BtnCorou(Button btn, TextMeshProUGUI txt)
+    {
+        btn.interactable = false;
+        float t = 0;
+        while(t < 1)
+        {
+            yield return null;
+            t += Time.unscaledDeltaTime;
+        }
+
+        if (txt.text.CompareTo("Done") == 0)
+            InitSkillPnl();
+
+        btn.interactable = true;
+        txt.text = "Buy";
+    }
+
+    #endregion
+
+    #region weapon
+
+    #endregion
 }

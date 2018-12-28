@@ -160,11 +160,12 @@ public class UnitData : ICloneable
     public bool isFriendly;
     public bool isStanding;
     public MOVE_TYPE move;
-    public float size;
     public float moveDelay;
     public float moveDistance;
     public float moveSpeed;
+    public float limitTime;
     public Vector2 shadowPos;
+    public Order order;
     public EffectData[] effects;
 
     public object Clone()
@@ -240,17 +241,22 @@ public class BulletData : ICloneable
     public string name;
     public int id;
     public float dmg;
+    public STAT related;
     public RuntimeAnimatorController controller;
     public BULLET_TYPE type;
     public float localSpeed;
     public float worldSpeed;
     public float localAccel;
     public float worldAccel;
+    public float guideSpeed;
     public float size;
     public float delay;
     public float limitTime;
+    public float disapearStartTime;
+    public float disapearDuration;
     public int pierce;
     public ShakeData shake;
+    public Order order;
     public EffectData[] effects;
 
     public BulletChildData[] children;
@@ -296,7 +302,6 @@ public struct BulletChildData : ICloneable
     public float angle;
 
     public bool isRepeat;
-    public bool isFirst;//반복의 첫 번째는 startTime 무시
     public bool isStick;
     public bool isDestroyWith;
 
@@ -311,29 +316,7 @@ public struct BulletChildData : ICloneable
 [Serializable]
 public enum BULLET_TYPE
 {
-    CIRCLECAST, RAYCAST, TRIANGLE, SECTOR, NONE, DYNAMIC
-}
-
-/// <summary>
-/// Bullet Ability
-/// 중력, 자전, 관통, 시간파괴, 유도, 주인 죽으면 파괴
-/// </summary>
-[Serializable]
-public enum ABILITY
-{
-    GRAVITY, SPIN, PIERCE, TIME, GUIDE, OWNER
-}
-
-[Serializable]
-public struct Ability : ICloneable
-{
-    public ABILITY ability;
-    public float value;
-
-    public object Clone()
-    {
-        return this.MemberwiseClone();
-    }
+    CIRCLECAST, RAYCAST, NONE
 }
 
 //[Serializable]
@@ -353,22 +336,25 @@ enum SKILL_ID
 public class SkillData:ICloneable
 {
     public string name;
+    public string[] nameLang;
     public int[] bulletIds;
     public int[] unitIds;
     public Sprite spr;
     public int id;
     public int level;
+    public int cost;
     public float coolTime;
     public float coolTimeLeft;
     public float manaCost;
     public float size;
     public bool isCircleToPlayer;
     public bool isDeath;
+    public bool isBasic;
     public EffectData[] effects;
     public ValueData[] values;
     public SkillUpData levelUp;
     [TextArea]
-    public string description;
+    public string[] description;
 
     public object Clone()
     {
@@ -394,26 +380,59 @@ public class SkillData:ICloneable
         name = string.Empty; spr = null; id = -1; level = 1; coolTime = 0; coolTimeLeft = 0; manaCost = 0; effects = new EffectData[0]; values = new ValueData[0];
     }
 
-    public string desc
+    public string GetName()
     {
-        get
+        string result = nameLang.Length > (int)GameManager.language ?
+            nameLang[(int)GameManager.language] : (nameLang.Length > 0 ? nameLang[0] : name);
+        return result;
+    }
+
+    public string GetDescription()
+    {
+        string result = description.Length > (int)GameManager.language ?
+            description[(int)GameManager.language] : (description.Length > 0 ? description[0] : string.Empty);
+
+        return result;
+    }
+
+    public static bool[] GetBoughtSkills()
+    {
+        string str = PlayerPrefs.GetString("boughtSkills");
+        bool[] save;
+        bool[] result;
+        bool isSave = false;
+        if ((str.CompareTo(string.Empty) != 0))
+            save = JsonHelper.FromJson<bool>(str);
+        else
         {
-            {
-                SKILL_ID _id = (SKILL_ID)id;
-                if (id >= GameDatabase.instance.skills.Length)
-                    return string.Empty;
-                SkillData data = GameDatabase.instance.skills[id];
-                string des = data.description;
-                
-                float tec = BoardManager.instance.player.data.stat.GetCurrent(STAT.TEC);
-                switch (_id)
-                {
-                    case SKILL_ID.ThunderStrike:
-                        return string.Format(des, data.values[0].value, string.Format("{0:##0.##}({1:##0.##}TEC*0.1)", tec * 0.1f, tec));
-                }
-                return des;
-            }
+            save = new bool[GameDatabase.instance.skills.Length];
+            isSave = true;
         }
+
+        if (save.Length < GameDatabase.instance.skills.Length)
+            result = new bool[GameDatabase.instance.skills.Length];
+        else
+            result = save;
+        for (int i = 0; i < result.Length; i++)
+        {
+            if (GameDatabase.instance.skills[i].isBasic)
+                result[i] = true;
+        }
+        if (isSave)
+            SaveBoughtSkills(result);
+        return result;
+    }
+
+    public static void Buy(int id)
+    {
+        bool[] bought = GetBoughtSkills();
+        bought[id] = true;
+        SaveBoughtSkills(bought);
+    }
+
+    public static void SaveBoughtSkills(bool[] boughts)
+    {
+        PlayerPrefs.SetString("boughtSkills", JsonHelper.ToJson<bool>(boughts));
     }
 }
 
@@ -435,9 +454,9 @@ public struct SkillSaveData
 }
 
 [Serializable]
-public enum SKILL_VALUE
+public enum Value
 {
-    AMOUNT, TIME
+    Amount, Time, Damage, LifeSteal, Hp
 }
 
 [Serializable]
@@ -468,7 +487,7 @@ public class SkillUpData : ICloneable
 [Serializable]
 public class ValueData : ICloneable
 {
-    public SKILL_VALUE name;
+    public Value name;
     public float value;
 
     public object Clone()
@@ -511,7 +530,7 @@ public class EffectData:ICloneable
 [Serializable]
 public enum EFFECT
 {
-    STUN, SLOW, FIRE, ICE, KNOCKBACK, POISON, HEAL, LIFESTEAL
+    Stun, Slow, Fire, Ice, Knockback, Poison, Heal, LifeSteal
 }
 
 [Serializable]
@@ -566,4 +585,10 @@ public enum MOVE_TYPE
     DISTANCE,//거리 유지
     RUN,//도망
     REST_RUSH,
+}
+
+[Serializable]
+public enum Language
+{
+    English, Korean
 }

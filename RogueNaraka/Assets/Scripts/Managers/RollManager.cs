@@ -239,7 +239,7 @@ public class RollManager : MonoBehaviour {
                     selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "Skill";
                     nameTxt.text = skill.name;
-                    descTxt.text = skill.desc;
+                    descTxt.text = skill.description[(int)GameManager.language];
                     break;
                 case ROLL_TYPE.STAT:
                     selectedImg.sprite = GetSprite(data);

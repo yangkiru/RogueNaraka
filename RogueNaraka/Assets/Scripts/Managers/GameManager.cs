@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GoogleMobileAds.Api;
 using RogueNaraka.UnitScripts;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
     const string version = "1.0.0";
     const bool isReset = true;
+    public static Language language;
 
     [SerializeField][ReadOnly]
     public static GameManager instance = null;
@@ -19,7 +21,8 @@ public class GameManager : MonoBehaviour {
     public LevelUpManager levelUpManager;
     public SoulShopManager soulShopManager;
     public SkillManager skillManager;
-    public DeathEffectPool deathEffectPool; 
+    public DeathEffectPool deathEffectPool;
+    public GameObject settingPnl;
     public Unit player
     {
         get { return boardManager.player; }
@@ -59,12 +62,18 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("isReset", 0);
         }
 
+        string lang = PlayerPrefs.GetString("language");
+        try
+        {
+            if (lang == string.Empty)
+                language = (Language)System.Enum.Parse(typeof(Language), Application.systemLanguage.ToString());
+            else
+                language = (Language)System.Enum.Parse(typeof(Language), lang);
+        } catch
+        {
+            language = Language.English;
+        }
         Application.targetFrameRate = 60;
-    }
-
-    private void Start()
-    {
-        Load();
     }
 
     private void RandomStat()
@@ -159,6 +168,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("stage", 1);
 
         PlayerPrefs.SetInt("isReset", 1);
+        PlayerPrefs.SetInt("language", 0);
     }
 
     private void RunGame()
@@ -276,8 +286,18 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 1;
     }
 
-    public void Setting()
+    public void SetSettingPnl(bool value)
     {
+        if(value)
+        {
+            SetPause(true);
+        }
+        else
+        {
+            if (!RollManager.instance.rollPnl.activeSelf && !SoulShopManager.instance.shopPnl.activeSelf)
+                SetPause(false);
+        }
+        settingPnl.SetActive(value);
     }
 
     /// <summary>
@@ -307,15 +327,30 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         player.animator.updateMode = AnimatorUpdateMode.Normal;
-        for(int i = 0; i < 3; i++)
-        {
-            SkillManager.instance.skills[i].ResetSkill();
-        }
+
+        SkillManager.instance.ResetSave();
+
         Load();
     }
 
     public static Vector2 GetMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public void SetLanguage(int num)
+    {
+        language = (Language)num;
+        PlayerPrefs.SetString("language", language.ToString());
+    }
+
+    public void InitDropdown(TMP_Dropdown dropdown)
+    {
+        dropdown.value = (int)language;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

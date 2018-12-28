@@ -32,7 +32,7 @@ namespace RogueNaraka.UnitScripts.Targetable
                 leftDelay -= Time.deltaTime;
                 return;
             }
-            else if (leftDelay < 0)
+            else
                 leftDelay = 0.1f;
             _target = GetTarget();
             _targetDistance = Distance(target);

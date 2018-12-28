@@ -52,9 +52,13 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         void Attack()
         {
+            if (unit.targetable.direction == Vector2.zero)
+                return;
             Bullet bullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             bullet.Spawn(unit, GameDatabase.instance.bullets[_weapon.startBulletId], transform.position);
             bullet.shootable.Shoot(unit.targetable.direction, _weapon.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
+            afterAttackCorou = AfterAttack();
+            StartCoroutine(afterAttackCorou);
         } 
 
         IEnumerator BeforeAttack()
@@ -76,8 +80,6 @@ namespace RogueNaraka.UnitScripts.Attackable
 
             Attack();
             beforeAttackCorou = null;
-            afterAttackCorou = AfterAttack();
-            StartCoroutine(afterAttackCorou);
         }
 
         IEnumerator AfterAttack()

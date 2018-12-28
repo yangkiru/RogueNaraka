@@ -14,27 +14,19 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         List<Effect> _effects = new List<Effect>();
 
-        public List<Effect> stun { get { return _stun; } }
-        List<Effect> _stun = new List<Effect>();
-        public List<Effect> slow { get { return _slow; } }
-        List<Effect> _slow = new List<Effect>();
-        public List<Effect> ice { get { return _ice; } }
-        [SerializeField]
-        List<Effect> _ice = new List<Effect>();
-        public List<Effect> fire { get { return _fire; } }
-        List<Effect> _fire = new List<Effect>();
-        public List<Effect> knockback { get { return _knockback; } }
-        List<Effect> _knockback = new List<Effect>();
-        public List<Effect> poison { get { return _poison; } }
-        List<Effect> _poison = new List<Effect>();
-        public List<Effect> heal { get { return _heal; } }
-        List<Effect> _heal = new List<Effect>();
-        public List<Effect> lifeSteal { get { return _lifeSteal; } }
-        List<Effect> _lifeSteal = new List<Effect>();
+        Dictionary<EFFECT, List<Effect>> dictionary = new Dictionary<EFFECT, List<Effect>>();
 
         void Reset()
         {
             unit = GetComponent<Unit>();
+        }
+
+        private void Awake()
+        {
+            for(int i = 0; i < (int)EFFECT.LifeSteal; i++)
+            {
+                dictionary.Add((EFFECT)i, new List<Effect>());
+            }
         }
 
         public void Init()
@@ -43,50 +35,44 @@ namespace RogueNaraka.UnitScripts
             {
                 _effects[i].Destroy();
             }
-            
-            _stun.Clear();
-            _slow.Clear();
-            _ice.Clear();
-            _fire.Clear();
-            _knockback.Clear();
-            _poison.Clear();
-            _heal.Clear();
-            _lifeSteal.Clear();
+
+            _effects.Clear();
+            dictionary.Clear();
         }
 
         public Effect GetSameEffect(EffectData data)
         {
-            
+            List<Effect> list = dictionary[data.type];
             switch (data.type)
             {
-                case EFFECT.STUN:
-                    if (_stun.Count > 0)
-                        return _stun[0];
+                case EFFECT.Stun:
+                    if (list.Count > 0)
+                        return list[0];
                     else
                         return null;
-                case EFFECT.SLOW:
+                case EFFECT.Slow:
                     return null;
-                case EFFECT.FIRE:
+                case EFFECT.Fire:
                     return null;
-                case EFFECT.ICE:
-                    for (int i = 0; i < _ice.Count; i++)
+                case EFFECT.Ice:
+                    for (int i = 0; i < list.Count; i++)
                     {
-                        if (_ice[i].data.value == data.value)
-                            return _ice[i];
+                        if (list[i].data.value == data.value)
+                            return list[i];
                     }
                     return null;
-                case EFFECT.KNOCKBACK:
-                    for (int i = 0; i < _knockback.Count; i++)
+                case EFFECT.Knockback:
+                    for (int i = 0; i < list.Count; i++)
                     {
-                        if (_knockback[i].data.time == data.time)
-                            return _knockback[i];
+                        if (list[i].data.time == data.time)
+                            return list[i];
                     }
                     return null;
-                case EFFECT.POISON:
+                case EFFECT.Poison:
                     return null;
-                case EFFECT.HEAL:
+                case EFFECT.Heal:
                     return null;
-                case EFFECT.LIFESTEAL:
+                case EFFECT.LifeSteal:
                     return null;
                 default:
                     return null;
@@ -97,44 +83,13 @@ namespace RogueNaraka.UnitScripts
         {
             Effect effect = GetSameEffect(data);
             GameObject obj = effect == null ? BoardManager.instance.effectPool.DequeueObjectPool() : null;
-            List<Effect> list = null;
+
             if (!effect)
             {
-                switch (data.type)
-                {
-                    case EFFECT.STUN:
-                        //effect = obj.AddComponent<Stun>();
-                        list = _stun;
-                        break;
-                    case EFFECT.SLOW:
-                        //effect = obj.AddComponent<Slow>();
-                        list = _slow;
-                        break;
-                    case EFFECT.FIRE:
-                        //effect = obj.AddComponent<Fire>();
-                        list = _fire;
-                        break;
-                    case EFFECT.ICE:
-                        effect = obj.AddComponent<Ice>();
-                        list = _ice;
-                        break;
-                    case EFFECT.KNOCKBACK:
-                        //effect = obj.AddComponent<Knockback>();
-                        list = _knockback;
-                        break;
-                    case EFFECT.POISON:
-                        //effect = obj.AddComponent<Poison>();
-                        list = _poison;
-                        break;
-                    case EFFECT.HEAL:
-                        //effect = obj.AddComponent<Heal>();
-                        list = _heal;
-                        break;
-                    case EFFECT.LIFESTEAL:
-                        //effect = obj.AddComponent<LifeSteal>();
-                        list = _lifeSteal;
-                        break;
-                }
+                System.Type type = System.Type.GetType(string.Format("RogueNaraka.EffectScripts.{0}", data.type));
+                effect = obj.AddComponent(type) as Effect;
+
+                List<Effect> list = dictionary[data.type];
 
                 effect.Init(unit, (EffectData)data.Clone(), list);
             }

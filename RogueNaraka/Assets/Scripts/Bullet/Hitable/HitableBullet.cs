@@ -28,6 +28,8 @@ namespace RogueNaraka.BulletScripts.Hitable
         [SerializeField]
         protected int pierce;
 
+        public event System.Action<Bullet, Unit> OnDamage;
+
         private void Reset()
         {
             bullet = GetComponent<Bullet>();
@@ -44,19 +46,20 @@ namespace RogueNaraka.BulletScripts.Hitable
             }
             else
                 leftDelay = delay;
-            Debug.Log(name + " GetHitUnits" + leftDelay + "/" + delay);
             GetHitUnits();
             for (int i = 0; i < hitList.Count; i++)
             {
-                Debug.Log(name + " hit " + hitList[i].name);
+                //Debug.Log(name + " hit " + hitList[i].name);
                 
                 for(int j = 0; j < bullet.data.effects.Length; j++)
                 {
                     hitList[i].effectable.AddEffect(bullet.data.effects[j]);
                 }
-                bullet.damageable.Damage(hitList[i]);
+                bullet.damageable.Damage(hitList[i], bullet.data.related);
                 if(shakeable.shake.isOnHit)
                     shakeable.Shake();
+                if (OnDamage != null)
+                    OnDamage(bullet, hitList[i]);
             }
             hitList.Clear();
         }
@@ -68,6 +71,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             leftDelay = 0;
             pierce = data.pierce;
             hitList = new List<Unit>();
+            OnDamage = null;
         }
 
         protected abstract void GetHitUnits();

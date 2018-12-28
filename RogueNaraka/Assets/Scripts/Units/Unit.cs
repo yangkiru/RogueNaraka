@@ -9,53 +9,62 @@ namespace RogueNaraka.UnitScripts
 {
     public class Unit : MonoBehaviour
     {
+        #region field
         public MoveableUnit moveable { get { return _moveable; } }
         [SerializeField]
-        protected MoveableUnit _moveable;
+        MoveableUnit _moveable;
 
         public AttackableUnit attackable { get { return _attackable; } }
-        protected AttackableUnit _attackable;
+        AttackableUnit _attackable;
         [SerializeField]
-        protected StopBeforeAttackableUnit _stopBeforeAttackable;
+        StopBeforeAttackableUnit _stopBeforeAttackable;
         [SerializeField]
-        protected StopAfterAttackableUnit _stopAfterAttackable;
+        StopAfterAttackableUnit _stopAfterAttackable;
         [SerializeField]
-        protected DontStopAttackableUnit _dontStopAttackable;
+        DontStopAttackableUnit _dontStopAttackable;
 
         public TargetableUnit targetable { get { return _targetable; } }
-        protected TargetableUnit _targetable;
+        TargetableUnit _targetable;
         [SerializeField]
-        protected EnemyTargetableUnit _enemyTargetable;
+        EnemyTargetableUnit _enemyTargetable;
         [SerializeField]
-        protected FriendlyTargetableUnit _friendlyTargetable;
+        FriendlyTargetableUnit _friendlyTargetable;
 
         public AutoMoveableUnit autoMoveable { get { return _autoMoveable; } }
-        protected AutoMoveableUnit _autoMoveable;
+        AutoMoveableUnit _autoMoveable;
         [SerializeField]
-        protected RandomMoveableUnit _randomMoveable;
+        RandomMoveableUnit _randomMoveable;
         [SerializeField]
-        protected RushMoveableUnit _rushMoveable;
+        RushMoveableUnit _rushMoveable;
         [SerializeField]
-        protected RestRushMoveableUnit _restRushMoveable;
+        RestRushMoveableUnit _restRushMoveable;
 
         public DamageableUnit damageable { get { return _damageable; } }
         [SerializeField]
-        protected DamageableUnit _damageable;
+        DamageableUnit _damageable;
 
         public HpableUnit hpable { get { return _hpable; } }
         [SerializeField]
-        protected HpableUnit _hpable;
+        HpableUnit _hpable;
         public MpableUnit mpable { get { return _mpable; } }
         [SerializeField]
-        protected MpableUnit _mpable;
+        MpableUnit _mpable;
 
         public DeathableUnit deathable { get { return _deathable; } }
         [SerializeField]
-        protected DeathableUnit _deathable;
+        DeathableUnit _deathable;
 
         public EffectableUnit effectable { get { return _effectable; } }
         [SerializeField]
-        protected EffectableUnit _effectable;
+        EffectableUnit _effectable;
+
+        public TimeLimitableUnit timeLimitable { get { return _timeLimitable; } }
+        [SerializeField]
+        TimeLimitableUnit _timeLimitable;
+
+        public Orderable orderable { get { return _orderable; } }
+        [SerializeField]
+        Orderable _orderable;
 
         public Animator animator { get { return _animator; } }
         [SerializeField]
@@ -66,6 +75,8 @@ namespace RogueNaraka.UnitScripts
         UnitData _data;
 
         public Stat stat { get { return _data.stat; } }
+
+        #endregion
 
         void Reset()
         {
@@ -83,17 +94,21 @@ namespace RogueNaraka.UnitScripts
             _mpable = GetComponent<MpableUnit>();
             _deathable = GetComponent<DeathableUnit>();
             _effectable = GetComponent<EffectableUnit>();
+            _timeLimitable = GetComponent<TimeLimitableUnit>();
+
+            _orderable = GetComponent<Orderable>();
 
             _animator = GetComponent<Animator>();
         }
 
         void OnDisable()
         {
+            if (!Application.isPlaying)
+                return;
             if(_data.isFriendly)
                 BoardManager.instance.friendlies.Remove(this);
             else
                 BoardManager.instance.enemies.Remove(this);
-            Debug.Log(name + " disabled");
         }
 
         public void SetStat(Stat stat)
@@ -103,7 +118,7 @@ namespace RogueNaraka.UnitScripts
 
         public void Init(UnitData data)
         {
-            Debug.Log(data.name + " Init");
+            //Debug.Log(data.name + " Init");
             _data = (UnitData)data.Clone();
             name = _data.name;
             if (_data.isFriendly)
@@ -153,16 +168,24 @@ namespace RogueNaraka.UnitScripts
                     _autoMoveable = _restRushMoveable;
                     break;
                 default:
-                    _autoMoveable = _randomMoveable;
+                    _autoMoveable = null;
                     break;
             }
-            _autoMoveable.Init(_data);
-            _autoMoveable.enabled = true;
+            if (_autoMoveable)
+            {
+                _autoMoveable.Init(_data);
+                _autoMoveable.enabled = true;
+            }
 
             _hpable.Init(_data.stat);
             _mpable.Init(_data.stat);
             _hpable.enabled = true;
             _mpable.enabled = true;
+
+            _timeLimitable.enabled = false;
+            _timeLimitable.Init(data.limitTime);
+
+            _orderable.Init(data.order);
 
             if(_data.effects != null)
                 for (int i = 0; i < _data.effects.Length; i++)
@@ -178,6 +201,8 @@ namespace RogueNaraka.UnitScripts
                 BoardManager.instance.friendlies.Add(this);
             else if (!_data.isFriendly && !BoardManager.instance.enemies.Contains(this))
                 BoardManager.instance.enemies.Add(this);
+            if (_timeLimitable.time != 0)
+                _timeLimitable.enabled = true;
         }
 
         void DisableAutoMoveables()
@@ -203,15 +228,18 @@ namespace RogueNaraka.UnitScripts
             hpable.enabled = false;
             mpable.enabled = false;
             moveable.enabled = false;
-            autoMoveable.enabled = false;
+            if(autoMoveable) autoMoveable.enabled = false;
             attackable.enabled = false;
             targetable.enabled = false;
             moveable.agent.enabled = false;
         }
 
-        public void Kill()
+        public void Kill(bool isTxt = true)
         {
-            hpable.AddHp(-hpable.currentHp);
+            if (isTxt)
+                damageable.Damage(-hpable.currentHp);
+            else
+                hpable.AddHp(-hpable.currentHp);
         }
     }
 }

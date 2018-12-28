@@ -65,6 +65,18 @@ namespace RogueNaraka.UnitScripts
             }
         }
 
+        public void Heal(float amount)
+        {
+            float result = Mathf.Min(maxHp, _currentHp + amount);
+
+            float heal = result - _currentHp;
+
+            if(heal > 0)
+                PointTxtManager.instance.TxtOnHead(heal, transform, Color.green);
+            _currentHp = result;
+            stat.currentHp = _currentHp;
+        }
+
         void Regen()
         {
             if (unit.deathable.isDeath || stat == null)

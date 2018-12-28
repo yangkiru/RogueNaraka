@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DebugManager : MonoBehaviour {
 
+#if DEBUG
     public bool reset;
     public bool setStage;
     public int stage;
@@ -12,6 +13,8 @@ public class DebugManager : MonoBehaviour {
     public bool setShopStage;
     public int shopStage;
     public bool levelUp;
+    public int addSoul;
+    public bool resetSkillBought;
     private void OnValidate()
     {
         if (reset)
@@ -54,5 +57,18 @@ public class DebugManager : MonoBehaviour {
             PlayerPrefs.SetInt("isLevelUp", 1);
             levelUp = false;
         }
+        if(addSoul != 0)
+        {
+            if (MoneyManager.instance) MoneyManager.instance.AddSoul(addSoul);
+            else
+                PlayerPrefs.SetInt("soul", PlayerPrefs.GetInt("soul") + addSoul);
+            addSoul = 0;
+        }
+        if(resetSkillBought)
+        {
+            PlayerPrefs.SetString("boughtSkills", string.Empty);
+            resetSkillBought = false;
+        }
     }
+#endif
 }

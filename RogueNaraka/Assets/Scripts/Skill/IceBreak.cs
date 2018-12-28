@@ -15,13 +15,14 @@ namespace RogueNaraka.SkillScripts
         void SpawnIce(Vector3 mp)
         {
             Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-            BulletData newData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
-            newData.limitTime += GetValue(SKILL_VALUE.TIME).value;
-            newData.GetEffect(EFFECT.ICE).value += GetEffect(EFFECT.ICE).value;
-            ice.Init(BoardManager.instance.player, newData);
+            BulletData iceData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
+            iceData.limitTime += GetValue(Value.Time).value;
+            iceData.GetEffect(EFFECT.Ice).value += GetEffect(EFFECT.Ice).value;
+            iceData.disapearStartTime = iceData.limitTime / 2;
+            iceData.disapearDuration = iceData.disapearStartTime;
+            
+            ice.Init(BoardManager.instance.player, iceData);
             ice.Spawn(mp);
-            float time = ice.data.limitTime / 2;
-            ice.disapearable.StartCoroutine(ice.disapearable.Disapear(time, time));
         }
     }
 }

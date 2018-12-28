@@ -9,24 +9,46 @@ namespace RogueNaraka.BulletScripts
         [SerializeField]
         Bullet bullet;
 
+        public float startTime { get { return _startTime; } }
+        float _startTime;
+        public float duration { get { return _duration; } }
+        float _duration;
+
         private void Reset()
         {
             bullet = GetComponent<Bullet>();
         }
 
-        public IEnumerator Disapear(float time, float wait)
+        public void Init(BulletData data)
+        {
+            _startTime = data.disapearStartTime;
+            _duration = data.disapearDuration;
+        }
+
+        public void Disapear()
+        {
+            StartCoroutine(DisapearCorou());
+        }
+
+        IEnumerator DisapearCorou()
         {
             Color color = bullet.renderer.color;
-            yield return new WaitForSeconds(wait);
+            float t = 0;
+            while (t < _startTime)
+            {
+                t += Time.deltaTime;
+                yield return null;
+            }
+
             float alpha = bullet.renderer.color.a;
 
-            float t = 0;
+            t = 0;
 
             while (t < 1)
             {
                 yield return null;
                 color.a -= alpha * Time.deltaTime;
-                t += Time.deltaTime / time;
+                t += Time.deltaTime / _duration;
                 bullet.renderer.color = color;
             }
             color.a = 0;

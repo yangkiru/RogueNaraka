@@ -47,11 +47,14 @@ namespace RogueNaraka.EffectScripts
             Destroy(this);
         }
 
+
+
         protected abstract void OnInit();
         protected abstract void OnDestroyEffect();
         public abstract void Combine(EffectData dt);
     }
 }
+
 //public void CombineEffects(Effect result, EffectData data)
 //{
 //    switch (data.type)

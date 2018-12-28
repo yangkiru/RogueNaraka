@@ -27,7 +27,7 @@ public class IsometricSpriteRenderer : MonoBehaviour {
             //pos = transform.position.y;
             //if (pos != _pos)
             //{
-            //    //renderer.sortingOrder = (int)(transform.position.y * -10);
+            //    //
             //}
             //_pos = pos;
             yield return new WaitForSeconds(0.5f);

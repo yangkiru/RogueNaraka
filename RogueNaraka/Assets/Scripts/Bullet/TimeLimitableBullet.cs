@@ -12,6 +12,11 @@ namespace RogueNaraka.BulletScripts
         [SerializeField]
         float leftTime;
 
+        private void Reset()
+        {
+            bullet = GetComponent<Bullet>();
+        }
+
         public void Init(BulletData data)
         {
             time = data.limitTime;
@@ -27,11 +32,6 @@ namespace RogueNaraka.BulletScripts
                 bullet.Destroy();
                 enabled = false;
             }
-        }
-
-        private void Reset()
-        {
-            bullet = GetComponent<Bullet>();
         }
     }
 }

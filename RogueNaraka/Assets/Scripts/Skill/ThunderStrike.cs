@@ -15,7 +15,10 @@ namespace RogueNaraka.SkillScripts
 
         IEnumerator SpawnThunder(Vector3 mp)
         {
-            for (int i = 0; i < GetValue(SKILL_VALUE.AMOUNT).value; i++)
+            float amount = GetValue(Value.Amount).value;
+            Debug.Log("Thunder" + amount);
+            float delay = 0.5f / amount;
+            for (int i = 0; i < amount; i++)
             {
                 Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
                 Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
@@ -24,9 +27,13 @@ namespace RogueNaraka.SkillScripts
                 float rndAngle = Random.Range(0, 360);
                 thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
                 thunder.Spawn((Vector2)mp + rnd);
-                float delay = data.values[1].value > 0 ? data.values[1].value : 0;
 
-                yield return new WaitForSeconds(delay);
+                float time = delay;
+                do
+                {
+                    yield return null;
+                    time -= Time.deltaTime;
+                } while (time > 0);
             }
         }
     }

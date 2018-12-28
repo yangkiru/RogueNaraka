@@ -6,17 +6,23 @@ namespace RogueNaraka.BulletScripts
 {
     public class MoveableBullet : MonoBehaviour
     {
-        /// <summary>
-        /// 매 프레임 속력 증가 값
-        /// </summary>
-        [SerializeField]
-        Vector3 localAccel;
-        [SerializeField]
-        Vector3 worldAccel;
+
         [SerializeField]
         Vector3 localVelocity;
         [SerializeField]
         Vector3 worldVelocity;
+        [SerializeField]
+        Vector3 localAccel;
+        [SerializeField]
+        Vector3 worldAccel;
+
+        public void Init()
+        {
+            localAccel = Vector3.zero;
+            worldAccel = Vector3.zero;
+            localVelocity = Vector3.zero;
+            worldVelocity = Vector3.zero;
+        }
 
         public void SetVelocity(Vector3 velocity, Space space)
         {

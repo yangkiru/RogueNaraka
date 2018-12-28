@@ -8,12 +8,14 @@ namespace RogueNaraka.BulletScripts
 {
     public class Bullet : MonoBehaviour
     {
+        #region field
         [SerializeField]
         HitableBullet hitableRay;
         [SerializeField]
         HitableBullet hitableCircle;
-        [HideInInspector]
-        public HitableBullet hitable;
+
+        public HitableBullet hitable { get { return _hitable; } }
+        HitableBullet _hitable;
 
         public ShootableBullet shootable { get { return _shootable; } }
         [SerializeField]
@@ -39,6 +41,13 @@ namespace RogueNaraka.BulletScripts
         public DisapearableBullet disapearable { get { return _disapearable; } }
         [SerializeField]
         DisapearableBullet _disapearable;
+        public GuideableBullet guideable { get { return _guideable; } }
+        [SerializeField]
+        GuideableBullet _guideable;
+
+        public Orderable orderable { get { return _orderable; } }
+        [SerializeField]
+        Orderable _orderable;
 
         public BulletData data { get { return _data; } }
         [SerializeField]
@@ -53,6 +62,8 @@ namespace RogueNaraka.BulletScripts
         SpriteRenderer _renderer;
 
         IEnumerator deathCorou;
+
+        #endregion
 
         void Reset()
         {
@@ -70,17 +81,21 @@ namespace RogueNaraka.BulletScripts
             _spawnable = GetComponent<SpawnableBullet>();
             _shakeable = GetComponent<ShakeableBullet>();
             _disapearable = GetComponent<DisapearableBullet>();
+            _guideable = GetComponent<GuideableBullet>();
+            _orderable = GetComponent<Orderable>();
         }
 
         public void Init(Unit owner, BulletData data)
         {
             gameObject.SetActive(true);
 
-            renderer.color = Color.white;
+            _renderer.color = Color.white;
 
-            moveable.enabled = false;
+            transform.rotation = Quaternion.identity;
+            _moveable.Init();
+            _moveable.enabled = false;
 
-            ownerable.SetOwner(owner);
+            _ownerable.SetOwner(owner);
             _data = (BulletData)data.Clone();
             name = _data.name;
 
@@ -89,27 +104,37 @@ namespace RogueNaraka.BulletScripts
             switch(_data.type)
             {
                 case BULLET_TYPE.CIRCLECAST:
-                    hitable = hitableCircle;
+                    _hitable = hitableCircle;
                     break;
                 case BULLET_TYPE.RAYCAST:
-                    hitable = hitableRay;
+                    _hitable = hitableRay;
+                    break;
+                default:
+                    _hitable = null;
                     break;
             }
             
-            hitable.Init(_data);
+            if(_hitable)
+                _hitable.Init(_data);
 
-            animator.runtimeAnimatorController = data.controller;
+            _animator.runtimeAnimatorController = _data.controller;
 
-            renderer.enabled = false;
-            animator.enabled = false;
+            _renderer.enabled = false;
+            _animator.enabled = false;
 
             deathCorou = null;
 
-            timeLimitable.Init(data);
-            timeLimitable.enabled = false;
+            _timeLimitable.Init(_data);
+            _timeLimitable.enabled = false;
 
-            shakeable.Init(data.shake);
-            shakeable.enabled = false;
+            _shakeable.Init(_data.shake);
+
+            _guideable.Init(_data);
+            _guideable.enabled = false;
+
+            _disapearable.Init(_data);
+
+            _orderable.Init(_data.order);
         }
 
         void DisableAllHitable()
@@ -126,7 +151,8 @@ namespace RogueNaraka.BulletScripts
 
         public void Spawn(Vector3 position)
         {
-            hitable.enabled = true;
+            if(_hitable)
+                _hitable.enabled = true;
             moveable.enabled = true;
             if (_data.limitTime != 0)
                 timeLimitable.enabled = true;                
@@ -134,11 +160,17 @@ namespace RogueNaraka.BulletScripts
             animator.enabled = true;
 
             if (shakeable.shake.power != 0 || shakeable.shake.time != 0)
-                shakeable.enabled = true;
+                shakeable.Shake();
 
             transform.position = position;
             
             spawnable.Init(_data);
+
+            if (guideable.rotateSpeed != 0)
+                guideable.enabled = true;
+
+            if (disapearable.duration != 0)
+                disapearable.Disapear();
         }
 
         public void Destroy()
@@ -152,7 +184,8 @@ namespace RogueNaraka.BulletScripts
 
         public void DisableOnDestroy()
         {
-            hitable.enabled = false;
+            if(_hitable)
+                _hitable.enabled = false;
             moveable.enabled = false;
         }
 

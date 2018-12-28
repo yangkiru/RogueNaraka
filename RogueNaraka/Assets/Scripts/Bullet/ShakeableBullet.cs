@@ -8,7 +8,6 @@ namespace RogueNaraka.BulletScripts
     {
         public ShakeData shake { get { return _shake; } }
         ShakeData _shake;
-        float leftTime;
 
         public void Init(ShakeData data)
         {
@@ -16,25 +15,11 @@ namespace RogueNaraka.BulletScripts
             _shake.gap = data.gap;
             _shake.power = data.power;
             _shake.isOnHit = data.isOnHit;
-            leftTime = 0;
         }
 
         public void Shake()
         {
             CameraShake.instance.Shake(_shake);
-        }
-
-        private void Update()
-        {
-            if (_shake.isOnHit)
-                return;
-            if(leftTime > 0)
-            {
-                leftTime -= Time.deltaTime;
-                return;
-            }
-            Shake();
-            leftTime = _shake.time;
         }
     }
 }

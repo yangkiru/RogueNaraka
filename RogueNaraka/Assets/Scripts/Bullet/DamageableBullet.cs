@@ -15,12 +15,13 @@ namespace RogueNaraka.BulletScripts
             bullet = GetComponent<Bullet>();
         }
 
-        public void Damage(Unit unit, STAT related = STAT.DMG)
+        public float Damage(Unit unit, STAT related = STAT.DMG)
         {
             float ownerDmg = bullet.ownerable.owner ? bullet.ownerable.owner.stat.GetCurrent(related) : 1;
             float damage = bullet.data.dmg * ownerDmg;
             Debug.Log(string.Format("{0}'s {1} damaged {2} to {3}", bullet.ownerable.owner.name, name, damage, unit.name));
             unit.damageable.Damage(damage);
+            return damage;
         }
     }
 }
