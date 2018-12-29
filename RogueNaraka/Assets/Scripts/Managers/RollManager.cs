@@ -238,8 +238,8 @@ public class RollManager : MonoBehaviour {
                     SkillData skill = GameDatabase.instance.skills[data.id];
                     selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "Skill";
-                    nameTxt.text = skill.name;
-                    descTxt.text = skill.description[(int)GameManager.language];
+                    nameTxt.text = skill.GetName();
+                    descTxt.text = skill.GetDescription();
                     break;
                 case ROLL_TYPE.STAT:
                     selectedImg.sprite = GetSprite(data);

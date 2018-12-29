@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Purchasing;
 
 public class MoneyManager : MonoBehaviour {
 
@@ -88,7 +89,7 @@ public class MoneyManager : MonoBehaviour {
         Debug.Log("RefineSoul");
     }
 
-    public void Save()
+    public void Save(bool isUnrefined = true)
     {
         PlayerPrefs.SetInt("unrefinedSoul", _unrefinedSoul);
         PlayerPrefs.SetInt("soul", _soul);
@@ -117,5 +118,20 @@ public class MoneyManager : MonoBehaviour {
     {
         soulTxt.text = _soul.ToString();
         unrefinedSoulTxt.text = _unrefinedSoul.ToString();
+    }
+
+    public void BuySoul(Product product)
+    {
+        if(product != null)
+        {
+            switch(product.definition.id)
+            {
+                case "soul.100":
+                    Debug.Log("Bought 100 Soul");
+                    AddSoul(100);
+                    Save(false);
+                    break;
+            }
+        }
     }
 }
