@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BezierCurve : MonoBehaviour {
+public class BezierCurve {
 
     public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
     {

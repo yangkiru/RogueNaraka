@@ -250,5 +250,5 @@ public class Stat : ICloneable
 [Serializable]
 public enum STAT
 {
-    DMG, SPD, TEC, HP, MP, HPREGEN, MPREGEN, STATPOINT
+    DMG, SPD, TEC, HP, HPREGEN, MP, MPREGEN, STATPOINT
 }

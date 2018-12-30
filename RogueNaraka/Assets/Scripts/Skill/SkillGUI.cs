@@ -54,7 +54,7 @@ public class SkillGUI : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (_skill.data.id != -1 && !GameManager.instance.isPause)
+        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause)
         {
             isMouseDown = true;
             //skillManager.DrawLine(position, true);
@@ -74,7 +74,7 @@ public class SkillGUI : MonoBehaviour
         skillManager.SetLine(false);
         skillManager.GetCircle().SetEnable(false);
         skillManager.GetCircle().transform.SetParent(null);
-        if (_skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
+        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
         {
             UseSkill();
         }
