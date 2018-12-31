@@ -20,5 +20,10 @@ namespace RogueNaraka.EffectScripts
         {
             owner.stat.tmpSpd += data.value;
         }
+
+        public override bool Equal(EffectData dt)
+        {
+            return data.value == dt.value;
+        }
     }
 }

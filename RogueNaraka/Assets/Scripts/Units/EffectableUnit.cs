@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.EffectScripts;
+using RogueNaraka.BulletScripts;
 
 namespace RogueNaraka.UnitScripts
 {
@@ -43,43 +44,15 @@ namespace RogueNaraka.UnitScripts
         public Effect GetSameEffect(EffectData data)
         {
             List<Effect> list = dictionary[data.type];
-            switch (data.type)
+            for(int i = 0; i < list.Count; i++)
             {
-                case EFFECT.Stun:
-                    if (list.Count > 0)
-                        return list[0];
-                    else
-                        return null;
-                case EFFECT.Slow:
-                    return null;
-                case EFFECT.Fire:
-                    return null;
-                case EFFECT.Ice:
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        if (list[i].data.value == data.value)
-                            return list[i];
-                    }
-                    return null;
-                case EFFECT.Knockback:
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        if (list[i].data.time == data.time)
-                            return list[i];
-                    }
-                    return null;
-                case EFFECT.Poison:
-                    return null;
-                case EFFECT.Heal:
-                    return null;
-                case EFFECT.LifeSteal:
-                    return null;
-                default:
-                    return null;
+                if (list[i].Equal(data))
+                    return list[i];
             }
+            return null;
         }
 
-        public void AddEffect(EffectData data)
+        public void AddEffect(EffectData data, Bullet bullet = null, Unit owner = null)
         {
             Effect effect = GetSameEffect(data);
             GameObject obj = effect == null ? BoardManager.instance.effectPool.DequeueObjectPool() : null;
@@ -91,7 +64,7 @@ namespace RogueNaraka.UnitScripts
 
                 List<Effect> list = dictionary[data.type];
 
-                effect.Init(unit, (EffectData)data.Clone(), list);
+                effect.Init((EffectData)data.Clone(), list, unit, bullet, owner);
             }
             else
             {

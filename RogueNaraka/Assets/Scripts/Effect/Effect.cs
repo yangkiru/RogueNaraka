@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.UnitScripts;
+using RogueNaraka.BulletScripts;
 
 namespace RogueNaraka.EffectScripts
 {
@@ -13,17 +14,24 @@ namespace RogueNaraka.EffectScripts
         private EffectData _data;
 
         //public new SpriteRenderer renderer;
-        public Unit owner;
+        public Unit target { get { return _target; } }
+        Unit _target;//A to B, B
+        public Unit owner { get { return _owner; } }
+        Unit _owner;//A to B, A
+        public Bullet bullet { get { return _bullet; } }
+        Bullet _bullet;
         List<Effect> list;
 
-        public void Init(Unit owner, EffectData data, List<Effect> list)
+        public void Init(EffectData data, List<Effect> list, Unit target, Bullet bullet = null, Unit owner = null)
         {
             _data = data;
             EffectSpriteData sprData = GameDatabase.instance.effects[(int)data.type];
             name = sprData.name;
             GetComponent<SpriteRenderer>().sprite = sprData.spr;
-            this.owner = owner;
-            transform.SetParent(owner.effectable.holder);
+            _owner = owner;
+            _target = target;
+            _bullet = bullet;
+            transform.SetParent(_target.effectable.holder);
             gameObject.SetActive(true);
             this.list = list;
             list.Add(this);
@@ -52,6 +60,7 @@ namespace RogueNaraka.EffectScripts
         protected abstract void OnInit();
         protected abstract void OnDestroyEffect();
         public abstract void Combine(EffectData dt);
+        public abstract bool Equal(EffectData dt);
     }
 }
 

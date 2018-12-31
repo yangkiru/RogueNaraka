@@ -104,6 +104,15 @@ public class GameManager : MonoBehaviour {
         float sum = random.sumOrigin;
         Debug.Log("RandomStatOrb " + random.ToString());
         float delay = 1 / sum;
+        StartCoroutine(StatOrbManager.instance.ActivePot(true));
+
+        float t = 3;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
+
         do
         {
             System.Action<STAT, Stat> onEnd = null;
@@ -121,7 +130,7 @@ public class GameManager : MonoBehaviour {
             
             StatOrbManager.instance.AddStat((STAT)type, stat, onEnd);
             
-            float t = delay;
+            t = delay;
             do
             {
                 yield return null;
@@ -146,6 +155,8 @@ public class GameManager : MonoBehaviour {
         stat.currentMp = stat.GetCurrent(STAT.MP);
 
         Stat.StatToData(stat);
+
+        StartCoroutine(StatOrbManager.instance.ActivePot(false));
 
         StartCoroutine(RunGameCorou(stat, 0.5f));
     }

@@ -12,7 +12,6 @@ public class LevelUpManager : MonoBehaviour {
     public Text[] upgradeTxt;
     public TextMeshProUGUI leftStatTxt;
 
-    public GameObject selectPnl;
     public GameObject statPnl;
 
     public Button cancelBtn;
@@ -162,17 +161,13 @@ public class LevelUpManager : MonoBehaviour {
         Debug.Log("EndLevelUp");
         cancelBtn.interactable = false;
         statPnl.SetActive(false);
-        //SetSelectPnl(false);
-#if DELAY
-        yield return GameManager.instance.delayPointOneReal;
-#else
+
         float t = 0;
         while (t < 0.1f)
         {
             t += Time.unscaledDeltaTime;
             yield return null;
         }
-#endif
         if (SoulShopManager.instance.shopStage <= 1)
             SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.SET);
         else

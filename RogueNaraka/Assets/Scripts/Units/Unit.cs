@@ -74,6 +74,10 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         UnitData _data;
 
+        public Rigidbody2D rigid { get { return _rigid; } }
+        [SerializeField]
+        Rigidbody2D _rigid;
+
         public Stat stat { get { return _data.stat; } }
 
         #endregion
@@ -99,6 +103,7 @@ namespace RogueNaraka.UnitScripts
             _orderable = GetComponent<Orderable>();
 
             _animator = GetComponent<Animator>();
+            _rigid = GetComponent<Rigidbody2D>();
         }
 
         void OnDisable()

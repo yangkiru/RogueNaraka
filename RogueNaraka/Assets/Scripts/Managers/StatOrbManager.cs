@@ -7,13 +7,22 @@ public class StatOrbManager : MonoBehaviour
     public static StatOrbManager instance;
     public GameObject orbPrefab;
     public GameObject endPrefab;
+    public GameObject potPrefab;
+
+    public GameObject potImg;
+
     public ObjectPool orbPool;
     public ObjectPool endPool;
+    public ObjectPool potPool;
     public Transform[] stat;
     public Transform from;
     public Color[] statColor;
 
+    public int orbPotAmount = 50;
     public float rndPower = 0.1f;
+
+    [SerializeField]
+    List<OrbPotParticle> potList = new List<OrbPotParticle>();
 
     private void Awake()
     {
@@ -22,6 +31,36 @@ public class StatOrbManager : MonoBehaviour
         {
             orbPool.EnqueueObjectPool(Instantiate(orbPrefab));
             endPool.EnqueueObjectPool(Instantiate(endPrefab));
+        }
+        for (int i = 0; i < orbPotAmount; i++)
+        {
+            potPool.EnqueueObjectPool(Instantiate(potPrefab));
+        }
+    }
+
+    public IEnumerator ActivePot(bool value)
+    {
+        if(value)
+        {
+            potImg.gameObject.SetActive(true);
+            for (int i = 0; i < orbPotAmount; i++)
+            {
+                OrbPotParticle particle = potPool.DequeueObjectPool().GetComponent<OrbPotParticle>();
+                potList.Add(particle);
+                particle.gameObject.SetActive(true);
+                int rnd = Random.Range(1, 11);
+                for(int j = 0; j < rnd; j++)
+                    yield return null;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < potList.Count; i++)
+            {
+                potPool.EnqueueObjectPool(potList[i].gameObject);
+            }
+            potList.Clear();
+            potImg.gameObject.SetActive(false);
         }
     }
 

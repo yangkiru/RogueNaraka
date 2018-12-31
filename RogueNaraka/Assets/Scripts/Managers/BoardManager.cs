@@ -242,6 +242,7 @@ public class BoardManager : MonoBehaviour {
     private IEnumerator StageTxtEffect()
     {
         Debug.Log("stageTxt");
+        stageTxt.gameObject.SetActive(true);
         string text = string.Format("STAGE {0}", _stage);
         stageTxt.text = string.Empty;
         stageTxt.color = Color.white;
@@ -249,7 +250,12 @@ public class BoardManager : MonoBehaviour {
         //Appear
         for (int i = 0; i < text.Length; i++)
         {
-            yield return null;
+            float t = 0.1f;
+            while (t > 0)
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            }
             stageTxt.text = string.Format("{0}{1}", stageTxt.text, text[i]);
         }
         float alpha = 1;
@@ -260,6 +266,7 @@ public class BoardManager : MonoBehaviour {
             stageTxt.color = new Color(stageTxt.color.r, stageTxt.color.g, stageTxt.color.b, alpha);
             yield return null;
         }
+        stageTxt.gameObject.SetActive(false);
     }
 
     public void ClearStage()

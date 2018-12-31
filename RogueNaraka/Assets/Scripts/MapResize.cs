@@ -17,6 +17,5 @@ public class MapResize : MonoBehaviour
         temp[3] = new Vector2(boardManager.boardRange[1].x, boardManager.boardRange[0].y);
 
         map.points = temp;
-        boardManager.goalPoint = new Vector2(0, boardManager.boardRange[1].y - 1);
     }
 }
