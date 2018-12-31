@@ -25,28 +25,28 @@ public class StatOrbManager : MonoBehaviour
         }
     }
 
-    public void AddStat(STAT stat)
+    public void AddStat(STAT type, Stat stat = null, System.Action<STAT, Stat> onEnd = null)
     {
         GameObject obj = orbPool.DequeueObjectPool();
         StatOrb orb = obj.GetComponent<StatOrb>();
-        orb.Play(stat);
+        orb.Play(type, stat, onEnd);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Alpha0))
-            AddStat(STAT.DMG);
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-            AddStat(STAT.SPD);
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-            AddStat(STAT.TEC);
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-            AddStat(STAT.HP);
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-            AddStat(STAT.HPREGEN);
-        if (Input.GetKeyUp(KeyCode.Alpha5))
-            AddStat(STAT.MP);
-        if (Input.GetKeyUp(KeyCode.Alpha6))
-            AddStat(STAT.MPREGEN);
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Alpha0))
+    //        AddStat(STAT.DMG);
+    //    if (Input.GetKeyUp(KeyCode.Alpha1))
+    //        AddStat(STAT.SPD);
+    //    if (Input.GetKeyUp(KeyCode.Alpha2))
+    //        AddStat(STAT.TEC);
+    //    if (Input.GetKeyUp(KeyCode.Alpha3))
+    //        AddStat(STAT.HP);
+    //    if (Input.GetKeyUp(KeyCode.Alpha4))
+    //        AddStat(STAT.HPREGEN);
+    //    if (Input.GetKeyUp(KeyCode.Alpha5))
+    //        AddStat(STAT.MP);
+    //    if (Input.GetKeyUp(KeyCode.Alpha6))
+    //        AddStat(STAT.MPREGEN);
+    //}
 }

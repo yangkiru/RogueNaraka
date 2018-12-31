@@ -76,36 +76,88 @@ public class GameManager : MonoBehaviour {
         Application.targetFrameRate = 60;
     }
 
-    private void RandomStat()
+    private void RandomStat(Stat stat)
     {
-        Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
         int statPoint = stat.statPoints;
-        Debug.Log("statPoint"+statPoint);
-
-        Stat statBase = (Stat)GameDatabase.instance.playerBase.stat.Clone();
-        stat.SetOrigin(statBase);
+        Debug.Log("RandomStat " + stat.statPoints);
         while(statPoint > 0)
         {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
-            if(stat.AddOrigin((STAT)type, 1))
+            if (stat.AddOrigin((STAT)type, 1))
             {
+                Debug.Log((STAT)type);
                 statPoint--;
             }
             else
             {
-                int current = (int)stat.sumOrigin;
+                int origin = (int)stat.sumOrigin;
                 int max = (int)stat.sumMax;
-                if (current >= max)
-                {
-                    return;
-                }
-                //Maxed
+                Debug.Log("origin:" + origin + " max:" + max);
+                if (origin >= max)
+                    break;
             }
         }
+    }
 
-        stat.currentHp = stat.hp;
-        stat.currentMp = stat.mp;
-        PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
+    private IEnumerator RandomStatOrb(Stat stat, Stat random)
+    { 
+        float sum = random.sumOrigin;
+        Debug.Log("RandomStatOrb " + random.ToString());
+        float delay = 1 / sum;
+        do
+        {
+            System.Action<STAT, Stat> onEnd = null;
+            int type = Random.Range(0, (int)STAT.MPREGEN + 1);
+            if (random.GetOrigin((STAT)type) <= 0)
+                continue;
+
+            random.AddOrigin((STAT)type, -1);
+            sum = random.sumOrigin;
+
+            if (sum >= 1)
+                onEnd = AddStat;
+            else
+                onEnd = OnRandomStatEnd;
+            
+            StatOrbManager.instance.AddStat((STAT)type, stat, onEnd);
+            
+            float t = delay;
+            do
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            } while (t > 0);
+        } while(sum > 0) ;
+    }
+
+    void AddStat(STAT type, Stat stat)
+    {
+        stat.AddOrigin(type, 1);
+        StatTextUpdate(stat);
+    }
+
+    void OnRandomStatEnd(STAT type, Stat stat)
+    {
+        stat.AddOrigin(type, 1);
+        StatTextUpdate(stat);
+        PlayerPrefs.SetString("randomStat", string.Empty);
+        
+        stat.currentHp = stat.GetCurrent(STAT.HP);
+        stat.currentMp = stat.GetCurrent(STAT.MP);
+
+        Stat.StatToData(stat);
+
+        StartCoroutine(RunGameCorou(stat, 0.5f));
+    }
+
+    IEnumerator RunGameCorou(Stat stat, float time)
+    {
+        while(time > 0)
+        {
+            yield return null;
+            time -= Time.unscaledDeltaTime;
+        }
+        RunGame(stat);
     }
 
     public IEnumerator AutoSave(float time)
@@ -159,6 +211,7 @@ public class GameManager : MonoBehaviour {
         Stat.StatToData(dbStat);
        
         PlayerPrefs.SetString("stat", Stat.StatToJson(dbStat));
+        PlayerPrefs.SetString("randomStat", string.Empty);
         
         PlayerPrefs.SetString("effect", string.Empty);
         PlayerPrefs.SetInt("isRun", 0);
@@ -171,21 +224,21 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("language", 0);
     }
 
-    private void RunGame()
+    private void RunGame(Stat stat = null)
     {
         Debug.Log("RunGame");
         moneyManager.Load();
-
-        Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
+        
+        if(stat == null)
+            stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
         playerData.weapon = PlayerPrefs.GetInt("weapon");
         playerData.stat = stat;
         string effect = PlayerPrefs.GetString("effect");
         if (effect != string.Empty)
             playerData.effects = JsonHelper.FromJson<EffectData>(effect);
-        boardManager.SpawnPlayer(playerData);
 
-        StatTextUpdate();
+        boardManager.SpawnPlayer(playerData);
 
         boardManager.SetStage(PlayerPrefs.GetInt("stage"));
 
@@ -204,24 +257,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    //IEnumerator WaitForEffectPoolInit()
-    //{
-    //    while (boardManager == null || boardManager.effectPool.GetCount() <= 100)
-    //        yield return null;
-    //    if (PlayerPrefs.GetString("effect") != string.Empty)
-    //    {
-    //        EffectData[] temp = JsonHelper.FromJson<EffectData>(PlayerPrefs.GetString("effect"));
-    //        for (int i = 0; i < temp.Length; i++)
-    //        {
-    //            player.AddEffect((EffectData)temp[i].Clone());
-    //        }
-    //    }
-    //}
-
     private void LoadInit()
     {
         UnitData playerBase = (UnitData)GameDatabase.instance.playerBase.Clone();
-        Stat.StatToData(playerBase.stat);
+        Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
+        stat.SetOrigin(playerBase.stat);
+        Stat randomStat = new Stat();
+        randomStat.SetMax(stat);
+        for (int i = 0; i < (int)STAT.MPREGEN + 1; i++)
+            randomStat.AddMax((STAT)i, -playerBase.stat.GetOrigin((STAT)i));
+        randomStat.statPoints = stat.statPoints;
+        RandomStat(randomStat);
+
+        Stat.StatToData(randomStat, "randomStat");
+        Stat.StatToData(stat);
+
         PlayerPrefs.SetInt("stage", 1);
         PlayerPrefs.SetInt("weapon", playerBase.weapon);
   
@@ -240,31 +290,26 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("isRun") == 1)
         {
             Debug.Log("Open Run");
-            RunGame();
+
+            Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
+            Stat randomStat = Stat.DataToStat("randomStat");
+            StatTextUpdate(stat);
+
+            if (randomStat != null)
+            {
+                StartCoroutine(RandomStatOrb(stat, randomStat));
+            }
+            else
+                RunGame(stat);
         }
         else//Init Run
         {
             Debug.Log("RunReset");
-            LoadInit();
             PlayerPrefs.SetInt("isRun", 1);
-            RandomStat();
-            RunGame();
+            LoadInit();
+            Load();
         }
     }
-
-    //public void SyncDataToStat()
-    //{
-    //    PlayerPrefs.SetFloat("dmg", player.data.stat.dmg);
-    //    PlayerPrefs.SetFloat("spd", player.data.stat.spd);
-    //    PlayerPrefs.SetFloat("tec", player.data.stat.tec);
-    //    PlayerPrefs.SetFloat("hp", player.data.stat.hp);
-    //    PlayerPrefs.SetFloat("mp", player.data.stat.mp);
-    //    PlayerPrefs.SetFloat("hpRegen", player.data.stat.hpRegen);
-    //    PlayerPrefs.SetFloat("mpRegen", player.data.stat.mpRegen);
-    //    PlayerPrefs.SetFloat("health", player.health);
-    //    PlayerPrefs.SetFloat("mana", player.mana);
-    //    PlayerPrefs.SetInt("stage", boardManager.stage);
-    //}
 
     public void StatTextUpdate()
     {
@@ -275,6 +320,17 @@ public class GameManager : MonoBehaviour {
         statTxt[4].text = player.data.stat.hpRegen.ToString();
         statTxt[5].text = player.data.stat.mp.ToString();
         statTxt[6].text = player.data.stat.mpRegen.ToString();
+    }
+
+    public void StatTextUpdate(Stat stat)
+    {
+        statTxt[0].text = stat.dmg.ToString();
+        statTxt[1].text = stat.spd.ToString();
+        statTxt[2].text = stat.tec.ToString();
+        statTxt[3].text = stat.hp.ToString();
+        statTxt[4].text = stat.hpRegen.ToString();
+        statTxt[5].text = stat.mp.ToString();
+        statTxt[6].text = stat.mpRegen.ToString();
     }
 
     public void SetPause(bool value)

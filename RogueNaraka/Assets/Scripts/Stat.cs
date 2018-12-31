@@ -57,44 +57,51 @@ public class Stat : ICloneable
         get { return dmgMax + spdMax + tecMax + hpMax + mpMax + hpRegenMax + mpRegenMax; }
     }
 
-    public bool AddOrigin(STAT type, float amount)
+    public bool AddOrigin(STAT type, float amount, bool isCheck = false)
     {
         switch(type)
         {
             case STAT.DMG:
                 if (dmg + amount > dmgMax)
                     return false;
-                dmg += amount;
+                if(!isCheck)
+                    dmg += amount;
                 return true;
             case STAT.SPD:
                 if (spd + amount > spdMax)
                     return false;
-                spd += amount;
+                if (!isCheck)
+                    spd += amount;
                 return true;
             case STAT.TEC:
                 if (tec + amount > tecMax)
                     return false;
-                tec += amount;
+                if (!isCheck)
+                    tec += amount;
                 return true;
             case STAT.HP:
                 if (hp + amount > hpMax)
                     return false;
-                hp += amount;
+                if (!isCheck)
+                    hp += amount;
                 return true;
             case STAT.MP:
                 if (mp + amount > mpMax)
                     return false;
-                mp += amount;
+                if (!isCheck)
+                    mp += amount;
                 return true;
             case STAT.HPREGEN:
                 if (hpRegen + amount > hpRegenMax)
                     return false;
-                hpRegen += amount;
+                if (!isCheck)
+                    hpRegen += amount;
                 return true;
             case STAT.MPREGEN:
                 if (mpRegen + amount > mpRegenMax)
                     return false;
-                mpRegen += amount;
+                if (!isCheck)
+                    mpRegen += amount;
                 return true;
         }
         return false;
@@ -231,14 +238,14 @@ public class Stat : ICloneable
         return JsonUtility.ToJson(stat);
     }
 
-    public static void StatToData(Stat stat)
+    public static void StatToData(Stat stat, string str = "stat")
     {
-        PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
+        PlayerPrefs.SetString(str, Stat.StatToJson(stat));
     }
 
-    public static Stat DataToStat()
+    public static Stat DataToStat(string str = "stat")
     {
-        return JsonToStat(PlayerPrefs.GetString("stat"));
+        return JsonToStat(PlayerPrefs.GetString(str));
     }
 
     public object Clone()

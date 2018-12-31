@@ -32,20 +32,18 @@ public class DebugManager : MonoBehaviour {
         if (killPlayer && BoardManager.instance && BoardManager.instance.player)
         {
             BoardManager.instance.player.Kill();
+            Debug.Log("Kill Player");
             killPlayer = false;
         }
-        else if (killPlayer)
-            killPlayer = false;
-        if (killEnemies && BoardManager.instance)
+        if (killEnemies && BoardManager.instance && BoardManager.instance.enemies.Count > 0)
         {
             for (int i = 0; i < BoardManager.instance.enemies.Count; i++)
             {
                 BoardManager.instance.enemies[i].Kill();
             }
+            Debug.Log("Kill Enemies");
             killEnemies = false;
         }
-        else if (killEnemies)
-            killEnemies = false;
         if(setShopStage)
         {
             PlayerPrefs.SetInt("shopStage", shopStage);

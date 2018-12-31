@@ -237,7 +237,7 @@ namespace RogueNaraka.UnitScripts
         public void Kill(bool isTxt = true)
         {
             if (isTxt)
-                damageable.Damage(-hpable.currentHp);
+                damageable.Damage(hpable.currentHp);
             else
                 hpable.AddHp(-hpable.currentHp);
         }

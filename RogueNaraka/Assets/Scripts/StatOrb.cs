@@ -6,7 +6,7 @@ using UnityEngine;
 public class StatOrb : MonoBehaviour
 {
     [SerializeField]
-    STAT stat;
+    STAT type;
 
     [SerializeField]
     ParticleSystem particle;
@@ -18,11 +18,15 @@ public class StatOrb : MonoBehaviour
     Transform[] point;
     Vector2 origin;
 
-    public void Play(STAT stat)
+    Stat stat;
+
+    public event System.Action<STAT, Stat> onEnd;
+
+    public void Play(STAT type, Stat stat = null, System.Action<STAT, Stat> onEnd = null)
     {
         gameObject.SetActive(true);
-        this.stat = stat;
-        to = StatOrbManager.instance.stat[(int)stat];
+        this.type = type;
+        to = StatOrbManager.instance.stat[(int)type];
         from = StatOrbManager.instance.from;
         transform.position = from.position;
         origin = point[1].position;
@@ -31,9 +35,15 @@ public class StatOrb : MonoBehaviour
             , point[1].position.y + Random.Range(-power, power));
         point[2].position = to.transform.position;
         cursor.DistanceRatio = 0;
-        Color color = StatOrbManager.instance.statColor[(int)stat];
+        Color color = StatOrbManager.instance.statColor[(int)type];
         var main = particle.main;
         main.startColor = color;
+        if (onEnd != null)
+            this.onEnd = onEnd;
+        else
+            this.onEnd = null;
+
+        this.stat = stat;
     }
 
     private void Update()
@@ -45,14 +55,15 @@ public class StatOrb : MonoBehaviour
     void OnEnd()
     {
         point[1].transform.position = origin;
-        Debug.Log(stat);
-        //GameManager.instance.player.stat.AddOrigin(stat, 1);
+        //Debug.Log(type);
         ParticleSystem end = StatOrbManager.instance.endPool.DequeueObjectPool().GetComponent<ParticleSystem>();
         end.transform.position = point[2].position;
         end.gameObject.SetActive(true);
         var main = end.main;
         main.startColor = particle.main.startColor;
         end.Play();
+        if (onEnd != null)
+            onEnd.Invoke(type, stat);
         StatOrbManager.instance.orbPool.EnqueueObjectPool(gameObject);
     }
 }
