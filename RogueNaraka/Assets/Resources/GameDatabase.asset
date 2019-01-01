@@ -17,7 +17,7 @@ MonoBehaviour:
     id: 0
     cost: 0
     stage: 0
-    weapon: 0
+    weapon: 5
     stat:
       dmg: 1
       spd: 1
@@ -47,7 +47,7 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
-    move: 0
+    move: 1
     moveDelay: 0.5
     moveDistance: 2
     moveSpeed: 1
@@ -83,7 +83,7 @@ MonoBehaviour:
       tmpMp: 0
       tmpHpRegen: 0
       tmpMpRegen: 0
-      currentHp: 8
+      currentHp: 4
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
@@ -96,7 +96,7 @@ MonoBehaviour:
     moveSpeed: 0.7
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.05}
-    order: 0
+    order: -100
     effects: []
   - name: Bug1
     id: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 3
+      hp: 6
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
       tmpMp: 0
       tmpHpRegen: 0
       tmpMpRegen: 0
-      currentHp: 3
+      currentHp: 6
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
@@ -138,7 +138,7 @@ MonoBehaviour:
     moveSpeed: 0.7
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.05}
-    order: 0
+    order: -100
     effects: []
   - name: Bat0
     id: 2
@@ -147,48 +147,6 @@ MonoBehaviour:
     weapon: 3
     stat:
       dmg: 1
-      spd: 0
-      tec: 0
-      hp: 2
-      mp: 0
-      hpRegen: 0
-      mpRegen: 0
-      dmgMax: 0
-      spdMax: 0
-      tecMax: 0
-      hpMax: 0
-      mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
-      currentHp: 2
-      currentMp: 0
-      statPoints: 0
-    controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    isFriendly: 0
-    isStanding: 1
-    move: 5
-    moveDelay: 0.2
-    moveDistance: 2
-    moveSpeed: 2
-    limitTime: 0
-    shadowPos: {x: 0.05, y: -0.3}
-    order: 0
-    effects: []
-  - name: Bat1
-    id: 3
-    cost: 2
-    stage: 8
-    weapon: 3
-    stat:
-      dmg: 2
       spd: 0
       tec: 0
       hp: 3
@@ -212,7 +170,7 @@ MonoBehaviour:
       currentHp: 3
       currentMp: 0
       statPoints: 0
-    controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
+    controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
@@ -222,18 +180,18 @@ MonoBehaviour:
     moveSpeed: 2
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
-    order: 0
+    order: 100
     effects: []
-  - name: Bone0
-    id: 4
-    cost: 3
-    stage: 10
+  - name: Bat1
+    id: 3
+    cost: 2
+    stage: 8
     weapon: 3
     stat:
-      dmg: 3
+      dmg: 2
       spd: 0
       tec: 0
-      hp: 4
+      hp: 5
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -251,14 +209,56 @@ MonoBehaviour:
       tmpMp: 0
       tmpHpRegen: 0
       tmpMpRegen: 0
-      currentHp: 4
+      currentHp: 5
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 1
+    move: 5
+    moveDelay: 0.2
+    moveDistance: 2
+    moveSpeed: 2
+    limitTime: 0
+    shadowPos: {x: 0.05, y: -0.3}
+    order: 100
+    effects: []
+  - name: Bone0
+    id: 4
+    cost: 3
+    stage: 10
+    weapon: 3
+    stat:
+      dmg: 3
+      spd: 0
+      tec: 0
+      hp: 8
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      tmpDmg: 0
+      tmpSpd: 0
+      tmpTec: 0
+      tmpHp: 0
+      tmpMp: 0
+      tmpHpRegen: 0
+      tmpMpRegen: 0
+      currentHp: 8
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
-    move: 4
+    move: 1
     moveDelay: 1
     moveDistance: 0.5
     moveSpeed: 1
@@ -523,7 +523,7 @@ MonoBehaviour:
     onDestroy: []
   - name: ScarecrowAttack
     id: 4
-    dmg: 0.1
+    dmg: 0.05
     related: 0
     controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
     type: 0
@@ -621,7 +621,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: 0
+    order: -100
     effects:
     - type: 3
       value: 1
@@ -650,7 +650,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: 0
+    order: -100
     effects: []
     children: []
     onDestroy: []
@@ -676,7 +676,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: 0
+    order: 100
     effects: []
     children: []
     onDestroy: []
@@ -702,7 +702,7 @@ MonoBehaviour:
       power: 0.15
       gap: 0.01
       isOnHit: 0
-    order: 0
+    order: 100
     effects: []
     children:
     - name: BeamHole
@@ -738,7 +738,59 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: 0
+    order: -100
+    effects: []
+    children: []
+    onDestroy: []
+  - name: MagicSlash
+    id: 12
+    dmg: 0.1
+    related: 0
+    controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0.45
+    delay: 0.1
+    limitTime: 0.3
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 0
+    shake:
+      time: 0.01
+      power: 0.01
+      gap: 0.01
+      isOnHit: 1
+    order: 100
+    effects: []
+    children: []
+    onDestroy: []
+  - name: MonsterBullet
+    id: 13
+    dmg: 0.5
+    related: 0
+    controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 1
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0.1
+    delay: 0
+    limitTime: 0
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 100
     effects: []
     children: []
     onDestroy: []
@@ -747,6 +799,8 @@ MonoBehaviour:
     id: 0
     type: 2
     startBulletId: 0
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 1
@@ -755,6 +809,8 @@ MonoBehaviour:
     id: 1
     type: 2
     startBulletId: 0
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 1
@@ -763,6 +819,8 @@ MonoBehaviour:
     id: 2
     type: 0
     startBulletId: 2
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0.5, z: 0}
     beforeAttackDelay: 1
     afterAttackDelay: 1
@@ -771,6 +829,8 @@ MonoBehaviour:
     id: 3
     type: 1
     startBulletId: 3
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 1
@@ -779,10 +839,22 @@ MonoBehaviour:
     id: 4
     type: 2
     startBulletId: 4
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 0.25
     attackDistance: 0
+  - name: MagicSword
+    id: 5
+    type: 1
+    startBulletId: 12
+    children: []
+    onDestroy: []
+    offset: {x: 0, y: 0.25, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 0.5
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1
@@ -904,7 +976,7 @@ MonoBehaviour:
     values:
     - name: 0
       value: 1
-    - name: 2
+    - name: 3
       value: 0.1
     levelUp:
       manaCost: 0.25

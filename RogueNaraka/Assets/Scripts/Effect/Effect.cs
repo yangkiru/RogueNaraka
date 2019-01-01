@@ -15,10 +15,13 @@ namespace RogueNaraka.EffectScripts
 
         //public new SpriteRenderer renderer;
         public Unit target { get { return _target; } }
+        [SerializeField]
         Unit _target;//A to B, B
         public Unit owner { get { return _owner; } }
+        [SerializeField]
         Unit _owner;//A to B, A
         public Bullet bullet { get { return _bullet; } }
+        [SerializeField]
         Bullet _bullet;
         List<Effect> list;
 
@@ -40,7 +43,7 @@ namespace RogueNaraka.EffectScripts
 
         void Update()
         {
-            if (_data.time > 0 && !owner.deathable.isDeath)
+            if (_data.time > 0 && !target.deathable.isDeath)
                 _data.time -= Time.deltaTime;
             else
                 Destroy();
@@ -49,7 +52,7 @@ namespace RogueNaraka.EffectScripts
         public void Destroy()
         {
             OnDestroyEffect();
-            owner.effectable.effects.Remove(this);
+            target.effectable.effects.Remove(this);
             list.Remove(this);
             BoardManager.instance.effectPool.EnqueueObjectPool(gameObject);
             Destroy(this);

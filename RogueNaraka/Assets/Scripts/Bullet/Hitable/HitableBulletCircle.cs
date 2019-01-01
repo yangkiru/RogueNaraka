@@ -19,7 +19,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         protected override void GetHitUnits()
         {
             RaycastHit2D[] hits;
-            hits = Physics2D.CircleCastAll(transform.position, size, Vector2.zero, 0, layerMask);
+            hits = Physics2D.CircleCastAll(transform.position, size, Vector2.zero, 5, layerMask);
             for(int i = 0; i < hits.Length; i++)
             {
                 Unit hit = hits[i].transform.GetComponent<Unit>();

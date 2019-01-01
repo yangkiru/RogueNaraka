@@ -238,7 +238,13 @@ public class SoulShopManager : MonoBehaviour
     void InitSkillPnl()
     {
         var cellData = GetUnBoughtSkills();
-        skillScrollView.UpdateData(cellData);
+        if (cellData.Count > 0)
+        {
+            skillScrollView.gameObject.SetActive(true);
+            skillScrollView.UpdateData(cellData);
+        }
+        else
+            skillScrollView.gameObject.SetActive(false);
     }
 
     public List<SkillData> GetUnBoughtSkills()
@@ -264,7 +270,7 @@ public class SoulShopManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(skill.GetName() + "bought " + skill.cost + " soul");
+            Debug.Log("bought " + skill.GetName() + " " + skill.cost + " soul");
             if (MoneyManager.instance.UseSoul(skill.cost))
             {
                 SkillData.Buy(skill.id);

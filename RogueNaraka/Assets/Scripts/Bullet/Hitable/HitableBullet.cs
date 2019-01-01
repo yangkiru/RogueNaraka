@@ -53,7 +53,7 @@ namespace RogueNaraka.BulletScripts.Hitable
                 
                 for(int j = 0; j < bullet.data.effects.Length; j++)
                 {
-                    hitList[i].effectable.AddEffect(bullet.data.effects[j]);
+                    hitList[i].effectable.AddEffect(bullet.data.effects[j], bullet, ownerable.unit);
                 }
                 bullet.damageable.Damage(hitList[i], bullet.data.related);
                 if(shakeable.shake.isOnHit)

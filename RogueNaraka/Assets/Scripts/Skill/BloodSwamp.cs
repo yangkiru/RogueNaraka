@@ -43,10 +43,10 @@ namespace RogueNaraka.SkillScripts
         void OnBloodBubbleHit(Bullet from, Unit to)
         {
             float lifeSteal = GetValue(Value.LifeSteal).value;
-            Unit fromUnit = from.ownerable.owner;
+            Unit fromUnit = from.ownerable.unit;
             float amount = lifeSteal * fromUnit.stat.GetCurrent(STAT.HP);
 
-            if (!from.ownerable.owner.deathable.isDeath)
+            if (!from.ownerable.unit.deathable.isDeath)
             {
                 fromUnit.damageable.Damage(amount);
                 if (!to.deathable.isDeath)

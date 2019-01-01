@@ -224,6 +224,8 @@ public class WeaponData : ICloneable
     public int id;
     public ATTACK_TYPE type;
     public int startBulletId;
+    public BulletChildData[] children;
+    public BulletChildData[] onDestroy;
     public Vector3 offset;
     public float beforeAttackDelay;
     public float afterAttackDelay;
@@ -421,6 +423,13 @@ public class SkillData:ICloneable
         if (isSave)
             SaveBoughtSkills(result);
         return result;
+    }
+
+    public static bool IsBought(int id)
+    {
+        bool[] boughts = GetBoughtSkills();
+
+        return boughts[id];
     }
 
     public static void Buy(int id)

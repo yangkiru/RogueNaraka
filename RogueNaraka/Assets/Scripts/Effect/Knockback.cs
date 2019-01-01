@@ -18,20 +18,20 @@ namespace RogueNaraka.EffectScripts
             Vector2 vec;
             if (bullet)
             {
-                vec = (bullet.transform.position - target.transform.position).normalized;
+                vec = (target.transform.position - bullet.transform.position).normalized;
                 data.value = MathHelpers.Vector2ToDegree(vec);
             }
             else if (owner)
             {
-                vec = (owner.transform.position - target.transform.position).normalized;
+                vec = (target.transform.position - owner.transform.position).normalized;
                 data.value = MathHelpers.Vector2ToDegree(vec);
             }
             else
             {
                 vec = MathHelpers.DegreeToVector2(data.value).normalized;
             }
-            
-            owner.rigid.AddForce(vec * data.time);
+
+            target.rigid.AddForce(vec * data.time);
             Destroy();
         }
 

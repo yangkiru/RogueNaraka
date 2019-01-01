@@ -416,7 +416,10 @@ public class RollManager : MonoBehaviour {
         switch (result.type)
         {
             case ROLL_TYPE.SKILL:
-                result.id = Random.Range(0, GameDatabase.instance.skills.Length);
+                do
+                {
+                    result.id = Random.Range(0, GameDatabase.instance.skills.Length);
+                } while (!SkillData.IsBought(result.id));
                 break;
             case ROLL_TYPE.STAT:
                 result.id = Random.Range(0, 3);

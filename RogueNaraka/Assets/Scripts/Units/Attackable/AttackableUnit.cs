@@ -55,7 +55,11 @@ namespace RogueNaraka.UnitScripts.Attackable
             if (unit.targetable.direction == Vector2.zero)
                 return;
             Bullet bullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-            bullet.Spawn(unit, GameDatabase.instance.bullets[_weapon.startBulletId], transform.position);
+
+            BulletData data = (BulletData)GameDatabase.instance.bullets[_weapon.startBulletId].Clone();
+            data.children = (BulletChildData[])_weapon.children.Clone();
+            data.onDestroy = (BulletChildData[])_weapon.onDestroy.Clone();
+            bullet.Spawn(unit, data, transform.position);
             bullet.shootable.Shoot(unit.targetable.direction, _weapon.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
             afterAttackCorou = AfterAttack();
             StartCoroutine(afterAttackCorou);

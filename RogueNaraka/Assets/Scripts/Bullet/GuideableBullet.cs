@@ -28,7 +28,7 @@ namespace RogueNaraka.BulletScripts
 
         void FixedUpdate()
         {
-            target = bullet.ownerable.owner.targetable.target;
+            target = bullet.ownerable.unit.targetable.target;
             if (!target)
                 return;
             Vector2 direction = target.transform.position - transform.position;

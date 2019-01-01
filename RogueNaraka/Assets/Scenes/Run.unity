@@ -1906,7 +1906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &114112724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27148,7 +27148,6 @@ MonoBehaviour:
   - {fileID: 1435143466}
   - {fileID: 435309515}
   leftStatTxt: {fileID: 1943678348}
-  selectPnl: {fileID: 0}
   statPnl: {fileID: 1552022172}
   cancelBtn: {fileID: 1033553708}
 --- !u!1 &1643724012
