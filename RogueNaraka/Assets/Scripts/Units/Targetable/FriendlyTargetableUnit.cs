@@ -9,6 +9,11 @@ namespace RogueNaraka.UnitScripts.Targetable
         protected override Unit GetTarget()
         {
             List<Unit> list = BoardManager.instance.friendlies;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (!list[i].targetable.isTargetable)
+                    list.RemoveAt(i);
+            }
             if (list.Count == 0)
                 return null;
             Unit min = list[0];

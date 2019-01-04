@@ -31,6 +31,7 @@ namespace RogueNaraka.UnitScripts
         {
             SetSpeed(data.moveSpeed);
             agent.enabled = true;
+            agent.Stop();
         }
 
         public void SetSpeed(float speed)

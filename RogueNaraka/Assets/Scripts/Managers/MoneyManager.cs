@@ -65,6 +65,7 @@ public class MoneyManager : MonoBehaviour {
             _soul = 0;
         MoneyUpdate();
         PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulSpawnPosition);
+        Save(false);
     }
 
     public bool UseSoul(int amount)
@@ -74,6 +75,7 @@ public class MoneyManager : MonoBehaviour {
             _soul -= amount;
             MoneyUpdate();
             PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform, soulSpawnPosition);
+            Save(false);
             return true;
         }
         else
@@ -91,7 +93,8 @@ public class MoneyManager : MonoBehaviour {
 
     public void Save(bool isUnrefined = true)
     {
-        PlayerPrefs.SetInt("unrefinedSoul", _unrefinedSoul);
+        if(isUnrefined)
+            PlayerPrefs.SetInt("unrefinedSoul", _unrefinedSoul);
         PlayerPrefs.SetInt("soul", _soul);
     }
 
@@ -105,13 +108,6 @@ public class MoneyManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("unrefinedSoul", 0);
         PlayerPrefs.SetInt("soul", 0);
-    }
-
-    [ContextMenu("SoulUp")]
-    public void SoulUp()
-    {
-        Debug.Log("soulUp");
-        AddSoul(10);
     }
 
     public void MoneyUpdate()

@@ -18,7 +18,7 @@ public class BoardManager : MonoBehaviour {
     public Vector2 bossPoint;
     public Vector2[] boardRange;//0:min, 1:max
     public ObjectPool unitPool;//basic 100 counts
-    public ObjectPool bulletPool;//basic 750 counts
+    public ObjectPool bulletPool;//basic 500 counts
     public ObjectPool effectPool;//basic 200 counts
 
     public List<Unit> enemies = new List<Unit>();
@@ -75,7 +75,7 @@ public class BoardManager : MonoBehaviour {
     {
         Debug.Log("InitBoard");
         int count = unitPool.GetCount();
-        if (count < 20)//unit Pooling
+        if (count < 100)//unit Pooling
         {
             for (int i = count; i < 100; i++)
             {

@@ -52,6 +52,7 @@ MonoBehaviour:
     moveDistance: 2
     moveSpeed: 1
     limitTime: 0
+    followDistance: 0.25
     shadowPos: {x: 0.2, y: -0.45}
     order: 0
     effects: []
@@ -95,6 +96,7 @@ MonoBehaviour:
     moveDistance: 1
     moveSpeed: 0.7
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
@@ -137,6 +139,7 @@ MonoBehaviour:
     moveDistance: 1
     moveSpeed: 0.7
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
@@ -179,6 +182,7 @@ MonoBehaviour:
     moveDistance: 2
     moveSpeed: 2
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
@@ -221,6 +225,7 @@ MonoBehaviour:
     moveDistance: 2
     moveSpeed: 2
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
@@ -263,6 +268,7 @@ MonoBehaviour:
     moveDistance: 0.5
     moveSpeed: 1
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -305,6 +311,7 @@ MonoBehaviour:
     moveDistance: 0.5
     moveSpeed: 1.5
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -348,6 +355,7 @@ MonoBehaviour:
     moveDistance: 0
     moveSpeed: 0
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0, y: 0}
     order: 0
     effects: []
@@ -391,8 +399,52 @@ MonoBehaviour:
     moveDistance: 0
     moveSpeed: 0
     limitTime: 2
+    followDistance: 0
     shadowPos: {x: 0, y: -1}
     order: 0
+    effects: []
+  - name: Shadow
+    id: 1
+    cost: 0
+    stage: 0
+    weapon: 5
+    stat:
+      dmg: 1
+      spd: 1
+      tec: 1
+      hp: 1
+      mp: 1
+      hpRegen: 1
+      mpRegen: 1
+      dmgMax: 5
+      spdMax: 5
+      tecMax: 5
+      hpMax: 5
+      mpMax: 5
+      hpRegenMax: 5
+      mpRegenMax: 5
+      tmpDmg: 0
+      tmpSpd: 0
+      tmpTec: 0
+      tmpHp: 0
+      tmpMp: 0
+      tmpHpRegen: 0
+      tmpMpRegen: 0
+      currentHp: 1
+      currentMp: 0
+      statPoints: 5
+    controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
+    color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+    isFriendly: 1
+    isStanding: 1
+    move: 1
+    moveDelay: 0.5
+    moveDistance: 2
+    moveSpeed: 1
+    limitTime: 0
+    followDistance: 0.25
+    shadowPos: {x: 0.2, y: -0.45}
+    order: -100
     effects: []
   unitMask:
     serializedVersion: 2
@@ -407,18 +459,44 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   bullets:
-  - name: MagicBall
+  - name: MagicSlashSmall
     id: 0
-    dmg: 0.4
+    dmg: 0.1
     related: 0
-    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
+    controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
     type: 0
-    localSpeed: 3
+    localSpeed: 0
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
-    size: 0.15
+    size: 0.45
+    delay: 0.1
+    limitTime: 0.3
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 0
+    shake:
+      time: 0.01
+      power: 0.01
+      gap: 0.01
+      isOnHit: 1
+    order: 100
+    effects: []
+    children: []
+    onDestroy: []
+  - name: MonsterBullet
+    id: 1
+    dmg: 0.5
+    related: 0
+    controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 1
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0.1
     delay: 0
     limitTime: 0
     disapearStartTime: 0
@@ -429,43 +507,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: 0
-    effects: []
-    children: []
-    onDestroy:
-    - name: MagicBallDestroy
-      bulletId: 1
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-  - name: MagicBallDestroy
-    id: 1
-    dmg: 0.2
-    related: 0
-    controller: {fileID: 9100000, guid: 236f9fcbffc638c428d2dab3b5530725, type: 2}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    guideSpeed: 0
-    size: 0.5
-    delay: 0
-    limitTime: 0.01
-    disapearStartTime: 0
-    disapearDuration: 0
-    pierce: 1
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    order: 0
+    order: 100
     effects: []
     children: []
     onDestroy: []
@@ -742,18 +784,80 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
-  - name: MagicSlash
+  - name: MagicBall
     id: 12
-    dmg: 0.1
+    dmg: 0.4
     related: 0
-    controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
+    controller: {fileID: 22100000, guid: 2cbcff5ceb7ddac4fbd1b54f6fc96b6a, type: 2}
+    type: 0
+    localSpeed: 3
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0.15
+    delay: 0
+    limitTime: 0
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 0
+    effects: []
+    children: []
+    onDestroy:
+    - name: MagicBallDestroy
+      bulletId: 13
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+  - name: MagicBallDestroy
+    id: 13
+    dmg: 0.2
+    related: 0
+    controller: {fileID: 9100000, guid: 236f9fcbffc638c428d2dab3b5530725, type: 2}
     type: 0
     localSpeed: 0
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
-    size: 0.45
+    size: 0.5
+    delay: 0
+    limitTime: 0.01
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 0
+    effects: []
+    children: []
+    onDestroy: []
+  - name: MagicSlashMedium
+    id: 14
+    dmg: 0.2
+    related: 0
+    controller: {fileID: 9100000, guid: e2ebdd70d9f6c2a49a5ade3aea94ea69, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0.6
     delay: 0.1
     limitTime: 0.3
     disapearStartTime: 0
@@ -768,37 +872,11 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
-  - name: MonsterBullet
-    id: 13
-    dmg: 0.5
-    related: 0
-    controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
-    type: 0
-    localSpeed: 0
-    worldSpeed: 1
-    localAccel: 0
-    worldAccel: 0
-    guideSpeed: 0
-    size: 0.1
-    delay: 0
-    limitTime: 0
-    disapearStartTime: 0
-    disapearDuration: 0
-    pierce: 1
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    order: 100
-    effects: []
-    children: []
-    onDestroy: []
   weapons:
   - name: MagicBall
     id: 0
     type: 2
-    startBulletId: 0
+    startBulletId: 12
     children: []
     onDestroy: []
     offset: {x: 0, y: 0, z: 0}
@@ -848,13 +926,26 @@ MonoBehaviour:
   - name: MagicSword
     id: 5
     type: 1
-    startBulletId: 12
+    startBulletId: 0
     children: []
     onDestroy: []
     offset: {x: 0, y: 0.25, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 0.5
+  playerWeapons:
+  - level: 0
+    cost: 20
+    id: 5
+    spr: {fileID: 0}
+  - level: 1
+    cost: 20
+    id: 0
+    spr: {fileID: 0}
+  - level: 2
+    cost: 0
+    id: 1
+    spr: {fileID: 0}
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1
@@ -1012,6 +1103,35 @@ MonoBehaviour:
       values:
       - name: 4
         value: 1
+    description: []
+  - name: Shadow
+    nameLang:
+    - Shadow
+    - "\uADF8\uB9BC\uC790"
+    bulletIds: 
+    unitIds: 
+    spr: {fileID: 21300000, guid: be64555548c85074cae0399f39a4192e, type: 3}
+    id: 5
+    level: 1
+    cost: 50
+    coolTime: 3
+    coolTimeLeft: 0
+    manaCost: 1
+    size: 1
+    isCircleToPlayer: 1
+    isDeath: 0
+    isBasic: 0
+    effects: []
+    values:
+    - name: 1
+      value: 3
+    levelUp:
+      manaCost: 0.5
+      size: 0.25
+      effects: []
+      values:
+      - name: 1
+        value: 0.25
     description: []
   items:
   - name: HealPotion

@@ -38,6 +38,7 @@ public class GameDatabase : ScriptableObject
     public LayerMask wallMask;
     public BulletData[] bullets;
     public WeaponData[] weapons;
+    public PlayerWeaponData[] playerWeapons;
     public int[] stageCosts;
     public UnitCost[] unitCosts;
     public SkillData[] skills;
@@ -96,10 +97,22 @@ public class GameDatabase : ScriptableObject
         }
     }
 
+    void BulletSwap(int a, int b)
+    {
+        BulletData temp = bullets[a];
+        bullets[a] = bullets[b];
+        bullets[b] = temp;
+    }
+
+    void BulletClone(int from, int to)
+    {
+        bullets[to] = (BulletData)bullets[from].Clone();
+    }
+
     [ContextMenu("Temp")]
     void Temp()
     {
-        //bullets[34] = (BulletData)bullets[15].Clone();
+        spawnables[1] = (UnitData)playerBase.Clone();
     }
 }
 
@@ -109,42 +122,6 @@ public struct UnitCost
     public int cost;
     public int[] unitId;
 }
-
-//[Serializable]
-//public struct KnowledgeData
-//{
-//    public float fire;
-//    public float ice;
-//    public float poison;
-//    public float knockBack;
-//    public float stun;
-//    public float slow;
-//    public float gravity;
-
-//    public KnowledgeData(float value)
-//    {
-//        fire = value; ice = value; poison = value; knockBack = value; stun = value; slow = value; gravity = value;
-//    }
-//    public KnowledgeData(KnowledgeData k, float value = 0) : this(value)
-//    {
-//        fire += k.fire; ice += k.ice; poison += k.poison; knockBack += k.knockBack; stun += k.stun; slow += k.slow; gravity += k.gravity;
-//    }
-
-//    public static float GetHalf(float know)
-//    {
-//        return (1 + know) * 0.5f;
-//    }
-
-//    public static float GetNegative(float know)
-//    {
-//        return 2 - know;
-//    }
-
-//    public static float GetAdditional(float know)
-//    {
-//        return know - 1;
-//    }
-//}
 
 [Serializable]
 public class UnitData : ICloneable
@@ -164,6 +141,7 @@ public class UnitData : ICloneable
     public float moveDistance;
     public float moveSpeed;
     public float limitTime;
+    public float followDistance;
     public Vector2 shadowPos;
     public Order order;
     public EffectData[] effects;
@@ -177,32 +155,6 @@ public class UnitData : ICloneable
     }
 }
 
-//[Serializable]
-//public struct Weapon
-//{
-//    public string name;
-//    public int id;
-//    public int level;
-//    public int[] startBulletId;
-//    public Vector2 spawnPoint;
-//    public ATTACK_TYPE type;
-//    public float beforeAttackDelay;
-//    public float afterAttackDelay;
-//    public float localSpeed;
-//    public float worldSpeed;
-
-//    public Weapon(Weapon w)
-//    {
-//        this = w;
-//        startBulletId = (int[])w.startBulletId.Clone();
-//    }
-
-//    public Weapon(int id, int level):this(GameDatabase.instance.weapons[id])
-//    {
-//        this.level = level;
-//    }
-//}
-
 [Serializable]
 public struct ShakeData
 {
@@ -212,9 +164,13 @@ public struct ShakeData
     public bool isOnHit;
 }
 
-public enum SORTING_LAYER
+[Serializable]
+public class PlayerWeaponData
 {
-    TOP, MID, BOT
+    public int level;
+    public int cost;
+    public int id;
+    public Sprite spr;
 }
 
 [Serializable]
@@ -314,25 +270,6 @@ public struct BulletChildData : ICloneable
         return this.MemberwiseClone();
     }
 }
-
-[Serializable]
-public enum BULLET_TYPE
-{
-    CIRCLECAST, RAYCAST, NONE
-}
-
-//[Serializable]
-//public struct ArmorData
-//{
-//    public string name;
-//    public int level;
-//    public float def;
-//    public Effect effect;
-//}
-
-[Serializable]
-enum SKILL_ID
-{ ThunderStrike, IceBreak, Genesis, BloodSwamp, ScarecrowSoldier }
 
 [Serializable]
 public class SkillData:ICloneable
@@ -463,12 +400,6 @@ public struct SkillSaveData
 }
 
 [Serializable]
-public enum Value
-{
-    Amount, Time, Damage, LifeSteal, Hp
-}
-
-[Serializable]
 public class SkillUpData : ICloneable
 {
     public float manaCost;
@@ -537,12 +468,6 @@ public class EffectData:ICloneable
 }
 
 [Serializable]
-public enum EFFECT
-{
-    Stun, Slow, Fire, Ice, Knockback, Poison, Heal, LifeSteal
-}
-
-[Serializable]
 public struct ItemData
 {
     public string name;
@@ -579,10 +504,29 @@ public struct ItemSpriteData
     public string description;
 }
 
+
+[Serializable]
+public enum BULLET_TYPE
+{
+    CIRCLECAST, RAYCAST, NONE
+}
+
+[Serializable]
+public enum EFFECT
+{
+    Stun, Slow, Fire, Ice, Knockback, Poison, Heal, LifeSteal
+}
+
 [Serializable]
 public enum ATTACK_TYPE
 {
     STOP_BEFORE, STOP_AFTER, DONT_STOP
+}
+
+[Serializable]
+public enum Value
+{
+    Amount, Time, Damage, LifeSteal, Hp
 }
 
 [Serializable]
@@ -594,6 +538,12 @@ public enum MOVE_TYPE
     DISTANCE,//거리 유지
     RUN,//도망
     REST_RUSH,
+    FOLLOW
+}
+
+public enum SORTING_LAYER
+{
+    TOP, MID, BOT
 }
 
 [Serializable]

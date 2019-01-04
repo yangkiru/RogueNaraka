@@ -57,8 +57,33 @@ namespace RogueNaraka.UnitScripts.Attackable
             Bullet bullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
 
             BulletData data = (BulletData)GameDatabase.instance.bullets[_weapon.startBulletId].Clone();
-            data.children = (BulletChildData[])_weapon.children.Clone();
-            data.onDestroy = (BulletChildData[])_weapon.onDestroy.Clone();
+
+            List<BulletChildData> list = new List<BulletChildData>();
+
+            for(int i = 0; i < data.children.Length; i++)
+            {
+                list.Add(data.children[i]);
+            }
+            for (int i = 0; i < _weapon.children.Length; i++)
+            {
+                list.Add(_weapon.children[i]);
+            }
+
+            data.children = list.ToArray();
+
+            list.Clear();
+
+            for (int i = 0; i < data.onDestroy.Length; i++)
+            {
+                list.Add(data.onDestroy[i]);
+            }
+            for (int i = 0; i < _weapon.onDestroy.Length; i++)
+            {
+                list.Add(_weapon.onDestroy[i]);
+            }
+
+            data.onDestroy = list.ToArray();
+
             bullet.Spawn(unit, data, transform.position);
             bullet.shootable.Shoot(unit.targetable.direction, _weapon.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
             afterAttackCorou = AfterAttack();

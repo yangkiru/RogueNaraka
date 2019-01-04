@@ -227,7 +227,8 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetString("effect", string.Empty);
         PlayerPrefs.SetInt("isRun", 0);
         PlayerPrefs.SetInt("isLevelUp", 0);
-        PlayerPrefs.SetInt("weapon", playerBase.weapon);
+
+        PlayerPrefs.SetInt("exp", 0);
 
         PlayerPrefs.SetInt("stage", 1);
 
@@ -243,7 +244,7 @@ public class GameManager : MonoBehaviour {
         if(stat == null)
             stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
-        playerData.weapon = PlayerPrefs.GetInt("weapon");
+        playerData.weapon = GetPlayerWeapon(PlayerPrefs.GetInt("exp")).id;
         playerData.stat = stat;
         string effect = PlayerPrefs.GetString("effect");
         if (effect != string.Empty)
@@ -284,7 +285,6 @@ public class GameManager : MonoBehaviour {
         Stat.StatToData(stat);
 
         PlayerPrefs.SetInt("stage", 1);
-        PlayerPrefs.SetInt("weapon", playerBase.weapon);
   
         skillManager.ResetSave();
         Item.instance.ResetSave();
@@ -320,6 +320,35 @@ public class GameManager : MonoBehaviour {
             LoadInit();
             Load();
         }
+    }
+
+    public PlayerWeaponData GetPlayerWeapon(int exp)
+    {
+        for (int i = 0; i < GameDatabase.instance.playerWeapons.Length; i++)
+        {
+            exp -= GameDatabase.instance.playerWeapons[i].cost;
+            if (exp < 0)
+            {
+                return GameDatabase.instance.playerWeapons[i];
+            }
+        }
+        return null;
+    }
+
+    public PlayerWeaponData GetPlayerWeapon(int exp, out int remain)
+    {
+        remain = -1;
+        int i;
+        for(i = 0; i < GameDatabase.instance.playerWeapons.Length; i++)
+        {
+            exp -= GameDatabase.instance.playerWeapons[i].cost;
+            if (exp < 0)
+            {
+                remain = GameDatabase.instance.playerWeapons[i].cost + exp;
+                return GameDatabase.instance.playerWeapons[i];
+            }
+        }
+        return GameDatabase.instance.playerWeapons[i - 1];
     }
 
     public void StatTextUpdate()
@@ -397,6 +426,7 @@ public class GameManager : MonoBehaviour {
 
         SkillManager.instance.ResetSave();
 
+        boardManager.ClearStage();
         Load();
     }
 

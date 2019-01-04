@@ -61,6 +61,10 @@ namespace RogueNaraka.BulletScripts
         [SerializeField]
         SpriteRenderer _renderer;
 
+        public Rigidbody2D rigid { get { return _rigid; } }
+        [SerializeField]
+        Rigidbody2D _rigid;
+
         IEnumerator deathCorou;
 
         #endregion
@@ -69,6 +73,7 @@ namespace RogueNaraka.BulletScripts
         {
             _animator = GetComponent<Animator>();
             _renderer = GetComponent<SpriteRenderer>();
+            _rigid = GetComponent<Rigidbody2D>();
 
             hitableRay = GetComponent<HitableBulletRay>();
             hitableCircle = GetComponent<HitableBulletCircle>();

@@ -21,6 +21,8 @@ public class OnMouseButton : Button {
 
     public override void OnPointerDown(PointerEventData eventData)
     {
+        if (!interactable)
+            return;
         base.OnPointerDown(eventData);
 
         if (eventData.button != PointerEventData.InputButton.Left)
@@ -31,6 +33,8 @@ public class OnMouseButton : Button {
 
     public override void OnPointerUp(PointerEventData eventData)
     {
+        if (!interactable)
+            return;
         base.OnPointerUp(eventData);
 
         if (eventData.button != PointerEventData.InputButton.Left)
@@ -41,6 +45,8 @@ public class OnMouseButton : Button {
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        if (!interactable)
+            return;
         base.OnPointerEnter(eventData);
 
         if (eventData.button != PointerEventData.InputButton.Left)
@@ -51,6 +57,8 @@ public class OnMouseButton : Button {
 
     public override void OnPointerExit(PointerEventData eventData)
     {
+        if (!interactable)
+            return;
         base.OnPointerExit(eventData);
 
         if (eventData.button != PointerEventData.InputButton.Left)

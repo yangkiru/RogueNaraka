@@ -15,6 +15,7 @@ public class DebugManager : MonoBehaviour {
     public bool levelUp;
     public int addSoul;
     public bool resetSkillBought;
+    public int addExp;
     private void OnValidate()
     {
         if (reset)
@@ -66,6 +67,11 @@ public class DebugManager : MonoBehaviour {
         {
             PlayerPrefs.SetString("boughtSkills", string.Empty);
             resetSkillBought = false;
+        }
+        if(addExp != 0)
+        {
+            PlayerPrefs.SetInt("exp", PlayerPrefs.GetInt("exp") + addExp);
+            addExp = 0;
         }
     }
 #endif

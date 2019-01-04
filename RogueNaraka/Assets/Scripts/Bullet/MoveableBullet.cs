@@ -6,7 +6,8 @@ namespace RogueNaraka.BulletScripts
 {
     public class MoveableBullet : MonoBehaviour
     {
-
+        [SerializeField]
+        Bullet bullet;
         [SerializeField]
         Vector3 localVelocity;
         [SerializeField]

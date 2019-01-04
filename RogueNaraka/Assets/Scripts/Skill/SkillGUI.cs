@@ -123,7 +123,7 @@ public class SkillGUI : MonoBehaviour
             Destroy(_skill);
         }
 
-        string str = string.Format("RogueNaraka.SkillScripts.{0}", ((SKILL_ID)dt.id).ToString());
+        string str = string.Format("RogueNaraka.SkillScripts.{0}", dt.name);
         System.Type type = System.Type.GetType(str);
 
         _skill = gameObject.AddComponent(type) as Skill;

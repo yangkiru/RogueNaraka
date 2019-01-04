@@ -69,12 +69,14 @@ GameObject:
   - component: {fileID: 114116071741596666}
   - component: {fileID: 114847344676331612}
   - component: {fileID: 5803475585598790251}
+  - component: {fileID: 410936814330744879}
   - component: {fileID: 114189907379417390}
   - component: {fileID: 114517530178566646}
   - component: {fileID: 114519388432992828}
   - component: {fileID: 114581098381244704}
   - component: {fileID: 114675008330108068}
   - component: {fileID: 2605540994433798053}
+  - component: {fileID: 606372875436568407}
   - component: {fileID: 114967868431888216}
   - component: {fileID: 95588626938235128}
   - component: {fileID: 50410147267040436}
@@ -175,6 +177,7 @@ MonoBehaviour:
   _randomMoveable: {fileID: 114847344676331612}
   _rushMoveable: {fileID: 114116071741596666}
   _restRushMoveable: {fileID: 5803475585598790251}
+  _followMoveable: {fileID: 410936814330744879}
   _damageable: {fileID: 114360932324936328}
   _hpable: {fileID: 114504902211139030}
   _mpable: {fileID: 114946238239239822}
@@ -182,6 +185,7 @@ MonoBehaviour:
   _effectable: {fileID: 114369404985621176}
   _timeLimitable: {fileID: 2605540994433798053}
   _orderable: {fileID: 3900195907407459146}
+  _followable: {fileID: 606372875436568407}
   _animator: {fileID: 95588626938235128}
   _data:
     name: 
@@ -223,10 +227,13 @@ MonoBehaviour:
     moveDistance: 0
     moveSpeed: 0
     limitTime: 0
+    followDistance: 0
     shadowPos: {x: 0, y: 0}
     order: 0
     effects: []
   _rigid: {fileID: 50410147267040436}
+  _renderer: {fileID: 212722301744784912}
+  _collider: {fileID: 60075246512643172}
 --- !u!114 &114504902211139030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +366,24 @@ MonoBehaviour:
   moveable: {fileID: 114798437530957502}
   delay: 0
   leftDelay: 0
+--- !u!114 &410936814330744879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380923796952252}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e3bfbe983c61446ac596b29004f61f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 114302036002021230}
+  moveable: {fileID: 114798437530957502}
+  delay: 0
+  leftDelay: 0
+  _target: {fileID: 0}
+  _following: {fileID: 0}
 --- !u!114 &114189907379417390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +401,8 @@ MonoBehaviour:
     id: 0
     type: 0
     startBulletId: 0
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 0
@@ -398,6 +425,8 @@ MonoBehaviour:
     id: 0
     type: 0
     startBulletId: 0
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 0
@@ -420,6 +449,8 @@ MonoBehaviour:
     id: 0
     type: 0
     startBulletId: 0
+    children: []
+    onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0
     afterAttackDelay: 0
@@ -466,6 +497,21 @@ MonoBehaviour:
   unit: {fileID: 114302036002021230}
   _time: 0
   leftTime: 0
+--- !u!114 &606372875436568407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380923796952252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e0e32fdbd87c84e8ebdf682cc263c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _followers: []
+  _distance: 0
+  unit: {fileID: 114302036002021230}
 --- !u!114 &114967868431888216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,8 +529,8 @@ MonoBehaviour:
   mass: 100
   stoppingDistance: 0.1
   slowingDistance: 1
-  accelerationRate: 2
-  decelerationRate: 2
+  accelerationRate: 10000
+  decelerationRate: 0.1
   lookAheadDistance: 1
   avoidRadius: 0
   avoidanceConsiderStuckedTime: 3

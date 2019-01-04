@@ -16,9 +16,11 @@ namespace RogueNaraka.UnitScripts.Targetable
 
         float delay;
         float leftDelay;
-        bool isDeath;
 
         public Vector2 direction { get { if (target) return target.transform.position - transform.position; else return Vector2.zero; } }
+
+        public bool isTargetable { get { return _isTargetable; } }
+        bool _isTargetable = true;
 
         void Reset()
         {
@@ -45,6 +47,17 @@ namespace RogueNaraka.UnitScripts.Targetable
             return Vector2.SqrMagnitude(target.transform.position - transform.position);
         }
 
+        public void SetTargetable(bool value)
+        {
+            _isTargetable = value;
+        }
+
         abstract protected Unit GetTarget();
+
+        private void OnDisable()
+        {
+            _target = null;
+            SetTargetable(true);
+        }
     }
 }

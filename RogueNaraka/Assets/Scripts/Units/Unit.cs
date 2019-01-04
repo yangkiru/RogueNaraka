@@ -14,6 +14,8 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         MoveableUnit _moveable;
 
+        #region attackable
+
         public AttackableUnit attackable { get { return _attackable; } }
         AttackableUnit _attackable;
         [SerializeField]
@@ -23,12 +25,20 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         DontStopAttackableUnit _dontStopAttackable;
 
+        #endregion
+
+        #region targetable
+
         public TargetableUnit targetable { get { return _targetable; } }
         TargetableUnit _targetable;
         [SerializeField]
         EnemyTargetableUnit _enemyTargetable;
         [SerializeField]
         FriendlyTargetableUnit _friendlyTargetable;
+
+        #endregion
+
+        #region autoMoveable
 
         public AutoMoveableUnit autoMoveable { get { return _autoMoveable; } }
         AutoMoveableUnit _autoMoveable;
@@ -38,6 +48,13 @@ namespace RogueNaraka.UnitScripts
         RushMoveableUnit _rushMoveable;
         [SerializeField]
         RestRushMoveableUnit _restRushMoveable;
+        public FollowMoveableUnit followMoveable { get { return _followMoveable; } }
+        [SerializeField]
+        FollowMoveableUnit _followMoveable;
+
+        #endregion
+
+        #region etc-able
 
         public DamageableUnit damageable { get { return _damageable; } }
         [SerializeField]
@@ -66,6 +83,14 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         Orderable _orderable;
 
+        public FollowableUnit followable { get { return _followable; } }
+        [SerializeField]
+        FollowableUnit _followable;
+
+        #endregion
+
+        #region etc
+        
         public Animator animator { get { return _animator; } }
         [SerializeField]
         Animator _animator;
@@ -78,7 +103,17 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         Rigidbody2D _rigid;
 
+        public new SpriteRenderer renderer { get { return _renderer; } }
+        [SerializeField]
+        SpriteRenderer _renderer;
+
+        public new Collider2D collider { get { return _collider; } }
+        [SerializeField]
+        Collider2D _collider;
+
         public Stat stat { get { return _data.stat; } }
+
+        #endregion
 
         #endregion
 
@@ -93,17 +128,20 @@ namespace RogueNaraka.UnitScripts
             _randomMoveable = GetComponent<RandomMoveableUnit>();
             _rushMoveable = GetComponent<RushMoveableUnit>();
             _restRushMoveable = GetComponent<RestRushMoveableUnit>();
+            _followMoveable = GetComponent<FollowMoveableUnit>();
             _damageable = GetComponent<DamageableUnit>();
             _hpable = GetComponent<HpableUnit>();
             _mpable = GetComponent<MpableUnit>();
             _deathable = GetComponent<DeathableUnit>();
             _effectable = GetComponent<EffectableUnit>();
             _timeLimitable = GetComponent<TimeLimitableUnit>();
-
             _orderable = GetComponent<Orderable>();
+            _followable = GetComponent<FollowableUnit>();
 
             _animator = GetComponent<Animator>();
             _rigid = GetComponent<Rigidbody2D>();
+            _renderer = GetComponent<SpriteRenderer>();
+            _collider = GetComponent<Collider2D>();
         }
 
         void OnDisable()
@@ -172,6 +210,9 @@ namespace RogueNaraka.UnitScripts
                 case MOVE_TYPE.REST_RUSH:
                     _autoMoveable = _restRushMoveable;
                     break;
+                case MOVE_TYPE.FOLLOW:
+                    _autoMoveable = _followMoveable;
+                    break;
                 default:
                     _autoMoveable = null;
                     break;
@@ -188,13 +229,18 @@ namespace RogueNaraka.UnitScripts
             _mpable.enabled = true;
 
             _timeLimitable.enabled = false;
-            _timeLimitable.Init(data.limitTime);
+            _timeLimitable.Init(_data.limitTime);
+
+            _followable.Init(_data);
 
             _orderable.Init(data.order);
 
             if(_data.effects != null)
                 for (int i = 0; i < _data.effects.Length; i++)
                     _effectable.AddEffect(_data.effects[i]);
+
+            _renderer.color = _data.color;
+            _collider.enabled = true;
         }
 
         public void Spawn(Vector3 position)
@@ -214,6 +260,7 @@ namespace RogueNaraka.UnitScripts
         {
             _randomMoveable.enabled = false;
             _rushMoveable.enabled = false;
+            _followMoveable.enabled = false;
         }
 
         void DisableTargetables()

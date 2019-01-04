@@ -11,13 +11,7 @@ public class SoulShopManager : MonoBehaviour
     public GameObject shopPnl;
     public GameObject statPnl;
     public GameObject skillPnl;
-    public GameObject weaponPnl;
-    public SkillScrollView skillScrollView;
 
-    public Button[] statUpgradeBtn;
-
-    public TextMeshProUGUI[] statUpgradeTxt;
-    public TextMeshProUGUI[] statUpgradeBtnTxt;
     public int shopStage
     { get { return _shopStage; } }
     [SerializeField]
@@ -105,9 +99,15 @@ public class SoulShopManager : MonoBehaviour
         skillPnl.SetActive(false);
 
         weaponPnl.SetActive(true);
+
+        WeaponPnlUpdate(PlayerPrefs.GetInt("exp"));
     }
 
     #region stat
+
+    public TextMeshProUGUI[] statUpgradeTxt;
+    public TextMeshProUGUI[] statUpgradeBtnTxt;
+    public Button[] statUpgradeBtn;
 
     bool isStatUpgrading = false;
     /// <summary>
@@ -233,7 +233,10 @@ public class SoulShopManager : MonoBehaviour
     }
 
     #endregion
+
     #region skill
+
+    public SkillScrollView skillScrollView;
 
     void InitSkillPnl()
     {
@@ -303,5 +306,59 @@ public class SoulShopManager : MonoBehaviour
 
     #region weapon
 
+    public GameObject weaponPnl;
+    public TextMeshProUGUI weaponSoulTxt;
+    public TextMeshProUGUI weaponLevelTxt;
+    public Image weaponBar;
+    public Button weaponExpBtn;
+
+    public void StartAddWeaponExp()
+    {
+        StartCoroutine("AddWeaponExpCorou");
+    }
+
+    void WeaponPnlUpdate(int exp)
+    {
+        int remain;
+        PlayerWeaponData data = GameManager.instance.GetPlayerWeapon(exp, out remain);
+        if(data.level == GameDatabase.instance.playerWeapons.Length - 1 && remain == -1)
+        {
+            weaponSoulTxt.text = string.Format("{0}/{1} Soul", data.cost, data.cost); ;
+            weaponBar.fillAmount = 1;
+            weaponExpBtn.interactable = false;
+            StopCoroutine("AddWeaponExpCorou");
+        }
+        else
+        {
+            weaponSoulTxt.text = string.Format("{0}/{1} Soul", remain, data.cost);
+            weaponBar.fillAmount = (float)remain / data.cost;
+            weaponExpBtn.interactable = true;
+        }
+        
+        weaponLevelTxt.text = string.Format("{0} Level", data.level);
+        
+    }
+
+    IEnumerator AddWeaponExpCorou()
+    {
+        float delay = 0.5f;
+        int exp = PlayerPrefs.GetInt("exp");
+        while (MoneyManager.instance.UseSoul(1))
+        {
+            float t = delay;
+            exp = exp + 1;
+            PlayerPrefs.SetInt("exp", exp);
+
+            WeaponPnlUpdate(exp);
+
+            while (t > 0)
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            }
+            if(delay > 0.05f)
+                delay *= 0.9f;
+        }
+    }
     #endregion
 }
