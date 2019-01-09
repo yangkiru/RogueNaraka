@@ -41,7 +41,11 @@ public class ObjectPool : MonoBehaviour
         catch
         {
             if (prefab)
-                return Instantiate(prefab);
+            {
+                GameObject newObj = Instantiate(prefab);
+                newObj.transform.SetParent(transform);
+                return newObj;
+            }
             else
                 return null;
         }

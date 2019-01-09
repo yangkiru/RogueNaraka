@@ -18,8 +18,7 @@ namespace RogueNaraka.UnitScripts.Targetable
                 return null;
             Unit min = list[0];
 
-            float minDistance;
-            minDistance = Distance(list[0]);
+            float minDistance = Distance(list[0]);
             for (int i = 1; i < list.Count; i++)
             {
                 float newDistance = Distance(list[i]);

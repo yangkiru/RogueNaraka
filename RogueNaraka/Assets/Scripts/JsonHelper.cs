@@ -22,10 +22,10 @@ public static class JsonHelper
         wrapper.Items = array;
         return JsonUtility.ToJson(wrapper, prettyPrint);
     }
+}
 
-    [Serializable]
-    private class Wrapper<T>
-    {
-        public T[] Items;
-    }
+[Serializable]
+public class Wrapper<T>
+{
+    public T[] Items;
 }

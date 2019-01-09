@@ -47,6 +47,8 @@ public class GameDatabase : ScriptableObject
     public EffectSpriteData[] effects;
     public Sprite statSprite;
 
+    public StatLang[] statLang;
+
     void OnEnable()
     {
         BulletIdToData();
@@ -109,10 +111,18 @@ public class GameDatabase : ScriptableObject
         bullets[to] = (BulletData)bullets[from].Clone();
     }
 
+    void EffectSpriteName()
+    {
+        for(int i = 0; i < effects.Length; i++)
+        {
+            effects[i].name = effects[i].type.ToString();
+        }
+    }
+
     [ContextMenu("Temp")]
     void Temp()
     {
-        spawnables[1] = (UnitData)playerBase.Clone();
+        EffectSpriteName();
     }
 }
 
@@ -133,7 +143,8 @@ public class UnitData : ICloneable
     public int weapon;
     public Stat stat;
     public RuntimeAnimatorController controller;
-    public Color color;
+    public Color color = Color.white;
+    public Color bulletColor = Color.white;
     public bool isFriendly;
     public bool isStanding;
     public MOVE_TYPE move;
@@ -141,7 +152,6 @@ public class UnitData : ICloneable
     public float moveDistance;
     public float moveSpeed;
     public float limitTime;
-    public float followDistance;
     public Vector2 shadowPos;
     public Order order;
     public EffectData[] effects;
@@ -170,7 +180,6 @@ public class PlayerWeaponData
     public int level;
     public int cost;
     public int id;
-    public Sprite spr;
 }
 
 [Serializable]
@@ -235,6 +244,12 @@ public class BulletData : ICloneable
         {
             data.children[i] = (BulletChildData)children[i].Clone();
         }
+
+        data.onDestroy = new BulletChildData[onDestroy.Length];
+        for (int i = 0; i < onDestroy.Length; i++)
+        {
+            data.onDestroy[i] = (BulletChildData)onDestroy[i].Clone();
+        }
         return data;
     }
 
@@ -250,7 +265,7 @@ public class BulletData : ICloneable
 }
 
 [Serializable]
-public struct BulletChildData : ICloneable
+public class BulletChildData : ICloneable
 {
     public string name;
     public int bulletId;
@@ -404,6 +419,7 @@ public class SkillUpData : ICloneable
 {
     public float manaCost;
     public float size;
+    public float coolTime;
     public EffectData[] effects;
     public ValueData[] values;
 
@@ -504,17 +520,24 @@ public struct ItemSpriteData
     public string description;
 }
 
+[Serializable]
+public class StatLang
+{
+    public string lang;
+    public string[] items;
+}
 
 [Serializable]
 public enum BULLET_TYPE
 {
-    CIRCLECAST, RAYCAST, NONE
+    CIRCLE, DYNAMIC, NONE
 }
 
 [Serializable]
 public enum EFFECT
 {
-    Stun, Slow, Fire, Ice, Knockback, Poison, Heal, LifeSteal
+    Stun, Slow, Fire, Ice, Knockback, Poison, Heal, LifeSteal, DmgBuff, SpdBuff, TecBuff,
+    HpBuff, HpRegenBuff, MpBuff, MpRegenBuff, Accel
 }
 
 [Serializable]
@@ -526,7 +549,7 @@ public enum ATTACK_TYPE
 [Serializable]
 public enum Value
 {
-    Amount, Time, Damage, LifeSteal, Hp
+    Amount, Time, Damage, LifeSteal, Hp, Accel, Delay, Fire
 }
 
 [Serializable]

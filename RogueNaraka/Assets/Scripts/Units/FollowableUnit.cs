@@ -10,10 +10,6 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         List<Unit> _followers = new List<Unit>();
 
-        public float distance { get { return _distance; } }
-        [SerializeField]
-        float _distance;
-
         [SerializeField]
         Unit unit;
 
@@ -24,7 +20,7 @@ namespace RogueNaraka.UnitScripts
 
         public void Init(UnitData data)
         {
-            _distance = data.followDistance;
+            _followers.Clear();
         }
 
         public void AddFollower(Unit unit)

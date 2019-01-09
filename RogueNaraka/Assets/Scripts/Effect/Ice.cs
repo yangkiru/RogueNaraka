@@ -13,12 +13,12 @@ namespace RogueNaraka.EffectScripts
 
         protected override void OnInit()
         {
-            owner.stat.tmpSpd -= data.value;
+            owner.stat.spdTemp -= data.value;
         }
 
         protected override void OnDestroyEffect()
         {
-            owner.stat.tmpSpd += data.value;
+            owner.stat.spdTemp += data.value;
         }
 
         public override bool Equal(EffectData dt)

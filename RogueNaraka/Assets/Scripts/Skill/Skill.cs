@@ -45,6 +45,7 @@ namespace RogueNaraka.SkillScripts
             {
                 data.manaCost += data.levelUp.manaCost;
                 data.size += data.levelUp.size;
+                data.coolTime += data.levelUp.coolTime;
                 for (int j = 0; j < data.levelUp.values.Length; j++)
                 {
                     ValueData value = GetValue(data.levelUp.values[j].name);

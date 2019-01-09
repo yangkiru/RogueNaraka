@@ -33,18 +33,19 @@ MonoBehaviour:
       mpMax: 5
       hpRegenMax: 5
       mpRegenMax: 5
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 1
       currentMp: 0
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
     move: 1
@@ -52,7 +53,6 @@ MonoBehaviour:
     moveDistance: 2
     moveSpeed: 1
     limitTime: 0
-    followDistance: 0.25
     shadowPos: {x: 0.2, y: -0.45}
     order: 0
     effects: []
@@ -77,18 +77,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
-      currentHp: 4
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 2
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
     move: 1
@@ -96,7 +97,6 @@ MonoBehaviour:
     moveDistance: 1
     moveSpeed: 0.7
     limitTime: 0
-    followDistance: 0
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
@@ -109,7 +109,7 @@ MonoBehaviour:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 6
+      hp: 4
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -120,18 +120,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
-      currentHp: 6
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 4
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
     move: 1
@@ -139,7 +140,6 @@ MonoBehaviour:
     moveDistance: 1
     moveSpeed: 0.7
     limitTime: 0
-    followDistance: 0
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
@@ -163,18 +163,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
     move: 5
@@ -182,7 +183,6 @@ MonoBehaviour:
     moveDistance: 2
     moveSpeed: 2
     limitTime: 0
-    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
@@ -206,18 +206,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 5
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
     move: 5
@@ -225,7 +226,6 @@ MonoBehaviour:
     moveDistance: 2
     moveSpeed: 2
     limitTime: 0
-    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
@@ -249,18 +249,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 8
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
     move: 1
@@ -268,7 +269,6 @@ MonoBehaviour:
     moveDistance: 0.5
     moveSpeed: 1
     limitTime: 0
-    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -292,18 +292,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
     move: 0
@@ -311,7 +312,6 @@ MonoBehaviour:
     moveDistance: 0.5
     moveSpeed: 1.5
     limitTime: 0
-    followDistance: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -336,18 +336,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 0
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
     move: 0
@@ -355,7 +356,6 @@ MonoBehaviour:
     moveDistance: 0
     moveSpeed: 0
     limitTime: 0
-    followDistance: 0
     shadowPos: {x: 0, y: 0}
     order: 0
     effects: []
@@ -380,18 +380,19 @@ MonoBehaviour:
       mpMax: 0
       hpRegenMax: 0
       mpRegenMax: 0
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 2
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 184c384e313182a43afa874a8da647ce, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
     move: 2
@@ -399,7 +400,6 @@ MonoBehaviour:
     moveDistance: 0
     moveSpeed: 0
     limitTime: 2
-    followDistance: 0
     shadowPos: {x: 0, y: -1}
     order: 0
     effects: []
@@ -423,26 +423,26 @@ MonoBehaviour:
       mpMax: 5
       hpRegenMax: 5
       mpRegenMax: 5
-      tmpDmg: 0
-      tmpSpd: 0
-      tmpTec: 0
-      tmpHp: 0
-      tmpMp: 0
-      tmpHpRegen: 0
-      tmpMpRegen: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
       currentHp: 1
       currentMp: 0
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
-    color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+    color: {r: 0.9056604, g: 0, b: 0, a: 0.6}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
-    move: 1
-    moveDelay: 0.5
+    move: 6
+    moveDelay: 0.01
     moveDistance: 2
-    moveSpeed: 1
+    moveSpeed: 5
     limitTime: 0
-    followDistance: 0.25
     shadowPos: {x: 0.2, y: -0.45}
     order: -100
     effects: []
@@ -464,7 +464,7 @@ MonoBehaviour:
     dmg: 0.1
     related: 0
     controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
-    type: 0
+    type: 1
     localSpeed: 0
     worldSpeed: 0
     localAccel: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
     onDestroy: []
   - name: Bite
     id: 2
-    dmg: 0.5
+    dmg: 0.25
     related: 0
     controller: {fileID: 22100000, guid: 1e874f9454a810e4b8eac28108fe8293, type: 2}
     type: 0
@@ -846,23 +846,23 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
-  - name: MagicSlashMedium
+  - name: SwordSmall
     id: 14
-    dmg: 0.2
+    dmg: 0.3
     related: 0
-    controller: {fileID: 9100000, guid: e2ebdd70d9f6c2a49a5ade3aea94ea69, type: 2}
-    type: 0
-    localSpeed: 0
+    controller: {fileID: 22100000, guid: da63d2c42c766504b8345bff4b454923, type: 2}
+    type: 1
+    localSpeed: 3
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
-    size: 0.6
-    delay: 0.1
-    limitTime: 0.3
+    size: 0
+    delay: 0
+    limitTime: 0
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: 0
+    pierce: 1
     shake:
       time: 0.01
       power: 0.01
@@ -870,6 +870,195 @@ MonoBehaviour:
       isOnHit: 1
     order: 100
     effects: []
+    children: []
+    onDestroy:
+    - name: SwordSmallDestroy
+      bulletId: 15
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+  - name: SwordSmallDestroy
+    id: 15
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 0dfdcb185ab57bd4db4a55d82bc407f9, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.001
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 100
+    effects: []
+    children: []
+    onDestroy: []
+  - name: SwordMedium
+    id: 16
+    dmg: 0.5
+    related: 0
+    controller: {fileID: 22100000, guid: 22cbc4dea137a91418cf01a2004c6ea3, type: 2}
+    type: 1
+    localSpeed: 3
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    shake:
+      time: 0.02
+      power: 0.02
+      gap: 0.02
+      isOnHit: 1
+    order: 100
+    effects: []
+    children: []
+    onDestroy:
+    - name: SwordMediumDestroy
+      bulletId: 17
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+  - name: SwordMediumDestroy
+    id: 17
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 9a99e762098c08641b5e028f7d14e29e, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.001
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 100
+    effects: []
+    children: []
+    onDestroy: []
+  - name: SwordSmall
+    id: 18
+    dmg: 0.7
+    related: 0
+    controller: {fileID: 22100000, guid: fce69881dc12eb040ba0d611eecbde7d, type: 2}
+    type: 1
+    localSpeed: 3
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    shake:
+      time: 0.03
+      power: 0.03
+      gap: 0.03
+      isOnHit: 1
+    order: 100
+    effects: []
+    children: []
+    onDestroy:
+    - name: SwordBigDestroy
+      bulletId: 19
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+  - name: SwordBigDestroy
+    id: 19
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 62a9a8dd3ffa91f4dbed9eac716c0047, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.001
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 100
+    effects: []
+    children: []
+    onDestroy: []
+  - name: Flame
+    id: 20
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 7bc24ad198b15ef4e9c8564ab6776c12, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    size: 0.1
+    delay: 0.1
+    limitTime: 1
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: -100
+    effects:
+    - type: 2
+      value: 0
+      time: 0.2
     children: []
     onDestroy: []
   weapons:
@@ -902,7 +1091,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0.5, z: 0}
     beforeAttackDelay: 1
     afterAttackDelay: 1
-    attackDistance: 0.2
+    attackDistance: 0.3
   - name: Tackle
     id: 3
     type: 1
@@ -933,19 +1122,56 @@ MonoBehaviour:
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 0.5
+  - name: SwordSmall
+    id: 6
+    type: 1
+    startBulletId: 14
+    children: []
+    onDestroy: []
+    offset: {x: 0, y: 0.4, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 3
+  - name: SwordMedium
+    id: 7
+    type: 1
+    startBulletId: 16
+    children: []
+    onDestroy: []
+    offset: {x: 0, y: 0.5, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 4
+  - name: SwordBig
+    id: 8
+    type: 1
+    startBulletId: 18
+    children: []
+    onDestroy: []
+    offset: {x: 0, y: 0.7, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 5
+  - name: SwordBig
+    id: 8
+    type: 1
+    startBulletId: 18
+    children: []
+    onDestroy: []
+    offset: {x: 0, y: 0.7, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 5
   playerWeapons:
   - level: 0
-    cost: 20
-    id: 5
-    spr: {fileID: 0}
+    cost: 10
+    id: 6
   - level: 1
-    cost: 20
-    id: 0
-    spr: {fileID: 0}
+    cost: 15
+    id: 7
   - level: 2
-    cost: 0
-    id: 1
-    spr: {fileID: 0}
+    cost: 20
+    id: 8
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
   - cost: 1
@@ -981,6 +1207,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.5
       size: 0.1
+      coolTime: 0
       effects: []
       values:
       - name: 0
@@ -1013,6 +1240,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.25
       size: 0
+      coolTime: 0
       effects:
       - type: 3
         value: 1
@@ -1043,6 +1271,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.75
       size: 0
+      coolTime: 0
       effects: []
       values:
       - name: 2
@@ -1072,6 +1301,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.25
       size: 0.25
+      coolTime: 0
       effects: []
       values:
       - name: 0
@@ -1099,6 +1329,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.5
       size: 0.25
+      coolTime: 0
       effects: []
       values:
       - name: 4
@@ -1109,7 +1340,7 @@ MonoBehaviour:
     - Shadow
     - "\uADF8\uB9BC\uC790"
     bulletIds: 
-    unitIds: 
+    unitIds: 01000000
     spr: {fileID: 21300000, guid: be64555548c85074cae0399f39a4192e, type: 3}
     id: 5
     level: 1
@@ -1124,14 +1355,75 @@ MonoBehaviour:
     effects: []
     values:
     - name: 1
-      value: 3
+      value: 5
     levelUp:
       manaCost: 0.5
       size: 0.25
+      coolTime: 0
       effects: []
       values:
       - name: 1
-        value: 0.25
+        value: 1
+    description: []
+  - name: DashShoes
+    nameLang:
+    - Dash Shoes
+    - "\uC9C8\uC8FC \uC2E0\uBC1C"
+    bulletIds: 
+    unitIds: 
+    spr: {fileID: 21300000, guid: ec4df30b369eef248a09a0e169996604, type: 3}
+    id: 6
+    level: 1
+    cost: 0
+    coolTime: 4.5
+    coolTimeLeft: 0
+    manaCost: 0.5
+    size: 2
+    isCircleToPlayer: 1
+    isDeath: 0
+    isBasic: 1
+    effects: []
+    values: []
+    levelUp:
+      manaCost: 0.25
+      size: 0.5
+      coolTime: -0.5
+      effects: []
+      values: []
+    description: []
+  - name: FlameShoes
+    nameLang:
+    - Flame Shoes
+    - "\uD654\uC5FC \uC2E0\uBC1C"
+    bulletIds: 14000000
+    unitIds: 
+    spr: {fileID: 21300000, guid: 5c40673c3e569e041acac7fa85e7e830, type: 3}
+    id: 7
+    level: 1
+    cost: 50
+    coolTime: 7
+    coolTimeLeft: 0
+    manaCost: 0.5
+    size: 2
+    isCircleToPlayer: 1
+    isDeath: 0
+    isBasic: 1
+    effects: []
+    values:
+    - name: 0
+      value: 5
+    - name: 6
+      value: 0.1
+    - name: 7
+      value: 0.05
+    levelUp:
+      manaCost: 0.25
+      size: 0.5
+      coolTime: -0.5
+      effects: []
+      values:
+      - name: 7
+        value: 0.05
     description: []
   items:
   - name: HealPotion
@@ -1178,7 +1470,7 @@ MonoBehaviour:
     type: 3
     spr: {fileID: 21300000, guid: 003f2fc7c432bef48a792107bdd904c6, type: 3}
     particle: {fileID: 21300000, guid: 62f999e0e7bd89943a06031ed0e92f51, type: 3}
-  - name: KnockBack
+  - name: Knockback
     type: 4
     spr: {fileID: 0}
     particle: {fileID: 0}
@@ -1194,4 +1486,57 @@ MonoBehaviour:
     type: 7
     spr: {fileID: 21300000, guid: dc99ef82990bb11459fbd221c765d9fb, type: 3}
     particle: {fileID: 0}
+  - name: DmgBuff
+    type: 8
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: SpdBuff
+    type: 9
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: TecBuff
+    type: 10
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: HpBuff
+    type: 11
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: HpRegenBuff
+    type: 12
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: MpBuff
+    type: 13
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: MpRegenBuff
+    type: 14
+    spr: {fileID: 0}
+    particle: {fileID: 0}
+  - name: Accel
+    type: 15
+    spr: {fileID: 0}
+    particle: {fileID: 0}
   statSprite: {fileID: 21300000, guid: 708e1f81b47bee448a6f201ccf946acc, type: 3}
+  statLang:
+  - lang: English
+    items:
+    - Damage
+    - Speed
+    - Technique
+    - Health Point
+    - Health Point Regen
+    - Mana Point
+    - Mana Point Regen
+    - Stat Point
+  - lang: Korean
+    items:
+    - "\uACF5\uACA9\uB825"
+    - "\uC21C\uBC1C\uB825"
+    - "\uAE30\uC220\uB825"
+    - "\uCCB4\uB825"
+    - "\uCCB4\uB825 \uD68C\uBCF5\uB825"
+    - "\uB9C8\uB825"
+    - "\uB9C8\uB825 \uD68C\uBCF5\uB825"
+    - "\uC2A4\uD0EF \uD3EC\uC778\uD2B8"

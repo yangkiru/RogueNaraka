@@ -318,7 +318,12 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         void OnEnable()
         {
-            StartCoroutine(Check());
+            StartCoroutine("Check");
+        }
+
+        private void OnDisable()
+        {
+            StopCoroutine("Check");
         }
 
         private IEnumerator Check()

@@ -35,7 +35,7 @@ namespace RogueNaraka.UnitScripts.Attackable
         {
             beforeAttackCorou = null;
             afterAttackCorou = null;
-            WeaponData weapon = GameDatabase.instance.weapons[data.weapon];
+            WeaponData weapon = (WeaponData)GameDatabase.instance.weapons[data.weapon].Clone();
             Init(weapon);
         }
 
@@ -85,6 +85,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             data.onDestroy = list.ToArray();
 
             bullet.Spawn(unit, data, transform.position);
+            bullet.renderer.color = unit.data.bulletColor;
             bullet.shootable.Shoot(unit.targetable.direction, _weapon.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
             afterAttackCorou = AfterAttack();
             StartCoroutine(afterAttackCorou);
@@ -95,14 +96,18 @@ namespace RogueNaraka.UnitScripts.Attackable
             float leftDelay = beforeDelay;
             if(isBeforeAnimation)
                 unit.animator.SetBool("isBeforeAttack", true);
-            OnBeforeAttackStart();
+            bool isMoveForced = false;
+            if (unit.autoMoveable.enabled)
+                OnBeforeAttackStart();
+            else
+                isMoveForced = true;
 
             do
             {
                 yield return null;
                 leftDelay -= Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
             } while (leftDelay > 0);
-            if (isBeforeAnimation)
+            if (!isMoveForced && isBeforeAnimation)
                 unit.animator.SetBool("isBeforeAttack", false);
 
             OnBeforeAttackEnd();
@@ -117,7 +122,12 @@ namespace RogueNaraka.UnitScripts.Attackable
             if (isAfterAnimation)
                 unit.animator.SetBool("isAfterAttack", true);
 
-            OnAfterAttackStart();
+            bool isMoveForced = false;
+
+            if (unit.autoMoveable.enabled)
+                OnAfterAttackStart();
+            else
+                isMoveForced = true;
 
             do
             {

@@ -1,69 +1,49 @@
-﻿using BansheeGz.BGSpline.Components;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using BansheeGz.BGSpline.Components;
+using BansheeGz.BGSpline.Curve;
 public class StatOrb : MonoBehaviour
 {
-    [SerializeField]
-    STAT type;
+    public BGCcTrs trs;
+    public BGCcCursor cursor;
+    public GameObject startPoint;
+    public GameObject endPoint;
+    public GameObject orb;
+    public Rigidbody2D rigid;
+    public float speed;
 
-    [SerializeField]
-    ParticleSystem particle;
-    [SerializeField]
-    BGCcCursor cursor;
-    Transform from;
-    Transform to;
-    [SerializeField]
-    Transform[] point;
-    Vector2 origin;
+    bool isShaked;
 
-    Stat stat;
-
-    public event System.Action<STAT, Stat> onEnd;
-
-    public void Play(STAT type, Stat stat = null, System.Action<STAT, Stat> onEnd = null)
+    private void OnEnable()
     {
-        gameObject.SetActive(true);
-        this.type = type;
-        to = StatOrbManager.instance.stat[(int)type];
-        from = StatOrbManager.instance.from;
-        transform.position = from.position;
-        origin = point[1].position;
-        float power = StatOrbManager.instance.rndPower;
-        point[1].position = new Vector2(point[1].position.x + Random.Range(-power, power)
-            , point[1].position.y + Random.Range(-power, power));
-        point[2].position = to.transform.position;
-        cursor.DistanceRatio = 0;
-        Color color = StatOrbManager.instance.statColor[(int)type];
-        var main = particle.main;
-        main.startColor = color;
-        if (onEnd != null)
-            this.onEnd = onEnd;
-        else
-            this.onEnd = null;
-
-        this.stat = stat;
+        trs.MoveObject = false;
+        orb.transform.localPosition = new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+    }
+    private void OnDisable()
+    {
+        rigid.velocity = Vector2.zero;
+        speed = 0;
+        isShaked = false;
     }
 
     private void Update()
     {
-        if (cursor.DistanceRatio >= 1)
-            OnEnd();
-    }
+        speed = Mathf.Abs(rigid.velocity.x) + Mathf.Abs(rigid.velocity.y);
+        if (speed > 10)
+        {
+            rigid.velocity = rigid.velocity * 0.9f;
+        }
 
-    void OnEnd()
-    {
-        point[1].transform.position = origin;
-        //Debug.Log(type);
-        ParticleSystem end = StatOrbManager.instance.endPool.DequeueObjectPool().GetComponent<ParticleSystem>();
-        end.transform.position = point[2].position;
-        end.gameObject.SetActive(true);
-        var main = end.main;
-        main.startColor = particle.main.startColor;
-        end.Play();
-        if (onEnd != null)
-            onEnd.Invoke(type, stat);
-        StatOrbManager.instance.orbPool.EnqueueObjectPool(gameObject);
+        if (!isShaked && trs.MoveObject)
+        {
+            int from, to;
+            cursor.GetAdjacentPointIndexes(out from, out to);
+            if (from == 1)
+            {
+                CameraShake.instance.Shake(0.1f, 0.1f, 0.001f);
+                isShaked = true;
+            }
+        }
     }
 }

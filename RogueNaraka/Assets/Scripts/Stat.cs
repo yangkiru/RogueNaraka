@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RogueNaraka.UnitScripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine;
 [Serializable]
 public class Stat : ICloneable
 {
-
     public float dmg;
     public float spd;
     public float tec;
@@ -23,29 +23,18 @@ public class Stat : ICloneable
     public float hpRegenMax;
     public float mpRegenMax;
 
-    public float tmpDmg;
-    public float tmpSpd;
-    public float tmpTec;
-    public float tmpHp;
-    public float tmpMp;
-    public float tmpHpRegen;
-    public float tmpMpRegen;
+    public float dmgTemp;
+    public float spdTemp;
+    public float tecTemp;
+    public float hpTemp;
+    public float mpTemp;
+    public float hpRegenTemp;
+    public float mpRegenTemp;
 
     public float currentHp;
     public float currentMp;
 
     public int statPoints;
-
-    public void Init()
-    {
-        tmpDmg = 0;
-        tmpSpd = 0;
-        tmpTec = 0;
-        tmpHp = 0;
-        tmpMp = 0;
-        tmpHpRegen = 0;
-        tmpMpRegen = 0;
-    }
 
     public float sumOrigin
     {
@@ -55,6 +44,11 @@ public class Stat : ICloneable
     public float sumMax
     {
         get { return dmgMax + spdMax + tecMax + hpMax + mpMax + hpRegenMax + mpRegenMax; }
+    }
+
+    public float sumTemp
+    {
+        get { return dmgTemp + spdTemp + tecTemp + hpTemp + mpTemp + hpRegenTemp + mpRegenTemp; }
     }
 
     public bool AddOrigin(STAT type, float amount, bool isCheck = false)
@@ -138,6 +132,34 @@ public class Stat : ICloneable
         }
     }
 
+    public void AddTemp(STAT type, float amount)
+    {
+        switch (type)
+        {
+            case STAT.DMG:
+                dmgTemp += amount;
+                break;
+            case STAT.SPD:
+                spdTemp += amount;
+                break;
+            case STAT.TEC:
+                tecTemp += amount;
+                break;
+            case STAT.HP:
+                hpTemp += amount;
+                break;
+            case STAT.MP:
+                mpTemp += amount;
+                break;
+            case STAT.HPREGEN:
+                hpRegenTemp += amount;
+                break;
+            case STAT.MPREGEN:
+                mpRegenTemp += amount;
+                break;
+        }
+    }
+
     public void SetOrigin(Stat s)
     {
         dmg = s.dmg;
@@ -187,19 +209,19 @@ public class Stat : ICloneable
         switch (type)
         {
             case STAT.DMG:
-                return dmg + tmpDmg;
+                return dmg + dmgTemp;
             case STAT.SPD:
-                return spd + tmpSpd;
+                return spd + spdTemp;
             case STAT.TEC:
-                return tec + tmpTec;
+                return tec + tecTemp;
             case STAT.HP:
-                return hp + tmpHp;
+                return hp + hpTemp;
             case STAT.MP:
-                return mp + tmpMp;
+                return mp + mpTemp;
             case STAT.HPREGEN:
-                return hpRegen + tmpHpRegen;
+                return hpRegen + hpRegenTemp;
             case STAT.MPREGEN:
-                return mpRegen + tmpMpRegen;
+                return mpRegen + mpRegenTemp;
         }
         return -1;
     }
@@ -240,12 +262,19 @@ public class Stat : ICloneable
 
     public static void StatToData(Stat stat, string str = "stat")
     {
-        PlayerPrefs.SetString(str, Stat.StatToJson(stat));
+        if(stat == null)
+            PlayerPrefs.SetString(str, string.Empty);
+        else
+            PlayerPrefs.SetString(str, Stat.StatToJson(stat));
     }
 
     public static Stat DataToStat(string str = "stat")
     {
-        return JsonToStat(PlayerPrefs.GetString(str));
+        string json = PlayerPrefs.GetString(str);
+        if (json == string.Empty)
+            return null;
+        else
+            return JsonToStat(json);
     }
 
     public object Clone()

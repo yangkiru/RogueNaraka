@@ -9,7 +9,7 @@ public class CameraShake : MonoBehaviour {
     public float time;
     public float power;
     public float speed;
-    private Vector3 origin;
+    private Vector3 origin = Vector3.zero;
 
     private void Awake()
     {
@@ -29,10 +29,11 @@ public class CameraShake : MonoBehaviour {
         float t1 = 0, t2 = 0;
         if (gap <= 0)
             gap = 0.001f;
-        origin = camera.transform.position;
+        if(origin == Vector3.zero)
+            origin = camera.transform.position;
         while (t1 <= time)
         {
-            Vector3 random = new Vector3(Random.Range(-1f, 1f) * power, Random.Range(-1f, 1f) * power, origin.z);
+            Vector3 random = new Vector3(Random.Range(-power, power), Random.Range(-power, power), origin.z);
             camera.transform.position = random;
             
             while (t2 <= gap)

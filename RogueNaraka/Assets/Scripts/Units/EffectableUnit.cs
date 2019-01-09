@@ -17,14 +17,17 @@ namespace RogueNaraka.UnitScripts
 
         Dictionary<EFFECT, List<Effect>> dictionary = new Dictionary<EFFECT, List<Effect>>();
 
+        public float effectDelay { get { return _effectDelay; } }
+        float _effectDelay = 0.1f;
+
         void Reset()
         {
             unit = GetComponent<Unit>();
         }
 
-        private void Awake()
+        private void Start()
         {
-            for(int i = 0; i < (int)EFFECT.LifeSteal; i++)
+            for(int i = 0; i < GameDatabase.instance.effects.Length; i++)
             {
                 dictionary.Add((EFFECT)i, new List<Effect>());
             }
@@ -63,6 +66,7 @@ namespace RogueNaraka.UnitScripts
                 effect = obj.AddComponent(type) as Effect;
 
                 List<Effect> list = dictionary[data.type];
+                Debug.Log(list);
 
                 effect.Init((EffectData)data.Clone(), list, unit, bullet, owner);
             }
@@ -70,6 +74,12 @@ namespace RogueNaraka.UnitScripts
             {
                 effect.Combine(data);
             }
+        }
+
+        public void AddEffect(EFFECT type, float value, float time, Bullet bullet = null, Unit owner = null)
+        {
+            EffectData effect = new EffectData(type, value, time);
+            AddEffect(effect, bullet, owner);
         }
     }
 }

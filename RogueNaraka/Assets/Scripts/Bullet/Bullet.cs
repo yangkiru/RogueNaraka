@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.UnitScripts;
 using RogueNaraka.BulletScripts.Hitable;
+using DigitalRuby.AdvancedPolygonCollider;
 
 namespace RogueNaraka.BulletScripts
 {
@@ -15,6 +16,7 @@ namespace RogueNaraka.BulletScripts
         HitableBullet hitableCircle;
 
         public HitableBullet hitable { get { return _hitable; } }
+        [SerializeField]
         HitableBullet _hitable;
 
         public ShootableBullet shootable { get { return _shootable; } }
@@ -65,6 +67,14 @@ namespace RogueNaraka.BulletScripts
         [SerializeField]
         Rigidbody2D _rigid;
 
+        [SerializeField]
+        PolygonCollider2D _polygon;
+        [SerializeField]
+        CircleCollider2D _circle;
+
+        [SerializeField]
+        AdvancedPolygonCollider _advanced;
+
         IEnumerator deathCorou;
 
         #endregion
@@ -75,8 +85,9 @@ namespace RogueNaraka.BulletScripts
             _renderer = GetComponent<SpriteRenderer>();
             _rigid = GetComponent<Rigidbody2D>();
 
-            hitableRay = GetComponent<HitableBulletRay>();
-            hitableCircle = GetComponent<HitableBulletCircle>();
+            _hitable = GetComponent<HitableBullet>();
+            //hitableRay = GetComponent<HitableBulletRay>();
+            //hitableCircle = GetComponent<HitableBulletCircle>();
 
             _shootable = GetComponent<ShootableBullet>();
             _moveable = GetComponent<MoveableBullet>();
@@ -88,6 +99,10 @@ namespace RogueNaraka.BulletScripts
             _disapearable = GetComponent<DisapearableBullet>();
             _guideable = GetComponent<GuideableBullet>();
             _orderable = GetComponent<Orderable>();
+
+            _polygon = GetComponent<PolygonCollider2D>();
+            _circle = GetComponent<CircleCollider2D>();
+            _advanced = GetComponent<AdvancedPolygonCollider>();
         }
 
         public void Init(Unit owner, BulletData data)
@@ -105,22 +120,25 @@ namespace RogueNaraka.BulletScripts
             name = _data.name;
 
             //Hitable
-            DisableAllHitable();
-            switch(_data.type)
+            //DisableAllHitable();
+            switch (_data.type)
             {
-                case BULLET_TYPE.CIRCLECAST:
-                    _hitable = hitableCircle;
+                case BULLET_TYPE.CIRCLE:
+                    _circle.enabled = true;
+                    _polygon.enabled = false;
+                    _advanced.enabled = false;
+                    _circle.radius = _data.size;
                     break;
-                case BULLET_TYPE.RAYCAST:
-                    _hitable = hitableRay;
+                case BULLET_TYPE.DYNAMIC:
+                    _circle.enabled = false;
+                    _polygon.enabled = true;
+                    _advanced.enabled = true;
                     break;
                 default:
-                    _hitable = null;
                     break;
             }
-            
-            if(_hitable)
-                _hitable.Init(_data);
+
+            _hitable.Init(_data);
 
             _animator.runtimeAnimatorController = _data.controller;
 
@@ -144,8 +162,8 @@ namespace RogueNaraka.BulletScripts
 
         void DisableAllHitable()
         {
-            hitableRay.enabled = false;
-            hitableCircle.enabled = false;
+            //hitableRay.enabled = false;
+            //hitableCircle.enabled = false;
         }
 
         public void Spawn(Unit owner, BulletData data, Vector3 position)

@@ -15,8 +15,14 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         PolyNavAgent _agent;
 
-        public float speed { get { return unitSpeed * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f); } }
+        public float speed {
+            get {
+                return unitSpeed * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f) *
+                    (1 + factor);
+            }
+        }
         float unitSpeed;
+        public float factor;
 
         bool isWalk;
         bool _isWalk;

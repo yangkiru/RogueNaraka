@@ -56,6 +56,8 @@ namespace RogueNaraka.BulletScripts
             yield return new WaitForSeconds(data.startTime);
 
             bullet.Spawn(parent.transform.position);
+            bullet.renderer.color = parent.renderer.color;
+
             if (data.isDestroyWith)
                 parent.spawnable.destroyChildList.Add(parent);
 

@@ -17,6 +17,11 @@ namespace RogueNaraka.BulletScripts
         [SerializeField]
         Vector3 worldAccel;
 
+        private void Reset()
+        {
+            bullet = GetComponent<Bullet>();
+        }
+
         public void Init()
         {
             localAccel = Vector3.zero;
@@ -59,8 +64,7 @@ namespace RogueNaraka.BulletScripts
         {
             localVelocity += localAccel;
             worldVelocity += worldAccel;
-            transform.Translate(localVelocity * Time.deltaTime, Space.Self);
-            transform.Translate(worldVelocity * Time.deltaTime, Space.World);
+            bullet.rigid.velocity = worldVelocity + transform.TransformDirection(localVelocity);
         }
     }
 }

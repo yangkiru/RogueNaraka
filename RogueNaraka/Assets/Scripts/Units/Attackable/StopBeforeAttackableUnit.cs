@@ -18,14 +18,13 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         protected override void OnBeforeAttackEnd()
         {
-            unit.moveable.agent.enabled = true;
-            unit.moveable.enabled = true;
+            unit.moveable.agent.Stop();
+            unit.autoMoveable.enabled = true;
         }
 
         protected override void OnBeforeAttackStart()
         {
-            unit.moveable.agent.enabled = false;
-            unit.moveable.enabled = false;
+            unit.autoMoveable.enabled = false;
         }
     }
 }

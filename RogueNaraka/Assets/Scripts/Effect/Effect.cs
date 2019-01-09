@@ -31,6 +31,8 @@ namespace RogueNaraka.EffectScripts
             EffectSpriteData sprData = GameDatabase.instance.effects[(int)data.type];
             name = sprData.name;
             GetComponent<SpriteRenderer>().sprite = sprData.spr;
+            if (sprData.spr == null)
+                transform.SetAsLastSibling();
             _owner = owner;
             _target = target;
             _bullet = bullet;

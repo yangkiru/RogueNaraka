@@ -272,9 +272,15 @@ public class BoardManager : MonoBehaviour {
     public void ClearStage()
     {
         Debug.Log("Clear stage " + enemies.Count + " enemies");
-        Unit[] clear = enemies.ToArray();
-        for(int i = 0; i < clear.Length; i++)
-            unitPool.EnqueueObjectPool(clear[i].gameObject);
+        for(int i = enemies.Count - 1; i >= 0; i--)
+            unitPool.EnqueueObjectPool(enemies[i].gameObject);
+
+        for (int i = friendlies.Count - 1; i >= 0; i--)
+        {
+            if (friendlies[i].Equals(player))
+                continue;
+            unitPool.EnqueueObjectPool(friendlies[i].gameObject);
+        }
     }
     public static Vector3 GetMousePosition()
     {

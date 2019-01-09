@@ -69,9 +69,11 @@ public class GameManager : MonoBehaviour {
                 language = (Language)System.Enum.Parse(typeof(Language), Application.systemLanguage.ToString());
             else
                 language = (Language)System.Enum.Parse(typeof(Language), lang);
+            SetLanguage((int)language);
         } catch
         {
-            language = Language.English;
+            Debug.Log("Can't not fine language : " + lang);
+            SetLanguage(0);
         }
         Application.targetFrameRate = 60;
     }
@@ -97,78 +99,6 @@ public class GameManager : MonoBehaviour {
                     break;
             }
         }
-    }
-
-    private IEnumerator RandomStatOrb(Stat stat, Stat random)
-    { 
-        float sum = random.sumOrigin;
-        Debug.Log("RandomStatOrb " + random.ToString());
-        float delay = 1 / sum;
-        StartCoroutine(StatOrbManager.instance.ActivePot(true));
-
-        float t = 3;
-        do
-        {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-        } while (t > 0);
-
-        do
-        {
-            System.Action<STAT, Stat> onEnd = null;
-            int type = Random.Range(0, (int)STAT.MPREGEN + 1);
-            if (random.GetOrigin((STAT)type) <= 0)
-                continue;
-
-            random.AddOrigin((STAT)type, -1);
-            sum = random.sumOrigin;
-
-            if (sum >= 1)
-                onEnd = AddStat;
-            else
-                onEnd = OnRandomStatEnd;
-            
-            StatOrbManager.instance.AddStat((STAT)type, stat, onEnd);
-            
-            t = delay;
-            do
-            {
-                yield return null;
-                t -= Time.unscaledDeltaTime;
-            } while (t > 0);
-        } while(sum > 0) ;
-    }
-
-    void AddStat(STAT type, Stat stat)
-    {
-        stat.AddOrigin(type, 1);
-        StatTextUpdate(stat);
-    }
-
-    void OnRandomStatEnd(STAT type, Stat stat)
-    {
-        stat.AddOrigin(type, 1);
-        StatTextUpdate(stat);
-        PlayerPrefs.SetString("randomStat", string.Empty);
-        
-        stat.currentHp = stat.GetCurrent(STAT.HP);
-        stat.currentMp = stat.GetCurrent(STAT.MP);
-
-        Stat.StatToData(stat);
-
-        StartCoroutine(StatOrbManager.instance.ActivePot(false));
-
-        StartCoroutine(RunGameCorou(stat, 0.5f));
-    }
-
-    IEnumerator RunGameCorou(Stat stat, float time)
-    {
-        while(time > 0)
-        {
-            yield return null;
-            time -= Time.unscaledDeltaTime;
-        }
-        RunGame(stat);
     }
 
     public IEnumerator AutoSave(float time)
@@ -233,16 +163,13 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("stage", 1);
 
         PlayerPrefs.SetInt("isReset", 1);
-        PlayerPrefs.SetInt("language", 0);
     }
 
-    private void RunGame(Stat stat = null)
+    public void RunGame(Stat stat)
     {
         Debug.Log("RunGame");
         moneyManager.Load();
         
-        if(stat == null)
-            stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
         playerData.weapon = GetPlayerWeapon(PlayerPrefs.GetInt("exp")).id;
         playerData.stat = stat;
@@ -253,6 +180,8 @@ public class GameManager : MonoBehaviour {
         boardManager.SpawnPlayer(playerData);
 
         boardManager.SetStage(PlayerPrefs.GetInt("stage"));
+
+        StatTextUpdate(stat);
 
         SkillManager.instance.Load();
         Item.instance.Load();
@@ -308,7 +237,8 @@ public class GameManager : MonoBehaviour {
 
             if (randomStat != null)
             {
-                StartCoroutine(RandomStatOrb(stat, randomStat));
+                StatOrbManager.instance.SetActive(true, randomStat, stat);
+                //StatOrbManager.OnLastOverflow에서 RunGame() 호출
             }
             else
                 RunGame(stat);
@@ -327,7 +257,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < GameDatabase.instance.playerWeapons.Length; i++)
         {
             exp -= GameDatabase.instance.playerWeapons[i].cost;
-            if (exp < 0)
+            if (exp < 0 || i == GameDatabase.instance.playerWeapons.Length - 1)
             {
                 return GameDatabase.instance.playerWeapons[i];
             }
@@ -435,10 +365,11 @@ public class GameManager : MonoBehaviour {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    public void SetLanguage(int num)
+    public void SetLanguage(int num = -1)
     {
-        language = (Language)num;
-        PlayerPrefs.SetString("language", language.ToString());
+        if(num != -1)
+            language = (Language)num;
+        PlayerPrefs.SetString("language", language.ToString().Remove(0));
     }
 
     public void InitDropdown(TMP_Dropdown dropdown)

@@ -1,28 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BansheeGz.BGSpline.Components;
+using UnityEngine.UI;
+using TMPro;
 
 public class StatOrbManager : MonoBehaviour
 {
     public static StatOrbManager instance;
     public GameObject orbPrefab;
-    public GameObject endPrefab;
-    public GameObject potPrefab;
-
-    public GameObject potImg;
+    public GameObject pnl;
+    public GameObject endPoint;
 
     public ObjectPool orbPool;
-    public ObjectPool endPool;
-    public ObjectPool potPool;
-    public Transform[] stat;
-    public Transform from;
-    public Color[] statColor;
+    public Image icon;
+    public Sprite[] icons;
 
-    public int orbPotAmount = 50;
-    public float rndPower = 0.1f;
+    public TextMeshProUGUI statNameTxt;
+    public TextMeshProUGUI statValueTxt;
 
-    [SerializeField]
-    List<OrbPotParticle> potList = new List<OrbPotParticle>();
+    public List<StatOrb> list = new List<StatOrb>();
+
+    STAT currentStat;
+    Stat rndStat;
+    Stat stat;
+
+    int used;
 
     private void Awake()
     {
@@ -30,62 +33,191 @@ public class StatOrbManager : MonoBehaviour
         for (int i = 0; i < 50; i++)
         {
             orbPool.EnqueueObjectPool(Instantiate(orbPrefab));
-            endPool.EnqueueObjectPool(Instantiate(endPrefab));
-        }
-        for (int i = 0; i < orbPotAmount; i++)
-        {
-            potPool.EnqueueObjectPool(Instantiate(potPrefab));
         }
     }
 
-    public IEnumerator ActivePot(bool value)
+    public void SpawnOrb(int n)
     {
-        if(value)
+        for (int i = 0; i < n; i++)
         {
-            potImg.gameObject.SetActive(true);
-            for (int i = 0; i < orbPotAmount; i++)
+            GameObject orb = orbPool.DequeueObjectPool();
+            orb.transform.localPosition = Vector3.zero;
+            list.Add(orb.GetComponent<StatOrb>());
+            orb.SetActive(true);
+        }
+    }
+
+    public void Shoot(int n, float delay)
+    {
+        if(list.Count >= n)
+            StartCoroutine(ShootCorou(n, delay));
+    }
+
+    public void Shoot(StatOrb orbRoot)
+    {
+        orbRoot.startPoint.transform.position = orbRoot.orb.transform.position;
+        orbRoot.endPoint.transform.position = endPoint.transform.position;
+        orbRoot.trs.MoveObject = true;
+        orbRoot.trs.DistanceRatio = 0;
+        orbRoot.trs.SetOnOverflow(OnOverflow, orbRoot.gameObject);
+        orbRoot.rigid.velocity = Vector2.zero;
+    }
+
+    IEnumerator ShootCorou(int n, float delay)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            Shoot(list[list.Count - 1]);
+            list.RemoveAt(list.Count - 1);
+            //CameraShake.instance.Shake(0.1f, 0.1f, 0.001f);
+            float t = delay;
+            while (t > 0)
             {
-                OrbPotParticle particle = potPool.DequeueObjectPool().GetComponent<OrbPotParticle>();
-                potList.Add(particle);
-                particle.gameObject.SetActive(true);
-                int rnd = Random.Range(1, 11);
-                for(int j = 0; j < rnd; j++)
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            }
+        }
+    }
+
+    void OnOverflow(GameObject obj)
+    {
+        stat.AddOrigin(currentStat, 1);
+        StatTxtUpdate();
+        used++;
+        IconEffect();
+        if(used == rndStat.statPoints)
+        {
+            StartCoroutine(OnLastOverflow());
+        }
+        orbPool.EnqueueObjectPool(obj);
+    }
+
+    IEnumerator OnLastOverflow()
+    {
+        //CameraShake.instance.Shake(0.1f, 0.1f, 0.001f);
+        float t = 1;
+        while (t > 0)
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        }
+        stat.currentHp = stat.GetCurrent(STAT.HP);
+        stat.currentMp = stat.GetCurrent(STAT.MP);
+        pnl.SetActive(false);
+        Stat.StatToData(stat);
+        Stat.StatToData(null, "randomStat");
+        
+        GameManager.instance.RunGame(stat);
+    }
+
+    float iconTime;
+    float size = 1;
+    IEnumerator iconEffectCorou;
+
+    void IconEffect()
+    {
+        size += 0.05f;
+        icon.rectTransform.localScale = new Vector3(size, size, 0);
+        iconTime = 0.5f;
+        if (iconEffectCorou == null)
+        {
+            iconEffectCorou = IconEffectCorou();
+            StartCoroutine(iconEffectCorou);
+        }
+    }
+    IEnumerator IconEffectCorou()
+    {
+        while(iconTime > 0)
+        {
+            yield return null;
+            iconTime -= Time.unscaledDeltaTime;
+            icon.rectTransform.localScale = Vector3.Lerp(icon.rectTransform.localScale, Vector3.one, 1 - iconTime * 2);
+        }
+        icon.rectTransform.localScale = Vector3.one;
+        iconEffectCorou = null;
+    }
+
+    public void SetStat(STAT type)
+    {
+        currentStat = type;
+        icon.sprite = icons[(int)type];
+        StatTxtUpdate();
+    }
+
+    public void SetActive(bool value, Stat rndStat = null, Stat stat = null)
+    {
+        if (value && rndStat != null && stat != null)
+        {
+            used = 0;
+            this.rndStat = rndStat;
+            this.stat = stat;
+            StatTxtUpdate();
+            pnl.SetActive(true);
+            SpawnOrb(rndStat.statPoints);
+            StartCoroutine(StatCorou(rndStat));
+        }
+        else if (!value)
+            pnl.SetActive(false);
+    }
+
+    IEnumerator StatCorou(Stat stat)
+    {
+        for(int i = 0; i <= (int)STAT.MPREGEN; i++)
+        {
+            float t = 0.5f;
+            while (t > 0)
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            }
+            //CameraShake.instance.Shake(0.1f, 0.1f, 0.001f);
+            StartCoroutine(IconShake(0.1f, 0.1f, 0.001f));
+            SetStat((STAT)i);
+
+            int amount = (int)stat.GetOrigin((STAT)i);
+
+            if (amount > 0)
+            {
+                float delay = Mathf.Pow(0.75f, amount);
+
+                Shoot(amount, delay);
+
+                t = delay;
+                while (t > 0)
+                {
                     yield return null;
+                    t -= Time.unscaledDeltaTime;
+                }
             }
-        }
-        else
-        {
-            for (int i = 0; i < potList.Count; i++)
-            {
-                potPool.EnqueueObjectPool(potList[i].gameObject);
-            }
-            potList.Clear();
-            potImg.gameObject.SetActive(false);
         }
     }
 
-    public void AddStat(STAT type, Stat stat = null, System.Action<STAT, Stat> onEnd = null)
+    private IEnumerator IconShake(float time, float power, float gap)
     {
-        GameObject obj = orbPool.DequeueObjectPool();
-        StatOrb orb = obj.GetComponent<StatOrb>();
-        orb.Play(type, stat, onEnd);
+        float t1 = 0, t2 = 0;
+        if (gap <= 0)
+            gap = 0.001f;
+        Vector3 origin = icon.rectTransform.position;
+        while (t1 <= time)
+        {
+            Vector3 random = origin + new Vector3(Random.Range(-power, power), Random.Range(-power, power), origin.z);
+            icon.rectTransform.position = random;
+
+            while (t2 <= gap)
+            {
+                yield return null;
+                t1 += Time.deltaTime;
+                t2 += Time.deltaTime;
+            }
+            t2 = 0;
+
+            icon.rectTransform.position = origin;
+        }
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyUp(KeyCode.Alpha0))
-    //        AddStat(STAT.DMG);
-    //    if (Input.GetKeyUp(KeyCode.Alpha1))
-    //        AddStat(STAT.SPD);
-    //    if (Input.GetKeyUp(KeyCode.Alpha2))
-    //        AddStat(STAT.TEC);
-    //    if (Input.GetKeyUp(KeyCode.Alpha3))
-    //        AddStat(STAT.HP);
-    //    if (Input.GetKeyUp(KeyCode.Alpha4))
-    //        AddStat(STAT.HPREGEN);
-    //    if (Input.GetKeyUp(KeyCode.Alpha5))
-    //        AddStat(STAT.MP);
-    //    if (Input.GetKeyUp(KeyCode.Alpha6))
-    //        AddStat(STAT.MPREGEN);
-    //}
+    void StatTxtUpdate()
+    {
+        statNameTxt.text = string.Format("{0}\n({1})", GameDatabase.instance.statLang[(int)GameManager.language].items[(int)currentStat], currentStat.ToString());
+        statValueTxt.text = string.Format("{0}/{1}", stat.GetOrigin(currentStat), stat.GetMax(currentStat));
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using RogueNaraka.ScrollScripts;
+using RogueNaraka.UnitScripts;
 
 public class SoulShopManager : MonoBehaviour
 {
@@ -311,6 +312,8 @@ public class SoulShopManager : MonoBehaviour
     public TextMeshProUGUI weaponLevelTxt;
     public Image weaponBar;
     public Button weaponExpBtn;
+    int weapon = -1;
+    int _weapon = -1;
 
     public void StartAddWeaponExp()
     {
@@ -336,7 +339,18 @@ public class SoulShopManager : MonoBehaviour
         }
         
         weaponLevelTxt.text = string.Format("{0} Level", data.level);
-        
+
+        weapon = data.id;
+        if (weapon != _weapon)
+        {
+            _weapon = weapon;
+            Unit player = BoardManager.instance.player;
+            if (player)
+            {
+                player.data.weapon = data.id;
+                player.attackable.Init((WeaponData)GameDatabase.instance.weapons[data.id].Clone());
+            }
+        }
     }
 
     IEnumerator AddWeaponExpCorou()

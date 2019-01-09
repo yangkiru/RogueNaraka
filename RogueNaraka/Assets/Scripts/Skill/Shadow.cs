@@ -20,7 +20,7 @@ namespace RogueNaraka.SkillScripts
             unitData.weapon = player.data.weapon;
             unitData.stat = (Stat)BoardManager.instance.player.stat.Clone();
             unitData.stat.dmg *= 0.5f;
-            unitData.stat.tmpDmg *= 0.5f;
+            unitData.stat.dmgTemp *= 0.5f;
             unitData.limitTime = GetValue(Value.Time).value;
             shadow.Init(unitData);
             player.followable.AddFollower(shadow);

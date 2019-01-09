@@ -32,6 +32,8 @@ namespace BansheeGz.BGSpline.Components
 
             /// <summary>Stop</summary>
             Stop = 2,
+
+            CallBack = 3,
         }
 
         /// <summary>Mode for changing cursor position.</summary>
@@ -52,6 +54,19 @@ namespace BansheeGz.BGSpline.Components
             None = 0,
             Lerp = 1,
             Slerp = 2,
+        }
+
+        //===============================================================================================
+        //                                                    Custom
+        //===============================================================================================
+
+        public event Action<GameObject> onOverflow;
+        public GameObject onOverflowParameter;
+        public void SetOnOverflow(Action<GameObject> action, GameObject obj = null)
+        {
+            onOverflow += action;
+            if(obj != null)
+                onOverflowParameter = obj;
         }
 
         //===============================================================================================
@@ -323,6 +338,8 @@ namespace BansheeGz.BGSpline.Components
                     case OverflowControlEnum.Stop:
                         Speed = 0;
                         break;
+                    case OverflowControlEnum.CallBack:
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -343,6 +360,14 @@ namespace BansheeGz.BGSpline.Components
                             break;
                         case OverflowControlEnum.Stop:
                             Speed = 0;
+                            break;
+                        case OverflowControlEnum.CallBack:
+                            if (onOverflow != null)
+                            {
+                                onOverflow(onOverflowParameter);
+                                onOverflow = null;
+                                onOverflowParameter = null;
+                            }
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

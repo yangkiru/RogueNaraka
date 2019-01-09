@@ -28,13 +28,13 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         protected override void AutoMove()
         {
-            if (_target && _target.followable.followers.Count > 1)
+            if (_target)
             {
-                _following = _target.followable.followers[target.followable.followers.Count - 1];
-            }
-            else if (_target)
-            {
-                _following = _target;
+                int index = target.followable.followers.FindIndex(0, x => x.GetInstanceID() == unit.GetInstanceID());
+                if(index > 0)
+                    _following = _target.followable.followers[index - 1];
+                else
+                    _following = _target;
             }
             else
                 _following = null;
@@ -44,7 +44,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             if (_following)
             {
-                moveable.Move(target.transform.position);
+                moveable.Move(_following.transform.position);
             }
         }
 
