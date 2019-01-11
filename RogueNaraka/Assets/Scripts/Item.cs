@@ -255,6 +255,7 @@ public class Item : MonoBehaviour
             circle.MoveCircleToMouse();
             circle.SetCircle(_data.size);
             circle.SetEnable(true);
+            Pointer.instance.SetPointer(true);
             //line.enabled = true;
             isMouseDown = true;
         }
@@ -271,6 +272,7 @@ public class Item : MonoBehaviour
         if (_data.id != -1)
         {
             circle.MoveCircleToMouse();
+            Pointer.instance.PositionToMouse();
             //DrawLine();
         }
     }

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4215614072316304}
   - component: {fileID: 212126601148893928}
   - component: {fileID: 114481818113872668}
-  - component: {fileID: 537917684446927641}
+  - component: {fileID: 1655965979807426877}
+  - component: {fileID: 400561887986786836}
   - component: {fileID: 114697676651531626}
   - component: {fileID: 114163797499506304}
   - component: {fileID: 114574027343910540}
@@ -108,9 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140b4409e51482248803355ebf213cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitableRay: {fileID: 0}
-  hitableCircle: {fileID: 0}
-  _hitable: {fileID: 537917684446927641}
+  _hitableCircleCast: {fileID: 1655965979807426877}
+  _hitableTrigger: {fileID: 400561887986786836}
+  _hitable: {fileID: 0}
   _shootable: {fileID: 114180939160881066}
   _moveable: {fileID: 114163797499506304}
   _ownerable: {fileID: 114574027343910540}
@@ -154,7 +155,7 @@ MonoBehaviour:
   _polygon: {fileID: 1426770371750627783}
   _circle: {fileID: 1307021657860848083}
   _advanced: {fileID: 6279783528189844711}
---- !u!114 &537917684446927641
+--- !u!114 &1655965979807426877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,13 +164,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1040694008069246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dd735db97ae74f45ac2247c3e058407, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ca4e32c0c6833b49bb11b83237d3107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 114481818113872668}
   ownerable: {fileID: 114574027343910540}
   shakeable: {fileID: 1119521292092267351}
-  hitList: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  delay: 0
+  leftDelay: 0
+  pierce: 0
+--- !u!114 &400561887986786836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040694008069246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf789525cb3a83245b0d5153e33b62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 114481818113872668}
+  ownerable: {fileID: 114574027343910540}
+  shakeable: {fileID: 1119521292092267351}
   layerMask:
     serializedVersion: 2
     m_Bits: 0

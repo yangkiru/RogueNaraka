@@ -254,6 +254,8 @@ namespace RogueNaraka.UnitScripts
                 BoardManager.instance.enemies.Add(this);
             if (_timeLimitable.time != 0)
                 _timeLimitable.enabled = true;
+            if (_hpable.currentHp <= 0)
+                _deathable.Death();
         }
 
         void DisableAutoMoveables()

@@ -14,6 +14,8 @@ namespace RogueNaraka.UnitScripts
 
         IEnumerator deathCorou;
 
+        public event System.Action onDeath;
+
         void Reset()
         {
             unit = GetComponent<Unit>();
@@ -22,6 +24,21 @@ namespace RogueNaraka.UnitScripts
         public void Init()
         {
             _isDeath = false;
+
+            if (unit == BoardManager.instance.player)
+                onDeath = PlayerOnDeath;
+            else if (!unit.data.isFriendly)
+                onDeath = EnemyOnDeath;
+        }
+
+        public void PlayerOnDeath()
+        {
+            DeathManager.instance.OnDeath();
+        }
+
+        public void EnemyOnDeath()
+        {
+            MoneyManager.instance.AddUnrefinedSoul(unit.data.cost);
         }
 
         public void Death()
@@ -38,14 +55,13 @@ namespace RogueNaraka.UnitScripts
         {
             _isDeath = true;
             unit.animator.SetBool("isDeath", true);
+            unit.DisableAll();
             AnimatorStateInfo state;
             do
             {
                 yield return null;
                 state = unit.animator.GetCurrentAnimatorStateInfo(0);
-            } while (!state.IsName("Death"));
-
-            unit.DisableAll();
+            } while (state.normalizedTime < 1 || !state.IsName("Death"));
 
             do
             {
@@ -54,10 +70,11 @@ namespace RogueNaraka.UnitScripts
 
             DeathEffectPool.instance.Play(transform);
 
-            if (unit == BoardManager.instance.player)
-                GameManager.instance.StartCoroutine(GameManager.instance.OnEnd());
-            else if (!unit.data.isFriendly)
-                MoneyManager.instance.AddUnrefinedSoul(unit.data.cost);
+            if (onDeath != null)
+            {
+                onDeath.Invoke();
+            }
+            
             BoardManager.instance.unitPool.EnqueueObjectPool(gameObject, false);
             deathCorou = null;
         }

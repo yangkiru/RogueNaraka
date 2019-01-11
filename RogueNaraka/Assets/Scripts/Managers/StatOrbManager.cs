@@ -12,9 +12,13 @@ public class StatOrbManager : MonoBehaviour
     public GameObject pnl;
     public GameObject endPoint;
 
+    public ParticleSystem bombParticle;
+
     public ObjectPool orbPool;
     public Image icon;
+    public Image smallIcon;
     public Sprite[] icons;
+    public Sprite[] smallIcons;
 
     public TextMeshProUGUI statNameTxt;
     public TextMeshProUGUI statValueTxt;
@@ -26,6 +30,7 @@ public class StatOrbManager : MonoBehaviour
     Stat stat;
 
     int used;
+    int current;
 
     private void Awake()
     {
@@ -74,7 +79,7 @@ public class StatOrbManager : MonoBehaviour
             while (t > 0)
             {
                 yield return null;
-                t -= Time.unscaledDeltaTime;
+                t -= Time.deltaTime;
             }
         }
     }
@@ -84,7 +89,9 @@ public class StatOrbManager : MonoBehaviour
         stat.AddOrigin(currentStat, 1);
         StatTxtUpdate();
         used++;
+        current--;
         IconEffect();
+        bombParticle.Play();
         if(used == rndStat.statPoints)
         {
             StartCoroutine(OnLastOverflow());
@@ -99,7 +106,7 @@ public class StatOrbManager : MonoBehaviour
         while (t > 0)
         {
             yield return null;
-            t -= Time.unscaledDeltaTime;
+            t -= Time.deltaTime;
         }
         stat.currentHp = stat.GetCurrent(STAT.HP);
         stat.currentMp = stat.GetCurrent(STAT.MP);
@@ -130,7 +137,7 @@ public class StatOrbManager : MonoBehaviour
         while(iconTime > 0)
         {
             yield return null;
-            iconTime -= Time.unscaledDeltaTime;
+            iconTime -= Time.deltaTime;
             icon.rectTransform.localScale = Vector3.Lerp(icon.rectTransform.localScale, Vector3.one, 1 - iconTime * 2);
         }
         icon.rectTransform.localScale = Vector3.one;
@@ -140,7 +147,9 @@ public class StatOrbManager : MonoBehaviour
     public void SetStat(STAT type)
     {
         currentStat = type;
-        icon.sprite = icons[(int)type];
+        int i = (int)type;
+        icon.sprite = icons[i];
+        smallIcon.sprite = smallIcons[i];
         StatTxtUpdate();
     }
 
@@ -155,6 +164,7 @@ public class StatOrbManager : MonoBehaviour
             pnl.SetActive(true);
             SpawnOrb(rndStat.statPoints);
             StartCoroutine(StatCorou(rndStat));
+            Time.timeScale = 1;
         }
         else if (!value)
             pnl.SetActive(false);
@@ -168,25 +178,23 @@ public class StatOrbManager : MonoBehaviour
             while (t > 0)
             {
                 yield return null;
-                t -= Time.unscaledDeltaTime;
+                t -= Time.deltaTime;
             }
             //CameraShake.instance.Shake(0.1f, 0.1f, 0.001f);
             StartCoroutine(IconShake(0.1f, 0.1f, 0.001f));
             SetStat((STAT)i);
 
             int amount = (int)stat.GetOrigin((STAT)i);
-
+            current = amount;
             if (amount > 0)
             {
                 float delay = Mathf.Pow(0.75f, amount);
 
                 Shoot(amount, delay);
 
-                t = delay;
-                while (t > 0)
+                while (current > 0)
                 {
                     yield return null;
-                    t -= Time.unscaledDeltaTime;
                 }
             }
         }

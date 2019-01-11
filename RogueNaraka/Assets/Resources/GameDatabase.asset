@@ -464,7 +464,7 @@ MonoBehaviour:
     dmg: 0.1
     related: 0
     controller: {fileID: 9100000, guid: be2920a2a1f994d419a22bf79d33cf3d, type: 2}
-    type: 1
+    type: 0
     localSpeed: 0
     worldSpeed: 0
     localAccel: 0
@@ -851,7 +851,7 @@ MonoBehaviour:
     dmg: 0.3
     related: 0
     controller: {fileID: 22100000, guid: da63d2c42c766504b8345bff4b454923, type: 2}
-    type: 1
+    type: 3
     localSpeed: 3
     worldSpeed: 0
     localAccel: 0
@@ -913,7 +913,7 @@ MonoBehaviour:
     dmg: 0.5
     related: 0
     controller: {fileID: 22100000, guid: 22cbc4dea137a91418cf01a2004c6ea3, type: 2}
-    type: 1
+    type: 3
     localSpeed: 3
     worldSpeed: 0
     localAccel: 0
@@ -975,7 +975,7 @@ MonoBehaviour:
     dmg: 0.7
     related: 0
     controller: {fileID: 22100000, guid: fce69881dc12eb040ba0d611eecbde7d, type: 2}
-    type: 1
+    type: 3
     localSpeed: 3
     worldSpeed: 0
     localAccel: 0
@@ -1043,7 +1043,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
-    size: 0.1
+    size: 0.25
     delay: 0.1
     limitTime: 1
     disapearStartTime: 0
@@ -1054,7 +1054,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: -100
+    order: 100
     effects:
     - type: 2
       value: 0
@@ -1415,7 +1415,7 @@ MonoBehaviour:
     - name: 6
       value: 0.1
     - name: 7
-      value: 0.05
+      value: 0.025
     levelUp:
       manaCost: 0.25
       size: 0.5
@@ -1423,7 +1423,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 7
-        value: 0.05
+        value: 0.025
     description: []
   items:
   - name: HealPotion

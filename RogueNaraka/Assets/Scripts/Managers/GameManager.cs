@@ -326,40 +326,6 @@ public class GameManager : MonoBehaviour {
         settingPnl.SetActive(value);
     }
 
-    /// <summary>
-    /// 플레이어가 죽었을 시 호출
-    /// Player의 OnDeath에서 호출 됨
-    /// </summary>
-    public IEnumerator OnEnd()
-    {
-        yield return null;
-        moneyManager.RefineSoul();
-        PlayerPrefs.SetInt("isRun", 0);
-        Debug.Log("End");
-        float t = 0;
-        while (t < 3)
-        {
-            t += Time.unscaledDeltaTime;
-            yield return null;
-        }
-        Debug.Log("Waited");
-        player.deathable.Revive();
-        
-        player.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-        t = 0;
-        while (t < 1)
-        {
-            t += Time.unscaledDeltaTime;
-            yield return null;
-        }
-        player.animator.updateMode = AnimatorUpdateMode.Normal;
-
-        SkillManager.instance.ResetSave();
-
-        boardManager.ClearStage();
-        Load();
-    }
-
     public static Vector2 GetMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);

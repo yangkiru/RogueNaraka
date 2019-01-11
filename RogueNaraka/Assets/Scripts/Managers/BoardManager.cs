@@ -151,7 +151,7 @@ public class BoardManager : MonoBehaviour {
         if(stage > GameDatabase.instance.stageCosts.Length)
         {
             Debug.Log("NoMoreStage");
-            GameManager.instance.StartCoroutine(GameManager.instance.OnEnd());
+            //
             return;
         }
         int cost = GameDatabase.instance.stageCosts[stage - 1];

@@ -5,7 +5,7 @@ using RogueNaraka.UnitScripts;
 
 namespace RogueNaraka.BulletScripts.Hitable
 {
-    public class HitableBullet : MonoBehaviour
+    public abstract class HitableBullet : MonoBehaviour
     {
         [SerializeField]
         protected Bullet bullet;
@@ -14,8 +14,8 @@ namespace RogueNaraka.BulletScripts.Hitable
         OwnerableBullet ownerable;
         [SerializeField]
         ShakeableBullet shakeable;
-        [SerializeField]
-        protected List<Unit> hitList = new List<Unit>();
+        //[SerializeField]
+        //protected List<Unit> hitList = new List<Unit>();
 
         [SerializeField]
         protected LayerMask layerMask;
@@ -27,6 +27,7 @@ namespace RogueNaraka.BulletScripts.Hitable
 
         bool isHit;
         bool isDestroy;
+
         
         [SerializeField]
         protected int pierce;
@@ -40,16 +41,23 @@ namespace RogueNaraka.BulletScripts.Hitable
             shakeable = GetComponent<ShakeableBullet>();
         }
 
-        void LateUpdate()
+        protected virtual void Update()
         {
             if (leftDelay > 0)
             {
                 leftDelay -= Time.deltaTime;
                 return;
             }
-            else if (isHit)
+            if (isHit)
             {
                 leftDelay = delay;
+                isHit = false;
+
+                OnHit();
+            }
+            else
+            {
+                OnNotHit();
             }
             //GetHitUnits();
             //for (int i = 0; i < hitList.Count; i++)
@@ -69,18 +77,21 @@ namespace RogueNaraka.BulletScripts.Hitable
             //hitList.Clear();
         }
 
-        private void OnTriggerStay2D(Collider2D coll)
+        /// <summary>
+        /// Call this on children
+        /// </summary>
+        /// <param name="coll"></param>
+        protected void Hit(Collider2D coll)
         {
             if (isDestroy || leftDelay > 0)
                 return;
             if ((layerMask.value & (1 << coll.gameObject.layer)) != (1 << coll.gameObject.layer))
                 return;
-                
+
             Unit hit = coll.GetComponent<Unit>();
 
             if (hit)
             {
-
                 for (int i = 0; i < bullet.data.effects.Length; i++)
                 {
                     hit.effectable.AddEffect(bullet.data.effects[i], bullet, ownerable.unit);
@@ -93,7 +104,6 @@ namespace RogueNaraka.BulletScripts.Hitable
 
                 if (OnDamage != null)
                     OnDamage(bullet, hit);
-
             }
 
             if (pierce-- == 1)
@@ -104,6 +114,16 @@ namespace RogueNaraka.BulletScripts.Hitable
             isHit = true;
         }
 
+        protected virtual void OnHit()
+        {
+
+        }
+
+        protected virtual void OnNotHit()
+        {
+
+        }
+
         public virtual void Init(BulletData data)
         {
             layerMask = GetLayerMask();
@@ -111,7 +131,6 @@ namespace RogueNaraka.BulletScripts.Hitable
             leftDelay = 0;
             isHit = false;
             isDestroy = false;
-            hitList.Clear();
             pierce = data.pierce;
             OnDamage = null;
         }

@@ -8,10 +8,7 @@ public class Pointer : MonoBehaviour {
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
+        instance = this;
     }
     public float offset = 1;
 	public void SetPointer(bool value)
