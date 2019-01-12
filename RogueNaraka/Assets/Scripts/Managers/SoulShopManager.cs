@@ -60,7 +60,6 @@ public class SoulShopManager : MonoBehaviour
     {
         if (value)
         {
-            GameManager.instance.SetPause(true);
             shopPnl.SetActive(true);
             StatPnlOpen();
             GameManager.instance.moneyManager.Load();
@@ -68,7 +67,6 @@ public class SoulShopManager : MonoBehaviour
         else
         {
             shopPnl.SetActive(false);
-            ShopStage(SHOPSTAGE.DECREASE);
         }
     }
 

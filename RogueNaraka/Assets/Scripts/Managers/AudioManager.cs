@@ -48,10 +48,10 @@ public class AudioManager : MonoBehaviour
         audioSettings[(int)AudioGroups.SFX].SetExposedParam(value);
     }
 
-    public void Mute(int audio)
-    {
-        audioSettings[audio].Mute();
-    }
+    //public void Mute(int audio)
+    //{
+    //    audioSettings[audio].Mute();
+    //}
 
     public void PlayMusic(string name)
     {
@@ -75,7 +75,7 @@ public class AudioManager : MonoBehaviour
 public class AudioSetting
 {
     public Slider slider;
-    public Button mute;
+    //public Button mute;
     public string exposedParam;
 
     public void Initialize()
@@ -85,26 +85,26 @@ public class AudioSetting
 
     public void SetExposedParam(float value)
     {
-        if(value <= slider.minValue)
-            mute.targetGraphic.color = mute.colors.disabledColor;
-        else
-            mute.targetGraphic.color = mute.colors.normalColor;
+        //if(value <= slider.minValue)
+        //    mute.targetGraphic.color = mute.colors.disabledColor;
+        //else
+        //    mute.targetGraphic.color = mute.colors.normalColor;
         AudioManager.instance.mixer.SetFloat(exposedParam, value);
         PlayerPrefs.SetFloat(exposedParam, value);
     }
 
-    public void Mute()
-    {
-        float value = slider.value;
-        if (slider.value > slider.minValue)
-        {
-            value = slider.value;
-            slider.value = slider.minValue;
-            PlayerPrefs.SetFloat(exposedParam, value);
-        }
-        else
-        {
-            value = slider.value = PlayerPrefs.GetFloat(exposedParam);
-        }
-    }
+    //public void Mute()
+    //{
+    //    float value = slider.value;
+    //    if (slider.value > slider.minValue)
+    //    {
+    //        value = slider.value;
+    //        slider.value = slider.minValue;
+    //        PlayerPrefs.SetFloat(exposedParam, value);
+    //    }
+    //    else
+    //    {
+    //        value = slider.value = PlayerPrefs.GetFloat(exposedParam);
+    //    }
+    //}
 }

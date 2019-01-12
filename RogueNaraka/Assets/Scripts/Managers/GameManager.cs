@@ -10,7 +10,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
 
-    const string version = "1.0.0";
+    const string version = "1.0.2";
     const bool isReset = true;
     public static Language language;
 
@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour {
     public SkillManager skillManager;
     public DeathEffectPool deathEffectPool;
     public GameObject settingPnl;
+
+    public Button[] languageBtns;
+
     public Unit player
     {
         get { return boardManager.player; }
@@ -336,6 +339,14 @@ public class GameManager : MonoBehaviour {
         if(num != -1)
             language = (Language)num;
         PlayerPrefs.SetString("language", language.ToString().Remove(0));
+        int lang = (int)language;
+        for (int i = 0; i < languageBtns.Length; i++)
+        {
+            if (i == lang)
+                languageBtns[i].interactable = false;
+            else
+                languageBtns[i].interactable = true;
+        }
     }
 
     public void InitDropdown(TMP_Dropdown dropdown)
