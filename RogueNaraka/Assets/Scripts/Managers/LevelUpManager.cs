@@ -73,11 +73,9 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SkillManager.instance.SetIsDragable(false);
-        if (GameManager.instance.soulShopManager.shopStage <= 1)
-            GameManager.instance.soulShopManager.SetSoulShop(true);
+
         if (isLeftStatChanged)
         {
-            Debug.Log("남은 스탯이 있따:" + leftStat + " " + _leftStat);
             SetStatPnl(true);
         }
         else
@@ -107,7 +105,6 @@ public class LevelUpManager : MonoBehaviour {
         {
             if (isLeftStatChanged)
             {
-                Debug.Log("남은 스탯이 있따:" + this.leftStat + " " + _leftStat);
                 
                 if (!lastChance)
                 {
@@ -126,7 +123,6 @@ public class LevelUpManager : MonoBehaviour {
             }
             else
             {
-                Debug.Log("남은 스탯이 없따:" + leftStat + " " + _leftStat);
                 rollManager.SetRollPnl(true);
                 statPnl.SetActive(false);
             }
@@ -185,12 +181,12 @@ public class LevelUpManager : MonoBehaviour {
 
     public void SyncStatUpgradeTxt()
     {
-        upgradeTxt[0].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.DMG), player.data.stat.GetMax(STAT.DMG));
-        upgradeTxt[1].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.SPD), player.data.stat.GetMax(STAT.SPD));
-        upgradeTxt[2].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.TEC), player.data.stat.GetMax(STAT.TEC));
-        upgradeTxt[3].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.HP), player.data.stat.GetMax(STAT.HP));
-        upgradeTxt[4].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.MP), player.data.stat.GetMax(STAT.MP));
-        upgradeTxt[5].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.HPREGEN), player.data.stat.GetMax(STAT.HPREGEN));
-        upgradeTxt[6].text = string.Format("{0}/{1}", player.data.stat.GetCurrent(STAT.MPREGEN), player.data.stat.GetMax(STAT.MPREGEN));
+        upgradeTxt[0].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.DMG), player.data.stat.GetMax(STAT.DMG));
+        upgradeTxt[1].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.SPD), player.data.stat.GetMax(STAT.SPD));
+        upgradeTxt[2].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.TEC), player.data.stat.GetMax(STAT.TEC));
+        upgradeTxt[3].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.HP), player.data.stat.GetMax(STAT.HP));
+        upgradeTxt[4].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.MP), player.data.stat.GetMax(STAT.MP));
+        upgradeTxt[5].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.HPREGEN), player.data.stat.GetMax(STAT.HPREGEN));
+        upgradeTxt[6].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.MPREGEN), player.data.stat.GetMax(STAT.MPREGEN));
     }
 }

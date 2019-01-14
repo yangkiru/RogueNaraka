@@ -160,6 +160,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetString("effect", string.Empty);
         PlayerPrefs.SetInt("isRun", 0);
         PlayerPrefs.SetInt("isLevelUp", 0);
+        MoneyManager.instance.refiningRate = 0.3f;
 
         PlayerPrefs.SetInt("exp", 0);
 

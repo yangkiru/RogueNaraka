@@ -25,6 +25,8 @@ public class MoneyManager : MonoBehaviour {
     [SerializeField][ReadOnly]
     private int _soul;
 
+    public float refiningRate { get { return PlayerPrefs.GetFloat("refiningRate"); } set { PlayerPrefs.SetFloat("refiningRate", value); } }
+
     public static MoneyManager instance = null;
 
     public void Awake()
@@ -82,13 +84,19 @@ public class MoneyManager : MonoBehaviour {
             return false;
     }
 
-    public void RefineSoul()
+    public void RefineSoul(float rate = 1)
     {
         if(_unrefinedSoul > 0)
-            AddSoul(_unrefinedSoul);
+            AddSoul((int)(_unrefinedSoul * rate));
         SetUnrefinedSoul(0);
         Save();
         Debug.Log("RefineSoul");
+    }
+
+    public void RandomRefineSoul()
+    {
+        float rate = Random.Range(refiningRate, 1f);
+        RefineSoul(rate);
     }
 
     public void Save(bool isUnrefined = true)
@@ -125,6 +133,16 @@ public class MoneyManager : MonoBehaviour {
                 case "soul.100":
                     Debug.Log("Bought 100 Soul");
                     AddSoul(100);
+                    Save(false);
+                    break;
+                case "soul.550":
+                    Debug.Log("Bought 550 Soul");
+                    AddSoul(550);
+                    Save(false);
+                    break;
+                case "soul.1200":
+                    Debug.Log("Bought 1200 Soul");
+                    AddSoul(1200);
                     Save(false);
                     break;
             }

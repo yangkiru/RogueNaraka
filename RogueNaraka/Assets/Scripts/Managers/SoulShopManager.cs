@@ -12,6 +12,10 @@ public class SoulShopManager : MonoBehaviour
     public GameObject shopPnl;
     public GameObject statPnl;
     public GameObject skillPnl;
+    public GameObject soulPnl;
+    public GameObject preparingPnl;
+
+    public Button statBtn;
 
     public int shopStage
     { get { return _shopStage; } }
@@ -61,7 +65,7 @@ public class SoulShopManager : MonoBehaviour
         if (value)
         {
             shopPnl.SetActive(true);
-            StatPnlOpen();
+            statBtn.onClick.Invoke();
             GameManager.instance.moneyManager.Load();
         }
         else
@@ -78,28 +82,47 @@ public class SoulShopManager : MonoBehaviour
         SyncStatUpgradeTxt();
         skillPnl.SetActive(false);
         weaponPnl.SetActive(false);
+        soulPnl.SetActive(false);
 
         statPnl.SetActive(true);
         SyncStatUpgradeTxt();
+        preparingPnl.SetActive(false);
     }
 
     public void SkillPnlOpen()
     {
         statPnl.SetActive(false);
         weaponPnl.SetActive(false);
+        soulPnl.SetActive(false);
 
         InitSkillPnl();
         skillPnl.SetActive(true);
+        preparingPnl.SetActive(true);
     }
 
     public void WeaponPnlOpen()
     {
         statPnl.SetActive(false);
         skillPnl.SetActive(false);
+        soulPnl.SetActive(false);
 
         weaponPnl.SetActive(true);
 
         WeaponPnlUpdate(PlayerPrefs.GetInt("exp"));
+        preparingPnl.SetActive(false);
+    }
+
+    public void SoulPnlOpen()
+    {
+        statPnl.SetActive(false);
+        skillPnl.SetActive(false);
+        weaponPnl.SetActive(false);
+
+        soulPnl.SetActive(true);
+
+        preparingPnl.SetActive(false);
+        RefiningRateTxtNameUpdate();
+        RefiningRateTxtUpdate();
     }
 
     #region stat
@@ -372,5 +395,39 @@ public class SoulShopManager : MonoBehaviour
                 delay *= 0.9f;
         }
     }
+    #endregion
+
+    #region soul
+
+    public TextMeshProUGUI soulRefiningRateNameTxt;
+    public TextMeshProUGUI soulRefiningRateValueTxt;
+
+    public void RefiningRateUpgrade()
+    {
+        float rate = MoneyManager.instance.refiningRate;
+        if (MoneyManager.instance.UseSoul((int)(rate * 100)))
+        {
+            MoneyManager.instance.refiningRate = rate + 0.01f;
+            RefiningRateTxtUpdate();
+        }
+    }
+
+    public void RefiningRateTxtUpdate()
+    {
+        soulRefiningRateValueTxt.text = string.Format("{0}% ~ 100%", MoneyManager.instance.refiningRate * 100);
+    }
+    public void RefiningRateTxtNameUpdate()
+    {
+        switch(GameManager.language)
+        {
+            default:
+                soulRefiningRateNameTxt.text = "Soul refining rate";
+                break;
+            case Language.Korean:
+                soulRefiningRateNameTxt.text = "영혼 정제율";
+                break;
+        }
+    }
+
     #endregion
 }

@@ -64,7 +64,7 @@ public class SkillGUI : MonoBehaviour
                 skillManager.GetCircle().SetCircle(_skill.data.size);
                 skillManager.GetCircle().SetEnable(true);
             }
-            pointer.SetPointer(true);
+            Pointer.instance.SetPointer(true);
         }
     }
 

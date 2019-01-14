@@ -698,7 +698,7 @@ MonoBehaviour:
     onDestroy: []
   - name: BloodBubble
     id: 9
-    dmg: 0.1
+    dmg: 0
     related: 3
     controller: {fileID: 22100000, guid: 743522a24d1f9114b9b6464c01a7fe38, type: 2}
     type: 0
@@ -1170,7 +1170,7 @@ MonoBehaviour:
     cost: 15
     id: 7
   - level: 2
-    cost: 20
+    cost: 0
     id: 8
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d0000003f00000041000000430000004500000047000000490000004b0000004d0000004f00000051000000530000005500000057000000590000005b0000005d0000005f000000610000006300000065000000
   unitCosts:
@@ -1263,7 +1263,7 @@ MonoBehaviour:
     size: 1
     isCircleToPlayer: 0
     isDeath: 0
-    isBasic: 0
+    isBasic: 1
     effects: []
     values:
     - name: 2
@@ -1291,7 +1291,7 @@ MonoBehaviour:
     size: 1
     isCircleToPlayer: 0
     isDeath: 0
-    isBasic: 0
+    isBasic: 1
     effects: []
     values:
     - name: 0
@@ -1321,7 +1321,7 @@ MonoBehaviour:
     size: 1
     isCircleToPlayer: 1
     isDeath: 0
-    isBasic: 0
+    isBasic: 1
     effects: []
     values:
     - name: 4
@@ -1351,7 +1351,7 @@ MonoBehaviour:
     size: 1
     isCircleToPlayer: 1
     isDeath: 0
-    isBasic: 0
+    isBasic: 1
     effects: []
     values:
     - name: 1

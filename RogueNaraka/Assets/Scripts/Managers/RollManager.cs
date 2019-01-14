@@ -10,7 +10,6 @@ public class RollManager : MonoBehaviour {
     public Image[] showCases;
     public GameObject rollPnl;
     public GameObject selectPnl;
-    public Image selectedImg;
     public Image dragImg;
     public TextMeshProUGUI typeTxt;
     public TextMeshProUGUI nameTxt;
@@ -89,6 +88,7 @@ public class RollManager : MonoBehaviour {
             rollPnl.SetActive(value);
             Init();
             SetShowCase();
+            reRollTxt.text = "ReRoll";
         }
         else
         {
@@ -130,6 +130,7 @@ public class RollManager : MonoBehaviour {
 
                 int spin = Random.Range(2, 4);//2~3바퀴
                 scroll.Spin(spin * 10 + stopped - last);
+                SetSelectPnl(false);
                 StartCoroutine(CheckRollEnd());
             }
         }
@@ -220,7 +221,8 @@ public class RollManager : MonoBehaviour {
 
     private bool IsSelectable(int position)
     {
-        if (stopped == position || (stopped + 1) % 10 == position || (stopped + 2) % 10 == position)
+        //if (stopped == position || (stopped + 1) % 10 == position || (stopped + 2) % 10 == position)
+        if ((stopped + 1) % 10 == position)
             return true;
         else
             return false;
@@ -236,13 +238,13 @@ public class RollManager : MonoBehaviour {
             {
                 case ROLL_TYPE.SKILL:
                     SkillData skill = GameDatabase.instance.skills[data.id];
-                    selectedImg.sprite = GetSprite(data);
+                    //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "Skill";
                     nameTxt.text = skill.GetName();
                     descTxt.text = skill.GetDescription();
                     break;
                 case ROLL_TYPE.STAT:
-                    selectedImg.sprite = GetSprite(data);
+                    //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "Stat";
                     string point = "Point";
                     if (data.id + 1 > 1)
@@ -252,7 +254,7 @@ public class RollManager : MonoBehaviour {
                     //descTxt.text = (data.id + 1) + "의 스탯 포인트를 획득한다.";
                     break;
                 case ROLL_TYPE.ITEM:
-                    selectedImg.sprite = GetSprite(data);
+                    //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "ITEM";
                     ItemData item = GameDatabase.instance.items[data.id];
                     ItemSpriteData itemSpr = GameDatabase.instance.itemSprites[Item.instance.sprIds[item.id]];
@@ -268,7 +270,7 @@ public class RollManager : MonoBehaviour {
                     }
                     break;
                 case ROLL_TYPE.PASSIVE:
-                    selectedImg.sprite = GetSprite(data);
+                    //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "Passive";
                     nameTxt.text = "패시브";
                     descTxt.text = "패시브";
@@ -284,16 +286,18 @@ public class RollManager : MonoBehaviour {
             OnMouse();
     }
 
-    public void OnMouseClick()
+    public void OnMouseClick(int position)
     {
-        if (datas[selected].type == ROLL_TYPE.STAT)
+        if (selected == position && datas[selected].type == ROLL_TYPE.STAT)
             Ok();
     }
 
     bool isMouseDown;
     
-    public void OnMouseDown()
+    public void OnMouseDown(int position)
     {
+        if (selected != position)
+            return;
         if (datas[selected].type != ROLL_TYPE.STAT)
         {
             isMouseDown = true;
@@ -339,7 +343,7 @@ public class RollManager : MonoBehaviour {
                 SetRollPnl(false);
                 break;
             case ROLL_TYPE.PASSIVE:
-                selectedImg.sprite = GetSprite(data);
+                //selectedImg.sprite = GetSprite(data);
                 typeTxt.text = "Passive";
                 nameTxt.text = "패시브";
                 descTxt.text = "패시브";
@@ -448,6 +452,7 @@ public class RollManager : MonoBehaviour {
     /// </summary>
     public void Roll()
     {
+        SetSelectPnl(false);
         isClickable = false;
         LoadRollCount();
         if (!LoadStopped())//로드에 실패하면
@@ -541,6 +546,23 @@ public class RollManager : MonoBehaviour {
     public void OnRollEnd()
     {
         isClickable = true;
+        StartCoroutine(IconEffectCorou());
+        Select((stopped + 1) % 10);
+    }
+
+    IEnumerator IconEffectCorou()
+    {
+        float size = 1.5f;
+        float t = 0.5f;
+        RectTransform imgRect = showCases[(stopped + 1) % 10].rectTransform;
+        imgRect.localScale = new Vector3(size, size, 0);
+        while (t > 0)
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+            imgRect.localScale = Vector3.Lerp(imgRect.localScale, Vector3.one, 1 - t * 2);
+        }
+        imgRect.localScale = Vector3.one;
     }
 
     /// <summary>

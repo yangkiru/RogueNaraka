@@ -33,7 +33,7 @@ namespace RogueNaraka.BulletScripts
                 return;
             Vector2 direction = target.transform.position - transform.position;
 
-            float angle = 180 + Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotateToTarget = Quaternion.Euler(0, 0, angle);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotateToTarget, Time.deltaTime * _rotateSpeed);
         }

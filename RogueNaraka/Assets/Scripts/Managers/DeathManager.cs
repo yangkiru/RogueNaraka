@@ -22,6 +22,7 @@ public class DeathManager : MonoBehaviour
 
     public void OnDeath()
     {
+        RankManager.instance.SendPlayerRank();
         GameManager.instance.Save();
         StartCoroutine(WaitForDeathAnimation());
     }
@@ -45,7 +46,7 @@ public class DeathManager : MonoBehaviour
     public IEnumerator WaitForDeathAnimation()
     {
         yield return null;
-        MoneyManager.instance.RefineSoul();
+        MoneyManager.instance.RandomRefineSoul();
         
         Debug.Log("Player Died");
         

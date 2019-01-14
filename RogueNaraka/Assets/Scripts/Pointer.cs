@@ -9,6 +9,7 @@ public class Pointer : MonoBehaviour {
     void Awake()
     {
         instance = this;
+        gameObject.SetActive(false);
     }
     public float offset = 1;
 	public void SetPointer(bool value)

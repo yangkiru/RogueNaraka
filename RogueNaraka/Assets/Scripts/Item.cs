@@ -193,6 +193,7 @@ public class Item : MonoBehaviour
             return;
         circle.SetCircle(_data.size);
         circle.MoveCircleToMouse();
+        Pointer.instance.SetPointer(false);
         isKnown[_data.id] = true;
 
         if (_data.size != 0)//size 값이 있으면 서클 캐스트
@@ -227,11 +228,11 @@ public class Item : MonoBehaviour
             {
                 case 0:
                     Debug.Log("HealPotion");
-                    BoardManager.instance.player.hpable.AddHp(_data.value * BoardManager.instance.player.data.stat.tec);
+                    BoardManager.instance.player.hpable.Heal(_data.value * BoardManager.instance.player.data.stat.GetCurrent(STAT.HP));
                     break;
                 case 1:
                     Debug.Log("ManaPotion");
-                    BoardManager.instance.player.mpable.AddMp(_data.value * BoardManager.instance.player.data.stat.tec);
+                    BoardManager.instance.player.mpable.Heal(_data.value * BoardManager.instance.player.data.stat.GetCurrent(STAT.MP));
                     break;
             }
         }
@@ -281,6 +282,7 @@ public class Item : MonoBehaviour
     {
         //line.enabled = false;
         circle.SetEnable(false);
+        Pointer.instance.SetPointer(false);
         if (_data.id != -1)
         {
             if(BoardManager.IsMouseInBoard())

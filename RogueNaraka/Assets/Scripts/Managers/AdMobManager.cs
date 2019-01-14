@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using GoogleMobileAds.Api;
+using UnityEngine.Events;
+using System.Collections;
 
 public class AdMobManager : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class AdMobManager : MonoBehaviour
     private float deltaTime = 0.0f;
     private static string outputMessage = string.Empty;
 
+    public AdEvent onReward;
+
+    public static AdMobManager instance;
+
     public static string OutputMessage
     {
         set { outputMessage = value; }
@@ -17,6 +23,8 @@ public class AdMobManager : MonoBehaviour
 
     public void Start()
     {
+
+        instance = this;
 
 #if UNITY_ANDROID
         string appId = "ca-app-pub-3940256099942544~3347511713";
@@ -34,16 +42,22 @@ public class AdMobManager : MonoBehaviour
         // Get singleton reward based video ad reference.
         this.rewardBasedVideo = RewardBasedVideoAd.Instance;
 
-        // RewardBasedVideoAd is a singleton, so handlers should only be registered once.
+        //광고 요청이 성공적으로 로드되면 호출
         this.rewardBasedVideo.OnAdLoaded += this.HandleRewardBasedVideoLoaded;
+        //광고 요청을 로드하지 못했을 때 호출
         this.rewardBasedVideo.OnAdFailedToLoad += this.HandleRewardBasedVideoFailedToLoad;
+        //광고가 표시될 때 호출
         this.rewardBasedVideo.OnAdOpening += this.HandleRewardBasedVideoOpened;
+        //광고가 재생되기 시작하면 호출
         this.rewardBasedVideo.OnAdStarted += this.HandleRewardBasedVideoStarted;
+        //사용자가 비디오 시청을 통해 보상을 받을 때 호출
         this.rewardBasedVideo.OnAdRewarded += this.HandleRewardBasedVideoRewarded;
+        //광고가 닫힐 때 호출
         this.rewardBasedVideo.OnAdClosed += this.HandleRewardBasedVideoClosed;
+        //광고 클릭으로 인해 사용자가 애플리케이션을 종료한 경우 호출
         this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;
 
-        this.RequestBanner();
+        this.RequestRewardBasedVideo();
     }
 
     //public void Update()
@@ -155,16 +169,17 @@ public class AdMobManager : MonoBehaviour
     {
         return new AdRequest.Builder()
             .AddTestDevice(AdRequest.TestDeviceSimulator)
-            .AddTestDevice("0123456789ABCDEF0123456789ABCDEF")
-            .AddKeyword("game")
-            .SetGender(Gender.Male)
-            .SetBirthday(new DateTime(1985, 1, 1))
-            .TagForChildDirectedTreatment(false)
-            .AddExtra("color_bg", "9B30FF")
             .Build();
+            //.AddTestDevice("0123456789ABCDEF0123456789ABCDEF")
+            //.AddKeyword("game")
+            //.SetGender(Gender.Male)
+            //.SetBirthday(new DateTime(1985, 1, 1))
+            //.TagForChildDirectedTreatment(false)
+            //.AddExtra("color_bg", "9B30FF")
+            //.Build();
     }
 
-    private void RequestBanner()
+    public void RequestBanner()
     {
         // These ad units are configured to always serve test ads.
 #if UNITY_EDITOR
@@ -201,7 +216,7 @@ public class AdMobManager : MonoBehaviour
     {
         // These ad units are configured to always serve test ads.
 #if UNITY_EDITOR
-        string adUnitId = "unused";
+        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_IPHONE
@@ -230,10 +245,10 @@ public class AdMobManager : MonoBehaviour
         this.interstitial.LoadAd(this.CreateAdRequest());
     }
 
-    private void RequestRewardBasedVideo()
+    public void RequestRewardBasedVideo()
     {
 #if UNITY_EDITOR
-        string adUnitId = "unused";
+        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_IPHONE
@@ -257,7 +272,7 @@ public class AdMobManager : MonoBehaviour
         }
     }
 
-    private void ShowRewardBasedVideo()
+    public void ShowRewardBasedVideo()
     {
         if (this.rewardBasedVideo.IsLoaded())
         {
@@ -360,6 +375,7 @@ public class AdMobManager : MonoBehaviour
     {
         string type = args.Type;
         double amount = args.Amount;
+        StartCoroutine(OnReward());
         MonoBehaviour.print(
             "HandleRewardBasedVideoRewarded event received for " + amount.ToString() + " " + type);
     }
@@ -370,4 +386,19 @@ public class AdMobManager : MonoBehaviour
     }
 
     #endregion
+
+    IEnumerator OnReward()
+    {
+        float t = 1;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
+        if (onReward != null)
+            onReward.Invoke();
+    }
+
+    [Serializable]
+    public class AdEvent : UnityEvent { }
 }

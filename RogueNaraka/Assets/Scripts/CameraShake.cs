@@ -15,16 +15,16 @@ public class CameraShake : MonoBehaviour {
     {
         instance = this;
     }
-    public void Shake(float time, float power, float gap)
+    public void Shake(float time, float power, float gap, bool isUnscale = false)
     {
-        StartCoroutine(RandomMove(time, power, gap));
+        StartCoroutine(RandomMove(time, power, gap, isUnscale));
     }
 
-    public void Shake(ShakeData data)
+    public void Shake(ShakeData data, bool isUnscale = false)
     {
-        Shake(data.time, data.power, data.gap);
+        Shake(data.time, data.power, data.gap, isUnscale);
     }
-    private IEnumerator RandomMove(float time, float power, float gap)
+    private IEnumerator RandomMove(float time, float power, float gap, bool isUnscale = false)
     {
         float t1 = 0, t2 = 0;
         if (gap <= 0)
@@ -39,8 +39,8 @@ public class CameraShake : MonoBehaviour {
             while (t2 <= gap)
             {
                 yield return null;
-                t1 += Time.deltaTime;
-                t2 += Time.deltaTime;
+                t1 += isUnscale ? Time.unscaledDeltaTime : Time.deltaTime;
+                t2 += isUnscale ? Time.unscaledDeltaTime : Time.deltaTime;
             }
             t2 = 0;
             
