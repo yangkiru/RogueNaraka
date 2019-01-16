@@ -23,6 +23,7 @@ public class RollManager : MonoBehaviour {
     public RollData[] datas;
     private int rollCount;
     private bool isSkillSelected;
+    bool isStageUp;
 
     //선택된 SkillUI 위치 및 아이템 획득 여부
     private int target;
@@ -81,8 +82,9 @@ public class RollManager : MonoBehaviour {
         }
     }
 
-    public void SetRollPnl(bool value)
+    public void SetRollPnl(bool value, bool isStageUp = true)
     {
+        this.isStageUp = isStageUp;
         if (value)
         {
             rollPnl.SetActive(value);
@@ -93,7 +95,11 @@ public class RollManager : MonoBehaviour {
         else
         {
             Reset();
-            LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
+            SkillManager.instance.Save();
+            if(isStageUp)
+                LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
+            else
+                GameManager.instance.RunGame(StatOrbManager.instance.stat);
             rollPnl.SetActive(value);
         }
     }
@@ -113,7 +119,9 @@ public class RollManager : MonoBehaviour {
                 if (reRollTxt.text.CompareTo("ReRoll") == 0)
                     reRollTxt.text = string.Format("{0}Soul", amount);
                 else
-                    reRollTxt.text = "Fail";
+                {
+                    StartCoroutine(OnFail());
+                }
             }
             else
             {
@@ -134,6 +142,20 @@ public class RollManager : MonoBehaviour {
                 StartCoroutine(CheckRollEnd());
             }
         }
+    }
+
+    IEnumerator OnFail()
+    {
+        float t = 1f;
+        reRollTxt.text = "Fail";
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
+        SoulShopManager.instance.SetSoulShop(true);
+        SoulShopManager.instance.SoulPnlOpen();
+        reRollTxt.text = "ReRoll";
     }
 
     bool isPassed;
@@ -333,14 +355,14 @@ public class RollManager : MonoBehaviour {
             case ROLL_TYPE.SKILL:
                 SkillData skill = GameDatabase.instance.skills[data.id];
                 SkillManager.instance.SetSkill(datas[selected].id, target);
-                SetRollPnl(false);
+                SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.STAT:
                 LevelUpManager.instance.SetStatPnl(true, data.id + 1);
                 break;
             case ROLL_TYPE.ITEM:
                 Item.instance.SyncData(data.id);
-                SetRollPnl(false);
+                SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.PASSIVE:
                 //selectedImg.sprite = GetSprite(data);
@@ -416,7 +438,10 @@ public class RollManager : MonoBehaviour {
     public RollData GetRandom()
     {
         RollData result = new RollData();
-        result.type = (ROLL_TYPE)Random.Range(0, 4);
+        if (isStageUp)
+            result.type = (ROLL_TYPE)Random.Range(0, 4);
+        else
+            result.type = ROLL_TYPE.SKILL;
         switch (result.type)
         {
             case ROLL_TYPE.SKILL:

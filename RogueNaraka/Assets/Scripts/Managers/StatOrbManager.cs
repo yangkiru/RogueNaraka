@@ -27,7 +27,8 @@ public class StatOrbManager : MonoBehaviour
 
     STAT currentStat;
     Stat rndStat;
-    Stat stat;
+    public Stat stat { get { return _stat; } } 
+    Stat _stat;
 
     int used;
     int current;
@@ -86,7 +87,7 @@ public class StatOrbManager : MonoBehaviour
 
     void OnOverflow(GameObject obj)
     {
-        stat.AddOrigin(currentStat, 1);
+        _stat.AddOrigin(currentStat, 1);
         StatTxtUpdate();
         used++;
         current--;
@@ -108,13 +109,15 @@ public class StatOrbManager : MonoBehaviour
             yield return null;
             t -= Time.deltaTime;
         }
-        stat.currentHp = stat.GetCurrent(STAT.HP);
-        stat.currentMp = stat.GetCurrent(STAT.MP);
+        _stat.currentHp = _stat.GetCurrent(STAT.HP);
+        _stat.currentMp = _stat.GetCurrent(STAT.MP);
         pnl.SetActive(false);
-        Stat.StatToData(stat);
+        Stat.StatToData(_stat);
         Stat.StatToData(null, "randomStat");
-        
-        GameManager.instance.RunGame(stat);
+
+        GameManager.instance.StatTextUpdate(stat);
+        RollManager.instance.SetRollPnl(true, false);
+        //GameManager.instance.RunGame(stat);
     }
 
     float iconTime;
@@ -159,7 +162,7 @@ public class StatOrbManager : MonoBehaviour
         {
             used = 0;
             this.rndStat = rndStat;
-            this.stat = stat;
+            this._stat = stat;
             StatTxtUpdate();
             pnl.SetActive(true);
             SpawnOrb(rndStat.statPoints);
@@ -226,6 +229,6 @@ public class StatOrbManager : MonoBehaviour
     void StatTxtUpdate()
     {
         statNameTxt.text = string.Format("{0}\n({1})", GameDatabase.instance.statLang[(int)GameManager.language].items[(int)currentStat], currentStat.ToString());
-        statValueTxt.text = string.Format("{0}/{1}", stat.GetOrigin(currentStat), stat.GetMax(currentStat));
+        statValueTxt.text = string.Format("{0}/{1}", _stat.GetOrigin(currentStat), _stat.GetMax(currentStat));
     }
 }

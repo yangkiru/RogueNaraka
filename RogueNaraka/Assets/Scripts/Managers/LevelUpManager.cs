@@ -45,7 +45,7 @@ public class LevelUpManager : MonoBehaviour {
 
     void Update()
     {
-        if (!isLevelUp && player && BoardManager.instance.enemies.Count <= 0)
+        if (!isLevelUp && player && player.gameObject.activeSelf && BoardManager.instance.enemies.Count <= 0)
         {
             time -= Time.deltaTime;
             if (time > 0)
@@ -53,13 +53,29 @@ public class LevelUpManager : MonoBehaviour {
             else
                 time = 0.5f;
             player.autoMoveable.enabled = false;
-            player.moveable.Move(BoardManager.instance.goalPoint);
-            float distance = Vector2.Distance(player.transform.position, BoardManager.instance.goalPoint);
-            if (distance <= 0.5f)
+            player.moveable.agent.Stop();
+
+            if (endStageCorou == null)
             {
-                LevelUp();
+                endStageCorou = EndStageCorou();
+                StartCoroutine(endStageCorou);
             }
         }
+    }
+
+    IEnumerator endStageCorou;
+    IEnumerator EndStageCorou(float time = 3.5f)
+    {
+        PlayerPrefs.SetInt("isLevelUp", 1);
+
+        do
+        {
+            yield return null;
+            time -= Time.deltaTime;
+        } while (time > 0);
+
+        LevelUp();
+        endStageCorou = null;
     }
 
     /// <summary>
@@ -82,11 +98,10 @@ public class LevelUpManager : MonoBehaviour {
         {
             rollManager.SetRollPnl(true);
         }
-        PlayerPrefs.SetInt("isLevelUp", 1);
         GameManager.instance.Save();
         time = 0;
-        player.autoMoveable.enabled = true;
         player.moveable.agent.Stop();
+        player.autoMoveable.enabled = true;
     }
 
     bool lastChance;

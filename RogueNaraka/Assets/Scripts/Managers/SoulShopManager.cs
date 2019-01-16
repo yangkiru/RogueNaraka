@@ -71,6 +71,10 @@ public class SoulShopManager : MonoBehaviour
         else
         {
             shopPnl.SetActive(false);
+            if(DeathManager.instance.pnl.gameObject.activeSelf)
+                DeathManager.instance.pauseBtn.gameObject.SetActive(false);
+            else
+                DeathManager.instance.pauseBtn.gameObject.SetActive(true);
         }
     }
 

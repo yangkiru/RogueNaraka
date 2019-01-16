@@ -41,6 +41,7 @@ namespace RogueNaraka.UnitScripts
         #region autoMoveable
 
         public AutoMoveableUnit autoMoveable { get { return _autoMoveable; } }
+        [SerializeField]
         AutoMoveableUnit _autoMoveable;
         [SerializeField]
         RandomMoveableUnit _randomMoveable;

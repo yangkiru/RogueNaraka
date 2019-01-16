@@ -9,6 +9,8 @@ public class DeathManager : MonoBehaviour
     public static DeathManager instance;
 
     public Image pnl;
+    public Image youDied;
+    public Image pauseBtn;
 
     void Awake()
     {
@@ -18,24 +20,30 @@ public class DeathManager : MonoBehaviour
     public void SetDeathPnl(bool value)
     {
         pnl.gameObject.SetActive(value);
+        //CameraShake.instance.Shake(0.2f, 0.2f, 0.01f);
+        StartCoroutine(IconEffectCorou());
     }
 
     public void OnDeath()
     {
         RankManager.instance.SendPlayerRank();
         GameManager.instance.Save();
-        StartCoroutine(WaitForDeathAnimation());
+        SetDeathPnl(true);
+        
+        MoneyManager.instance.RandomRefineSoul();
+        pauseBtn.gameObject.SetActive(false);
     }
 
     public void ReGame()
     {
         SetDeathPnl(false);
         PlayerPrefs.SetInt("isRun", 0);
-        BoardManager.instance.player.deathable.Revive();
         SkillManager.instance.ResetSave();
 
         BoardManager.instance.ClearStage();
         GameManager.instance.Load();
+
+        pauseBtn.gameObject.SetActive(true);
     }
 
     public void OpenSoulShop()
@@ -43,29 +51,19 @@ public class DeathManager : MonoBehaviour
         SoulShopManager.instance.SetSoulShop(true);
     }
 
-    public IEnumerator WaitForDeathAnimation()
+    IEnumerator IconEffectCorou()
     {
-        yield return null;
-        MoneyManager.instance.RandomRefineSoul();
-        
-        Debug.Log("Player Died");
-        
-        float t = 0;
-        while (t < 1)
+        float size = 3f;
+        float t = 0.5f;
+        RectTransform imgRect = youDied.rectTransform;
+        imgRect.localScale = new Vector3(size, size, 0);
+        Vector3 two = new Vector3(2, 2, 1);
+        while (t > 0)
         {
-            t += Time.unscaledDeltaTime;
             yield return null;
+            t -= Time.unscaledDeltaTime;
+            imgRect.localScale = Vector3.Lerp(imgRect.localScale, two, 1 - t * 2);
         }
-
-        SetDeathPnl(true);
-
-        //player.animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-        //t = 0;
-        //while (t < 1)
-        //{
-        //    t += Time.unscaledDeltaTime;
-        //    yield return null;
-        //}
-        //player.animator.updateMode = AnimatorUpdateMode.Normal;
+        imgRect.localScale = two;
     }
 }

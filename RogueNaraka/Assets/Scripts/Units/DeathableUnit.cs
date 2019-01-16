@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RogueNaraka.UnitScripts.AutoMoveable;
 
 namespace RogueNaraka.UnitScripts
 {
@@ -56,6 +57,11 @@ namespace RogueNaraka.UnitScripts
             _isDeath = true;
             unit.animator.SetBool("isDeath", true);
             unit.DisableAll();
+            if(unit.autoMoveable is FollowMoveableUnit)
+            {
+                unit.followMoveable.OnDeath();
+            }
+            unit.followable.OnDeath();
             AnimatorStateInfo state;
             do
             {
@@ -68,14 +74,19 @@ namespace RogueNaraka.UnitScripts
                 yield return null;
             } while (state.normalizedTime < 1 && unit.animator.IsInTransition(0));
 
-            DeathEffectPool.instance.Play(transform);
+            
 
             if (onDeath != null)
             {
                 onDeath.Invoke();
             }
-            
-            BoardManager.instance.unitPool.EnqueueObjectPool(gameObject, false);
+
+            if (this != BoardManager.instance.player)
+            {
+                DeathEffectPool.instance.Play(transform);
+                BoardManager.instance.unitPool.EnqueueObjectPool(gameObject, false);
+            }
+
             deathCorou = null;
         }
 

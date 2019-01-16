@@ -1347,8 +1347,8 @@ MonoBehaviour:
     cost: 50
     coolTime: 3
     coolTimeLeft: 0
-    manaCost: 1
-    size: 1
+    manaCost: 0.5
+    size: 0
     isCircleToPlayer: 1
     isDeath: 0
     isBasic: 1
@@ -1357,8 +1357,8 @@ MonoBehaviour:
     - name: 1
       value: 5
     levelUp:
-      manaCost: 0.5
-      size: 0.25
+      manaCost: 0.25
+      size: 0
       coolTime: 0
       effects: []
       values:

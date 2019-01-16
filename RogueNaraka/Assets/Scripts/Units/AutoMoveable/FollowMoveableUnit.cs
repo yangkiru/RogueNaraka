@@ -17,11 +17,13 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         public void SetTarget(Unit unit)
         {
+            Debug.Log("SetTarget" + this.unit.name + " " + unit.name);
             _target = unit;
         }
 
         public void LostTarget()
         {
+            Debug.Log("LostTarget" + this.unit.name + " " + unit.name);
             _target = null;
             _following = null;
         }
@@ -48,7 +50,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             }
         }
 
-        private void OnDisable()
+        public void OnDeath()
         {
             if (_target)
             {

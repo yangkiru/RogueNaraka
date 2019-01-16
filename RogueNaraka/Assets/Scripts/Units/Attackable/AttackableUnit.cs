@@ -97,7 +97,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             if(isBeforeAnimation)
                 unit.animator.SetBool("isBeforeAttack", true);
             bool isMoveForced = false;
-            if (unit.autoMoveable.enabled)
+            if (unit.autoMoveable && unit.autoMoveable.enabled)
                 OnBeforeAttackStart();
             else
                 isMoveForced = true;
@@ -124,7 +124,7 @@ namespace RogueNaraka.UnitScripts.Attackable
 
             bool isMoveForced = false;
 
-            if (unit.autoMoveable.enabled)
+            if (unit.autoMoveable && unit.autoMoveable.enabled)
                 OnAfterAttackStart();
             else
                 isMoveForced = true;
@@ -135,7 +135,7 @@ namespace RogueNaraka.UnitScripts.Attackable
                 leftDelay -= Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
             } while (leftDelay > 0);
 
-            if (isAfterAnimation)
+            if (!isMoveForced && isAfterAnimation)
                 unit.animator.SetBool("isAfterAttack", false);
 
             OnAfterAttackEnd();

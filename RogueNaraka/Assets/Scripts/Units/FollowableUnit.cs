@@ -25,6 +25,7 @@ namespace RogueNaraka.UnitScripts
 
         public void AddFollower(Unit unit)
         {
+            Debug.Log("AddFollower" + this.unit.name + " " + unit.name);
             _followers.Add(unit);
             unit.followMoveable.SetTarget(this.unit);
         }
@@ -35,7 +36,7 @@ namespace RogueNaraka.UnitScripts
                 unit.followMoveable.LostTarget();
         }
 
-        private void OnDisable()
+        public void OnDeath()
         {
             for(int i = _followers.Count - 1; i >= 0; i--)
             {

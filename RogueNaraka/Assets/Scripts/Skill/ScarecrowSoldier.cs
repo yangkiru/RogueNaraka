@@ -20,6 +20,7 @@ namespace RogueNaraka.SkillScripts
             unitData.stat.hp = GetValue(Value.Hp).value;
             soldier.Init(unitData);
             soldier.Spawn(mp);
+            soldier.collider.enabled = false;
         }
     }
 }
