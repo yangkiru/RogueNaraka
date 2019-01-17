@@ -11,6 +11,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public Text[] upgradeTxt;
     public TextMeshProUGUI leftStatTxt;
+    public Fade fade;
 
     public GameObject statPnl;
 
@@ -45,38 +46,35 @@ public class LevelUpManager : MonoBehaviour {
 
     void Update()
     {
-        if (!isLevelUp && player && player.gameObject.activeSelf && BoardManager.instance.enemies.Count <= 0)
+        if (!FadeManager.instance.pnl.gameObject.activeSelf && !isLevelUp && player && player.gameObject.activeSelf && BoardManager.instance.enemies.Count <= 0)
         {
-            time -= Time.deltaTime;
-            if (time > 0)
-                return;
-            else
-                time = 0.5f;
             player.autoMoveable.enabled = false;
             player.moveable.agent.Stop();
 
-            if (endStageCorou == null)
-            {
-                endStageCorou = EndStageCorou();
-                StartCoroutine(endStageCorou);
-            }
+            fade.FadeOut();
+            isLevelUp = true;
+            //if (endStageCorou == null)
+            //{
+            //    endStageCorou = EndStageCorou();
+            //    StartCoroutine(endStageCorou);
+            //}
         }
     }
 
-    IEnumerator endStageCorou;
-    IEnumerator EndStageCorou(float time = 3.5f)
-    {
-        PlayerPrefs.SetInt("isLevelUp", 1);
+    //IEnumerator endStageCorou;
+    //IEnumerator EndStageCorou(float time = 3.5f)
+    //{
+    //    PlayerPrefs.SetInt("isLevelUp", 1);
+    //    fade.FadeIn();
+    //    do
+    //    {
+    //        yield return null;
+    //        time -= Time.deltaTime;
+    //    } while (time > 0);
 
-        do
-        {
-            yield return null;
-            time -= Time.deltaTime;
-        } while (time > 0);
-
-        LevelUp();
-        endStageCorou = null;
-    }
+    //    LevelUp();
+    //    endStageCorou = null;
+    //}
 
     /// <summary>
     /// Player가 Enemy를 모두 처치하고 화면 상단에 도착하면 호출
@@ -84,12 +82,10 @@ public class LevelUpManager : MonoBehaviour {
     /// 
     public void LevelUp()
     {
-        isLevelUp = true;
         Debug.Log("LevelUp");
         GameManager.instance.SetPause(true);
         SyncStatUpgradeTxt();
         SkillManager.instance.SetIsDragable(false);
-
         if (isLeftStatChanged)
         {
             SetStatPnl(true);
@@ -179,14 +175,11 @@ public class LevelUpManager : MonoBehaviour {
             t += Time.unscaledDeltaTime;
             yield return null;
         }
-        if (SoulShopManager.instance.shopStage <= 1)
-            SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.SET);
-        else
-            SoulShopManager.instance.ShopStage(SoulShopManager.SHOPSTAGE.DECREASE);
+        
         PlayerPrefs.SetInt("isLevelUp", 0);
         cancelBtn.interactable = true;
         BoardManager.instance.StageUp();
-        BoardManager.instance.InitBoard();
+        //BoardManager.instance.InitBoard();
         GameManager.instance.Save();
         GameManager.instance.SetPause(false);
         leftStat = 0;

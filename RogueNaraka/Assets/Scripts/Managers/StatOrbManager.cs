@@ -12,6 +12,8 @@ public class StatOrbManager : MonoBehaviour
     public GameObject pnl;
     public GameObject endPoint;
 
+    public Fade fade;
+
     public ParticleSystem bombParticle;
 
     public ObjectPool orbPool;
@@ -167,10 +169,15 @@ public class StatOrbManager : MonoBehaviour
             pnl.SetActive(true);
             SpawnOrb(rndStat.statPoints);
             StartCoroutine(StatCorou(rndStat));
-            Time.timeScale = 1;
+            GameManager.instance.SetPause(false);
+
+            fade.FadeIn();
         }
         else if (!value)
+        {
             pnl.SetActive(false);
+            fade.FadeOut();
+        }
     }
 
     IEnumerator StatCorou(Stat stat)

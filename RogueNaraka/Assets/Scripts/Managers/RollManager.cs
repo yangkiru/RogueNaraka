@@ -17,6 +17,8 @@ public class RollManager : MonoBehaviour {
     public TextMeshProUGUI reRollTxt;
     public TextMeshProUGUI[] statTxts;
 
+    public Fade fade;
+
     public int selected;
     public int stopped;
     public bool isClickable;
@@ -91,17 +93,27 @@ public class RollManager : MonoBehaviour {
             Init();
             SetShowCase();
             reRollTxt.text = "ReRoll";
+            fade.FadeIn();
         }
         else
         {
             Reset();
             SkillManager.instance.Save();
-            if(isStageUp)
+            if (isStageUp)
                 LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
-            else
-                GameManager.instance.RunGame(StatOrbManager.instance.stat);
-            rollPnl.SetActive(value);
+
+            fade.FadeOut();
+            //rollPnl.SetActive(value);
         }
+    }
+
+    public void OnFadeOut()
+    {
+        rollPnl.SetActive(false);
+        if (isStageUp)
+            BoardManager.instance.InitBoard();
+        else
+            GameManager.instance.RunGame(StatOrbManager.instance.stat);
     }
 
     bool isReRoll;//참이면 ReRoll 재 호출시 ReRoll 진행

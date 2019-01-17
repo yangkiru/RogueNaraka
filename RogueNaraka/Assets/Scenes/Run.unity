@@ -965,6 +965,7 @@ GameObject:
   - component: {fileID: 64563113}
   - component: {fileID: 64563112}
   - component: {fileID: 64563111}
+  - component: {fileID: 64563114}
   m_Layer: 5
   m_Name: PlayBtn
   m_TagString: Untagged
@@ -1031,28 +1032,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 201026582}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1213261076}
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2049767584}
         m_MethodName: PlayMusic
         m_Mode: 5
@@ -1077,6 +1056,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2075701092}
         m_MethodName: RequestBanner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 64563114}
+        m_MethodName: FadeOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1125,6 +1115,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64563109}
   m_CullTransparentMesh: 0
+--- !u!114 &64563114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64563109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea0040225091a7409b59d119d3f1813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeIntime: 0.5
+  FadeOuttime: 0.25
+  ignoreTimeScaleIn: 0
+  ignoreTimeScaleOut: 0
+  onFadeInEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFadeOutEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 201026582}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1213261076}
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &72330249
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,6 +3755,119 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &137828933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 137828937}
+  - component: {fileID: 137828936}
+  - component: {fileID: 137828935}
+  - component: {fileID: 137828934}
+  - component: {fileID: 137828938}
+  m_Layer: 5
+  m_Name: FadeCanvas/Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &137828934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137828933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &137828935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137828933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 32
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 480, y: 800}
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 1
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &137828936
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137828933}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 2062417050}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 1797976757
+  m_SortingOrder: 20
+  m_TargetDisplay: 0
+--- !u!224 &137828937
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137828933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 1420987506}
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &137828938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137828933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab205101d6665144a4530e62bd59104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pnl: {fileID: 1420987507}
 --- !u!1 &139503526
 GameObject:
   m_ObjectHideFlags: 0
@@ -10696,7 +10847,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &454034903
 MonoBehaviour:
@@ -19809,6 +19960,7 @@ GameObject:
   - component: {fileID: 834756105}
   - component: {fileID: 834756104}
   - component: {fileID: 834756106}
+  - component: {fileID: 834756107}
   m_Layer: 0
   m_Name: BoardManager
   m_TagString: Untagged
@@ -19835,6 +19987,7 @@ MonoBehaviour:
   - {fileID: 1535588327964946, guid: b711df19d8a6fba43920b82f29f26d50, type: 3}
   effectPrefab: {fileID: 1797224367943760, guid: 06df19925f8c45345a6a7c675cb2cd26,
     type: 3}
+  fade: {fileID: 834756107}
   player: {fileID: 0}
   spawnPoint: {x: 0, y: 0.92}
   goalPoint: {x: 0, y: 5.5}
@@ -19862,7 +20015,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &834756106
 MonoBehaviour:
@@ -19878,6 +20031,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 990179673}
   boardManager: {fileID: 834756104}
+--- !u!114 &834756107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834756103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea0040225091a7409b59d119d3f1813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeIntime: 0.5
+  FadeOuttime: 1
+  ignoreTimeScaleIn: 0
+  ignoreTimeScaleOut: 0
+  onFadeInEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFadeOutEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &836182702
 GameObject:
   m_ObjectHideFlags: 0
@@ -19952,7 +20131,7 @@ RectTransform:
   m_LocalScale: {x: 0.015625, y: 0.015625, z: 0.015625}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24981,6 +25160,7 @@ GameObject:
   - component: {fileID: 1114166079}
   - component: {fileID: 1114166078}
   - component: {fileID: 1114166076}
+  - component: {fileID: 1114166081}
   m_Layer: 5
   m_Name: RollCanvas/Manager
   m_TagString: Untagged
@@ -25031,6 +25211,7 @@ MonoBehaviour:
   - {fileID: 1998584947}
   - {fileID: 304747006}
   - {fileID: 372754847}
+  fade: {fileID: 1114166081}
   selected: 0
   stopped: 0
   isClickable: 0
@@ -25115,6 +25296,43 @@ Canvas:
   m_SortingLayerID: 1797976757
   m_SortingOrder: 4
   m_TargetDisplay: 0
+--- !u!114 &1114166081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114166075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea0040225091a7409b59d119d3f1813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeIntime: 1
+  FadeOuttime: 1
+  ignoreTimeScaleIn: 1
+  ignoreTimeScaleOut: 1
+  onFadeInEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFadeOutEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnFadeOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1118934371
 GameObject:
   m_ObjectHideFlags: 0
@@ -27175,7 +27393,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1227548796
 GameObject:
@@ -31665,6 +31883,80 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1420987505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1420987506}
+  - component: {fileID: 1420987508}
+  - component: {fileID: 1420987507}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1420987506
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420987505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 137828937}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1420987507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420987505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &1420987508
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420987505}
+  m_CullTransparentMesh: 0
 --- !u!1 &1421943394
 GameObject:
   m_ObjectHideFlags: 0
@@ -35163,7 +35455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -37227,10 +37519,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1632865325}
-  - component: {fileID: 1632865326}
   - component: {fileID: 1632865324}
   - component: {fileID: 1632865323}
   - component: {fileID: 1632865322}
+  - component: {fileID: 1632865326}
+  - component: {fileID: 1632865327}
   m_Layer: 5
   m_Name: LevelUpCanvas/Manager
   m_TagString: Untagged
@@ -37341,8 +37634,46 @@ MonoBehaviour:
   - {fileID: 1435143466}
   - {fileID: 435309515}
   leftStatTxt: {fileID: 1943678348}
+  fade: {fileID: 1632865327}
   statPnl: {fileID: 1552022172}
   cancelBtn: {fileID: 1033553708}
+--- !u!114 &1632865327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632865321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea0040225091a7409b59d119d3f1813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeIntime: 1
+  FadeOuttime: 2
+  ignoreTimeScaleIn: 0
+  ignoreTimeScaleOut: 1
+  onFadeInEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFadeOutEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1632865326}
+        m_MethodName: LevelUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1642880605
 GameObject:
   m_ObjectHideFlags: 0
@@ -48021,7 +48352,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1906991402
 GameObject:
@@ -48366,6 +48697,7 @@ GameObject:
   - component: {fileID: 1911294460}
   - component: {fileID: 1911294459}
   - component: {fileID: 1911294458}
+  - component: {fileID: 1911294463}
   m_Layer: 0
   m_Name: StatOrbCanvas/Manager
   m_TagString: Untagged
@@ -48389,6 +48721,7 @@ MonoBehaviour:
     type: 3}
   pnl: {fileID: 1123694121}
   endPoint: {fileID: 1895750801}
+  fade: {fileID: 1911294463}
   bombParticle: {fileID: 1693526909}
   orbPool: {fileID: 2041768607}
   icon: {fileID: 534437625}
@@ -48494,6 +48827,43 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 480.00003, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1911294463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911294457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea0040225091a7409b59d119d3f1813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeIntime: 1
+  FadeOuttime: 1
+  ignoreTimeScaleIn: 0
+  ignoreTimeScaleOut: 0
+  onFadeInEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onFadeOutEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1123694121}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: FadeManager+FadeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1915726180
 GameObject:
   m_ObjectHideFlags: 0
@@ -50959,7 +51329,7 @@ Transform:
   m_Children:
   - {fileID: 519939161}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2049767584
 MonoBehaviour:
@@ -51566,7 +51936,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2078066769
 GameObject:

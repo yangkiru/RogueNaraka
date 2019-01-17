@@ -12,6 +12,8 @@ public class BoardManager : MonoBehaviour {
     public GameObject[] bossPrefabs;
     public GameObject effectPrefab;
 
+    public Fade fade;
+
     public Unit player;
     public Vector2 spawnPoint;//player spawn
     public Vector2 goalPoint;//next Stage
@@ -106,6 +108,7 @@ public class BoardManager : MonoBehaviour {
         InitStage(_stage);
         player.Spawn(spawnPoint);
         StartCoroutine(WaitForLoad());
+        fade.FadeIn();
     }
 
     private IEnumerator WaitForLoad()

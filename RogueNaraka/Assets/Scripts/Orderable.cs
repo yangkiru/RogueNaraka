@@ -35,5 +35,5 @@ public class Orderable : MonoBehaviour
 [System.Serializable]
 public enum Order
 {
-    Top = 100, Mid = 0, Bottom = -100
+    Top = 100, Mid = 0, Bottom = -100, Floor = -200
 }

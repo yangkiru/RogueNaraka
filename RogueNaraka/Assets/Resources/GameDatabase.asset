@@ -663,7 +663,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: -100
+    order: -200
     effects:
     - type: 3
       value: 1
@@ -684,15 +684,15 @@ MonoBehaviour:
     size: 1.2
     delay: 0.5
     limitTime: 1.5
-    disapearStartTime: 0
-    disapearDuration: 0
+    disapearStartTime: 1
+    disapearDuration: 0.5
     pierce: -1
     shake:
       time: 0
       power: 0
       gap: 0
       isOnHit: 0
-    order: -100
+    order: -200
     effects: []
     children: []
     onDestroy: []
