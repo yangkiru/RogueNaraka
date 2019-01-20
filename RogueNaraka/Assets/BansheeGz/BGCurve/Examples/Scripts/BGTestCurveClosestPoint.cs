@@ -181,13 +181,13 @@ namespace BansheeGz.BGSpline.Example
             float distanceUsingMath;
             var posUsingMath = math.CalcPositionByClosestPoint(point, out distanceUsingMath);
 
-            Debug.DrawLine(point, posUsingMath, Color.yellow);
+            UnityEngine.Debug.DrawLine(point, posUsingMath, Color.yellow);
 
             if (!CheckResults) return;
 
             float distanceUsingCheckMethod;
             var posUsingCheckMethod = CalcPositionByClosestPoint(math, point, out distanceUsingCheckMethod);
-            Debug.DrawLine(point, posUsingCheckMethod, Color.blue);
+            UnityEngine.Debug.DrawLine(point, posUsingCheckMethod, Color.blue);
 
             var distanceCheck = Math.Abs(distanceUsingMath - distanceUsingCheckMethod) > .01f;
             var pointCheck = Vector3.Magnitude(posUsingMath - posUsingCheckMethod) > 0.001f;

@@ -191,6 +191,8 @@ public class SkillGUI : MonoBehaviour
             mp = (Vector2)player.transform.position + vec.normalized * distance;
         }
         _skill.Use(mp);
+        if(_skill.data.useSFX.CompareTo(string.Empty) != 0)
+            AudioManager.instance.PlaySFX(_skill.data.useSFX);
 
         Debug.Log(_skill.data.name + " Skill Used!");
     }

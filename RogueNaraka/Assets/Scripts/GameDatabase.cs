@@ -155,6 +155,8 @@ public class UnitData : ICloneable
     public Vector2 shadowPos;
     public Order order;
     public EffectData[] effects;
+    public string deathSFX;
+    public string attackSFX;
 
     public object Clone()
     {
@@ -216,6 +218,7 @@ public class BulletData : ICloneable
     public float localAccel;
     public float worldAccel;
     public float guideSpeed;
+    public float spinSpeed;
     public float size;
     public float delay;
     public float limitTime;
@@ -228,6 +231,9 @@ public class BulletData : ICloneable
 
     public BulletChildData[] children;
     public BulletChildData[] onDestroy;
+
+    public string[] hitSFX;
+    public string spawnSFX;
     
     public object Clone()
     {
@@ -309,6 +315,8 @@ public class SkillData:ICloneable
     public SkillUpData levelUp;
     [TextArea]
     public string[] description;
+
+    public string useSFX;
 
     public object Clone()
     {

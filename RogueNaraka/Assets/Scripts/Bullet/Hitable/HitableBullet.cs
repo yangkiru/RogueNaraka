@@ -26,7 +26,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         float leftDelay;
 
         bool isHit;
-        bool isDestroy;
+        protected bool isDestroy;
 
         
         [SerializeField]
@@ -50,10 +50,17 @@ namespace RogueNaraka.BulletScripts.Hitable
             }
             if (isHit)
             {
+                
                 leftDelay = delay;
                 isHit = false;
 
                 OnHit();
+                if (pierce-- == 1)
+                {
+                    isDestroy = true;
+                    bullet.Destroy();
+                }
+                return;
             }
             else
             {
@@ -99,6 +106,13 @@ namespace RogueNaraka.BulletScripts.Hitable
 
                 bullet.damageable.Damage(hit, bullet.data.related);
 
+                if (bullet.data.hitSFX.Length > 0)
+                {
+                    int rnd = Random.Range(0, bullet.data.hitSFX.Length);
+                    string str = bullet.data.hitSFX[rnd];
+                    AudioManager.instance.PlaySFX(str);
+                }
+
                 if (shakeable.shake.isOnHit)
                     shakeable.Shake();
 
@@ -106,11 +120,6 @@ namespace RogueNaraka.BulletScripts.Hitable
                     OnDamage(bullet, hit);
             }
 
-            if (pierce-- == 1)
-            {
-                isDestroy = true;
-                bullet.Destroy();
-            }
             isHit = true;
         }
 

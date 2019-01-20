@@ -51,7 +51,7 @@ public class InfiniteScroll : MonoBehaviour {
         while (true)
         {
             yield return null;
-            float moving = _speed * Time.unscaledDeltaTime;
+            float moving = !RollManager.instance.isPause ? _speed * Time.unscaledDeltaTime * (Input.anyKey ? 3 : 1) : 0;
             bool isLast = false;
             if (moved + moving >= distance)
             {
@@ -82,6 +82,7 @@ public class InfiniteScroll : MonoBehaviour {
         if (objs[first].localPosition.x < start.x - size / 2)
         {
             MoveFirstToEnd();
+            AudioManager.instance.PlaySFX("skillRoulette");
         }
     }
 

@@ -229,10 +229,12 @@ public class Item : MonoBehaviour
                 case 0:
                     Debug.Log("HealPotion");
                     BoardManager.instance.player.hpable.Heal(_data.value * BoardManager.instance.player.data.stat.GetCurrent(STAT.HP));
+                    AudioManager.instance.PlaySFX("drink");
                     break;
                 case 1:
                     Debug.Log("ManaPotion");
                     BoardManager.instance.player.mpable.Heal(_data.value * BoardManager.instance.player.data.stat.GetCurrent(STAT.MP));
+                    AudioManager.instance.PlaySFX("drink");
                     break;
             }
         }

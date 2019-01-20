@@ -16,6 +16,8 @@ namespace RogueNaraka.BulletScripts
         Vector3 localAccel;
         [SerializeField]
         Vector3 worldAccel;
+        [SerializeField]
+        Vector3 direction;
 
         private void Reset()
         {
@@ -30,16 +32,20 @@ namespace RogueNaraka.BulletScripts
             worldVelocity = Vector3.zero;
         }
 
-        public void SetVelocity(Vector3 velocity, Space space)
-        {
-            if (space == Space.Self)
-                localVelocity = velocity;
-            else
-                worldVelocity = velocity;
-        }
+        //public void SetVelocity(Vector3 velocity, Space space)
+        //{
+        //    if (space == Space.Self)
+        //        localVelocity = velocity;
+        //    else
+        //    {
+        //        direction = bullet.cachedTransform.forward;
+        //        worldVelocity = velocity;
+        //    }
+        //}
 
         public void SetVelocity(Vector3 velocity, Vector3 accel, Space space)
         {
+            //SetVelocity(velocity, space);
             if (space == Space.Self)
             {
                 localVelocity = velocity;
@@ -47,9 +53,15 @@ namespace RogueNaraka.BulletScripts
             }
             else
             {
+                direction = bullet.cachedTransform.right;
                 worldVelocity = velocity;
                 worldAccel = accel;
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawRay(bullet.cachedTransform.position, direction);
         }
 
         public void SetAccel(Vector3 accel, Space space)
@@ -64,7 +76,9 @@ namespace RogueNaraka.BulletScripts
         {
             localVelocity += localAccel;
             worldVelocity += worldAccel;
-            bullet.rigid.velocity = worldVelocity + transform.TransformDirection(localVelocity);
+            Vector3 velocity = new Vector3(worldVelocity.x * direction.x, worldVelocity.y * direction.y, worldVelocity.z * worldVelocity.z);
+            
+            bullet.rigid.velocity = velocity + bullet.cachedTransform.TransformDirection(localVelocity);
         }
     }
 }

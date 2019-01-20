@@ -56,6 +56,8 @@ MonoBehaviour:
     shadowPos: {x: 0.2, y: -0.45}
     order: 0
     effects: []
+    deathSFX: playerDeath
+    attackSFX: 
   enemies:
   - name: Bug0
     id: 0
@@ -100,6 +102,8 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
+    deathSFX: bugDeath
+    attackSFX: 
   - name: Bug1
     id: 1
     cost: 1
@@ -143,6 +147,8 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
+    deathSFX: bugDeath
+    attackSFX: 
   - name: Bat0
     id: 2
     cost: 2
@@ -186,6 +192,8 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
+    deathSFX: batDeath
+    attackSFX: 
   - name: Bat1
     id: 3
     cost: 2
@@ -229,7 +237,9 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
-  - name: Bone0
+    deathSFX: batDeath
+    attackSFX: 
+  - name: BoneDragon0
     id: 4
     cost: 3
     stage: 10
@@ -272,16 +282,18 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
+    deathSFX: boneDragonDeath
+    attackSFX: 
   - name: BoneHead0
     id: 5
     cost: 4
     stage: 14
-    weapon: 0
+    weapon: 1
     stat:
-      dmg: 2
+      dmg: 1
       spd: 0
       tec: 0
-      hp: 3
+      hp: 5
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -299,7 +311,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 3
+      currentHp: 5
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
@@ -315,6 +327,8 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
+    deathSFX: boneHeadDeath
+    attackSFX: 
   bosses:
   - name: Boss0
     id: 0
@@ -359,6 +373,8 @@ MonoBehaviour:
     shadowPos: {x: 0, y: 0}
     order: 0
     effects: []
+    deathSFX: 
+    attackSFX: 
   spawnables:
   - name: ScarecrowSoldier
     id: 0
@@ -403,6 +419,8 @@ MonoBehaviour:
     shadowPos: {x: 0, y: -1}
     order: 0
     effects: []
+    deathSFX: 
+    attackSFX: 
   - name: Shadow
     id: 1
     cost: 0
@@ -446,6 +464,8 @@ MonoBehaviour:
     shadowPos: {x: 0.2, y: -0.45}
     order: -100
     effects: []
+    deathSFX: shadowEnd
+    attackSFX: 
   unitMask:
     serializedVersion: 2
     m_Bits: 768
@@ -470,6 +490,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.45
     delay: 0.1
     limitTime: 0.3
@@ -485,6 +506,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: MonsterBullet
     id: 1
     dmg: 0.5
@@ -492,10 +515,11 @@ MonoBehaviour:
     controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
     type: 0
     localSpeed: 0
-    worldSpeed: 1
+    worldSpeed: 1.5
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 720
     size: 0.1
     delay: 0
     limitTime: 0
@@ -511,6 +535,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: Bite
     id: 2
     dmg: 0.25
@@ -522,6 +548,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.3
     delay: 0
     limitTime: 0.01
@@ -537,6 +564,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: Tackle
     id: 3
     dmg: 0.3
@@ -548,6 +577,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.3
     delay: 0
     limitTime: 0.01
@@ -563,6 +593,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: ScarecrowAttack
     id: 4
     dmg: 0.05
@@ -574,6 +606,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 1
     delay: 0
     limitTime: 0.01
@@ -589,6 +622,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: scarecrowAttack
   - name: ThunderL
     id: 5
     dmg: 0.1
@@ -600,6 +635,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.3
     delay: 0.1
     limitTime: 0.1
@@ -615,6 +651,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: ThunderR
     id: 6
     dmg: 0.1
@@ -626,6 +664,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.3
     delay: 0.1
     limitTime: 0.2
@@ -641,6 +680,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: Ice
     id: 7
     dmg: 0
@@ -652,6 +693,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 1.2
     delay: 0.1
     limitTime: 1.5
@@ -670,6 +712,8 @@ MonoBehaviour:
       time: 0.15
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: Blood
     id: 8
     dmg: 0
@@ -681,6 +725,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 1.2
     delay: 0.5
     limitTime: 1.5
@@ -696,17 +741,20 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: BloodBubble
     id: 9
     dmg: 0
     related: 3
     controller: {fileID: 22100000, guid: 743522a24d1f9114b9b6464c01a7fe38, type: 2}
     type: 0
-    localSpeed: 1
+    localSpeed: 2.5
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 2.5
+    spinSpeed: 0
     size: 0.1
     delay: 0
     limitTime: 0
@@ -722,6 +770,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: GenesisBeam
     id: 10
     dmg: 0
@@ -733,6 +783,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.75
     delay: 0.25
     limitTime: 1
@@ -758,17 +809,20 @@ MonoBehaviour:
       isDestroyWith: 0
       offset: {x: 0, y: 0, z: 0}
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: BeamHole
     id: 11
     dmg: 0
     related: 0
-    controller: {fileID: 22100000, guid: 743522a24d1f9114b9b6464c01a7fe38, type: 2}
+    controller: {fileID: 22100000, guid: ec09c21b7dd1396499cd30867ec46b60, type: 2}
     type: 2
     localSpeed: 0
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 3
@@ -780,10 +834,12 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: -100
+    order: -200
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: MagicBall
     id: 12
     dmg: 0.4
@@ -795,6 +851,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.15
     delay: 0
     limitTime: 0
@@ -820,6 +877,8 @@ MonoBehaviour:
       isStick: 0
       isDestroyWith: 0
       offset: {x: 0, y: 0, z: 0}
+    hitSFX: []
+    spawnSFX: 
   - name: MagicBallDestroy
     id: 13
     dmg: 0.2
@@ -831,6 +890,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.5
     delay: 0
     limitTime: 0.01
@@ -846,17 +906,20 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: SwordSmall
     id: 14
     dmg: 0.3
     related: 0
     controller: {fileID: 22100000, guid: da63d2c42c766504b8345bff4b454923, type: 2}
     type: 3
-    localSpeed: 3
+    localSpeed: 4
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 0
@@ -882,6 +945,13 @@ MonoBehaviour:
       isStick: 0
       isDestroyWith: 0
       offset: {x: 0, y: 0, z: 0}
+    hitSFX:
+    - enemyHit1
+    - enemyHit2
+    - enemyHit3
+    - enemyHit4
+    - enemyHit5
+    spawnSFX: weaponAttack
   - name: SwordSmallDestroy
     id: 15
     dmg: 0
@@ -893,6 +963,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 0.001
@@ -908,17 +979,20 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: SwordMedium
     id: 16
     dmg: 0.5
     related: 0
     controller: {fileID: 22100000, guid: 22cbc4dea137a91418cf01a2004c6ea3, type: 2}
     type: 3
-    localSpeed: 3
+    localSpeed: 4.5
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 0
@@ -944,6 +1018,14 @@ MonoBehaviour:
       isStick: 0
       isDestroyWith: 0
       offset: {x: 0, y: 0, z: 0}
+    hitSFX:
+    - enemyHit1
+    - enemyHit2
+    - enemyHit3
+    - enemyHit4
+    - enemyHit5
+    - enemyHit6
+    spawnSFX: weaponAttack
   - name: SwordMediumDestroy
     id: 17
     dmg: 0
@@ -955,6 +1037,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 0.001
@@ -970,17 +1053,20 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
-  - name: SwordSmall
+    hitSFX: []
+    spawnSFX: 
+  - name: SwordBig
     id: 18
     dmg: 0.7
     related: 0
     controller: {fileID: 22100000, guid: fce69881dc12eb040ba0d611eecbde7d, type: 2}
     type: 3
-    localSpeed: 3
+    localSpeed: 5
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 0
@@ -1006,6 +1092,8 @@ MonoBehaviour:
       isStick: 0
       isDestroyWith: 0
       offset: {x: 0, y: 0, z: 0}
+    hitSFX: []
+    spawnSFX: weaponAttack
   - name: SwordBigDestroy
     id: 19
     dmg: 0
@@ -1017,6 +1105,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 0.001
@@ -1032,6 +1121,8 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   - name: Flame
     id: 20
     dmg: 0
@@ -1043,8 +1134,9 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0.25
-    delay: 0.1
+    delay: 0.2
     limitTime: 1
     disapearStartTime: 0
     disapearDuration: 0
@@ -1054,13 +1146,21 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: 100
+    order: -200
     effects:
     - type: 2
       value: 0
       time: 0.2
     children: []
     onDestroy: []
+    hitSFX:
+    - enemyHit1
+    - enemyHit2
+    - enemyHit3
+    - enemyHit4
+    - enemyHit5
+    - enemyHit6
+    spawnSFX: 
   weapons:
   - name: MagicBall
     id: 0
@@ -1075,12 +1175,12 @@ MonoBehaviour:
   - name: MonsterBullet
     id: 1
     type: 2
-    startBulletId: 0
+    startBulletId: 1
     children: []
     onDestroy: []
     offset: {x: 0, y: 0, z: 0}
-    beforeAttackDelay: 0
-    afterAttackDelay: 1
+    beforeAttackDelay: 2
+    afterAttackDelay: 0
     attackDistance: 0
   - name: Bite
     id: 2
@@ -1092,7 +1192,7 @@ MonoBehaviour:
     beforeAttackDelay: 1
     afterAttackDelay: 1
     attackDistance: 0.3
-  - name: Tackle
+  - name: BatTackle
     id: 3
     type: 1
     startBulletId: 3
@@ -1152,22 +1252,12 @@ MonoBehaviour:
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 5
-  - name: SwordBig
-    id: 8
-    type: 1
-    startBulletId: 18
-    children: []
-    onDestroy: []
-    offset: {x: 0, y: 0.7, z: 0}
-    beforeAttackDelay: 0.25
-    afterAttackDelay: 0.75
-    attackDistance: 5
   playerWeapons:
   - level: 0
     cost: 10
     id: 6
   - level: 1
-    cost: 15
+    cost: 20
     id: 7
   - level: 2
     cost: 0
@@ -1215,6 +1305,7 @@ MonoBehaviour:
     description:
     - 
     - 
+    useSFX: thunderStrike
   - name: IceBreak
     nameLang: []
     bulletIds: 07000000
@@ -1232,7 +1323,7 @@ MonoBehaviour:
     isBasic: 1
     effects:
     - type: 3
-      value: 0
+      value: 4
       time: 0
     values:
     - name: 1
@@ -1249,6 +1340,7 @@ MonoBehaviour:
       - name: 1
         value: 0.5
     description: []
+    useSFX: 
   - name: Genesis
     nameLang: []
     bulletIds: 0a000000
@@ -1277,6 +1369,7 @@ MonoBehaviour:
       - name: 2
         value: 0.5
     description: []
+    useSFX: genesis
   - name: BloodSwamp
     nameLang: []
     bulletIds: 0800000009000000
@@ -1307,6 +1400,7 @@ MonoBehaviour:
       - name: 0
         value: 1
     description: []
+    useSFX: blood
   - name: ScarecrowSoldier
     nameLang: []
     bulletIds: 
@@ -1335,6 +1429,7 @@ MonoBehaviour:
       - name: 4
         value: 1
     description: []
+    useSFX: scarecrow
   - name: Shadow
     nameLang:
     - Shadow
@@ -1365,6 +1460,7 @@ MonoBehaviour:
       - name: 1
         value: 1
     description: []
+    useSFX: shadowStart
   - name: DashShoes
     nameLang:
     - Dash Shoes
@@ -1391,6 +1487,7 @@ MonoBehaviour:
       effects: []
       values: []
     description: []
+    useSFX: dashShoes
   - name: FlameShoes
     nameLang:
     - Flame Shoes
@@ -1415,7 +1512,7 @@ MonoBehaviour:
     - name: 6
       value: 0.1
     - name: 7
-      value: 0.025
+      value: 0.1
     levelUp:
       manaCost: 0.25
       size: 0.5
@@ -1425,21 +1522,18 @@ MonoBehaviour:
       - name: 7
         value: 0.025
     description: []
+    useSFX: flameShoes
   items:
   - name: HealPotion
     id: 0
     value: 1
     size: 0
-    description: 'Heal
-
-      Value = Tec : {0} = {1}'
+    description: Heal Your HP
   - name: ManaPotion
     id: 1
     value: 1
     size: 0
-    description: 'ManaHeal
-
-      Value = Tec : {0} = {1}'
+    description: Heal Your MP
   itemSprites:
   - id: 0
     name: HealPotion

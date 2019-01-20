@@ -47,9 +47,9 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
 #if UNITY_EDITOR
-        Debug.unityLogger.logEnabled = true;
+        UnityEngine.Debug.unityLogger.logEnabled = true;
 #else
-        Debug.unityLogger.logEnabled = false;
+        UnityEngine.Debug.unityLogger.logEnabled = false;
 #endif
         if (instance == null)
         {
@@ -90,14 +90,14 @@ public class GameManager : MonoBehaviour {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
             if (stat.AddOrigin((STAT)type, 1))
             {
-                Debug.Log((STAT)type);
+                Debug.Log(((STAT)type).ToString());
                 statPoint--;
             }
             else
             {
                 int origin = (int)stat.sumOrigin;
                 int max = (int)stat.sumMax;
-                Debug.Log("origin:" + origin + " max:" + max);
+                Debug.Log(string.Format("origin:{0},max:{1}", origin, max));
                 if (origin >= max)
                     break;
             }
@@ -182,15 +182,12 @@ public class GameManager : MonoBehaviour {
             playerData.effects = JsonHelper.FromJson<EffectData>(effect);
 
         boardManager.SpawnPlayer(playerData);
-
         boardManager.SetStage(PlayerPrefs.GetInt("stage"));
 
         StatTextUpdate(stat);
 
         SkillManager.instance.Load();
         Item.instance.Load();
-
-        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SYNC);
 
         if (PlayerPrefs.GetInt("isLevelUp") == 1)
         {
@@ -199,6 +196,12 @@ public class GameManager : MonoBehaviour {
         else
         {
             boardManager.InitBoard();
+        }
+
+        if (PlayerPrefs.GetInt("isFirstRoll") == 1)
+        {
+            SetPause(true);
+            RollManager.instance.SetRollPnl(true, false);
         }
     }
 
@@ -324,7 +327,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            if (!RollManager.instance.rollPnl.activeSelf && !SoulShopManager.instance.shopPnl.activeSelf)
+            if (!RollManager.instance.rollPnl.activeSelf && !SoulShopManager.instance.shopPnl.activeSelf && !TutorialManager.instance.isPlaying)
                 SetPause(false);
         }
         settingPnl.SetActive(value);

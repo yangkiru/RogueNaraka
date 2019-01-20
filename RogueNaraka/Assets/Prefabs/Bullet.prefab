@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 1119521292092267351}
   - component: {fileID: 5294774309564381968}
   - component: {fileID: 428995459983639036}
+  - component: {fileID: 7397859947877684801}
   - component: {fileID: 95887579399525280}
   - component: {fileID: 3810510510627864314}
   - component: {fileID: 3793362596285630770}
@@ -109,20 +110,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140b4409e51482248803355ebf213cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitableCircleCast: {fileID: 1655965979807426877}
-  _hitableTrigger: {fileID: 400561887986786836}
-  _hitable: {fileID: 0}
-  _shootable: {fileID: 114180939160881066}
-  _moveable: {fileID: 114163797499506304}
-  _ownerable: {fileID: 114574027343910540}
-  _timeLimitable: {fileID: 114820682920085916}
-  _damageable: {fileID: 114697676651531626}
-  _spawnable: {fileID: 8025817194552201350}
-  _shakeable: {fileID: 1119521292092267351}
-  _disapearable: {fileID: 5294774309564381968}
-  _guideable: {fileID: 428995459983639036}
-  _orderable: {fileID: 3810510510627864314}
-  _data:
+  hitableCircleCast: {fileID: 1655965979807426877}
+  hitableTrigger: {fileID: 400561887986786836}
+  hitable: {fileID: 0}
+  shootable: {fileID: 114180939160881066}
+  moveable: {fileID: 114163797499506304}
+  ownerable: {fileID: 114574027343910540}
+  timeLimitable: {fileID: 114820682920085916}
+  damageable: {fileID: 114697676651531626}
+  spawnable: {fileID: 8025817194552201350}
+  shakeable: {fileID: 1119521292092267351}
+  disapearable: {fileID: 5294774309564381968}
+  guideable: {fileID: 428995459983639036}
+  spinable: {fileID: 7397859947877684801}
+  orderable: {fileID: 3810510510627864314}
+  data:
     name: 
     id: 0
     dmg: 0
@@ -134,6 +136,7 @@ MonoBehaviour:
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
+    spinSpeed: 0
     size: 0
     delay: 0
     limitTime: 0
@@ -149,12 +152,15 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
-  _animator: {fileID: 95887579399525280}
-  _renderer: {fileID: 212126601148893928}
-  _rigid: {fileID: 3793362596285630770}
-  _polygon: {fileID: 1426770371750627783}
-  _circle: {fileID: 1307021657860848083}
-  _advanced: {fileID: 6279783528189844711}
+    hitSFX: 
+    spawnSFX: 
+  animator: {fileID: 95887579399525280}
+  renderer: {fileID: 212126601148893928}
+  rigid: {fileID: 3793362596285630770}
+  polygon: {fileID: 1426770371750627783}
+  circle: {fileID: 1307021657860848083}
+  advanced: {fileID: 6279783528189844711}
+  cachedTransform: {fileID: 4215614072316304}
 --- !u!114 &1655965979807426877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +233,7 @@ MonoBehaviour:
   worldVelocity: {x: 0, y: 0, z: 0}
   localAccel: {x: 0, y: 0, z: 0}
   worldAccel: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &114574027343910540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +327,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 114481818113872668}
   target: {fileID: 0}
+--- !u!114 &7397859947877684801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040694008069246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d438654641f8c842bb783968a02c32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 114481818113872668}
 --- !u!95 &95887579399525280
 Animator:
   serializedVersion: 3

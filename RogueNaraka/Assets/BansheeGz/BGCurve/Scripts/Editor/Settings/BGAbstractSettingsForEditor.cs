@@ -232,7 +232,7 @@ namespace BansheeGz.BGSpline.Editor
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(e);
+                    UnityEngine.Debug.LogException(e);
                     return defaultColor;
                 }
             }

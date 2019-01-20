@@ -13,71 +13,39 @@ namespace RogueNaraka.BulletScripts
         //[SerializeField]
         //HitableBullet _hitableRay;
         [SerializeField]
-        HitableBullet _hitableCircleCast;
+        HitableBullet hitableCircleCast;
         [SerializeField]
-        HitableBullet _hitableTrigger;
+        HitableBullet hitableTrigger;
 
-        public HitableBullet hitable { get { return _hitable; } }
-        HitableBullet _hitable;
+        public HitableBullet hitable;
 
-        public ShootableBullet shootable { get { return _shootable; } }
-        [SerializeField]
-        ShootableBullet _shootable;
-        public MoveableBullet moveable { get { return _moveable; } }
-        [SerializeField]
-        MoveableBullet _moveable;
-        public OwnerableBullet ownerable { get { return _ownerable; } }
-        [SerializeField]
-        OwnerableBullet _ownerable;
-        public TimeLimitableBullet timeLimitable { get { return _timeLimitable; } }
-        [SerializeField]
-        TimeLimitableBullet _timeLimitable;
-        public DamageableBullet damageable { get { return _damageable; } }
-        [SerializeField]
-        DamageableBullet _damageable;
-        public SpawnableBullet spawnable { get { return _spawnable; } }
-        [SerializeField]
-        SpawnableBullet _spawnable;
-        public ShakeableBullet shakeable { get { return _shakeable; } }
-        [SerializeField]
-        ShakeableBullet _shakeable;
-        public DisapearableBullet disapearable { get { return _disapearable; } }
-        [SerializeField]
-        DisapearableBullet _disapearable;
-        public GuideableBullet guideable { get { return _guideable; } }
-        [SerializeField]
-        GuideableBullet _guideable;
+        public ShootableBullet shootable;
+        public MoveableBullet moveable;
+        public OwnerableBullet ownerable;
+        public TimeLimitableBullet timeLimitable;
+        public DamageableBullet damageable;
+        public SpawnableBullet spawnable;
+        public ShakeableBullet shakeable;
+        public DisapearableBullet disapearable;
+        public GuideableBullet guideable;
+        public SpinableBullet spinable;
 
-        public Orderable orderable { get { return _orderable; } }
-        [SerializeField]
-        Orderable _orderable;
+        public Orderable orderable;
 
-        public BulletData data { get { return _data; } }
-        [SerializeField]
-        BulletData _data;
+        public BulletData data;
 
-        public Animator animator { get { return _animator; } }
-        [SerializeField]
-        Animator _animator;
+        public Animator animator;
 
-        public new SpriteRenderer renderer { get { return _renderer; } }
-        [SerializeField]
-        SpriteRenderer _renderer;
+        public new SpriteRenderer renderer;
 
-        public Rigidbody2D rigid { get { return _rigid; } }
-        [SerializeField]
-        Rigidbody2D _rigid;
+        public Rigidbody2D rigid;
 
-        public PolygonCollider2D polygon { get { return _polygon; } }
-        [SerializeField]
-        PolygonCollider2D _polygon;
-        public CircleCollider2D circle { get { return _circle; } }
-        [SerializeField]
-        CircleCollider2D _circle;
+        public PolygonCollider2D polygon;
+        public CircleCollider2D circle;
 
-        public AdvancedPolygonCollider advanced { get { return _advanced; } }
-        [SerializeField]
-        AdvancedPolygonCollider _advanced;
+        public AdvancedPolygonCollider advanced;
+
+        public Transform cachedTransform;
 
         IEnumerator deathCorou;
 
@@ -85,86 +53,93 @@ namespace RogueNaraka.BulletScripts
 
         void Reset()
         {
-            _animator = GetComponent<Animator>();
-            _renderer = GetComponent<SpriteRenderer>();
-            _rigid = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
+            renderer = GetComponent<SpriteRenderer>();
+            rigid = GetComponent<Rigidbody2D>();
 
             //_hitable = GetComponent<HitableBullet>();
             //hitableRay = GetComponent<HitableBulletRay>();
-            _hitableCircleCast = GetComponent<HitableBulletCircleCast>();
-            _hitableTrigger = GetComponent<HitableBulletTrigger>();
+            hitableCircleCast = GetComponent<HitableBulletCircleCast>();
+            hitableTrigger = GetComponent<HitableBulletTrigger>();
 
-            _shootable = GetComponent<ShootableBullet>();
-            _moveable = GetComponent<MoveableBullet>();
-            _ownerable = GetComponent<OwnerableBullet>();
-            _timeLimitable = GetComponent<TimeLimitableBullet>();
-            _damageable = GetComponent<DamageableBullet>();
-            _spawnable = GetComponent<SpawnableBullet>();
-            _shakeable = GetComponent<ShakeableBullet>();
-            _disapearable = GetComponent<DisapearableBullet>();
-            _guideable = GetComponent<GuideableBullet>();
-            _orderable = GetComponent<Orderable>();
+            shootable = GetComponent<ShootableBullet>();
+            moveable = GetComponent<MoveableBullet>();
+            ownerable = GetComponent<OwnerableBullet>();
+            timeLimitable = GetComponent<TimeLimitableBullet>();
+            damageable = GetComponent<DamageableBullet>();
+            spawnable = GetComponent<SpawnableBullet>();
+            shakeable = GetComponent<ShakeableBullet>();
+            disapearable = GetComponent<DisapearableBullet>();
+            guideable = GetComponent<GuideableBullet>();
+            orderable = GetComponent<Orderable>();
+            spinable = GetComponent<SpinableBullet>();
 
-            _polygon = GetComponent<PolygonCollider2D>();
-            _circle = GetComponent<CircleCollider2D>();
-            _advanced = GetComponent<AdvancedPolygonCollider>();
+            polygon = GetComponent<PolygonCollider2D>();
+            circle = GetComponent<CircleCollider2D>();
+            advanced = GetComponent<AdvancedPolygonCollider>();
+
+            cachedTransform = transform;
         }
 
         public void Init(Unit owner, BulletData data)
         {
             gameObject.SetActive(true);
 
-            _renderer.color = Color.white;
+            renderer.color = Color.white;
 
             transform.rotation = Quaternion.identity;
-            _moveable.Init();
-            _moveable.enabled = false;
+            moveable.Init();
+            moveable.enabled = false;
 
-            _ownerable.SetOwner(owner);
-            _data = (BulletData)data.Clone();
-            name = _data.name;
+            ownerable.SetOwner(owner);
+            this.data = (BulletData)data.Clone();
+            name = this.data.name;
 
             //Hitable
-            if (_hitable)
-                _hitable.enabled = false;
+            if (hitable)
+                hitable.enabled = false;
 
             switch (data.type)
             {
                 case BULLET_TYPE.CIRCLE_CAST:
-                    _hitable = _hitableCircleCast;
+                    hitable = hitableCircleCast;
+                    advanced.enabled = false;
                     break;
                 case BULLET_TYPE.DYNAMIC_CIRCLE:
                 case BULLET_TYPE.DYNAMIC_POLY:
-                    _hitable = _hitableTrigger;
+                    hitable = hitableTrigger;
+                    advanced.enabled = true;
                     break;
                 default:
                     break;
             }
 
-            if (_hitable)
+            if (hitable)
             {
-                _hitable.Init(_data);
-                _hitable.enabled = true;
+                hitable.Init(this.data);
+                hitable.enabled = true;
             }
 
-            _animator.runtimeAnimatorController = _data.controller;
+            animator.runtimeAnimatorController = this.data.controller;
 
-            _renderer.enabled = false;
-            _animator.enabled = false;
+            renderer.enabled = false;
+            animator.enabled = false;
 
             deathCorou = null;
 
-            _timeLimitable.Init(_data);
-            _timeLimitable.enabled = false;
+            timeLimitable.Init(this.data);
+            timeLimitable.enabled = false;
 
-            _shakeable.Init(_data.shake);
+            shakeable.Init(this.data.shake);
 
-            _guideable.Init(_data);
-            _guideable.enabled = false;
+            guideable.Init(this.data);
+            guideable.enabled = false;
 
-            _disapearable.Init(_data);
+            disapearable.Init(this.data);
 
-            _orderable.Init(_data.order);
+            orderable.Init(this.data.order);
+
+            spinable.Init(this.data);
         }
 
         public void Spawn(Unit owner, BulletData data, Vector3 position)
@@ -175,26 +150,29 @@ namespace RogueNaraka.BulletScripts
 
         public void Spawn(Vector3 position)
         {
-            if(_hitable)
-                _hitable.enabled = true;
+            if(hitable)
+                hitable.enabled = true;
             moveable.enabled = true;
-            if (_data.limitTime != 0)
+            if (data.limitTime != 0)
                 timeLimitable.enabled = true;                
-            renderer.enabled = true;
+            base.GetComponent<Renderer>().enabled = true;
             animator.enabled = true;
 
             if (shakeable.shake.power != 0 || shakeable.shake.time != 0)
                 shakeable.Shake();
+            if (data.spawnSFX.CompareTo(string.Empty) != 0)
+                AudioManager.instance.PlaySFX(data.spawnSFX);
 
             transform.position = position;
             
-            spawnable.Init(_data);
+            spawnable.Init(data);
 
-            if (guideable.rotateSpeed != 0)
-                guideable.enabled = true;
+            guideable.enabled = (guideable.rotateSpeed != 0);
 
             if (disapearable.duration != 0)
                 disapearable.Disapear();
+
+                spinable.enabled = data.spinSpeed != 0;
         }
 
         public void Destroy()
@@ -208,8 +186,8 @@ namespace RogueNaraka.BulletScripts
 
         public void DisableOnDestroy()
         {
-            if(_hitable)
-                _hitable.enabled = false;
+            if(hitable)
+                hitable.enabled = false;
             moveable.enabled = false;
         }
 

@@ -10,18 +10,20 @@ public class Fade : MonoBehaviour
     public float FadeOuttime = 1;
     public bool ignoreTimeScaleIn;
     public bool ignoreTimeScaleOut;
+    public bool isClickableIn;
+    public bool isClickableOut;
     public FadeManager.FadeEvent onFadeInEnd;
     public FadeManager.FadeEvent onFadeOutEnd;
 
     public void FadeIn()
     {
         Debug.Log("FadeIn");
-        FadeManager.instance.FadeIn(FadeIntime, ignoreTimeScaleIn, onFadeInEnd);
+        FadeManager.instance.FadeIn(FadeIntime, ignoreTimeScaleIn, isClickableIn, onFadeInEnd);
     }
 
     public void FadeOut()
     {
         Debug.Log("FadeOut");
-        FadeManager.instance.FadeOut(FadeOuttime, ignoreTimeScaleOut, onFadeOutEnd);
+        FadeManager.instance.FadeOut(FadeOuttime, ignoreTimeScaleOut, isClickableIn, onFadeOutEnd);
     }
 }

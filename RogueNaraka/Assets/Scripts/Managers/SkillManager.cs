@@ -124,7 +124,7 @@ public class SkillManager : MonoBehaviour {
     {
         if (id >= GameDatabase.instance.skills.Length)
         {
-            Debug.LogError("SaveData Not Matching With DataBase:Skill" + id);
+            Debug.Log(string.Format("SaveData Not Matching With DataBase:Skill {0}",id));
             return null;
         }
         return GameDatabase.instance.skills[id].spr;
@@ -331,9 +331,15 @@ public class SkillManager : MonoBehaviour {
     public void SetSkill(SkillData data, int position)
     {
         if (skills[position].skill == null || data.id != skills[position].skill.data.id)
+        {
+            AudioManager.instance.PlaySFX("skillEquip");
             skills[position].Init(data);
+        }
         else
+        {
+            AudioManager.instance.PlaySFX("skillLevelUp");
             skills[position].LevelUp(1);
+        }
     }
     /// <summary>
     /// 
@@ -471,7 +477,7 @@ public class SkillManager : MonoBehaviour {
                     skills[i].LevelUp(datas[i].level - 1);
                 }
                 else
-                    Debug.LogError("SkillMissing:id too big" + datas[i].id);
+                    Debug.Log(string.Format("SkillMissing:id too big{0}", datas[i].id));
             }
         }
         //Debug.Log("Load Skills : " + str);

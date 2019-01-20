@@ -23,7 +23,7 @@ namespace RogueNaraka.BulletScripts
                 transform.position += transform.up * offset.x + transform.right * offset.y + transform.forward * offset.z;
 
             moveable.SetVelocity(Vector2.right * localSpeed, Vector2.right * localAccel, Space.Self);
-            moveable.SetVelocity(Vector2.right * worldSpeed, Vector2.right * worldAccel, Space.World);
+            moveable.SetVelocity(Vector3.one * worldSpeed, Vector2.right * worldAccel, Space.World);
         }
     }
 }

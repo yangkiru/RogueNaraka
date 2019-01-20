@@ -67,6 +67,7 @@ public class SoulShopManager : MonoBehaviour
             shopPnl.SetActive(true);
             statBtn.onClick.Invoke();
             GameManager.instance.moneyManager.Load();
+            TutorialManager.instance.StartTutorial(3);
         }
         else
         {
@@ -387,6 +388,7 @@ public class SoulShopManager : MonoBehaviour
             float t = delay;
             exp = exp + 1;
             PlayerPrefs.SetInt("exp", exp);
+            AudioManager.instance.PlaySFX("weaponUpgrade");
 
             WeaponPnlUpdate(exp);
 
@@ -403,32 +405,57 @@ public class SoulShopManager : MonoBehaviour
 
     #region soul
 
-    public TextMeshProUGUI soulRefiningRateNameTxt;
-    public TextMeshProUGUI soulRefiningRateValueTxt;
-
+    public TextMeshProUGUI soulRefRateNameTxt;
+    public TextMeshProUGUI soulRefRateValueTxt;
+    public TextMeshProUGUI soulRefRateBtnTxt;
+    public Button soulRefRateBtn;
     public void RefiningRateUpgrade()
     {
         float rate = MoneyManager.instance.refiningRate;
-        if (MoneyManager.instance.UseSoul((int)(rate * 100)))
+        if (soulRefRateBtnTxt.text.CompareTo("Up") == 0)
+        {
+            soulRefRateBtnTxt.text = string.Format("{0}Soul", (int)(rate * 100));
+        }
+        else if (MoneyManager.instance.UseSoul((int)(rate * 100)))
         {
             MoneyManager.instance.refiningRate = rate + 0.01f;
             RefiningRateTxtUpdate();
+            soulRefRateBtnTxt.text = "Done";
+            StartCoroutine(LockSoulRefRateBtn());
         }
+        else
+        {
+            soulRefRateBtnTxt.text = "Fail";
+            StartCoroutine(LockSoulRefRateBtn());
+        }
+    }
+
+    IEnumerator LockSoulRefRateBtn()
+    {
+        soulRefRateBtn.interactable = false;
+        float t = 1;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
+        soulRefRateBtn.interactable = true;
+        soulRefRateBtnTxt.text = "Up";
     }
 
     public void RefiningRateTxtUpdate()
     {
-        soulRefiningRateValueTxt.text = string.Format("{0}% ~ 100%", MoneyManager.instance.refiningRate * 100);
+        soulRefRateValueTxt.text = string.Format("{0}% ~ 100%", MoneyManager.instance.refiningRate * 100);
     }
     public void RefiningRateTxtNameUpdate()
     {
         switch(GameManager.language)
         {
             default:
-                soulRefiningRateNameTxt.text = "Soul refining rate";
+                soulRefRateNameTxt.text = "Soul refining rate";
                 break;
             case Language.Korean:
-                soulRefiningRateNameTxt.text = "영혼 정제율";
+                soulRefRateNameTxt.text = "영혼 정제율";
                 break;
         }
     }

@@ -22,6 +22,7 @@ public class RollManager : MonoBehaviour {
     public int selected;
     public int stopped;
     public bool isClickable;
+    public bool isPause { get; set; }
     public RollData[] datas;
     private int rollCount;
     private bool isSkillSelected;
@@ -99,6 +100,8 @@ public class RollManager : MonoBehaviour {
         {
             Reset();
             SkillManager.instance.Save();
+            if (!isStageUp)
+                PlayerPrefs.SetInt("isFirstRoll", 0);
             if (isStageUp)
                 LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
 
@@ -113,7 +116,11 @@ public class RollManager : MonoBehaviour {
         if (isStageUp)
             BoardManager.instance.InitBoard();
         else
-            GameManager.instance.RunGame(StatOrbManager.instance.stat);
+        {
+            if (StatOrbManager.instance.stat != null)
+                GameManager.instance.RunGame(StatOrbManager.instance.stat);
+            GameManager.instance.SetPause(false);
+        }
     }
 
     bool isReRoll;//참이면 ReRoll 재 호출시 ReRoll 진행
@@ -178,7 +185,7 @@ public class RollManager : MonoBehaviour {
             isPassed = true;
         }
         else
-            SetRollPnl(false);
+            SetRollPnl(false, isStageUp);
     }
 
     public void SetSelectPnl(bool value)
@@ -500,7 +507,7 @@ public class RollManager : MonoBehaviour {
             PlayerPrefs.SetInt("stopped", stopped);//저장
         }
         //Save Here
-        int spin = Random.Range(2, 4);//2~3바퀴
+        int spin = 2;
         scroll.Spin(spin * 10 + stopped);
         StartCoroutine(CheckRollEnd());
     }
@@ -585,6 +592,10 @@ public class RollManager : MonoBehaviour {
         isClickable = true;
         StartCoroutine(IconEffectCorou());
         Select((stopped + 1) % 10);
+        TutorialManager.instance.StartTutorial(2);
+        AudioManager.instance.PlaySFX("skillStop");
+        if (datas[(stopped + 1) % 10].type == ROLL_TYPE.ITEM)
+            TutorialManager.instance.StartTutorial(5);
     }
 
     IEnumerator IconEffectCorou()
@@ -600,31 +611,6 @@ public class RollManager : MonoBehaviour {
             imgRect.localScale = Vector3.Lerp(imgRect.localScale, Vector3.one, 1 - t * 2);
         }
         imgRect.localScale = Vector3.one;
-    }
-
-    /// <summary>
-    /// 가속
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerator SpeedUp()
-    {
-        Debug.Log("SpeedUp");
-#if DELAY
-        yield return GameManager.instance.delayPointOneReal;
-#else
-        float t = 0;
-        while (t < 0.1f)
-        {
-            t += Time.unscaledDeltaTime;
-            yield return null;
-        }
-#endif
-        while (scroll.rolling > 0)
-        {
-            scroll.SpeedUp(1.02f);
-            yield return null;
-        }
-        scroll.SpeedReset();
     }
 
     /// <summary>

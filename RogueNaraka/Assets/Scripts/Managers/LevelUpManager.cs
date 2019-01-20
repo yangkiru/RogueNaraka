@@ -39,6 +39,7 @@ public class LevelUpManager : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
+        isLevelUp = PlayerPrefs.GetInt("isLevelUp") == 1;
     }
 
     float time;
@@ -84,6 +85,7 @@ public class LevelUpManager : MonoBehaviour {
     {
         Debug.Log("LevelUp");
         GameManager.instance.SetPause(true);
+        PlayerPrefs.SetInt("isLevelUp", 1);
         SyncStatUpgradeTxt();
         SkillManager.instance.SetIsDragable(false);
         if (isLeftStatChanged)

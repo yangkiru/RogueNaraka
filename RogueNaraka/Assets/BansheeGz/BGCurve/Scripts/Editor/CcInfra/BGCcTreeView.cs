@@ -45,7 +45,7 @@ namespace BansheeGz.BGSpline.Editor
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(e);
+                    UnityEngine.Debug.LogException(e);
                     continue;
                 }
                 type2Node[node.CcData.Type] = node;

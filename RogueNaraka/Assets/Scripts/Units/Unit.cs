@@ -112,6 +112,8 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         Collider2D _collider;
 
+        public Transform cashedTransform;
+
         public Stat stat { get { return _data.stat; } }
 
         #endregion
@@ -155,6 +157,11 @@ namespace RogueNaraka.UnitScripts
                 BoardManager.instance.enemies.Remove(this);
         }
 
+        private void Awake()
+        {
+            cashedTransform = transform;
+        }
+
         public void SetStat(Stat stat)
         {
             _data.stat = (Stat)stat.Clone();
@@ -176,7 +183,8 @@ namespace RogueNaraka.UnitScripts
             _moveable.Init(_data);
             _moveable.enabled = true;
 
-            DisableAttackables();
+            if (_attackable)
+                _attackable.enabled = false;
             switch(GameDatabase.instance.weapons[_data.weapon].type)
             {
                 case ATTACK_TYPE.STOP_BEFORE:
@@ -270,12 +278,6 @@ namespace RogueNaraka.UnitScripts
         {
             _enemyTargetable.enabled = false;
             _friendlyTargetable.enabled = false;
-        }
-    
-        void DisableAttackables()
-        {
-            _stopAfterAttackable.enabled = false;
-            _stopBeforeAttackable.enabled = false;
         }
 
         public void DisableAll()

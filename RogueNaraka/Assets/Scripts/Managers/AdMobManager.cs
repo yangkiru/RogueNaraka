@@ -3,6 +3,7 @@ using System;
 using GoogleMobileAds.Api;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.UI;
 
 public class AdMobManager : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class AdMobManager : MonoBehaviour
     private static string outputMessage = string.Empty;
 
     public AdEvent onReward;
+
+    public Button removeAdsBtn;
+    public Image testerPnl;
+    public TMPro.TextMeshProUGUI testerTxt;
 
     public static AdMobManager instance;
 
@@ -27,7 +32,7 @@ public class AdMobManager : MonoBehaviour
         instance = this;
 
 #if UNITY_ANDROID
-        string appId = "ca-app-pub-3940256099942544~3347511713";
+        string appId = "ca-app-pub-8089259583608162~1486526628";
 #elif UNITY_IPHONE
         string appId = "ca-app-pub-3940256099942544~1458002511";
 #else
@@ -56,120 +61,71 @@ public class AdMobManager : MonoBehaviour
         this.rewardBasedVideo.OnAdClosed += this.HandleRewardBasedVideoClosed;
         //광고 클릭으로 인해 사용자가 애플리케이션을 종료한 경우 호출
         this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;
-
-        this.RequestRewardBasedVideo();
     }
 
-    //public void Update()
-    //{
-    //    // Calculate simple moving average for time to render screen. 0.1 factor used as smoothing
-    //    // value.
-    //    this.deltaTime += (Time.deltaTime - this.deltaTime) * 0.1f;
-    //}
+    public void SetIsTester(bool value)
+    {
+        PlayerPrefs.SetInt("isTester", value ? 1 : 0);
+        if (value)
+            testerTxt.text = "Now you are Ads Tester";
+        else
+            testerTxt.text = "Now you are not Ads Tester";
+        testerPnl.gameObject.SetActive(true);
+        StartCoroutine(CloseTesterPnl());
+    }
 
-    //public void OnGUI()
-    //{
-    //    GUIStyle style = new GUIStyle();
+    public void ToggleIsTester()
+    {
+        bool value = PlayerPrefs.GetInt("isTester") == 0;
+        SetIsTester(value);
+    }
 
-    //    Rect rect = new Rect(0, 0, Screen.width, Screen.height);
-    //    style.alignment = TextAnchor.LowerRight;
-    //    style.fontSize = (int)(Screen.height * 0.06);
-    //    style.normal.textColor = new Color(0.0f, 0.0f, 0.5f, 1.0f);
-    //    float fps = 1.0f / this.deltaTime;
-    //    string text = string.Format("{0:0.} fps", fps);
-    //    GUI.Label(rect, text, style);
+    int requestAmount;
+    public void RequestToggleIsTester()
+    {
+        if(++requestAmount >= 10)
+        {
+            ToggleIsTester();
+            requestAmount = 0;
+        }
+    }
 
-    //    // Puts some basic buttons onto the screen.
-    //    GUI.skin.button.fontSize = (int)(0.035f * Screen.width);
-    //    float buttonWidth = 0.35f * Screen.width;
-    //    float buttonHeight = 0.15f * Screen.height;
-    //    float columnOnePosition = 0.1f * Screen.width;
-    //    float columnTwoPosition = 0.55f * Screen.width;
+    IEnumerator CloseTesterPnl()
+    {
+        float t = 2;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
 
-    //    Rect requestBannerRect = new Rect(
-    //        columnOnePosition,
-    //        0.05f * Screen.height,
-    //        buttonWidth,
-    //        buttonHeight);
-    //    if (GUI.Button(requestBannerRect, "Request\nBanner"))
-    //    {
-    //        this.RequestBanner();
-    //    }
+        testerPnl.gameObject.SetActive(false);
+    }
 
-    //    Rect destroyBannerRect = new Rect(
-    //        columnOnePosition,
-    //        0.225f * Screen.height,
-    //        buttonWidth,
-    //        buttonHeight);
-    //    if (GUI.Button(destroyBannerRect, "Destroy\nBanner"))
-    //    {
-    //        this.bannerView.Destroy();
-    //    }
-
-    //    Rect requestInterstitialRect = new Rect(
-    //        columnOnePosition,
-    //        0.4f * Screen.height,
-    //        buttonWidth,
-    //        buttonHeight);
-    //    if (GUI.Button(requestInterstitialRect, "Request\nInterstitial"))
-    //    {
-    //        this.RequestInterstitial();
-    //    }
-
-    //    Rect showInterstitialRect = new Rect(
-    //        columnOnePosition,
-    //        0.575f * Screen.height,
-    //        buttonWidth,
-    //        buttonHeight);
-    //    if (GUI.Button(showInterstitialRect, "Show\nInterstitial"))
-    //    {
-    //        this.ShowInterstitial();
-    //    }
-
-    //    Rect destroyInterstitialRect = new Rect(
-    //        columnOnePosition,
-    //        0.75f * Screen.height,
-    //        buttonWidth,
-    //        buttonHeight);
-    //    if (GUI.Button(destroyInterstitialRect, "Destroy\nInterstitial"))
-    //    {
-    //        this.interstitial.Destroy();
-    //    }
-
-    //    Rect requestRewardedRect = new Rect(
-    //        columnTwoPosition,
-    //        0.05f * Screen.height,
-    //        buttonWidth,
-    //        buttonHeight);
-    //    if (GUI.Button(requestRewardedRect, "Request\nRewarded Video"))
-    //    {
-    //        this.RequestRewardBasedVideo();
-    //    }
-
-    //    Rect showRewardedRect = new Rect(
-    //        columnTwoPosition,
-    //        0.225f * Screen.height,
-    //        buttonWidth,
-    //        buttonHeight);
-    //    if (GUI.Button(showRewardedRect, "Show\nRewarded Video"))
-    //    {
-    //        this.ShowRewardBasedVideo();
-    //    }
-
-    //    Rect textOutputRect = new Rect(
-    //        columnTwoPosition,
-    //        0.925f * Screen.height,
-    //        buttonWidth,
-    //        0.05f * Screen.height);
-    //    GUI.Label(textOutputRect, outputMessage);
-    //}
+    public void RemoveAds()
+    {
+        PlayerPrefs.SetInt("isRemoveAds", 1);
+        if(this.bannerView != null)
+        {
+            this.bannerView.Destroy();
+        }
+        removeAdsBtn.interactable = false;
+    }
 
     // Returns an ad request with custom ad targeting.
     private AdRequest CreateAdRequest()
     {
-        return new AdRequest.Builder()
+        if (PlayerPrefs.GetInt("isTester") == 1)
+        {
+            return new AdRequest.Builder()
             .AddTestDevice(AdRequest.TestDeviceSimulator)
             .Build();
+        }
+        else
+        {
+            return new AdRequest.Builder()
+            .Build();
+        }
             //.AddTestDevice("0123456789ABCDEF0123456789ABCDEF")
             //.AddKeyword("game")
             //.SetGender(Gender.Male)
@@ -181,11 +137,16 @@ public class AdMobManager : MonoBehaviour
 
     public void RequestBanner()
     {
+        if (PlayerPrefs.GetInt("isRemoveAds") == 1)
+        {
+            removeAdsBtn.interactable = false;
+            return;
+        }
         // These ad units are configured to always serve test ads.
 #if UNITY_EDITOR
-        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        string adUnitId = "ca-app-pub-8089259583608162/9668268975";
 #elif UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+        string adUnitId = "ca-app-pub-8089259583608162/9668268975";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/2934735716";
 #else
@@ -216,7 +177,7 @@ public class AdMobManager : MonoBehaviour
     {
         // These ad units are configured to always serve test ads.
 #if UNITY_EDITOR
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "unexpected_platform";
 #elif UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_IPHONE
@@ -248,9 +209,9 @@ public class AdMobManager : MonoBehaviour
     public void RequestRewardBasedVideo()
     {
 #if UNITY_EDITOR
-        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        string adUnitId = "ca-app-pub-8089259583608162/3877063853";
 #elif UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        string adUnitId = "ca-app-pub-8089259583608162/3877063853";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else

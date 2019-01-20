@@ -1,0 +1,5 @@
+Product ID,Published State,Purchase Type,Auto Translate,Locale; Title; Description,Auto Fill Prices,Price,Pricing Template ID
+soul.100,published,managed_by_android,false,en_US;100 Soul;100 Soul,true,,4638320941052255890
+soul.550,published,managed_by_android,false,en_US;550 Soul;550 Soul,true,,4636743181171706362
+soul.1200,published,managed_by_android,false,en_US;1200 Soul;1200 Soul,true,,4636082978910493929
+ad.remove,published,managed_by_android,false,en_US;Remove Ads;Remove Ads,true,,4636851123311867577

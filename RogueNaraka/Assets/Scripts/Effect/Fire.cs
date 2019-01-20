@@ -6,6 +6,7 @@ namespace RogueNaraka.EffectScripts
     public class Fire : Effect
     {
         Color color;
+        IEnumerator damageCorou;
 
         public override void Combine(EffectData dt)
         {
@@ -19,14 +20,22 @@ namespace RogueNaraka.EffectScripts
 
         protected override void OnDestroyEffect()
         {
-            StopCoroutine("Damage");
+            if (damageCorou != null)
+            {
+                StopCoroutine(damageCorou);
+                damageCorou = null;
+            }
             target.renderer.color = color;
         }
 
         protected override void OnInit()
         {
             color = target.renderer.color;
-            StartCoroutine("Damage");
+            if (damageCorou == null)
+            {
+                damageCorou = Damage();
+                StartCoroutine(damageCorou);
+            }
             target.renderer.color = new Color(1, 0.368f, 0);
         }
 
@@ -34,7 +43,7 @@ namespace RogueNaraka.EffectScripts
         {
             while (true)
             {
-                float t = target.effectable.effectDelay;
+                float t = target.effectable.effectDelay * 2;
                 
                 do
                 {

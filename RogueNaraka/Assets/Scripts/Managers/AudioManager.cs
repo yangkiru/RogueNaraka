@@ -12,16 +12,37 @@ public class AudioManager : MonoBehaviour
     public AudioSetting[] audioSettings;
     private enum AudioGroups { Master, Music, SFX };
 
-    public AudioSource[] musics;
-    public AudioSource currentMusic;
-    Dictionary<string, AudioSource> sources = new Dictionary<string, AudioSource>();
+    public AudioClip[] musicClips;
+    public AudioClip[] SFXClips;
+
+    public AudioSource music;
+    public AudioSource SFX;
+
+    public Button[] btns;
+    Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
+    Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
 
     void Awake()
     {
         instance = this;
-        for (int i = 0; i < musics.Length; i++)
+        for (int i = 0; i < musicClips.Length; i++)
         {
-            sources.Add(musics[i].clip.name, musics[i]);
+            musicClipDictionary.Add(musicClips[i].name, musicClips[i]);
+        }
+        for (int i = 0; i < SFXClips.Length; i++)
+        {
+            SFXClipDictionary.Add(SFXClips[i].name, SFXClips[i]);
+        }
+        BtnSound();
+    }
+
+
+    [ContextMenu("BtnSound")]
+    void BtnSound()
+    {
+        for (int i = 0; i < btns.Length; i++)
+        {
+            btns[i].onClick.AddListener(() => PlaySFX("click"));
         }
     }
 
@@ -55,19 +76,37 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(string name)
     {
-        try
+        if (music.clip && music.clip.name.CompareTo(name) == 0)
+            return;
+
+        if (musicClipDictionary.ContainsKey(name))
         {
-            if (currentMusic && currentMusic.clip.name.CompareTo(name) != 0)
-                currentMusic.Stop();
-            else if (currentMusic)
-                return;
-            currentMusic = sources[name];
-            currentMusic.Play();
+            music.clip = musicClipDictionary[name];
+            music.Play();
         }
-        catch
+        else
         {
-            Debug.LogError(string.Format("Can't find {0}", name));
+            music.Stop();
+            music.clip = null;
         }
+    }
+
+    //public IEnumerator PlaySound(AudioSource source, Transform parent)
+    //{
+    //    Transform sourceTransform = source.transform;
+    //    sourceTransform.SetParent(null);
+    //    source.Play();
+    //    do
+    //    {
+    //        yield return null;
+    //    } while (source.isPlaying);
+    //    sourceTransform.SetParent(parent);
+    //}
+
+    public void PlaySFX(string name)
+    {
+        if(SFXClipDictionary.ContainsKey(name))
+            SFX.PlayOneShot(SFXClipDictionary[name]);
     }
 }
 

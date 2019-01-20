@@ -69,6 +69,7 @@ public class StatOrbManager : MonoBehaviour
         orbRoot.trs.DistanceRatio = 0;
         orbRoot.trs.SetOnOverflow(OnOverflow, orbRoot.gameObject);
         orbRoot.rigid.velocity = Vector2.zero;
+        AudioManager.instance.PlaySFX("statFire");
     }
 
     IEnumerator ShootCorou(int n, float delay)
@@ -99,8 +100,11 @@ public class StatOrbManager : MonoBehaviour
         {
             StartCoroutine(OnLastOverflow());
         }
+        AudioManager.instance.PlaySFX("statDestroy");
         orbPool.EnqueueObjectPool(obj);
     }
+
+
 
     IEnumerator OnLastOverflow()
     {
@@ -118,6 +122,7 @@ public class StatOrbManager : MonoBehaviour
         Stat.StatToData(null, "randomStat");
 
         GameManager.instance.StatTextUpdate(stat);
+        PlayerPrefs.SetInt("isFirstRoll", 1);
         RollManager.instance.SetRollPnl(true, false);
         //GameManager.instance.RunGame(stat);
     }
@@ -171,6 +176,9 @@ public class StatOrbManager : MonoBehaviour
             StartCoroutine(StatCorou(rndStat));
             GameManager.instance.SetPause(false);
 
+            TutorialManager.instance.StartTutorial(1);
+            bombParticle.gameObject.SetActive(true);
+
             fade.FadeIn();
         }
         else if (!value)
@@ -178,6 +186,11 @@ public class StatOrbManager : MonoBehaviour
             pnl.SetActive(false);
             fade.FadeOut();
         }
+    }
+
+    public void OnFadeOut()
+    {
+        bombParticle.gameObject.SetActive(false);
     }
 
     IEnumerator StatCorou(Stat stat)
@@ -193,6 +206,7 @@ public class StatOrbManager : MonoBehaviour
             //CameraShake.instance.Shake(0.1f, 0.1f, 0.001f);
             StartCoroutine(IconShake(0.1f, 0.1f, 0.001f));
             SetStat((STAT)i);
+            AudioManager.instance.PlaySFX("statChange");
 
             int amount = (int)stat.GetOrigin((STAT)i);
             current = amount;

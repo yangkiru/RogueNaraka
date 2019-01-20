@@ -419,7 +419,7 @@ namespace BansheeGz.BGSpline.Example
                 else if (toCheck.ExpectedDelay < Elapsed - Epsilon)
                 {
                     valid = false;
-                    Debug.LogException(GetException("Missing event: expected " + toCheck + " event did not occur"));
+                    UnityEngine.Debug.LogException(GetException("Missing event: expected " + toCheck + " event did not occur"));
                     return;
                 }
             }
@@ -432,7 +432,7 @@ namespace BansheeGz.BGSpline.Example
                 if (toCompare.PointIndex >= 0 && toCompare.PointIndex != point)
                 {
                     valid = false;
-                    Debug.LogException(GetException("Points indexes mismatch: expected " + toCompare.PointIndex + ", actual=" + point));
+                    UnityEngine.Debug.LogException(GetException("Points indexes mismatch: expected " + toCompare.PointIndex + ", actual=" + point));
                     return;
                 }
 
@@ -441,7 +441,7 @@ namespace BansheeGz.BGSpline.Example
                 if (Math.Abs(expectedDelay - actualDelay) > Epsilon)
                 {
                     valid = false;
-                    Debug.LogException(GetException("Timing mismatch at point {" + toCompare.PointIndex + "}: expected " + expectedDelay + ", actual=" + actualDelay));
+                    UnityEngine.Debug.LogException(GetException("Timing mismatch at point {" + toCompare.PointIndex + "}: expected " + expectedDelay + ", actual=" + actualDelay));
                     return;
                 }
 

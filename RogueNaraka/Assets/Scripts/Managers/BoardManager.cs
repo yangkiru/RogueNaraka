@@ -86,9 +86,9 @@ public class BoardManager : MonoBehaviour {
             }
         }
         count = bulletPool.GetCount();
-        if (count < 500)//bullet Pooling
+        if (count < 250)//bullet Pooling
         {
-            for (int i = count; i < 500; i++)
+            for (int i = count; i < 250; i++)
             {
                 GameObject obj = SpawnBulletObj();
                 bulletPool.EnqueueObjectPool(obj);
@@ -107,16 +107,10 @@ public class BoardManager : MonoBehaviour {
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
         player.Spawn(spawnPoint);
-        StartCoroutine(WaitForLoad());
+        isReady = true;
         fade.FadeIn();
     }
 
-    private IEnumerator WaitForLoad()
-    {
-        yield return null;
-        GameManager.instance.SetPause(false);
-        isReady = true;
-    }
     /// <summary>
     /// stage = value;
     /// </summary>

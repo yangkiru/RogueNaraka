@@ -57,6 +57,12 @@ namespace RogueNaraka.UnitScripts
             _isDeath = true;
             unit.animator.SetBool("isDeath", true);
             unit.DisableAll();
+            string sfx = unit.data.deathSFX;
+            if (sfx.CompareTo(string.Empty) != 0)
+            {
+                //AudioManager.instance.StartCoroutine(AudioManager.instance.PlaySound(deathSFX, unit.cashedTransform));
+                AudioManager.instance.PlaySFX(sfx);
+            }
             if(unit.autoMoveable is FollowMoveableUnit)
             {
                 unit.followMoveable.OnDeath();

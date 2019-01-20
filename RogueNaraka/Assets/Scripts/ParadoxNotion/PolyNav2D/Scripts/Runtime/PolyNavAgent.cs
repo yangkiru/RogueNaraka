@@ -184,7 +184,7 @@ namespace PolyNav{
 		public bool SetDestination(Vector2 goal, Action<bool> callback){
 
 			if (map == null){
-				Debug.LogError("No PolyNav2D assigned or in scene!");
+                UnityEngine.Debug.LogError("No PolyNav2D assigned or in scene!");
 				return false;
 			}
 
@@ -446,7 +446,7 @@ namespace PolyNav{
 			var currentLookAheadDistance = Mathf.Lerp(0, lookAheadDistance, _velocity.magnitude/maxSpeed);
 			var lookAheadPos = position + _velocity.normalized * currentLookAheadDistance;
 
-			Debug.DrawLine(position, lookAheadPos, Color.blue);
+            UnityEngine.Debug.DrawLine(position, lookAheadPos, Color.blue);
 
 			if (!map.PointIsValid(lookAheadPos)){
 				_velocity -= (lookAheadPos - position);

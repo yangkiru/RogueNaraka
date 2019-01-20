@@ -524,7 +524,7 @@ namespace PolyNav{
 					index = i;
 				}
 			}
-			Debug.DrawLine(point, possiblePoints[index]);
+            UnityEngine.Debug.DrawLine(point, possiblePoints[index]);
 			return possiblePoints[index];
 		}
 

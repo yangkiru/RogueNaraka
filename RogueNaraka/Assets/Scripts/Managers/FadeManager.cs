@@ -9,22 +9,30 @@ public class FadeManager : MonoBehaviour
 {
     public static FadeManager instance;
     public Image pnl;
+    public Fade onStart;
 
     private void Awake()
     {
         instance = this;
     }
-    public void FadeOut(float t = 1, bool ignoreTimeScale = false, FadeEvent onEnd = null)
+
+    private void Start()
     {
-        Debug.Log("FadeOut");
-        StartCoroutine(FadeOutCorou(t, ignoreTimeScale, onEnd));
+        onStart.FadeIn();
     }
 
-    IEnumerator FadeOutCorou(float t = 1, bool ignoreTimeScale = false, FadeEvent onEnd = null)
+    public void FadeOut(float t = 1, bool ignoreTimeScale = false, bool isClickable = false, FadeEvent onEnd = null)
+    {
+        Debug.Log("FadeOut");
+        StartCoroutine(FadeOutCorou(t, ignoreTimeScale, isClickable, onEnd));
+    }
+
+    IEnumerator FadeOutCorou(float t = 1, bool ignoreTimeScale = false, bool isClickable = false, FadeEvent onEnd = null)
     {
         Color color = pnl.color;
         color.a = 0;
         pnl.color = color;
+        pnl.raycastTarget = !isClickable;
         pnl.gameObject.SetActive(true);
         float tt = t;
         do
@@ -38,17 +46,18 @@ public class FadeManager : MonoBehaviour
         if (onEnd != null)
             onEnd.Invoke();
     }
-    public void FadeIn(float t = 1, bool ignoreTimeScale = false, FadeEvent onEnd = null)
+    public void FadeIn(float t = 1, bool ignoreTimeScale = false, bool isClickable = false, FadeEvent onEnd = null)
     {
         Debug.Log("FadeIn");
-        StartCoroutine(FadeInCorou(t, ignoreTimeScale, onEnd));
+        StartCoroutine(FadeInCorou(t, ignoreTimeScale, isClickable, onEnd));
     }
 
-    IEnumerator FadeInCorou(float t = 1, bool ignoreTimeScale = false, FadeEvent onEnd = null)
+    IEnumerator FadeInCorou(float t = 1, bool ignoreTimeScale = false, bool isClickable = false, FadeEvent onEnd = null)
     {
         Color color = pnl.color;
         color.a = 1;
         pnl.color = color;
+        pnl.raycastTarget = !isClickable;
         pnl.gameObject.SetActive(true);
         float tt = t;
         do

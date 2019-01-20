@@ -561,7 +561,7 @@ namespace BansheeGz.BGSpline.Editor
                 if (critical)
                 {
                     // no luck
-                    Debug.LogException(new UnityException(
+                    UnityEngine.Debug.LogException(new UnityException(
                         "Can not find BGCurve Editors icons folder. The icons folder, located by default at '" + DefaultIconPath +
                         "', should be included in your assets, otherwise the package will not work correctly in Editor."));
                 }

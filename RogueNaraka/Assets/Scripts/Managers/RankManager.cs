@@ -13,8 +13,8 @@ public class RankManager : MonoBehaviour
 
     private void Start()
     {
-        PlayGamesPlatform.Activate();
-        Social.localUser.Authenticate(AuthenticateHandler);
+        //PlayGamesPlatform.Activate();
+        //Social.localUser.Authenticate(AuthenticateHandler);
     }
 
     string leaderBoardId = "CgkIvu-SvO4aEAIQAA";
@@ -69,6 +69,11 @@ public class RankManager : MonoBehaviour
     public void ShowRank()
     {
         Social.ShowLeaderboardUI();
+    }
+
+    public void SetLocalRank()
+    {
+
     }
 
     public void ShowAchievement()

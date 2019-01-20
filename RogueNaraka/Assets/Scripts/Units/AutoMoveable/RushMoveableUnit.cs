@@ -16,10 +16,10 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         protected override void AutoMove()
         {
-            if (targetable?.target)
+            if (targetable && targetable.target)
             {
-                Vector2 vec = targetable.target.transform.position - transform.position;
-                moveable.Move((Vector2)transform.position + vec.normalized * Mathf.Min(distance, targetable.targetDistance));
+                Vector2 vec = targetable.target.cashedTransform.position - cashedTransform.position;
+                moveable.Move((Vector2)cashedTransform.position + vec.normalized * Mathf.Min(distance, targetable.targetDistance));
             }
         }
     }

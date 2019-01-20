@@ -66,7 +66,6 @@ namespace RogueNaraka.UnitScripts
                 effect = obj.AddComponent(type) as Effect;
 
                 List<Effect> list = dictionary[data.type];
-                Debug.Log(list);
 
                 effect.Init((EffectData)data.Clone(), list, unit, bullet, owner);
             }

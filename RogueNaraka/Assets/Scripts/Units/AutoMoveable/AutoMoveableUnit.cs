@@ -11,6 +11,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         [SerializeField]
         protected MoveableUnit moveable;
 
+        protected Transform cashedTransform;
         protected float distance;
 
         [SerializeField]
@@ -22,6 +23,11 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             unit = GetComponent<Unit>();
             moveable = GetComponent<MoveableUnit>();
+        }
+
+        private void Awake()
+        {
+            cashedTransform = transform;
         }
 
         public virtual void Init(UnitData data)
@@ -37,7 +43,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 return;
             if (leftDelay > 0)
             {
-                leftDelay -= Time.deltaTime;
+                leftDelay -= Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
                 return;
             }
             else if (leftDelay <= 0)

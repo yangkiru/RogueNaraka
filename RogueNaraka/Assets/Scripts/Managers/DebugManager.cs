@@ -27,8 +27,11 @@ public class DebugManager : MonoBehaviour {
         if (setStage)
         {
             setStage = false;
-            stage = 0;
+
+            if(BoardManager.instance)
+                BoardManager.instance.SetStage(stage);
             PlayerPrefs.SetInt("stage", stage);
+            stage = 0;
         }
         if (killPlayer && BoardManager.instance && BoardManager.instance.player)
         {
@@ -75,4 +78,22 @@ public class DebugManager : MonoBehaviour {
         }
     }
 #endif
+
+    int requestReset;
+
+    public GameObject resetPnl;
+
+    public void RequestReset()
+    {
+        if(++requestReset > 10)
+        {
+            resetPnl.SetActive(true);
+        }
+    }
+
+    public void DataReset()
+    {
+        PlayerPrefs.DeleteAll();
+        resetPnl.SetActive(false);
+    }
 }
