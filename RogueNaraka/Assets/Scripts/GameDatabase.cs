@@ -48,6 +48,7 @@ public class GameDatabase : ScriptableObject
     public Sprite statSprite;
 
     public StatLang[] statLang;
+    public string[] langFonts;
 
     void OnEnable()
     {
@@ -495,26 +496,26 @@ public class EffectData:ICloneable
 public struct ItemData
 {
     public string name;
+    public string[] nameLang;
     public int id;
     public float value;
     public float size;
     [TextArea]
-    public string description;
+    public string[] description;
+
+    public string GetName()
+    {
+        string result = nameLang.Length > (int)GameManager.language ?
+            nameLang[(int)GameManager.language] : (nameLang.Length > 0 ? nameLang[0] : name);
+        return result;
+    }
 
     public string GetDescription()
     {
-        float temp = 0;
-        switch (id)
-        {
-            case 0://HealPotion
-                //temp = Player.instance.data.stat.tec;
-                return string.Format(description, temp, temp);
-            case 1://ManaPotion
-                //temp = Player.instance.data.stat.tec;
-                return string.Format(description, temp, temp);
-            default:
-                return description;
-        }
+        string result = description.Length > (int)GameManager.language ?
+            description[(int)GameManager.language] : (description.Length > 0 ? description[0] : string.Empty);
+
+        return result;
     }
 }
 

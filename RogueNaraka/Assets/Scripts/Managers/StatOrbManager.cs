@@ -96,7 +96,7 @@ public class StatOrbManager : MonoBehaviour
         current--;
         IconEffect();
         bombParticle.Play();
-        if(used == rndStat.statPoints)
+        if(used == rndStat.statPoints || (currentStat == STAT.MPREGEN && stat.mpRegen == stat.mpRegenMax))
         {
             StartCoroutine(OnLastOverflow());
         }
@@ -120,6 +120,11 @@ public class StatOrbManager : MonoBehaviour
         pnl.SetActive(false);
         Stat.StatToData(_stat);
         Stat.StatToData(null, "randomStat");
+        
+        for(int i = 0; i < list.Count; i++)
+        {
+            orbPool.EnqueueObjectPool(list[i].gameObject);
+        }
 
         GameManager.instance.StatTextUpdate(stat);
         PlayerPrefs.SetInt("isFirstRoll", 1);
@@ -248,7 +253,7 @@ public class StatOrbManager : MonoBehaviour
     }
 
     void StatTxtUpdate()
-    {
+    { 
         statNameTxt.text = string.Format("{0}\n({1})", GameDatabase.instance.statLang[(int)GameManager.language].items[(int)currentStat], currentStat.ToString());
         statValueTxt.text = string.Format("{0}/{1}", _stat.GetOrigin(currentStat), _stat.GetMax(currentStat));
     }

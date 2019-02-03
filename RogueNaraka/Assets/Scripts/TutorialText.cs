@@ -35,10 +35,21 @@ public class TutorialText : MonoBehaviour
 
     IEnumerator TextTyping(string text)
     {
-        string current = string.Empty;
+        Language currentLang = GameManager.language;
+        string font = GameDatabase.instance.langFonts[(int)currentLang];
+        string current = font == string.Empty ? string.Empty : string.Format("<font=\"{0}\">", font);
         tmpro.text = current;
+        
         for (int i = 0; i < text.Length; i++)
         {
+            if(currentLang != GameManager.language)
+            {
+                currentLang = GameManager.language;
+                i = -1;
+                text = texts?[(int)currentLang];
+                current = string.Empty;
+                continue;
+            }
             float t = delay;
             if (Input.anyKey && !TutorialManager.instance.isPause)
                 t = delay * 0.25f;
@@ -48,7 +59,7 @@ public class TutorialText : MonoBehaviour
                 if(!TutorialManager.instance.isPause)
                     t -= Time.unscaledDeltaTime;
             } while (t > 0);
-            current += text[i];
+            current = string.Format("{0}{1}", current, text[i]);
             tmpro.text = current;
         }
         do

@@ -72,7 +72,7 @@ public class SoulShopManager : MonoBehaviour
         else
         {
             shopPnl.SetActive(false);
-            if(DeathManager.instance.pnl.gameObject.activeSelf)
+            if(DeathManager.instance.deathPnl.gameObject.activeSelf)
                 DeathManager.instance.pauseBtn.gameObject.SetActive(false);
             else
                 DeathManager.instance.pauseBtn.gameObject.SetActive(true);
@@ -445,13 +445,13 @@ public class SoulShopManager : MonoBehaviour
 
     public void RefiningRateTxtUpdate()
     {
-        soulRefRateValueTxt.text = string.Format("{0}% ~ 100%", MoneyManager.instance.refiningRate * 100);
+        soulRefRateValueTxt.text = string.Format("{0}%~100%", MoneyManager.instance.refiningRate * 100);
     }
     public void RefiningRateTxtNameUpdate()
     {
-        switch(GameManager.language)
+        switch (GameManager.language)
         {
-            default:
+            case Language.English:
                 soulRefRateNameTxt.text = "Soul refining rate";
                 break;
             case Language.Korean:

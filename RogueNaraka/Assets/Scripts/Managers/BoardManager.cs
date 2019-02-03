@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RogueNaraka.UnitScripts;
+using TMPro;
 
 public class BoardManager : MonoBehaviour {
 
@@ -26,7 +27,7 @@ public class BoardManager : MonoBehaviour {
     public List<Unit> enemies = new List<Unit>();
     public List<Unit> friendlies = new List<Unit>();
 
-    public Text stageTxt;
+    public TextMeshProUGUI stageTxt;
 
     public int stage
     { get { return _stage; } }
@@ -242,7 +243,8 @@ public class BoardManager : MonoBehaviour {
         stageTxt.gameObject.SetActive(true);
         string text = string.Format("STAGE {0}", _stage);
         stageTxt.text = string.Empty;
-        stageTxt.color = Color.white;
+        Color color = Color.white;
+        stageTxt.color = color;
         yield return null;
         //Appear
         for (int i = 0; i < text.Length; i++)
@@ -255,15 +257,16 @@ public class BoardManager : MonoBehaviour {
             }
             stageTxt.text = string.Format("{0}{1}", stageTxt.text, text[i]);
         }
-        float alpha = 1;
-        float amount = 5 / 255f;
-        while (alpha >= 0)
-        {
-            alpha -= amount;
-            stageTxt.color = new Color(stageTxt.color.r, stageTxt.color.g, stageTxt.color.b, alpha);
-            yield return null;
-        }
-        stageTxt.gameObject.SetActive(false);
+        //float alpha = 1;
+        //float amount = 2 / 255f;
+        //while (alpha >= 0)
+        //{
+        //    alpha -= amount;
+        //    color.a = alpha;
+        //    stageTxt.color = color;
+        //    yield return null;
+        //}
+        //stageTxt.gameObject.SetActive(false);
     }
 
     public void ClearStage()

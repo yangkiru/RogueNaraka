@@ -17,16 +17,19 @@ namespace RogueNaraka.SkillScripts
         {
             float amount = GetValue(Value.Amount).value;
             Debug.Log("Thunder" + amount);
-            float delay = 0.5f / amount;
-            for (int i = 0; i < amount; i++)
+            float delay = 0.05f;
+            for (int i = 0; i < 10; i++)
             {
-                Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
-                Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-                int rndDirection = Random.Range(0, 2);
-                thunder.Init(BoardManager.instance.player, GameDatabase.instance.bullets[data.bulletIds[rndDirection]]);
-                float rndAngle = Random.Range(0, 360);
-                thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
-                thunder.Spawn((Vector2)mp + rnd);
+                for (int j = 0; j < amount; j++)
+                {
+                    Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
+                    Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+                    int rndDirection = Random.Range(0, 2);
+                    thunder.Init(BoardManager.instance.player, GameDatabase.instance.bullets[data.bulletIds[rndDirection]]);
+                    float rndAngle = Random.Range(0, 360);
+                    thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
+                    thunder.Spawn((Vector2)mp + rnd);
+                }
 
                 float time = delay;
                 do

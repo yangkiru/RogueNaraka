@@ -19,19 +19,31 @@ public class AudioManager : MonoBehaviour
     public AudioSource SFX;
 
     public Button[] btns;
+
     Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
+#if UNITY_EDITOR
     Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
+#endif
+#if !UNITY_EDITOR && UNITY_ANDROID
+    Dictionary<string, int> fileIDDictionary = new Dictionary<string, int>();
+#endif
 
     void Awake()
     {
         instance = this;
+        AndroidNativeAudio.makePool();
         for (int i = 0; i < musicClips.Length; i++)
         {
             musicClipDictionary.Add(musicClips[i].name, musicClips[i]);
         }
         for (int i = 0; i < SFXClips.Length; i++)
         {
+#if UNITY_EDITOR
             SFXClipDictionary.Add(SFXClips[i].name, SFXClips[i]);
+#endif
+#if !UNITY_EDITOR && UNITY_ANDROID
+            fileIDDictionary.Add(SFXClips[i].name, AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXClips[i].name)));
+#endif
         }
         BtnSound();
     }
@@ -105,9 +117,24 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(string name)
     {
-        if(SFXClipDictionary.ContainsKey(name))
+#if UNITY_EDITOR
+        if (SFXClipDictionary.ContainsKey(name))
             SFX.PlayOneShot(SFXClipDictionary[name]);
+#endif
+#if !UNITY_EDITOR && UNITY_ANDROID
+        AndroidNativeAudio.play(fileIDDictionary[name]);
+#endif
     }
+#if !UNITY_EDITOR && UNITY_ANDROID
+    void OnApplicationQuit()
+    {
+        // Clean up when done
+        List<int> list = new List<int>(fileIDDictionary.Values);
+        for (int i = 0; i < list.Count; i++)
+            AndroidNativeAudio.unload(list[i]);
+        AndroidNativeAudio.releasePool();
+    }
+#endif
 }
 
 [System.Serializable]

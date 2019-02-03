@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ public class PointTxtManager : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < 100; i++)
         {
             SpawnTxt();
         }
@@ -32,10 +33,10 @@ public class PointTxtManager : MonoBehaviour {
     /// </summary>
     /// <param name="cut">EX:"N2"</param>
     /// <returns></returns>
-    public Text TxtOn(Vector2 pos, float value, string cut = null)
+    public TextMeshProUGUI TxtOn(Vector2 pos, float value, string cut = null)
     {
         GameObject obj = txtPool.DequeueObjectPool();
-        Text txt = obj ? obj.GetComponent<Text>() : null;
+        TextMeshProUGUI txt = obj ? obj.GetComponent<TextMeshProUGUI>() : null;
         if (txt)
         {
             txt.transform.position = pos;
@@ -48,32 +49,32 @@ public class PointTxtManager : MonoBehaviour {
         return txt;
     }
 
-    public Text TxtOn(Transform tf, float value, Vector2 offset, string cut = null)
+    public TextMeshProUGUI TxtOn(Transform tf, float value, Vector2 offset, string cut = null)
     {
         return TxtOn((Vector2)tf.position + offset, value, cut);
     }
 
-    public Text TxtOn(Vector2 pos, float value, Color color, string cut = null)
+    public TextMeshProUGUI TxtOn(Vector2 pos, float value, Color color, string cut = null)
     {
-        Text txt = TxtOn(pos, value, cut);
+        TextMeshProUGUI txt = TxtOn(pos, value, cut);
         if(txt)
             txt.color = color;
         return txt;
     }
 
-    public Text TxtOn(Transform tf, float value, Color color, string cut = null)
+    public TextMeshProUGUI TxtOn(Transform tf, float value, Color color, string cut = null)
     {
         return TxtOn(tf.position, value, color, cut);
     }
 
-    public Text TxtOn(Transform tf, float value, Color color, Vector2 offset, string cut = null)
+    public TextMeshProUGUI TxtOn(Transform tf, float value, Color color, Vector2 offset, string cut = null)
     {
         return TxtOn((Vector2)tf.position + offset, value, color, cut);
     }
 
-    public Text TxtOnHead(float value, Transform tf, Color color)
+    public TextMeshProUGUI TxtOnHead(float value, Transform tf, Color color)
     {
-        Text txt = TxtOn((Vector2)tf.position + new Vector2(0, 0.3f), value, color, "##0.##");
+        TextMeshProUGUI txt = TxtOn((Vector2)tf.position + new Vector2(0, 0.3f), value, color, "##0.##");
         if (txt)
         {
             StartCoroutine(Shoot(txt, 0.75f));
@@ -85,7 +86,7 @@ public class PointTxtManager : MonoBehaviour {
 
     public void TxtOnSoul(float value, Transform tf, Vector2 offset)
     {
-        Text txt = TxtOn(tf, value, Color.white, offset);
+        TextMeshProUGUI txt = TxtOn(tf, value, Color.white, offset);
         if (txt)
         {
             StartCoroutine(MoveUp(txt, 2f, 0.005f));
@@ -93,7 +94,7 @@ public class PointTxtManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator MoveUp(Text txt, float time, float speed)
+    private IEnumerator MoveUp(TextMeshProUGUI txt, float time, float speed)
     {
         float amount = 0.05f;
         for (float t = 0; t < time; t += amount)
@@ -109,7 +110,7 @@ public class PointTxtManager : MonoBehaviour {
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
-    IEnumerator Shoot(Text txt, float time)
+    IEnumerator Shoot(TextMeshProUGUI txt, float time)
     {
         float rnd = Random.Range(-0.01f, 0.01f);
         float acel = Random.Range(0.75f, 1f);
@@ -130,7 +131,7 @@ public class PointTxtManager : MonoBehaviour {
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
-    IEnumerator AlphaDown(Text txt, float delay, float speed)
+    IEnumerator AlphaDown(TextMeshProUGUI txt, float delay, float speed)
     {
         yield return new WaitForSeconds(delay);
 #if !DELAY
@@ -151,5 +152,11 @@ public class PointTxtManager : MonoBehaviour {
             color.a = color.a -= 0.1f * speed;
             txt.color = color;
         }
+    }
+
+    IEnumerator Pump(TextMeshProUGUI txt, float time, float power)
+    {
+        txt.rectTransform.localScale = Vector3.one * power;
+        yield return null;
     }
 }

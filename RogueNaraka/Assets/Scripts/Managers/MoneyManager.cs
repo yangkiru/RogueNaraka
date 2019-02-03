@@ -93,10 +93,10 @@ public class MoneyManager : MonoBehaviour {
         Debug.Log("RefineSoul");
     }
 
-    public void RandomRefineSoul()
+    public float GetRandomRefiningRate()
     {
         float rate = Random.Range(refiningRate, 1f);
-        RefineSoul(rate);
+        return rate;
     }
 
     public void Save(bool isUnrefined = true)

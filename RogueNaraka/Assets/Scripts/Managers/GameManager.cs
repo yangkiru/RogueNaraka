@@ -312,6 +312,7 @@ public class GameManager : MonoBehaviour {
 
     public void SetPause(bool value)
     {
+        Debug.Log(string.Format("SetPause {0}", value));
         _isPause = value;
         if (value)
             Time.timeScale = 0;
@@ -321,15 +322,6 @@ public class GameManager : MonoBehaviour {
 
     public void SetSettingPnl(bool value)
     {
-        if(value)
-        {
-            SetPause(true);
-        }
-        else
-        {
-            if (!RollManager.instance.rollPnl.activeSelf && !SoulShopManager.instance.shopPnl.activeSelf && !TutorialManager.instance.isPlaying)
-                SetPause(false);
-        }
         settingPnl.SetActive(value);
     }
 
@@ -356,6 +348,12 @@ public class GameManager : MonoBehaviour {
     public void InitDropdown(TMP_Dropdown dropdown)
     {
         dropdown.value = (int)language;
+    }
+
+    public void Resume()
+    {
+        if (!RollManager.instance.rollPnl.activeSelf)
+            SetPause(false);
     }
 
     public void ExitGame()

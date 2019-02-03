@@ -48,7 +48,7 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
-    move: 1
+    move: 0
     moveDelay: 0.5
     moveDistance: 2
     moveSpeed: 1
@@ -68,7 +68,7 @@ MonoBehaviour:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 2
+      hp: 4
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 2
+      currentHp: 4
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
@@ -113,7 +113,7 @@ MonoBehaviour:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 4
+      hp: 8
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 4
+      currentHp: 8
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
@@ -248,7 +248,7 @@ MonoBehaviour:
       dmg: 3
       spd: 0
       tec: 0
-      hp: 8
+      hp: 12
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 8
+      currentHp: 12
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
@@ -293,7 +293,7 @@ MonoBehaviour:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 5
+      hp: 8
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 5
+      currentHp: 8
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
@@ -641,7 +641,7 @@ MonoBehaviour:
     limitTime: 0.1
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: -1
+    pierce: 0
     shake:
       time: 0.1
       power: 0.05
@@ -670,7 +670,7 @@ MonoBehaviour:
     limitTime: 0.2
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: -1
+    pierce: 0
     shake:
       time: 0.1
       power: 0.05
@@ -1293,7 +1293,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: 0
-      value: 20
+      value: 1
     levelUp:
       manaCost: 0.5
       size: 0.1
@@ -1301,7 +1301,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 0
-        value: 10
+        value: 1
     description:
     - 
     - 
@@ -1525,15 +1525,17 @@ MonoBehaviour:
     useSFX: flameShoes
   items:
   - name: HealPotion
+    nameLang: []
     id: 0
     value: 1
     size: 0
-    description: Heal Your HP
+    description: []
   - name: ManaPotion
+    nameLang: []
     id: 1
     value: 1
     size: 0
-    description: Heal Your MP
+    description: []
   itemSprites:
   - id: 0
     name: HealPotion
@@ -1634,3 +1636,6 @@ MonoBehaviour:
     - "\uB9C8\uB825"
     - "\uB9C8\uB825 \uD68C\uBCF5\uB825"
     - "\uC2A4\uD0EF \uD3EC\uC778\uD2B8"
+  langFonts:
+  - 
+  - 

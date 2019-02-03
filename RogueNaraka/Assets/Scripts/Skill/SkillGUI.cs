@@ -14,7 +14,7 @@ public class SkillGUI : MonoBehaviour
     public Image img;
     public Image coolImg;
     public TextMeshProUGUI levelTxt;
-    public Text coolTimeTxt;
+    public TextMeshProUGUI coolTimeTxt;
     public int position;
     public bool isCool;
 
@@ -108,7 +108,7 @@ public class SkillGUI : MonoBehaviour
         coolImg.color = c;
         coolImg.enabled = false;
         coolTimeTxt.text = string.Empty;
-        levelTxt.gameObject.SetActive(false);
+        levelTxt.enabled = false;
         if (_skill)
         {
             _skill.data.id = -1;
@@ -137,7 +137,7 @@ public class SkillGUI : MonoBehaviour
         isCool = true;
         img.color = Color.white;
         levelTxt.text = string.Format("+{0}", _skill.data.level);
-        levelTxt.gameObject.SetActive(true);
+        levelTxt.enabled = true;
     }
 
     public void LevelUp(int amount)
@@ -146,6 +146,12 @@ public class SkillGUI : MonoBehaviour
         SyncCoolImg();
         SyncCoolText();
         levelTxt.text = levelTxt.text = string.Format("+{0}", _skill.data.level);
+    }
+
+    [ContextMenu("LevelUpOnce")]
+    public void LevelUpOnce()
+    {
+        LevelUp(1);
     }
 
     public void SyncCoolImg()

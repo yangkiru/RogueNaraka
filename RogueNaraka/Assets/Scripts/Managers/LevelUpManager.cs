@@ -9,7 +9,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public RollManager rollManager;
 
-    public Text[] upgradeTxt;
+    public TextMeshProUGUI[] upgradeTxt;
     public TextMeshProUGUI leftStatTxt;
     public Fade fade;
 

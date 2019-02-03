@@ -67,10 +67,10 @@ public class RollManager : MonoBehaviour {
                 if (active && datas[i].type == ROLL_TYPE.STAT)
                 {
                     statTxts[i].text = string.Format("+{0}", datas[i].id + 1);
-                    statTxts[i].alpha = 1;
+                    statTxts[i].gameObject.SetActive(true);
                 }
                 else
-                    statTxts[i].alpha = 0;
+                    statTxts[i].gameObject.SetActive(false);
             }
         }
         else
@@ -78,10 +78,10 @@ public class RollManager : MonoBehaviour {
             if (active && datas[position].type == ROLL_TYPE.STAT)
             {
                 statTxts[position].text = string.Format("+{0}", datas[position].id + 1);
-                statTxts[position].alpha = 1;
+                statTxts[position].gameObject.SetActive(true);
             }
             else
-                statTxts[position].alpha = 0;
+                statTxts[position].gameObject.SetActive(false);
         }
     }
 
@@ -275,40 +275,47 @@ public class RollManager : MonoBehaviour {
         {
             RollData data = datas[position];
             selected = position;
-            switch (data.type)
+                switch (data.type)
             {
                 case ROLL_TYPE.SKILL:
                     SkillData skill = GameDatabase.instance.skills[data.id];
                     //selectedImg.sprite = GetSprite(data);
-                    typeTxt.text = "Skill";
+                    typeTxt.text = GameManager.language == Language.Korean ? "기술" : "Skill";
                     nameTxt.text = skill.GetName();
                     descTxt.text = skill.GetDescription();
                     break;
                 case ROLL_TYPE.STAT:
                     //selectedImg.sprite = GetSprite(data);
-                    typeTxt.text = "Stat";
+                    typeTxt.text = GameManager.language == Language.Korean ? "능력치" : "Stat";
                     string point = "Point";
                     if (data.id + 1 > 1)
                         point += "s";
                     nameTxt.text = (data.id + 1) + point;
-                    descTxt.text = "You will get " + (data.id + 1) + "Stat " + point.ToLower() + ".";
-                    //descTxt.text = (data.id + 1) + "의 스탯 포인트를 획득한다.";
+                    switch (GameManager.language)
+                    {
+                        default:
+                            descTxt.text = string.Format("You will get {0} Stat {1}.", (data.id + 1), point);
+                            break;
+                        case Language.Korean:
+                            descTxt.text = string.Format("{0}의 스탯 포인트를 획득한다.", (data.id + 1));
+                            break;
+                    }
                     break;
                 case ROLL_TYPE.ITEM:
                     //selectedImg.sprite = GetSprite(data);
-                    typeTxt.text = "ITEM";
+                    typeTxt.text = GameManager.language == Language.Korean ? "소모품" : "ITEM";
                     ItemData item = GameDatabase.instance.items[data.id];
                     ItemSpriteData itemSpr = GameDatabase.instance.itemSprites[Item.instance.sprIds[item.id]];
-                    if (Item.instance.isKnown[item.id])
-                    {
-                        nameTxt.text = item.name;
+                    //if (Item.instance.isKnown[item.id])
+                    //{
+                        nameTxt.text = item.GetName();
                         descTxt.text = item.GetDescription();
-                    }
-                    else
-                    {
-                        nameTxt.text = itemSpr.name;
-                        descTxt.text = itemSpr.description;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    nameTxt.text = string.Format(format, item.GetName());
+                    //    descTxt.text = string.Format(format, item.GetDescription());
+                    //}
                     break;
                 case ROLL_TYPE.PASSIVE:
                     //selectedImg.sprite = GetSprite(data);
