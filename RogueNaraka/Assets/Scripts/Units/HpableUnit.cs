@@ -18,6 +18,9 @@ namespace RogueNaraka.UnitScripts
         float currentTime;//Current Regen Time
 
         public float regenHp { get { return stat.hpRegen * 0.1f; } }
+        
+        public float regenSpeed = 1;
+        public bool isInvincible;
 
         Stat stat;
 
@@ -39,7 +42,6 @@ namespace RogueNaraka.UnitScripts
                 _currentHp = maxHp;
             else if (value >= 0)
                 _currentHp = value;
-
             else
                 _currentHp = 0;
             stat.currentHp = _currentHp;
@@ -77,21 +79,40 @@ namespace RogueNaraka.UnitScripts
             stat.currentHp = _currentHp;
         }
 
-        void Regen()
+        //void Regen()
+        //{
+        //    if (unit.deathable.isDeath || stat == null)
+        //        return;
+        //    currentTime += Time.deltaTime;
+        //    if(currentTime >= regenTime)
+        //    {
+        //        AddHp(regenHp);
+        //        currentTime = 0;
+        //    }
+        //}
+
+        //private void Update()
+        //{
+        //    Regen();
+        //}
+
+        IEnumerator RegenCorou()
         {
-            if (unit.deathable.isDeath || stat == null)
-                return;
-            currentTime += Time.deltaTime;
-            if(currentTime >= regenTime)
+            while (true)
             {
+                float t = regenTime;
+                do
+                {
+                    yield return null;
+                    t -= Time.deltaTime * regenSpeed;
+                } while (t > 0);
                 AddHp(regenHp);
-                currentTime = 0;
             }
         }
 
-        private void Update()
+        private void OnEnable()
         {
-            Regen();
+            StartCoroutine(RegenCorou());
         }
 
     }

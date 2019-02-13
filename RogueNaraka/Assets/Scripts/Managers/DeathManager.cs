@@ -17,6 +17,8 @@ public class DeathManager : MonoBehaviour
     public Image pauseBtn;
 
     public TextMeshProUGUI soulRefiningRateTxt;
+    public TextMeshProUGUI unSoulTxt;
+    public TextMeshProUGUI soulTxt;
 
     void Awake()
     {
@@ -58,6 +60,10 @@ public class DeathManager : MonoBehaviour
         {
             SetSoulPnl(true);
         }
+        else
+        {
+            btnLayout.SetActive(true);
+        }
     }
 
     public void SetSoulPnl(bool value)
@@ -68,21 +74,25 @@ public class DeathManager : MonoBehaviour
             float refiningRate = lastRefiningRate == 0 ? MoneyManager.instance.GetRandomRefiningRate() : lastRefiningRate;
             PlayerPrefs.SetFloat("lastRefiningRate", refiningRate);
             soulPnl.gameObject.SetActive(true);
-            StartCoroutine(SoulRefiningRateTxtCorou((int)(refiningRate * 100)));
+            StartCoroutine(SoulRefiningRateTxtCorou(refiningRate));
             StartCoroutine(PumpCorou(soulPnl.rectTransform, 0f, 0.25f));
+            AdMobManager.instance.RequestRewardBasedVideo();
         }
         else
         {
             soulPnl.gameObject.SetActive(false);
             btnLayout.SetActive(true);
             PlayerPrefs.SetFloat("lastRefiningRate", -1);
+            isADActive = false;
+            isADReward = false;
         }
     }
 
-    IEnumerator SoulRefiningRateTxtCorou(int rate)
+    IEnumerator SoulRefiningRateTxtCorou(float rate)
     {
-        float delay = 1f / rate;
-        for (int i = 0; i <= rate; i++)
+        int intRate = (int)(rate * 100);
+        float delay = 1f / intRate;
+        for (int i = 0; i <= intRate; i++)
         {
             float t = delay;
             do
@@ -93,22 +103,78 @@ public class DeathManager : MonoBehaviour
             soulRefiningRateTxt.text = string.Format("{0}%", i);
         }
 
+        int unSoul = MoneyManager.instance.unrefinedSoul;
+        delay = 0.5f / intRate;
+        for (int i = 0; i <= unSoul; i++)
+        {
+            float t = delay;
+            do
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            } while (t > 0);
+
+            unSoulTxt.text = string.Format("{0}<size=12><sprite=0></size>", i);
+        }
+
+        int soul = (int)(unSoul * rate);
+        delay = 0.5f / intRate;
+        for (int i = 0; i <= soul; i++)
+        {
+            float t = delay;
+            do
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            } while (t > 0);
+
+            soulTxt.text = string.Format("{0}<size=12><sprite=0></size>", i);
+        }
+
         StartCoroutine(SoulAutoCloseCorou(rate));
     }
 
-    IEnumerator SoulAutoCloseCorou(int rate)
+    bool isADActive;
+    bool isADReward;
+    public bool isClose { get; set; }
+
+    IEnumerator SoulAutoCloseCorou(float rate)
     {
-        float t = 5;
+        float t = 6;
         do
         {
             yield return null;
-            t -= Time.unscaledDeltaTime;
+            t -= Time.unscaledDeltaTime * (isADActive ? 0 : 1);
+            if(isADReward)
+            {
+                MoneyManager.instance.RefineSoul(rate * 2);
+                SetSoulPnl(false);
+                yield break;
+            }
+            if(isClose)
+            {
+                MoneyManager.instance.RefineSoul(rate);
+                SetSoulPnl(false);
+                isClose = false;
+                yield break;
+            }
         } while (t > 0);
 
         if (soulPnl.gameObject.activeSelf)
         {
+            MoneyManager.instance.RefineSoul(rate);
             SetSoulPnl(false);
         }
+    }
+
+    public void OnADStart()
+    {
+        isADActive = true;
+    }
+
+    public void OnADReward()
+    {
+        isADReward = true;
     }
 
     public void ReGame()

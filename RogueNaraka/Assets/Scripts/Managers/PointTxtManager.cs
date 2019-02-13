@@ -89,8 +89,8 @@ public class PointTxtManager : MonoBehaviour {
         TextMeshProUGUI txt = TxtOn(tf, value, Color.white, offset);
         if (txt)
         {
-            StartCoroutine(MoveUp(txt, 2f, 0.005f));
-            StartCoroutine(AlphaDown(txt, 0.1f, 5));
+            StartCoroutine(MoveUp(txt, 4f, 0.005f));
+            StartCoroutine(AlphaDown(txt, 1f, 5));
         }
     }
 
@@ -133,21 +133,20 @@ public class PointTxtManager : MonoBehaviour {
 
     IEnumerator AlphaDown(TextMeshProUGUI txt, float delay, float speed)
     {
-        yield return new WaitForSeconds(delay);
-#if !DELAY
-#endif
+        while(delay > 0)
+        {
+            yield return null;
+            delay -= Time.unscaledDeltaTime;
+        }
+
         while (txt.color.a > float.Epsilon)
         {
-#if DELAY
-            yield return GameManager.instance.delayPointOneReal;
-#else
             float t = 0;
             while (t < 0.1f)
             {
                 t += Time.unscaledDeltaTime;
                 yield return null;
             }
-#endif
             Color color = txt.color;
             color.a = color.a -= 0.1f * speed;
             txt.color = color;

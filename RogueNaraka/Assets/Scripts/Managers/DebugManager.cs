@@ -1,83 +1,144 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DebugManager : MonoBehaviour {
 
-#if DEBUG
-    public bool reset;
-    public bool setStage;
-    public int stage;
-    public bool killPlayer;
-    public bool killEnemies;
-    public bool setShopStage;
-    public int shopStage;
-    public bool levelUp;
-    public int addSoul;
-    public bool resetSkillBought;
-    public int addExp;
-    private void OnValidate()
-    {
-        if (reset)
-        {
-            PlayerPrefs.DeleteAll();
-            Debug.Log("Reset");
-            reset = false;
-        }
-        if (setStage)
-        {
-            setStage = false;
+    public GameObject debugPnl;
+    public GameObject debugBtn;
 
-            if(BoardManager.instance)
-                BoardManager.instance.SetStage(stage);
-            PlayerPrefs.SetInt("stage", stage);
-            stage = 0;
-        }
-        if (killPlayer && BoardManager.instance && BoardManager.instance.player)
-        {
+//#if DEBUG
+//    private void Awake()
+//    {
+//        debugBtn.SetActive(true);
+//    }
+//#endif
+
+    public void KillPlayer()
+    {
+        if(BoardManager.instance.player)
             BoardManager.instance.player.Kill();
-            Debug.Log("Kill Player");
-            killPlayer = false;
-        }
-        if (killEnemies && BoardManager.instance && BoardManager.instance.enemies.Count > 0)
+        Debug.Log("Kill Player");
+    }
+
+    public void KillEnemies()
+    {
+        for (int i = 0; i < BoardManager.instance.enemies.Count; i++)
         {
-            for (int i = 0; i < BoardManager.instance.enemies.Count; i++)
-            {
-                BoardManager.instance.enemies[i].Kill();
-            }
-            Debug.Log("Kill Enemies");
-            killEnemies = false;
+            BoardManager.instance.enemies[i].Kill();
         }
-        if(setShopStage)
+        Debug.Log("Kill Enemies");
+    }
+
+    public void SetStage(int stage)
+    {
+        PlayerPrefs.SetInt("stage", stage);
+        BoardManager.instance.SetStage(stage);
+        BoardManager.instance.InitBoard();
+        //FadeManager.instance.FadeOut(0.5f, true);
+        Debug.Log("SetStage:" + stage);
+    }
+
+    public void ReadStageText(TMP_InputField input)
+    {
+        int result;
+        if(int.TryParse(input.text, out result))
         {
-            PlayerPrefs.SetInt("shopStage", shopStage);
-            setShopStage = false;
-            shopStage = 0;
-        }
-        if(levelUp)
-        {
-            PlayerPrefs.SetInt("isLevelUp", 1);
-            levelUp = false;
-        }
-        if(addSoul != 0)
-        {
-            if (MoneyManager.instance) MoneyManager.instance.AddSoul(addSoul);
-            else
-                PlayerPrefs.SetInt("soul", PlayerPrefs.GetInt("soul") + addSoul);
-            addSoul = 0;
-        }
-        if(resetSkillBought)
-        {
-            PlayerPrefs.SetString("boughtSkills", string.Empty);
-            resetSkillBought = false;
-        }
-        if(addExp != 0)
-        {
-            PlayerPrefs.SetInt("exp", PlayerPrefs.GetInt("exp") + addExp);
-            addExp = 0;
+            SetStage(result);
         }
     }
-#endif
+
+    public void SetSkill(int slot, int id)
+    {
+        SkillManager.instance.SetSkill(id, slot);
+        Debug.Log("SetSkill:slot=" + slot + " id=" + id);
+    }
+
+    public TMP_InputField[] skillInputs;
+
+    public void ReadSkill()
+    {
+        int slot;
+        int.TryParse(skillInputs[0].text, out slot);
+
+        if (slot >= 0 && slot <= 2)
+        {
+            int id;
+            if (int.TryParse(skillInputs[1].text, out id))
+                SetSkill(slot, id);
+        }
+        else
+            Debug.Log("SetSkill ERROR:ID isn't 0~2");
+    }
+
+    public void SkillLevelUp(int slot, int amount)
+    {
+        SkillManager.instance.skills[slot].LevelUp(amount);
+        Debug.Log("SkillLevelUp:slot=" + slot + " amount=" + amount);
+    }
+
+    public void ReadSkillLevelUp()
+    {
+        int slot;
+        int.TryParse(skillInputs[2].text, out slot);
+
+        if (slot >= 0 && slot <= 2)
+        {
+            int amount;
+            if (int.TryParse(skillInputs[3].text, out amount))
+                SkillLevelUp(slot, amount);
+        }
+        else
+            Debug.Log("SetSkill ERROR:ID isn't 0~2");
+    }
+
+    public void AddSoul(int amount)
+    {
+        MoneyManager.instance.AddSoul(amount);
+    }
+
+    public void ReadSoul(TMP_InputField input)
+    {
+        int amount;
+        if(int.TryParse(input.text, out amount))
+        {
+            AddSoul(amount);
+        }
+    }
+
+    public void SetStat(STAT type, float value)
+    {
+        BoardManager.instance.player.stat.SetOrigin(type, value);
+        Debug.Log("SetStat:type=" + type + "value=" + value);
+    }
+
+    public TMP_InputField[] statInput;
+    public void ReadSetStat()
+    {
+        int typeNum;
+        float value;
+        if (int.TryParse(statInput[0].text, out typeNum) && float.TryParse(statInput[1].text, out value))
+        {
+            if (typeNum >= 0 && typeNum < 7)
+            {
+                STAT type = (STAT)typeNum;
+                SetStat(type, value);
+                GameManager.instance.StatTextUpdate();
+            }
+        }
+    }
+
+    public void GodMode()
+    {
+        BoardManager.instance.player.hpable.isInvincible = true;
+        Debug.Log("GodMode");
+    }
+
+    public void SetDebugPnl(bool value)
+    {
+        debugPnl.SetActive(true);
+    }
 
     int requestReset;
 

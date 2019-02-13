@@ -13,7 +13,6 @@ namespace RogueNaraka.UnitScripts
         HpableUnit hpable;
 
         float damaged;
-        float time;
 
         private void Reset()
         {
@@ -24,28 +23,61 @@ namespace RogueNaraka.UnitScripts
         void OnEnable()
         {
             damaged = 0;
-            time = 0;
+            StartCoroutine(DamageCorou());
         }
 
         public void Damage(float amount)
         {
-            hpable.AddHp(-amount);
-            damaged -= amount;
+            if (!hpable.isInvincible) 
+            {
+                hpable.AddHp(-amount);
+                damaged += amount;
+            }
         }
 
-        void Update()
+        //void Update()
+        //{
+        //    if (time > 0)
+        //        time -= Time.deltaTime;
+        //    else if(damaged > 0)
+        //    {
+        //        Color color;
+        //        if (unit.data.isFriendly)
+        //            color = Color.red;
+        //        else
+        //            color = Color.white;
+        //        PointTxtManager.instance.TxtOnHead(damaged, transform, color);
+        //        damaged = 0;
+        //        time = 0.1f;
+        //    }
+        //}
+
+        IEnumerator DamageCorou()
         {
-            time += Time.deltaTime;
-            if(time >= 0.1f && damaged != 0)
+            while(true)
             {
-                Color color;
-                if (unit.data.isFriendly)
-                    color = Color.red;
+                if (damaged != 0)
+                {
+                    float time = 0.1f;
+
+                    Color color;
+                    if (unit.data.isFriendly)
+                        color = Color.red;
+                    else
+                        color = Color.white;
+                    PointTxtManager.instance.TxtOnHead(-damaged, transform, color);
+                    damaged = 0;
+
+                    do
+                    {
+                        yield return null;
+                        time -= Time.deltaTime;
+                    } while (time > 0);
+                }
                 else
-                    color = Color.white;
-                PointTxtManager.instance.TxtOnHead(damaged, transform, color);
-                damaged = 0;
-                time = 0;
+                {
+                    yield return null;
+                }
             }
         }
 

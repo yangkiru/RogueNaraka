@@ -171,6 +171,34 @@ public class Stat : ICloneable
         mpRegen = s.mpRegen;
     }
 
+    public void SetOrigin(STAT type, float value)
+    {
+        switch (type)
+        {
+            case STAT.DMG:
+                dmg = value;
+                break;
+            case STAT.SPD:
+                spd = value;
+                break;
+            case STAT.TEC:
+                tec = value;
+                break;
+            case STAT.HP:
+                hp = value;
+                break;
+            case STAT.MP:
+                mp = value;
+                break;
+            case STAT.HPREGEN:
+                hpRegen = value;
+                break;
+            case STAT.MPREGEN:
+                mpRegen = value;
+                break;
+        }
+    }
+
     public void SetMax(Stat s)
     {
         dmgMax = s.dmgMax;

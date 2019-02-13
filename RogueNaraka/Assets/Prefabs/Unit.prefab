@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4616481813884920
 Transform:
   m_ObjectHideFlags: 0
@@ -233,7 +233,8 @@ MonoBehaviour:
     shadowPos: {x: 0, y: 0}
     order: 0
     effects: []
-    deathSFX: {fileID: 0}
+    deathSFX: 
+    attackSFX: 
   _rigid: {fileID: 50410147267040436}
   _renderer: {fileID: 212722301744784912}
   _collider: {fileID: 60075246512643172}
@@ -252,6 +253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 114302036002021230}
   _currentHp: 0
+  regenSpeed: 1
+  isInvincible: 0
 --- !u!114 &114946238239239822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +296,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 114302036002021230}
-  deathSFX: {fileID: 3352645486933378653}
 --- !u!114 &114369404985621176
 MonoBehaviour:
   m_ObjectHideFlags: 0

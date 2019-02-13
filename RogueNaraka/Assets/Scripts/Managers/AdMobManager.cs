@@ -4,6 +4,7 @@ using GoogleMobileAds.Api;
 using UnityEngine.Events;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class AdMobManager : MonoBehaviour
 {
@@ -13,7 +14,12 @@ public class AdMobManager : MonoBehaviour
     private float deltaTime = 0.0f;
     private static string outputMessage = string.Empty;
 
-    public AdEvent onReward;
+    public GameObject adPnl;
+    public TextMeshProUGUI adNameTxt;
+    public TextMeshProUGUI adDescTxt;
+
+    AdEvent onReward;
+    AdEvent onStart;
 
     public Button removeAdsBtn;
     public Image testerPnl;
@@ -61,6 +67,8 @@ public class AdMobManager : MonoBehaviour
         this.rewardBasedVideo.OnAdClosed += this.HandleRewardBasedVideoClosed;
         //광고 클릭으로 인해 사용자가 애플리케이션을 종료한 경우 호출
         this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;
+
+        RequestRewardBasedVideo();
     }
 
     public void SetIsTester(bool value)
@@ -242,6 +250,18 @@ public class AdMobManager : MonoBehaviour
         else
         {
             MonoBehaviour.print("Reward based video ad is not ready yet");
+            adPnl.SetActive(true);
+            switch (GameManager.language)
+            {
+                case Language.English:
+                    adNameTxt.text = "Ad is not ready yet";
+                    adDescTxt.text = "Please try again later";
+                    break;
+                case Language.Korean:
+                    adNameTxt.text = "광고가 준비되지 않았습니다";
+                    adDescTxt.text = "나중에 다시 시도해주세요";
+                    break;
+            }
         }
     }
 
@@ -315,6 +335,20 @@ public class AdMobManager : MonoBehaviour
     {
         MonoBehaviour.print(
             "HandleRewardBasedVideoFailedToLoad event received with message: " + args.Message);
+        adPnl.SetActive(true);
+        switch (GameManager.language)
+        {
+            case Language.English:
+                adNameTxt.text = "Ad load failed";
+                adDescTxt.text = "Please try again later";
+                break;
+            case Language.Korean:
+                adNameTxt.text = "광고를 불러오지 못했습니다";
+                adDescTxt.text = "나중에 다시 시도해주세요";
+                break;
+        }
+        RequestRewardBasedVideo();
+        //StartCoroutine(RequestRewardVideoCorou());
     }
 
     public void HandleRewardBasedVideoOpened(object sender, EventArgs args)
@@ -324,21 +358,40 @@ public class AdMobManager : MonoBehaviour
 
     public void HandleRewardBasedVideoStarted(object sender, EventArgs args)
     {
+        if (onStart != null)
+            onStart.Invoke();
         MonoBehaviour.print("HandleRewardBasedVideoStarted event received");
     }
 
     public void HandleRewardBasedVideoClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
+        //adPnl.SetActive(true);
+        //switch (GameManager.language)
+        //{
+        //    case Language.English:
+        //        adNameTxt.text = "Ad closed";
+        //        adDescTxt.text = "You can't be rewarded";
+        //        break;
+        //    case Language.Korean:
+        //        adNameTxt.text = "광고가 취소되었습니다";
+        //        adDescTxt.text = "광고를 끝까지 보지 못하여 보상을 받을 수 없습니다";
+        //        break;
+        //}
+        RequestRewardBasedVideo();
+        //StartCoroutine(RequestRewardVideoCorou());
     }
 
     public void HandleRewardBasedVideoRewarded(object sender, Reward args)
     {
         string type = args.Type;
         double amount = args.Amount;
-        StartCoroutine(OnReward());
+        if (onReward != null)
+            onReward.Invoke();
         MonoBehaviour.print(
             "HandleRewardBasedVideoRewarded event received for " + amount.ToString() + " " + type);
+        RequestRewardBasedVideo();
+        //StartCoroutine(RequestRewardVideoCorou());
     }
 
     public void HandleRewardBasedVideoLeftApplication(object sender, EventArgs args)
@@ -348,7 +401,17 @@ public class AdMobManager : MonoBehaviour
 
     #endregion
 
-    IEnumerator OnReward()
+    public void SetOnReward(AdEventScript adEventScript)
+    {
+        //AdEventScript adEventScript = GetComponent<AdEventScript>();
+        onReward = adEventScript.onReward;
+    }
+    public void SetOnStart(AdEventScript adEventScript)
+    {
+        onStart = adEventScript.onStart;
+    }
+
+    IEnumerator RequestRewardVideoCorou()
     {
         float t = 1;
         do
@@ -356,10 +419,5 @@ public class AdMobManager : MonoBehaviour
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
-        if (onReward != null)
-            onReward.Invoke();
     }
-
-    [Serializable]
-    public class AdEvent : UnityEvent { }
 }

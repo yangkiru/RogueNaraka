@@ -455,7 +455,7 @@ public class SoulShopManager : MonoBehaviour
                 soulRefRateNameTxt.text = "Soul refining rate";
                 break;
             case Language.Korean:
-                soulRefRateNameTxt.text = "영혼 정제율";
+                soulRefRateNameTxt.text = "정제율";
                 break;
         }
     }

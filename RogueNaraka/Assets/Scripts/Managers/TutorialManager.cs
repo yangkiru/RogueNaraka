@@ -32,14 +32,13 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator Intro()
     {
-        float t = 1;
+        float t = 1.5f;
         do
         {
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
-        if (isTutorial[0])
-            StartTutorial(0);
+        StartTutorial(0);
     }
     public void StartTutorial(int i)
     {

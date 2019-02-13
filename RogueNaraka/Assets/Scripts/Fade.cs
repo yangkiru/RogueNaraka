@@ -17,13 +17,11 @@ public class Fade : MonoBehaviour
 
     public void FadeIn()
     {
-        Debug.Log("FadeIn");
         FadeManager.instance.FadeIn(FadeIntime, ignoreTimeScaleIn, isClickableIn, onFadeInEnd);
     }
 
     public void FadeOut()
     {
-        Debug.Log("FadeOut");
         FadeManager.instance.FadeOut(FadeOuttime, ignoreTimeScaleOut, isClickableIn, onFadeOutEnd);
     }
 }
