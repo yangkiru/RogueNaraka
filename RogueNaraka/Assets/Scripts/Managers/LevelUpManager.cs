@@ -191,12 +191,16 @@ public class LevelUpManager : MonoBehaviour {
 
     public void SyncStatUpgradeTxt()
     {
-        upgradeTxt[0].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.DMG), player.data.stat.GetMax(STAT.DMG));
-        upgradeTxt[1].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.SPD), player.data.stat.GetMax(STAT.SPD));
-        upgradeTxt[2].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.TEC), player.data.stat.GetMax(STAT.TEC));
-        upgradeTxt[3].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.HP), player.data.stat.GetMax(STAT.HP));
-        upgradeTxt[4].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.MP), player.data.stat.GetMax(STAT.MP));
-        upgradeTxt[5].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.HPREGEN), player.data.stat.GetMax(STAT.HPREGEN));
-        upgradeTxt[6].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.MPREGEN), player.data.stat.GetMax(STAT.MPREGEN));
+        for (int i = 0; i < 7; i++)
+        {
+            upgradeTxt[i].text = string.Format("{0}/{1}", player.data.stat.GetOrigin((STAT)i), player.data.stat.GetMax((STAT)i));
+            //upgradeTxt[0].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.DMG), player.data.stat.GetMax(STAT.DMG));
+            //upgradeTxt[1].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.SPD), player.data.stat.GetMax(STAT.SPD));
+            //upgradeTxt[2].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.TEC), player.data.stat.GetMax(STAT.TEC));
+            //upgradeTxt[3].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.HP), player.data.stat.GetMax(STAT.HP));
+            //upgradeTxt[4].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.MP), player.data.stat.GetMax(STAT.MP));
+            //upgradeTxt[5].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.HPREGEN), player.data.stat.GetMax(STAT.HPREGEN));
+            //upgradeTxt[6].text = string.Format("{0}/{1}", player.data.stat.GetOrigin(STAT.MPREGEN), player.data.stat.GetMax(STAT.MPREGEN));
+        }
     }
 }

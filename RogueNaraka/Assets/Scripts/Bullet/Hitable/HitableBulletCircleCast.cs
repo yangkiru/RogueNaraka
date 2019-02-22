@@ -7,16 +7,65 @@ namespace RogueNaraka.BulletScripts.Hitable
 {
     public class HitableBulletCircleCast : HitableBullet
     {
-        protected override void Update()
+
+        protected override void OnEnable()
         {
-            base.Update();
+            base.OnEnable();
+            StartCoroutine(CheckCorou());
+        }
+
+        IEnumerator CheckCorou()
+        {
+            while (true)
+            {
+                if (leftDelay <= 0)
+                {
+                    //Debug.Log("CheckHitCorou");
+                    CheckHit();
+                    yield return new WaitForFixedUpdate();
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+        }
+        private void CheckHit()
+        {
             RaycastHit2D[] hits;
             hits = Physics2D.CircleCastAll(bullet.cachedTransform.position, bullet.data.size, Vector2.zero, 0, layerMask);
-            int length = hits.Length;
             for (int i = 0; i < hits.Length; i++)
             {
-                Hit(hits[i].collider);
+                //Debug.Log("!!!!!!!!!!hit " + hits[i].collider.name);
+                HIT result = Hit(hits[i].collider);
+                switch(result)
+                {
+                    case HIT.ENEMY:
+                        //Debug.Log("Hit Enemy:" + name);
+                        if(pierce < 99999)
+                            pierce--;
+                        if (!isSplash)
+                            CheckPierce();
+                        break;
+                    case HIT.WALL:
+                        //Debug.Log("Hit Wall:" + name);
+                        if (!isHitableWall)
+                        {
+                            pierce = 0;
+                            if (!isSplash)
+                                CheckPierce();
+                        }
+                        break;
+                    //case HIT.FRIENDLY:
+                    //    Debug.Log("Hit Friendly:"+name);
+                    //    break;
+                    //case HIT.ETC:
+                    //    Debug.Log("Hit ETC:" + name);
+                    //    break;
+                }
             }
+            if (isSplash)
+                CheckPierce();
         }
 
 #if UNITY_EDITOR

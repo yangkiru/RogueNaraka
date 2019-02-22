@@ -296,7 +296,7 @@ namespace RogueNaraka.UnitScripts
             if (isTxt)
                 damageable.Damage(hpable.currentHp);
             else
-                hpable.AddHp(-hpable.currentHp);
+                hpable.AddHp(-stat.hp);
         }
     }
 }

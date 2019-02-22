@@ -100,6 +100,10 @@ public class DeathManager : MonoBehaviour
                 yield return null;
                 t -= Time.unscaledDeltaTime;
             } while (t > 0);
+
+            if (Input.anyKey)
+                i = intRate;
+
             soulRefiningRateTxt.text = string.Format("{0}%", i);
         }
 
@@ -114,6 +118,9 @@ public class DeathManager : MonoBehaviour
                 t -= Time.unscaledDeltaTime;
             } while (t > 0);
 
+            if (Input.anyKey)
+                i = unSoul;
+
             unSoulTxt.text = string.Format("{0}<size=12><sprite=0></size>", i);
         }
 
@@ -127,6 +134,8 @@ public class DeathManager : MonoBehaviour
                 yield return null;
                 t -= Time.unscaledDeltaTime;
             } while (t > 0);
+            if (Input.anyKey)
+                i = soul;
 
             soulTxt.text = string.Format("{0}<size=12><sprite=0></size>", i);
         }

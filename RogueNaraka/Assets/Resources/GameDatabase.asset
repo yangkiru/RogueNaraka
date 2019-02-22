@@ -287,6 +287,51 @@ MonoBehaviour:
   - name: BoneHead0
     id: 5
     cost: 4
+    stage: 12
+    weapon: 1
+    stat:
+      dmg: 1
+      spd: 0
+      tec: 0
+      hp: 8
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 8
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 1
+    move: 0
+    moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.5
+    limitTime: 0
+    shadowPos: {x: 0.05, y: -0.3}
+    order: 0
+    effects: []
+    deathSFX: boneHeadDeath
+    attackSFX: 
+  - name: DragonHead0
+    id: 6
+    cost: 4
     stage: 14
     weapon: 1
     stat:
@@ -336,10 +381,10 @@ MonoBehaviour:
     stage: 0
     weapon: 0
     stat:
-      dmg: 0
-      spd: 0
+      dmg: 10
+      spd: 5
       tec: 0
-      hp: 0
+      hp: 40
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -497,6 +542,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0.01
       power: 0.01
@@ -526,6 +573,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -555,6 +604,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 1
+    isHitableWall: 1
     shake:
       time: 0
       power: 0
@@ -584,6 +635,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -613,6 +666,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -642,6 +697,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0.1
       power: 0.05
@@ -671,6 +728,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0.1
       power: 0.05
@@ -699,7 +758,9 @@ MonoBehaviour:
     limitTime: 1.5
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: -1
+    pierce: 99999
+    isSplash: 1
+    isHitableWall: 1
     shake:
       time: 0
       power: 0
@@ -732,6 +793,8 @@ MonoBehaviour:
     disapearStartTime: 1
     disapearDuration: 0.5
     pierce: -1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -761,6 +824,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -790,6 +855,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 1
       power: 0.15
@@ -829,6 +896,8 @@ MonoBehaviour:
     disapearStartTime: 1
     disapearDuration: 2
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -858,6 +927,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -897,6 +968,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -926,6 +999,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0.01
       power: 0.01
@@ -970,6 +1045,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -999,6 +1076,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0.02
       power: 0.02
@@ -1044,6 +1123,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -1073,6 +1154,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0.03
       power: 0.03
@@ -1112,6 +1195,8 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -1140,7 +1225,9 @@ MonoBehaviour:
     limitTime: 1
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: 0
+    pierce: 99999
+    isSplash: 1
+    isHitableWall: 1
     shake:
       time: 0
       power: 0
@@ -1153,13 +1240,7 @@ MonoBehaviour:
       time: 0.2
     children: []
     onDestroy: []
-    hitSFX:
-    - enemyHit1
-    - enemyHit2
-    - enemyHit3
-    - enemyHit4
-    - enemyHit5
-    - enemyHit6
+    hitSFX: []
     spawnSFX: 
   weapons:
   - name: MagicBall
@@ -1271,7 +1352,7 @@ MonoBehaviour:
   - cost: 3
     unitId: 04000000
   - cost: 4
-    unitId: 05000000
+    unitId: 0500000006000000
   skills:
   - name: ThunderStrike
     nameLang:
@@ -1334,7 +1415,7 @@ MonoBehaviour:
       coolTime: 0
       effects:
       - type: 3
-        value: 1
+        value: 2
         time: 0
       values:
       - name: 1

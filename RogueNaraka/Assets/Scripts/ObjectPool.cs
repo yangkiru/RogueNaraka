@@ -44,6 +44,7 @@ public class ObjectPool : MonoBehaviour
             {
                 GameObject newObj = Instantiate(prefab);
                 newObj.transform.SetParent(transform);
+                newObj.transform.localScale = Vector3.one;
                 return newObj;
             }
             else

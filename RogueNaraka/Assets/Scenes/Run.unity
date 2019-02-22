@@ -29112,7 +29112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeIntime: 0.5
   FadeOuttime: 1
-  ignoreTimeScaleIn: 0
+  ignoreTimeScaleIn: 1
   ignoreTimeScaleOut: 0
   isClickableIn: 1
   isClickableOut: 0

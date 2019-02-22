@@ -138,7 +138,8 @@ public class StatOrbManager : MonoBehaviour
 
     void IconEffect()
     {
-        size += 0.05f;
+        if(size < 2)
+            size += 0.05f;
         icon.rectTransform.localScale = new Vector3(size, size, 0);
         iconTime = 0.5f;
         if (iconEffectCorou == null)

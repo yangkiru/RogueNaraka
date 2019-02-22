@@ -57,6 +57,8 @@ namespace RogueNaraka.SkillScripts
 
                         flame.Init(player, flameData);
                         flame.Spawn((Vector2)player.transform.position + new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)));
+                        //Vector2 vec = (Vector2)player.transform.position + new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
+                        //flame.Spawn(player, flameData, vec);
                         flameTime = flameDelay;
                     }
                 }

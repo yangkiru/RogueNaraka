@@ -188,6 +188,10 @@ namespace RogueNaraka.BulletScripts
         {
             if(hitable)
                 hitable.enabled = false;
+            if (polygon.enabled)
+                polygon.enabled = false;
+            if (circle.enabled)
+                circle.enabled = false;
             moveable.enabled = false;
         }
 

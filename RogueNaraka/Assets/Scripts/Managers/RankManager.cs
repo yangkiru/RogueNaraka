@@ -33,6 +33,7 @@ public class RankManager : MonoBehaviour
     }
     public void SendPlayerRank()
     {
+#if UNITY_ANDROID
         bool isHighScore;
         highScore = GetHighScore(out isHighScore);
         if(isHighScore)
@@ -50,6 +51,7 @@ public class RankManager : MonoBehaviour
                 }
             });
         }
+#endif
     }
 
     void AuthenticateHandler(bool isSuccess)

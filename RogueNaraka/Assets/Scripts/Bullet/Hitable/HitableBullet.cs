@@ -23,11 +23,31 @@ namespace RogueNaraka.BulletScripts.Hitable
         [SerializeField]
         float delay;
         [SerializeField]
-        float leftDelay;
+        protected float leftDelay;
 
-        bool isHit;
-        protected bool isDestroy;
 
+        protected bool isDestroy
+        {
+            get
+            {
+                return _isDestroy;
+            }
+            set
+            {
+                //Debug.Log(name + " Destroy " + value);
+                _isDestroy = value;
+            }
+        }
+
+        [SerializeField]
+        protected bool _isDestroy;
+
+        [SerializeField]
+        protected bool isHitableWall;
+
+        protected bool isHit;
+        [SerializeField]
+        protected bool isSplash;
         
         [SerializeField]
         protected int pierce;
@@ -41,64 +61,120 @@ namespace RogueNaraka.BulletScripts.Hitable
             shakeable = GetComponent<ShakeableBullet>();
         }
 
-        protected virtual void Update()
-        {
-            if (leftDelay > 0)
-            {
-                leftDelay -= Time.deltaTime;
-                return;
-            }
-            if (isHit)
-            {
-                
-                leftDelay = delay;
-                isHit = false;
+        //protected bool IsReady()
+        //{
+        //    if (leftDelay > 0)
+        //    {
+        //        leftDelay -= Time.deltaTime;
+        //        return false;
+        //    }
+        //    else
+        //        return true;
+        //}
 
-                OnHit();
-                if (pierce-- == 1)
-                {
-                    isDestroy = true;
-                    bullet.Destroy();
-                }
-                return;
-            }
-            else
+        //protected void HitFunc(bool value)
+        //{
+        //    if (value)
+        //    {
+        //        leftDelay = delay;
+
+        //        OnHit();
+        //        if (pierce-- == 1)
+        //        {
+        //            isDestroy = true;
+        //            bullet.Destroy();
+        //        }
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        OnNotHit();
+        //    }
+        //}
+
+        IEnumerator DelayCorou()
+        {
+            //Debug.Log(name + ":DelayCorouStart");
+            while (true)
             {
-                OnNotHit();
+                if (leftDelay > 0)
+                {
+                    while (leftDelay > 0)
+                    {
+                        //yield return null;
+                        //leftDelay -= Time.deltaTime;
+                        yield return new WaitForFixedUpdate();
+                        leftDelay -= Time.fixedDeltaTime;
+                    }
+                    //Debug.Log(name + ":DelayCorouDecrease");
+                }
+                else
+                {
+                    yield return null;
+                    //Debug.Log(name + ":DelayCorouPass");
+                }
             }
-            //GetHitUnits();
-            //for (int i = 0; i < hitList.Count; i++)
-            //{
-            //    //Debug.Log(name + " hit " + hitList[i].name);
-                
-            //    for(int j = 0; j < bullet.data.effects.Length; j++)
-            //    {
-            //        hitList[i].effectable.AddEffect(bullet.data.effects[j], bullet, ownerable.unit);
-            //    }
-            //    bullet.damageable.Damage(hitList[i], bullet.data.related);
-            //    if(shakeable.shake.isOnHit)
-            //        shakeable.Shake();
-            //    if (OnDamage != null)
-            //        OnDamage(bullet, hitList[i]);
-            //}
-            //hitList.Clear();
         }
 
-        /// <summary>
-        /// Call this on children
-        /// </summary>
-        /// <param name="coll"></param>
-        protected void Hit(Collider2D coll)
+        protected virtual void OnEnable()
+        {
+            StartCoroutine(DelayCorou());
+        }
+
+        //protected virtual void Update()
+        //{
+        //    if (isHit)
+        //    {
+        //        leftDelay = delay;
+        //        isHit = false;
+
+        //        OnHit();
+        //        if (pierce-- == 1)
+        //        {
+        //            isDestroy = true;
+        //            bullet.Destroy();
+        //        }
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        OnNotHit();
+        //    }
+        //    //GetHitUnits();
+        //    //for (int i = 0; i < hitList.Count; i++)
+        //    //{
+        //    //    //Debug.Log(name + " hit " + hitList[i].name);
+                
+        //    //    for(int j = 0; j < bullet.data.effects.Length; j++)
+        //    //    {
+        //    //        hitList[i].effectable.AddEffect(bullet.data.effects[j], bullet, ownerable.unit);
+        //    //    }
+        //    //    bullet.damageable.Damage(hitList[i], bullet.data.related);
+        //    //    if(shakeable.shake.isOnHit)
+        //    //        shakeable.Shake();
+        //    //    if (OnDamage != null)
+        //    //        OnDamage(bullet, hitList[i]);
+        //    //}
+        //    //hitList.Clear();
+        //}
+
+        public enum HIT
+        {
+            ENEMY, FRIENDLY, WALL, ETC
+        }
+
+        protected HIT Hit(Collider2D coll)
         {
             if (isDestroy || leftDelay > 0)
-                return;
+                return HIT.ETC;
             if ((layerMask.value & (1 << coll.gameObject.layer)) != (1 << coll.gameObject.layer))
-                return;
+                return HIT.FRIENDLY;
 
             Unit hit = coll.GetComponent<Unit>();
 
             if (hit)
             {
+                //Debug.Log(name + "hit : " + hit.name + "leftDelay:" + leftDelay);
                 for (int i = 0; i < bullet.data.effects.Length; i++)
                 {
                     hit.effectable.AddEffect(bullet.data.effects[i], bullet, ownerable.unit);
@@ -118,20 +194,28 @@ namespace RogueNaraka.BulletScripts.Hitable
 
                 if (OnDamage != null)
                     OnDamage(bullet, hit);
+                return HIT.ENEMY;
             }
-
-            isHit = true;
+            else
+            {
+                //Debug.Log(name + " hit " + coll.name + ":wall");
+                return HIT.WALL;
+            }
         }
 
-        protected virtual void OnHit()
+        protected void CheckPierce()
         {
-
+            leftDelay = delay;
+            if(pierce <= 0 && !isDestroy)
+            {
+                isDestroy = true;
+                bullet.Destroy();
+            }
         }
 
-        protected virtual void OnNotHit()
-        {
+        protected virtual void OnHit() { }
 
-        }
+        protected virtual void OnNotHit() { }
 
         public virtual void Init(BulletData data)
         {
@@ -139,6 +223,8 @@ namespace RogueNaraka.BulletScripts.Hitable
             delay = data.delay;
             leftDelay = 0;
             isHit = false;
+            isSplash = data.isSplash;
+            isHitableWall = data.isHitableWall;
             isDestroy = false;
             pierce = data.pierce;
             OnDamage = null;

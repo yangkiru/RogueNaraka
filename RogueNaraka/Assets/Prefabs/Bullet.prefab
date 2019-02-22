@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 1426770371750627783}
   - component: {fileID: 1307021657860848083}
   - component: {fileID: 6279783528189844711}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 0
+    isSplash: 0
     shake:
       time: 0
       power: 0
@@ -152,7 +153,7 @@ MonoBehaviour:
     effects: []
     children: []
     onDestroy: []
-    hitSFX: 
+    hitSFX: []
     spawnSFX: 
   animator: {fileID: 95887579399525280}
   renderer: {fileID: 212126601148893928}
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040694008069246}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ca4e32c0c6833b49bb11b83237d3107, type: 3}
   m_Name: 
@@ -181,6 +182,7 @@ MonoBehaviour:
     m_Bits: 0
   delay: 0
   leftDelay: 0
+  isSplash: 0
   pierce: 0
 --- !u!114 &400561887986786836
 MonoBehaviour:
@@ -189,7 +191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040694008069246}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf789525cb3a83245b0d5153e33b62e7, type: 3}
   m_Name: 
@@ -202,6 +204,7 @@ MonoBehaviour:
     m_Bits: 0
   delay: 0
   leftDelay: 0
+  isSplash: 0
   pierce: 0
 --- !u!114 &114697676651531626
 MonoBehaviour:

@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     public Button[] btns;
 
     Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
     Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
         }
         for (int i = 0; i < SFXClips.Length; i++)
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
             SFXClipDictionary.Add(SFXClips[i].name, SFXClips[i]);
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
@@ -117,7 +117,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(string name)
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
             SFX.PlayOneShot(SFXClipDictionary[name]);
 #endif

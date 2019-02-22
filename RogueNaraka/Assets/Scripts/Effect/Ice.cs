@@ -6,6 +6,17 @@ namespace RogueNaraka.EffectScripts
 {
     public class Ice : Effect
     {
+        IEnumerator decelerateCorou;
+        IEnumerator DecelerateCorou()
+        {
+            yield return null;
+            while (target.moveable.agent.currentSpeed > target.moveable.agent.maxSpeed)
+            {
+                target.moveable.agent.Decelerate(0.1f);
+                yield return null;
+            }
+            decelerateCorou = null;
+        }
         public override void Combine(EffectData dt)
         {
             data.time += dt.time;
@@ -13,12 +24,19 @@ namespace RogueNaraka.EffectScripts
 
         protected override void OnInit()
         {
-            owner.stat.spdTemp -= data.value;
+            target.stat.spdTemp -= data.value;
+            decelerateCorou = DecelerateCorou();
+            StartCoroutine(decelerateCorou);
         }
 
         protected override void OnDestroyEffect()
         {
-            owner.stat.spdTemp += data.value;
+            target.stat.spdTemp += data.value;
+            if(decelerateCorou != null)
+            {
+                StopCoroutine(decelerateCorou);
+                decelerateCorou = null;
+            }
         }
 
         public override bool Equal(EffectData dt)

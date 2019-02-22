@@ -60,7 +60,43 @@ namespace RogueNaraka.BulletScripts.Hitable
 
         private void OnTriggerStay2D(Collider2D coll)
         {
-            Hit(coll);
+            HIT result = Hit(coll);
+            switch(result)
+            {
+                case HIT.ENEMY:
+                    //Debug.Log("Hit Enemy:" + name);
+                    if(pierce < 99999)
+                        pierce--;
+                    if (isSplash)
+                    {
+                        if (pierceCorou != null)
+                        {
+                            pierceCorou = PierceCorou();
+                            StartCoroutine(pierceCorou);
+                        }
+                        
+                    }
+                    else
+                        CheckPierce();
+                    break;
+                case HIT.WALL:
+                    //Debug.Log("Hit Wall:" + name);
+                    if (!isHitableWall)
+                    {
+                        pierce = 0;
+                        StartCoroutine(PierceCorou());
+                    }
+                    break;
+            }
+        }
+
+        IEnumerator pierceCorou;
+
+        IEnumerator PierceCorou()
+        {
+            yield return new WaitForFixedUpdate();
+            CheckPierce();
+            pierceCorou = null;
         }
     }
 }

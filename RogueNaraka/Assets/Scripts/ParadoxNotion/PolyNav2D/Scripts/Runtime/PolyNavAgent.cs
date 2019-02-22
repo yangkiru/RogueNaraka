@@ -408,6 +408,12 @@ namespace PolyNav{
 			}
 		}
 
+        //Custom
+        public void Decelerate(float operand)
+        {
+            _velocity = new Vector2(_velocity.x * operand, _velocity.y * operand);
+        }
+
 		
 		//seeking a target
 		Vector2 Seek(Vector2 pos){

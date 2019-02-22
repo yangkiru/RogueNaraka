@@ -226,6 +226,8 @@ public class BulletData : ICloneable
     public float disapearStartTime;
     public float disapearDuration;
     public int pierce;
+    public bool isSplash;
+    public bool isHitableWall;
     public ShakeData shake;
     public Order order;
     public EffectData[] effects;

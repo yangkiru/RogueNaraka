@@ -14,7 +14,7 @@ public class PointTxtManager : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 200; i++)
         {
             SpawnTxt();
         }

@@ -20,9 +20,10 @@ namespace RogueNaraka.SkillScripts
             iceData.GetEffect(EFFECT.Ice).value += GetEffect(EFFECT.Ice).value;
             iceData.disapearStartTime = iceData.limitTime / 2;
             iceData.disapearDuration = iceData.disapearStartTime;
-            
+
             ice.Init(BoardManager.instance.player, iceData);
             ice.Spawn(mp);
+            //ice.Spawn(BoardManager.instance.player, iceData, mp);
         }
     }
 }
