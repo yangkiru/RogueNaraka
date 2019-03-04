@@ -18,9 +18,10 @@ namespace RogueNaraka.SkillScripts
             UnitData unitData = (UnitData)GameDatabase.instance.spawnables[data.unitIds[0]].Clone();
             unitData.stat.dmg = BoardManager.instance.player.stat.GetCurrent(STAT.TEC);
             unitData.stat.hp = GetValue(Value.Hp).value;
+            unitData.stat.currentHp = unitData.stat.hp;
             soldier.Init(unitData);
             soldier.Spawn(mp);
-            soldier.collider.enabled = false;
+            soldier.collider.isTrigger = true;
         }
     }
 }

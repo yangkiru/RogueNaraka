@@ -43,7 +43,7 @@ namespace RogueNaraka.EffectScripts
         {
             while (true)
             {
-                float t = target.effectable.effectDelay * 2;
+                float t = 0.5f * target.effectable.effectDelay;
                 
                 do
                 {

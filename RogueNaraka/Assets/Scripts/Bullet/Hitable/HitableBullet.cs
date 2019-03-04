@@ -50,7 +50,20 @@ namespace RogueNaraka.BulletScripts.Hitable
         protected bool isSplash;
         
         [SerializeField]
-        protected int pierce;
+        protected int pierce
+        {
+            get
+            {
+                return _pierce;
+            }
+            set
+            {
+                //Debug.Log(name + " Set Pierce:" + value);
+                _pierce = value;
+            }
+        }
+
+        protected int _pierce;
 
         public event System.Action<Bullet, Unit> OnDamage;
 
@@ -270,5 +283,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             else
                 return (1 << GameDatabase.friendlyLayer) | (1 << GameDatabase.enemyLayer) | (1 << GameDatabase.wallLayer);
         }
+
+        public virtual void OnSpawn() { }
     }
 }

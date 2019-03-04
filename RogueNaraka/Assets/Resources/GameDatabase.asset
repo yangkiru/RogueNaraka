@@ -49,6 +49,9 @@ MonoBehaviour:
     isFriendly: 1
     isStanding: 1
     move: 0
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
     moveDelay: 0.5
     moveDistance: 2
     moveSpeed: 1
@@ -95,7 +98,10 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 1
-    moveDelay: 2
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
+    moveDelay: 1
     moveDistance: 1
     moveSpeed: 0.7
     limitTime: 0
@@ -140,7 +146,10 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 1
-    moveDelay: 2
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
+    moveDelay: 1
     moveDistance: 1
     moveSpeed: 0.7
     limitTime: 0
@@ -153,12 +162,12 @@ MonoBehaviour:
     id: 2
     cost: 2
     stage: 6
-    weapon: 3
+    weapon: -1
     stat:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 3
+      hp: 10
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -176,7 +185,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 3
+      currentHp: 10
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
@@ -185,9 +194,12 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 1
     move: 5
-    moveDelay: 0.2
-    moveDistance: 2
-    moveSpeed: 2
+    tackleSize: 0.3
+    tackleDamage: 0.3
+    tackleDelay: 0.3
+    moveDelay: 0.4
+    moveDistance: 5
+    moveSpeed: 3
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
@@ -198,12 +210,12 @@ MonoBehaviour:
     id: 3
     cost: 2
     stage: 8
-    weapon: 3
+    weapon: -1
     stat:
       dmg: 2
       spd: 0
       tec: 0
-      hp: 5
+      hp: 15
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -221,7 +233,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 5
+      currentHp: 15
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
@@ -230,9 +242,12 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 1
     move: 5
-    moveDelay: 0.2
-    moveDistance: 2
-    moveSpeed: 2
+    tackleSize: 0.3
+    tackleDamage: 0.3
+    tackleDelay: 0.3
+    moveDelay: 0.4
+    moveDistance: 5
+    moveSpeed: 3
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
@@ -243,12 +258,12 @@ MonoBehaviour:
     id: 4
     cost: 3
     stage: 10
-    weapon: 3
+    weapon: -1
     stat:
-      dmg: 3
+      dmg: 4
       spd: 0
       tec: 0
-      hp: 12
+      hp: 20
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -266,7 +281,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 12
+      currentHp: 20
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
@@ -275,8 +290,11 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 1
     move: 1
-    moveDelay: 1
-    moveDistance: 0.5
+    tackleSize: 0.1
+    tackleDamage: 0.125
+    tackleDelay: 0.25
+    moveDelay: 0.5
+    moveDistance: 2
     moveSpeed: 1
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
@@ -293,7 +311,7 @@ MonoBehaviour:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 8
+      hp: 15
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -320,9 +338,12 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 1
     move: 0
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
     moveDelay: 0.5
     moveDistance: 0.5
-    moveSpeed: 1.5
+    moveSpeed: 1
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
@@ -332,7 +353,7 @@ MonoBehaviour:
   - name: DragonHead0
     id: 6
     cost: 4
-    stage: 14
+    stage: 1000
     weapon: 1
     stat:
       dmg: 1
@@ -359,12 +380,15 @@ MonoBehaviour:
       currentHp: 8
       currentMp: 0
       statPoints: 0
-    controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
+    controller: {fileID: 9100000, guid: 1e88895c007552b489e6b67bd2c9acdb, type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
     move: 0
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
     moveDelay: 0.5
     moveDistance: 0.5
     moveSpeed: 1.5
@@ -379,12 +403,12 @@ MonoBehaviour:
     id: 0
     cost: 0
     stage: 0
-    weapon: 0
+    weapon: -1
     stat:
       dmg: 10
       spd: 5
       tec: 0
-      hp: 40
+      hp: 100
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -402,7 +426,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 0
+      currentHp: 100
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
@@ -410,10 +434,13 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
-    move: 0
+    move: 7
+    tackleSize: 1
+    tackleDamage: 0.25
+    tackleDelay: 0.25
     moveDelay: 0
-    moveDistance: 0
-    moveSpeed: 0
+    moveDistance: 5
+    moveSpeed: 2
     limitTime: 0
     shadowPos: {x: 0, y: 0}
     order: 0
@@ -430,7 +457,7 @@ MonoBehaviour:
       dmg: 0
       spd: 0
       tec: 0
-      hp: 0
+      hp: 2
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -457,6 +484,9 @@ MonoBehaviour:
     isFriendly: 1
     isStanding: 1
     move: 2
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
     moveDelay: 0
     moveDistance: 0
     moveSpeed: 0
@@ -502,6 +532,9 @@ MonoBehaviour:
     isFriendly: 1
     isStanding: 1
     move: 6
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
     moveDelay: 0.01
     moveDistance: 2
     moveSpeed: 5
@@ -562,7 +595,7 @@ MonoBehaviour:
     controller: {fileID: 22100000, guid: 7b8890ad0e6932a44b04e2fbdd0fca42, type: 2}
     type: 0
     localSpeed: 0
-    worldSpeed: 1.5
+    worldSpeed: 3
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
@@ -619,7 +652,7 @@ MonoBehaviour:
     spawnSFX: 
   - name: Tackle
     id: 3
-    dmg: 0.3
+    dmg: 0
     related: 0
     controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
     type: 0
@@ -629,14 +662,14 @@ MonoBehaviour:
     worldAccel: 0
     guideSpeed: 0
     spinSpeed: 0
-    size: 0.3
+    size: 0
     delay: 0
     limitTime: 0.01
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1
-    isSplash: 0
-    isHitableWall: 0
+    isSplash: 1
+    isHitableWall: 1
     shake:
       time: 0
       power: 0
@@ -696,9 +729,9 @@ MonoBehaviour:
     limitTime: 0.1
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: 0
+    pierce: 99999
     isSplash: 0
-    isHitableWall: 0
+    isHitableWall: 1
     shake:
       time: 0.1
       power: 0.05
@@ -727,9 +760,9 @@ MonoBehaviour:
     limitTime: 0.2
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: 0
+    pierce: 99999
     isSplash: 0
-    isHitableWall: 0
+    isHitableWall: 1
     shake:
       time: 0.1
       power: 0.05
@@ -792,9 +825,9 @@ MonoBehaviour:
     limitTime: 1.5
     disapearStartTime: 1
     disapearDuration: 0.5
-    pierce: -1
-    isSplash: 0
-    isHitableWall: 0
+    pierce: 99999
+    isSplash: 1
+    isHitableWall: 1
     shake:
       time: 0
       power: 0
@@ -812,11 +845,11 @@ MonoBehaviour:
     related: 3
     controller: {fileID: 22100000, guid: 743522a24d1f9114b9b6464c01a7fe38, type: 2}
     type: 0
-    localSpeed: 2.5
+    localSpeed: 2
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
-    guideSpeed: 2.5
+    guideSpeed: 4
     spinSpeed: 0
     size: 0.1
     delay: 0
@@ -854,9 +887,9 @@ MonoBehaviour:
     limitTime: 1
     disapearStartTime: 0
     disapearDuration: 0
-    pierce: 0
-    isSplash: 0
-    isHitableWall: 0
+    pierce: 99999
+    isSplash: 1
+    isHitableWall: 1
     shake:
       time: 1
       power: 0.15
@@ -1260,7 +1293,7 @@ MonoBehaviour:
     children: []
     onDestroy: []
     offset: {x: 0, y: 0, z: 0}
-    beforeAttackDelay: 2
+    beforeAttackDelay: 3
     afterAttackDelay: 0
     attackDistance: 0
   - name: Bite
@@ -1335,10 +1368,10 @@ MonoBehaviour:
     attackDistance: 5
   playerWeapons:
   - level: 0
-    cost: 10
+    cost: 20
     id: 6
   - level: 1
-    cost: 20
+    cost: 50
     id: 7
   - level: 2
     cost: 0
@@ -1415,7 +1448,7 @@ MonoBehaviour:
       coolTime: 0
       effects:
       - type: 3
-        value: 2
+        value: 1
         time: 0
       values:
       - name: 1
@@ -1433,7 +1466,7 @@ MonoBehaviour:
     coolTime: 3
     coolTimeLeft: 0
     manaCost: 1.5
-    size: 1
+    size: 0.75
     isCircleToPlayer: 0
     isDeath: 0
     isBasic: 1
@@ -1448,7 +1481,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 2
-        value: 0.5
+        value: 0.25
     description: []
     useSFX: genesis
   - name: BloodSwamp
@@ -1462,7 +1495,7 @@ MonoBehaviour:
     coolTime: 3
     coolTimeLeft: 0
     manaCost: 1
-    size: 1
+    size: 1.2
     isCircleToPlayer: 0
     isDeath: 0
     isBasic: 1
@@ -1473,13 +1506,13 @@ MonoBehaviour:
     - name: 3
       value: 0.1
     levelUp:
-      manaCost: 0.25
-      size: 0.25
+      manaCost: 0.5
+      size: 0
       coolTime: 0
       effects: []
       values:
-      - name: 0
-        value: 1
+      - name: 3
+        value: 0.1
     description: []
     useSFX: blood
   - name: ScarecrowSoldier
@@ -1601,7 +1634,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 7
-        value: 0.025
+        value: 0.1
     description: []
     useSFX: flameShoes
   items:

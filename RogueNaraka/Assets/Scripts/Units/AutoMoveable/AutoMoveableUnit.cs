@@ -16,8 +16,8 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         [SerializeField]
         float delay;
-        [SerializeField]
-        float leftDelay;
+        
+        public float leftDelay;
 
         void Reset()
         {

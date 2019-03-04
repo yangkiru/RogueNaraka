@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#define TUTORIAL
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -27,7 +28,7 @@ public class TutorialManager : MonoBehaviour
             isTutorial[i] = PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0;
         }
 
-        StartCoroutine(Intro());
+        //StartCoroutine(Intro());
     }
 
     IEnumerator Intro()
@@ -40,13 +41,17 @@ public class TutorialManager : MonoBehaviour
         } while (t > 0);
         StartTutorial(0);
     }
+
+
     public void StartTutorial(int i)
     {
+#if TUTORIAL
         if (isTutorial[i])
         {
             startTexts[i].TextOn();
             isPlaying = true;
         }
+#endif
     }
 
     public void EndTutorial(int i)

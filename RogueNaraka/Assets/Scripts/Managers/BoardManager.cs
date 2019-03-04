@@ -16,6 +16,7 @@ public class BoardManager : MonoBehaviour {
     public Fade fade;
 
     public Unit player;
+    public Unit boss;
     public Vector2 spawnPoint;//player spawn
     public Vector2 goalPoint;//next Stage
     public Vector2 bossPoint;
@@ -134,6 +135,7 @@ public class BoardManager : MonoBehaviour {
     //    int cost = Random.Range(1, leftCost)
     //}
 
+
     private void InitStage(int stage)
     {
         isReady = false;
@@ -152,6 +154,12 @@ public class BoardManager : MonoBehaviour {
             //
             return;
         }
+        else if(stage == 30)
+        {
+            SpawnBoss(0);
+        }
+
+
         int cost = GameDatabase.instance.stageCosts[stage - 1];
         UnitCost[] unitCosts = GameDatabase.instance.unitCosts;
         List<int> able = new List<int>();
@@ -204,6 +212,8 @@ public class BoardManager : MonoBehaviour {
         StartCoroutine(StageTxtEffect());
     }
 
+
+
     public void SpawnPlayer(UnitData data)
     {
         if(player == null)
@@ -220,14 +230,14 @@ public class BoardManager : MonoBehaviour {
         enemy.Spawn(GetRandomSpawn());
     }
 
-    //public void SpawnBoss(int id)
-    //{
-    //    Debug.Log(id + " Boss Spawned");
-    //    boss = Instantiate(bossPrefabs[id], bossPoint, new Quaternion(0, 0, 0, 0)).GetComponent<Enemy>();
-    //    boss.SyncData(GameDatabase.instance.bosses[id]);
-    //    boss.gameObject.SetActive(true);
-    //    enemies.Add(boss);
-    //}
+    public void SpawnBoss(int id)
+    {
+        //Debug.Log(id + " Boss Spawned");
+        Unit boss = unitPool.DequeueObjectPool().GetComponent<Unit>();
+        this.boss = boss;
+        boss.Init(GameDatabase.instance.bosses[id]);
+        boss.Spawn(bossPoint);
+    }
 
     public Vector2 GetRandomSpawn()
     {

@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 4616481813884920}
   - component: {fileID: 212722301744784912}
   - component: {fileID: 114302036002021230}
+  - component: {fileID: 310890433804304187}
   - component: {fileID: 114504902211139030}
   - component: {fileID: 114946238239239822}
   - component: {fileID: 114360932324936328}
@@ -70,6 +71,7 @@ GameObject:
   - component: {fileID: 114847344676331612}
   - component: {fileID: 5803475585598790251}
   - component: {fileID: 410936814330744879}
+  - component: {fileID: 2215865072240927729}
   - component: {fileID: 114189907379417390}
   - component: {fileID: 114517530178566646}
   - component: {fileID: 114519388432992828}
@@ -180,6 +182,7 @@ MonoBehaviour:
   _rushMoveable: {fileID: 114116071741596666}
   _restRushMoveable: {fileID: 5803475585598790251}
   _followMoveable: {fileID: 410936814330744879}
+  _boss0Moveable: {fileID: 2215865072240927729}
   _damageable: {fileID: 114360932324936328}
   _hpable: {fileID: 114504902211139030}
   _mpable: {fileID: 114946238239239822}
@@ -188,6 +191,7 @@ MonoBehaviour:
   _timeLimitable: {fileID: 2605540994433798053}
   _orderable: {fileID: 3900195907407459146}
   _followable: {fileID: 606372875436568407}
+  _tackleable: {fileID: 310890433804304187}
   _animator: {fileID: 95588626938235128}
   _data:
     name: 
@@ -226,6 +230,8 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 0
     move: 0
+    tackleSize: 0
+    tackleDamage: 0
     moveDelay: 0
     moveDistance: 0
     moveSpeed: 0
@@ -238,7 +244,20 @@ MonoBehaviour:
   _rigid: {fileID: 50410147267040436}
   _renderer: {fileID: 212722301744784912}
   _collider: {fileID: 60075246512643172}
-  cashedTransform: {fileID: 0}
+  cashedTransform: {fileID: 4616481813884920}
+--- !u!114 &310890433804304187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380923796952252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c3ed8dc410720449e208b1a68ce35d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 114302036002021230}
 --- !u!114 &114504902211139030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +330,7 @@ MonoBehaviour:
   holder: {fileID: 224339251782192074}
   unit: {fileID: 114302036002021230}
   _effects: []
+  effectDelay: 1
 --- !u!114 &114798437530957502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +412,23 @@ MonoBehaviour:
   leftDelay: 0
   _target: {fileID: 0}
   _following: {fileID: 0}
+--- !u!114 &2215865072240927729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380923796952252}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c4936ac6da42447909228b4e011a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 114302036002021230}
+  moveable: {fileID: 114798437530957502}
+  delay: 0
+  leftDelay: 0
+  state: 0
 --- !u!114 &114189907379417390
 MonoBehaviour:
   m_ObjectHideFlags: 0

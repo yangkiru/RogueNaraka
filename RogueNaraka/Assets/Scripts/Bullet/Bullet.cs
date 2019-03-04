@@ -172,7 +172,12 @@ namespace RogueNaraka.BulletScripts
             if (disapearable.duration != 0)
                 disapearable.Disapear();
 
-                spinable.enabled = data.spinSpeed != 0;
+            spinable.enabled = data.spinSpeed != 0;
+
+            if (!gameObject.activeSelf)
+                gameObject.SetActive(true);
+            if (hitable)
+                hitable.OnSpawn();
         }
 
         public void Destroy()

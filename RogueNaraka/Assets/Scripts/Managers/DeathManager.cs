@@ -72,6 +72,8 @@ public class DeathManager : MonoBehaviour
         {
             float lastRefiningRate = PlayerPrefs.GetFloat("lastRefiningRate");
             float refiningRate = lastRefiningRate == 0 ? MoneyManager.instance.GetRandomRefiningRate() : lastRefiningRate;
+            soulTxt.text = "0";
+            unSoulTxt.text = "0";
             PlayerPrefs.SetFloat("lastRefiningRate", refiningRate);
             soulPnl.gameObject.SetActive(true);
             StartCoroutine(SoulRefiningRateTxtCorou(refiningRate));
@@ -191,6 +193,7 @@ public class DeathManager : MonoBehaviour
         SetDeathPnl(false);
         PlayerPrefs.SetInt("isRun", 0);
         SkillManager.instance.ResetSave();
+        Item.instance.ResetSave();
 
         BoardManager.instance.ClearStage();
         GameManager.instance.Load();

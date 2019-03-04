@@ -52,6 +52,8 @@ namespace RogueNaraka.UnitScripts
         public FollowMoveableUnit followMoveable { get { return _followMoveable; } }
         [SerializeField]
         FollowMoveableUnit _followMoveable;
+        [SerializeField]
+        Boss0MoveableUnit _boss0Moveable;
 
         #endregion
 
@@ -91,7 +93,11 @@ namespace RogueNaraka.UnitScripts
         #endregion
 
         #region etc
-        
+
+        public TackleableUnit tackleable { get { return _tackleable; } }
+        [SerializeField]
+        TackleableUnit _tackleable;
+
         public Animator animator { get { return _animator; } }
         [SerializeField]
         Animator _animator;
@@ -116,6 +122,8 @@ namespace RogueNaraka.UnitScripts
 
         public Stat stat { get { return _data.stat; } }
 
+        public bool isStun;
+
         #endregion
 
         #endregion
@@ -126,12 +134,15 @@ namespace RogueNaraka.UnitScripts
             _stopBeforeAttackable = GetComponent<StopBeforeAttackableUnit>();
             _stopAfterAttackable = GetComponent<StopAfterAttackableUnit>();
             _dontStopAttackable = GetComponent<DontStopAttackableUnit>();
+
             _enemyTargetable = GetComponent<EnemyTargetableUnit>();
             _friendlyTargetable = GetComponent<FriendlyTargetableUnit>();
             _randomMoveable = GetComponent<RandomMoveableUnit>();
             _rushMoveable = GetComponent<RushMoveableUnit>();
             _restRushMoveable = GetComponent<RestRushMoveableUnit>();
             _followMoveable = GetComponent<FollowMoveableUnit>();
+            _boss0Moveable = GetComponent<Boss0MoveableUnit>();
+
             _damageable = GetComponent<DamageableUnit>();
             _hpable = GetComponent<HpableUnit>();
             _mpable = GetComponent<MpableUnit>();
@@ -157,11 +168,6 @@ namespace RogueNaraka.UnitScripts
                 BoardManager.instance.enemies.Remove(this);
         }
 
-        private void Awake()
-        {
-            cashedTransform = transform;
-        }
-
         public void SetStat(Stat stat)
         {
             _data.stat = (Stat)stat.Clone();
@@ -185,20 +191,23 @@ namespace RogueNaraka.UnitScripts
 
             if (_attackable)
                 _attackable.enabled = false;
-            switch(GameDatabase.instance.weapons[_data.weapon].type)
+            if (_data.weapon >= 0)
             {
-                case ATTACK_TYPE.STOP_BEFORE:
-                    _attackable = _stopBeforeAttackable;
-                    break;
-                case ATTACK_TYPE.STOP_AFTER:
-                    _attackable = _stopAfterAttackable;
-                    break;
-                case ATTACK_TYPE.DONT_STOP:
-                    _attackable = _dontStopAttackable;
-                    break;
+                switch (GameDatabase.instance.weapons[_data.weapon].type)
+                {
+                    case ATTACK_TYPE.STOP_BEFORE:
+                        _attackable = _stopBeforeAttackable;
+                        break;
+                    case ATTACK_TYPE.STOP_AFTER:
+                        _attackable = _stopAfterAttackable;
+                        break;
+                    case ATTACK_TYPE.DONT_STOP:
+                        _attackable = _dontStopAttackable;
+                        break;
+                }
+                _attackable.Init(_data);
+                _attackable.enabled = true;
             }
-            _attackable.Init(_data);
-            _attackable.enabled = true;
 
             DisableTargetables();
             if (_data.isFriendly)
@@ -221,6 +230,9 @@ namespace RogueNaraka.UnitScripts
                     break;
                 case MOVE_TYPE.FOLLOW:
                     _autoMoveable = _followMoveable;
+                    break;
+                case MOVE_TYPE.BOSS0:
+                    _autoMoveable = _boss0Moveable;
                     break;
                 default:
                     _autoMoveable = null;
@@ -249,7 +261,10 @@ namespace RogueNaraka.UnitScripts
                     _effectable.AddEffect(_data.effects[i]);
 
             _renderer.color = _data.color;
+            _collider.isTrigger = false;
             _collider.enabled = true;
+
+            _tackleable.Init(data);
         }
 
         public void Spawn(Vector3 position)
@@ -286,7 +301,7 @@ namespace RogueNaraka.UnitScripts
             mpable.enabled = false;
             moveable.enabled = false;
             if(autoMoveable) autoMoveable.enabled = false;
-            attackable.enabled = false;
+            if(attackable) attackable.enabled = false;
             targetable.enabled = false;
             moveable.agent.enabled = false;
         }

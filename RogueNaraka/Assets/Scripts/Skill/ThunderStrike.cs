@@ -16,7 +16,7 @@ namespace RogueNaraka.SkillScripts
         IEnumerator SpawnThunder(Vector3 mp)
         {
             float amount = GetValue(Value.Amount).value;
-            Debug.Log("Thunder" + amount);
+            //Debug.Log("Thunder" + amount);
             float delay = 0.05f;
             for (int i = 0; i < 10; i++)
             {

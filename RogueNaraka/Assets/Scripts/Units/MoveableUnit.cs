@@ -47,7 +47,8 @@ namespace RogueNaraka.UnitScripts
 
         public void Move(Vector3 pos, Action<bool> callback = null)
         {
-            _agent.SetDestination(pos, callback);
+            if(!unit.isStun)
+                _agent.SetDestination(pos, callback);
         }
 
         void Update()

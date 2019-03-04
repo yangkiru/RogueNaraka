@@ -52,8 +52,15 @@ public class LevelUpManager : MonoBehaviour {
             player.autoMoveable.enabled = false;
             player.moveable.agent.Stop();
 
-            fade.FadeOut();
-            isLevelUp = true;
+            if (BoardManager.instance.stage == 30)
+            {
+                RageManager.instance.Rage();
+            }
+            else
+            {
+                fade.FadeOut();
+                isLevelUp = true;
+            }
             //if (endStageCorou == null)
             //{
             //    endStageCorou = EndStageCorou();

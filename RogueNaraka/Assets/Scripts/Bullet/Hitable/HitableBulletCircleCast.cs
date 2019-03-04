@@ -8,9 +8,8 @@ namespace RogueNaraka.BulletScripts.Hitable
     public class HitableBulletCircleCast : HitableBullet
     {
 
-        protected override void OnEnable()
+        public override void OnSpawn()
         {
-            base.OnEnable();
             StartCoroutine(CheckCorou());
         }
 
@@ -48,7 +47,8 @@ namespace RogueNaraka.BulletScripts.Hitable
                             CheckPierce();
                         break;
                     case HIT.WALL:
-                        //Debug.Log("Hit Wall:" + name);
+                        Debug.Log("Hit Wall:" + name + ", " + hits[i].collider.name + " " + hits[i].point);
+                        
                         if (!isHitableWall)
                         {
                             pierce = 0;

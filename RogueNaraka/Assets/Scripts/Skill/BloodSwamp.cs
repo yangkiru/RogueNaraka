@@ -44,13 +44,13 @@ namespace RogueNaraka.SkillScripts
         {
             float lifeSteal = GetValue(Value.LifeSteal).value;
             Unit fromUnit = from.ownerable.unit;
-            float amount = lifeSteal * fromUnit.stat.GetCurrent(STAT.HP);
+            float amount = lifeSteal;
 
             if (!from.ownerable.unit.deathable.isDeath)
             {
                 fromUnit.damageable.Damage(amount);
                 if (!to.deathable.isDeath)
-                    to.hpable.Heal(amount);
+                    to.hpable.Heal(amount * 0.25f);
             }
         }
     }

@@ -17,8 +17,7 @@ namespace RogueNaraka.UnitScripts
 
         Dictionary<EFFECT, List<Effect>> dictionary = new Dictionary<EFFECT, List<Effect>>();
 
-        public float effectDelay { get { return _effectDelay; } }
-        float _effectDelay = 0.1f;
+        public float effectDelay = 1;
 
         void Reset()
         {
@@ -55,7 +54,7 @@ namespace RogueNaraka.UnitScripts
             return null;
         }
 
-        public void AddEffect(EffectData data, Bullet bullet = null, Unit owner = null)
+        public Effect AddEffect(EffectData data, Bullet bullet = null, Unit owner = null)
         {
             Effect effect = GetSameEffect(data);
             GameObject obj = effect == null ? BoardManager.instance.effectPool.DequeueObjectPool() : null;
@@ -73,12 +72,13 @@ namespace RogueNaraka.UnitScripts
             {
                 effect.Combine(data);
             }
+            return effect;
         }
 
-        public void AddEffect(EFFECT type, float value, float time, Bullet bullet = null, Unit owner = null)
+        public Effect AddEffect(EFFECT type, float value, float time, Bullet bullet = null, Unit owner = null)
         {
             EffectData effect = new EffectData(type, value, time);
-            AddEffect(effect, bullet, owner);
+            return AddEffect(effect, bullet, owner);
         }
     }
 }

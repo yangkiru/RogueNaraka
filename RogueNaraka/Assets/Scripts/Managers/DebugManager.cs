@@ -107,6 +107,12 @@ public class DebugManager : MonoBehaviour {
         }
     }
 
+    public void GodMode()
+    {
+        BoardManager.instance.player.hpable.isInvincible = !BoardManager.instance.player.hpable.isInvincible;
+        Debug.Log("GodMode");
+    }
+
     public void SetStat(STAT type, float value)
     {
         BoardManager.instance.player.stat.SetOrigin(type, value);
@@ -129,10 +135,16 @@ public class DebugManager : MonoBehaviour {
         }
     }
 
-    public void GodMode()
+    public void SpawnBoss(int id)
     {
-        BoardManager.instance.player.hpable.isInvincible = true;
-        Debug.Log("GodMode");
+        BoardManager.instance.SpawnBoss(id);
+    }
+
+    public void ReadSpawnBoss(TMP_InputField bossInput)
+    {
+        int id;
+        int.TryParse(bossInput.text, out id);
+        SpawnBoss(id);
     }
 
     public void SetDebugPnl(bool value)

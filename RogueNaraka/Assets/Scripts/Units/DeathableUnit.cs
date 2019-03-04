@@ -28,6 +28,8 @@ namespace RogueNaraka.UnitScripts
 
             if (unit == BoardManager.instance.player)
                 onDeath = PlayerOnDeath;
+            else if (unit == BoardManager.instance.boss)
+                onDeath = BossOnDeath;
             else if (!unit.data.isFriendly)
                 onDeath = EnemyOnDeath;
         }
@@ -40,6 +42,11 @@ namespace RogueNaraka.UnitScripts
         public void EnemyOnDeath()
         {
             MoneyManager.instance.AddUnrefinedSoul(unit.data.cost);
+        }
+
+        public void BossOnDeath()
+        {
+            MoneyManager.instance.AddSoul(unit.data.cost);
         }
 
         public void Death()

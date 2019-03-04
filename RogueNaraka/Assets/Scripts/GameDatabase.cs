@@ -149,6 +149,9 @@ public class UnitData : ICloneable
     public bool isFriendly;
     public bool isStanding;
     public MOVE_TYPE move;
+    public float tackleSize;
+    public float tackleDamage;
+    public float tackleDelay;
     public float moveDelay;
     public float moveDistance;
     public float moveSpeed;
@@ -572,7 +575,8 @@ public enum MOVE_TYPE
     DISTANCE,//거리 유지
     RUN,//도망
     REST_RUSH,
-    FOLLOW
+    FOLLOW,
+    BOSS0
 }
 
 public enum SORTING_LAYER

@@ -50,7 +50,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             isAfterAnimation = false;
         }
 
-        void Attack()
+        protected virtual void Attack()
         {
             if (unit.targetable.direction == Vector2.zero)
                 return;
