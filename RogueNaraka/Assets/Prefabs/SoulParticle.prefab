@@ -50,6 +50,8 @@ MonoBehaviour:
   - {fileID: 5289023435169474043}
   - {fileID: 5289023434299461146}
   bgc: {fileID: 5289023435892328599}
+  rigid: {fileID: 91820407919415583}
+  spr: {fileID: 5289023435027803298}
 --- !u!1 &5289023434299461147
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5289023435027803298}
   - component: {fileID: 5289023435027803297}
+  - component: {fileID: 91820407919415583}
   m_Layer: 0
   m_Name: Spr
   m_TagString: Untagged
@@ -196,6 +199,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &91820407919415583
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5289023435027803299}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5289023435148571128
 GameObject:
   m_ObjectHideFlags: 0

@@ -118,8 +118,11 @@ public class RollManager : MonoBehaviour {
             BoardManager.instance.InitBoard();
         else
         {
-            if (StatOrbManager.instance.stat != null)
-                GameManager.instance.RunGame(StatOrbManager.instance.stat);
+            Stat stat = Stat.DataToStat();
+            if (stat != null)
+                GameManager.instance.RunGame(stat);
+            //else
+            //    BoardManager.instance.fade.FadeIn();
             GameManager.instance.SetPause(false);
         }
     }

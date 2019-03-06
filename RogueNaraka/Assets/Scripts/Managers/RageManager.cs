@@ -28,7 +28,7 @@ public class RageManager : MonoBehaviour
         PlayerPrefs.SetInt("isRage", 1);
         rageLevel = PlayerPrefs.GetInt("rageLevel") + 1;
         PlayerPrefs.SetInt("rageLevel", rageLevel);
-        ragePnl.SetActive(true);
+        //ragePnl.SetActive(true);
 
         PlayerPrefs.SetInt("isRun", 0);
 
