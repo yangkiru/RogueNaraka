@@ -10,6 +10,7 @@ public class RageManager : MonoBehaviour
     public int rageLevel;
     public float enemiesDmg = 1;
     public float enemiesHp = 1;
+    public float soul = 1;
     public bool isRage;
 
     public GameObject ragePnl;
@@ -18,7 +19,6 @@ public class RageManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        CheckRage();
     }
 
     public void ResetSave()
@@ -55,6 +55,7 @@ public class RageManager : MonoBehaviour
     public void CheckRage()
     {
         rageLevel = PlayerPrefs.GetInt("rageLevel");
+        ResetRage();
         Rage(rageLevel);
     }
 
@@ -62,6 +63,8 @@ public class RageManager : MonoBehaviour
     {
         enemiesDmg = 1;
         enemiesHp = 1;
+        soul = 1;
+        contentTxt.text = string.Empty;
     }
 
     public void Rage(int level)
@@ -70,17 +73,18 @@ public class RageManager : MonoBehaviour
         {
             case 0:
                 return;
-            case 1:
-                DmgUp(2f, level);
-                HpUp(2f, level);
-                break;
-            case 2:
-                DmgUp(2f, level);
-                HpUp(2f, level);
-                break;
+            //case 1:
+            //    DmgUp(2f, level);
+            //    HpUp(2f, level);
+            //    break;
+            //case 2:
+            //    DmgUp(2f, level);
+            //    HpUp(2f, level);
+            //    break;
             default:
                 DmgUp(2f, level);
                 HpUp(2f, level);
+                SoulUp(1f, level);
                 break;
 
         }
@@ -90,6 +94,7 @@ public class RageManager : MonoBehaviour
 
     void DmgUp(float amount, int level)
     {
+        Debug.Log("DmgUp" + amount);
         enemiesDmg += amount;
         if (level == rageLevel)
         {
@@ -103,13 +108,14 @@ public class RageManager : MonoBehaviour
                     str = string.Format("적들의 공격력 {0}% 증가", amount * 100);
                     break;
             }
-            contentTxt.text = str;
+            contentTxt.text += str;
         }
     }
 
     void HpUp(float amount, int level)
     {
-        enemiesDmg += amount;
+        Debug.Log("HpUp" + amount);
+        enemiesHp += amount;
         if (level == rageLevel)
         {
             string str = string.Empty;
@@ -122,7 +128,27 @@ public class RageManager : MonoBehaviour
                     str = string.Format("적들의 체력 {0}% 증가", amount * 100);
                     break;
             }
-            contentTxt.text = str;
+            contentTxt.text += str;
+        }
+    }
+
+    void SoulUp(float amount, int level)
+    {
+        Debug.Log("SoulUp" + amount);
+        soul += amount;
+        if (level == rageLevel)
+        {
+            string str = string.Empty;
+            switch (GameManager.language)
+            {
+                case Language.English:
+                    str = string.Format("Soul Get {0}% Up", amount * 100);
+                    break;
+                case Language.Korean:
+                    str = string.Format("얻는 영혼 {0}% 증가", amount * 100);
+                    break;
+            }
+            contentTxt.text += str;
         }
     }
 }

@@ -233,6 +233,9 @@ public class BoardManager : MonoBehaviour {
         //Debug.Log(id + " Enemies Spawned");
         Unit enemy = unitPool.DequeueObjectPool().GetComponent<Unit>();
         enemy.Init(GameDatabase.instance.enemies[id]);
+        enemy.stat.dmg *= RageManager.instance.enemiesDmg;
+        enemy.stat.hp *= RageManager.instance.enemiesHp;
+        enemy.stat.currentHp *= RageManager.instance.enemiesHp;
         enemy.Spawn(GetRandomSpawn());
     }
 
@@ -242,6 +245,9 @@ public class BoardManager : MonoBehaviour {
         Unit boss = unitPool.DequeueObjectPool().GetComponent<Unit>();
         this.boss = boss;
         boss.Init(GameDatabase.instance.bosses[id]);
+        boss.stat.dmg *= RageManager.instance.enemiesDmg;
+        boss.stat.hp *= RageManager.instance.enemiesHp;
+        boss.stat.currentHp *= RageManager.instance.enemiesHp;
         boss.Spawn(bossPoint);
     }
 

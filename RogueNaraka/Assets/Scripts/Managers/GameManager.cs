@@ -189,6 +189,8 @@ public class GameManager : MonoBehaviour {
         SkillManager.instance.Load();
         Item.instance.Load();
 
+        RageManager.instance.CheckRage();
+
         if (PlayerPrefs.GetInt("isLevelUp") == 1)
         {
             levelUpManager.LevelUp();
@@ -220,6 +222,7 @@ public class GameManager : MonoBehaviour {
 
         Stat.StatToData(randomStat, "randomStat");
         Stat.StatToData(stat);
+        RageManager.instance.ResetSave();
 
         PlayerPrefs.SetInt("stage", 1);
   
