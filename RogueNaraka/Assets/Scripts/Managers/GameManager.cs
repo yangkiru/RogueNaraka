@@ -193,16 +193,17 @@ public class GameManager : MonoBehaviour {
         {
             levelUpManager.LevelUp();
         }
+        else if (PlayerPrefs.GetInt("isFirstRoll") == 1)
+        {
+            SetPause(true);
+            RollManager.instance.SetRollPnl(true, false);
+        }
         else
         {
             boardManager.InitBoard();
         }
 
-        if (PlayerPrefs.GetInt("isFirstRoll") == 1)
-        {
-            SetPause(true);
-            RollManager.instance.SetRollPnl(true, false);
-        }
+        
     }
 
     private void LoadInit()

@@ -46,6 +46,8 @@ public class DeathManager : MonoBehaviour
         StartCoroutine(SoulPnlCorou(1));
 
         pauseBtn.gameObject.SetActive(false);
+
+        AudioManager.instance.PlayMusic("silent1");
     }
 
     IEnumerator SoulPnlCorou(float t)
@@ -198,6 +200,11 @@ public class DeathManager : MonoBehaviour
         BoardManager.instance.ClearStage();
         GameManager.instance.Load();
         PlayerPrefs.SetFloat("lastRefiningRate", 0);
+
+        AudioManager.instance.PlayMusic("tension2");
+
+        BoardManager.instance.player.hpable.SetFullHp();
+        BoardManager.instance.player.mpable.SetFullMp();
 
         pauseBtn.gameObject.SetActive(true);
     }

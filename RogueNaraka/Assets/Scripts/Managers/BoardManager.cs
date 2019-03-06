@@ -142,6 +142,9 @@ public class BoardManager : MonoBehaviour {
     private void InitStage(int stage)
     {
         isReady = false;
+
+        AudioManager.instance.PlayMusic("tension2");
+
         for (int i = 0; i < bulletPool.transform.childCount; i++)
         {
             GameObject obj = bulletPool.transform.GetChild(i).gameObject;
@@ -154,7 +157,6 @@ public class BoardManager : MonoBehaviour {
         if(stage > GameDatabase.instance.stageCosts.Length)
         {
             Debug.Log("NoMoreStage");
-            //
             return;
         }
         else if(stage != 0 && stage % 30 == 0)
@@ -224,6 +226,8 @@ public class BoardManager : MonoBehaviour {
             player = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity).GetComponent<Unit>();
         player.Init(data);
         player.Spawn(spawnPoint);
+        //player.cashedTransform.SetParent(unitPool.transform);
+        //player.cashedTransform.SetSiblingIndex(0);
     }
 
     public void SpawnEnemy(int id)

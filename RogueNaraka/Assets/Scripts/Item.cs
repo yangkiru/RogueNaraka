@@ -169,6 +169,12 @@ public class Item : MonoBehaviour
         SyncSprite();
     }
 
+    public void EquipItem(int id)
+    {
+        SyncData(GetData(id));
+        AudioManager.instance.PlaySFX("skillEquip");
+    }
+
     public void SyncData(int id)
     {
         SyncData(GetData(id));

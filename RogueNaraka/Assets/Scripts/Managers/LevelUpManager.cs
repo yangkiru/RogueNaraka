@@ -50,18 +50,8 @@ public class LevelUpManager : MonoBehaviour {
         player.autoMoveable.enabled = false;
         player.moveable.agent.Stop();
 
-        if (BoardManager.instance.stage / 30 >= RageManager.instance.rageLevel + 1 && BoardManager.instance.stage % 30 == 0)
-        {
-            if (!RageManager.instance.ragePnl.activeSelf && !RageManager.instance.isRage)
-            {
-                RageManager.instance.Rage();
-            }
-        }
-        else
-        {
-            fade.FadeOut();
-            isLevelUp = true;
-        }
+        fade.FadeOut();
+        isLevelUp = true;
     }
     //void Update()
     //{
@@ -210,8 +200,7 @@ public class LevelUpManager : MonoBehaviour {
         cancelBtn.interactable = true;
         BoardManager.instance.StageUp();
         //BoardManager.instance.InitBoard();
-        GameManager.instance.Save();
-        GameManager.instance.SetPause(false);
+        //GameManager.instance.SetPause(false);
         leftStat = 0;
         lastChance = false;
         isLevelUp = false;

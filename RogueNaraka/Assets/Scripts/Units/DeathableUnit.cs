@@ -42,7 +42,7 @@ namespace RogueNaraka.UnitScripts
         public void EnemyOnDeath()
         {
             MoneyManager.instance.AddUnrefinedSoul(unit.data.cost);
-            if(BoardManager.instance.enemies.Count <= 0)
+            if(BoardManager.instance.enemies.Count <= 1)
             {
                 LevelUpManager.instance.OnEndStage();
             }
@@ -56,6 +56,8 @@ namespace RogueNaraka.UnitScripts
             {
                 BoardManager.instance.soulPool.DequeueObjectPool();
             }
+
+            RageManager.instance.Rage();
         }
 
         public void Death()

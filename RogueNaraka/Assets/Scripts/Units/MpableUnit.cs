@@ -45,6 +45,14 @@ namespace RogueNaraka.UnitScripts
             stat.currentMp = _currentMp;
         }
 
+        public void SetFullMp(bool isTxt = false)
+        {
+            if (isTxt)
+                Heal(maxMp - _currentMp);
+            else
+                _currentMp = maxMp;
+        }
+
         public void AddMp(float amount)
         {
             float result = _currentMp + amount;

@@ -387,7 +387,7 @@ public class RollManager : MonoBehaviour {
                 LevelUpManager.instance.SetStatPnl(true, data.id + 1);
                 break;
             case ROLL_TYPE.ITEM:
-                Item.instance.SyncData(data.id);
+                Item.instance.EquipItem(data.id);
                 SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.PASSIVE:

@@ -55,6 +55,8 @@ public class SoulShopManager : MonoBehaviour
         }
     }
 
+    string lastMusic = string.Empty;
+
     /// <summary>
     /// Soul 상점 패널을 열거나 닫는 함수
     /// 외부에서 접근 가능함
@@ -67,11 +69,16 @@ public class SoulShopManager : MonoBehaviour
             shopPnl.SetActive(true);
             statBtn.onClick.Invoke();
             GameManager.instance.moneyManager.Load();
+
+            lastMusic = AudioManager.instance.music.clip.name;
+            AudioManager.instance.PlayMusic("peace4");
             TutorialManager.instance.StartTutorial(3);
         }
         else
         {
             shopPnl.SetActive(false);
+
+            AudioManager.instance.PlayMusic(lastMusic);
             if(DeathManager.instance.deathPnl.gameObject.activeSelf)
                 DeathManager.instance.pauseBtn.gameObject.SetActive(false);
             else

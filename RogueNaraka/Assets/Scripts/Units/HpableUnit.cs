@@ -49,6 +49,14 @@ namespace RogueNaraka.UnitScripts
                 unit.deathable.Death();
         }
 
+        public void SetFullHp(bool isTxt = false)
+        {
+            if (isTxt)
+                Heal(maxHp - _currentHp);
+            else
+                _currentHp = maxHp;
+        }
+
         public void AddHp(float amount)
         {
             float result = _currentHp + amount;
