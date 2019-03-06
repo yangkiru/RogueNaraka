@@ -147,6 +147,15 @@ public class DebugManager : MonoBehaviour {
         SpawnBoss(id);
     }
 
+    public void ReadSetItem(TMP_InputField input)
+    {
+        int id;
+        if (int.TryParse(input.text, out id))
+        {
+            Item.instance.EquipItem(id);
+        }
+    }
+
     public void SetDebugPnl(bool value)
     {
         debugPnl.SetActive(true);

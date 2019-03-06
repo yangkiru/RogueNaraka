@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using RogueNaraka.UnitScripts;
+using TMPro;
 
 public class Item : MonoBehaviour
 {
@@ -17,9 +18,12 @@ public class Item : MonoBehaviour
     public CircleRenderer circle;
     public LineRenderer line;
 
+    public TextMeshProUGUI amountTxt;
+
     private Image img;
     public int[] sprIds;
     public bool[] isKnown;
+    public int amount;
 
     public RectTransform[] points;
 
@@ -36,6 +40,8 @@ public class Item : MonoBehaviour
     {
         _data.id = -1;
         img.color = Color.clear;
+        amount = 0;
+        ItemAmountUpdate();
     }
 
     public void ResetSave()
@@ -44,6 +50,7 @@ public class Item : MonoBehaviour
         PlayerPrefs.SetInt("item", -1);
         PlayerPrefs.SetString("itemSpr", string.Empty);
         PlayerPrefs.SetString("itemIsKnow", string.Empty);
+        PlayerPrefs.SetInt("itemAmount", 0);
     }
 
     public void Save()
@@ -52,6 +59,7 @@ public class Item : MonoBehaviour
         PlayerPrefs.SetInt("item", _data.id);
         PlayerPrefs.SetString("itemSpr", JsonHelper.ToJson<int>(sprIds));
         PlayerPrefs.SetString("itemIsKnown", JsonHelper.ToJson<bool>(isKnown));
+        PlayerPrefs.SetInt("itemAmount", amount);
     }
 
     public void Load()
@@ -71,6 +79,7 @@ public class Item : MonoBehaviour
             int itemData = PlayerPrefs.GetInt("item");
             string sprData = PlayerPrefs.GetString("itemSpr");
             string isKnownData = PlayerPrefs.GetString("itemIsKnown");
+            int amount = PlayerPrefs.GetInt("itemAmount");
             //Debug.Log(itemData);
             if (sprData != string.Empty)
             {
@@ -103,6 +112,8 @@ public class Item : MonoBehaviour
             if (itemData != -1 && GameDatabase.instance.items.Length > itemData)
             {
                 SyncData(GameDatabase.instance.items[itemData]);
+                this.amount = amount;
+                ItemAmountUpdate();
                 SyncSprite();
             }
             else
@@ -171,8 +182,31 @@ public class Item : MonoBehaviour
 
     public void EquipItem(int id)
     {
-        SyncData(GetData(id));
+        if (id == _data.id)
+        {
+            amount++;
+            ItemAmountUpdate();
+        }
+        else
+        {
+            SyncData(GetData(id));
+            amount = 1;
+            ItemAmountUpdate();
+        }
+
+        Save();
         AudioManager.instance.PlaySFX("skillEquip");
+    }
+
+    public void ItemAmountUpdate()
+    {
+        if (amount == 0)
+            amountTxt.enabled = false;
+        else
+        {
+            amountTxt.enabled = true;
+            amountTxt.text = amount.ToString();
+        }
     }
 
     public void SyncData(int id)
@@ -197,6 +231,8 @@ public class Item : MonoBehaviour
     {
         if (BoardManager.instance.player.deathable.isDeath)
             return;
+        amount--;
+        ItemAmountUpdate();
         circle.SetCircle(_data.size);
         circle.MoveCircleToMouse();
         Pointer.instance.SetPointer(false);
@@ -244,7 +280,8 @@ public class Item : MonoBehaviour
                     break;
             }
         }
-        InitItem();
+        if(amount <= 0)
+            InitItem();
     }
 
 
@@ -267,14 +304,19 @@ public class Item : MonoBehaviour
             Pointer.instance.SetPointer(true);
             //line.enabled = true;
             isMouseDown = true;
+            StartCoroutine(MouseCorou());
         }
     }
 
-    void Update()
+    IEnumerator MouseCorou()
     {
-        if (isMouseDown)
+        while (isMouseDown)
+        {
             OnMouse();
+            yield return null;
+        }
     }
+
 
     public void OnMouse()
     {

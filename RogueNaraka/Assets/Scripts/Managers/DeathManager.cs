@@ -196,6 +196,7 @@ public class DeathManager : MonoBehaviour
         PlayerPrefs.SetInt("isRun", 0);
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
+        Item.instance.InitItem();
 
         BoardManager.instance.ClearStage();
         GameManager.instance.Load();

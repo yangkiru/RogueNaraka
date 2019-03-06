@@ -100,6 +100,7 @@ public class RollManager : MonoBehaviour {
         {
             Reset();
             SkillManager.instance.Save();
+            Item.instance.Save();
             if (!isStageUp)
                 PlayerPrefs.SetInt("isFirstRoll", 0);
             if (isStageUp)
