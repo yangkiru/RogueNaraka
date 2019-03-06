@@ -237,7 +237,11 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("isRun") == 1)
         {
             Debug.Log("Open Run");
-
+            if(PlayerPrefs.GetInt("isRage") == 1)
+            {
+                RageManager.instance.CheckRage();
+                RageManager.instance.ragePnl.SetActive(true);
+            }
             Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
             Stat randomStat = Stat.DataToStat("randomStat");
             StatTextUpdate(stat);

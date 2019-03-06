@@ -18,22 +18,27 @@ public class TutorialManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        isTutorial = new bool[startTexts.Length];
+        for (int i = 0; i < startTexts.Length; i++)
+        {
+            isTutorial[i] = PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0;
+        }
     }
 
     private void Start()
     {
-        isTutorial = new bool[startTexts.Length];
-        for(int i = 0; i < startTexts.Length; i++)
-        {
-            isTutorial[i] = PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0;
-        }
 
-        //StartCoroutine(Intro());
+        //isTutorial = new bool[startTexts.Length];
+        //for (int i = 0; i < startTexts.Length; i++)
+        //{
+        //    isTutorial[i] = PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0;
+        //}
+        StartCoroutine(Intro());
     }
 
     IEnumerator Intro()
     {
-        float t = 1.5f;
+        float t = 0.5f;
         do
         {
             yield return null;

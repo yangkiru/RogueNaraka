@@ -10,6 +10,7 @@ public class RageManager : MonoBehaviour
     public int rageLevel;
     public float enemiesDmg = 1;
     public float enemiesHp = 1;
+    public bool isRage;
 
     public GameObject ragePnl;
     public TextMeshProUGUI contentTxt;
@@ -17,10 +18,14 @@ public class RageManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        CheckRage();
     }
 
     public void Rage()
     {
+        Debug.Log("Rage");
+        isRage = true;
+        PlayerPrefs.SetInt("isRage", 1);
         rageLevel = PlayerPrefs.GetInt("rageLevel") + 1;
         PlayerPrefs.SetInt("rageLevel", rageLevel);
         ragePnl.SetActive(true);

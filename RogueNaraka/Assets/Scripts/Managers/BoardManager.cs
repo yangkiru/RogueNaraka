@@ -12,6 +12,7 @@ public class BoardManager : MonoBehaviour {
     public GameObject bulletPrefab;
     public GameObject[] bossPrefabs;
     public GameObject effectPrefab;
+    public GameObject soulPrefab;
 
     public Fade fade;
 
@@ -21,9 +22,14 @@ public class BoardManager : MonoBehaviour {
     public Vector2 goalPoint;//next Stage
     public Vector2 bossPoint;
     public Vector2[] boardRange;//0:min, 1:max
-    public ObjectPool unitPool;//basic 100 counts
-    public ObjectPool bulletPool;//basic 500 counts
-    public ObjectPool effectPool;//basic 200 counts
+    public ObjectPool unitPool;
+    const int unitObjCount = 100;
+    public ObjectPool bulletPool;
+    const int bulletObjCount = 250;
+    public ObjectPool effectPool;
+    const int effectObjCount = 200;
+    public ObjectPool soulPool;
+    const int soulObjCount = 50;
 
     public List<Unit> enemies = new List<Unit>();
     public List<Unit> friendlies = new List<Unit>();
@@ -57,21 +63,9 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    public GameObject SpawnUnitObj()
+    public GameObject SpawnObj(GameObject prefab)
     {
-        GameObject obj = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity, unitPool.transform);
-        return obj;
-    }
-
-    public GameObject SpawnBulletObj()
-    {
-        GameObject obj = Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity, bulletPool.transform);
-        return obj;
-    }
-
-    public GameObject SpawnEffectObj()
-    {
-        GameObject obj = Instantiate(effectPrefab, Vector3.zero, Quaternion.identity, effectPool.transform);
+        GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, unitPool.transform);
         return obj;
     }
 
@@ -79,33 +73,42 @@ public class BoardManager : MonoBehaviour {
     {
         Debug.Log("InitBoard");
         int count = unitPool.GetCount();
-        if (count < 100)//unit Pooling
+        if (count < unitObjCount)//unit Pooling
         {
-            for (int i = count; i < 100; i++)
+            for (int i = count; i < unitObjCount; i++)
             {
-                GameObject obj = SpawnUnitObj();
+                GameObject obj = SpawnObj(unitPrefab);
                 unitPool.EnqueueObjectPool(obj);
             }
         }
         count = bulletPool.GetCount();
-        if (count < 250)//bullet Pooling
+        if (count < bulletObjCount)//bullet Pooling
         {
-            for (int i = count; i < 250; i++)
+            for (int i = count; i < bulletObjCount; i++)
             {
-                GameObject obj = SpawnBulletObj();
+                GameObject obj = SpawnObj(bulletPrefab);
                 bulletPool.EnqueueObjectPool(obj);
             }
         }
         count = effectPool.GetCount();
-        if (count < 200)//effect Pooling
+        if (count < effectObjCount)//effect Pooling
         {
-            for (int i = count; i < 200; i++)
+            for (int i = count; i < effectObjCount; i++)
             {
-                GameObject obj = SpawnEffectObj();
+                GameObject obj = SpawnObj(effectPrefab);
                 effectPool.EnqueueObjectPool(obj);
             }
         }
-        
+        count = soulPool.GetCount();
+        if (count < soulObjCount)//soul Pooling
+        {
+            for (int i = count; i < soulObjCount; i++)
+            {
+                GameObject obj = SpawnObj(soulPrefab);
+                effectPool.EnqueueObjectPool(obj);
+            }
+        }
+
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
         player.Spawn(spawnPoint);
@@ -154,9 +157,10 @@ public class BoardManager : MonoBehaviour {
             //
             return;
         }
-        else if(stage == 30)
+        else if(stage != 0 && stage % 30 == 0)
         {
             SpawnBoss(0);
+            return;
         }
 
 

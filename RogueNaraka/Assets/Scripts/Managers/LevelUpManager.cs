@@ -45,29 +45,50 @@ public class LevelUpManager : MonoBehaviour {
     float time;
     bool isLevelUp;
 
-    void Update()
+    public void OnEndStage()
     {
-        if (!FadeManager.instance.pnl.gameObject.activeSelf && !isLevelUp && player && player.gameObject.activeSelf && BoardManager.instance.enemies.Count <= 0)
-        {
-            player.autoMoveable.enabled = false;
-            player.moveable.agent.Stop();
+        player.autoMoveable.enabled = false;
+        player.moveable.agent.Stop();
 
-            if (BoardManager.instance.stage == 30)
+        if (BoardManager.instance.stage / 30 >= RageManager.instance.rageLevel + 1 && BoardManager.instance.stage % 30 == 0)
+        {
+            if (!RageManager.instance.ragePnl.activeSelf && !RageManager.instance.isRage)
             {
                 RageManager.instance.Rage();
             }
-            else
-            {
-                fade.FadeOut();
-                isLevelUp = true;
-            }
-            //if (endStageCorou == null)
-            //{
-            //    endStageCorou = EndStageCorou();
-            //    StartCoroutine(endStageCorou);
-            //}
+        }
+        else
+        {
+            fade.FadeOut();
+            isLevelUp = true;
         }
     }
+    //void Update()
+    //{
+    //    if (!FadeManager.instance.pnl.gameObject.activeSelf && !isLevelUp && player && player.gameObject.activeSelf && BoardManager.instance.enemies.Count <= 0)
+    //    {
+    //        player.autoMoveable.enabled = false;
+    //        player.moveable.agent.Stop();
+
+    //        if (BoardManager.instance.stage / 30 >= RageManager.instance.rageLevel + 1 && BoardManager.instance.stage % 30 == 0)
+    //        {
+    //            if (!RageManager.instance.ragePnl.activeSelf && !RageManager.instance.isRage)
+    //            {
+    //                RageManager.instance.Rage();
+    //            }
+    //        }
+    //        else
+    //        {
+    //            fade.FadeOut();
+    //            isLevelUp = true;
+    //        }
+    //        //if (endStageCorou == null)
+    //        //{
+    //        //    endStageCorou = EndStageCorou();
+    //        //    StartCoroutine(endStageCorou);
+    //        //}
+    //    }
+    //}
 
     //IEnumerator endStageCorou;
     //IEnumerator EndStageCorou(float time = 3.5f)
@@ -85,7 +106,7 @@ public class LevelUpManager : MonoBehaviour {
     //}
 
     /// <summary>
-    /// Player가 Enemy를 모두 처치하고 화면 상단에 도착하면 호출
+    /// fade에서 호출
     /// </summary>
     /// 
     public void LevelUp()

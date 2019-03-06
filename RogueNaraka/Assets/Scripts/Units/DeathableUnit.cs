@@ -42,11 +42,20 @@ namespace RogueNaraka.UnitScripts
         public void EnemyOnDeath()
         {
             MoneyManager.instance.AddUnrefinedSoul(unit.data.cost);
+            if(BoardManager.instance.enemies.Count <= 0)
+            {
+                LevelUpManager.instance.OnEndStage();
+            }
         }
 
         public void BossOnDeath()
         {
             MoneyManager.instance.AddSoul(unit.data.cost);
+            //SoulParticle을 생성
+            for (int i = 0; i < unit.data.cost; i++)
+            {
+                BoardManager.instance.soulPool.DequeueObjectPool();
+            }
         }
 
         public void Death()

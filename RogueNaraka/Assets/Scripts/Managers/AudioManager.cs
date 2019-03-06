@@ -20,6 +20,8 @@ public class AudioManager : MonoBehaviour
 
     public Button[] btns;
 
+    public float sfxVolume = 0.5f;
+
     Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
 #if UNITY_EDITOR || UNITY_STANDALONE
     Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
@@ -73,12 +75,24 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicVolume(float value)
     {
-        audioSettings[(int)AudioGroups.Music].SetExposedParam(value);
+        if(value <= -20)
+            audioSettings[(int)AudioGroups.Music].SetExposedParam(-80);
+        else
+            audioSettings[(int)AudioGroups.Music].SetExposedParam(value);
     }
 
     public void SetSFXVolume(float value)
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
         audioSettings[(int)AudioGroups.SFX].SetExposedParam(value);
+#endif
+
+#if !UNITY_EDITOR && UNITY_ANDROID
+        sfxVolume = Mathf.InverseLerp(audioSettings[(int)AudioGroups.SFX].slider.minDistance,
+            audioSettings[(int)AudioGroups.SFX].slider.maxDistance, value) * SFX.volume;
+        PlayerPrefs.SetFloat(audioSettings[(int)AudioGroups.SFX].exposedParam, value);
+#endif
+
     }
 
     //public void Mute(int audio)
@@ -121,8 +135,9 @@ public class AudioManager : MonoBehaviour
         if (SFXClipDictionary.ContainsKey(name))
             SFX.PlayOneShot(SFXClipDictionary[name]);
 #endif
+
 #if !UNITY_EDITOR && UNITY_ANDROID
-        AndroidNativeAudio.play(fileIDDictionary[name]);
+        AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume);
 #endif
     }
 #if !UNITY_EDITOR && UNITY_ANDROID
