@@ -83,6 +83,8 @@ public class SoulShopManager : MonoBehaviour
                 DeathManager.instance.pauseBtn.gameObject.SetActive(false);
             else
                 DeathManager.instance.pauseBtn.gameObject.SetActive(true);
+            if (LevelUpManager.instance.statPnl.activeSelf)
+                LevelUpManager.instance.SyncStatUpgradeTxt();
         }
     }
 

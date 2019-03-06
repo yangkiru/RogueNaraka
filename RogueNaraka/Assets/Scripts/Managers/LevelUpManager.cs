@@ -108,7 +108,9 @@ public class LevelUpManager : MonoBehaviour {
         SkillManager.instance.SetIsDragable(false);
         if (isLeftStatChanged)
         {
+            rollManager.SetRollPnl(true, true, false);
             SetStatPnl(true);
+            //fade.FadeIn();
         }
         else
         {
@@ -139,10 +141,6 @@ public class LevelUpManager : MonoBehaviour {
                 
                 if (!lastChance)
                 {
-                    if (GameManager.instance.soulShopManager.shopStage <= 1)
-                    {
-                        GameManager.instance.soulShopManager.SetSoulShop(true);
-                    }
                     lastChance = true;
                     return;
                 }
@@ -175,10 +173,12 @@ public class LevelUpManager : MonoBehaviour {
                 rollManager.SetRollPnl(false);
             leftStatTxt.text = leftStat + " Points";
             SyncStatUpgradeTxt();
+            Stat.StatToData(player.data.stat);
             GameManager.instance.StatTextUpdate();
         }
         else
         {
+            GameManager.instance.soulShopManager.SetSoulShop(true);
             Debug.Log("Stat Maxed");
         }
     }
@@ -196,9 +196,7 @@ public class LevelUpManager : MonoBehaviour {
             yield return null;
         }
         
-        PlayerPrefs.SetInt("isLevelUp", 0);
         cancelBtn.interactable = true;
-        BoardManager.instance.StageUp();
         //BoardManager.instance.InitBoard();
         //GameManager.instance.SetPause(false);
         leftStat = 0;

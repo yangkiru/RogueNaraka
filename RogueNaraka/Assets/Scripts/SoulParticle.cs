@@ -9,31 +9,35 @@ public class SoulParticle : MonoBehaviour
     public Transform[] points;
     public BGCcCursorChangeLinear bgc;
     public Rigidbody2D rigid;
+    public SpriteRenderer spr;
 
     public void Init(Vector3 position)
     {
-        rigid.MovePosition(position);
-        this.enabled = true;
+        points[0].position = position;
+        gameObject.SetActive(true);
     }
 
     void OnEnable()
     {
         Vector3 rndVec = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-        float rndPower = Random.Range(10f, 10f);
+        float rndPower = Random.Range(1f, 2f);
         rigid.AddRelativeForce(rndVec * rndPower, ForceMode2D.Impulse);
         StartCoroutine(Corou());
     }
 
     IEnumerator Corou()
     {
-        float t = Random.Range(0f, 1f);
+        yield return null;
+        spr.enabled = true;
+        float t = Random.Range(1f, 2f);
         do
         {
             yield return null;
             t -= Time.deltaTime;
         } while (t > 0);
-        float x = Mathf.Lerp(points[0].position.x, points[0].position.x, Random.Range(0f, 1f));
-        float y = Mathf.Lerp(points[0].position.y, points[0].position.y, Random.Range(0f, 1f));
+
+        float x = Mathf.Lerp(points[0].position.x, points[2].position.x, Random.Range(0f, 1f));
+        float y = Mathf.Lerp(points[0].position.y, points[2].position.y, Random.Range(0f, 1f));
         points[1].position = new Vector3(x, y);
 
         float a = 0;
@@ -49,11 +53,12 @@ public class SoulParticle : MonoBehaviour
             yield return null;
             bgc.Speed += 0.1f + a;
             
-        } while (bgc.Speed < 4);
+        } while (bgc.Speed < 5);
     }
 
-    public void OnReached()
+    public void OnReached(int point)
     {
-        BoardManager.instance.soulPool.EnqueueObjectPool(gameObject);
+        if(point == 2)
+            BoardManager.instance.soulPool.EnqueueObjectPool(gameObject);
     }
 }

@@ -52,9 +52,10 @@ namespace RogueNaraka.UnitScripts
         {
             MoneyManager.instance.AddSoul(unit.data.cost);
             //SoulParticle을 생성
-            for (int i = 0; i < unit.data.cost; i++)
+            for (int i = 0; i < unit.data.cost*0.25f; i++)
             {
-                BoardManager.instance.soulPool.DequeueObjectPool();
+                SoulParticle soulParticle = BoardManager.instance.soulPool.DequeueObjectPool().GetComponent<SoulParticle>();
+                soulParticle.Init(unit.cashedTransform.position);
             }
 
             RageManager.instance.Rage();

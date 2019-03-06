@@ -105,7 +105,7 @@ public class BoardManager : MonoBehaviour {
             for (int i = count; i < soulObjCount; i++)
             {
                 GameObject obj = SpawnObj(soulPrefab);
-                effectPool.EnqueueObjectPool(obj);
+                soulPool.EnqueueObjectPool(obj);
             }
         }
 
@@ -129,6 +129,11 @@ public class BoardManager : MonoBehaviour {
     public void StageUp()
     {
         _stage++;
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt("stage", stage);
     }
 
     //void RandomEnemy(int leftCost)
@@ -226,8 +231,8 @@ public class BoardManager : MonoBehaviour {
             player = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity).GetComponent<Unit>();
         player.Init(data);
         player.Spawn(spawnPoint);
-        //player.cashedTransform.SetParent(unitPool.transform);
-        //player.cashedTransform.SetSiblingIndex(0);
+        player.cashedTransform.SetParent(unitPool.transform);
+        player.cashedTransform.SetSiblingIndex(0);
     }
 
     public void SpawnEnemy(int id)

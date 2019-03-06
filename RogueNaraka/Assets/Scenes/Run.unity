@@ -56521,7 +56521,7 @@ GameObject:
   - component: {fileID: 1632865326}
   - component: {fileID: 1632865327}
   m_Layer: 5
-  m_Name: StatUpCanvas/LevelUpManager
+  m_Name: LevelUpCanvas/Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56646,7 +56646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeIntime: 1
   FadeOuttime: 2
-  ignoreTimeScaleIn: 0
+  ignoreTimeScaleIn: 1
   ignoreTimeScaleOut: 1
   isClickableIn: 0
   isClickableOut: 0

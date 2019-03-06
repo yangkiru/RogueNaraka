@@ -85,27 +85,37 @@ public class RollManager : MonoBehaviour {
         }
     }
 
-    public void SetRollPnl(bool value, bool isStageUp = true)
+    public void SetRollPnl(bool value, bool isStageUp = true, bool isRoll = true)
     {
         this.isStageUp = isStageUp;
         if (value)
         {
             rollPnl.SetActive(value);
             Init();
-            SetShowCase();
+            SetShowCase(isRoll);
             reRollTxt.text = "ReRoll";
             fade.FadeIn();
         }
         else
         {
             Reset();
-            SkillManager.instance.Save();
-            Item.instance.Save();
-            if (!isStageUp)
-                PlayerPrefs.SetInt("isFirstRoll", 0);
-            if (isStageUp)
-                LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
 
+            if (!isStageUp)
+            {
+                PlayerPrefs.SetInt("isFirstRoll", 0);
+                SkillManager.instance.Save();
+                Item.instance.Save();
+            }
+            if (isStageUp)
+            {
+                BoardManager.instance.StageUp();
+                //BoardManager.instance.Save();
+                PlayerPrefs.SetInt("isLevelUp", 0);
+                LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
+                GameManager.instance.Save();
+            }
+            
+            
             fade.FadeOut();
             //rollPnl.SetActive(value);
         }
@@ -123,7 +133,6 @@ public class RollManager : MonoBehaviour {
                 GameManager.instance.RunGame(stat);
             //else
             //    BoardManager.instance.fade.FadeIn();
-            GameManager.instance.SetPause(false);
         }
     }
 
@@ -526,7 +535,7 @@ public class RollManager : MonoBehaviour {
     /// <summary>
     /// 쇼케이스 설정
     /// </summary>
-    public void SetShowCase()
+    public void SetShowCase(bool isRoll = true)
     {
         if (!LoadDatas())
         {
@@ -556,7 +565,8 @@ public class RollManager : MonoBehaviour {
             }
         }
         SetStatTxt(true);
-        Roll();
+        if(isRoll)
+            Roll();
     }
 
     /// <summary>

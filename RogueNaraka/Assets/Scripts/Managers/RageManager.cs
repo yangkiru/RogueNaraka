@@ -30,24 +30,24 @@ public class RageManager : MonoBehaviour
         PlayerPrefs.SetInt("rageLevel", rageLevel);
         //ragePnl.SetActive(true);
 
-        PlayerPrefs.SetInt("isRun", 0);
+        //PlayerPrefs.SetInt("isRun", 0);
 
         ResetRage();
         Rage(rageLevel);
-        StartCoroutine(EndCorou());
+        //StartCoroutine(EndCorou());
     }
 
-    IEnumerator EndCorou()
-    {
-        float t = 3;
-        do
-        {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-        } while (t > 0);
-        ragePnl.SetActive(false);
-        BoardManager.instance.player.Kill();
-    }
+    //IEnumerator EndCorou()
+    //{
+    //    float t = 3;
+    //    do
+    //    {
+    //        yield return null;
+    //        t -= Time.unscaledDeltaTime;
+    //    } while (t > 0);
+    //    ragePnl.SetActive(false);
+    //    BoardManager.instance.player.Kill();
+    //}
 
     public void CheckRage()
     {

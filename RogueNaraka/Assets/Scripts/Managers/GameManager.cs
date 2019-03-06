@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetString("effect", JsonHelper.ToJson<EffectData>(effectDatas));
 
         PlayerPrefs.SetString("stat", Stat.StatToJson(player.data.stat));
-        PlayerPrefs.SetInt("stage", boardManager.stage);
+        boardManager.Save();
         PlayerPrefs.SetInt("weapon", player.attackable.weapon.id);
         SkillManager.instance.Save();
         Item.instance.Save();

@@ -59,7 +59,7 @@ public class MoneyManager : MonoBehaviour {
         MoneyUpdate();
     }
 
-    public void AddSoul(int value)
+    public void AddSoul(int value, bool isSave = true)
     {
         if (_soul + value >= 0)
             _soul += value;
@@ -67,7 +67,8 @@ public class MoneyManager : MonoBehaviour {
             _soul = 0;
         MoneyUpdate();
         PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulSpawnPosition);
-        Save(false);
+        if(isSave)
+            Save(false);
     }
 
     public bool UseSoul(int amount)
