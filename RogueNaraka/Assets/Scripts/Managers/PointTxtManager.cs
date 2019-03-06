@@ -89,7 +89,7 @@ public class PointTxtManager : MonoBehaviour {
         TextMeshProUGUI txt = TxtOn(tf, value, Color.white, offset);
         if (txt)
         {
-            StartCoroutine(MoveUp(txt, 4f, 0.005f));
+            StartCoroutine(MoveUp(txt, 3f, 0.01f));
             StartCoroutine(AlphaDown(txt, 1f, 5));
         }
     }

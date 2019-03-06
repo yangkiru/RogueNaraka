@@ -21,11 +21,14 @@ public class RageManager : MonoBehaviour
         CheckRage();
     }
 
+    public void ResetSave()
+    {
+        PlayerPrefs.SetInt("rageLevel", 0);
+    }
+
     public void Rage()
     {
         Debug.Log("Rage");
-        isRage = true;
-        PlayerPrefs.SetInt("isRage", 1);
         rageLevel = PlayerPrefs.GetInt("rageLevel") + 1;
         PlayerPrefs.SetInt("rageLevel", rageLevel);
         //ragePnl.SetActive(true);
@@ -68,11 +71,18 @@ public class RageManager : MonoBehaviour
             case 0:
                 return;
             case 1:
-                DmgUp(0.5f, level);
+                DmgUp(2f, level);
+                HpUp(2f, level);
                 break;
             case 2:
-                HpUp(0.5f, level);
+                DmgUp(2f, level);
+                HpUp(2f, level);
                 break;
+            default:
+                DmgUp(2f, level);
+                HpUp(2f, level);
+                break;
+
         }
         Rage(level - 1);
         return;

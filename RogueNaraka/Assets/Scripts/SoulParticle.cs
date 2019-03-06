@@ -11,8 +11,13 @@ public class SoulParticle : MonoBehaviour
     public Rigidbody2D rigid;
     public SpriteRenderer spr;
 
-    public void Init(Vector3 position)
+    int soul;
+    bool isLast;
+
+    public void Init(Vector3 position, int soul, bool isLast)
     {
+        this.soul = soul;
+        this.isLast = isLast;
         points[0].position = position;
         gameObject.SetActive(true);
     }
@@ -58,7 +63,11 @@ public class SoulParticle : MonoBehaviour
 
     public void OnReached(int point)
     {
-        if(point == 2)
-            BoardManager.instance.soulPool.EnqueueObjectPool(gameObject);
+        if (point != 2)
+            return;
+        if (isLast)
+            LevelUpManager.instance.OnEndStage();
+        MoneyManager.instance.AddSoul(soul, false);
+        BoardManager.instance.soulPool.EnqueueObjectPool(gameObject);
     }
 }

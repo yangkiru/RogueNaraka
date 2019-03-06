@@ -159,19 +159,14 @@ public class BoardManager : MonoBehaviour {
             }
         }
         //Debug.Log("SetStage(" + stage + ")");
-        if(stage > GameDatabase.instance.stageCosts.Length)
-        {
-            Debug.Log("NoMoreStage");
-            return;
-        }
-        else if(stage != 0 && stage % 30 == 0)
+        if(stage != 0 && stage % 30 == 0)
         {
             SpawnBoss(0);
             return;
         }
 
 
-        int cost = GameDatabase.instance.stageCosts[stage - 1];
+        int cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];
         UnitCost[] unitCosts = GameDatabase.instance.unitCosts;
         List<int> able = new List<int>();
         for(int i = 0; i < unitCosts.Length; i++)
@@ -222,8 +217,6 @@ public class BoardManager : MonoBehaviour {
 
         StartCoroutine(StageTxtEffect());
     }
-
-
 
     public void SpawnPlayer(UnitData data)
     {
