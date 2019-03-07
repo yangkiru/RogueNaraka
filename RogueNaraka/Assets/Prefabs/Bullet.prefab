@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 114481818113872668}
   - component: {fileID: 1655965979807426877}
   - component: {fileID: 400561887986786836}
+  - component: {fileID: 7784130944132487645}
   - component: {fileID: 114697676651531626}
   - component: {fileID: 114163797499506304}
   - component: {fileID: 114574027343910540}
@@ -112,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitableCircleCast: {fileID: 1655965979807426877}
   hitableTrigger: {fileID: 400561887986786836}
+  hitableRaycast: {fileID: 7784130944132487645}
   hitable: {fileID: 0}
   shootable: {fileID: 114180939160881066}
   moveable: {fileID: 114163797499506304}
@@ -144,6 +146,7 @@ MonoBehaviour:
     disapearDuration: 0
     pierce: 0
     isSplash: 0
+    isHitableWall: 0
     shake:
       time: 0
       power: 0
@@ -182,8 +185,10 @@ MonoBehaviour:
     m_Bits: 0
   delay: 0
   leftDelay: 0
+  _isDestroy: 0
+  isHitableWall: 0
   isSplash: 0
-  pierce: 0
+  _pierce: 0
 --- !u!114 &400561887986786836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,8 +209,34 @@ MonoBehaviour:
     m_Bits: 0
   delay: 0
   leftDelay: 0
+  _isDestroy: 0
+  isHitableWall: 0
   isSplash: 0
-  pierce: 0
+  _pierce: 0
+--- !u!114 &7784130944132487645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040694008069246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234a2e72ff8b9c448b49bddc1bc15624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 114481818113872668}
+  ownerable: {fileID: 114574027343910540}
+  shakeable: {fileID: 1119521292092267351}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  delay: 0
+  leftDelay: 0
+  _isDestroy: 0
+  isHitableWall: 0
+  isSplash: 0
+  _pierce: 0
 --- !u!114 &114697676651531626
 MonoBehaviour:
   m_ObjectHideFlags: 0

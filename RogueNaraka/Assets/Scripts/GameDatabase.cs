@@ -544,7 +544,7 @@ public class StatLang
 [Serializable]
 public enum BULLET_TYPE
 {
-    CIRCLE_CAST, DYNAMIC_CIRCLE, NONE, DYNAMIC_POLY
+    CIRCLE_CAST, DYNAMIC_CIRCLE, NONE, DYNAMIC_POLY, RAY_CAST
 }
 
 [Serializable]

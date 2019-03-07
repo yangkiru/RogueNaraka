@@ -166,7 +166,7 @@ public class BoardManager : MonoBehaviour {
         }
 
 
-        int cost = GameDatabase.instance.stageCosts[stage % 30];
+        int cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];
         UnitCost[] unitCosts = GameDatabase.instance.unitCosts;
         List<int> able = new List<int>();
         for(int i = 0; i < unitCosts.Length; i++)

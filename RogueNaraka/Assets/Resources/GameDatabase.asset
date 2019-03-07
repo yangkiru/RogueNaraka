@@ -1026,7 +1026,7 @@ MonoBehaviour:
     worldAccel: 0
     guideSpeed: 0
     spinSpeed: 0
-    size: 0
+    size: 0.1
     delay: 0
     limitTime: 0
     disapearStartTime: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
     worldAccel: 0
     guideSpeed: 0
     spinSpeed: 0
-    size: 0
+    size: 0.2
     delay: 0
     limitTime: 0
     disapearStartTime: 0
@@ -1181,7 +1181,7 @@ MonoBehaviour:
     worldAccel: 0
     guideSpeed: 0
     spinSpeed: 0
-    size: 0
+    size: 0.3
     delay: 0
     limitTime: 0
     disapearStartTime: 0

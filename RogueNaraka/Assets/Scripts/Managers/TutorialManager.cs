@@ -44,6 +44,13 @@ public class TutorialManager : MonoBehaviour
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
+        instance = this;
+        isTutorial = new bool[startTexts.Length];
+        for (int i = 0; i < startTexts.Length; i++)
+        {
+            isTutorial[i] = PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0;
+        }
+        yield return null;
         StartTutorial(0);
     }
 

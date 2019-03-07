@@ -232,6 +232,7 @@ MonoBehaviour:
     move: 0
     tackleSize: 0
     tackleDamage: 0
+    tackleDelay: 0
     moveDelay: 0
     moveDistance: 0
     moveSpeed: 0
@@ -245,6 +246,7 @@ MonoBehaviour:
   _renderer: {fileID: 212722301744784912}
   _collider: {fileID: 60075246512643172}
   cashedTransform: {fileID: 4616481813884920}
+  isStun: 0
 --- !u!114 &310890433804304187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,11 +681,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AlphaTolerance: 15
-  DistanceThreshold: 0
+  DistanceThreshold: 1
   Scale: 1
   Decompose: 0
   RunInPlayMode: 1
-  UseCache: 1
+  UseCache: 0
   lastAlphaTolerance: 15
   lastScale: 1
   lastDistanceThreshold: 0

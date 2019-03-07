@@ -63,6 +63,7 @@ namespace RogueNaraka.BulletScripts.Hitable
             }
         }
 
+        [SerializeField]
         protected int _pierce;
 
         public event System.Action<Bullet, Unit> OnDamage;

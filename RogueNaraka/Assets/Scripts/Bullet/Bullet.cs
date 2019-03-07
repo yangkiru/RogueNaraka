@@ -13,9 +13,11 @@ namespace RogueNaraka.BulletScripts
         //[SerializeField]
         //HitableBullet _hitableRay;
         [SerializeField]
-        HitableBullet hitableCircleCast;
+        HitableBulletCircleCast hitableCircleCast;
         [SerializeField]
-        HitableBullet hitableTrigger;
+        HitableBulletTrigger hitableTrigger;
+        [SerializeField]
+        HitableBulletRayCast hitableRaycast;
 
         public HitableBullet hitable;
 
@@ -61,6 +63,7 @@ namespace RogueNaraka.BulletScripts
             //hitableRay = GetComponent<HitableBulletRay>();
             hitableCircleCast = GetComponent<HitableBulletCircleCast>();
             hitableTrigger = GetComponent<HitableBulletTrigger>();
+            hitableRaycast = GetComponent<HitableBulletRayCast>();
 
             shootable = GetComponent<ShootableBullet>();
             moveable = GetComponent<MoveableBullet>();
@@ -109,6 +112,10 @@ namespace RogueNaraka.BulletScripts
                 case BULLET_TYPE.DYNAMIC_POLY:
                     hitable = hitableTrigger;
                     advanced.enabled = true;
+                    break;
+                case BULLET_TYPE.RAY_CAST:
+                    hitable = hitableRaycast;
+                    advanced.enabled = false;
                     break;
                 default:
                     break;

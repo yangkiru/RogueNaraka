@@ -88,8 +88,8 @@ public class AudioManager : MonoBehaviour
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
-        sfxVolume = Mathf.InverseLerp(audioSettings[(int)AudioGroups.SFX].slider.minDistance,
-            audioSettings[(int)AudioGroups.SFX].slider.maxDistance, value) * SFX.volume;
+                sfxVolume = Mathf.InverseLerp(audioSettings[(int)AudioGroups.SFX].slider.minValue,
+            audioSettings[(int)AudioGroups.SFX].slider.maxValue, value) * SFX.volume;
         PlayerPrefs.SetFloat(audioSettings[(int)AudioGroups.SFX].exposedParam, value);
 #endif
 

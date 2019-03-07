@@ -522,6 +522,8 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
         private List<Vector2[]> ProcessVertices(PolygonCollider2D collider, Vertices v, List<Vector2[]> list, ref PolygonParameters p, ref int pathIndex)
         {
+            if (pathIndex != 0)
+                return list;
             Vector2 offset = p.Offset;
             float flipXMultiplier = (spriteRenderer.flipX ? -1.0f : 1.0f);
             float flipYMultiplier = (spriteRenderer.flipY ? -1.0f : 1.0f);

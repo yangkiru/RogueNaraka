@@ -14,7 +14,7 @@ public class TutorialText : MonoBehaviour
     public TutorialEvent onStart;
     public TutorialEvent onEnd;
 
-    float delay = 0.05f;
+    float delay = 0.025f;
 
     private void Reset()
     {
@@ -51,15 +51,22 @@ public class TutorialText : MonoBehaviour
                 continue;
             }
             float t = delay;
-            if (Input.anyKey && !TutorialManager.instance.isPause)
-                t = delay * 0.25f;
+
+            //Physics2D.Raycast(GameManager.GetMousePosition())
+            
             do
             {
                 yield return null;
                 if(!TutorialManager.instance.isPause)
                     t -= Time.unscaledDeltaTime;
             } while (t > 0);
-            current = string.Format("{0}{1}", current, text[i]);
+            if (Input.anyKey && !TutorialManager.instance.isPause && i + 1 < text.Length)
+            {
+                current = string.Format("{0}{1}{2}", current, text[i], text[i + 1]);
+                i++;
+            }
+            else
+                current = string.Format("{0}{1}", current, text[i]);
             tmpro.text = current;
         }
         do
