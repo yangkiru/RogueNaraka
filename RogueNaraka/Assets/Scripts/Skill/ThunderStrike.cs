@@ -22,7 +22,7 @@ namespace RogueNaraka.SkillScripts
             {
                 for (int j = 0; j < amount; j++)
                 {
-                    Vector2 rnd = new Vector2(Random.Range(-data.size, data.size), Random.Range(-data.size, data.size));
+                    Vector2 rnd = Random.insideUnitCircle * data.size;
                     Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
                     int rndDirection = Random.Range(0, 2);
                     thunder.Init(BoardManager.instance.player, GameDatabase.instance.bullets[data.bulletIds[rndDirection]]);

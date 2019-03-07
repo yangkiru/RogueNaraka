@@ -40,17 +40,18 @@ namespace RogueNaraka.SkillScripts
 
         public void LevelUp(int amount)
         {
+            float reverse = amount < 0 ? -1 : 1;
             data.level += amount;
             for (int i = 0; i < amount; i++)
             {
-                data.manaCost += data.levelUp.manaCost;
-                data.size += data.levelUp.size;
-                data.coolTime += data.levelUp.coolTime;
+                data.manaCost += data.levelUp.manaCost * reverse;
+                data.size += data.levelUp.size * reverse;
+                data.coolTime += data.levelUp.coolTime * reverse;
                 for (int j = 0; j < data.levelUp.values.Length; j++)
                 {
                     ValueData value = GetValue(data.levelUp.values[j].name);
                     if(value != null)
-                        value.value += data.levelUp.values[j].value;
+                        value.value += data.levelUp.values[j].value * reverse;
                 }
 
                 for (int j = 0; j < data.levelUp.effects.Length; j++)
@@ -58,8 +59,8 @@ namespace RogueNaraka.SkillScripts
                     EffectData effect = GetEffect(data.levelUp.effects[j].type);
                     if (effect != null)
                     {
-                        effect.time += data.levelUp.effects[j].time;
-                        effect.value += data.levelUp.effects[j].value;
+                        effect.time += data.levelUp.effects[j].time * reverse;
+                        effect.value += data.levelUp.effects[j].value * reverse;
                     }
                 }
             }

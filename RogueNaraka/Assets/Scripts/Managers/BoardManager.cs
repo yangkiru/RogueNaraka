@@ -249,6 +249,7 @@ public class BoardManager : MonoBehaviour {
         boss.stat.hp *= RageManager.instance.enemiesHp;
         boss.stat.currentHp *= RageManager.instance.enemiesHp;
         boss.Spawn(bossPoint);
+        Fillable.bossHp.gameObject.SetActive(true);
     }
 
     public Vector2 GetRandomSpawn()

@@ -50,6 +50,7 @@ namespace RogueNaraka.UnitScripts
 
         public void BossOnDeath()
         {
+            Fillable.bossHp.gameObject.SetActive(false);
             //SoulParticle을 생성
             int _soul = (int)(unit.data.cost * RageManager.instance.soul);
             int count = (int)(_soul * 0.25f);

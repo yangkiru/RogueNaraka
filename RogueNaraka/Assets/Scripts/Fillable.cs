@@ -6,37 +6,25 @@ using RogueNaraka.UnitScripts;
 
 public class Fillable : MonoBehaviour
 {
-    public bool isPlayer;
-    public Canvas canvas;
     public float current = 100;
     public float goal = 100;
     public Image img;
     public Unit unit;
     public TYPE type;
-    public Vector2 move;
-    public RectTransform rectTransform;
+    public FILLABLE unitType;
+
+    public static Fillable bossHp;
 
     private float t = 1;
 
     public enum TYPE { HEALTH, MANA }
 
-    void Awake()
+    private void Awake()
     {
-        if (!isPlayer)
+        if(unitType == FILLABLE.BOSS)
         {
-            Vector2 pos = gameObject.transform.position;  // get the game object position
-            Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);  //convert game object position to VievportPoint
-
-            // set MIN and MAX Anchor values(positions) to the same position (ViewportPoint)
-            rectTransform.anchorMin = viewportPoint;
-            rectTransform.anchorMax = viewportPoint;
-        }
-    }
-    void Update()
-    {
-        if (!isPlayer && unit)
-        {
-            transform.parent.position = unit.transform.position + (Vector3)move;
+            bossHp = this;
+            gameObject.SetActive(false);
         }
     }
 
@@ -68,7 +56,19 @@ public class Fillable : MonoBehaviour
         }
         else
         {
-            unit = BoardManager.instance.player;
+            switch (unitType)
+            {
+                case FILLABLE.PLAYER:
+                    unit = BoardManager.instance.player;
+                    break;
+                case FILLABLE.BOSS:
+                    unit = BoardManager.instance.boss;
+                    break;
+            }
         }
     }
 }
+
+    [System.Serializable]
+    public enum FILLABLE
+    { PLAYER, BOSS }

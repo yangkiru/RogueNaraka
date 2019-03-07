@@ -10,9 +10,9 @@ namespace RogueNaraka.BulletScripts.Hitable
 
         public override void OnSpawn()
         {
-            Debug.Log("OnSpawn" + name);
+            //Debug.Log("OnSpawn" + name);
             StartCoroutine(CheckCorou());
-            CheckHit();
+            //CheckHit();
         }
 
         IEnumerator CheckCorou()
@@ -49,7 +49,7 @@ namespace RogueNaraka.BulletScripts.Hitable
                             CheckPierce();
                         break;
                     case HIT.WALL:
-                        Debug.Log("Hit Wall:" + name + ", " + hits[i].collider.name + " " + hits[i].point);
+                        //Debug.Log("Hit Wall:" + name + ", " + hits[i].collider.name + " " + hits[i].point);
 
                         if (!isHitableWall)
                         {
