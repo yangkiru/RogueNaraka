@@ -1417,11 +1417,14 @@ MonoBehaviour:
       - name: 0
         value: 2
     description:
-    - 
-    - 
+    - The damage of thunder is proportional to the technical stats.
+    - "\uB370\uBBF8\uC9C0\uAC00 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
+      \uBC88\uAC1C\uB97C \uCE5C\uB2E4."
     useSFX: thunderStrike
   - name: IceBreak
-    nameLang: []
+    nameLang:
+    - Ice Break
+    - "\uC5BC\uC74C"
     bulletIds: 07000000
     unitIds: 
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
@@ -1437,7 +1440,7 @@ MonoBehaviour:
     isBasic: 1
     effects:
     - type: 3
-      value: 4
+      value: 5
       time: 0
     values:
     - name: 1
@@ -1448,7 +1451,7 @@ MonoBehaviour:
       coolTime: 0
       effects:
       - type: 3
-        value: 1
+        value: 2
         time: 0
       values:
       - name: 1

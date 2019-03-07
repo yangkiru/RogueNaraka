@@ -47,6 +47,8 @@ public class LevelUpManager : MonoBehaviour {
 
     public void OnEndStage()
     {
+        if (player.deathable.isDeath)
+            return;
         player.autoMoveable.enabled = false;
         player.moveable.agent.Stop();
 
