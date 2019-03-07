@@ -166,7 +166,7 @@ public class BoardManager : MonoBehaviour {
         }
 
 
-        int cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];
+        int cost = GameDatabase.instance.stageCosts[stage % 30];
         UnitCost[] unitCosts = GameDatabase.instance.unitCosts;
         List<int> able = new List<int>();
         for(int i = 0; i < unitCosts.Length; i++)
@@ -182,7 +182,7 @@ public class BoardManager : MonoBehaviour {
             for(int j = 0; j < unitCosts[i].unitId.Length; j++)//stage 제한
             {
                 int temp = unitCosts[i].unitId[j];
-                if (GameDatabase.instance.enemies[temp].stage < _stage)
+                if (GameDatabase.instance.enemies[temp].stage <= _stage)
                     ids.Add(temp);
                 
             }
@@ -204,7 +204,7 @@ public class BoardManager : MonoBehaviour {
             for (int j = 0; j < unitCosts[0].unitId.Length; j++)//stage 제한
             {
                 int temp = unitCosts[0].unitId[j];
-                if (GameDatabase.instance.enemies[temp].stage < _stage)
+                if (GameDatabase.instance.enemies[temp].stage <= _stage)
                     ids.Add(temp);
             }
             if (ids.Count > 0)

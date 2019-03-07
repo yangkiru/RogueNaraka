@@ -65,7 +65,7 @@ MonoBehaviour:
   - name: Bug0
     id: 0
     cost: 1
-    stage: 0
+    stage: 1
     weapon: 2
     stat:
       dmg: 1
@@ -257,7 +257,7 @@ MonoBehaviour:
   - name: BoneDragon0
     id: 4
     cost: 3
-    stage: 10
+    stage: 11
     weapon: -1
     stat:
       dmg: 4
@@ -305,7 +305,7 @@ MonoBehaviour:
   - name: BoneHead0
     id: 5
     cost: 4
-    stage: 12
+    stage: 13
     weapon: 1
     stat:
       dmg: 1

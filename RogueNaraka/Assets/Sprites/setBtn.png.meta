@@ -3,7 +3,7 @@ guid: 2bf7e203862f99c4da4bb425caa09569
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -50,7 +50,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -94,7 +94,11 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
+    outline:
+    - - {x: 32, y: 32}
+      - {x: -32, y: 32}
+      - {x: -32, y: -32}
+      - {x: 32, y: -32}
     physicsShape: []
     bones: []
     spriteID: fb17afa50a181f747a173af31ed0243d
