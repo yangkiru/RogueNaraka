@@ -11,15 +11,16 @@ public class SoulParticle : MonoBehaviour
     public Rigidbody2D rigid;
     public SpriteRenderer spr;
 
-    int soul;
-    bool isLast;
+    public static int soulCount = 0;
 
-    public void Init(Vector3 position, int soul, bool isLast)
+    int soul;
+
+    public void Init(Vector3 position, int soul)
     {
         this.soul = soul;
-        this.isLast = isLast;
         points[0].position = position;
         gameObject.SetActive(true);
+        soulCount++;
     }
 
     void OnEnable()
@@ -65,8 +66,8 @@ public class SoulParticle : MonoBehaviour
     {
         if (point != 2)
             return;
-        if (isLast)
-            LevelUpManager.instance.OnEndStage();
+        if (--soulCount <= 0)
+            LevelUpManager.instance.RequestEndStageCorou();
         MoneyManager.instance.AddSoul(soul, false);
         BoardManager.instance.soulPool.EnqueueObjectPool(gameObject);
     }

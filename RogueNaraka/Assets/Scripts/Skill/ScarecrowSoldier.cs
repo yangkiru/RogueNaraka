@@ -19,6 +19,7 @@ namespace RogueNaraka.SkillScripts
             unitData.stat.dmg = BoardManager.instance.player.stat.GetCurrent(STAT.TEC);
             unitData.stat.hp = GetValue(Value.Hp).value;
             unitData.stat.currentHp = unitData.stat.hp;
+            unitData.limitTime = GetValue(Value.Time).value;
             soldier.Init(unitData);
             soldier.Spawn(mp);
             soldier.collider.isTrigger = true;

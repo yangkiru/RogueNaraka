@@ -42,10 +42,7 @@ namespace RogueNaraka.UnitScripts
         public void EnemyOnDeath()
         {
             MoneyManager.instance.AddUnrefinedSoul((int)(unit.data.cost * RageManager.instance.soul));
-            if(BoardManager.instance.enemies.Count <= 1 && BoardManager.instance.boss == null)
-            {
-                LevelUpManager.instance.OnEndStage();
-            }
+            LevelUpManager.instance.RequestEndStageCorou();
         }
 
         public void BossOnDeath()
@@ -59,15 +56,13 @@ namespace RogueNaraka.UnitScripts
             {
                 SoulParticle soulParticle = BoardManager.instance.soulPool.DequeueObjectPool().GetComponent<SoulParticle>();
                 int soul = 0;
-                bool isLast = false;
                 if (i < count - 1)
                     soul = 4;
                 else
                 {
                     soul = 4 + diff;
-                    isLast = true;
                 }
-                soulParticle.Init(unit.cashedTransform.position, soul, isLast);
+                soulParticle.Init(unit.cashedTransform.position, soul);
             }
 
             RageManager.instance.Rage();
@@ -110,8 +105,6 @@ namespace RogueNaraka.UnitScripts
             {
                 yield return null;
             } while (state.normalizedTime < 1 && unit.animator.IsInTransition(0));
-
-            
 
             if (onDeath != null)
             {

@@ -45,6 +45,25 @@ public class LevelUpManager : MonoBehaviour {
     float time;
     bool isLevelUp;
 
+    IEnumerator endStageCorou;
+
+    public void RequestEndStageCorou()
+    {
+        if (endStageCorou != null)
+            return;
+
+        endStageCorou = EndStageCorou();
+        StartCoroutine(EndStageCorou());
+    }
+
+    IEnumerator EndStageCorou()
+    {
+        yield return null;
+        if (BoardManager.instance.enemies.Count == 0)
+            OnEndStage();
+        endStageCorou = null;
+    }
+
     public void OnEndStage()
     {
         if (player.deathable.isDeath)

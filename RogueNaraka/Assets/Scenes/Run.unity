@@ -29217,7 +29217,7 @@ MonoBehaviour:
   start: {x: -531, y: 0}
   spacing: 29
   size: 80
-  speed: 80
+  speed: 40
   first: 0
 --- !u!1 &792975209
 GameObject:
@@ -50096,7 +50096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1420987506
 RectTransform:
   m_ObjectHideFlags: 0
