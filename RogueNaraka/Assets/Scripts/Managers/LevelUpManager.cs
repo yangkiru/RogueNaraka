@@ -126,7 +126,7 @@ public class LevelUpManager : MonoBehaviour {
         GameManager.instance.SetPause(true);
         PlayerPrefs.SetInt("isLevelUp", 1);
         SyncStatUpgradeTxt();
-        SkillManager.instance.SetIsDragable(false);
+        //SkillManager.instance.SetIsDragable(false);
         if (isLeftStatChanged)
         {
             rollManager.SetRollPnl(true, true, false);

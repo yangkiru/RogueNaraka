@@ -168,7 +168,7 @@ public class RollManager : MonoBehaviour {
                 PlayerPrefs.SetInt("rollCount", rollCount);//Roll Count 저장
                 PlayerPrefs.SetInt("stopped", stopped);//저장
 
-                int spin = Random.Range(2, 4);//2~3바퀴
+                int spin = 1;
                 scroll.Spin(spin * 10 + stopped - last);
                 SetSelectPnl(false);
                 StartCoroutine(CheckRollEnd());
@@ -527,7 +527,7 @@ public class RollManager : MonoBehaviour {
             PlayerPrefs.SetInt("stopped", stopped);//저장
         }
         //Save Here
-        int spin = 2;
+        int spin = 1;
         scroll.Spin(spin * 10 + stopped);
         StartCoroutine(CheckRollEnd());
     }

@@ -10,7 +10,6 @@ public class InfiniteScroll : MonoBehaviour {
     public float spacing;
     public float size;
     public float speed;
-    private float _speed;
     public int first;
     public int rolling
     { get { return _rolling; } }
@@ -31,7 +30,6 @@ public class InfiniteScroll : MonoBehaviour {
         {
             objs[i].localPosition = GetPosition(i);
         }
-        SpeedReset();
     }
 
     public Vector2 GetPosition(int index)
@@ -51,7 +49,7 @@ public class InfiniteScroll : MonoBehaviour {
         while (true)
         {
             yield return null;
-            float moving = !RollManager.instance.isPause ? _speed * Time.unscaledDeltaTime * (Input.anyKey ? 3 : 1) : 0;
+            float moving = !RollManager.instance.isPause ? speed * Time.unscaledDeltaTime * (Input.anyKey ? 4 : 1) : 0;
             bool isLast = false;
             if (moved + moving >= distance)
             {
@@ -101,24 +99,13 @@ public class InfiniteScroll : MonoBehaviour {
         for (int i = 0; i < count; i++)
         {
             StartCoroutine(MoveNext());
-            float t = 0;
-            while (t < 0.1f)
+            float t = 0.1f;
+            do
             {
-                t += Time.unscaledDeltaTime;
                 yield return null;
-            }
+                t -= Time.unscaledDeltaTime;
+            } while (t > 0);
         }
-    }
-
-    public void SpeedUp(float value)
-    {
-        _speed *= value;
-        Debug.Log("SpeedUp");
-    }
-
-    public void SpeedReset()
-    {
-        _speed = speed;
     }
 
     [ContextMenu("MoveOne")]

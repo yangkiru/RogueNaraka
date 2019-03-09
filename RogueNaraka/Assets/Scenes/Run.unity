@@ -29217,7 +29217,7 @@ MonoBehaviour:
   start: {x: -531, y: 0}
   spacing: 29
   size: 80
-  speed: 40
+  speed: 80
   first: 0
 --- !u!1 &792975209
 GameObject:
@@ -30953,32 +30953,10 @@ MonoBehaviour:
   - {fileID: 183834732}
   lr: {fileID: 740543707}
   circle: {fileID: 37812797}
-  scroll: {fileID: 0}
-  skillPnl: {fileID: 0}
-  skillSelectPnl: {fileID: 0}
-  skillSelectTxt: {fileID: 0}
-  rejectBtn: {fileID: 0}
-  reRollBtn: {fileID: 0}
-  okBtn: {fileID: 0}
-  cancelBtn: {fileID: 0}
   skills:
   - {fileID: 1329915886}
   - {fileID: 755337020}
   - {fileID: 1255047360}
-  showCaseId: 
-  showCase:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  selected: 0
-  rollCount: 0
   thunderStrike: {fileID: 0}
 --- !u!224 &836182704
 RectTransform:

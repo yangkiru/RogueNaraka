@@ -182,7 +182,7 @@ public class BoardManager : MonoBehaviour {
             for(int j = 0; j < unitCosts[i].unitId.Length; j++)//stage 제한
             {
                 int temp = unitCosts[i].unitId[j];
-                if (GameDatabase.instance.enemies[temp].stage <= _stage)
+                if (GameDatabase.instance.enemies[temp].stage <= (_stage % 30))
                     ids.Add(temp);
                 
             }

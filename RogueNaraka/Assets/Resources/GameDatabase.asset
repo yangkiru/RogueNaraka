@@ -1418,8 +1418,8 @@ MonoBehaviour:
         value: 2
     description:
     - The damage of thunder is proportional to the technical stats.
-    - "\uB370\uBBF8\uC9C0\uAC00 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
-      \uBC88\uAC1C\uB97C \uCE5C\uB2E4."
+    - "\uC704\uB825\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294 \uBC88\uAC1C\uB97C
+      \uCE5C\uB2E4."
     useSFX: thunderStrike
   - name: IceBreak
     nameLang:
