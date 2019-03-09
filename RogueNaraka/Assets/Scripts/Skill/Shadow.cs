@@ -27,7 +27,7 @@ namespace RogueNaraka.SkillScripts
             shadow.collider.enabled = false;
             shadow.targetable.SetTargetable(false);
 
-            shadow.Spawn(BoardManager.instance.player.transform.position);
+            shadow.Spawn(player.cashedTransform.position);
         }
     }
 }

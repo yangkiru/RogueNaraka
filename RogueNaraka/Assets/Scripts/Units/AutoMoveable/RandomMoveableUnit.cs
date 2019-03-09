@@ -24,7 +24,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             }
             else
             {
-                Vector2 rnd = new Vector2(Random.Range(-distance, distance), Random.Range(-distance, distance));
+                Vector2 rnd = Random.insideUnitCircle * distance;
                 moveable.Move((Vector2)cashedTransform.position + rnd);
             }
         }

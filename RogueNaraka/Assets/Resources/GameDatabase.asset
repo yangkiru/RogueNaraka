@@ -52,7 +52,7 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveDelay: 0.5
+    moveDelay: 0.25
     moveDistance: 2
     moveSpeed: 1
     limitTime: 0
@@ -538,7 +538,7 @@ MonoBehaviour:
     moveDelay: 0.01
     moveDistance: 2
     moveSpeed: 5
-    limitTime: 0
+    limitTime: 1
     shadowPos: {x: 0.2, y: -0.45}
     order: -100
     effects: []
@@ -1476,7 +1476,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: 2
-      value: 0.5
+      value: 0.2
     levelUp:
       manaCost: 0.75
       size: 0
@@ -1484,7 +1484,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 2
-        value: 0.25
+        value: 0.1
     description: []
     useSFX: genesis
   - name: BloodSwamp

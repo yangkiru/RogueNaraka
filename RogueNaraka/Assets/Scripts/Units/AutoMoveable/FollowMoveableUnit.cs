@@ -56,7 +56,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             {
                 if (_target.gameObject.activeSelf)
                     _target.followable.RemoveFollower(unit);
-                LostTarget();
+                //LostTarget();
             }
         }
     }

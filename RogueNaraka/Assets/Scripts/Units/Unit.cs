@@ -162,8 +162,13 @@ namespace RogueNaraka.UnitScripts
         {
             if (!Application.isPlaying)
                 return;
-            if(_data.isFriendly)
-                BoardManager.instance.friendlies.Remove(this);
+            if (_data.isFriendly)
+            {
+                if(BoardManager.instance.friendlies.Remove(this))
+                    Debug.Log("Friendly Remove:" + name);
+                else
+                    Debug.Log("Friendly Remove Fail:" + name);
+            }
             else
                 BoardManager.instance.enemies.Remove(this);
         }
@@ -273,9 +278,15 @@ namespace RogueNaraka.UnitScripts
 
             gameObject.SetActive(true);
             if (_data.isFriendly && !BoardManager.instance.friendlies.Contains(this))
+            {
+                Debug.Log("Friendly:" + name);
                 BoardManager.instance.friendlies.Add(this);
+            }
             else if (!_data.isFriendly && !BoardManager.instance.enemies.Contains(this))
+            {
+                Debug.Log("Enemy:" + name);
                 BoardManager.instance.enemies.Add(this);
+            }
             if (_timeLimitable.time != 0)
                 _timeLimitable.enabled = true;
             if (_hpable.currentHp <= 0)

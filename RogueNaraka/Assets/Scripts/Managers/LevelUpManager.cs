@@ -58,9 +58,11 @@ public class LevelUpManager : MonoBehaviour {
 
     IEnumerator EndStageCorou()
     {
-        yield return null;
-        if (BoardManager.instance.enemies.Count == 0)
-            OnEndStage();
+        do
+        {
+            yield return null;
+        } while (BoardManager.instance.enemies.Count != 0);
+        OnEndStage();
         endStageCorou = null;
     }
 
