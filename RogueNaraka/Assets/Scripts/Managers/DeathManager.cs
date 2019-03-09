@@ -78,6 +78,7 @@ public class DeathManager : MonoBehaviour
             unSoulTxt.text = "0";
             PlayerPrefs.SetFloat("lastRefiningRate", refiningRate);
             soulPnl.gameObject.SetActive(true);
+            rate = refiningRate;
             StartCoroutine(SoulRefiningRateTxtCorou(refiningRate));
             StartCoroutine(PumpCorou(soulPnl.rectTransform, 0f, 0.25f));
             AdMobManager.instance.RequestRewardBasedVideo();
@@ -87,8 +88,6 @@ public class DeathManager : MonoBehaviour
             soulPnl.gameObject.SetActive(false);
             btnLayout.SetActive(true);
             PlayerPrefs.SetFloat("lastRefiningRate", -1);
-            isADActive = false;
-            isADReward = false;
         }
     }
 
@@ -143,51 +142,20 @@ public class DeathManager : MonoBehaviour
 
             soulTxt.text = string.Format("{0}<size=12><sprite=0></size>", i);
         }
-
-        StartCoroutine(SoulAutoCloseCorou(rate));
     }
 
-    bool isADActive;
-    bool isADReward;
-    public bool isClose { get; set; }
+    float rate;
 
-    IEnumerator SoulAutoCloseCorou(float rate)
+    public void OnSoulRefiningRatePnlClose()
     {
-        float t = 6;
-        do
-        {
-            yield return null;
-            t -= Time.unscaledDeltaTime * (isADActive ? 0 : 1);
-            if(isADReward)
-            {
-                MoneyManager.instance.RefineSoul(rate * 2);
-                SetSoulPnl(false);
-                yield break;
-            }
-            if(isClose)
-            {
-                MoneyManager.instance.RefineSoul(rate);
-                SetSoulPnl(false);
-                isClose = false;
-                yield break;
-            }
-        } while (t > 0);
-
-        if (soulPnl.gameObject.activeSelf)
-        {
-            MoneyManager.instance.RefineSoul(rate);
-            SetSoulPnl(false);
-        }
-    }
-
-    public void OnADStart()
-    {
-        isADActive = true;
+        MoneyManager.instance.RefineSoul(rate);
+        SetSoulPnl(false);
     }
 
     public void OnADReward()
     {
-        isADReward = true;
+        MoneyManager.instance.RefineSoul(rate * 2);
+        SetSoulPnl(false);
     }
 
     public void ReGame()

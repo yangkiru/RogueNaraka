@@ -52,6 +52,7 @@ public class LevelUpManager : MonoBehaviour {
         if (endStageCorou != null)
             return;
 
+        Debug.Log("StartEndStageCoroutine!!!");
         endStageCorou = EndStageCorou();
         StartCoroutine(EndStageCorou());
     }
@@ -62,7 +63,9 @@ public class LevelUpManager : MonoBehaviour {
         {
             yield return null;
         } while (BoardManager.instance.enemies.Count != 0);
+        Debug.Log("EndStage!!");
         OnEndStage();
+        yield return null;
         endStageCorou = null;
     }
 
