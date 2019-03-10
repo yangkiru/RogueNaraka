@@ -64,7 +64,7 @@ public class SoulShopManager : MonoBehaviour
     /// 외부에서 접근 가능함
     /// </summary>
     /// <param name="value"></param>
-    public void SetSoulShop(bool value)
+    public void SetSoulShop(bool value, int menu = 0)
     {
         if (value)
         {
@@ -74,19 +74,8 @@ public class SoulShopManager : MonoBehaviour
 
             lastMusic = AudioManager.instance.music.clip.name;
             AudioManager.instance.PlayMusic("peace4");
-            if (DeathManager.instance.deathPnl.gameObject.activeSelf)
-            {
-                menuBtns[0].onClick.Invoke();
-                TutorialManager.instance.StartTutorial(3);
-            }
-            else
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    menuBtns[i].interactable = false;
-                }
-                SoulPnlOpen();
-            }
+            
+            menuBtns[menu].onClick.Invoke();
             
         }
         else
@@ -100,7 +89,13 @@ public class SoulShopManager : MonoBehaviour
                 DeathManager.instance.pauseBtn.gameObject.SetActive(true);
             if (LevelUpManager.instance.statPnl.activeSelf)
                 LevelUpManager.instance.SyncStatUpgradeTxt();
+            AudioManager.instance.PlayMusic(AudioManager.instance.currentMusic);
         }
+    }
+
+    public void SetSoulShop(bool value)
+    {
+        SetSoulShop(value, 0);
     }
 
     /// <summary>
@@ -116,6 +111,7 @@ public class SoulShopManager : MonoBehaviour
         statPnl.SetActive(true);
         SyncStatUpgradeTxt();
         preparingPnl.SetActive(false);
+        TutorialManager.instance.StartTutorial(3);
     }
 
     public void SkillPnlOpen()

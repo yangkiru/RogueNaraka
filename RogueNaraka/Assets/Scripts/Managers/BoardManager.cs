@@ -148,7 +148,6 @@ public class BoardManager : MonoBehaviour {
     {
         isReady = false;
 
-        AudioManager.instance.PlayMusic("tension2");
 
         for (int i = 0; i < bulletPool.transform.childCount; i++)
         {
@@ -162,7 +161,17 @@ public class BoardManager : MonoBehaviour {
         if(stage != 0 && stage % 30 == 0)
         {
             SpawnBoss(0);
+            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomBossMusic());
+            
+            StartCoroutine(StageTxtEffect(true));
             return;
+        }
+        else
+        {
+            if(AudioManager.instance.currentMusic.CompareTo(string.Empty)!=0)
+                AudioManager.instance.PlayMusic(AudioManager.instance.currentMusic);
+            else
+                AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMusic());
         }
 
 
@@ -260,11 +269,11 @@ public class BoardManager : MonoBehaviour {
         return new Vector2(x, y);
     }
 
-    private IEnumerator StageTxtEffect()
+    private IEnumerator StageTxtEffect(bool isBoss = false)
     {
         Debug.Log("stageTxt");
         stageTxt.gameObject.SetActive(true);
-        string text = string.Format("STAGE {0}", _stage);
+        string text = isBoss ? "BOSS STAGE" : string.Format("STAGE {0}", _stage);
         stageTxt.text = string.Empty;
         Color color = Color.white;
         stageTxt.color = color;
@@ -280,16 +289,6 @@ public class BoardManager : MonoBehaviour {
             }
             stageTxt.text = string.Format("{0}{1}", stageTxt.text, text[i]);
         }
-        //float alpha = 1;
-        //float amount = 2 / 255f;
-        //while (alpha >= 0)
-        //{
-        //    alpha -= amount;
-        //    color.a = alpha;
-        //    stageTxt.color = color;
-        //    yield return null;
-        //}
-        //stageTxt.gameObject.SetActive(false);
     }
 
     public void ClearStage()

@@ -190,8 +190,7 @@ public class RollManager : MonoBehaviour {
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
-        SoulShopManager.instance.SetSoulShop(true);
-        SoulShopManager.instance.SoulPnlOpen();
+        SoulShopManager.instance.SetSoulShop(true, 3);
         reRollTxt.text = "ReRoll";
     }
 

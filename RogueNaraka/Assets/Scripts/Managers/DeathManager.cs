@@ -47,7 +47,7 @@ public class DeathManager : MonoBehaviour
 
         pauseBtn.gameObject.SetActive(false);
 
-        AudioManager.instance.PlayMusic("silent1");
+        AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomDeathMusic());
     }
 
     IEnumerator SoulPnlCorou(float t)
@@ -81,6 +81,8 @@ public class DeathManager : MonoBehaviour
             rate = refiningRate;
             StartCoroutine(SoulRefiningRateTxtCorou(refiningRate));
             StartCoroutine(PumpCorou(soulPnl.rectTransform, 0f, 0.25f));
+            soulCorou = SoulCorou();
+            StartCoroutine(soulCorou);
             AdMobManager.instance.RequestRewardBasedVideo();
         }
         else
@@ -144,23 +146,74 @@ public class DeathManager : MonoBehaviour
         }
     }
 
+    bool isADReward;
+    //-    public bool isClose { get; set; }
+    //-
+    //-    IEnumerator SoulAutoCloseCorou(float rate)
+    //-    {
+    //-        float t = 6;
+    //-        do
+    //-        {
+    //-            yield return null;
+    //-            t -= Time.unscaledDeltaTime* (isADActive? 0 : 1);
+    //-            if(isADReward)
+    //-            {
+    //-                MoneyManager.instance.RefineSoul(rate* 2);
+    //-                SetSoulPnl(false);
+    //-                yield break;
+    //-            }
+    //-            if(isClose)
+    //-            {
+    //-                MoneyManager.instance.RefineSoul(rate);
+    //-                SetSoulPnl(false);
+    //-                isClose = false;
+    //-                yield break;
+    //-            }
+    //-        } while (t > 0);
+    //-
+    //-        if (soulPnl.gameObject.activeSelf)
+    //-        {
+    //-            MoneyManager.instance.RefineSoul(rate);
+    //-            SetSoulPnl(false);
+    //-        }
+    //-    }
+
+    IEnumerator soulCorou;
+    IEnumerator SoulCorou()
+    {
+        while(true)
+        {
+            yield return null;
+            if(isADReward)
+            {
+                yield return null;
+                MoneyManager.instance.RefineSoul(rate * 2);
+                SetSoulPnl(false);
+                break;
+            }
+        }
+        soulCorou = null;
+    }
+
     float rate;
 
     public void OnSoulRefiningRatePnlClose()
     {
+        StopCoroutine(soulCorou);
         MoneyManager.instance.RefineSoul(rate);
         SetSoulPnl(false);
     }
 
     public void OnADReward()
     {
-        MoneyManager.instance.RefineSoul(rate * 2);
-        SetSoulPnl(false);
+        isADReward = true;
     }
 
     public void ReGame()
     {
         SetDeathPnl(false);
+
+        RankManager.instance.SendPlayerRank();
         PlayerPrefs.SetInt("isRun", 0);
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
@@ -170,7 +223,7 @@ public class DeathManager : MonoBehaviour
         GameManager.instance.Load();
         PlayerPrefs.SetFloat("lastRefiningRate", 0);
 
-        AudioManager.instance.PlayMusic("tension2");
+        AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMusic());
 
         BoardManager.instance.player.hpable.SetFullHp();
         BoardManager.instance.player.mpable.SetFullMp();

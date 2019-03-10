@@ -62,6 +62,11 @@ public class LevelUpManager : MonoBehaviour {
         do
         {
             yield return null;
+            if (player.deathable.isDeath)
+            {
+                endStageCorou = null;
+                yield break;
+            }
         } while (BoardManager.instance.enemies.Count != 0);
         Debug.Log("EndStage!!");
         OnEndStage();

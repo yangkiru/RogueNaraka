@@ -82,9 +82,9 @@ public class RageManager : MonoBehaviour
             //    HpUp(2f, level);
             //    break;
             default:
-                DmgUp(2f, level);
-                HpUp(2f, level);
-                SoulUp(1f, level);
+                DmgUp(4f, level);
+                HpUp(4f, level);
+                SoulUp(0.5f, level);
                 break;
 
         }

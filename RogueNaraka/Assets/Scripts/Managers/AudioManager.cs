@@ -22,6 +22,11 @@ public class AudioManager : MonoBehaviour
 
     public float sfxVolume = 0.5f;
 
+    public string currentMusic;
+    public string[] playMusics;
+    public string[] deathMusics;
+    public string[] bossMusics;
+
     Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
 #if UNITY_EDITOR || UNITY_STANDALONE
     Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
@@ -66,6 +71,40 @@ public class AudioManager : MonoBehaviour
         {
             audioSettings[i].Initialize();
         }
+    }
+
+    public void PlayRandomMusic()
+    {
+        PlayMusic(GetRandomMusic());
+    }
+
+    public string GetRandomMusic()
+    {
+        int rnd = Random.Range(0, playMusics.Length);
+        string str = playMusics[rnd];
+        do
+        {
+            rnd = Random.Range(0, playMusics.Length);
+            str = playMusics[rnd];
+        } while (str.CompareTo(currentMusic) == 0);
+        currentMusic = str;
+        return str;
+    }
+
+    public string GetRandomDeathMusic()
+    {
+        int rnd = Random.Range(0, deathMusics.Length);
+        string str = deathMusics[rnd];
+        currentMusic = str;
+        return str;
+    }
+
+    public string GetRandomBossMusic()
+    {
+        int rnd = Random.Range(0, bossMusics.Length);
+        string str = bossMusics[rnd];
+        currentMusic = str;
+        return str;
     }
 
     public void SetMasterVolume(float value)
