@@ -65,13 +65,18 @@ public class LevelUpManager : MonoBehaviour {
         } while (BoardManager.instance.enemies.Count != 0);
         Debug.Log("EndStage!!");
         OnEndStage();
-        yield return null;
+        float t = 3;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
         endStageCorou = null;
     }
 
     public void OnEndStage()
     {
-        if (player.deathable.isDeath)
+        if (player.deathable.isDeath && SoulParticle.soulCount != 0)
             return;
         player.autoMoveable.enabled = false;
         player.moveable.agent.Stop();

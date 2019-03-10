@@ -24,8 +24,7 @@ public class RollManager : MonoBehaviour {
     public bool isClickable;
     public bool isPause { get; set; }
     public RollData[] datas;
-    int rollCount { get { Debug.Log("Get rollCount=" + _rollCount); return _rollCount; } set { Debug.Log("Set rollCount="+value); _rollCount = value; } }
-    private int _rollCount;
+    private int rollCount;
     private bool isSkillSelected;
     bool isStageUp;
 
@@ -166,7 +165,10 @@ public class RollManager : MonoBehaviour {
                 isClickable = false;
                 LoadRollCount();
                 int last = stopped;
-                stopped = Random.Range(0, 10);//새로운 selected
+                do
+                {
+                    stopped = Random.Range(0, 10);//새로운 selected
+                } while (last == stopped);
                 rollCount++;
                 PlayerPrefs.SetInt("rollCount", rollCount);//Roll Count 저장
                 PlayerPrefs.SetInt("stopped", stopped);//저장
