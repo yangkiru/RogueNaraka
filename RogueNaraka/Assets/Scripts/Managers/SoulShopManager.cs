@@ -15,6 +15,8 @@ public class SoulShopManager : MonoBehaviour
     public GameObject soulPnl;
     public GameObject preparingPnl;
 
+    public Button[] menuBtns;
+
     public Button statBtn;
 
     public int shopStage
@@ -67,12 +69,25 @@ public class SoulShopManager : MonoBehaviour
         if (value)
         {
             shopPnl.SetActive(true);
-            statBtn.onClick.Invoke();
+            
             GameManager.instance.moneyManager.Load();
 
             lastMusic = AudioManager.instance.music.clip.name;
             AudioManager.instance.PlayMusic("peace4");
-            TutorialManager.instance.StartTutorial(3);
+            if (DeathManager.instance.deathPnl.gameObject.activeSelf)
+            {
+                menuBtns[0].onClick.Invoke();
+                TutorialManager.instance.StartTutorial(3);
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    menuBtns[i].interactable = false;
+                }
+                SoulPnlOpen();
+            }
+            
         }
         else
         {
@@ -137,6 +152,8 @@ public class SoulShopManager : MonoBehaviour
         preparingPnl.SetActive(false);
         RefiningRateTxtNameUpdate();
         RefiningRateTxtUpdate();
+
+        TutorialManager.instance.StartTutorial(4);
     }
 
     #region stat

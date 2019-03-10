@@ -166,6 +166,8 @@ public class GameManager : MonoBehaviour {
 
         PlayerPrefs.SetInt("stage", 1);
 
+        RollManager.instance.ResetData();
+
         PlayerPrefs.SetInt("isReset", 1);
     }
 

@@ -24,7 +24,8 @@ public class RollManager : MonoBehaviour {
     public bool isClickable;
     public bool isPause { get; set; }
     public RollData[] datas;
-    private int rollCount;
+    int rollCount { get { Debug.Log("Get rollCount=" + _rollCount); return _rollCount; } set { Debug.Log("Set rollCount="+value); _rollCount = value; } }
+    private int _rollCount;
     private bool isSkillSelected;
     bool isStageUp;
 
@@ -44,7 +45,8 @@ public class RollManager : MonoBehaviour {
     }
     public void Init()
     {
-        datas = new RollData[showCases.Length];
+        if(datas.Length < showCases.Length)
+            datas = new RollData[showCases.Length];
         for (int i = 0; i < 10; i++)
         {
             showCases[i].enabled = false;
@@ -54,6 +56,7 @@ public class RollManager : MonoBehaviour {
         stopped = -1;
         selected = -1;
         rollCount = 0;
+        isReRoll = false;
         scroll.Init();
         SetSelectPnl(false);
     }
@@ -98,7 +101,7 @@ public class RollManager : MonoBehaviour {
         }
         else
         {
-            Reset();
+            ResetData();
 
             if (!isStageUp)
             {
@@ -261,7 +264,7 @@ public class RollManager : MonoBehaviour {
         return false;
     }
 
-    public void Reset()
+    public void ResetData()
     {
         PlayerPrefs.SetString("rollDatas", string.Empty);
         PlayerPrefs.SetInt("rollCount", 0);

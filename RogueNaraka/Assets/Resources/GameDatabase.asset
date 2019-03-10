@@ -52,8 +52,8 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveDelay: 0.25
-    moveDistance: 2
+    moveDelay: 1
+    moveDistance: 1
     moveSpeed: 1
     limitTime: 0
     shadowPos: {x: 0.2, y: -0.45}
@@ -401,14 +401,14 @@ MonoBehaviour:
   bosses:
   - name: Boss0
     id: 0
-    cost: 100
+    cost: 200
     stage: 0
     weapon: -1
     stat:
       dmg: 10
       spd: 5
       tec: 0
-      hp: 100
+      hp: 300
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -426,7 +426,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 100
+      currentHp: 300
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
@@ -1338,7 +1338,7 @@ MonoBehaviour:
     attackDistance: 0.5
   - name: SwordSmall
     id: 6
-    type: 1
+    type: 2
     startBulletId: 14
     children: []
     onDestroy: []
@@ -1348,30 +1348,30 @@ MonoBehaviour:
     attackDistance: 3
   - name: SwordMedium
     id: 7
-    type: 1
+    type: 2
     startBulletId: 16
     children: []
     onDestroy: []
-    offset: {x: 0, y: 0.5, z: 0}
+    offset: {x: 0, y: 0.4, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 4
   - name: SwordBig
     id: 8
-    type: 1
+    type: 2
     startBulletId: 18
     children: []
     onDestroy: []
-    offset: {x: 0, y: 0.7, z: 0}
+    offset: {x: 0, y: 0.4, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 5
   playerWeapons:
   - level: 0
-    cost: 20
+    cost: 50
     id: 6
   - level: 1
-    cost: 50
+    cost: 100
     id: 7
   - level: 2
     cost: 0
