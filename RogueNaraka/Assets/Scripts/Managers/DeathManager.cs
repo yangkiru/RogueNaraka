@@ -187,6 +187,7 @@ public class DeathManager : MonoBehaviour
             if(isADReward)
             {
                 yield return null;
+                isADReward = false;
                 MoneyManager.instance.RefineSoul(rate * 2);
                 SetSoulPnl(false);
                 break;

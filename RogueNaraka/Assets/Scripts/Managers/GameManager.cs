@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
             int type = Random.Range(0, (int)STAT.MPREGEN + 1);
             if (stat.AddOrigin((STAT)type, 1))
             {
-                Debug.Log(((STAT)type).ToString());
+                //Debug.Log(((STAT)type).ToString());
                 statPoint--;
             }
             else

@@ -527,7 +527,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
-    color: {r: 0.9056604, g: 0, b: 0, a: 0.6}
+    color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0.7921569}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
@@ -540,7 +540,7 @@ MonoBehaviour:
     moveSpeed: 5
     limitTime: 1
     shadowPos: {x: 0.2, y: -0.45}
-    order: -100
+    order: -200
     effects: []
     deathSFX: shadowEnd
     attackSFX: 
@@ -1368,10 +1368,10 @@ MonoBehaviour:
     attackDistance: 5
   playerWeapons:
   - level: 0
-    cost: 50
+    cost: 100
     id: 6
   - level: 1
-    cost: 100
+    cost: 300
     id: 7
   - level: 2
     cost: 0

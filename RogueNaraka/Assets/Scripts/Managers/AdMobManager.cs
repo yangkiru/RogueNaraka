@@ -32,11 +32,15 @@ public class AdMobManager : MonoBehaviour
         set { outputMessage = value; }
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void Start()
     {
-
-        instance = this;
-
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+            return;
 #if UNITY_ANDROID
         string appId = "ca-app-pub-8089259583608162~1486526628";
 #elif UNITY_IPHONE

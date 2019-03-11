@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip[] musicClips;
     public AudioClip[] SFXClips;
+    public string[] SFXNames;
 
     public AudioSource music;
     public AudioSource SFX;
@@ -43,16 +44,30 @@ public class AudioManager : MonoBehaviour
         {
             musicClipDictionary.Add(musicClips[i].name, musicClips[i]);
         }
+#if UNITY_EDITOR || UNITY_STANDALONE
         for (int i = 0; i < SFXClips.Length; i++)
         {
-#if UNITY_EDITOR || UNITY_STANDALONE
             SFXClipDictionary.Add(SFXClips[i].name, SFXClips[i]);
+        }
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
-            fileIDDictionary.Add(SFXClips[i].name, AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXClips[i].name)));
-#endif
+        for (int i = 0; i < SFXNames.Length; i++)
+        {
+            fileIDDictionary.Add(SFXNames[i], AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i])));
         }
+#endif
+
         BtnSound();
+    }
+
+    [ContextMenu("Temp")]
+    void Temp()
+    {
+        SFXNames = new string[SFXClips.Length];
+        for (int i = 0; i < SFXClips.Length; i++)
+        {
+            SFXNames[i] = SFXClips[i].name;
+        }
     }
 
 
