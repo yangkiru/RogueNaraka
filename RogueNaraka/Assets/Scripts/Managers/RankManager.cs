@@ -11,17 +11,13 @@ public class RankManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
+    public void Start()
     {
-        try
-        {
-            PlayGamesPlatform.Activate();
-            Login();
-        }
-        catch
-        {
-            Debug.Log("LeaderBoard Open Failed");
-        }
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+            return;
+
+        PlayGamesPlatform.Activate();
+        Login();
     }
 
     string leaderBoardId = "CgkIvu-SvO4aEAIQAA";
