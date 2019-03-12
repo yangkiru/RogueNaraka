@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -13,8 +14,7 @@ public class AudioManager : MonoBehaviour
     private enum AudioGroups { Master, Music, SFX };
 
     public AudioClip[] musicClips;
-    public AudioClip[] SFXClips;
-    public string[] SFXNames;
+    public DefaultAsset[] SFXs;
 
     public AudioSource music;
     public AudioSource SFX;
@@ -23,7 +23,8 @@ public class AudioManager : MonoBehaviour
 
     public float sfxVolume = 0.5f;
 
-    public string currentMusic;
+    public string currentMainMusic;
+    public string currentDeathMusic;
     public string[] playMusics;
     public string[] deathMusics;
     public string[] bossMusics;
@@ -44,31 +45,31 @@ public class AudioManager : MonoBehaviour
         {
             musicClipDictionary.Add(musicClips[i].name, musicClips[i]);
         }
-#if UNITY_EDITOR || UNITY_STANDALONE
-        for (int i = 0; i < SFXClips.Length; i++)
-        {
-            SFXClipDictionary.Add(SFXClips[i].name, SFXClips[i]);
-        }
-#endif
+//#if UNITY_EDITOR || UNITY_STANDALONE
+//        for (int i = 0; i < SFXs.Length; i++)
+//        {
+//            SFXClipDictionary.Add(SFXs[i].name, SFXs[i]);
+//        }
+//#endif
 #if !UNITY_EDITOR && UNITY_ANDROID
-        for (int i = 0; i < SFXNames.Length; i++)
+        for (int i = 0; i < SFXs.Length; i++)
         {
-            fileIDDictionary.Add(SFXNames[i], AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i])));
+            fileIDDictionary.Add(SFXs[i].name, AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXs[i].name)));
         }
 #endif
 
         BtnSound();
     }
 
-    [ContextMenu("Temp")]
-    void Temp()
-    {
-        SFXNames = new string[SFXClips.Length];
-        for (int i = 0; i < SFXClips.Length; i++)
-        {
-            SFXNames[i] = SFXClips[i].name;
-        }
-    }
+    //[ContextMenu("Temp")]
+    //void Temp()
+    //{
+    //    SFXNames = new string[SFXClips.Length];
+    //    for (int i = 0; i < SFXClips.Length; i++)
+    //    {
+    //        SFXNames[i] = SFXClips[i].name;
+    //    }
+    //}
 
 
     [ContextMenu("BtnSound")]
@@ -90,19 +91,19 @@ public class AudioManager : MonoBehaviour
 
     public void PlayRandomMusic()
     {
-        PlayMusic(GetRandomMusic());
+        PlayMusic(GetRandomMainMusic());
     }
 
-    public string GetRandomMusic()
+    public string GetRandomMainMusic()
     {
-        int rnd = Random.Range(0, playMusics.Length);
-        string str = playMusics[rnd];
+        int rnd;
+        string str;
         do
         {
             rnd = Random.Range(0, playMusics.Length);
             str = playMusics[rnd];
-        } while (str.CompareTo(currentMusic) == 0);
-        currentMusic = str;
+        } while (str.CompareTo(currentMainMusic) == 0);
+        currentMainMusic = str;
         return str;
     }
 
@@ -110,7 +111,7 @@ public class AudioManager : MonoBehaviour
     {
         int rnd = Random.Range(0, deathMusics.Length);
         string str = deathMusics[rnd];
-        currentMusic = str;
+        currentDeathMusic = str;
         return str;
     }
 
@@ -118,7 +119,7 @@ public class AudioManager : MonoBehaviour
     {
         int rnd = Random.Range(0, bossMusics.Length);
         string str = bossMusics[rnd];
-        currentMusic = str;
+        currentMainMusic = str;
         return str;
     }
 

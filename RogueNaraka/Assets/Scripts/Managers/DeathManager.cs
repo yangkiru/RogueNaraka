@@ -214,6 +214,8 @@ public class DeathManager : MonoBehaviour
     {
         SetDeathPnl(false);
 
+        AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
+
         RankManager.instance.SendPlayerRank();
         PlayerPrefs.SetInt("isRun", 0);
         SkillManager.instance.ResetSave();
@@ -223,8 +225,6 @@ public class DeathManager : MonoBehaviour
         BoardManager.instance.ClearStage();
         GameManager.instance.Load();
         PlayerPrefs.SetFloat("lastRefiningRate", 0);
-
-        AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMusic());
 
         BoardManager.instance.player.hpable.SetFullHp();
         BoardManager.instance.player.mpable.SetFullMp();

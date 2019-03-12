@@ -89,7 +89,10 @@ public class SoulShopManager : MonoBehaviour
                 DeathManager.instance.pauseBtn.gameObject.SetActive(true);
             if (LevelUpManager.instance.statPnl.activeSelf)
                 LevelUpManager.instance.SyncStatUpgradeTxt();
-            AudioManager.instance.PlayMusic(AudioManager.instance.currentMusic);
+            if(DeathManager.instance.deathPnl.gameObject.activeSelf)
+                AudioManager.instance.PlayMusic(AudioManager.instance.currentDeathMusic);
+            else
+                AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
         }
     }
 

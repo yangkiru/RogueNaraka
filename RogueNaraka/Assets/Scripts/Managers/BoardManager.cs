@@ -168,10 +168,11 @@ public class BoardManager : MonoBehaviour {
         }
         else
         {
-            if(AudioManager.instance.currentMusic.CompareTo(string.Empty)!=0)
-                AudioManager.instance.PlayMusic(AudioManager.instance.currentMusic);
+            if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty)==0)
+                AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
             else
-                AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMusic());
+                AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
+            
         }
 
 

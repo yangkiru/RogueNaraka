@@ -45,7 +45,7 @@ namespace RogueNaraka.UnitScripts
             else
                 _currentHp = 0;
             stat.currentHp = _currentHp;
-            if(_currentHp <= 0)
+            if(_currentHp <= 0 && !unit.deathable.isDeath)
                 unit.deathable.Death();
         }
 
@@ -69,7 +69,7 @@ namespace RogueNaraka.UnitScripts
             _currentHp = result;
             stat.currentHp = _currentHp;
 
-            if (result <= 0)
+            if (result <= 0 && !unit.deathable.isDeath)
             {
                 unit.deathable.Death();
             }

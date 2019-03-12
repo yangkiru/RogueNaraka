@@ -1019,7 +1019,7 @@ MonoBehaviour:
     dmg: 0.3
     related: 0
     controller: {fileID: 22100000, guid: da63d2c42c766504b8345bff4b454923, type: 2}
-    type: 3
+    type: 4
     localSpeed: 4
     worldSpeed: 0
     localAccel: 0
@@ -1096,7 +1096,7 @@ MonoBehaviour:
     dmg: 0.5
     related: 0
     controller: {fileID: 22100000, guid: 22cbc4dea137a91418cf01a2004c6ea3, type: 2}
-    type: 3
+    type: 4
     localSpeed: 4.5
     worldSpeed: 0
     localAccel: 0
@@ -1174,7 +1174,7 @@ MonoBehaviour:
     dmg: 0.7
     related: 0
     controller: {fileID: 22100000, guid: fce69881dc12eb040ba0d611eecbde7d, type: 2}
-    type: 3
+    type: 4
     localSpeed: 5
     worldSpeed: 0
     localAccel: 0
@@ -1417,21 +1417,21 @@ MonoBehaviour:
       - name: 0
         value: 2
     description:
-    - The damage of thunder is proportional to the technical stats.
-    - "\uC704\uB825\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294 \uBC88\uAC1C\uB97C
-      \uCE5C\uB2E4."
+    - Summon lightning of which damage is proportional to the technical stats.
+    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
+      \uBC88\uAC1C\uB97C \uCE5C\uB2E4."
     useSFX: thunderStrike
   - name: IceBreak
     nameLang:
     - Ice Break
-    - "\uC5BC\uC74C"
+    - "\uC5BC\uC74C\uB561"
     bulletIds: 07000000
     unitIds: 
     spr: {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
     id: 1
     level: 1
     cost: 0
-    coolTime: 3
+    coolTime: 5
     coolTimeLeft: 0
     manaCost: 0.5
     size: 1
@@ -1440,7 +1440,7 @@ MonoBehaviour:
     isBasic: 1
     effects:
     - type: 3
-      value: 5
+      value: 9
       time: 0
     values:
     - name: 1
@@ -1448,7 +1448,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.25
       size: 0
-      coolTime: 0
+      coolTime: -0.25
       effects:
       - type: 3
         value: 2
@@ -1456,10 +1456,15 @@ MonoBehaviour:
       values:
       - name: 1
         value: 0.5
-    description: []
+    description:
+    - Summon ice plane that reduces enemies' speed temporarily.
+    - "\uC21C\uBC1C\uB825\uC744 \uC77C\uC2DC\uC801\uC73C\uB85C \uAC10\uC18C\uC2DC\uD0A4\uB294
+      \uBE59\uD310\uC744 \uC18C\uD658\uD55C\uB2E4."
     useSFX: 
   - name: Genesis
-    nameLang: []
+    nameLang:
+    - Genesis
+    - "\uC81C\uB124\uC2DC\uC2A4"
     bulletIds: 0a000000
     unitIds: 
     spr: {fileID: 21300000, guid: 3c8be8ee2042a0e4bbb154b327514c01, type: 3}
@@ -1485,10 +1490,15 @@ MonoBehaviour:
       values:
       - name: 2
         value: 0.1
-    description: []
+    description:
+    - Shoot beam of which damage is proportional to the technical stats.
+    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
+      \uBE54\uC744 \uC3DC\uB2E4."
     useSFX: genesis
   - name: BloodSwamp
-    nameLang: []
+    nameLang:
+    - Blood Swamp
+    - "\uD53C\uC758 \uB2AA"
     bulletIds: 0800000009000000
     unitIds: 
     spr: {fileID: 21300000, guid: 0b192675c393aa24bb17096185049b2f, type: 3}
@@ -1516,10 +1526,15 @@ MonoBehaviour:
       values:
       - name: 3
         value: 0.1
-    description: []
+    description:
+    - Summon a blood swamp absorbing health from target enemies
+    - "\uB2FF\uC740 \uC801\uB4E4\uC758 \uCCB4\uB825\uC744 \uD761\uC218\uD558\uB294
+      \uB2AA\uC744 \uC18C\uD658\uD55C\uB2E4"
     useSFX: blood
   - name: ScarecrowSoldier
-    nameLang: []
+    nameLang:
+    - Scarecrow Soldier
+    - "\uD5C8\uC218\uC544\uBE44 \uBCD1\uC0AC"
     bulletIds: 
     unitIds: 00000000
     spr: {fileID: 21300000, guid: caaeff1be02fc8144845d3e17ffe77b9, type: 3}
@@ -1549,7 +1564,12 @@ MonoBehaviour:
         value: 1
       - name: 1
         value: 0.5
-    description: []
+    description:
+    - Summon a Scarecrow of which damage is proportional to the technical stats. It
+      can be used as a shield.
+    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uACE0
+      \uBC29\uD328\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC788\uB294 \uD5C8\uC218\uC544\uBE44\uB97C
+      \uC18C\uD658\uD55C\uB2E4."
     useSFX: scarecrow
   - name: Shadow
     nameLang:
@@ -1580,7 +1600,10 @@ MonoBehaviour:
       values:
       - name: 1
         value: 1
-    description: []
+    description:
+    - Summon shadow of which damage is half of the player's damage stat.
+    - "\uD50C\uB808\uC774\uC5B4\uC758 \uC808\uBC18\uC758 \uACF5\uACA9\uB825\uC744
+      \uAC16\uB294 \uADF8\uB9BC\uC790\uB97C \uC18C\uD658\uD55C\uB2E4."
     useSFX: shadowStart
   - name: DashShoes
     nameLang:
@@ -1607,7 +1630,9 @@ MonoBehaviour:
       coolTime: -0.5
       effects: []
       values: []
-    description: []
+    description:
+    - Move fast.
+    - "\uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4."
     useSFX: dashShoes
   - name: FlameShoes
     nameLang:
@@ -1642,21 +1667,34 @@ MonoBehaviour:
       values:
       - name: 7
         value: 0.1
-    description: []
+    description:
+    - Move fast summoning flames with dot damage.
+    - "\uC9C0\uC18D\uC801\uC73C\uB85C \uD654\uC5FC \uD53C\uD574\uB97C \uC8FC\uB294
+      \uBD88\uAF43\uC744 \uC18C\uD658\uD558\uBA70 \uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4."
     useSFX: flameShoes
   items:
   - name: HealPotion
-    nameLang: []
+    nameLang:
+    - Heal Potion
+    - "\uCCB4\uB825 \uD68C\uBCF5 \uBB3C\uC57D"
     id: 0
     value: 1
     size: 0
-    description: []
+    description:
+    - If you drink this portion, you can restore your helath.
+    - "\uB9C8\uC2DC\uBA74 \uCCB4\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uD560 \uC218
+      \uC788\uB2E4."
   - name: ManaPotion
-    nameLang: []
+    nameLang:
+    - Mana Potion
+    - "\uB9C8\uB825 \uD68C\uBCF5 \uBB3C\uC57D"
     id: 1
     value: 1
     size: 0
-    description: []
+    description:
+    - If you drink this portion, you can restore your mana
+    - "\uB9C8\uC2DC\uBA74 \uB9C8\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uD560 \uC218
+      \uC788\uB2E4."
   itemSprites:
   - id: 0
     name: HealPotion

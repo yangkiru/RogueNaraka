@@ -64,7 +64,7 @@ namespace RogueNaraka.UnitScripts
                 }
                 soulParticle.Init(unit.cashedTransform.position, soul);
             }
-            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMusic());
+            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
             RageManager.instance.Rage();
         }
 
