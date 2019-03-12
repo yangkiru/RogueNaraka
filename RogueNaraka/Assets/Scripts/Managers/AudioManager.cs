@@ -71,8 +71,6 @@ public class AudioManager : MonoBehaviour
     //    }
     //}
 
-
-    [ContextMenu("BtnSound")]
     void BtnSound()
     {
         for (int i = 0; i < btns.Length; i++)

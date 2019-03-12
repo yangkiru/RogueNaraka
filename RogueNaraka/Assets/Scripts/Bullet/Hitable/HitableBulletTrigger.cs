@@ -61,6 +61,8 @@ namespace RogueNaraka.BulletScripts.Hitable
         private void OnTriggerStay2D(Collider2D coll)
         {
             //Debug.Log(name + " OnTriggerStay " + coll.name);
+            if (pierce <= 0)
+                return;
             HIT result = Hit(coll);
             switch(result)
             {

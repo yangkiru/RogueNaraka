@@ -9,7 +9,7 @@ public class DeathManager : MonoBehaviour
 {
     public static DeathManager instance;
 
-    public GameObject btnLayout;
+    public GameObject[] btnLayout;
     public Image deathPnl;
     public Image soulPnl;
 
@@ -31,7 +31,8 @@ public class DeathManager : MonoBehaviour
         //CameraShake.instance.Shake(0.2f, 0.2f, 0.01f);
         if (value)
         {
-            btnLayout.SetActive(false);
+            btnLayout[0].SetActive(false);
+            btnLayout[1].SetActive(false);
             StartCoroutine(PumpCorou(youDied.rectTransform, 3, 0.5f));
         }
     }
@@ -64,7 +65,8 @@ public class DeathManager : MonoBehaviour
         }
         else
         {
-            btnLayout.SetActive(true);
+            btnLayout[0].SetActive(true);
+            btnLayout[1].SetActive(true);
         }
     }
 
@@ -88,7 +90,8 @@ public class DeathManager : MonoBehaviour
         else
         {
             soulPnl.gameObject.SetActive(false);
-            btnLayout.SetActive(true);
+            btnLayout[0].SetActive(true);
+            btnLayout[1].SetActive(true);
             PlayerPrefs.SetFloat("lastRefiningRate", -1);
         }
     }
