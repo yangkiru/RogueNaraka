@@ -6,6 +6,7 @@ namespace RogueNaraka.UnitScripts.Targetable
 {
     public abstract class TargetableUnit : MonoBehaviour
     {
+        [SerializeField]
         Unit owner;
         public Unit target { get { return _target; } }
         [SerializeField]
@@ -37,14 +38,15 @@ namespace RogueNaraka.UnitScripts.Targetable
             else
                 leftDelay = 0.1f;
             _target = GetTarget();
-            _targetDistance = Distance(target);
+            _targetDistance = Distance(_target);
         }
 
         protected float Distance(Unit target)
         {
-            if (!target)
+            if (target == null || target.deathable.isDeath)
                 return float.PositiveInfinity;
-            return Vector2.SqrMagnitude(target.transform.position - transform.position);
+            else
+                return Vector2.SqrMagnitude(target.cashedTransform.position - owner.cashedTransform.position);
         }
 
         public void SetTargetable(bool value)

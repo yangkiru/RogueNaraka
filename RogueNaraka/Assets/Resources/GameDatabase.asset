@@ -165,7 +165,7 @@ MonoBehaviour:
     weapon: -1
     stat:
       dmg: 1
-      spd: 0
+      spd: 5
       tec: 0
       hp: 5
       mp: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     tackleDelay: 0.3
     moveDelay: 0.4
     moveDistance: 5
-    moveSpeed: 3
+    moveSpeed: 2.25
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
@@ -212,8 +212,8 @@ MonoBehaviour:
     stage: 8
     weapon: -1
     stat:
-      dmg: 2
-      spd: 0
+      dmg: 1
+      spd: 5
       tec: 0
       hp: 10
       mp: 0
@@ -244,10 +244,10 @@ MonoBehaviour:
     move: 5
     tackleSize: 0.3
     tackleDamage: 0.3
-    tackleDelay: 0.3
+    tackleDelay: 1
     moveDelay: 0.4
     moveDistance: 5
-    moveSpeed: 3
+    moveSpeed: 2.25
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
@@ -260,10 +260,10 @@ MonoBehaviour:
     stage: 11
     weapon: -1
     stat:
-      dmg: 4
+      dmg: 1
       spd: 0
       tec: 0
-      hp: 18
+      hp: 25
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 18
+      currentHp: 25
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
@@ -290,9 +290,9 @@ MonoBehaviour:
     isFriendly: 0
     isStanding: 1
     move: 1
-    tackleSize: 0.1
-    tackleDamage: 0.125
-    tackleDelay: 0.25
+    tackleSize: 0.35
+    tackleDamage: 0.5
+    tackleDelay: 1
     moveDelay: 0.5
     moveDistance: 2
     moveSpeed: 1
@@ -406,7 +406,7 @@ MonoBehaviour:
     weapon: -1
     stat:
       dmg: 10
-      spd: 5
+      spd: 20
       tec: 0
       hp: 300
       mp: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
     tackleDelay: 0.25
     moveDelay: 0
     moveDistance: 5
-    moveSpeed: 2
+    moveSpeed: 1
     limitTime: 0
     shadowPos: {x: 0, y: 0}
     order: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: 2
-      value: 0.2
+      value: 0.25
     levelUp:
       manaCost: 0.75
       size: 0

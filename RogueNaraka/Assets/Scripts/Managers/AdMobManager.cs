@@ -25,6 +25,8 @@ public class AdMobManager : MonoBehaviour
     public Image testerPnl;
     public TMPro.TextMeshProUGUI testerTxt;
 
+    bool isInit;
+
     public static AdMobManager instance;
 
     public static string OutputMessage
@@ -48,7 +50,11 @@ public class AdMobManager : MonoBehaviour
 #else
         string appId = "unexpected_platform";
 #endif
-
+        if (isInit)
+        {
+            RequestRewardBasedVideo();
+            return;
+        }
         MobileAds.SetiOSAppPauseOnBackground(true);
 
         // Initialize the Google Mobile Ads SDK.
@@ -73,6 +79,8 @@ public class AdMobManager : MonoBehaviour
         this.rewardBasedVideo.OnAdLeavingApplication += this.HandleRewardBasedVideoLeftApplication;
 
         RequestRewardBasedVideo();
+
+        isInit = true;
     }
 
     public void SetIsTester(bool value)
@@ -154,9 +162,15 @@ public class AdMobManager : MonoBehaviour
             removeAdsBtn.interactable = false;
             return;
         }
-        // These ad units are configured to always serve test ads.
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            StartCoroutine(RequestBannerCorou());
+            return;
+        }
+
+            // These ad units are configured to always serve test ads.
 #if UNITY_EDITOR
-        string adUnitId = "ca-app-pub-8089259583608162/9668268975";
+            string adUnitId = "ca-app-pub-8089259583608162/9668268975";
 #elif UNITY_ANDROID
         string adUnitId = "ca-app-pub-8089259583608162/9668268975";
 #elif UNITY_IPHONE
@@ -266,6 +280,7 @@ public class AdMobManager : MonoBehaviour
                     adDescTxt.text = "나중에 다시 시도해주세요";
                     break;
             }
+            RequestRewardBasedVideo();
         }
     }
 
@@ -415,13 +430,24 @@ public class AdMobManager : MonoBehaviour
         onStart = adEventScript.onStart;
     }
 
-    IEnumerator RequestRewardVideoCorou()
+    IEnumerator RequestBannerCorou()
     {
-        float t = 1;
-        do
+        while(true)
         {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-        } while (t > 0);
+            if (Application.internetReachability != NetworkReachability.NotReachable)
+            {
+                Start();
+                RequestBanner();
+                yield break;
+            }
+            float t = 10;
+            do
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+            } while (t > 0);
+        }
     }
+
+
 }

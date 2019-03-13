@@ -217,7 +217,7 @@ public class DeathManager : MonoBehaviour
     {
         SetDeathPnl(false);
 
-        AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
+        //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
 
         RankManager.instance.SendPlayerRank();
         PlayerPrefs.SetInt("isRun", 0);

@@ -76,6 +76,7 @@ public class LevelUpManager : MonoBehaviour {
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
+        AdMobManager.instance.RequestBanner();
         endStageCorou = null;
     }
 

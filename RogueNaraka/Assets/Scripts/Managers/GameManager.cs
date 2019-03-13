@@ -201,6 +201,7 @@ public class GameManager : MonoBehaviour {
         {
             SetPause(true);
             RollManager.instance.SetRollPnl(true, false);
+            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         }
         else
         {
@@ -250,6 +251,7 @@ public class GameManager : MonoBehaviour {
             if (randomStat != null)
             {
                 StatOrbManager.instance.SetActive(true, randomStat, stat);
+                AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
                 //StatOrbManager.OnLastOverflow에서 RunGame() 호출
             }
             else

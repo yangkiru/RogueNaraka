@@ -56,6 +56,7 @@ public class RankManager : MonoBehaviour
 
     public void SendPlayerRank()
     {
+        Debug.Log("SendPlayerRank:" + (long)BoardManager.instance.stage);
 #if UNITY_ANDROID
         Login();
         Social.ReportScore((long)BoardManager.instance.stage, leaderBoardId, (bool success) =>
@@ -73,32 +74,33 @@ public class RankManager : MonoBehaviour
 #endif
     }
 
-    void AuthenticateHandler(bool isSuccess)
-    {
-        if (isSuccess)
-        {
-            Debug.Log("LeaderBoard Login Success");
-        }
-        else
-        {
-            Debug.Log("LeaderBoard Login Failed");
-            //login failed
-        }
+    //void AuthenticateHandler(bool isSuccess)
+    //{
+    //    if (isSuccess)
+    //    {
+    //        Debug.Log("LeaderBoard Login Success");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("LeaderBoard Login Failed");
+    //        //login failed
+    //    }
 
-    }
+    //}
 
     public void ShowRank()
     {
+        Login();
         Social.ShowLeaderboardUI();
     }
 
-    public void SetLocalRank()
-    {
+    //public void SetLocalRank()
+    //{
 
-    }
+    //}
 
-    public void ShowAchievement()
-    {
+    //public void ShowAchievement()
+    //{
 
-    }
+    //}
 }
