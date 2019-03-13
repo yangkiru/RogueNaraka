@@ -279,11 +279,11 @@ namespace PolyNav{
 			if (remainingDistance < slowingDistance){
 				
 				accelerationValue = 0;
-				_velocity += Arrive(nextPoint) / mass;
+				_velocity += Arrive(nextPoint) / mass * Time.timeScale;
 
 			} else {
 
-				_velocity += Seek(nextPoint) / mass;
+				_velocity += Seek(nextPoint) / mass * Time.timeScale;
 				accelerationValue += accelerationRate * Time.deltaTime;
 				accelerationValue = Mathf.Clamp01(accelerationValue);
 				_velocity *= accelerationValue;

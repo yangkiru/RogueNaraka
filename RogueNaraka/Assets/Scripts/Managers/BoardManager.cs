@@ -246,6 +246,8 @@ public class BoardManager : MonoBehaviour {
         enemy.stat.dmg *= RageManager.instance.enemiesDmg;
         enemy.stat.hp *= RageManager.instance.enemiesHp;
         enemy.stat.currentHp *= RageManager.instance.enemiesHp;
+        enemy.hpable.SetHp(enemy.stat.currentHp);
+
         enemy.Spawn(GetRandomSpawn());
     }
 

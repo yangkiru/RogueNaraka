@@ -21,18 +21,24 @@ public class TutorialManager : MonoBehaviour
         {
             isTutorial.Add(PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0);
         }
+        
+    }
+
+    IEnumerator IntroCorou()
+    {
+        yield return null;
         StartTutorial(0);
     }
 
-    //private void Start()
-    //{
-
-    //    //isTutorial = new bool[startTexts.Length];
-    //    //for (int i = 0; i < startTexts.Length; i++)
-    //    //{
-    //    //    isTutorial[i] = PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0;
-    //    //}
-    //}
+    private void Start()
+    {
+        StartCoroutine(IntroCorou());
+        //    //isTutorial = new bool[startTexts.Length];
+        //    //for (int i = 0; i < startTexts.Length; i++)
+        //    //{
+        //    //    isTutorial[i] = PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)) == 0;
+        //    //}
+    }
 
     public void ResetTutorial()
     {

@@ -54,7 +54,6 @@ public class AudioManager : MonoBehaviour
 #if UNITY_EDITOR || UNITY_STANDALONE
         for (int i = 0; i < SFXNames.Length; i++)
         {
-
             StartCoroutine(LoadClipCoroutine(SFXNames[i], OnAudioClipLoadingCompleted));
         }
 #endif
@@ -62,13 +61,14 @@ public class AudioManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_ANDROID
         for (int i = 0; i < SFXNames.Length; i++)
         {
-            fileIDDictionary.Add(SFXNames[i].name, AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i].name)));
+            fileIDDictionary.Add(SFXNames[i], AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i])));
         }
 #endif
 
         BtnSound();
     }
 
+    #if UNITY_EDITOR || UNITY_STANDALONE
     IEnumerator LoadClipCoroutine(string name, System.Action<AudioClip> onLoadingCompleted)
     {
         string file = (string.Format("{0}/SFX/{1}.wav", Application.streamingAssetsPath, name));
@@ -86,6 +86,7 @@ public class AudioManager : MonoBehaviour
                 clip.name = name;
                 onLoadingCompleted(clip);
             }
+            www.Dispose();
         }
     }
 
@@ -103,6 +104,7 @@ public class AudioManager : MonoBehaviour
             SFXNames[i] = SFXs[i].name;
         }
     }
+#endif
 
     void BtnSound()
     {
@@ -223,7 +225,11 @@ public class AudioManager : MonoBehaviour
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
-        AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume);
+        try
+        {
+            AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume);
+        }catch
+        {}
 #endif
     }
 #if !UNITY_EDITOR && UNITY_ANDROID

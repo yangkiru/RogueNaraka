@@ -8,6 +8,7 @@ public class RollManager : MonoBehaviour {
     public InfiniteScroll scroll;
     public Button rejectBtn;
     public Image[] showCases;
+    public GameObject pauseBtn;
     public GameObject rollPnl;
     public GameObject selectPnl;
     public Image dragImg;
@@ -92,6 +93,7 @@ public class RollManager : MonoBehaviour {
         this.isStageUp = isStageUp;
         if (value)
         {
+            pauseBtn.SetActive(true);
             rollPnl.SetActive(value);
             Init();
             SetShowCase(isRoll);
