@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
@@ -14,7 +15,12 @@ public class AudioManager : MonoBehaviour
     private enum AudioGroups { Master, Music, SFX };
 
     public AudioClip[] musicClips;
+
+#if UNITY_EDITOR
     public DefaultAsset[] SFXs;
+#endif
+
+    public string[] SFXNames;
 
     public AudioSource music;
     public AudioSource SFX;
@@ -30,7 +36,7 @@ public class AudioManager : MonoBehaviour
     public string[] bossMusics;
 
     Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_EDITOR
     Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
@@ -45,31 +51,58 @@ public class AudioManager : MonoBehaviour
         {
             musicClipDictionary.Add(musicClips[i].name, musicClips[i]);
         }
-//#if UNITY_EDITOR || UNITY_STANDALONE
-//        for (int i = 0; i < SFXs.Length; i++)
-//        {
-//            SFXClipDictionary.Add(SFXs[i].name, SFXs[i]);
-//        }
-//#endif
-#if !UNITY_EDITOR && UNITY_ANDROID
-        for (int i = 0; i < SFXs.Length; i++)
+#if UNITY_EDITOR || UNITY_STANDALONE
+        for (int i = 0; i < SFXNames.Length; i++)
         {
-            fileIDDictionary.Add(SFXs[i].name, AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXs[i].name)));
+
+            StartCoroutine(LoadClipCoroutine(SFXNames[i], OnAudioClipLoadingCompleted));
+        }
+#endif
+
+#if !UNITY_EDITOR && UNITY_ANDROID
+        for (int i = 0; i < SFXNames.Length; i++)
+        {
+            fileIDDictionary.Add(SFXNames[i].name, AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i].name)));
         }
 #endif
 
         BtnSound();
     }
 
-    //[ContextMenu("Temp")]
-    //void Temp()
-    //{
-    //    SFXNames = new string[SFXClips.Length];
-    //    for (int i = 0; i < SFXClips.Length; i++)
-    //    {
-    //        SFXNames[i] = SFXClips[i].name;
-    //    }
-    //}
+    IEnumerator LoadClipCoroutine(string name, System.Action<AudioClip> onLoadingCompleted)
+    {
+        string file = (string.Format("{0}/SFX/{1}.wav", Application.streamingAssetsPath, name));
+        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(file, AudioType.WAV))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError)
+            {
+                Debug.Log("Sound Loading Fail:" + file);
+            }
+            else if (onLoadingCompleted != null)
+            {
+                AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
+                clip.name = name;
+                onLoadingCompleted(clip);
+            }
+        }
+    }
+
+    void OnAudioClipLoadingCompleted(AudioClip clip)
+    {
+        SFXClipDictionary.Add(clip.name, clip);
+    }
+
+    [ContextMenu("Temp")]
+    void Temp()
+    {
+        SFXNames = new string[SFXs.Length];
+        for (int i = 0; i < SFXs.Length; i++)
+        {
+            SFXNames[i] = SFXs[i].name;
+        }
+    }
 
     void BtnSound()
     {
