@@ -52,7 +52,7 @@ namespace RogueNaraka.UnitScripts
             int _soul = (int)(unit.data.cost * RageManager.instance.soul);
             int count = (int)(_soul * 0.25f);
             int diff = _soul - (count * 4);
-            for (int i = 0; i < unit.data.cost*0.25f; i++)
+            for (int i = 0; i < count; i++)
             {
                 SoulParticle soulParticle = BoardManager.instance.soulPool.DequeueObjectPool().GetComponent<SoulParticle>();
                 int soul = 0;
@@ -66,6 +66,7 @@ namespace RogueNaraka.UnitScripts
             }
             AudioManager.instance.GetRandomMainMusic();
             RageManager.instance.Rage();
+            BoardManager.instance.boss = null;
         }
 
         public void Death()

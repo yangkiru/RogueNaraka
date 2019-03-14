@@ -82,7 +82,7 @@ public class LevelUpManager : MonoBehaviour {
 
     public void OnEndStage()
     {
-        if (player.deathable.isDeath && SoulParticle.soulCount != 0)
+        if (player.deathable.isDeath || SoulParticle.soulCount != 0)
             return;
         player.autoMoveable.enabled = false;
         player.moveable.agent.Stop();

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using GoogleMobileAds.Api;
 using RogueNaraka.UnitScripts;
 using TMPro;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
@@ -66,19 +67,48 @@ public class GameManager : MonoBehaviour {
         }
 
         string lang = PlayerPrefs.GetString("language");
-        try
-        {
+        //try
+        //{
             if (lang == string.Empty)
+            {
+                Debug.Log("Language Empty");
                 language = (Language)System.Enum.Parse(typeof(Language), Application.systemLanguage.ToString());
+            }
             else
-                language = (Language)System.Enum.Parse(typeof(Language), lang);
+            {
+                Debug.Log("Language " + lang);
+                language = (Language)System.Enum.Parse(typeof(Language), StripAlpha(lang));
+            }
             SetLanguage((int)language);
-        } catch
-        {
-            Debug.Log("Can't not fine language : " + lang);
-            SetLanguage(0);
-        }
+        //}
+        //catch
+        //{
+        //    Debug.Log("Can't not find language : " + lang);
+        //    SetLanguage(0);
+        //}
         Application.targetFrameRate = 60;
+    }
+
+    public void SetLanguage(int num = -1)
+    {
+        if (num != -1)
+            language = (Language)num;
+        string str = language.ToString();
+        PlayerPrefs.SetString("language", str);
+        Debug.Log(language);
+        int lang = (int)language;
+        for (int i = 0; i < languageBtns.Length; i++)
+        {
+            if (i == lang)
+                languageBtns[i].interactable = false;
+            else
+                languageBtns[i].interactable = true;
+        }
+    }
+
+    public string StripAlpha(string self)
+    {
+        return new string(self.Where(c => char.IsLetter(c)).ToArray());
     }
 
     private void RandomStat(Stat stat)
@@ -342,21 +372,6 @@ public class GameManager : MonoBehaviour {
     public static Vector2 GetMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    public void SetLanguage(int num = -1)
-    {
-        if(num != -1)
-            language = (Language)num;
-        PlayerPrefs.SetString("language", language.ToString().Remove(0));
-        int lang = (int)language;
-        for (int i = 0; i < languageBtns.Length; i++)
-        {
-            if (i == lang)
-                languageBtns[i].interactable = false;
-            else
-                languageBtns[i].interactable = true;
-        }
     }
 
     public void InitDropdown(TMP_Dropdown dropdown)

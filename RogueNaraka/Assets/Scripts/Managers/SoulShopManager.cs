@@ -151,6 +151,7 @@ public class SoulShopManager : MonoBehaviour
         preparingPnl.SetActive(false);
         RefiningRateTxtNameUpdate();
         RefiningRateTxtUpdate();
+        ADLanguageUpdate();
 
         TutorialManager.instance.StartTutorial(4);
     }
@@ -433,6 +434,9 @@ public class SoulShopManager : MonoBehaviour
     public TextMeshProUGUI soulRefRateNameTxt;
     public TextMeshProUGUI soulRefRateValueTxt;
     public TextMeshProUGUI soulRefRateBtnTxt;
+
+    public TextMeshProUGUI adNameTxt;
+    public TextMeshProUGUI adValueTxt;
     public Button soulRefRateBtn;
     public void RefiningRateUpgrade()
     {
@@ -477,10 +481,25 @@ public class SoulShopManager : MonoBehaviour
         switch (GameManager.language)
         {
             case Language.English:
-                soulRefRateNameTxt.text = "Soul refining rate";
+                soulRefRateNameTxt.text = "<size=18>Refining rate</size>";
                 break;
             case Language.Korean:
                 soulRefRateNameTxt.text = "정제율";
+                break;
+        }
+    }
+
+    public void ADLanguageUpdate()
+    {
+        switch (GameManager.language)
+        {
+            case Language.English:
+                adNameTxt.text = "Refine";
+                adValueTxt.text = "Watch Video";
+                break;
+            case Language.Korean:
+                adNameTxt.text = "즉시 정제";
+                adValueTxt.text = "광고 시청";
                 break;
         }
     }

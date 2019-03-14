@@ -306,6 +306,8 @@ public class BoardManager : MonoBehaviour {
                 continue;
             unitPool.EnqueueObjectPool(friendlies[i].gameObject);
         }
+        boss = null;
+        Fillable.bossHp.gameObject.SetActive(false);
     }
     public static Vector3 GetMousePosition()
     {
