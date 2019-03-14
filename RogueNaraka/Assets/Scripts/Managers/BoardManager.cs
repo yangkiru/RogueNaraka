@@ -260,6 +260,7 @@ public class BoardManager : MonoBehaviour {
         boss.stat.dmg *= RageManager.instance.enemiesDmg;
         boss.stat.hp *= RageManager.instance.enemiesHp;
         boss.stat.currentHp *= RageManager.instance.enemiesHp;
+        boss.hpable.SetHp(boss.stat.currentHp);
         boss.Spawn(bossPoint);
         Fillable.bossHp.gameObject.SetActive(true);
     }

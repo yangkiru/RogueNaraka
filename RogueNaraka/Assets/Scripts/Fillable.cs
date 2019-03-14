@@ -28,11 +28,21 @@ public class Fillable : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        unit = null;
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
         if (unit)
         {
+            if (unit.deathable.isDeath)
+            {
+                unit = null;
+                return;
+            }
             if (float.IsNaN(current))
             {
                 switch (type)
