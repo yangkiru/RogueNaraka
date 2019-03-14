@@ -1565,11 +1565,14 @@ MonoBehaviour:
       - name: 1
         value: 0.5
     description:
-    - Summon a Scarecrow of which damage is proportional to the technical stats. It
-      can be used as a shield.
-    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uACE0
-      \uBC29\uD328\uB85C \uC0AC\uC6A9\uD560 \uC218 \uC788\uB294 \uD5C8\uC218\uC544\uBE44\uB97C
-      \uC18C\uD658\uD55C\uB2E4."
+    - Summon a Scarecrow Soldier of which damage is proportional to the technical
+      stats. When the Scarecrow Soldier is summoned, enemies will focus on it instead
+      of player if it is closer to the enemies than player.
+    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
+      \uD5C8\uC218\uC544\uBE44\uB97C \uC18C\uD658\uD55C\uB2E4. \uD5C8\uC218\uC544\uBE44\uAC00
+      \uC18C\uD658\uB418\uC5C8\uC744 \uB54C, \uB9CC\uC57D \uC801\uB4E4\uC5D0\uAC8C
+      \uD50C\uB808\uC774\uC5B4\uBCF4\uB2E4 \uD5C8\uC218\uC544\uBE44\uAC00 \uB354 \uAC00\uAE4C\uC6B8
+      \uACBD\uC6B0 \uC801\uB4E4\uC740 \uD5C8\uC218\uC544\uBE44\uB97C \uACF5\uACA9\uD55C\uB2E4."
     useSFX: scarecrow
   - name: Shadow
     nameLang:

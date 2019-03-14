@@ -343,6 +343,7 @@ public class RollManager : MonoBehaviour {
                     descTxt.text = "패시브";
                     break;
             }
+            
             SetSelectPnl(true);
         }
     }
