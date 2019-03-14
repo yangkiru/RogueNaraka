@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour {
         }
 
         string lang = PlayerPrefs.GetString("language");
-        //try
-        //{
+        try
+        {
             if (lang == string.Empty)
             {
                 Debug.Log("Language Empty");
@@ -80,12 +80,12 @@ public class GameManager : MonoBehaviour {
                 language = (Language)System.Enum.Parse(typeof(Language), StripAlpha(lang));
             }
             SetLanguage((int)language);
-        //}
-        //catch
-        //{
-        //    Debug.Log("Can't not find language : " + lang);
-        //    SetLanguage(0);
-        //}
+        }
+        catch
+        {
+            Debug.Log("Can't not find language : " + lang);
+            SetLanguage(0);
+        }
         Application.targetFrameRate = 60;
     }
 
