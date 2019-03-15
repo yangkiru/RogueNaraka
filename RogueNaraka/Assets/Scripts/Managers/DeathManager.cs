@@ -40,7 +40,8 @@ public class DeathManager : MonoBehaviour
     public void OnDeath()
     {
         //RankManager.instance.SendPlayerRank();
-        GameManager.instance.Save();
+        if(BoardManager.instance.player)
+            GameManager.instance.Save();
 
         SetDeathPnl(true);
 

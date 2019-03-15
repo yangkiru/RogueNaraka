@@ -79,10 +79,16 @@ namespace RogueNaraka.UnitScripts
             }
         }
 
+        private void OnDisable()
+        {
+            deathCorou = null;
+        }
+
         IEnumerator DeathCorou()
         {
             _isDeath = true;
             unit.animator.SetBool("isDeath", true);
+            unit.collider.enabled = false;
             unit.DisableAll();
             string sfx = unit.data.deathSFX;
             if (sfx.CompareTo(string.Empty) != 0)

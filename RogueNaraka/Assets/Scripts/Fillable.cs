@@ -36,12 +36,30 @@ public class Fillable : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (unit)
+        if (unit || current != goal)
         {
-            if (unit.deathable.isDeath)
+            if (unit)
             {
-                unit = null;
-                return;
+                if (unit.deathable.isDeath)
+                {
+                    goal = 0;
+                    unit = null;
+                }
+                else
+                {
+                    try
+                    {
+                        switch (type)
+                        {
+                            case TYPE.HEALTH: goal = unit.hpable.currentHp / unit.hpable.maxHp; break;
+                            case TYPE.MANA: goal = unit.mpable.currentMp / unit.mpable.maxMp; break;
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
             }
             if (float.IsNaN(current))
             {
@@ -51,11 +69,7 @@ public class Fillable : MonoBehaviour
                     case TYPE.MANA: current = unit.mpable.currentMp; break;
                 }
             }
-            switch (type)
-            {
-                case TYPE.HEALTH: goal = unit.hpable.currentHp / unit.hpable.maxHp; break;
-                case TYPE.MANA: goal = unit.mpable.currentMp / unit.mpable.maxMp; break;
-            }
+            
             t += Time.deltaTime;
             if (t > 1)
                 t = 1;
@@ -75,6 +89,8 @@ public class Fillable : MonoBehaviour
                     unit = BoardManager.instance.boss;
                     break;
             }
+            if (unit && unit.deathable.isDeath)
+                unit = null;
         }
     }
 }

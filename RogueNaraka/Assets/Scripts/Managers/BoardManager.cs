@@ -111,7 +111,7 @@ public class BoardManager : MonoBehaviour {
 
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
-        player.Spawn(spawnPoint);
+        //player.Spawn(spawnPoint);
         isReady = true;
         fade.FadeIn();
     }
@@ -134,6 +134,14 @@ public class BoardManager : MonoBehaviour {
     public void Save()
     {
         PlayerPrefs.SetInt("stage", stage);
+    }
+
+    public void OnFadeIn()
+    {
+        if (!GameManager.instance.pausePnl.activeSelf && !GameManager.instance.settingPnl.activeSelf)
+            GameManager.instance.SetPause(false);
+        if (!player.deathable.isDeath)
+            GameManager.instance.pauseBtn.SetActive(true);
     }
 
     //void RandomEnemy(int leftCost)

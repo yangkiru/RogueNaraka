@@ -234,7 +234,14 @@ public class SkillManager : MonoBehaviour {
 
     public SkillData GetSkillData(int id)
     {
-        return GameDatabase.instance.skills[id];
+        try
+        {
+            return GameDatabase.instance.skills[id];
+        }
+        catch
+        {
+            return null;
+        }
     }
 
 

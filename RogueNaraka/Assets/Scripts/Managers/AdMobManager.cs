@@ -261,6 +261,22 @@ public class AdMobManager : MonoBehaviour
 
     public void ShowRewardBasedVideo()
     {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            switch (GameManager.language)
+            {
+                case Language.English:
+                    adNameTxt.text = "Network Connection Error";
+                    adDescTxt.text = "Please try again later";
+                    break;
+                case Language.Korean:
+                    adNameTxt.text = "네트워크 연결 에러";
+                    adDescTxt.text = "나중에 다시 시도해주세요";
+                    break;
+            }
+            adPnl.SetActive(true);
+            return;
+        }
         if (this.rewardBasedVideo.IsLoaded())
         {
             this.rewardBasedVideo.Show();

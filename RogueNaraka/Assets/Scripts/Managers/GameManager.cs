@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     public SkillManager skillManager;
     public DeathEffectPool deathEffectPool;
     public GameObject settingPnl;
+    public GameObject pausePnl;
+    public GameObject pauseBtn;
 
     public Button[] languageBtns;
 
@@ -213,8 +215,15 @@ public class GameManager : MonoBehaviour {
         if (effect != string.Empty)
             playerData.effects = JsonHelper.FromJson<EffectData>(effect);
 
-        boardManager.SpawnPlayer(playerData);
         boardManager.SetStage(PlayerPrefs.GetInt("stage"));
+        
+        boardManager.SpawnPlayer(playerData);
+
+        if (playerData.stat.currentHp <= 0)
+        {
+            player.gameObject.SetActive(false);
+            DeathManager.instance.OnDeath();
+        }
 
         StatTextUpdate(stat);
 
@@ -257,6 +266,8 @@ public class GameManager : MonoBehaviour {
         Stat.StatToData(stat);
         RageManager.instance.ResetSave();
 
+        moneyManager.Load();
+
         PlayerPrefs.SetInt("stage", 1);
   
         skillManager.ResetSave();
@@ -282,6 +293,7 @@ public class GameManager : MonoBehaviour {
             {
                 StatOrbManager.instance.SetActive(true, randomStat, stat);
                 AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
+                moneyManager.Load();
                 //StatOrbManager.OnLastOverflow에서 RunGame() 호출
             }
             else

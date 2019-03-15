@@ -70,13 +70,13 @@ public class LevelUpManager : MonoBehaviour {
         } while (BoardManager.instance.enemies.Count != 0 || SoulParticle.soulCount != 0);
         Debug.Log("EndStage!!");
         OnEndStage();
-        float t = 3;
+        float t = 2;
         do
         {
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
-        AdMobManager.instance.RequestBanner();
+        //AdMobManager.instance.RequestBanner();
         endStageCorou = null;
     }
 
