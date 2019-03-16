@@ -73,7 +73,7 @@ public class SoulShopManager : MonoBehaviour
             GameManager.instance.moneyManager.Load();
 
             lastMusic = AudioManager.instance.music.clip.name;
-            AudioManager.instance.PlayMusic("peace4");
+            AudioManager.instance.PlayMusic("cave");
             
             menuBtns[menu].onClick.Invoke();
             

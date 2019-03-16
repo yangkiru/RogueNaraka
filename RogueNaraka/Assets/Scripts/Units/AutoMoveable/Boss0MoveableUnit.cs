@@ -67,6 +67,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 accelEffect = unit.effectable.AddEffect(EFFECT.Accel, 2f, 5);
 
                 //originSpeed = unit.data.moveSpeed;
+                AudioManager.instance.PlaySFX("boss0Rush");
                 
                 moveable.Move(destination, OnRushEnd);
                 unit.animator.SetBool("isBeforeAttack", true);
@@ -78,6 +79,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             leftDelay = 0;
             unit.tackleable.isTackle = false;
             unit.effectable.AddEffect(EFFECT.Stun, 0, 2);
+            AudioManager.instance.PlaySFX("weaponUpgrade");
             state = STATE.RANDOM;
             StartCoroutine(RandomCorou());
             unit.animator.SetBool("isBeforeAttack", false);

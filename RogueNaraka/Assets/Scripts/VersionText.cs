@@ -9,6 +9,6 @@ public class VersionText : MonoBehaviour
 
     private void Awake()
     {
-        txt.text = Application.version;
+        txt.text = string.Format("{0} ver", Application.version);
     }
 }

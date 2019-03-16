@@ -8,7 +8,7 @@ using RogueNaraka.UnitScripts;
 using RogueNaraka.BulletScripts;
 using RogueNaraka.SkillScripts;
 
-public class SkillGUI : MonoBehaviour
+public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Pointer pointer;
     public Image img;
@@ -49,6 +49,35 @@ public class SkillGUI : MonoBehaviour
                 skillManager.GetCircle().Move(GameManager.GetMousePosition() + new Vector2(0, pointer.offset));
             }
             pointer.PositionToMouse();
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(RollManager.instance.selectPnl.activeSelf && _skill)
+        {
+            RollManager.RollData data = RollManager.instance.datas[RollManager.instance.selected];
+            if (data.type == RollManager.ROLL_TYPE.SKILL)
+            {
+                if (data.id == _skill.data.id)
+                {
+                    SkillData skill = GameDatabase.instance.skills[data.id];
+                    RollManager.instance.manaUI.SetMana(skill, _skill.data.level + 1);
+                }
+            }
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (RollManager.instance.selectPnl.activeSelf && _skill)
+        {
+            RollManager.RollData data = RollManager.instance.datas[RollManager.instance.selected];
+            if (data.type == RollManager.ROLL_TYPE.SKILL)
+            {
+                SkillData skill = GameDatabase.instance.skills[data.id];
+                RollManager.instance.manaUI.SetMana(skill);
+            }
         }
     }
 

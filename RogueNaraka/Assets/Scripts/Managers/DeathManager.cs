@@ -43,6 +43,8 @@ public class DeathManager : MonoBehaviour
         if(BoardManager.instance.player)
             GameManager.instance.Save();
 
+        RankManager.instance.SendPlayerRank();
+
         SetDeathPnl(true);
 
         StartCoroutine(SoulPnlCorou(1));
@@ -219,8 +221,6 @@ public class DeathManager : MonoBehaviour
         SetDeathPnl(false);
 
         //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
-
-        RankManager.instance.SendPlayerRank();
         PlayerPrefs.SetInt("isRun", 0);
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();

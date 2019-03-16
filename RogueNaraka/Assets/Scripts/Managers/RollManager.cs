@@ -19,6 +19,7 @@ public class RollManager : MonoBehaviour {
     public TextMeshProUGUI[] statTxts;
 
     public Fade fade;
+    public ManaUI manaUI;
 
     public int selected;
     public int stopped;
@@ -294,7 +295,8 @@ public class RollManager : MonoBehaviour {
         {
             RollData data = datas[position];
             selected = position;
-                switch (data.type)
+            
+            switch (data.type)
             {
                 case ROLL_TYPE.SKILL:
                     SkillData skill = GameDatabase.instance.skills[data.id];
@@ -302,9 +304,11 @@ public class RollManager : MonoBehaviour {
                     typeTxt.text = GameManager.language == Language.Korean ? "기술" : "Skill";
                     nameTxt.text = skill.GetName();
                     descTxt.text = skill.GetDescription();
+                    manaUI.SetMana(skill);
                     break;
                 case ROLL_TYPE.STAT:
                     //selectedImg.sprite = GetSprite(data);
+                    manaUI.gameObject.SetActive(false);
                     typeTxt.text = GameManager.language == Language.Korean ? "능력치" : "Stat";
                     string point = "Point";
                     if (data.id + 1 > 1)
@@ -321,14 +325,15 @@ public class RollManager : MonoBehaviour {
                     }
                     break;
                 case ROLL_TYPE.ITEM:
+                    manaUI.gameObject.SetActive(false);
                     //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = GameManager.language == Language.Korean ? "소모품" : "ITEM";
                     ItemData item = GameDatabase.instance.items[data.id];
                     ItemSpriteData itemSpr = GameDatabase.instance.itemSprites[Item.instance.sprIds[item.id]];
                     //if (Item.instance.isKnown[item.id])
                     //{
-                        nameTxt.text = item.GetName();
-                        descTxt.text = item.GetDescription();
+                    nameTxt.text = item.GetName();
+                    descTxt.text = item.GetDescription();
                     //}
                     //else
                     //{
@@ -337,13 +342,14 @@ public class RollManager : MonoBehaviour {
                     //}
                     break;
                 case ROLL_TYPE.PASSIVE:
+                    manaUI.gameObject.SetActive(false);
                     //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = "Passive";
                     nameTxt.text = "패시브";
                     descTxt.text = "패시브";
                     break;
             }
-            
+
             SetSelectPnl(true);
         }
     }

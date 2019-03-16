@@ -244,7 +244,7 @@ MonoBehaviour:
     move: 5
     tackleSize: 0.3
     tackleDamage: 0.3
-    tackleDelay: 1
+    tackleDelay: 0.3
     moveDelay: 0.4
     moveDistance: 5
     moveSpeed: 2.25
@@ -1208,7 +1208,12 @@ MonoBehaviour:
       isStick: 0
       isDestroyWith: 0
       offset: {x: 0, y: 0, z: 0}
-    hitSFX: []
+    hitSFX:
+    - enemyHit1
+    - enemyHit2
+    - enemyHit3
+    - enemyHit4
+    - enemyHit5
     spawnSFX: weaponAttack
   - name: SwordBigDestroy
     id: 19

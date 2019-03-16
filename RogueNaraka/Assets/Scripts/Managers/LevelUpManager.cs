@@ -87,6 +87,7 @@ public class LevelUpManager : MonoBehaviour {
 
         fade.FadeOut();
         isLevelUp = true;
+        BoardManager.instance.ClearStage();
     }
     //void Update()
     //{

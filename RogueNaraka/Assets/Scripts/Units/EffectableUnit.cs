@@ -34,13 +34,16 @@ namespace RogueNaraka.UnitScripts
 
         public void Init()
         {
+            _effects.Clear();
+            dictionary.Clear();
+        }
+
+        private void OnDisable()
+        {
             for(int i = 0; i < _effects.Count; i++)
             {
                 _effects[i].Destroy();
             }
-
-            _effects.Clear();
-            dictionary.Clear();
         }
 
         public Effect GetSameEffect(EffectData data)

@@ -47,17 +47,10 @@ public class Fillable : MonoBehaviour
                 }
                 else
                 {
-                    try
+                    switch (type)
                     {
-                        switch (type)
-                        {
-                            case TYPE.HEALTH: goal = unit.hpable.currentHp / unit.hpable.maxHp; break;
-                            case TYPE.MANA: goal = unit.mpable.currentMp / unit.mpable.maxMp; break;
-                        }
-                    }
-                    catch
-                    {
-
+                        case TYPE.HEALTH: goal = unit.hpable.maxHp == 0 ? 0 : unit.hpable.currentHp / unit.hpable.maxHp; break;
+                        case TYPE.MANA: goal = unit.mpable.maxMp == 0 ? 0 : unit.mpable.currentMp / unit.mpable.maxMp; break;
                     }
                 }
             }

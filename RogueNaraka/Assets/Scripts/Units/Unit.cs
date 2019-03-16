@@ -261,9 +261,12 @@ namespace RogueNaraka.UnitScripts
 
             _orderable.Init(data.order);
 
-            if(_data.effects != null)
+
+            if (_data.effects != null)
+            {
                 for (int i = 0; i < _data.effects.Length; i++)
                     _effectable.AddEffect(_data.effects[i]);
+            }
 
             _renderer.color = _data.color;
             _collider.isTrigger = false;
@@ -274,7 +277,7 @@ namespace RogueNaraka.UnitScripts
 
         public void Spawn(Vector3 position)
         {
-            transform.position = position;
+            cashedTransform.position = position;
 
             gameObject.SetActive(true);
             if (_data.isFriendly && !BoardManager.instance.friendlies.Contains(this))
@@ -291,6 +294,16 @@ namespace RogueNaraka.UnitScripts
                 _timeLimitable.enabled = true;
             if (_hpable.currentHp <= 0)
                 _deathable.Death();
+        }
+
+        public void Teleport(Vector3 position)
+        {
+            cashedTransform.position = position;
+        }
+
+        public void PlaySFX(string name)
+        {
+            AudioManager.instance.PlaySFX(name);
         }
 
         void DisableAutoMoveables()

@@ -111,7 +111,8 @@ public class BoardManager : MonoBehaviour {
 
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
-        //player.Spawn(spawnPoint);
+        
+        player.Teleport(spawnPoint);
         isReady = true;
         fade.FadeIn();
     }
@@ -169,19 +170,16 @@ public class BoardManager : MonoBehaviour {
         if(stage != 0 && stage % 30 == 0)
         {
             SpawnBoss(0);
-            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomBossMusic());
+            //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomBossMusic());
             
             StartCoroutine(StageTxtEffect(true));
             return;
         }
+
+        if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty)==0)
+            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         else
-        {
-            if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty)==0)
-                AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
-            else
-                AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
-            
-        }
+            AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
 
 
         int cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];

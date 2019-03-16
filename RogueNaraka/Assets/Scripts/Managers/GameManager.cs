@@ -11,8 +11,7 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
-    const string version = "1.0.2";
-    const bool isReset = true;
+    const bool isReset = false;
     public static Language language;
 
     [SerializeField][ReadOnly]
@@ -63,7 +62,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         //업데이트된 버전이 초기화가 필요하면
-        if (isReset && PlayerPrefs.GetInt(version) == 0)
+        if (isReset && PlayerPrefs.GetInt(Application.version) == 0)
         {
             PlayerPrefs.SetInt("isReset", 0);
         }
@@ -174,7 +173,7 @@ public class GameManager : MonoBehaviour {
     {
         UnityEngine.PlayerPrefs.DeleteAll();
 
-        PlayerPrefs.SetInt(version, 1);
+        PlayerPrefs.SetInt(Application.version, 1);
 
         moneyManager.Reset();
         SkillManager.instance.ResetSave();
