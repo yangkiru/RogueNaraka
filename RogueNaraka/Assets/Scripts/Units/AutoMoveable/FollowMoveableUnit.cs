@@ -59,5 +59,10 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 //LostTarget();
             }
         }
+
+        private void OnDisable()
+        {
+            OnDeath();
+        }
     }
 }

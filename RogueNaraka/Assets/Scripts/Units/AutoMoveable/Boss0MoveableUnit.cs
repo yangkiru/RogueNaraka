@@ -61,10 +61,10 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             {
                 Vector2 vec = targetable.target.cashedTransform.position - cashedTransform.position;
                 Vector2 destination = (Vector2)cashedTransform.position + vec.normalized * 5;
-                unit.tackleable.isTackle = true;
+                //unit.tackleable.isTackle = true;
                 leftDelay = 99999;
 
-                accelEffect = unit.effectable.AddEffect(EFFECT.Accel, 2f, 5);
+                accelEffect = unit.effectable.AddEffect(EFFECT.Accel, 2f, 10);
 
                 //originSpeed = unit.data.moveSpeed;
                 AudioManager.instance.PlaySFX("boss0Rush");
@@ -77,7 +77,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         void OnRushEnd(bool isArrived)
         {
             leftDelay = 0;
-            unit.tackleable.isTackle = false;
+            //unit.tackleable.isTackle = false;
             unit.effectable.AddEffect(EFFECT.Stun, 0, 2);
             AudioManager.instance.PlaySFX("weaponUpgrade");
             state = STATE.RANDOM;

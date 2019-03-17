@@ -311,7 +311,8 @@ public class BoardManager : MonoBehaviour {
         {
             if (friendlies[i].Equals(player))
                 continue;
-            unitPool.EnqueueObjectPool(friendlies[i].gameObject);
+            //unitPool.EnqueueObjectPool(friendlies[i].gameObject);
+            friendlies[i].Kill();
         }
         boss = null;
         Fillable.bossHp.gameObject.SetActive(false);

@@ -95,22 +95,28 @@ namespace RogueNaraka
             {
                 float t = data.tackleDelay;
 
-                BulletData bulletData = (BulletData)GameDatabase.instance.bullets[tackleBulletID].Clone();
-                bulletData.size = data.tackleSize;
-                bulletData.dmg = data.tackleDamage;
-
-                if (_isTackle && data != null)
-                {
-                    Bullet tackleBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-
-                    tackleBullet.Spawn(unit, bulletData, unit.cashedTransform.position);
-                }
+                if(_isTackle)
+                    Tackle();
 
                 do
                 {
                     yield return null;
                     t -= Time.deltaTime;
                 } while (t > 0);
+            }
+        }
+
+        public void Tackle()
+        {
+            if (data != null)
+            {
+                BulletData bulletData = (BulletData)GameDatabase.instance.bullets[tackleBulletID].Clone();
+                bulletData.size = data.tackleSize;
+                bulletData.dmg = data.tackleDamage;
+
+                Bullet tackleBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+
+                tackleBullet.Spawn(unit, bulletData, unit.cashedTransform.position);
             }
         }
 

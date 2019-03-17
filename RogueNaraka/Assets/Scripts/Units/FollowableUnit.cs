@@ -23,6 +23,11 @@ namespace RogueNaraka.UnitScripts
             _followers.Clear();
         }
 
+        public void OnDisable()
+        {
+            OnDeath();
+        }
+
         public void AddFollower(Unit unit)
         {
             Debug.Log("AddFollower" + this.unit.name + " " + unit.name);
