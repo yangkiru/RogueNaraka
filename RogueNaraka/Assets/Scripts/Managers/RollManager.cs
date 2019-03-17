@@ -11,6 +11,7 @@ public class RollManager : MonoBehaviour {
     public GameObject pauseBtn;
     public GameObject rollPnl;
     public GameObject selectPnl;
+    public GameObject soulAlertPnl;
     public Image dragImg;
     public TextMeshProUGUI typeTxt;
     public TextMeshProUGUI nameTxt;
@@ -116,11 +117,11 @@ public class RollManager : MonoBehaviour {
                 BoardManager.instance.StageUp();
                 //BoardManager.instance.Save();
                 PlayerPrefs.SetInt("isLevelUp", 0);
-                LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
+                //LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
                 GameManager.instance.Save();
             }
-            
-            
+
+            //StatManager.instance.SetStatPnl(false);
             fade.FadeOut();
             //rollPnl.SetActive(value);
         }
@@ -129,6 +130,7 @@ public class RollManager : MonoBehaviour {
     public void OnFadeOut()
     {
         rollPnl.SetActive(false);
+        StatManager.instance.SetStatPnl(false);
         if (isStageUp)
             BoardManager.instance.InitBoard();
         else
@@ -193,7 +195,7 @@ public class RollManager : MonoBehaviour {
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
-        SoulShopManager.instance.SetSoulShop(true, 3);
+        soulAlertPnl.SetActive(true);
         reRollTxt.text = "ReRoll";
     }
 
@@ -410,7 +412,7 @@ public class RollManager : MonoBehaviour {
                 SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.STAT:
-                LevelUpManager.instance.SetStatPnl(true, data.id + 1);
+                StatManager.instance.SetStatPnl(true, data.id + 1);
                 break;
             case ROLL_TYPE.ITEM:
                 Item.instance.EquipItem(data.id);

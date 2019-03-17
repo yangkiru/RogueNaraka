@@ -50,6 +50,9 @@ public class ManaUI : MonoBehaviour
         t = 0;
         gameObject.SetActive(true);
         isOver = result > 1;
+
+        if(gameObject.activeSelf)
+            animator.SetBool("isOver", isOver);
     }
 
     [ContextMenu("Test")]

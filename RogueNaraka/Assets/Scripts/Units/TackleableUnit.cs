@@ -17,22 +17,18 @@ namespace RogueNaraka
 
         bool _isTackle;
 
-        UnitData data;
-
         List<CorouUnit> hits = new List<CorouUnit>();
 
         public void Init(UnitData data)
         {
-            if (data.tackleSize > 0 && data.tackleDamage != 0)
+            if (data.tackleSize > 0 && data.tackleDamage != 0 && data.tackleDelay != 0)
             {
                 _isTackle = true;
-                this.data = data;
                 this.enabled = true;
             }
             else
             {
                 _isTackle = false;
-                this.data = null;
                 this.enabled = false;
             }
         }
@@ -93,7 +89,7 @@ namespace RogueNaraka
         {
             while (true)
             {
-                float t = data.tackleDelay;
+                float t = unit.data.tackleDelay;
 
                 if(_isTackle)
                     Tackle();
@@ -108,16 +104,13 @@ namespace RogueNaraka
 
         public void Tackle()
         {
-            if (data != null)
-            {
-                BulletData bulletData = (BulletData)GameDatabase.instance.bullets[tackleBulletID].Clone();
-                bulletData.size = data.tackleSize;
-                bulletData.dmg = data.tackleDamage;
+            BulletData bulletData = (BulletData)GameDatabase.instance.bullets[tackleBulletID].Clone();
+            bulletData.size = unit.data.tackleSize;
+            bulletData.dmg = unit.data.tackleDamage;
 
-                Bullet tackleBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+            Bullet tackleBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
 
-                tackleBullet.Spawn(unit, bulletData, unit.cashedTransform.position);
-            }
+            tackleBullet.Spawn(unit, bulletData, unit.cashedTransform.position);
         }
 
         public class CorouUnit

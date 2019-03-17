@@ -452,7 +452,7 @@ MonoBehaviour:
     id: 0
     cost: 0
     stage: 0
-    weapon: 4
+    weapon: -1
     stat:
       dmg: 0
       spd: 0
@@ -484,8 +484,8 @@ MonoBehaviour:
     isFriendly: 1
     isStanding: 1
     move: 2
-    tackleSize: 0
-    tackleDamage: 0
+    tackleSize: 1
+    tackleDamage: 0.15
     tackleDelay: 0
     moveDelay: 0
     moveDistance: 0
@@ -1566,7 +1566,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 4
-        value: 1
+        value: 2
       - name: 1
         value: 0.5
     description:

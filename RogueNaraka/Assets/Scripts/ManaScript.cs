@@ -9,6 +9,8 @@ public class ManaScript : MonoBehaviour {
     public Image noMana;
 
     public static ManaScript instance = null;
+    int needCount;
+    int noCount;
 
     void Awake()
     {
@@ -24,24 +26,28 @@ public class ManaScript : MonoBehaviour {
         if (amount > 1) amount = 1;
         needMana.fillAmount = amount;
         needMana.gameObject.SetActive(true);
+        needCount++;
         float t = 0;
         while (t < 1)
         {
             t += Time.unscaledDeltaTime;
             yield return null;
         }
-        needMana.gameObject.SetActive(false);
+        if(--needCount <= 0)
+            needMana.gameObject.SetActive(false);
     }
 
     public IEnumerator NoMana()
     {
         noMana.gameObject.SetActive(true);
+        noCount++;
         float t = 0;
         while (t < 1)
         {
             t += Time.unscaledDeltaTime;
             yield return null;
         }
-        noMana.gameObject.SetActive(false);
+        if (--noCount <= 0)
+            noMana.gameObject.SetActive(false);
     }
 }
