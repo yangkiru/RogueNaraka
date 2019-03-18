@@ -11,6 +11,7 @@ public class StatManager : MonoBehaviour {
     public TextMeshProUGUI leftStatTxt;
 
     public GameObject statPnl;
+    public GameObject statAlertPnl;
 
     public Unit player { get { return BoardManager.instance.player; } }
 
@@ -69,9 +70,10 @@ public class StatManager : MonoBehaviour {
                     rollManager.SetRollPnl(false);
                 }
             }
-            else if(leftStat != 0)
+            else if(this.leftStat != 0)
             {
                 lastChance = false;
+                this.leftStat = 0;
                 rollManager.SetRollPnl(true);
                 statPnl.SetActive(false);
             }
@@ -106,7 +108,8 @@ public class StatManager : MonoBehaviour {
         }
         else
         {
-            GameManager.instance.soulShopManager.SetSoulShop(true);
+            //GameManager.instance.soulShopManager.SetSoulShop(true);
+            statAlertPnl.SetActive(true);
             Debug.Log("Stat Maxed");
         }
     }

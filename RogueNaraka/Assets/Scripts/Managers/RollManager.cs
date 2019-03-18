@@ -123,14 +123,13 @@ public class RollManager : MonoBehaviour {
 
             //StatManager.instance.SetStatPnl(false);
             fade.FadeOut();
-            //rollPnl.SetActive(value);
         }
     }
 
     public void OnFadeOut()
     {
         rollPnl.SetActive(false);
-        StatManager.instance.SetStatPnl(false);
+        StatManager.instance.statPnl.SetActive(false);
         if (isStageUp)
             BoardManager.instance.InitBoard();
         else
@@ -628,10 +627,17 @@ public class RollManager : MonoBehaviour {
         isClickable = true;
         StartCoroutine(IconEffectCorou());
         Select((stopped + 1) % 10);
-        TutorialManager.instance.StartTutorial(2);
+        
         AudioManager.instance.PlaySFX("skillStop");
-        if (datas[(stopped + 1) % 10].type == ROLL_TYPE.ITEM)
-            TutorialManager.instance.StartTutorial(5);
+        switch(datas[(stopped + 1) % 10].type)
+        {
+            case ROLL_TYPE.SKILL:
+                TutorialManager.instance.StartTutorial(2);
+                break;
+            case ROLL_TYPE.ITEM:
+                TutorialManager.instance.StartTutorial(5);
+                break;
+        }
     }
 
     IEnumerator IconEffectCorou()

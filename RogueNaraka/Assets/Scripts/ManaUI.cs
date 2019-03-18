@@ -48,11 +48,12 @@ public class ManaUI : MonoBehaviour
         float result = use / max;
         goal = Mathf.Clamp01(result);
         t = 0;
-        gameObject.SetActive(true);
         isOver = result > 1;
 
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
             animator.SetBool("isOver", isOver);
+
+        gameObject.SetActive(true);
     }
 
     [ContextMenu("Test")]

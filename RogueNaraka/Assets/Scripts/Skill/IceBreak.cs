@@ -18,7 +18,7 @@ namespace RogueNaraka.SkillScripts
             BulletData iceData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());
             iceData.limitTime += GetValue(Value.Time).value;
             iceData.GetEffect(EFFECT.Ice).value += GetEffect(EFFECT.Ice).value;
-            iceData.disapearStartTime = iceData.limitTime / 2;
+            iceData.disapearStartTime = iceData.limitTime * 0.5f;
             iceData.disapearDuration = iceData.disapearStartTime;
 
             ice.Init(BoardManager.instance.player, iceData);

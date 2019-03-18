@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
 #if UNITY_EDITOR
-        UnityEngine.Debug.unityLogger.logEnabled = true;
+        Debug.unityLogger.logEnabled = true;
 #else
-        UnityEngine.Debug.unityLogger.logEnabled = false;
+        Debug.unityLogger.logEnabled = false;
 #endif
         if (instance == null)
         {
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour {
 
     private void ResetData()
     {
-        UnityEngine.PlayerPrefs.DeleteAll();
+        //UnityEngine.PlayerPrefs.DeleteAll();
 
         PlayerPrefs.SetInt(Application.version, 1);
 
@@ -231,6 +231,11 @@ public class GameManager : MonoBehaviour {
 
         RageManager.instance.CheckRage();
 
+        if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty) == 0)
+            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
+        else
+            AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
+
         if (PlayerPrefs.GetInt("isLevelUp") == 1)
         {
             levelUpManager.LevelUp();
@@ -239,7 +244,7 @@ public class GameManager : MonoBehaviour {
         {
             SetPause(true);
             RollManager.instance.SetRollPnl(true, false);
-            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
+            //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         }
         else
         {

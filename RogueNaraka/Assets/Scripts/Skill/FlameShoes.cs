@@ -38,7 +38,7 @@ namespace RogueNaraka.SkillScripts
             int amount = (int)GetValue(Value.Amount).value;
 
             BulletData flameData = (BulletData)GameDatabase.instance.bullets[data.bulletIds[0]].Clone();
-            flameData.GetEffect(EFFECT.Fire).value += GetValue(Value.Fire).value;
+            flameData.GetEffect(EFFECT.Fire).value = GetValue(Value.Fire).value * player.stat.GetCurrent(STAT.TEC);
 
             while(bestVelocity == currentVelocity || bestVelocity * 0.1f < currentVelocity)
             {

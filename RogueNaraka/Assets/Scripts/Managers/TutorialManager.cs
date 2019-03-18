@@ -24,15 +24,15 @@ public class TutorialManager : MonoBehaviour
         
     }
 
-    IEnumerator IntroCorou()
-    {
-        yield return null;
-        StartTutorial(0);
-    }
+    //IEnumerator IntroCorou()
+    //{
+    //    yield return null;
+    //    StartTutorial(0);
+    //}
 
     private void Start()
     {
-        StartCoroutine(IntroCorou());
+        //StartCoroutine(IntroCorou());
         //    //isTutorial = new bool[startTexts.Length];
         //    //for (int i = 0; i < startTexts.Length; i++)
         //    //{

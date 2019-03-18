@@ -61,7 +61,7 @@ namespace RogueNaraka.BulletScripts.Hitable
         private void OnTriggerStay2D(Collider2D coll)
         {
             //Debug.Log(name + " OnTriggerStay " + coll.name);
-            if (pierce <= 0)
+            if (pierce <= 0 && leftDelay > 0)
                 return;
             HIT result = Hit(coll);
             switch(result)
@@ -72,7 +72,7 @@ namespace RogueNaraka.BulletScripts.Hitable
                         pierce--;
                     if (isSplash)
                     {
-                        if (pierceCorou != null)
+                        if (pierceCorou == null)
                         {
                             pierceCorou = PierceCorou();
                             StartCoroutine(pierceCorou);

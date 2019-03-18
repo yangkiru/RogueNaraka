@@ -125,29 +125,4 @@ public class MoneyManager : MonoBehaviour {
         soulTxt.text = _soul.ToString();
         unrefinedSoulTxt.text = _unrefinedSoul.ToString();
     }
-
-    public void BuySoul(Product product)
-    {
-        if(product != null)
-        {
-            switch(product.definition.id)
-            {
-                case "soul.100":
-                    Debug.Log("Bought 100 Soul");
-                    AddSoul(100);
-                    Save(false);
-                    break;
-                case "soul.550":
-                    Debug.Log("Bought 550 Soul");
-                    AddSoul(550);
-                    Save(false);
-                    break;
-                case "soul.1200":
-                    Debug.Log("Bought 1200 Soul");
-                    AddSoul(1200);
-                    Save(false);
-                    break;
-            }
-        }
-    }
 }

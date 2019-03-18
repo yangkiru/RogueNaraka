@@ -97,7 +97,7 @@ namespace RogueNaraka
                 do
                 {
                     yield return null;
-                    t -= Time.deltaTime;
+                    t -= Mathf.Max(Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f));
                 } while (t > 0);
             }
         }

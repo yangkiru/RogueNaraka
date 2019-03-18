@@ -43,7 +43,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 return;
             if (leftDelay > 0)
             {
-                leftDelay -= Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
+                leftDelay -= Mathf.Max(0, Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f));
                 return;
             }
             else if (leftDelay <= 0)

@@ -101,11 +101,17 @@ public class SoulShopManager : MonoBehaviour
         SetSoulShop(value, 0);
     }
 
+    public void OpenSoulShop(int menu)
+    {
+        SetSoulShop(true, menu);
+    }
+
     /// <summary>
     /// 스탯 패널만 여는 함수
     /// </summary>
     public void StatPnlOpen()
     {
+        shopPnl.SetActive(true);
         SyncStatUpgradeTxt();
         skillPnl.SetActive(false);
         weaponPnl.SetActive(false);
@@ -119,6 +125,7 @@ public class SoulShopManager : MonoBehaviour
 
     public void SkillPnlOpen()
     {
+        shopPnl.SetActive(true);
         statPnl.SetActive(false);
         weaponPnl.SetActive(false);
         soulPnl.SetActive(false);
@@ -130,6 +137,7 @@ public class SoulShopManager : MonoBehaviour
 
     public void WeaponPnlOpen()
     {
+        shopPnl.SetActive(true);
         statPnl.SetActive(false);
         skillPnl.SetActive(false);
         soulPnl.SetActive(false);
@@ -142,6 +150,7 @@ public class SoulShopManager : MonoBehaviour
 
     public void SoulPnlOpen()
     {
+        shopPnl.SetActive(true);
         statPnl.SetActive(false);
         skillPnl.SetActive(false);
         weaponPnl.SetActive(false);
@@ -443,9 +452,9 @@ public class SoulShopManager : MonoBehaviour
         float rate = MoneyManager.instance.refiningRate;
         if (soulRefRateBtnTxt.text.CompareTo("Up") == 0)
         {
-            soulRefRateBtnTxt.text = string.Format("{0}Soul", (int)(rate * 100));
+            soulRefRateBtnTxt.text = string.Format("{0}", (int)(rate * 1000));
         }
-        else if (MoneyManager.instance.UseSoul((int)(rate * 100)))
+        else if (MoneyManager.instance.UseSoul((int)(rate * 1000)))
         {
             MoneyManager.instance.refiningRate = rate + 0.01f;
             RefiningRateTxtUpdate();

@@ -618,7 +618,7 @@ MonoBehaviour:
     children: []
     onDestroy: []
     hitSFX: []
-    spawnSFX: 
+    spawnSFX: boneHeadAttack
   - name: Bite
     id: 2
     dmg: 0.25
@@ -714,7 +714,7 @@ MonoBehaviour:
     spawnSFX: scarecrowAttack
   - name: ThunderL
     id: 5
-    dmg: 0.15
+    dmg: 0.06
     related: 2
     controller: {fileID: 22100000, guid: a016a5d25f314554b9cda7aedd5996ee, type: 2}
     type: 0
@@ -745,7 +745,7 @@ MonoBehaviour:
     spawnSFX: 
   - name: ThunderR
     id: 6
-    dmg: 0.15
+    dmg: 0.06
     related: 2
     controller: {fileID: 22100000, guid: 30c0ba08d2084a845bbe1b4edde7d422, type: 2}
     type: 0
@@ -779,7 +779,7 @@ MonoBehaviour:
     dmg: 0
     related: 0
     controller: {fileID: 22100000, guid: 04290e155ba3f334da07ff9e0e3d3e10, type: 2}
-    type: 0
+    type: 3
     localSpeed: 0
     worldSpeed: 0
     localAccel: 0
@@ -803,7 +803,7 @@ MonoBehaviour:
     effects:
     - type: 3
       value: 1
-      time: 0.15
+      time: 0.14
     children: []
     onDestroy: []
     hitSFX: []
@@ -1300,7 +1300,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 3
     afterAttackDelay: 0
-    attackDistance: 0
+    attackDistance: 8
   - name: Bite
     id: 2
     type: 0
@@ -1373,10 +1373,10 @@ MonoBehaviour:
     attackDistance: 5
   playerWeapons:
   - level: 0
-    cost: 100
+    cost: 500
     id: 6
   - level: 1
-    cost: 300
+    cost: 1000
     id: 7
   - level: 2
     cost: 0
@@ -1405,22 +1405,22 @@ MonoBehaviour:
     coolTime: 3
     coolTimeLeft: 0
     manaCost: 1
-    size: 0.5
+    size: 1
     isCircleToPlayer: 0
     isDeath: 0
     isBasic: 1
     effects: []
     values:
     - name: 0
-      value: 1
+      value: 30
     levelUp:
-      manaCost: 0.5
-      size: 0.25
+      manaCost: 0.8
+      size: 0.2
       coolTime: 0
       effects: []
       values:
       - name: 0
-        value: 2
+        value: 20
     description:
     - Summon lightning of which damage is proportional to the technical stats.
     - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
@@ -1465,7 +1465,7 @@ MonoBehaviour:
     - Summon ice plane that reduces enemies' speed temporarily.
     - "\uC21C\uBC1C\uB825\uC744 \uC77C\uC2DC\uC801\uC73C\uB85C \uAC10\uC18C\uC2DC\uD0A4\uB294
       \uBE59\uD310\uC744 \uC18C\uD658\uD55C\uB2E4."
-    useSFX: 
+    useSFX: iceBreak
   - name: Genesis
     nameLang:
     - Genesis
@@ -1599,15 +1599,15 @@ MonoBehaviour:
     effects: []
     values:
     - name: 1
-      value: 5
+      value: 3
     levelUp:
-      manaCost: 0.25
+      manaCost: 0.4
       size: 0
       coolTime: 0
       effects: []
       values:
       - name: 1
-        value: 1
+        value: 1.5
     description:
     - Summon shadow of which damage is half of the player's damage stat.
     - "\uD50C\uB808\uC774\uC5B4\uC758 \uC808\uBC18\uC758 \uACF5\uACA9\uB825\uC744
@@ -1654,7 +1654,7 @@ MonoBehaviour:
     cost: 50
     coolTime: 7
     coolTimeLeft: 0
-    manaCost: 0.5
+    manaCost: 1
     size: 2
     isCircleToPlayer: 1
     isDeath: 0
@@ -1668,7 +1668,7 @@ MonoBehaviour:
     - name: 7
       value: 0.1
     levelUp:
-      manaCost: 0.25
+      manaCost: 0.5
       size: 0.5
       coolTime: -0.5
       effects: []

@@ -15,6 +15,7 @@ public class TranslatedText : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log(GameManager.language + "ENABLE");
         if (contents.Length > (int)GameManager.language)
         {
             text.text = contents[(int)GameManager.language];

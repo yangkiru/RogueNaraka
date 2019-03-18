@@ -47,8 +47,9 @@ namespace RogueNaraka.BulletScripts
             while (t < 1)
             {
                 yield return null;
-                color.a -= alpha * Time.deltaTime;
-                t += Time.deltaTime / _duration;
+                float amount = Time.deltaTime / _duration;
+                color.a -= amount;
+                t += amount;
                 bullet.renderer.color = color;
             }
             color.a = 0;

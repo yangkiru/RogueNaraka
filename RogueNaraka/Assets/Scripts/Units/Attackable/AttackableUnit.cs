@@ -105,7 +105,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             do
             {
                 yield return null;
-                leftDelay -= Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
+                leftDelay -= Mathf.Max(Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f), 0);
             } while (leftDelay > 0);
             if (!isMoveForced && isBeforeAnimation)
                 unit.animator.SetBool("isBeforeAttack", false);

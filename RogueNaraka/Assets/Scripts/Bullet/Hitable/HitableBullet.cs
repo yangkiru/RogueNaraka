@@ -113,13 +113,10 @@ namespace RogueNaraka.BulletScripts.Hitable
             {
                 if (leftDelay > 0)
                 {
-                    while (leftDelay > 0)
-                    {
-                        //yield return null;
-                        //leftDelay -= Time.deltaTime;
-                        yield return new WaitForFixedUpdate();
-                        leftDelay -= Time.fixedDeltaTime;
-                    }
+                    //yield return null;
+                    //leftDelay -= Time.deltaTime;
+                    yield return new WaitForFixedUpdate();
+                    leftDelay -= Time.fixedDeltaTime;
                     //Debug.Log(name + ":DelayCorouDecrease");
                 }
                 else

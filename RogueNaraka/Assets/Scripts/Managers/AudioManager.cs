@@ -193,6 +193,7 @@ public class AudioManager : MonoBehaviour
         if (music.clip && music.clip.name.CompareTo(name) == 0)
             return;
 
+        Debug.Log(string.Format("PlayMusic {0}", name));
         if (musicClipDictionary.ContainsKey(name))
         {
             music.clip = musicClipDictionary[name];
