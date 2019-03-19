@@ -212,7 +212,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (_skill.data.coolTimeLeft > 0)
             return;
-        Vector3 mp = BoardManager.GetMousePosition() + new Vector3(0, pointer.offset, 0);
+        Vector3 mp = GameManager.GetMousePosition() + new Vector2(0, pointer.offset);
         float distance = Vector2.Distance(mp, player.transform.position);
         Vector2 vec = mp - player.transform.position;
 

@@ -158,7 +158,7 @@ namespace RogueNaraka.UnitScripts
             _collider = GetComponent<Collider2D>();
         }
 
-        void OnDisable()
+        public void OnDisable()
         {
             if (!Application.isPlaying)
                 return;

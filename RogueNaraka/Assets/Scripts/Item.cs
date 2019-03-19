@@ -240,8 +240,7 @@ public class Item : MonoBehaviour
 
         if (_data.size != 0)//size 값이 있으면 서클 캐스트
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(
-                Input.mousePosition), _data.size, GameDatabase.instance.unitMask);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(GameManager.GetMousePosition(), _data.size, GameDatabase.instance.unitMask);
             for (int i = 0; i < hits.Length; i++)
             {
                 Unit unit = hits[i].GetComponent<Unit>();
@@ -288,7 +287,7 @@ public class Item : MonoBehaviour
     private void DrawLine()
     {
         points[0].position = new Vector3(transform.position.x, transform.position.y, 0);
-        Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mp = GameManager.GetMousePosition();
         points[2].position = new Vector3(mp.x, mp.y, 0);
         float mid = (BoardManager.instance.boardRange[0].x + BoardManager.instance.boardRange[1].x) / 2;
         points[1].position = new Vector3((mid + mp.x) / 2, (points[0].position.y + points[2].position.y) / 2, 0);

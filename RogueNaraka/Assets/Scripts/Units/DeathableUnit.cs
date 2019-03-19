@@ -64,6 +64,7 @@ namespace RogueNaraka.UnitScripts
                 }
                 soulParticle.Init(unit.cashedTransform.position, soul);
             }
+            
             AudioManager.instance.GetRandomMainMusic();
             RageManager.instance.Rage();
             BoardManager.instance.boss = null;
@@ -118,12 +119,18 @@ namespace RogueNaraka.UnitScripts
                 onDeath.Invoke();
             }
 
-            if (this != BoardManager.instance.player)
+            if (unit.data.isDeathEffect)
             {
                 DeathEffectPool.instance.Play(transform);
-                BoardManager.instance.unitPool.EnqueueObjectPool(gameObject, false);
             }
 
+            if (!unit.data.isCorpse)
+                BoardManager.instance.unitPool.EnqueueObjectPool(gameObject, false);
+            else
+            {
+                unit.OnDisable();
+                BoardManager.instance.corpses.Add(unit);
+            }
             deathCorou = null;
         }
 
@@ -131,6 +138,11 @@ namespace RogueNaraka.UnitScripts
         {
             _isDeath = false;
             unit.animator.SetBool("isDeath", false);
+        }
+
+        public void StopMusic()
+        {
+            AudioManager.instance.StopMusic();
         }
     }
 }

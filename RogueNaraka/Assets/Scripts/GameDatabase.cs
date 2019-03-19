@@ -148,6 +148,8 @@ public class UnitData : ICloneable
     public Color bulletColor = Color.white;
     public bool isFriendly;
     public bool isStanding;
+    public bool isDeathEffect;
+    public bool isCorpse;
     public MOVE_TYPE move;
     public float tackleSize;
     public float tackleDamage;

@@ -387,7 +387,14 @@ public class GameManager : MonoBehaviour {
 
     public static Vector2 GetMousePosition()
     {
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = Input.mousePosition;
+        if (mousePos.x < 0 || mousePos.x >= Screen.width || mousePos.y < 0 || mousePos.y >= Screen.height)
+        {
+            Debug.LogWarning("MousePosition isn't inside of screen");
+            return Vector2.zero;
+        }
+        Vector2 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return vec;
     }
 
     public void InitDropdown(TMP_Dropdown dropdown)

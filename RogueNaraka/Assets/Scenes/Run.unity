@@ -2099,7 +2099,7 @@ GameObject:
   - component: {fileID: 37812798}
   - component: {fileID: 37812797}
   - component: {fileID: 37812796}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CircleRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5133,7 +5133,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7348,7 +7348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 139503528}
   - component: {fileID: 139503527}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10246,7 +10246,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10993,7 +10993,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11268,7 +11268,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17623,7 +17623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 390428904}
   - component: {fileID: 390428903}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22683,7 +22683,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -24523,7 +24523,7 @@ GameObject:
   - component: {fileID: 552603414}
   - component: {fileID: 552603413}
   - component: {fileID: 552603412}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24543,7 +24543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cashedTransform: {fileID: 552603414}
-  restPosition: {x: -5, y: -5, z: 0}
+  restPosition: {x: -5, y: 0, z: 0}
   offset: 0.5
 --- !u!212 &552603413
 SpriteRenderer:
@@ -24601,7 +24601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552603411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 5.65, z: 0.20092773}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -27559,7 +27559,7 @@ GameObject:
   - component: {fileID: 648484180}
   - component: {fileID: 648484182}
   - component: {fileID: 648484181}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35713,7 +35713,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -39021,7 +39021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.035006}
+  m_AnchoredPosition: {x: -318, y: -204.6}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &940249674
@@ -39735,7 +39735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967465042}
   - component: {fileID: 967465043}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: vignetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43429,7 +43429,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 1797976757
+  m_SortingLayerID: -123621997
   m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!1 &1083862257
@@ -44556,7 +44556,7 @@ MonoBehaviour:
   - {fileID: 2054999018}
   fade: {fileID: 1114166081}
   manaUI: {fileID: 579780749}
-  restPosition: {x: 0, y: 0, z: 0}
+  restPosition: {x: -5, y: 0, z: 0}
   selected: 0
   stopped: 0
   isClickable: 0
@@ -60606,7 +60606,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -68366,7 +68366,7 @@ GameObject:
   - component: {fileID: 1693526907}
   - component: {fileID: 1693526909}
   - component: {fileID: 1693526908}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79622,7 +79622,7 @@ GameObject:
   - component: {fileID: 1911294459}
   - component: {fileID: 1911294458}
   - component: {fileID: 1911294463}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StatOrbCanvas/Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81465,7 +81465,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2049767584}
         m_MethodName: StopSFX
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -85052,7 +85052,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32566
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

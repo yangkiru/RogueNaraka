@@ -386,7 +386,7 @@ public class RollManager : MonoBehaviour {
     public void OnMouse()
     {
         dragImg.sprite = GetSprite(datas[selected]);
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 pos = GameManager.GetMousePosition();
         dragImg.rectTransform.position = pos;
         Vector3 local = dragImg.rectTransform.localPosition;
         local.z = 2;

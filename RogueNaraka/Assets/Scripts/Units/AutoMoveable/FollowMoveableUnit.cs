@@ -54,12 +54,15 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             Queue<Vector2> queue = new Queue<Vector2>(60);
             unit.cashedTransform.position = _following.cashedTransform.position;
-            float t = 0.2f;
+            float t = 0.3f;
             do
             {
                 yield return null;
                 if (!_following)
+                {
+                    currentCorou = null;
                     yield break;
+                }
                 queue.Enqueue(_following.cashedTransform.position);
                 if (t > 0)
                 {

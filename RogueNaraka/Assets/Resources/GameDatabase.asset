@@ -48,6 +48,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
+    isDeathEffect: 0
+    isCorpse: 0
     move: 0
     tackleSize: 0
     tackleDamage: 0
@@ -97,6 +99,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
     move: 1
     tackleSize: 0
     tackleDamage: 0
@@ -145,6 +149,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
     move: 1
     tackleSize: 0
     tackleDamage: 0
@@ -193,6 +199,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
     move: 5
     tackleSize: 0.3
     tackleDamage: 0.3
@@ -241,6 +249,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
     move: 5
     tackleSize: 0.3
     tackleDamage: 0.3
@@ -289,6 +299,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
     move: 1
     tackleSize: 0.35
     tackleDamage: 0.5
@@ -337,6 +349,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
     move: 0
     tackleSize: 0
     tackleDamage: 0
@@ -385,6 +399,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
     move: 0
     tackleSize: 0
     tackleDamage: 0
@@ -434,6 +450,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
+    isDeathEffect: 0
+    isCorpse: 1
     move: 7
     tackleSize: 1
     tackleDamage: 0.25
@@ -483,6 +501,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
     move: 2
     tackleSize: 1
     tackleDamage: 0.15
@@ -531,6 +551,8 @@ MonoBehaviour:
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
     isStanding: 1
+    isDeathEffect: 0
+    isCorpse: 0
     move: 6
     tackleSize: 0
     tackleDamage: 0
@@ -1347,7 +1369,7 @@ MonoBehaviour:
     startBulletId: 14
     children: []
     onDestroy: []
-    offset: {x: 0, y: 0.4, z: 0}
+    offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 3
@@ -1357,7 +1379,7 @@ MonoBehaviour:
     startBulletId: 16
     children: []
     onDestroy: []
-    offset: {x: 0, y: 0.4, z: 0}
+    offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 4
@@ -1367,7 +1389,7 @@ MonoBehaviour:
     startBulletId: 18
     children: []
     onDestroy: []
-    offset: {x: 0, y: 0.4, z: 0}
+    offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 5
@@ -1676,9 +1698,11 @@ MonoBehaviour:
       - name: 7
         value: 0.1
     description:
-    - Move fast summoning flames with dot damage.
+    - Move fast summoning flames with dot damage. The dot damage of flames are proportional
+      to the technical stats.
     - "\uC9C0\uC18D\uC801\uC73C\uB85C \uD654\uC5FC \uD53C\uD574\uB97C \uC8FC\uB294
-      \uBD88\uAF43\uC744 \uC18C\uD658\uD558\uBA70 \uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4."
+      \uBD88\uAF43\uC744 \uC18C\uD658\uD558\uBA70 \uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4.
+      \uD654\uC5FC \uD53C\uD574\uB294 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD55C\uB2E4."
     useSFX: flameShoes
   items:
   - name: HealPotion

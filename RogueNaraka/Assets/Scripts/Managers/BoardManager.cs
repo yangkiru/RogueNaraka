@@ -33,6 +33,7 @@ public class BoardManager : MonoBehaviour {
 
     public List<Unit> enemies = new List<Unit>();
     public List<Unit> friendlies = new List<Unit>();
+    public List<Unit> corpses = new List<Unit>();
 
     public TextMeshProUGUI stageTxt;
 
@@ -175,6 +176,10 @@ public class BoardManager : MonoBehaviour {
             StartCoroutine(StageTxtEffect(true));
             return;
         }
+        else if (stage != 1 && stage % 30 == 1)
+        {
+            AudioManager.instance.FadeInMusic(1);
+        }
 
         if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty)==0)
             AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
@@ -273,10 +278,15 @@ public class BoardManager : MonoBehaviour {
 
     public Vector2 GetRandomSpawn()
     {
-        float radius = PolyNav.PolyNav2D.current.radiusOffset;
-        float x = Random.Range(boardRange[0].x + radius, boardRange[1].x - radius);
-        float y = Random.Range(boardRange[0].y + radius, boardRange[1].y - radius);
-        return new Vector2(x, y);
+        Vector2 pos;
+        do
+        {
+            float radius = PolyNav.PolyNav2D.current.radiusOffset;
+            float x = Random.Range(boardRange[0].x + radius, boardRange[1].x - radius);
+            float y = Random.Range(boardRange[0].y + radius, boardRange[1].y - radius);
+            pos = new Vector2(x, y);
+        } while (Vector2.Distance(pos, player.cashedTransform.position) < 2);
+        return pos;
     }
 
     private IEnumerator StageTxtEffect(bool isBoss = false)
@@ -304,6 +314,13 @@ public class BoardManager : MonoBehaviour {
     public void ClearStage()
     {
         Debug.Log("Clear stage " + enemies.Count + " enemies");
+
+        for (int i = corpses.Count - 1; i >= 0; i--)
+        {
+            unitPool.EnqueueObjectPool(corpses[i].gameObject);
+            corpses.RemoveAt(i);
+        }
+
         for(int i = enemies.Count - 1; i >= 0; i--)
             unitPool.EnqueueObjectPool(enemies[i].gameObject);
 
@@ -311,21 +328,16 @@ public class BoardManager : MonoBehaviour {
         {
             if (friendlies[i].Equals(player))
                 continue;
-            //unitPool.EnqueueObjectPool(friendlies[i].gameObject);
-            friendlies[i].Kill();
+            unitPool.EnqueueObjectPool(friendlies[i].gameObject);
+            //friendlies[i].Kill();
         }
         boss = null;
         Fillable.bossHp.gameObject.SetActive(false);
     }
-    public static Vector3 GetMousePosition()
-    {
-        Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return new Vector3(mp.x, mp.y, 0);
-    }
 
     public static bool IsMouseInBoard()
     {
-        Vector3 mp = GetMousePosition() + new Vector3(0, Pointer.instance.offset, 0);
+        Vector3 mp = GameManager.GetMousePosition() + new Vector2(0, Pointer.instance.offset);
         Vector3 min = BoardManager.instance.boardRange[0];
         Vector3 max = BoardManager.instance.boardRange[1];
         return mp.x > min.x && mp.y > min.y && mp.x < max.x && mp.y < max.y;

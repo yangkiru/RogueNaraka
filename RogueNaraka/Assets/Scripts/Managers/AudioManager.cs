@@ -39,7 +39,8 @@ public class AudioManager : MonoBehaviour
 #if UNITY_EDITOR
     Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
 #endif
-#if !UNITY_EDITOR && UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
+    int currentStreamID;
     Dictionary<string, int> fileIDDictionary = new Dictionary<string, int>();
 #endif
 
@@ -58,7 +59,7 @@ public class AudioManager : MonoBehaviour
         }
 #endif
 
-#if !UNITY_EDITOR && UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         for (int i = 0; i < SFXNames.Length; i++)
         {
             fileIDDictionary.Add(SFXNames[i], AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i])));
@@ -175,7 +176,7 @@ public class AudioManager : MonoBehaviour
         audioSettings[(int)AudioGroups.SFX].SetExposedParam(value);
 #endif
 
-#if !UNITY_EDITOR && UNITY_ANDROID
+#if UNITY_ANDROID
                 sfxVolume = Mathf.InverseLerp(audioSettings[(int)AudioGroups.SFX].slider.minValue,
             audioSettings[(int)AudioGroups.SFX].slider.maxValue, value) * SFX.volume;
         PlayerPrefs.SetFloat(audioSettings[(int)AudioGroups.SFX].exposedParam, value);
@@ -206,6 +207,31 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void StopMusic()
+    {
+        music.Stop();
+    }
+
+    public void FadeInMusic(float time)
+    {
+        Debug.Log("FadeInMusic");
+        float volume = music.volume;
+        music.volume = 0;
+        StartCoroutine(FadeInMusicCorou(volume, time));
+    }
+
+    IEnumerator FadeInMusicCorou(float volume, float time)
+    {
+        float t = 0;
+        do
+        {
+            yield return null;
+            t += Time.unscaledDeltaTime / time;
+            music.volume = Mathf.Lerp(0, volume, t);
+        } while (t < 1);
+        music.volume = volume;
+    }
+
     //public IEnumerator PlaySound(AudioSource source, Transform parent)
     //{
     //    Transform sourceTransform = source.transform;
@@ -228,19 +254,19 @@ public class AudioManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_ANDROID
         try
         {
-            AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume);
+            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume);
         }catch
         {}
 #endif
     }
 
-    public void StopSFX(string name)
+    public void StopSFX()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
         SFX.Stop();
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
-        AndroidNativeAudio.stop(fileIDDictionary[name]);
+        AndroidNativeAudio.stop(currentStreamID);
 #endif
     }
 

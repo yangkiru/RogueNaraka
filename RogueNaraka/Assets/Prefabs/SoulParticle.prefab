@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 553358633947530481}
   - component: {fileID: 553358633947530486}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SoulParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5289023434299461146}
   - component: {fileID: 5289023434299461145}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BGCurve[2]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5289023435027803298}
   - component: {fileID: 5289023435027803297}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Spr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 5289023435148571135}
   - component: {fileID: 5289023435148571133}
   - component: {fileID: 5289023435148571134}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.02
+      scalar: 0.03
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -798,7 +798,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 100
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -4022,8 +4022,8 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 1
-    mode: 0
-    ratio: 1
+    mode: 1
+    ratio: 0.8
     lifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -4080,7 +4080,7 @@ ParticleSystem:
     minVertexDistance: 0.2
     textureMode: 0
     ribbonCount: 1
-    shadowBias: 0.5
+    shadowBias: 0
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
@@ -4093,7 +4093,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.78431374}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4155,7 +4155,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4872,7 +4872,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1797976757
   m_SortingLayer: 4
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4906,7 +4906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5289023435169474043}
   - component: {fileID: 5289023435169474020}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BGCurve[1]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5083,7 +5083,7 @@ GameObject:
   - component: {fileID: 5289023435892328599}
   - component: {fileID: 5289023435892328593}
   - component: {fileID: 5289023435892328592}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BGCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
