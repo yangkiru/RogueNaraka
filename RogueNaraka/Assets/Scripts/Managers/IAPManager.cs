@@ -33,7 +33,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
             InitializePurchasing();
         }
 
-        CheckProducts();
+        //CheckProducts();
     }
 
     public void InitializePurchasing()
@@ -240,7 +240,13 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
     IEnumerator CheckProductCorou(string productID)
     {
-        yield return new WaitForSecondsRealtime(5);
+        float t = 5;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
+        
         
         Debug.Log(string.Format("CheckingProduct:{0}", productID));
 
@@ -251,7 +257,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
             {
                 case PRODUCT_1000_SOUL:
                     Debug.Log(string.Format("RestorePurchase: PASS. Product: '{0}'", productID));
-                    if(MoneyManager.instance)MoneyManager.instance.AddSoul(1000);
+                    if(MoneyManager.instance) MoneyManager.instance.AddSoul(1000);
                     else
                         PlayerPrefs.SetInt("soul", PlayerPrefs.GetInt("soul") + 1000);
                     break;

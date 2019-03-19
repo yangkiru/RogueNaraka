@@ -5,7 +5,8 @@ using UnityEngine;
 public class Pointer : MonoBehaviour {
 
     public static Pointer instance = null;
-
+    public Transform cashedTransform;
+    public Vector3 restPosition;
     void Awake()
     {
         instance = this;
@@ -15,18 +16,20 @@ public class Pointer : MonoBehaviour {
 	public void SetPointer(bool value)
     {
         gameObject.SetActive(value);
+        if (!value)
+            cashedTransform.position = restPosition;
     }
 
     public void SetPosition(Vector2 position)
     {
         position.y += offset;
-        transform.position = position;
+        cashedTransform.position = position;
     }
 
     public void PositionToMouse()
     {
         Vector2 pos = GameManager.GetMousePosition();
         pos.y += offset;
-        transform.position = pos;
+        cashedTransform.position = pos;
     }
 }

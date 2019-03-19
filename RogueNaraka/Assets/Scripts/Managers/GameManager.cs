@@ -327,8 +327,8 @@ public class GameManager : MonoBehaviour {
 
     public PlayerWeaponData GetPlayerWeapon(int exp, out int remain)
     {
-        remain = -1;
         int i;
+        remain = 0;
         for(i = 0; i < GameDatabase.instance.playerWeapons.Length; i++)
         {
             exp -= GameDatabase.instance.playerWeapons[i].cost;

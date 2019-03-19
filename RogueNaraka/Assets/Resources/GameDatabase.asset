@@ -408,7 +408,7 @@ MonoBehaviour:
       dmg: 10
       spd: 20
       tec: 0
-      hp: 300
+      hp: 1500
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -426,7 +426,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 300
+      currentHp: 1000
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}

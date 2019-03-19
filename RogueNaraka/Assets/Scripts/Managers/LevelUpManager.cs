@@ -9,7 +9,6 @@ public class LevelUpManager : MonoBehaviour
     public Fade fade;
 
     float time;
-    bool isLevelUp;
 
     public RollManager rollManager;
     public StatManager statManager;
@@ -22,7 +21,6 @@ public class LevelUpManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        isLevelUp = PlayerPrefs.GetInt("isLevelUp") == 1;
     }
 
     public void RequestEndStageCorou()
@@ -64,13 +62,12 @@ public class LevelUpManager : MonoBehaviour
         player.moveable.agent.Stop();
 
         fade.FadeOut();
-        isLevelUp = true;
-        BoardManager.instance.ClearStage();
     }
 
     public void LevelUp()
     {
         Debug.Log("LevelUp");
+        BoardManager.instance.ClearStage();
         GameManager.instance.SetPause(true);
         PlayerPrefs.SetInt("isLevelUp", 1);
         statManager.SyncStatUpgradeTxt();

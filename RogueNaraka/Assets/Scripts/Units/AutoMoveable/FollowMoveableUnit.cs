@@ -37,17 +37,41 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                     _following = _target.followable.followers[index - 1];
                 else
                     _following = _target;
+
+                if(currentCorou == null)
+                {
+                    currentCorou = Follow();
+                    StartCoroutine(currentCorou);
+                }
             }
             else
                 _following = null;
         }
 
-        private void LateUpdate()
+        IEnumerator currentCorou;
+        
+        IEnumerator Follow()
         {
-            if (_following)
+            Queue<Vector2> queue = new Queue<Vector2>(60);
+            unit.cashedTransform.position = _following.cashedTransform.position;
+            float t = 0.2f;
+            do
             {
-                moveable.Move(_following.transform.position);
-            }
+                yield return null;
+                if (!_following)
+                    yield break;
+                queue.Enqueue(_following.cashedTransform.position);
+                if (t > 0)
+                {
+                    t -= Time.deltaTime;
+                    unit.cashedTransform.position = queue.Peek();
+                }
+                else
+                {
+                    unit.cashedTransform.position = queue.Dequeue();
+                }
+            } while (!unit.deathable.isDeath || _following == null);
+            currentCorou = null;
         }
 
         public void OnDeath()

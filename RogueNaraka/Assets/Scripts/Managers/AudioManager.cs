@@ -222,7 +222,7 @@ public class AudioManager : MonoBehaviour
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
-            SFX.PlayOneShot(SFXClipDictionary[name]);
+            SFX.PlayOneShot(SFXClipDictionary[name], sfxVolume);
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
@@ -233,6 +233,17 @@ public class AudioManager : MonoBehaviour
         {}
 #endif
     }
+
+    public void StopSFX(string name)
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        SFX.Stop();
+#endif
+#if !UNITY_EDITOR && UNITY_ANDROID
+        AndroidNativeAudio.stop(fileIDDictionary[name]);
+#endif
+    }
+
 #if !UNITY_EDITOR && UNITY_ANDROID
     void OnApplicationQuit()
     {

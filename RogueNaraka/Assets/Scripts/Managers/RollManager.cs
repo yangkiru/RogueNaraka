@@ -22,6 +22,8 @@ public class RollManager : MonoBehaviour {
     public Fade fade;
     public ManaUI manaUI;
 
+    public Vector3 restPosition;
+
     public int selected;
     public int stopped;
     public bool isClickable;
@@ -396,6 +398,7 @@ public class RollManager : MonoBehaviour {
         if(target != -1)
             Ok();
         isMouseDown = false;
+        dragImg.rectTransform.position = restPosition;
         dragImg.sprite = null;
         dragImg.gameObject.SetActive(false);
     }

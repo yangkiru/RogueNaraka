@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2379278054695447416}
   - component: {fileID: 744504853176165927}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: StatOrb[2]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 744504853472929913}
   - component: {fileID: 744504853472929918}
   - component: {fileID: 889525689071080608}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: StatOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ MonoBehaviour:
   hidden: 0
   parent: {fileID: 744504853472929913}
   ccName: 
-  distance: 104.58183
+  distance: 7.0878115
   handlesScale: 1
   handlesColor: {r: 1, g: 1, b: 1, a: 1}
   onOverflowParameter: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2679603132073843692}
   - component: {fileID: 744504853682586000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: StatOrb[0]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2738771542687252457}
   - component: {fileID: 744504854375554279}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: StatOrb[1]
   m_TagString: Untagged
   m_Icon: {fileID: 0}

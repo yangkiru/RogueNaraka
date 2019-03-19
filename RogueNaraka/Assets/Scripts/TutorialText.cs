@@ -73,12 +73,11 @@ public class TutorialText : MonoBehaviour
         {
             yield return null;
         } while (!Input.anyKeyDown || TutorialManager.instance.isPause);
-
-        gameObject.SetActive(false);
         if (onEnd != null)
             onEnd.Invoke();
         if (next)
             next.TextOn();
+        gameObject.SetActive(false);
     }
     [Serializable]
     public class TutorialEvent : UnityEvent { }

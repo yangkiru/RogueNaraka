@@ -381,7 +381,7 @@ public class SoulShopManager : MonoBehaviour
         StartCoroutine("AddWeaponExpCorou");
     }
 
-    void WeaponPnlUpdate(int exp)
+    int WeaponPnlUpdate(int exp)
     {
         int remain;
         PlayerWeaponData data = GameManager.instance.GetPlayerWeapon(exp, out remain);
@@ -412,29 +412,76 @@ public class SoulShopManager : MonoBehaviour
                 player.attackable.Init((WeaponData)GameDatabase.instance.weapons[data.id].Clone());
             }
         }
+        return data.level;
+    }
+
+    int GetWeaponLevel(int exp, out int remain)
+    {
+        remain = 0;
+        for (int i = 0; i < GameDatabase.instance.playerWeapons.Length; i++)
+        {
+            exp -= GameDatabase.instance.playerWeapons[i].cost;
+            if (exp < 0)
+            {
+                remain = GameDatabase.instance.playerWeapons[i].cost + exp;
+                return GameDatabase.instance.playerWeapons[i].level;
+            }
+        }
+        return -1;
     }
 
     IEnumerator AddWeaponExpCorou()
     {
         float delay = 0.5f;
         int exp = PlayerPrefs.GetInt("exp");
-        while (MoneyManager.instance.UseSoul(1))
+        int amount = 1;
+        int speedUp = 0;
+        int remain;
+        int currentLevel = GetWeaponLevel(exp, out remain);
+        int lastLevel = currentLevel;
+
+        bool isSuccess;
+        do
         {
             float t = delay;
-            exp = exp + 1;
+            int nextExp = exp + amount;
+            int nextLevel = GetWeaponLevel(nextExp, out remain);
+            if(nextLevel != currentLevel)//무기 레벨 업 전
+            {
+                amount -= remain;
+            }
+
+            isSuccess = MoneyManager.instance.UseSoul(amount);
+
+            if (!isSuccess)
+                yield break;
+
+            exp += amount;
             PlayerPrefs.SetInt("exp", exp);
             AudioManager.instance.PlaySFX("weaponUpgrade");
 
-            WeaponPnlUpdate(exp);
-
+            currentLevel = WeaponPnlUpdate(exp);
+            if(currentLevel != lastLevel)//무기 레벨 업
+            {
+                yield break;
+            }
+            lastLevel = currentLevel;
             while (t > 0)
             {
                 yield return null;
                 t -= Time.unscaledDeltaTime;
             }
-            if(delay > 0.05f)
+            if (delay > 0.05f)
                 delay *= 0.9f;
-        }
+            else
+            {
+                if (++speedUp > 10)
+                {
+                    speedUp = 0;
+                    amount++;
+                }
+            }
+        } while (isSuccess);
     }
     #endregion
 
