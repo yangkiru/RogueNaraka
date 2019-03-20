@@ -11,6 +11,7 @@ public class TutorialManager : MonoBehaviour
     public bool isPlaying;
     public GameObject pausePnl;
     public GameObject settingPnl;
+    public GameObject settingBtn;
 
     public static TutorialManager instance;
 
@@ -57,6 +58,7 @@ public class TutorialManager : MonoBehaviour
             //Debug.Log("StartTutorial" + i + ":" + PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)));
             startTexts[i].TextOn();
             isPlaying = true;
+            settingBtn.SetActive(true);
         }
     }
 
@@ -66,6 +68,7 @@ public class TutorialManager : MonoBehaviour
         PlayerPrefs.SetInt(string.Format("isTutorial{0}", i), 1);
         //Debug.Log("EndTutorial" + i + ":" + PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)));
         isPlaying = false;
+        settingBtn.SetActive(false);
     }
 
     [ContextMenu("CheckTutorial")]

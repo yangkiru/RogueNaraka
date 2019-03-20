@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CircleRenderer : MonoBehaviour {
 
@@ -11,6 +12,13 @@ public class CircleRenderer : MonoBehaviour {
     public LineRenderer line;
     public bool isSpin;
     public float spinAmount;
+
+    private void Awake()
+    {
+        Material result = line.material;
+        result.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
+        line.material = result;
+    }
 
     [ContextMenu("CreatPoints")]
     public void CreatePoints()

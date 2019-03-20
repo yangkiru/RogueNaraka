@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     public GameObject settingPnl;
     public GameObject pausePnl;
     public GameObject pauseBtn;
+    public GameObject settingBtn;
 
     public Button[] languageBtns;
 
@@ -371,6 +372,18 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
+    }
+
+    public void SetSettingBtn(bool value)
+    {
+        settingBtn.SetActive(value);
+        pauseBtn.SetActive(!value);
+    }
+
+    public void SetPauseBtn(bool value)
+    {
+        settingBtn.SetActive(!value);
+        pauseBtn.SetActive(value);
     }
 
     public void SetSettingPnl(bool value)

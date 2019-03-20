@@ -14,7 +14,6 @@ public class DeathManager : MonoBehaviour
     public Image soulPnl;
 
     public Image youDied;
-    public Image pauseBtn;
 
     public TextMeshProUGUI soulRefiningRateTxt;
     public TextMeshProUGUI unSoulTxt;
@@ -49,7 +48,7 @@ public class DeathManager : MonoBehaviour
 
         StartCoroutine(SoulPnlCorou(1));
 
-        pauseBtn.gameObject.SetActive(false);
+        GameManager.instance.SetSettingBtn(true);
 
         AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomDeathMusic());
     }
@@ -233,7 +232,7 @@ public class DeathManager : MonoBehaviour
         BoardManager.instance.player.hpable.SetFullHp();
         BoardManager.instance.player.mpable.SetFullMp();
 
-        pauseBtn.gameObject.SetActive(true);
+        GameManager.instance.SetSettingBtn(true);
     }
 
     public void OpenSoulShop()

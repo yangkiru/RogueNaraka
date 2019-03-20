@@ -174,6 +174,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
         m_StoreController = controller;
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
+        CheckADRemove();
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
@@ -228,6 +229,26 @@ public class IAPManager : MonoBehaviour, IStoreListener
         CheckProduct(PRODUCT_5500_SOUL);
         CheckProduct(PRODUCT_12000_SOUL);
         CheckProduct(PRODUCT_REMOVE_AD);
+    }
+
+    void CheckADRemove()
+    {
+        if (PlayerPrefs.GetInt("isRemoveAds") == 1)
+        {
+            Product product = m_StoreController.products.WithID(PRODUCT_REMOVE_AD);
+            if (product != null && !product.hasReceipt)
+            {
+                PlayerPrefs.SetInt("isRemoveAds", 0);
+            }
+        }
+        else
+        {
+            Product product = m_StoreController.products.WithID(PRODUCT_REMOVE_AD);
+            if (product != null && product.hasReceipt)
+            {
+                PlayerPrefs.SetInt("isRemoveAds", 1);
+            }
+        }
     }
 
     void CheckProduct(string productID)

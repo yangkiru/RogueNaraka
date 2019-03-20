@@ -143,7 +143,7 @@ public class BoardManager : MonoBehaviour {
         if (!GameManager.instance.pausePnl.activeSelf && !GameManager.instance.settingPnl.activeSelf)
             GameManager.instance.SetPause(false);
         if (!player.deathable.isDeath)
-            GameManager.instance.pauseBtn.SetActive(true);
+            GameManager.instance.SetPauseBtn(true);
     }
 
     //void RandomEnemy(int leftCost)

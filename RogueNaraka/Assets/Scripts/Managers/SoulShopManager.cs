@@ -76,6 +76,8 @@ public class SoulShopManager : MonoBehaviour
             AudioManager.instance.PlayMusic("cave");
             
             menuBtns[menu].onClick.Invoke();
+
+            GameManager.instance.settingBtn.SetActive(false);
             
         }
         else
@@ -83,10 +85,10 @@ public class SoulShopManager : MonoBehaviour
             shopPnl.SetActive(false);
 
             AudioManager.instance.PlayMusic(lastMusic);
-            if(DeathManager.instance.deathPnl.gameObject.activeSelf)
-                DeathManager.instance.pauseBtn.gameObject.SetActive(false);
+            if(DeathManager.instance.deathPnl.gameObject.activeSelf || StatOrbManager.instance.pnl.activeSelf)
+                GameManager.instance.SetSettingBtn(true);
             else
-                DeathManager.instance.pauseBtn.gameObject.SetActive(true);
+                GameManager.instance.SetPauseBtn(true);
             if (StatManager.instance.statPnl.activeSelf)
                 StatManager.instance.SyncStatUpgradeTxt();
             if(DeathManager.instance.deathPnl.gameObject.activeSelf)
@@ -385,11 +387,12 @@ public class SoulShopManager : MonoBehaviour
     {
         int remain;
         PlayerWeaponData data = GameManager.instance.GetPlayerWeapon(exp, out remain);
-        if(data.level == GameDatabase.instance.playerWeapons.Length - 1 && remain == -1)
+        if(data.level == GameDatabase.instance.playerWeapons.Length - 1 && remain == 0)
         {
             weaponSoulTxt.text = string.Format("{0}/{1} Soul", data.cost, data.cost); ;
             weaponBar.fillAmount = 1;
             weaponExpBtn.interactable = false;
+            Debug.Log("Max Weapon");
             StopCoroutine("AddWeaponExpCorou");
         }
         else

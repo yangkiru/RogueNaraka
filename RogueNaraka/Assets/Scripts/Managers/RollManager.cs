@@ -97,7 +97,7 @@ public class RollManager : MonoBehaviour {
         this.isStageUp = isStageUp;
         if (value)
         {
-            pauseBtn.SetActive(true);
+            GameManager.instance.SetPauseBtn(true);
             rollPnl.SetActive(value);
             Init();
             SetShowCase(isRoll);
