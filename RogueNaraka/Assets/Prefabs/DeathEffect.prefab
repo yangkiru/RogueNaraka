@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 212307275029977000}
   - component: {fileID: 95086447167642406}
   - component: {fileID: 114618477838506466}
+  - component: {fileID: 1189277104813977380}
   m_Layer: 5
   m_Name: DeathEffect
   m_TagString: Untagged
@@ -67,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 329776949
-  m_SortingLayer: 0
+  m_SortingLayerID: 1498647319
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -113,3 +114,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95086447167642406}
+--- !u!114 &1189277104813977380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834699485055432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd675250fcf2b147a55fc09f6dde186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 0
+  render: {fileID: 212307275029977000}

@@ -285,7 +285,7 @@ public class BoardManager : MonoBehaviour {
             float x = Random.Range(boardRange[0].x + radius, boardRange[1].x - radius);
             float y = Random.Range(boardRange[0].y + radius, boardRange[1].y - radius);
             pos = new Vector2(x, y);
-        } while (Vector2.Distance(pos, player.cashedTransform.position) < 2);
+        } while (Vector2.Distance(pos, spawnPoint) < 2);
         return pos;
     }
 

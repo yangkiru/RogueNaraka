@@ -581,11 +581,6 @@ public enum MOVE_TYPE
     BOSS0
 }
 
-public enum SORTING_LAYER
-{
-    TOP, MID, BOT
-}
-
 [Serializable]
 public enum Language
 {

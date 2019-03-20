@@ -48,9 +48,9 @@ namespace RogueNaraka.SkillScripts
 
             if (!from.ownerable.unit.deathable.isDeath)
             {
-                fromUnit.damageable.Damage(amount);
+                fromUnit.damageable.Damage(amount * 0.03f * BoardManager.instance.player.stat.GetCurrent(STAT.TEC));
                 if (!to.deathable.isDeath)
-                    to.hpable.Heal(amount * 0.25f);
+                    to.hpable.Heal(amount * 0.025f);
             }
         }
     }

@@ -442,7 +442,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 1000
+      currentHp: 1500
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
@@ -1544,7 +1544,7 @@ MonoBehaviour:
     - name: 0
       value: 1
     - name: 3
-      value: 0.1
+      value: 1
     levelUp:
       manaCost: 0.5
       size: 0
@@ -1552,11 +1552,14 @@ MonoBehaviour:
       effects: []
       values:
       - name: 3
-        value: 0.1
+        value: 1
     description:
-    - Summon a blood swamp absorbing health from target enemies
-    - "\uB2FF\uC740 \uC801\uB4E4\uC758 \uCCB4\uB825\uC744 \uD761\uC218\uD558\uB294
-      \uB2AA\uC744 \uC18C\uD658\uD55C\uB2E4"
+    - "Summon a blood swamp absorbing health from target enemies.\r\nThe damage is
+      proportional to the technical stats and the amount of recovery is proportional
+      to the count of reinforcement."
+    - "\uC801\uC758 \uCCB4\uB825\uC744 \uD761\uC218\uD558\uB294 \uB2AA\uC744 \uC18C\uD658\uD55C\uB2E4.\r
+      \uD53C\uD574\uB7C9\uC740 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uBA70 \uD68C\uBCF5\uB7C9\uC740
+      \uAC15\uD654\uB7C9\uC5D0 \uBE44\uB840\uD55C\uB2E4."
     useSFX: blood
   - name: ScarecrowSoldier
     nameLang:
