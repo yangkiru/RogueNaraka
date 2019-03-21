@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour {
 
     static public CameraShake instance;
-    public Camera camera;
+    public new Camera camera;
     public float time;
     public float power;
     public float speed;

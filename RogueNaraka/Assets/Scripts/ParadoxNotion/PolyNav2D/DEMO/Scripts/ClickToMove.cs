@@ -13,7 +13,7 @@ public class ClickToMove : MonoBehaviour{
 
 	void Update() {
 		if (Input.GetMouseButton(0)){
-			agent.SetDestination( GameManager.GetMousePosition() );
+			agent.SetDestination( GameManager.instance.GetMousePosition() );
 		}
 	}
 }

@@ -8,7 +8,6 @@ public class SkillManager : MonoBehaviour {
     public GameManager gameManager
     { get { return GameManager.instance; } }
     public RectTransform[] points;
-    public LineRenderer lr;
     public CircleRenderer circle;
 
     public SkillGUI[] skills;
@@ -316,11 +315,6 @@ public class SkillManager : MonoBehaviour {
     //    float mid = (BoardManager.instance.boardRange[0].x + BoardManager.instance.boardRange[1].x) / 2;
     //    points[1].position = new Vector3((mid + mp.x) / 2, (points[0].position.y + points[2].position.y) / 2, 0);
     //}
-
-    public void SetLine(bool value)
-    {
-        lr.enabled = value;
-    }
 
     //public bool HasSkill(int id)
     //{

@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
     public GameObject pauseBtn;
     public GameObject settingBtn;
 
+    public Camera mainCamera;
+
     public Button[] languageBtns;
 
     public Unit player
@@ -398,7 +400,7 @@ public class GameManager : MonoBehaviour {
             TutorialManager.instance.isPause = false;
     }
 
-    public static Vector2 GetMousePosition()
+    public Vector2 GetMousePosition()
     {
         var mousePos = Input.mousePosition;
         if (mousePos.x < 0 || mousePos.x >= Screen.width || mousePos.y < 0 || mousePos.y >= Screen.height)
@@ -406,7 +408,8 @@ public class GameManager : MonoBehaviour {
             Debug.LogWarning("MousePosition isn't inside of screen");
             return Vector2.zero;
         }
-        Vector2 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 vec = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         return vec;
     }
 

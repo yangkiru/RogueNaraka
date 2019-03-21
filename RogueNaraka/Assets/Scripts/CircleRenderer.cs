@@ -107,7 +107,7 @@ public class CircleRenderer : MonoBehaviour {
 
     public void MoveCircleToMouse()
     {
-        Vector3 mp = GameManager.GetMousePosition();
+        Vector3 mp = GameManager.instance.GetMousePosition();
         Move(mp);
     }
 }

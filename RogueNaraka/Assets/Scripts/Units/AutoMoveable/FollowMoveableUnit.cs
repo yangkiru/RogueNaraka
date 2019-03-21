@@ -85,6 +85,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                     _target.followable.RemoveFollower(unit);
                 //LostTarget();
             }
+            currentCorou = null;
         }
 
         private void OnDisable()

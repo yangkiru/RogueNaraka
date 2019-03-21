@@ -46,7 +46,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
             else
             {
-                skillManager.GetCircle().Move(GameManager.GetMousePosition() + new Vector2(0, pointer.offset));
+                skillManager.GetCircle().Move(GameManager.instance.GetMousePosition() + new Vector2(0, pointer.offset));
             }
             pointer.PositionToMouse();
         }
@@ -87,7 +87,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             isMouseDown = true;
             //skillManager.DrawLine(position, true);
-            //skillManager.SetLine(true);
             if (_skill.data.size > 0)
             {
                 skillManager.GetCircle().SetCircle(_skill.data.size);
@@ -100,7 +99,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnMouseUp()
     {
         isMouseDown = false;
-        skillManager.SetLine(false);
         skillManager.GetCircle().SetEnable(false);
         skillManager.GetCircle().transform.SetParent(null);
         if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
@@ -212,7 +210,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (_skill.data.coolTimeLeft > 0)
             return;
-        Vector3 mp = GameManager.GetMousePosition() + new Vector2(0, pointer.offset);
+        Vector3 mp = GameManager.instance.GetMousePosition() + new Vector2(0, pointer.offset);
         float distance = Vector2.Distance(mp, player.transform.position);
         Vector2 vec = mp - player.transform.position;
 

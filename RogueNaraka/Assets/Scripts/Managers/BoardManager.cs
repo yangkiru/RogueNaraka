@@ -285,7 +285,7 @@ public class BoardManager : MonoBehaviour {
             float x = Random.Range(boardRange[0].x + radius, boardRange[1].x - radius);
             float y = Random.Range(boardRange[0].y + radius, boardRange[1].y - radius);
             pos = new Vector2(x, y);
-        } while (Vector2.Distance(pos, spawnPoint) < 2);
+        } while (Vector2.Distance(pos, spawnPoint) < 1f);
         return pos;
     }
 
@@ -337,7 +337,7 @@ public class BoardManager : MonoBehaviour {
 
     public static bool IsMouseInBoard()
     {
-        Vector3 mp = GameManager.GetMousePosition() + new Vector2(0, Pointer.instance.offset);
+        Vector3 mp = GameManager.instance.GetMousePosition() + new Vector2(0, Pointer.instance.offset);
         Vector3 min = BoardManager.instance.boardRange[0];
         Vector3 max = BoardManager.instance.boardRange[1];
         return mp.x > min.x && mp.y > min.y && mp.x < max.x && mp.y < max.y;

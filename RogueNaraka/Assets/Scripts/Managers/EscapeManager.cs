@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EscapeManager : MonoBehaviour
 {
     public Button pauseBtn;
+    public Button settingBtn;
 #if UNITY_ANDROID
     
     bool isExit;
@@ -24,7 +25,12 @@ public class EscapeManager : MonoBehaviour
                 }
             }
             else
-                pauseBtn.onClick.Invoke();
+            {
+                if (pauseBtn.gameObject.activeSelf)
+                    pauseBtn.onClick.Invoke();
+                else if (settingBtn)
+                    settingBtn.onClick.Invoke();
+            }
         }
     }
 

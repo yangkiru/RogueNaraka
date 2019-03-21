@@ -28,7 +28,7 @@ public class Pointer : MonoBehaviour {
 
     public void PositionToMouse()
     {
-        Vector2 pos = GameManager.GetMousePosition();
+        Vector2 pos = GameManager.instance.GetMousePosition();
         pos.y += offset;
         cashedTransform.position = pos;
     }
