@@ -500,11 +500,14 @@ public class SoulShopManager : MonoBehaviour
     public void RefiningRateUpgrade()
     {
         float rate = MoneyManager.instance.refiningRate;
+        int amount = (int)(rate * 1000);
+        if (amount % 10 != 0)
+            amount++;
         if (soulRefRateBtnTxt.text.CompareTo("Up") == 0)
         {
-            soulRefRateBtnTxt.text = string.Format("{0}", (int)(rate * 1000));
+            soulRefRateBtnTxt.text = string.Format("{0}", amount);
         }
-        else if (MoneyManager.instance.UseSoul((int)(rate * 1000)))
+        else if (MoneyManager.instance.UseSoul(amount))
         {
             MoneyManager.instance.refiningRate = rate + 0.01f;
             RefiningRateTxtUpdate();

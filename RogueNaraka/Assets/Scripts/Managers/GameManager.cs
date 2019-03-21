@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour {
 
         PlayerPrefs.SetInt(Application.version, 1);
 
-        moneyManager.Reset();
+        moneyManager.ResetData();
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
         soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);

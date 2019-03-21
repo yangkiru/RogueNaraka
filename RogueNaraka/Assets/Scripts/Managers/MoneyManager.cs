@@ -66,7 +66,7 @@ public class MoneyManager : MonoBehaviour {
         else
             _soul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, soulSpawnPosition);
+        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, Vector2.zero);
         if(isSave)
             Save(false);
     }
@@ -77,7 +77,7 @@ public class MoneyManager : MonoBehaviour {
         {
             _soul -= amount;
             MoneyUpdate();
-            PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform, soulSpawnPosition);
+            PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform, Vector2.zero);
             Save(false);
             return true;
         }
@@ -113,7 +113,7 @@ public class MoneyManager : MonoBehaviour {
         SetSoul(PlayerPrefs.GetInt("soul"));
     }
 
-    public void Reset()
+    public void ResetData()
     {
         PlayerPrefs.SetInt("unrefinedSoul", 0);
         PlayerPrefs.SetInt("soul", 0);
@@ -122,7 +122,7 @@ public class MoneyManager : MonoBehaviour {
     public void MoneyUpdate()
     {
         Debug.Log("MoneyUpdate");
-        soulTxt.text = _soul.ToString();
-        unrefinedSoulTxt.text = _unrefinedSoul.ToString();
+        soulTxt.text = string.Format("Soul {0}", _soul.ToString());
+        unrefinedSoulTxt.text = string.Format("UnSoul {0}", _unrefinedSoul.ToString());
     }
 }
