@@ -188,55 +188,84 @@ public class BoardManager : MonoBehaviour {
 
 
         int cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];
-        UnitCost[] unitCosts = GameDatabase.instance.unitCosts;
-        List<int> able = new List<int>();
-        for(int i = 0; i < unitCosts.Length; i++)
-        {
-            if (unitCosts[i].cost <= cost)
-                able.Add(unitCosts[i].cost);
-        }
-        for (int i = able.Count-1; i >= 1; i--)
-        {
-            int amount = Random.Range(0, (cost / able[i]) + 1);
-            List<int> ids = new List<int>();
 
-            for(int j = 0; j < unitCosts[i].unitId.Length; j++)//stage 제한
-            {
-                int temp = unitCosts[i].unitId[j];
-                if (GameDatabase.instance.enemies[temp].stage <= (_stage % 30))
-                    ids.Add(temp);
+        while(cost > 0)
+            SpawnRandomEnemy(ref cost);
+        //for (int i = able.Count-1; i >= 1; i--)
+        //{
+        //    int amount = Random.Range(0, (cost / able[i]) + 1);
+        //    List<int> ids = new List<int>();
+
+        //    for(int j = 0; j < unitCosts[i].unitId.Length; j++)//stage 제한
+        //    {
+        //        int temp = unitCosts[i].unitId[j];
+        //        if (GameDatabase.instance.enemies[temp].stage <= (_stage % 30))
+        //            ids.Add(temp);
                 
-            }
-            if (ids.Count > 0)
-            {
-                for (int j = 0; j < amount; j++)
-                {
-                    int index = Random.Range(0, ids.Count);
-                    SpawnEnemy(ids[index]);
-                    cost -= unitCosts[i].cost;
-                }
-            }
-            if (cost <= 1)
-                break;
-        }
-        for (int i = 0; i < cost; i++)
-        {
-            List<int> ids = new List<int>();
-            for (int j = 0; j < unitCosts[0].unitId.Length; j++)//stage 제한
-            {
-                int temp = unitCosts[0].unitId[j];
-                if (GameDatabase.instance.enemies[temp].stage <= _stage)
-                    ids.Add(temp);
-            }
-            if (ids.Count > 0)
-            {
-                int index = Random.Range(0, ids.Count);
-                //Debug.Log("index:" + index + " ids.Count:" + ids.Count + " ids[index]:" + ids[index]);
-                SpawnEnemy(ids[index]);
-            }
-        }
+        //    }
+        //    if (ids.Count > 0)
+        //    {
+        //        for (int j = 0; j < amount; j++)
+        //        {
+        //            int index = Random.Range(0, ids.Count);
+        //            SpawnEnemy(ids[index]);
+        //            cost -= unitCosts[i].cost;
+        //        }
+        //    }
+        //    if (cost <= 1)
+        //        break;
+        //}
+        //for (int i = 0; i < cost; i++)
+        //{
+        //    List<int> ids = new List<int>();
+        //    for (int j = 0; j < unitCosts[0].unitId.Length; j++)//stage 제한
+        //    {
+        //        int temp = unitCosts[0].unitId[j];
+        //        if (GameDatabase.instance.enemies[temp].stage <= _stage)
+        //            ids.Add(temp);
+        //    }
+        //    if (ids.Count > 0)
+        //    {
+        //        int index = Random.Range(0, ids.Count);
+        //        //Debug.Log("index:" + index + " ids.Count:" + ids.Count + " ids[index]:" + ids[index]);
+        //        SpawnEnemy(ids[index]);
+        //    }
+        //}
 
         StartCoroutine(StageTxtEffect());
+    }
+
+    public void SpawnRandomEnemy(ref int cost)
+    {
+        UnitCost[] unitCosts = GameDatabase.instance.unitCosts;//코스트 별 유닛들
+
+        List<int> able = new List<int>();//소환 가능한 유닛들
+        int stage = _stage % 30;
+        for (int i = 0; i < unitCosts.Length; i++)
+        {
+            if (unitCosts[i].cost <= cost)
+            {
+                for(int j = 0; j < unitCosts[i].unitId.Length; j++)
+                {
+                    UnitData temp = GameDatabase.instance.enemies[unitCosts[i].unitId[j]];
+                    if (temp.stage <= stage && (temp.maxStage == 0 ? true : temp.maxStage >= stage))
+                        able.Add(temp.id);
+                }
+            }
+        }
+
+        if(able.Count <= 0)
+        {
+            cost = 0;
+            Debug.Log("No More Spawnable Enemies");
+            return;
+        }
+
+        int rnd = Random.Range(0, able.Count);
+        int rndID = able[rnd];
+
+        SpawnEnemy(rndID);
+        cost -= GameDatabase.instance.enemies[rndID].cost;
     }
 
     public void SpawnPlayer(UnitData data)
@@ -293,7 +322,7 @@ public class BoardManager : MonoBehaviour {
     {
         Debug.Log("stageTxt");
         stageTxt.gameObject.SetActive(true);
-        string text = isBoss ? "BOSS STAGE" : string.Format("STAGE {0}", _stage);
+        string text = isBoss ? string.Format("BOSS STAGE {0}", RageManager.instance.rageLevel + 1) : string.Format("STAGE {0}", _stage);
         stageTxt.text = string.Empty;
         Color color = Color.white;
         stageTxt.color = color;

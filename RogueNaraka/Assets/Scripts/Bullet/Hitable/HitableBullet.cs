@@ -200,7 +200,7 @@ namespace RogueNaraka.BulletScripts.Hitable
                     AudioManager.instance.PlaySFX(str);
                 }
 
-                if (shakeable.shake.isOnHit)
+                if (bullet.data.shake.isOnHit)
                     shakeable.Shake();
 
                 if (OnDamage != null)

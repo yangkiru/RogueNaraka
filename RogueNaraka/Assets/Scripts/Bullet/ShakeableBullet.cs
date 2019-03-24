@@ -6,20 +6,16 @@ namespace RogueNaraka.BulletScripts
 {
     public class ShakeableBullet : MonoBehaviour
     {
-        public ShakeData shake { get { return _shake; } }
-        ShakeData _shake;
+        public Bullet bullet;
 
-        public void Init(ShakeData data)
+        private void Reset()
         {
-            _shake.time = data.time;
-            _shake.gap = data.gap;
-            _shake.power = data.power;
-            _shake.isOnHit = data.isOnHit;
+            bullet = GetComponent<Bullet>();
         }
 
         public void Shake()
         {
-            CameraShake.instance.Shake(_shake);
+            CameraShake.instance.Shake(bullet.data.shake);
         }
     }
 }

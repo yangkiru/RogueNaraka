@@ -1,19 +1,11 @@
 fileFormatVersion: 2
-guid: c1ee076a37db64f43843810e1efc9e22
+guid: dfd2c6f0faf015d4896ede755f1f5a9f
 TextureImporter:
   fileIDToRecycleName:
     21300000: bug0RU_0
     21300002: bug0RU_1
     21300004: bug0RU_2
     21300006: bug0RU_3
-    21300008: Bug0RU_0
-    21300010: Bug0RU_1
-    21300012: Bug0RU_2
-    21300014: Bug0RU_3
-    21300016: Bug1RU_0
-    21300018: Bug1RU_1
-    21300020: Bug1RU_2
-    21300022: Bug1RU_3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -107,7 +99,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bug1RU_0
+      name: bug0RU_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,19 +107,19 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64b560981eaddca40969180fa4a132fd
+      spriteID: e8c376d1a59f2514aba5669f90886140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bug1RU_1
+      name: bug0RU_1
       rect:
         serializedVersion: 2
         x: 24
@@ -135,19 +127,19 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7db396efbb52c9948aeea435d38ab403
+      spriteID: 369c1e259db0c27478b4f1b2ca51080d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bug1RU_2
+      name: bug0RU_2
       rect:
         serializedVersion: 2
         x: 48
@@ -155,19 +147,19 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdda45b7b50d5a5449a18992a09a5c06
+      spriteID: 2d2a3873359667e40bb3c60323c88059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bug1RU_3
+      name: bug0RU_3
       rect:
         serializedVersion: 2
         x: 72
@@ -175,13 +167,13 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fcfae6445ec79146a3771d8a297d7b2
+      spriteID: a01484dd7d4197346a82daf86c0bb33f
       vertices: []
       indices: 
       edges: []
@@ -189,7 +181,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4f1a2b4874308d54198a7b0ad242cfb8
+    spriteID: 120180e8ba435c742be5ec80eb30d530
     vertices: []
     indices: 
     edges: []

@@ -392,12 +392,11 @@ public class GameManager : MonoBehaviour {
     {
         settingPnl.SetActive(value);
 
-        if(StatOrbManager.instance.pnl.activeSelf)
+        TutorialManager.instance.isPause = value;
+        if (StatOrbManager.instance.pnl.activeSelf && !TutorialManager.instance.isPlaying)
         {
             GameManager.instance.SetPause(value);
         }
-        else if (TutorialManager.instance.isPause && !value)
-            TutorialManager.instance.isPause = false;
     }
 
     public Vector2 GetMousePosition()

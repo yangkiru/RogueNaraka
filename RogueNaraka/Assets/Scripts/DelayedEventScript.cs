@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DelayedEventScript : MonoBehaviour
 {
     public float time;
+    public GameObject pauseObj;
     public DelayedEvent onEnd;
     // Start is called before the first frame update
     private void Start()
@@ -19,8 +20,8 @@ public class DelayedEventScript : MonoBehaviour
         do
         {
             yield return null;
-            
-            t -= Time.deltaTime;
+            if(!pauseObj || !pauseObj.activeSelf)
+                t -= Time.deltaTime;
         } while (t > 0);
         if(onEnd != null)
             onEnd.Invoke();

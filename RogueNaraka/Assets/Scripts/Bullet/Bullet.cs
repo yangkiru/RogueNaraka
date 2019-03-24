@@ -137,8 +137,6 @@ namespace RogueNaraka.BulletScripts
             timeLimitable.Init(this.data);
             timeLimitable.enabled = false;
 
-            shakeable.Init(this.data.shake);
-
             guideable.Init(this.data);
             guideable.enabled = false;
 
@@ -165,7 +163,7 @@ namespace RogueNaraka.BulletScripts
             base.GetComponent<Renderer>().enabled = true;
             animator.enabled = true;
 
-            if (shakeable.shake.power != 0 || shakeable.shake.time != 0)
+            if (!data.shake.isOnHit && data.shake.power != 0 || data.shake.time != 0)
                 shakeable.Shake();
             if (data.spawnSFX.CompareTo(string.Empty) != 0)
                 AudioManager.instance.PlaySFX(data.spawnSFX);

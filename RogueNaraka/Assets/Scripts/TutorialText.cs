@@ -33,11 +33,24 @@ public class TutorialText : MonoBehaviour
         StartCoroutine(TextTyping(txt));
     }
 
+    //IEnumerator TextAppear()
+    //{
+    //    Language currentLang = GameManager.language;
+    //    string current = string.Empty;
+    //    int lineCount = tmpro.textInfo.lineCount;
+    //    int wordCount = tmpro.textInfo.lineInfo[0].wordCount;
+
+    //    for(int i = 0; i < lineCount; i++)
+    //    {
+    //        string current =  tmpro.textInfo.lineInfo[i].
+    //    }
+
+    //}
+
     IEnumerator TextTyping(string text)
     {
         Language currentLang = GameManager.language;
-        string font = GameDatabase.instance.langFonts[(int)currentLang];
-        string current = font == string.Empty ? string.Empty : string.Format("<font=\"{0}\">", font);
+        string current = string.Empty;
         tmpro.text = current;
         
         for (int i = 0; i < text.Length; i++)

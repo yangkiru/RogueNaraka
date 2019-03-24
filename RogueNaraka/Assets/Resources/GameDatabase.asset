@@ -17,6 +17,7 @@ MonoBehaviour:
     id: 0
     cost: 0
     stage: 0
+    maxStage: 0
     weapon: 5
     stat:
       dmg: 1
@@ -67,7 +68,8 @@ MonoBehaviour:
   - name: Bug0
     id: 0
     cost: 1
-    stage: 1
+    stage: 4
+    maxStage: 0
     weapon: 2
     stat:
       dmg: 1
@@ -117,7 +119,8 @@ MonoBehaviour:
   - name: Bug1
     id: 1
     cost: 1
-    stage: 3
+    stage: 6
+    maxStage: 0
     weapon: 2
     stat:
       dmg: 1
@@ -167,7 +170,8 @@ MonoBehaviour:
   - name: Bat0
     id: 2
     cost: 2
-    stage: 6
+    stage: 8
+    maxStage: 0
     weapon: -1
     stat:
       dmg: 1
@@ -217,7 +221,8 @@ MonoBehaviour:
   - name: Bat1
     id: 3
     cost: 2
-    stage: 8
+    stage: 10
+    maxStage: 0
     weapon: -1
     stat:
       dmg: 1
@@ -267,7 +272,8 @@ MonoBehaviour:
   - name: BoneDragon0
     id: 4
     cost: 3
-    stage: 11
+    stage: 13
+    maxStage: 0
     weapon: -1
     stat:
       dmg: 1
@@ -317,7 +323,8 @@ MonoBehaviour:
   - name: BoneHead0
     id: 5
     cost: 4
-    stage: 13
+    stage: 15
+    maxStage: 0
     weapon: 1
     stat:
       dmg: 1
@@ -368,6 +375,7 @@ MonoBehaviour:
     id: 6
     cost: 4
     stage: 1000
+    maxStage: 0
     weapon: 1
     stat:
       dmg: 1
@@ -414,11 +422,165 @@ MonoBehaviour:
     effects: []
     deathSFX: boneHeadDeath
     attackSFX: 
+  - name: slime0
+    id: 7
+    cost: 1
+    stage: 1
+    maxStage: 3
+    weapon: -1
+    stat:
+      dmg: 1
+      spd: 0
+      tec: 0
+      hp: 1
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 8
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    move: 1
+    tackleSize: 0.3
+    tackleDamage: 0.1
+    tackleDelay: 1
+    moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.2
+    limitTime: 0
+    shadowPos: {x: 0.05, y: -0.3}
+    order: 0
+    effects: []
+    deathSFX: 
+    attackSFX: 
+  - name: slime1
+    id: 8
+    cost: 1
+    stage: 2
+    maxStage: 3
+    weapon: -1
+    stat:
+      dmg: 1
+      spd: 0
+      tec: 0
+      hp: 2
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 8
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 22100000, guid: 5affb1d8803e4394d84cefbf8cf49a6c, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    move: 1
+    tackleSize: 0.3
+    tackleDamage: 0.15
+    tackleDelay: 1
+    moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.2
+    limitTime: 0
+    shadowPos: {x: 0.05, y: -0.3}
+    order: 0
+    effects: []
+    deathSFX: 
+    attackSFX: 
+  - name: slime2
+    id: 9
+    cost: 1
+    stage: 3
+    maxStage: 3
+    weapon: -1
+    stat:
+      dmg: 1
+      spd: 0
+      tec: 0
+      hp: 2
+      mp: 0
+      hpRegen: 0
+      mpRegen: 0
+      dmgMax: 0
+      spdMax: 0
+      tecMax: 0
+      hpMax: 0
+      mpMax: 0
+      hpRegenMax: 0
+      mpRegenMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      tecTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 8
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 1, g: 1, b: 1, a: 1}
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    move: 1
+    tackleSize: 0.3
+    tackleDamage: 0.2
+    tackleDelay: 1
+    moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.2
+    limitTime: 0
+    shadowPos: {x: 0.05, y: -0.3}
+    order: 0
+    effects: []
+    deathSFX: 
+    attackSFX: 
   bosses:
   - name: Boss0
     id: 0
     cost: 200
     stage: 0
+    maxStage: 0
     weapon: -1
     stat:
       dmg: 10
@@ -470,6 +632,7 @@ MonoBehaviour:
     id: 0
     cost: 0
     stage: 0
+    maxStage: 0
     weapon: -1
     stat:
       dmg: 0
@@ -520,6 +683,7 @@ MonoBehaviour:
     id: 1
     cost: 0
     stage: 0
+    maxStage: 0
     weapon: 5
     stat:
       dmg: 1
@@ -1134,9 +1298,9 @@ MonoBehaviour:
     isSplash: 0
     isHitableWall: 0
     shake:
-      time: 0.02
+      time: 0.01
       power: 0.02
-      gap: 0.02
+      gap: 0.01
       isOnHit: 1
     order: 100
     effects: []
@@ -1212,9 +1376,9 @@ MonoBehaviour:
     isSplash: 0
     isHitableWall: 0
     shake:
-      time: 0.03
+      time: 0.01
       power: 0.03
-      gap: 0.03
+      gap: 0.01
       isOnHit: 1
     order: 100
     effects: []
@@ -1406,7 +1570,7 @@ MonoBehaviour:
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d000000
   unitCosts:
   - cost: 1
-    unitId: 0000000001000000
+    unitId: 0000000001000000070000000800000009000000
   - cost: 2
     unitId: 0200000003000000
   - cost: 3

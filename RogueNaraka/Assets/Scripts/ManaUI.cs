@@ -14,10 +14,9 @@ public class ManaUI : MonoBehaviour
     public bool isOver;
     float t = 1;
 
-    public void SetMana(SkillData data, int level = 0)
+    public void SetMana(SkillData data, int level = 1)
     {
-        Debug.Log(data.name + " " + level);
-        float use = data.manaCost + (data.levelUp.manaCost * level);
+        float use = data.manaCost + (data.levelUp.manaCost *  (level - 1));
         float mp = 0;
         if (BoardManager.instance.player && !BoardManager.instance.player.deathable.isDeath)
             mp = BoardManager.instance.player.stat.mp;
@@ -45,6 +44,7 @@ public class ManaUI : MonoBehaviour
 
     public void SetMana(float max, float use)
     {
+        Debug.Log(use + " " + max + " " + use / max);
         float result = use / max;
         goal = Mathf.Clamp01(result);
         t = 0;

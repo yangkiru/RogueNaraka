@@ -141,6 +141,7 @@ public class UnitData : ICloneable
     public int id;
     public int cost;
     public int stage;
+    public int maxStage;
     public int weapon;
     public Stat stat;
     public RuntimeAnimatorController controller;
