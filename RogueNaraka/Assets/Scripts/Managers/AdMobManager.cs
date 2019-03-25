@@ -370,7 +370,7 @@ public class AdMobManager : MonoBehaviour
     {
         MonoBehaviour.print(
             "HandleRewardBasedVideoFailedToLoad event received with message: " + args.Message);
-        adPnl.SetActive(true);
+        //adPnl.SetActive(true);
         switch (GameManager.language)
         {
             case Language.English:

@@ -68,7 +68,7 @@ MonoBehaviour:
   - name: Bug0
     id: 0
     cost: 1
-    stage: 4
+    stage: 1
     maxStage: 0
     weapon: 2
     stat:
@@ -119,7 +119,7 @@ MonoBehaviour:
   - name: Bug1
     id: 1
     cost: 1
-    stage: 6
+    stage: 7
     maxStage: 0
     weapon: 2
     stat:
@@ -170,12 +170,12 @@ MonoBehaviour:
   - name: Bat0
     id: 2
     cost: 2
-    stage: 8
+    stage: 12
     maxStage: 0
     weapon: -1
     stat:
       dmg: 1
-      spd: 5
+      spd: 4
       tec: 0
       hp: 5
       mp: 0
@@ -207,11 +207,11 @@ MonoBehaviour:
     isCorpse: 0
     move: 5
     tackleSize: 0.3
-    tackleDamage: 0.3
+    tackleDamage: 0.25
     tackleDelay: 0.3
     moveDelay: 0.4
     moveDistance: 5
-    moveSpeed: 2.25
+    moveSpeed: 1.8
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
@@ -221,14 +221,14 @@ MonoBehaviour:
   - name: Bat1
     id: 3
     cost: 2
-    stage: 10
+    stage: 16
     maxStage: 0
     weapon: -1
     stat:
       dmg: 1
       spd: 5
       tec: 0
-      hp: 10
+      hp: 8
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 10
+      currentHp: 8
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
@@ -272,7 +272,7 @@ MonoBehaviour:
   - name: BoneDragon0
     id: 4
     cost: 3
-    stage: 13
+    stage: 17
     maxStage: 0
     weapon: -1
     stat:
@@ -323,7 +323,7 @@ MonoBehaviour:
   - name: BoneHead0
     id: 5
     cost: 4
-    stage: 15
+    stage: 19
     maxStage: 0
     weapon: 1
     stat:
@@ -426,7 +426,7 @@ MonoBehaviour:
     id: 7
     cost: 1
     stage: 1
-    maxStage: 3
+    maxStage: 9
     weapon: -1
     stat:
       dmg: 1
@@ -450,7 +450,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 8
+      currentHp: 1
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
@@ -476,8 +476,8 @@ MonoBehaviour:
   - name: slime1
     id: 8
     cost: 1
-    stage: 2
-    maxStage: 3
+    stage: 1
+    maxStage: 10
     weapon: -1
     stat:
       dmg: 1
@@ -501,7 +501,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 8
+      currentHp: 2
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 5affb1d8803e4394d84cefbf8cf49a6c, type: 2}
@@ -527,14 +527,14 @@ MonoBehaviour:
   - name: slime2
     id: 9
     cost: 1
-    stage: 3
-    maxStage: 3
+    stage: 1
+    maxStage: 10
     weapon: -1
     stat:
       dmg: 1
       spd: 0
       tec: 0
-      hp: 2
+      hp: 3
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -552,7 +552,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 8
+      currentHp: 3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
@@ -675,7 +675,7 @@ MonoBehaviour:
     moveSpeed: 0
     limitTime: 2
     shadowPos: {x: 0, y: -1}
-    order: 0
+    order: 100
     effects: []
     deathSFX: 
     attackSFX: 
