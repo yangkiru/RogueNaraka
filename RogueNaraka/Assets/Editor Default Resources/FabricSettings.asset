@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ad9ddc0e5b942a98ec392b434d39bd, type: 3}
+  m_Name: FabricSettings
+  m_EditorClassIdentifier: 
+  email: kbh3719net@gmail.com
+  rawToken: '{"access_token":"bc498889e6d57f2674a2feb696991e3cf2294a590d5b8295d3bc734983914422","refresh_token":"34b5690f19cd6a72ffd1573f6de6483ba7b7c0e3fcd5f10800983614e5f8aec6","token_type":"bearer","expires_in":86400}'
+  organization:
+    Name: Noxbix
+    Id: 5c91f3a24d8f5b79af00484b
+    ApiKey: c960f47a3d7eabefd97e05607d83181e501ea643
+    BuildSecret: 38ae87a2325e9dc5ff8d3485816e006103d6e73ab5c39df9c2807c7d12e4cab9
+  iconUrl: https://s3.amazonaws.com/assets.crashlytics.com/production/project/10235484/project_icon/5158547/icon.png
+  dashboardUrl: https://www.fabric.io/zonadak/android/apps/com.noxbix.roguenaraka
+  initialization: 0
+  flowSequence: 0
+  conflict: 
+  kit: 
+  installedKits:
+  - Name: Crashlytics
+    InstallationStatus: 2
+    Installed: 1
+    Enabled: 1
+    Meta:
+    - Key: ConfiguredTimestamp
+      Value: 1553496389
+      Platform: 
+    - Key: Dependencies
+      Value: '[{"name":"Crashlytics-Android","version":"2.9.7"},{"name":"Crashlytics-Core-Android","version":"2.6.6"},{"name":"Fabric-Android","version":"1.4.6"},{"name":"Answers-Android","version":"1.4.5"},{"name":"Beta-Android","version":"1.2.10"},{"name":"Crashlytics-iOS","version":"3.12.0"},{"name":"Crashlytics-Wrapper-iOS","version":"0.0.0"},{"name":"Crashlytics-Wrapper-Android","version":"0.0.0"}]'
+      Platform: 
