@@ -14,3 +14,10 @@
 [branch "apply_smartMerge"]
 	remote = origin
 	merge = refs/heads/fix_damageRemains_nextStage
+[merge]
+    tool = unityyamlmerge
+[mergetool "unityyamlmerge"]
+    trustExitCode = false
+    keepTemporaries = true
+    keepBackup = false
+    cmd = '<path to UnityYAMLMerge>' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
