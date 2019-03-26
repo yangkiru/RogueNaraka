@@ -712,7 +712,7 @@ MonoBehaviour:
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
     color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0.7921569}
-    bulletColor: {r: 1, g: 1, b: 1, a: 1}
+    bulletColor: {r: 0, g: 0, b: 0, a: 0.7921569}
     isFriendly: 1
     isStanding: 1
     isDeathEffect: 0
@@ -1557,6 +1557,96 @@ MonoBehaviour:
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 5
+  - name: SwordBSS
+    id: 9
+    type: 2
+    startBulletId: 18
+    children:
+    - name: SwordSmallL
+      bulletId: 14
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: -1
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: -0.25, y: 0, z: 0}
+    - name: SwordSmallR
+      bulletId: 14
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: -1
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0.25, y: 0, z: 0}
+    onDestroy: []
+    offset: {x: 0, y: 0.3, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 5
+  - name: SwordBMM
+    id: 10
+    type: 2
+    startBulletId: 18
+    children:
+    - name: SwordMediumL
+      bulletId: 16
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: -1
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: -0.3, y: 0, z: 0}
+    - name: SwordMediumR
+      bulletId: 16
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: -1
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0.3, y: 0, z: 0}
+    onDestroy: []
+    offset: {x: 0, y: 0.3, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 5
+  - name: SwordBBB
+    id: 11
+    type: 2
+    startBulletId: 18
+    children:
+    - name: SwordBigL
+      bulletId: 18
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: -1
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: -0.35, y: -0.1, z: 0}
+    - name: SwordMediumR
+      bulletId: 18
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: -1
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0.35, y: -0.1, z: 0}
+    onDestroy: []
+    offset: {x: 0, y: 0.3, z: 0}
+    beforeAttackDelay: 0.25
+    afterAttackDelay: 0.75
+    attackDistance: 5
   playerWeapons:
   - level: 0
     cost: 500
@@ -1565,8 +1655,17 @@ MonoBehaviour:
     cost: 1000
     id: 7
   - level: 2
-    cost: 0
+    cost: 2000
     id: 8
+  - level: 3
+    cost: 3000
+    id: 9
+  - level: 4
+    cost: 5000
+    id: 10
+  - level: 5
+    cost: 0
+    id: 11
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d000000
   unitCosts:
   - cost: 1

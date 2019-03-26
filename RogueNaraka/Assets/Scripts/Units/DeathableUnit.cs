@@ -62,7 +62,7 @@ namespace RogueNaraka.UnitScripts
                 {
                     soul = 4 + diff;
                 }
-                soulParticle.Init(unit.cashedTransform.position, soul);
+                soulParticle.Init(unit.cachedTransform.position, soul);
             }
             
             AudioManager.instance.GetRandomMainMusic();

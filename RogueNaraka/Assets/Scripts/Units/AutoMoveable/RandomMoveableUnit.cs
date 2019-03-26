@@ -17,7 +17,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             if (unit.targetable && unit.targetable.target && unit.targetable.targetDistance > unit.attackable.weapon.attackDistance)
             {
-                Vector2 vec = unit.targetable.target.cashedTransform.position - cashedTransform.position;
+                Vector2 vec = unit.targetable.target.cachedTransform.position - cashedTransform.position;
                 float s = unit.attackable.weapon.attackDistance;
                 float tss = unit.targetable.targetDistance - s;
                 float m = unit.data.moveDistance;

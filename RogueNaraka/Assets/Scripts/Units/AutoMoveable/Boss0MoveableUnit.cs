@@ -59,7 +59,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             if (targetable && targetable.target)
             {
-                Vector2 vec = targetable.target.cashedTransform.position - cashedTransform.position;
+                Vector2 vec = targetable.target.cachedTransform.position - cashedTransform.position;
                 Vector2 destination = (Vector2)cashedTransform.position + vec.normalized * 5;
                 //unit.tackleable.isTackle = true;
                 leftDelay = 99999;

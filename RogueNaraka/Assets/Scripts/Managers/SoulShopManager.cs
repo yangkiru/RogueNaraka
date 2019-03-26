@@ -387,7 +387,7 @@ public class SoulShopManager : MonoBehaviour
     {
         int remain;
         PlayerWeaponData data = GameManager.instance.GetPlayerWeapon(exp, out remain);
-        if(data.level == GameDatabase.instance.playerWeapons.Length - 1 && remain == 0)
+        if(data.level == GameDatabase.instance.playerWeapons.Length-1)
         {
             weaponSoulTxt.text = string.Format("{0}/{1} Soul", data.cost, data.cost); ;
             weaponBar.fillAmount = 1;
@@ -440,6 +440,7 @@ public class SoulShopManager : MonoBehaviour
         int amount = 1;
         int speedUp = 0;
         int remain;
+        int nextRemain;
         int currentLevel = GetWeaponLevel(exp, out remain);
         int lastLevel = currentLevel;
 
@@ -448,11 +449,14 @@ public class SoulShopManager : MonoBehaviour
         {
             float t = delay;
             int nextExp = exp + amount;
-            int nextLevel = GetWeaponLevel(nextExp, out remain);
+            int nextLevel = GetWeaponLevel(nextExp, out nextRemain);
             if(nextLevel != currentLevel)//무기 레벨 업 전
             {
-                amount -= remain;
+                Debug.Log("amount:" + amount + " remain:" + remain);
+                amount = GameDatabase.instance.playerWeapons[currentLevel].cost - remain;
+                Debug.Log("amount:" + amount);
             }
+            remain = nextRemain;
 
             isSuccess = MoneyManager.instance.UseSoul(amount);
 

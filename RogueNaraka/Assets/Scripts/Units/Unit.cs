@@ -118,7 +118,7 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         Collider2D _collider;
 
-        public Transform cashedTransform;
+        public Transform cachedTransform;
 
         public Stat stat { get { return _data.stat; } }
 
@@ -277,7 +277,7 @@ namespace RogueNaraka.UnitScripts
 
         public void Spawn(Vector3 position)
         {
-            cashedTransform.position = position;
+            cachedTransform.position = position;
 
             gameObject.SetActive(true);
             if (_data.isFriendly && !BoardManager.instance.friendlies.Contains(this))
@@ -298,7 +298,7 @@ namespace RogueNaraka.UnitScripts
 
         public void Teleport(Vector3 position)
         {
-            cashedTransform.position = position;
+            cachedTransform.position = position;
         }
 
         public void PlaySFX(string name)
