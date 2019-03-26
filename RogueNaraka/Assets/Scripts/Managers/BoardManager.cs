@@ -158,15 +158,6 @@ public class BoardManager : MonoBehaviour {
     {
         isReady = false;
 
-
-        for (int i = 0; i < bulletPool.transform.childCount; i++)
-        {
-            GameObject obj = bulletPool.transform.GetChild(i).gameObject;
-            if (obj.activeSelf)
-            {
-                bulletPool.EnqueueObjectPool(obj);
-            }
-        }
         //Debug.Log("SetStage(" + stage + ")");
         if(stage != 0 && stage % 30 == 0)
         {
@@ -342,6 +333,15 @@ public class BoardManager : MonoBehaviour {
 
     public void ClearStage()
     {
+        for (int i = 0; i < bulletPool.transform.childCount; i++)
+        {
+            GameObject obj = bulletPool.transform.GetChild(i).gameObject;
+            if (obj.activeSelf)
+            {
+                bulletPool.EnqueueObjectPool(obj);
+            }
+        }
+        
         Debug.Log("Clear stage " + enemies.Count + " enemies");
 
         for (int i = corpses.Count - 1; i >= 0; i--)
