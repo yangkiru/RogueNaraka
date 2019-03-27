@@ -110,7 +110,7 @@ namespace RogueNaraka
 
             Bullet tackleBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
 
-            tackleBullet.Spawn(unit, bulletData, unit.cashedTransform.position);
+            tackleBullet.Spawn(unit, bulletData, unit.cachedTransform.position);
         }
 
         public class CorouUnit

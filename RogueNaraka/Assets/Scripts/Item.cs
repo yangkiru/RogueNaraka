@@ -41,6 +41,8 @@ public class Item : MonoBehaviour
         _data.id = -1;
         img.color = Color.clear;
         amount = 0;
+        doubleClickCorou = null;
+        mouseCorou = null;
         ItemAmountUpdate();
     }
 
@@ -297,15 +299,37 @@ public class Item : MonoBehaviour
     {
         if (_data.id != -1)
         {
-            circle.MoveCircleToMouse();
-            circle.SetCircle(_data.size);
-            circle.SetEnable(true);
-            Pointer.instance.SetPointer(true);
-            //line.enabled = true;
-            isMouseDown = true;
-            StartCoroutine(MouseCorou());
+            if (_data.size <= 0)
+            {
+                if (doubleClickCorou == null)
+                {
+                    doubleClickCorou = DoubleClickCorou();
+                    StartCoroutine(doubleClickCorou);
+                }
+                else
+                    isMouseDown = true;
+
+            }
+            else
+            {
+                circle.MoveCircleToMouse();
+                circle.SetCircle(_data.size);
+                circle.SetEnable(true);
+                Pointer.instance.SetPointer(true);
+                //line.enabled = true;
+                isMouseDown = true;
+
+                if(mouseCorou == null)
+                {
+                    mouseCorou = MouseCorou();
+                    StartCoroutine(mouseCorou);
+                }
+            }
         }
     }
+
+    IEnumerator mouseCorou;
+    IEnumerator doubleClickCorou;
 
     IEnumerator MouseCorou()
     {
@@ -314,6 +338,25 @@ public class Item : MonoBehaviour
             OnMouse();
             yield return null;
         }
+        mouseCorou = null;
+    }
+
+    IEnumerator DoubleClickCorou()
+    {
+        float t = 0.2f;
+        isMouseDown = false;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+            if (isMouseDown)
+            {
+                UseItem();
+                isMouseDown = false;
+            }
+        } while (t > 0);
+        yield return null;
+        doubleClickCorou = null;
     }
 
 

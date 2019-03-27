@@ -53,7 +53,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         IEnumerator Follow()
         {
             Queue<Vector2> queue = new Queue<Vector2>(60);
-            unit.cashedTransform.position = _following.cashedTransform.position;
+            unit.cachedTransform.position = _following.cachedTransform.position;
             float t = 0.3f;
             do
             {
@@ -63,15 +63,15 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                     currentCorou = null;
                     yield break;
                 }
-                queue.Enqueue(_following.cashedTransform.position);
+                queue.Enqueue(_following.cachedTransform.position);
                 if (t > 0)
                 {
                     t -= Time.deltaTime;
-                    unit.cashedTransform.position = queue.Peek();
+                    unit.cachedTransform.position = queue.Peek();
                 }
                 else
                 {
-                    unit.cashedTransform.position = queue.Dequeue();
+                    unit.cachedTransform.position = queue.Dequeue();
                 }
             } while (!unit.deathable.isDeath || _following == null);
             currentCorou = null;

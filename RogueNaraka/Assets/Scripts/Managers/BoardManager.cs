@@ -265,8 +265,8 @@ public class BoardManager : MonoBehaviour {
             player = Instantiate(unitPrefab, Vector3.zero, Quaternion.identity).GetComponent<Unit>();
         player.Init(data);
         player.Spawn(spawnPoint);
-        player.cashedTransform.SetParent(unitPool.transform);
-        player.cashedTransform.SetSiblingIndex(0);
+        player.cachedTransform.SetParent(unitPool.transform);
+        player.cachedTransform.SetSiblingIndex(0);
     }
 
     public void SpawnEnemy(int id)
@@ -343,6 +343,15 @@ public class BoardManager : MonoBehaviour {
         }
         
         Debug.Log("Clear stage " + enemies.Count + " enemies");
+
+        for (int i = 0; i < bulletPool.transform.childCount; i++)
+        {
+            GameObject obj = bulletPool.transform.GetChild(i).gameObject;
+            if (obj.activeSelf)
+            {
+                bulletPool.EnqueueObjectPool(obj);
+            }
+        }
 
         for (int i = corpses.Count - 1; i >= 0; i--)
         {

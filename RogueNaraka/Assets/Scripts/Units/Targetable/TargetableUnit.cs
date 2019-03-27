@@ -46,7 +46,7 @@ namespace RogueNaraka.UnitScripts.Targetable
             if (target == null || target.deathable.isDeath)
                 return float.PositiveInfinity;
             else
-                return Vector2.SqrMagnitude(target.cashedTransform.position - owner.cashedTransform.position);
+                return Vector2.SqrMagnitude(target.cachedTransform.position - owner.cachedTransform.position);
         }
 
         public void SetTargetable(bool value)

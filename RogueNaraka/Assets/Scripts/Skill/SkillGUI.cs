@@ -85,15 +85,45 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause)
         {
-            isMouseDown = true;
-            //skillManager.DrawLine(position, true);
-            if (_skill.data.size > 0)
+            if (_skill.data.size <= 0)
             {
+                if (doubleClickCorou == null)
+                {
+                    doubleClickCorou = DoubleClickCorou();
+                    StartCoroutine(doubleClickCorou);
+                }
+                else
+                    isMouseDown = true;
+            }
+            else
+            {
+                isMouseDown = true;
                 skillManager.GetCircle().SetCircle(_skill.data.size);
                 skillManager.GetCircle().SetEnable(true);
+                Pointer.instance.SetPointer(true);
             }
-            Pointer.instance.SetPointer(true);
         }
+    }
+
+    IEnumerator doubleClickCorou;
+
+    IEnumerator DoubleClickCorou()
+    {
+        float t = 0.2f;
+        isMouseDown = false;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+            if (isMouseDown)
+            {
+                if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
+                    UseSkill();
+                isMouseDown = false;
+            }
+        } while (t > 0);
+        yield return null;
+        doubleClickCorou = null;
     }
 
     public void OnMouseUp()
@@ -141,6 +171,8 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             _skill.data.id = -1;
             Destroy(_skill);
         }
+
+        doubleClickCorou = null;
     }
 
     public void Init(SkillData dt)
@@ -165,6 +197,8 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         img.color = Color.white;
         levelTxt.text = string.Format("+{0}", _skill.data.level);
         levelTxt.enabled = true;
+
+        doubleClickCorou = null;
     }
 
     public void LevelUp(int amount)

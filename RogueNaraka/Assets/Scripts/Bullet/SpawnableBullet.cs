@@ -55,20 +55,28 @@ namespace RogueNaraka.BulletScripts
         {
             yield return new WaitForSeconds(data.startTime);
 
-            bullet.Spawn(parent.transform.position);
+            bullet.Spawn(parent.cachedTransform.position);
             bullet.renderer.color = parent.renderer.color;
 
             if (data.isDestroyWith)
                 parent.spawnable.destroyChildList.Add(parent);
 
             if (data.isStick)
-                transform.SetParent(parent.transform);
+            {
+                transform.SetParent(parent.cachedTransform);
+            }
+
+            bullet.cachedTransform.rotation = parent.cachedTransform.rotation;
 
             yield return new WaitForSeconds(data.waitTime);
 
-            Vector3 direction = Quaternion.AngleAxis(data.angle, Vector3.back) * bullet.transform.rotation.eulerAngles;
-            bullet.shootable.Shoot(direction.normalized, data.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
-
+            if (data.angle >= 0)
+            {
+                Vector3 direction = Quaternion.AngleAxis(data.angle, Vector3.back) * bullet.cachedTransform.rotation.eulerAngles;
+                bullet.shootable.Shoot(direction.normalized, data.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
+            }
+            else
+                bullet.shootable.Shoot(parent.cachedTransform.rotation, data.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
             if (data.isRepeat && parent.gameObject.activeSelf)
                 parent.spawnable.BulletInit(data);
         }

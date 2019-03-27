@@ -25,5 +25,16 @@ namespace RogueNaraka.BulletScripts
             moveable.SetVelocity(Vector2.right * localSpeed, Vector2.right * localAccel, Space.Self);
             moveable.SetVelocity(Vector3.one * worldSpeed, Vector2.right * worldAccel, Space.World);
         }
+
+        public void Shoot(Quaternion q, Vector3 offset, float localSpeed, float worldSpeed, float localAccel, float worldAccel)
+        {
+            transform.rotation = q;
+
+            if (offset != Vector3.zero)
+                transform.position += transform.up * offset.x + transform.right * offset.y + transform.forward * offset.z;
+
+            moveable.SetVelocity(Vector2.right * localSpeed, Vector2.right * localAccel, Space.Self);
+            moveable.SetVelocity(Vector3.one * worldSpeed, Vector2.right * worldAccel, Space.World);
+        }
     }
 }

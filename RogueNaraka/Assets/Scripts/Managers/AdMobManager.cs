@@ -284,18 +284,18 @@ public class AdMobManager : MonoBehaviour
         else
         {
             MonoBehaviour.print("Reward based video ad is not ready yet");
-            adPnl.SetActive(true);
-            switch (GameManager.language)
-            {
-                case Language.English:
-                    adNameTxt.text = "Ad is not ready yet";
-                    adDescTxt.text = "Please try again later";
-                    break;
-                case Language.Korean:
-                    adNameTxt.text = "광고가 준비되지 않았습니다";
-                    adDescTxt.text = "나중에 다시 시도해주세요";
-                    break;
-            }
+            //adPnl.SetActive(true);
+            //switch (GameManager.language)
+            //{
+            //    case Language.English:
+            //        adNameTxt.text = "Ad is not ready yet";
+            //        adDescTxt.text = "Please try again later";
+            //        break;
+            //    case Language.Korean:
+            //        adNameTxt.text = "광고가 준비되지 않았습니다";
+            //        adDescTxt.text = "나중에 다시 시도해주세요";
+            //        break;
+            //}
             RequestRewardBasedVideo();
         }
     }
@@ -371,17 +371,17 @@ public class AdMobManager : MonoBehaviour
         MonoBehaviour.print(
             "HandleRewardBasedVideoFailedToLoad event received with message: " + args.Message);
         //adPnl.SetActive(true);
-        switch (GameManager.language)
-        {
-            case Language.English:
-                adNameTxt.text = "Ad load failed";
-                adDescTxt.text = "Please try again later";
-                break;
-            case Language.Korean:
-                adNameTxt.text = "광고를 불러오지 못했습니다";
-                adDescTxt.text = "나중에 다시 시도해주세요";
-                break;
-        }
+        //switch (GameManager.language)
+        //{
+        //    case Language.English:
+        //        adNameTxt.text = "Ad load failed";
+        //        adDescTxt.text = "Please try again later";
+        //        break;
+        //    case Language.Korean:
+        //        adNameTxt.text = "광고를 불러오지 못했습니다";
+        //        adDescTxt.text = "나중에 다시 시도해주세요";
+        //        break;
+        //}
         RequestRewardBasedVideo();
         //StartCoroutine(RequestRewardVideoCorou());
     }
