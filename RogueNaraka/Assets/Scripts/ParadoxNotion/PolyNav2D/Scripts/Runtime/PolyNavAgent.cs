@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using RogueNaraka.TimeScripts;
 
 namespace PolyNav{
 
@@ -53,7 +54,7 @@ namespace PolyNav{
 		public bool closerPointOnInvalid   = true;
 		///Will debug the path (gizmos). Disable for performance.
 		public bool debugPath              = true;
-        ///ÀÌµ¿ÀÌ ³¡³µ´ÂÁö
+        ///ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public bool isArrived                 = false;
 
 
@@ -307,7 +308,7 @@ namespace PolyNav{
 
 
 			//move the agent
-			position += _velocity * Time.deltaTime;
+			position += _velocity * TimeManager.Instance.DeltaTime;
 
 			//restrict just after movement
 			Restrict();
