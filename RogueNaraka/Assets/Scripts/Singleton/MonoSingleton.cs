@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RogueNaraka.Singleton {
+namespace RogueNaraka.SingletonPattern {
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour {
         protected static T instance;
         public static T Instance {
@@ -19,6 +19,9 @@ namespace RogueNaraka.Singleton {
             }
         }
 
+        /// <summary>
+        /// 해당 싱글톤 객체를 더이상 사용하지 않는 경우 반드시 해제해주세요. 
+        /// </summary>
         public virtual void OnDestroy() {
             Destroy(instance);
             instance = null;
