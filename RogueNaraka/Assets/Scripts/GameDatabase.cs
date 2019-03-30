@@ -155,9 +155,9 @@ public class UnitData : ICloneable
     public float tackleSize;
     public float tackleDamage;
     public float tackleDelay;
-    public float moveDelay;
-    public float moveDistance;
     public float moveSpeed;
+    public float moveDistance;
+    public float moveDelay;
     public float limitTime;
     public Vector2 shadowPos;
     public Order order;
