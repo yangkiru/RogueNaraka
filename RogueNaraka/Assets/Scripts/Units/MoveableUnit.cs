@@ -10,10 +10,10 @@ namespace RogueNaraka.UnitScripts
     {
         [SerializeField]
         Unit unit;
-        public PolyNavAgent agent
-        { get { return _agent; } }
-        [SerializeField]
-        PolyNavAgent _agent;
+
+        private Vector2 destination;
+        private Action onArrivedCallback;
+        public Action OnArrivedCallback { get { return this.onArrivedCallback; } }
 
         public float speed {
             get {
@@ -30,29 +30,34 @@ namespace RogueNaraka.UnitScripts
         void Reset()
         {
             unit = GetComponent<Unit>();
-            _agent = GetComponent<PolyNavAgent>();
         }
 
         public void Init(UnitData data)
         {
             SetSpeed(data.moveSpeed);
-            agent.enabled = true;
-            agent.Stop();
+            //agent.enabled = true;
+            //agent.Stop();
         }
 
         public void SetSpeed(float speed)
         {
             unitSpeed = speed;
         }
-
-        public void Move(Vector3 pos, Action<bool> callback = null)
+        
+        /// <summary>목적지를 설정합니다.</summary>
+        public void SetDestination(Vector3 pos, System.Action callback = null)
         {
+            this.destination = pos;
+            this.onArrivedCallback = callback;
+            /*
             if(!unit.isStun)
                 _agent.SetDestination(pos, callback);
+            */
         }
 
         void Update()
         {
+            //애니메이션 관련
             agent.maxSpeed = speed;
             float x = 0, y = 0;
             if (_agent.velocity.x != 0 || _agent.velocity.y != 0)
@@ -63,7 +68,7 @@ namespace RogueNaraka.UnitScripts
             }
             else
                 isWalk = false;
-
+            
             if (unit.targetable.target)
             {
                 x = unit.targetable.direction.x;
@@ -73,10 +78,10 @@ namespace RogueNaraka.UnitScripts
             unit.animator.SetFloat("x", x);
             unit.animator.SetFloat("y", y);
             
-            
             if (isWalk != _isWalk)
                 unit.animator.SetBool("isWalk", isWalk);
             _isWalk = isWalk;
+            //
         }
     }
 }

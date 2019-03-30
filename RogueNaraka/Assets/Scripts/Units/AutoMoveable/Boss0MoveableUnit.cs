@@ -69,7 +69,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 //originSpeed = unit.data.moveSpeed;
                 AudioManager.instance.PlaySFX("boss0Rush");
                 
-                moveable.Move(destination, OnRushEnd);
+                moveable.SetDestination(destination, OnRushEnd);
                 unit.animator.SetBool("isBeforeAttack", true);
             }
         }

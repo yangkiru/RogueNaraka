@@ -327,7 +327,7 @@ namespace RogueNaraka.UnitScripts
             if(autoMoveable) autoMoveable.enabled = false;
             if(attackable) attackable.enabled = false;
             targetable.enabled = false;
-            moveable.agent.enabled = false;
+            //moveable.agent.enabled = false;
         }
 
         public void Kill(bool isTxt = true)

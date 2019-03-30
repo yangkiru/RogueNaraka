@@ -22,7 +22,7 @@ namespace RogueNaraka.SkillScripts
                 isAttackable = true;
                 player.attackable.enabled = false;
             }
-            player.moveable.agent.Stop();
+            //player.moveable.agent.Stop();
             player.rigid.AddForce((mp - player.transform.position).normalized * Vector2.Distance(mp, player.transform.position) * 7);
             StartCoroutine(CheckEnd(mp));
         }

@@ -10,11 +10,12 @@ namespace RogueNaraka.EffectScripts
         IEnumerator DecelerateCorou()
         {
             yield return null;
+            /*
             while (target.moveable.agent.currentSpeed > target.moveable.agent.maxSpeed)
             {
                 target.moveable.agent.Decelerate(0.1f);
                 yield return null;
-            }
+            }*/
             decelerateCorou = null;
         }
         public override void Combine(EffectData dt)

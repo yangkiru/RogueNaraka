@@ -79,7 +79,6 @@ GameObject:
   - component: {fileID: 114675008330108068}
   - component: {fileID: 2605540994433798053}
   - component: {fileID: 606372875436568407}
-  - component: {fileID: 114967868431888216}
   - component: {fileID: 95588626938235128}
   - component: {fileID: 50410147267040436}
   - component: {fileID: 60075246512643172}
@@ -349,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 114302036002021230}
-  _agent: {fileID: 114967868431888216}
+  _agent: {fileID: 0}
   factor: 0
 --- !u!114 &114116071741596666
 MonoBehaviour:
@@ -563,38 +562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _followers: []
   unit: {fileID: 114302036002021230}
---- !u!114 &114967868431888216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380923796952252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93cc6a4987f7c684798156c56d545838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _map: {fileID: 0}
-  maxSpeed: 3.5
-  mass: 100
-  stoppingDistance: 0.1
-  slowingDistance: 1
-  accelerationRate: 1000
-  decelerationRate: 0.1
-  lookAheadDistance: 1
-  avoidRadius: 0.1
-  avoidanceConsiderStuckedTime: 3
-  avoidanceConsiderReachedDistance: 0.5
-  rotateTransform: 0
-  rotateSpeed: 350
-  centerOffset: {x: 0, y: 0}
-  repath: 1
-  restrict: 0
-  closerPointOnInvalid: 1
-  debugPath: 1
-  isArrived: 0
-  _velocity: {x: 0, y: 0}
 --- !u!95 &95588626938235128
 Animator:
   serializedVersion: 3
