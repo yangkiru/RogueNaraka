@@ -68,7 +68,7 @@ MonoBehaviour:
   - name: Bug0
     id: 0
     cost: 1
-    stage: 1
+    stage: 4
     maxStage: 0
     weapon: 2
     stat:
@@ -464,7 +464,7 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.03
     tackleDelay: 1
-    moveSpeed: 1.8
+    moveSpeed: 1.5
     moveDistance: 0.5
     moveDelay: 0.5
     limitTime: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.05
     tackleDelay: 1
-    moveSpeed: 1.8
+    moveSpeed: 1.5
     moveDistance: 0.5
     moveDelay: 0.5
     limitTime: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.08
     tackleDelay: 1
-    moveSpeed: 1.8
+    moveSpeed: 1.5
     moveDistance: 0.5
     moveDelay: 0.5
     limitTime: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
     color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0.7921569}
-    bulletColor: {r: 0, g: 0, b: 0, a: 0.7921569}
+    bulletColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.7921569}
     isFriendly: 1
     isStanding: 1
     isDeathEffect: 0
@@ -1738,7 +1738,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.25
       size: 0
-      coolTime: -0.25
+      coolTime: 0
       effects:
       - type: 3
         value: 2

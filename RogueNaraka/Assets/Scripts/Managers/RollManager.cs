@@ -103,6 +103,8 @@ public class RollManager : MonoBehaviour {
             SetShowCase(isRoll);
             reRollTxt.text = "ReRoll";
             fade.FadeIn();
+            if (Pointer.instance)
+                Pointer.instance.SetPointer(false);
         }
         else
         {

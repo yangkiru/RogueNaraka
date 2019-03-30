@@ -20,6 +20,21 @@ public class ManaScript : MonoBehaviour {
             Destroy(gameObject);
     }
 
+    public void SetNeedMana(bool value, float need = 0)
+    {
+        if(!value)
+        {
+            needMana.gameObject.SetActive(false);
+            return;
+        }
+
+        float amount = need / BoardManager.instance.player.data.stat.GetCurrent(STAT.MP);
+        if (amount > 1) amount = 1;
+
+        needMana.fillAmount = amount;
+        needMana.gameObject.SetActive(true);
+    }
+
     public IEnumerator NeedMana(float need)
     {
         float amount = need / BoardManager.instance.player.data.stat.GetCurrent(STAT.MP);

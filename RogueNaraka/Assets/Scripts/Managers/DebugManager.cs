@@ -8,12 +8,12 @@ public class DebugManager : MonoBehaviour {
     public GameObject debugPnl;
     public GameObject debugBtn;
 
-//#if DEBUG
-//    private void Awake()
-//    {
-//        debugBtn.SetActive(true);
-//    }
-//#endif
+#if UNITY_EDITOR
+    private void Awake()
+    {
+        debugBtn.SetActive(true);
+    }
+#endif
 
     public void KillPlayer()
     {

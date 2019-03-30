@@ -38,16 +38,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (_skill.data.id != -1 && (!player.deathable.isDeath || _skill.data.isDeath) && !GameManager.instance.isPause)
         {
-            //SkillManager.instance.DrawLine(position, true);
-            if (_skill.data.isCircleToPlayer)
-            {
-                skillManager.GetCircle().SetParent(player.transform);
-                skillManager.GetCircle().Move(Vector2.zero);
-            }
-            else
-            {
-                skillManager.GetCircle().Move(GameManager.instance.GetMousePosition() + new Vector2(0, pointer.offset));
-            }
             pointer.PositionToMouse();
         }
     }
@@ -98,10 +88,16 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             else
             {
                 isMouseDown = true;
-                skillManager.GetCircle().SetCircle(_skill.data.size);
-                skillManager.GetCircle().SetEnable(true);
+                skillManager.circle.SetCircle(_skill.data.size);
+                skillManager.circle.SetEnable(true);
+                if (skill.data.isCircleToPlayer)
+                    skillManager.circle.SetParent(BoardManager.instance.player.cachedTransform);
+                else
+                    skillManager.circle.SetParent(pointer.cashedTransform);
                 Pointer.instance.SetPointer(true);
             }
+
+            ManaScript.instance.SetNeedMana(true, _skill.data.manaCost);
         }
     }
 
@@ -129,8 +125,8 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnMouseUp()
     {
         isMouseDown = false;
-        skillManager.GetCircle().SetEnable(false);
-        skillManager.GetCircle().transform.SetParent(null);
+        skillManager.circle.SetEnable(false);
+        ManaScript.instance.SetNeedMana(false);
         if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
         {
             UseSkill();
@@ -159,10 +155,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         isCool = true;
         img.sprite = null;
         img.color = Color.clear;
-        coolImg.sprite = null;
-        Color c = coolImg.color;
-        c.a = 0;
-        coolImg.color = c;
         coolImg.enabled = false;
         coolTimeTxt.text = string.Empty;
         levelTxt.enabled = false;
@@ -189,7 +181,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _skill.Init((SkillData)dt.Clone(), this);
 
         img.sprite = _skill.data.spr;
-        coolImg.sprite = _skill.data.spr;
 
         SyncCoolImg();
         SyncCoolText();
@@ -219,14 +210,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (_skill.data.coolTimeLeft > 0)
         {
-            if (!coolImg.enabled)
-            {
-                coolImg.color = new Color(coolImg.color.r, coolImg.color.g, coolImg.color.b, 1);
-                coolImg.enabled = true;
-                coolImg.type = Image.Type.Filled;
-                coolImg.fillOrigin = 2;
-                coolImg.fillClockwise = false;
-            }
+            coolImg.enabled = true;
             coolImg.fillAmount = _skill.data.coolTimeLeft / _skill.data.coolTime;
         }
         else
