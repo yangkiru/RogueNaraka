@@ -1,5 +1,4 @@
-﻿using RogueNaraka.SkillScripts;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -34,7 +33,8 @@ public class RollManager : MonoBehaviour {
     private bool isSkillSelected;
     public bool isStageUp;
 
-    private int target;//선택된 SkillGUI
+    //선택된 SkillUI 위치 및 아이템 획득 여부
+    private int target;
 
     public static RollManager instance;
 
@@ -210,10 +210,7 @@ public class RollManager : MonoBehaviour {
             isPassed = true;
         }
         else
-        {
             SetRollPnl(false, isStageUp);
-            isPassed = false;
-        }
     }
 
     public void SetSelectPnl(bool value)
@@ -410,39 +407,19 @@ public class RollManager : MonoBehaviour {
 
     public void Ok()
     {
-        RollData rollData = datas[selected];
-        switch (rollData.type)
+        RollData data = datas[selected];
+        switch (data.type)
         {
             case ROLL_TYPE.SKILL:
-                SkillData selectedSkill = GameDatabase.instance.skills[rollData.id];//선택된 스킬 데이터
-                Skill slotSkill = SkillManager.instance.skills[target].skill;//해당 슬롯에 장착된 스킬
-                if (slotSkill == null || slotSkill.data.id == -1)//슬롯이 비었으면
-                {
-                    SkillManager.instance.SetSkill(selectedSkill, target);
-                    SetRollPnl(false, isStageUp);
-                }
-                else if (slotSkill.data.id == selectedSkill.id)//같은 스킬이면
-                {
-                    SkillManager.instance.SetSkill(selectedSkill, target);
-                    SetRollPnl(false, isStageUp);
-                }
-                else//다른 스킬이면
-                {
-                    if (slotSkill.data.level == 1)
-                    {
-                        SkillManager.instance.SetSkill(selectedSkill, target);
-                        SetRollPnl(false, isStageUp);
-                    }
-                    else
-                        SkillChangeManager.instance.OpenChangePnl(selectedSkill, target);//스킬 교체 패널 오픈
-                }
-                //SetRollPnl(false, isStageUp);
+                SkillData skill = GameDatabase.instance.skills[data.id];
+                SkillManager.instance.SetSkill(datas[selected].id, target);
+                SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.STAT:
-                StatManager.instance.SetStatPnl(true, rollData.id + 1);
+                StatManager.instance.SetStatPnl(true, data.id + 1);
                 break;
             case ROLL_TYPE.ITEM:
-                Item.instance.EquipItem(rollData.id);
+                Item.instance.EquipItem(data.id);
                 SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.PASSIVE:

@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using RogueNaraka.SkillScripts;
-using TMPro;
 
 public class SkillManager : MonoBehaviour {
 
@@ -12,6 +11,9 @@ public class SkillManager : MonoBehaviour {
     public CircleRenderer circle;
 
     public SkillGUI[] skills;
+
+    [SerializeField]
+    ThunderStrike thunderStrike;
 
     public static SkillManager instance = null;
 
@@ -35,7 +37,7 @@ public class SkillManager : MonoBehaviour {
 
 
     /// <summary>
-    /// 스킬 장착
+    /// 스킬 설정
     /// </summary>
     /// <param name="data"></param>
     /// <param name="position"></param>
@@ -52,96 +54,6 @@ public class SkillManager : MonoBehaviour {
             skills[position].LevelUp(1);
         }
     }
-
-    //#region SkillChangeParams
-
-    //public GameObject changePnl;
-    //public TextMeshProUGUI changeCostTxt;
-    //public TextMeshProUGUI lastChangeCostTxt;
-    //public TextMeshProUGUI levelTxt;
-
-    //SkillData data;
-
-    //bool isChange;
-    //bool isCancel;
-    //#endregion
-
-    ///// <summary>
-    ///// 스킬을 교체하는 패널을 여는 함수
-    ///// </summary>
-    ///// <param name="data">교체하는 스킬</param>
-    ///// <param name="position">교체될 슬롯</param>
-    //public void OpenChangePnl(SkillData data, int position)
-    //{
-    //    StartCoroutine(ChangeCorou(data, position));
-    //}
-
-    ///// <summary>
-    ///// 피보나치 수열
-    ///// </summary>
-    ///// <param name="level">스킬 레벨</param>
-    ///// <returns></returns>
-    //public int GetChangeCost(int level)
-    //{
-    //    switch(level)
-    //    {
-    //        case 0: case 1:
-    //            return 0;
-    //        case 2:
-    //            return 10;
-    //        case 3:
-    //            return 20;
-    //        default:
-    //            return GetChangeCost(level - 2) + GetChangeCost(level - 1);
-    //    }
-    //}
-
-    //IEnumerator ChangeCorou(SkillData data, int position)
-    //{
-    //    Debug.Log("ChangeCorou");
-    //    int level = skills[position].skill.data.level;
-    //    int cost = GetChangeCost(level);
-    //    int lastCost = cost;
-    //    while (!MoneyManager.instance.IsUseable(cost) && level > 1)
-    //    {
-    //        lastCost = cost;
-    //        cost = GetChangeCost(--level);
-    //    }
-
-    //    changeCostTxt.text = string.Format("{0}Soul", cost);
-    //    lastChangeCostTxt.text = string.Format("{0}Soul", cost);
-
-    //    do//Wait for btn action
-    //    {
-    //        yield return null;
-    //    } while (!isChange && !isCancel);
-
-    //    if(isChange)
-    //    {
-    //        data = (SkillData)data.Clone();
-    //        data.level = level;
-    //        skills[position].Init(data);
-    //    }
-
-    //    RollManager.instance.SetRollPnl(false, RollManager.instance.isStageUp);
-
-    //    changePnl.SetActive(false);
-
-    //    //Reset
-    //    isChange = false;
-    //    isCancel = false;
-    //}
-
-    //public void Change()
-    //{
-    //    isChange = true;
-    //}
-
-    //public void Cancel()
-    //{
-    //    isCancel = true;
-    //}
-
     /// <summary>
     /// 
     /// </summary>

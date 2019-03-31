@@ -73,7 +73,7 @@ public class MoneyManager : MonoBehaviour {
 
     public bool UseSoul(int amount)
     {
-        if (IsUseable(amount))
+        if (_soul - amount >= 0)
         {
             _soul -= amount;
             MoneyUpdate();
