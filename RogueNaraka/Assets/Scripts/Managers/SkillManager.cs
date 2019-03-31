@@ -12,9 +12,6 @@ public class SkillManager : MonoBehaviour {
 
     public SkillGUI[] skills;
 
-    [SerializeField]
-    ThunderStrike thunderStrike;
-
     public static SkillManager instance = null;
 
     private void Awake()

@@ -72,7 +72,8 @@ public class SkillChangeManager : MonoBehaviour
         }
 
         changePnl.SetActive(false);
-        
+        AudioManager.instance.PlaySFX("skillEquip");
+
         SkillManager.instance.skills[position].Init(data);
         SkillManager.instance.skills[position].LevelUp(level - 1);
         RollManager.instance.SetRollPnl(false, RollManager.instance.isStageUp);
