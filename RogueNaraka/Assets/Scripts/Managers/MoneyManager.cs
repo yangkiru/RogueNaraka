@@ -73,7 +73,7 @@ public class MoneyManager : MonoBehaviour {
 
     public bool UseSoul(int amount)
     {
-        if (_soul - amount >= 0)
+        if (IsUseable(amount))
         {
             _soul -= amount;
             MoneyUpdate();
@@ -83,6 +83,11 @@ public class MoneyManager : MonoBehaviour {
         }
         else
             return false;
+    }
+
+    public bool IsUseable(int amount)
+    {
+        return _soul - amount >= 0;
     }
 
     public void RefineSoul(float rate = 1)

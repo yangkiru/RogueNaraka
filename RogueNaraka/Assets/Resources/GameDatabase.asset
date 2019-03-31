@@ -1963,6 +1963,8 @@ MonoBehaviour:
       values:
       - name: 7
         value: 0.1
+      - name: 6
+        value: -0.0075
     description:
     - Move fast summoning flames with dot damage. The dot damage of flames are proportional
       to the technical stats.
