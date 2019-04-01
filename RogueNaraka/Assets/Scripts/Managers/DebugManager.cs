@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DebugManager : MonoBehaviour {
 
@@ -177,5 +178,6 @@ public class DebugManager : MonoBehaviour {
     {
         PlayerPrefs.DeleteAll();
         resetPnl.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 }

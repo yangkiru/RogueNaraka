@@ -32,6 +32,8 @@ namespace RogueNaraka.UnitScripts
                 onDeath = BossOnDeath;
             else if (!unit.data.isFriendly)
                 onDeath = EnemyOnDeath;
+            else
+                onDeath = null;
         }
 
         public void PlayerOnDeath()

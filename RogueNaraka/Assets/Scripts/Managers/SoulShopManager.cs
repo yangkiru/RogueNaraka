@@ -525,6 +525,33 @@ public class SoulShopManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 소울 정제율 초기화
+    /// </summary>
+    public void ResetRefiningRateUpgrade()
+    {
+        if (PlayerPrefs.GetInt("isRefiningRateReset") == 1)
+            return;
+
+        float rate = MoneyManager.instance.refiningRate;
+        int amount = (int)(rate * 1000);
+        amount = (amount % 10) == 0 ? amount : amount + 1;
+        int result = 0;
+        for(int i = 300; i < amount; i += 10)
+        {
+            result += i;
+        }
+
+        Debug.Log("rate:" + rate + " result:" + result);
+
+        MoneyManager.instance.AddSoul(result);
+
+        PlayerPrefs.SetInt("isRefiningRateReset", 1);
+        
+    }
+
+    
+
     IEnumerator LockSoulRefRateBtn()
     {
         soulRefRateBtn.interactable = false;
