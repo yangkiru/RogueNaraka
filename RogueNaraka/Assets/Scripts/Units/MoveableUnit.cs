@@ -9,6 +9,9 @@ namespace RogueNaraka.UnitScripts
 {
     public class MoveableUnit : MonoBehaviour
     {   
+        const float CHECK_ADDED_BOARD_SIZE_X = 0.2f;
+        const float CHECK_ADDED_BOARD_SIZE_Y = 0.2f;
+
         [SerializeField]
         Unit unit;
 
@@ -92,6 +95,7 @@ namespace RogueNaraka.UnitScripts
 
         void FixedUpdate() {
             Move();
+            CheckUnitInBoard();
         }
 
         private void Move() {
@@ -117,6 +121,24 @@ namespace RogueNaraka.UnitScripts
             if(distanceToDest <= MathHelpers.DecelerateDistance(this.accelerationRate, this.curSpeed)) {
                 this.moveState = MOVE_STATE.DECELERATE;
             }
+        }
+        private void CheckUnitInBoard() {
+            Vector2 changedPos = this.transform.position;
+            if(changedPos.x < BoardManager.instance.boardRange[0].x + CHECK_ADDED_BOARD_SIZE_X) {
+                Debug.LogWarning("Check!");
+                changedPos.x = BoardManager.instance.boardRange[0].x + CHECK_ADDED_BOARD_SIZE_X;
+            } else if(changedPos.x > BoardManager.instance.boardRange[1].x - CHECK_ADDED_BOARD_SIZE_X) {
+                Debug.LogWarning("Check!");
+                changedPos.x = BoardManager.instance.boardRange[1].x - CHECK_ADDED_BOARD_SIZE_X;
+            }
+            if(changedPos.y < BoardManager.instance.boardRange[0].y + CHECK_ADDED_BOARD_SIZE_Y) {
+                Debug.LogWarning("Check!");
+                changedPos.y = BoardManager.instance.boardRange[0].y + CHECK_ADDED_BOARD_SIZE_Y;
+            } else if(changedPos.y > BoardManager.instance.boardRange[1].y - CHECK_ADDED_BOARD_SIZE_Y) {
+                Debug.LogWarning("Check!");
+                changedPos.y = BoardManager.instance.boardRange[1].y - CHECK_ADDED_BOARD_SIZE_Y;
+            }
+            this.transform.position = changedPos;
         }
 
         private void Accelerate() {
