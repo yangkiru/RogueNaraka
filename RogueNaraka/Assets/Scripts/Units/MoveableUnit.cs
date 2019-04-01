@@ -44,10 +44,10 @@ namespace RogueNaraka.UnitScripts
         public void Init(UnitData data)
         {
             SetSpeed(data.moveSpeed);
-            if(unit.stat.accelerationRate == 0.0f) {
+            if(unit.data.accelerationRate == 0.0f) {
                 this.accelerationRate = 0.5f;
             } else {
-                this.accelerationRate = unit.stat.accelerationRate;
+                this.accelerationRate = unit.data.accelerationRate;
             }
         }
 

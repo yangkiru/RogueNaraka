@@ -158,6 +158,7 @@ public class UnitData : ICloneable
     public float moveDelay;
     public float moveDistance;
     public float moveSpeed;
+    public float accelerationRate;
     public float limitTime;
     public Vector2 shadowPos;
     public Order order;
