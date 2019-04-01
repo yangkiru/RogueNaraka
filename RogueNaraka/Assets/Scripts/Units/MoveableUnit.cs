@@ -25,12 +25,8 @@ namespace RogueNaraka.UnitScripts
         float unitSpeed;
         public float factor;
 
-        bool isWalk;
-        bool _isWalk;
-
         //추후 Stat으로 옮기고 변경
         private float accelerationRate;
-        private float maxSpeed;
         private float curSpeed;
         public float CurSpeed { get { return this.curSpeed; } }
         private Vector2 moveDir;
@@ -48,8 +44,11 @@ namespace RogueNaraka.UnitScripts
         public void Init(UnitData data)
         {
             SetSpeed(data.moveSpeed);
-            //agent.enabled = true;
-            //agent.Stop();
+            if(unit.stat.accelerationRate == 0.0f) {
+                this.accelerationRate = 0.5f;
+            } else {
+                this.accelerationRate = unit.stat.accelerationRate;
+            }
         }
 
         public void SetSpeed(float speed)
@@ -64,9 +63,6 @@ namespace RogueNaraka.UnitScripts
             this.onArrivedCallback = callback;
             this.moveState = MOVE_STATE.ACCELERATE;
             unit.animator.SetBool("isWalk", true);
-            //Test
-            this.maxSpeed = this.speed;
-            this.accelerationRate = 0.25f;
         }
 
         /// <summary>유닛을 즉시 멈춥니다.</summary>
@@ -125,8 +121,8 @@ namespace RogueNaraka.UnitScripts
 
         private void Accelerate() {
             this.curSpeed += this.accelerationRate * TimeManager.Instance.FixedDeltaTime;
-            if(this.curSpeed >= this.maxSpeed) {
-                this.curSpeed = this.maxSpeed;
+            if(this.curSpeed >= this.speed) {
+                this.curSpeed = this.speed;
                 this.moveState = MOVE_STATE.MOVE;
             }
         }

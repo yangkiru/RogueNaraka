@@ -36,6 +36,8 @@ public class Stat : ICloneable
 
     public int statPoints;
 
+    public float accelerationRate;
+
     public float sumOrigin
     {
         get { return dmg + spd + tec + hp + mp + hpRegen + mpRegen; }
