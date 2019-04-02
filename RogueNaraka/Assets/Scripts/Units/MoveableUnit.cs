@@ -125,17 +125,13 @@ namespace RogueNaraka.UnitScripts
         private void CheckUnitInBoard() {
             Vector2 changedPos = this.transform.position;
             if(changedPos.x < BoardManager.instance.boardRange[0].x + CHECK_ADDED_BOARD_SIZE_X) {
-                Debug.LogWarning("Check!");
                 changedPos.x = BoardManager.instance.boardRange[0].x + CHECK_ADDED_BOARD_SIZE_X;
             } else if(changedPos.x > BoardManager.instance.boardRange[1].x - CHECK_ADDED_BOARD_SIZE_X) {
-                Debug.LogWarning("Check!");
                 changedPos.x = BoardManager.instance.boardRange[1].x - CHECK_ADDED_BOARD_SIZE_X;
             }
             if(changedPos.y < BoardManager.instance.boardRange[0].y + CHECK_ADDED_BOARD_SIZE_Y) {
-                Debug.LogWarning("Check!");
                 changedPos.y = BoardManager.instance.boardRange[0].y + CHECK_ADDED_BOARD_SIZE_Y;
             } else if(changedPos.y > BoardManager.instance.boardRange[1].y - CHECK_ADDED_BOARD_SIZE_Y) {
-                Debug.LogWarning("Check!");
                 changedPos.y = BoardManager.instance.boardRange[1].y - CHECK_ADDED_BOARD_SIZE_Y;
             }
             this.transform.position = changedPos;
