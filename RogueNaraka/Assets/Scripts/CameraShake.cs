@@ -15,10 +15,13 @@ public class CameraShake : MonoBehaviour {
     public float speed;
     private Vector3 origin = Vector3.zero;
 
+    Transform cachedTransform;
+
     private void Awake()
     {
         instance = this;
         isShake = PlayerPrefs.GetInt("isShake") == 0;
+        cachedTransform = camera.transform;
         UpdateShakeBtn();
     }
 
@@ -62,7 +65,7 @@ public class CameraShake : MonoBehaviour {
         while (t1 <= time)
         {
             Vector3 random = new Vector3(Random.Range(-power, power), Random.Range(-power, power), origin.z);
-            camera.transform.position = random;
+            cachedTransform.position = random;
             
             while (t2 <= gap)
             {
@@ -71,8 +74,8 @@ public class CameraShake : MonoBehaviour {
                 t2 += isUnscale ? Time.unscaledDeltaTime : Time.deltaTime;
             }
             t2 = 0;
-            
-            camera.transform.position = origin;
+
+            cachedTransform.position = origin;
         }
     }
 }

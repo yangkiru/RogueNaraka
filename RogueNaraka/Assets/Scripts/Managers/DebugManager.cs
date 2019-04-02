@@ -180,4 +180,11 @@ public class DebugManager : MonoBehaviour {
         resetPnl.SetActive(false);
         SceneManager.LoadScene(0);
     }
+
+
+    [ContextMenu("Temp")]
+    public void Temp()
+    {
+        PlayerPrefs.SetInt("isRefiningRateReset", 0);
+    }
 }

@@ -50,7 +50,8 @@ public class MoneyManager : MonoBehaviour {
         else
             _unrefinedSoul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, unrefinedSoulTxt.transform, soulSpawnPosition);
+        if(value != 0)
+            PointTxtManager.instance.TxtOnSoul(value, unrefinedSoulTxt.transform, soulSpawnPosition);
     }
 
     public void SetSoul(int value)
@@ -66,7 +67,8 @@ public class MoneyManager : MonoBehaviour {
         else
             _soul = 0;
         MoneyUpdate();
-        PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, Vector2.zero);
+        if(value != 0)
+            PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, Vector2.zero);
         if(isSave)
             Save(false);
     }

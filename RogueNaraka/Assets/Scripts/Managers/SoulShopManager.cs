@@ -164,6 +164,17 @@ public class SoulShopManager : MonoBehaviour
         RefiningRateTxtUpdate();
         ADLanguageUpdate();
 
+        //정제율 제한
+        if (MoneyManager.instance.refiningRate >= 0.7f)
+        {
+            soulRefRateBtnTxt.text = "Max";
+            soulRefRateBtn.interactable = false;
+        }
+        else
+        {
+            soulRefRateBtnTxt.text = "Up";
+            soulRefRateBtn.interactable = true;
+        }
         TutorialManager.instance.StartTutorial(4);
     }
 
@@ -504,16 +515,18 @@ public class SoulShopManager : MonoBehaviour
     public void RefiningRateUpgrade()
     {
         float rate = MoneyManager.instance.refiningRate;
-        int amount = (int)(rate * 1000);
-        if (amount % 10 != 0)
-            amount++;
+        rate = Mathf.Round(rate * 100) * 0.01f;
+        int amount = GetRefiningRateCost(rate);
+        Debug.Log("rate:" + rate + " amount:" + amount);
         if (soulRefRateBtnTxt.text.CompareTo("Up") == 0)
         {
             soulRefRateBtnTxt.text = string.Format("{0}", amount);
         }
         else if (MoneyManager.instance.UseSoul(amount))
         {
-            MoneyManager.instance.refiningRate = rate + 0.01f;
+            float r = rate + 0.01f;
+            r = Mathf.Round(r * 100) * 0.01f;
+            MoneyManager.instance.refiningRate = r;
             RefiningRateTxtUpdate();
             soulRefRateBtnTxt.text = "Done";
             StartCoroutine(LockSoulRefRateBtn());
@@ -523,6 +536,54 @@ public class SoulShopManager : MonoBehaviour
             soulRefRateBtnTxt.text = "Fail";
             StartCoroutine(LockSoulRefRateBtn());
         }
+
+        if (MoneyManager.instance.refiningRate >= 0.7f)
+        {
+            soulRefRateBtnTxt.text = "Max";
+            soulRefRateBtn.interactable = false;
+        }
+    }
+
+    /// <summary>
+    /// 소울 정제율 비용을 구하는 함수
+    /// </summary>
+    /// <param name="rate"></param>
+    /// <returns></returns>
+    public int GetRefiningRateCost(float rate)
+    {
+        if (rate <= 0.3f)
+            return 100;
+        int delta = 0;
+        if (rate <= 0.35f)
+            delta = 10;
+        else if (rate <= 0.4f)
+            delta = 50;
+        else if (rate <= 0.45f)
+            delta = 100;
+        else if (rate <= 0.5f)
+            delta = 500;
+        else if (rate <= 0.55f)
+            delta = 1000;
+        else if (rate <= 0.6f)
+            delta = 5000;
+        else if (rate <= 0.65f)
+            delta = 10000;
+        else if (rate <= 0.7f)
+            delta = 20000;
+
+        rate = Mathf.Round((rate - 0.01f) * 100) * 0.01f;
+        return GetRefiningRateCost(rate) + delta;
+    }
+
+    [ContextMenu("Test")]
+    public void Test()
+    {
+        //for (float rate = 0.3f; rate + 0.01f <= 0.7f; rate += 0.01f)
+        //{
+        //    int result = GetRefiningRateCost(rate);
+        //    Debug.Log(rate + " " + result);
+        //}
+        PlayerPrefs.SetFloat("refiningRate", 0.3f);
     }
 
     /// <summary>
@@ -534,8 +595,7 @@ public class SoulShopManager : MonoBehaviour
             return;
 
         float rate = MoneyManager.instance.refiningRate;
-        int amount = (int)(rate * 1000);
-        amount = (amount % 10) == 0 ? amount : amount + 1;
+        int amount = (int)(Mathf.Round(rate * 1000));
         int result = 0;
         for(int i = 300; i < amount; i += 10)
         {
@@ -545,7 +605,7 @@ public class SoulShopManager : MonoBehaviour
         Debug.Log("rate:" + rate + " result:" + result);
 
         MoneyManager.instance.AddSoul(result);
-
+        MoneyManager.instance.refiningRate = 0.3f;
         PlayerPrefs.SetInt("isRefiningRateReset", 1);
         
     }
@@ -561,8 +621,12 @@ public class SoulShopManager : MonoBehaviour
             yield return null;
             t -= Time.unscaledDeltaTime;
         } while (t > 0);
-        soulRefRateBtn.interactable = true;
-        soulRefRateBtnTxt.text = "Up";
+
+        if (MoneyManager.instance.refiningRate < 0.7f)
+        {
+            soulRefRateBtn.interactable = true;
+            soulRefRateBtnTxt.text = "Up";
+        }
     }
 
     public void RefiningRateTxtUpdate()

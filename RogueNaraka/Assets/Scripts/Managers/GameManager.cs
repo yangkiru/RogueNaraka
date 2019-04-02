@@ -56,13 +56,7 @@ public class GameManager : MonoBehaviour {
 #else
         Debug.unityLogger.logEnabled = false;
 #endif
-        if (instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            instance = this;
-        }
-        else if (instance != this)
-            Destroy(gameObject);
+        instance = this;
 
         //업데이트된 버전이 초기화가 필요하면
         if (isReset && PlayerPrefs.GetInt(Application.version) == 0)
