@@ -34,13 +34,12 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             distance = data.moveDistance;
             delay = data.moveDelay;
-            leftDelay = 0;
+            leftDelay = Random.Range(delay * 0.5f, delay);
         }
 
         void Update()
         {
-            
-            if (moveable.CurSpeed * this.moveable.MoveDir.x >= 0.1f || moveable.CurSpeed * this.moveable.MoveDir.y >= 0.1f)
+            if (moveable.CurSpeed > 0 || unit.isStun)
                 return;
             
             if (leftDelay > 0)

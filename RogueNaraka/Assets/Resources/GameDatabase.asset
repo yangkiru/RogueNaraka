@@ -55,9 +55,11 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveSpeed: 1
-    moveDistance: 1
     moveDelay: 1
+    moveDistance: 1
+    moveSpeed: 1
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.2, y: -0.45}
     order: 0
@@ -107,9 +109,11 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveSpeed: 0.7
-    moveDistance: 1
     moveDelay: 1
+    moveDistance: 1
+    moveSpeed: 0.7
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
@@ -158,9 +162,11 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveSpeed: 0.7
-    moveDistance: 1
     moveDelay: 1
+    moveDistance: 1
+    moveSpeed: 0.7
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
@@ -209,9 +215,11 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.25
     tackleDelay: 0.3
-    moveSpeed: 1.8
-    moveDistance: 5
     moveDelay: 0.4
+    moveDistance: 5
+    moveSpeed: 1.8
+    accelerationRate: 0.7
+    decelerationRate: 0.5
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
@@ -260,9 +268,11 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.3
     tackleDelay: 0.3
-    moveSpeed: 2.25
-    moveDistance: 5
     moveDelay: 0.4
+    moveDistance: 5
+    moveSpeed: 2.25
+    accelerationRate: 0.7
+    decelerationRate: 0.5
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
@@ -311,9 +321,11 @@ MonoBehaviour:
     tackleSize: 0.35
     tackleDamage: 0.5
     tackleDelay: 1
-    moveSpeed: 1
-    moveDistance: 2
     moveDelay: 0.5
+    moveDistance: 2
+    moveSpeed: 1
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
@@ -362,9 +374,11 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveSpeed: 1
-    moveDistance: 0.5
     moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
@@ -413,9 +427,11 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveSpeed: 1.5
-    moveDistance: 0.5
     moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.5
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
@@ -464,9 +480,11 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.03
     tackleDelay: 1
-    moveSpeed: 1.5
-    moveDistance: 0.5
     moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.5
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
@@ -515,9 +533,11 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.05
     tackleDelay: 1
-    moveSpeed: 1.5
-    moveDistance: 0.5
     moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.5
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
@@ -566,9 +586,11 @@ MonoBehaviour:
     tackleSize: 0.3
     tackleDamage: 0.08
     tackleDelay: 1
-    moveSpeed: 1.5
-    moveDistance: 0.5
     moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.5
+    accelerationRate: 0.5
+    decelerationRate: 1
     limitTime: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
@@ -618,9 +640,11 @@ MonoBehaviour:
     tackleSize: 1
     tackleDamage: 0.25
     tackleDelay: 0.25
-    moveSpeed: 1
-    moveDistance: 5
     moveDelay: 0
+    moveDistance: 5
+    moveSpeed: 1
+    accelerationRate: 0.3
+    decelerationRate: 2
     limitTime: 0
     shadowPos: {x: 0, y: 0}
     order: 0
@@ -670,9 +694,11 @@ MonoBehaviour:
     tackleSize: 1
     tackleDamage: 0.15
     tackleDelay: 0
-    moveSpeed: 0
-    moveDistance: 0
     moveDelay: 0
+    moveDistance: 0
+    moveSpeed: 0
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 2
     shadowPos: {x: 0, y: -1}
     order: 100
@@ -721,9 +747,11 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveSpeed: 5
-    moveDistance: 2
     moveDelay: 0.01
+    moveDistance: 2
+    moveSpeed: 5
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 1
     shadowPos: {x: 0.2, y: -0.45}
     order: -200
@@ -1745,7 +1773,7 @@ MonoBehaviour:
         time: 0
       values:
       - name: 1
-        value: 0.5
+        value: 0.25
     description:
     - Summon ice plane that reduces enemies' speed temporarily.
     - "\uC21C\uBC1C\uB825\uC744 \uC77C\uC2DC\uC801\uC73C\uB85C \uAC10\uC18C\uC2DC\uD0A4\uB294

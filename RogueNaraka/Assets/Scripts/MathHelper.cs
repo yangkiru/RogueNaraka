@@ -52,6 +52,6 @@ public static class MathHelpers
             return angle;
     }
     public static float DecelerateDistance(float _decelerationRate, float _speed) {
-        return Mathf.Pow(_speed, 2.0f) / (2.0f * _decelerationRate);
+        return Mathf.Max(Mathf.Pow(_speed, 2.0f) * (1 - _decelerationRate), 0.1f * _speed);
     }
 }

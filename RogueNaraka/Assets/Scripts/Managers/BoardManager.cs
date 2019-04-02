@@ -373,6 +373,13 @@ public class BoardManager : MonoBehaviour {
         Fillable.bossHp.gameObject.SetActive(false);
     }
 
+    public Vector3 ClampToBoard(Vector3 pos, float offsetX = 0, float offsetY = 0)
+    {
+        float x = Mathf.Clamp(pos.x, boardRange[0].x + offsetX, boardRange[1].x - offsetX);
+        float y = Mathf.Clamp(pos.y, boardRange[0].y + offsetY, boardRange[1].y - offsetY);
+        return new Vector3(x, y, pos.z);
+    }
+
     public static bool IsMouseInBoard()
     {
         Vector3 mp = GameManager.instance.GetMousePosition() + new Vector2(0, Pointer.instance.offset);

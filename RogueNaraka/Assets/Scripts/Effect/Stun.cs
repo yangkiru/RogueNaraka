@@ -27,7 +27,6 @@ namespace RogueNaraka.EffectScripts
 
         protected override void OnInit()
         {
-            target.moveable.Stop();
             target.isStun = true;
             try
             {
@@ -45,7 +44,7 @@ namespace RogueNaraka.EffectScripts
         protected override void OnDestroyEffect()
         {
             target.isStun = false;
-            if(isStunParam)
+            if (isStunParam)
                 target.animator.SetBool("isStun", false);
         }
 

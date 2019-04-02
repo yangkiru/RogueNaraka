@@ -28,14 +28,16 @@ namespace RogueNaraka.UnitScripts
         float unitSpeed;
         public float factor;
 
-        //추후 Stat으로 옮기고 변경
         private float accelerationRate;
+        public float DecelerationRate { get { return decelerationRate; } set { decelerationRate = value; } }
+        private float decelerationRate;
         private float curSpeed;
         public float CurSpeed { get { return this.curSpeed; } }
         private Vector2 moveDir;
         public Vector2 MoveDir { get { return this.moveDir; } }
 
         private enum MOVE_STATE {STOP, ACCELERATE, MOVE, DECELERATE, END};
+        [SerializeField]
         private MOVE_STATE moveState;
         //
 
@@ -48,9 +50,16 @@ namespace RogueNaraka.UnitScripts
         {
             SetSpeed(data.moveSpeed);
             if(unit.data.accelerationRate == 0.0f) {
-                this.accelerationRate = 0.2f;
+                this.accelerationRate = 0.5f;
             } else {
                 this.accelerationRate = unit.data.accelerationRate;
+            }
+
+            if (unit.data.decelerationRate == 0.0f) {
+                this.decelerationRate = 1.0f;
+            }
+            else {
+                this.decelerationRate = unit.data.decelerationRate;
             }
         }
 
@@ -62,7 +71,7 @@ namespace RogueNaraka.UnitScripts
         /// <summary>목적지를 설정하고, MoveState를 ACCELERATE상태로 바꿉니다.</summary>
         public void SetDestination(Vector3 pos, Action<bool> callback = null)
         {
-            this.destination = pos;
+            this.destination = BoardManager.instance.ClampToBoard(pos, CHECK_ADDED_BOARD_SIZE_X, CHECK_ADDED_BOARD_SIZE_Y);//목적지 보드 제한
             this.onArrivedCallback = callback;
             this.moveState = MOVE_STATE.ACCELERATE;
             unit.animator.SetBool("isWalk", true);
@@ -99,6 +108,8 @@ namespace RogueNaraka.UnitScripts
         }
 
         private void Move() {
+            if (unit.isStun)
+                return;
             switch(this.moveState) {
                 case MOVE_STATE.STOP:
                     return;
@@ -106,6 +117,8 @@ namespace RogueNaraka.UnitScripts
                     Accelerate();
                 break;
                 case MOVE_STATE.MOVE:
+                    if (this.speed > this.curSpeed)
+                        this.moveState = MOVE_STATE.ACCELERATE;
                 break;
                 case MOVE_STATE.DECELERATE:
                     DecelerateForArrive();
@@ -114,31 +127,47 @@ namespace RogueNaraka.UnitScripts
                     Debug.LogError("MoveState is Incorrect!");
                 return;
             }
-            this.moveDir = this.destination.SubtractVector3FromVector2(this.transform.position);
+            /* 목적지에 가까워졌을 때, 방향이 바뀌는 것을 방지하기 위해 조건문 추가 */
+            if (this.moveState != MOVE_STATE.DECELERATE)
+                this.moveDir = this.destination.SubtractVector3FromVector2(this.transform.position);
             float distanceToDest = moveDir.sqrMagnitude;
             this.moveDir.Normalize();
             this.transform.Translate(moveDir * this.curSpeed * TimeManager.Instance.FixedDeltaTime);
-            if(distanceToDest <= MathHelpers.DecelerateDistance(this.accelerationRate, this.curSpeed)) {
+            if(this.moveState != MOVE_STATE.DECELERATE && this.moveState != MOVE_STATE.STOP &&
+                distanceToDest <= MathHelpers.DecelerateDistance(this.decelerationRate, this.curSpeed)) {
                 this.moveState = MOVE_STATE.DECELERATE;
             }
         }
         private void CheckUnitInBoard() {
             Vector2 changedPos = this.transform.position;
+            
+            bool isOut = false;
             if(changedPos.x < BoardManager.instance.boardRange[0].x + CHECK_ADDED_BOARD_SIZE_X) {
                 changedPos.x = BoardManager.instance.boardRange[0].x + CHECK_ADDED_BOARD_SIZE_X;
+                isOut = true;
             } else if(changedPos.x > BoardManager.instance.boardRange[1].x - CHECK_ADDED_BOARD_SIZE_X) {
                 changedPos.x = BoardManager.instance.boardRange[1].x - CHECK_ADDED_BOARD_SIZE_X;
+                isOut = true;
             }
             if(changedPos.y < BoardManager.instance.boardRange[0].y + CHECK_ADDED_BOARD_SIZE_Y) {
                 changedPos.y = BoardManager.instance.boardRange[0].y + CHECK_ADDED_BOARD_SIZE_Y;
+                isOut = true;
             } else if(changedPos.y > BoardManager.instance.boardRange[1].y - CHECK_ADDED_BOARD_SIZE_Y) {
                 changedPos.y = BoardManager.instance.boardRange[1].y - CHECK_ADDED_BOARD_SIZE_Y;
+                isOut = true;
+            }
+
+            /* 범위를 벗어났을 때, 감속 생략 */
+            if (isOut && this.moveState != MOVE_STATE.STOP)
+            {
+                this.moveState = MOVE_STATE.DECELERATE;
+                this.curSpeed = 0.0f;
             }
             this.transform.position = changedPos;
         }
 
         private void Accelerate() {
-            this.curSpeed += this.accelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime;
+            this.curSpeed += this.accelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime * (1 + factor);
             if(this.curSpeed >= this.speed) {
                 this.curSpeed = this.speed;
                 this.moveState = MOVE_STATE.MOVE;
@@ -146,7 +175,7 @@ namespace RogueNaraka.UnitScripts
         }
 
         private void DecelerateForArrive() {
-            this.curSpeed -= this.accelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime;
+            this.curSpeed -= this.decelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime * (1 + factor);
             if(this.curSpeed <= 0.0f) {
                 this.curSpeed = 0.0f;
                 this.moveState = MOVE_STATE.STOP;
