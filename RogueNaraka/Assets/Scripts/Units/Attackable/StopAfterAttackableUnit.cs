@@ -8,7 +8,7 @@ namespace RogueNaraka.UnitScripts.Attackable
     {
         protected override void OnAfterAttackEnd()
         {
-            unit.moveable.agent.Stop();
+            unit.moveable.Stop();
             if (unit.autoMoveable)
                 unit.autoMoveable.enabled = true;
         }

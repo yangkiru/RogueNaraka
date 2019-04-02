@@ -17,7 +17,7 @@ namespace RogueNaraka.SkillScripts
             Unit player = BoardManager.instance.player;
             player.autoMoveable.enabled = false;
             player.attackable.enabled = false;
-            player.moveable.agent.Stop();
+            player.moveable.Stop();
             player.rigid.AddForce((mp - player.transform.position).normalized * Vector2.Distance(mp, player.transform.position) * 7);
             StartCoroutine(CheckEnd(mp));
         }

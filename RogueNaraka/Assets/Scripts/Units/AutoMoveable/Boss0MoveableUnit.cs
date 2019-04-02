@@ -69,7 +69,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 //originSpeed = unit.data.moveSpeed;
                 AudioManager.instance.PlaySFX("boss0Rush");
                 
-                moveable.Move(destination, OnRushEnd);
+                //moveable.SetDestination(destination, OnRushEnd);
                 unit.animator.SetBool("isBeforeAttack", true);
             }
         }
@@ -91,7 +91,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         void Random()
         {
             Vector2 rnd = new Vector2(UnityEngine.Random.Range(-distance, distance), UnityEngine.Random.Range(-distance, distance));
-            moveable.Move((Vector2)cashedTransform.position + rnd);
+            //moveable.Move((Vector2)cashedTransform.position + rnd);
         }
 
         IEnumerator RandomCorou()
@@ -107,7 +107,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         void Return()
         {
-            moveable.Move(BoardManager.instance.bossPoint, OnReturnEnd);
+            moveable.SetDestination(BoardManager.instance.bossPoint, OnReturnEnd);
             leftDelay = 99999;
         }
 

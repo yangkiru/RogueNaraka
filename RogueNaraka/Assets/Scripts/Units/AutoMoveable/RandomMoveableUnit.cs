@@ -24,7 +24,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
                 float distance = (tss > m) ? m : unit.targetable.targetDistance;
                 Vector2 goal = (Vector2)cashedTransform.position + vec.normalized * distance;
-                moveable.Move(goal);
+                moveable.SetDestination(goal);
                 leftDelay = unit.data.moveDelay * 0.5f;
                 //Debug.DrawLine(cashedTransform.position, goal, Color.white, 2);
             }
@@ -33,7 +33,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 Vector2 rnd = Random.insideUnitCircle.normalized * distance;
                 Vector2 goal = (Vector2)cashedTransform.position + rnd;
                 //Debug.DrawLine(cashedTransform.position, goal, Color.white, 2);
-                moveable.Move(goal);
+                moveable.SetDestination(goal);
             }
         }
     }

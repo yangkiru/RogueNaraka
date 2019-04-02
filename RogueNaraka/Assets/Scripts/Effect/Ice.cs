@@ -10,9 +10,10 @@ namespace RogueNaraka.EffectScripts
         IEnumerator DecelerateCorou()
         {
             yield return null;
-            while (target.moveable.agent.currentSpeed > target.moveable.agent.maxSpeed)
+            
+            while (target.moveable.CurSpeed > target.stat.spdTemp)
             {
-                target.moveable.agent.Decelerate(0.1f);
+                target.moveable.ForceToDecelerate(0.1f);
                 yield return null;
             }
             decelerateCorou = null;

@@ -59,7 +59,7 @@ public class LevelUpManager : MonoBehaviour
     public void OnEndStage()
     {
         player.autoMoveable.enabled = false;
-        player.moveable.agent.Stop();
+        player.moveable.Stop();
 
         fade.FadeOut();
     }
@@ -84,7 +84,7 @@ public class LevelUpManager : MonoBehaviour
         }
         GameManager.instance.Save();
         time = 0;
-        player.moveable.agent.Stop();
+        player.moveable.Stop();
         player.autoMoveable.enabled = true;
     }
 }

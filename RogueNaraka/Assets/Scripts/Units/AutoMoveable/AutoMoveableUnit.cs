@@ -39,8 +39,10 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         void Update()
         {
-            if (moveable.agent.velocity.x >= 0.1f || moveable.agent.velocity.y >= 0.1f)
+            
+            if (moveable.CurSpeed * this.moveable.MoveDir.x >= 0.1f || moveable.CurSpeed * this.moveable.MoveDir.y >= 0.1f)
                 return;
+            
             if (leftDelay > 0)
             {
                 leftDelay -= Mathf.Max(0, Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f));
