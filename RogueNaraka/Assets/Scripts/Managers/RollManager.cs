@@ -180,7 +180,7 @@ public class RollManager : MonoBehaviour {
                 rollCount++;
                 PlayerPrefs.SetInt("rollCount", rollCount);//Roll Count 저장
                 PlayerPrefs.SetInt("stopped", stopped);//저장
-
+                SkillChangeManager.instance.Levels = 0;
                 int spin = 1;
                 scroll.Spin(spin * 10 + stopped - last);
                 SetSelectPnl(false);
@@ -581,6 +581,7 @@ public class RollManager : MonoBehaviour {
     {
         if (!LoadDatas())
         {
+            SkillChangeManager.instance.Levels = 0;
             for (int i = 0; i < showCases.Length; i++)
             {
                 RollData rnd;

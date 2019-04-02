@@ -10,11 +10,59 @@ public class SkillChangeManager : MonoBehaviour
     public TextMeshProUGUI costTxt;
     public TextMeshProUGUI levelTxt;
 
+    public int Levels
+    {
+        set { Level_0 = value; Level_1 = value; Level_2 = value; }
+    }
+
+    public int Level
+    {
+        get {
+            switch (this.position)
+            {
+                case 0: return Level_0;
+                case 1: return Level_1;
+                case 2: return Level_2;
+                default: Debug.LogError("SkillChangeManager:Position Error in Set Level"); return Level_0;
+            }
+        }
+        set
+        {
+            switch(this.position)
+            {
+                case 0: Level_0 = value; break;
+                case 1: Level_1 = value; break;
+                case 2: Level_2 = value; break;
+                default: Debug.LogError("SkillChangeManager:Position Error in Set Level"); break;
+            }
+        }
+    }
+
+    public int Level_0
+    {
+        get { return PlayerPrefs.GetInt("skillChangeLevel_0"); }
+        set { PlayerPrefs.SetInt("skillChangeLevel_0", value); }
+    }
+
+    public int Level_1
+    {
+        get { return PlayerPrefs.GetInt("skillChangeLevel_1"); }
+        set { PlayerPrefs.SetInt("skillChangeLevel_1", value); }
+    }
+
+    public int Level_2
+    {
+        get { return PlayerPrefs.GetInt("skillChangeLevel_2"); }
+        set { PlayerPrefs.SetInt("skillChangeLevel_2", value); }
+    }
+
     SkillData data;
 
     int position;//스킬 슬롯 위치
     int level;//스킬 레벨
     int cost;//소울 비용
+
+    float originSize = 0;
 
     private void Awake()
     {
@@ -32,16 +80,63 @@ public class SkillChangeManager : MonoBehaviour
         changePnl.SetActive(true);
         this.position = position;
         this.data = data;
-        level = SkillManager.instance.skills[position].skill.data.level;
-        cost = GetChangeCost(level);
-        //구매할 수 있는 최댓값의 레벨 탐색
-        while (!MoneyManager.instance.IsUseable(cost) && level >= 1)
+        Debug.Log(Level);
+        if (Level == 0)
         {
-            cost = GetChangeCost(--level);
+            level = Random.Range(1, SkillManager.instance.skills[position].skill.data.level + 1);
+            Level = level;
+            Debug.Log("Random:"+level);
+            //StartCoroutine(LevelTxtCorou(level));
         }
+        else
+        {
+            level = Level;
+            //levelTxt.text = string.Format("{0} Level", level);
+        }
+        
+        if(originSize != 0)
+            levelTxt.fontSize = originSize;
+        StartCoroutine("LevelTxtCorou", level);
 
-        levelTxt.text = string.Format("{0} Level", level);
-        costTxt.text = string.Format("{0} Soul", cost);
+        //cost = GetChangeCost(level);
+        ////구매할 수 있는 최댓값의 레벨 탐색
+        //while (!MoneyManager.instance.IsUseable(cost) && level >= 1)
+        //{
+        //    cost = GetChangeCost(--level);
+        //}
+
+
+        //costTxt.text = string.Format("{0} Soul", cost);
+    }
+
+    IEnumerator LevelTxtCorou(int level)
+    {
+        originSize = levelTxt.fontSize;
+        float maxSize = originSize * 3;
+        for (int i = 1; i <= level; i++)
+        {
+            levelTxt.text = string.Format("{0} Level", i);
+
+            levelTxt.fontSize = levelTxt.fontSize < maxSize ? levelTxt.fontSize * 1.2f : maxSize * 1.2f;
+
+            AudioManager.instance.PlaySFX(string.Format("weapon{0}", Random.Range(1, 4)));
+
+            float t = Input.GetMouseButton(0) ? 0.083f : 0.25f;
+            do
+            {
+                yield return null;
+                t -= Time.unscaledDeltaTime;
+                    levelTxt.fontSize *= 0.99f;
+                if (levelTxt.fontSize < originSize)
+                    levelTxt.fontSize = originSize;
+            } while (t > 0);
+        }
+        do
+        {
+            levelTxt.fontSize *= 0.9f;
+            yield return null;
+        } while (levelTxt.fontSize >= originSize);
+        levelTxt.fontSize = originSize;
     }
 
     /// <summary>
@@ -66,10 +161,10 @@ public class SkillChangeManager : MonoBehaviour
     /// </summary>
     public void Change()
     {
-        if(!MoneyManager.instance.UseSoul(cost))
-        {
-            return;
-        }
+        //if(!MoneyManager.instance.UseSoul(cost))
+        //{
+        //    return;
+        //}
 
         changePnl.SetActive(false);
         AudioManager.instance.PlaySFX("skillEquip");
@@ -85,6 +180,7 @@ public class SkillChangeManager : MonoBehaviour
     public void Cancel()
     {
         changePnl.SetActive(false);
+        StopCoroutine("LevelTxtCorou");
     }
 
     /// <summary>
