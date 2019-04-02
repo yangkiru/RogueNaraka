@@ -48,7 +48,7 @@ namespace RogueNaraka.UnitScripts
         {
             SetSpeed(data.moveSpeed);
             if(unit.data.accelerationRate == 0.0f) {
-                this.accelerationRate = 0.5f;
+                this.accelerationRate = 0.2f;
             } else {
                 this.accelerationRate = unit.data.accelerationRate;
             }
@@ -138,7 +138,7 @@ namespace RogueNaraka.UnitScripts
         }
 
         private void Accelerate() {
-            this.curSpeed += this.accelerationRate * TimeManager.Instance.FixedDeltaTime;
+            this.curSpeed += this.accelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime;
             if(this.curSpeed >= this.speed) {
                 this.curSpeed = this.speed;
                 this.moveState = MOVE_STATE.MOVE;
@@ -146,7 +146,7 @@ namespace RogueNaraka.UnitScripts
         }
 
         private void DecelerateForArrive() {
-            this.curSpeed -= this.accelerationRate * TimeManager.Instance.FixedDeltaTime;
+            this.curSpeed -= this.accelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime;
             if(this.curSpeed <= 0.0f) {
                 this.curSpeed = 0.0f;
                 this.moveState = MOVE_STATE.STOP;
