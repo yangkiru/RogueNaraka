@@ -66,7 +66,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             }
         }
 
-        void OnRushEnd(bool isArrived)
+        void OnRushEnd()
         {
             leftDelay = 0;
             unit.effectable.AddEffect(EFFECT.Stun, 0, 2);
@@ -99,7 +99,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             leftDelay = 3;
         }
 
-        void OnReturnEnd(bool isArrived)
+        void OnReturnEnd()
         {
             state = STATE.REST;
         }

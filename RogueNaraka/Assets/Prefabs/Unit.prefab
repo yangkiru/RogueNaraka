@@ -225,6 +225,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 0}
+    deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -238,6 +239,8 @@ MonoBehaviour:
     moveDelay: 0
     moveDistance: 0
     moveSpeed: 0
+    accelerationRate: 0
+    decelerationRate: 0
     limitTime: 0
     shadowPos: {x: 0, y: 0}
     order: 0
@@ -348,8 +351,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 114302036002021230}
-  _agent: {fileID: 0}
+  cachedTransform: {fileID: 4616481813884920}
   factor: 0
+  moveState: 0
 --- !u!114 &114116071741596666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,8 +418,6 @@ MonoBehaviour:
   moveable: {fileID: 114798437530957502}
   delay: 0
   leftDelay: 0
-  _target: {fileID: 0}
-  _following: {fileID: 0}
 --- !u!114 &2215865072240927729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e0e32fdbd87c84e8ebdf682cc263c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _followers: []
   unit: {fileID: 114302036002021230}
 --- !u!95 &95588626938235128
 Animator:

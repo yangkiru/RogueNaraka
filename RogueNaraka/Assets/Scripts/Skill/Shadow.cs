@@ -23,11 +23,16 @@ namespace RogueNaraka.SkillScripts
             unitData.stat.dmgTemp *= 0.5f;
             unitData.limitTime = GetValue(Value.Time).value;
             shadow.Init(unitData);
+            Vector3 pos;
             player.followable.AddFollower(shadow);
+            if (player.followable.Followers.Last.Previous != null)
+                pos = player.followable.Followers.Last.Previous.Value.cachedTransform.position;
+            else
+                pos = player.cachedTransform.position;
             shadow.collider.enabled = false;
             shadow.targetable.SetTargetable(false);
 
-            shadow.Spawn(player.cachedTransform.position);
+            shadow.Spawn(pos);
         }
     }
 }

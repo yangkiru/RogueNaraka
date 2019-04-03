@@ -15,9 +15,12 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         Unit unit;
 
+        [SerializeField]
+        Transform cachedTransform;
+
         private Vector2 destination;
-        private Action<bool> onArrivedCallback;
-        public Action<bool> OnArrivedCallback { get { return this.onArrivedCallback; } }
+        private Action onArrivedCallback;
+        public Action OnArrivedCallback { get { return this.onArrivedCallback; } }
 
         public float speed {
             get {
@@ -44,6 +47,7 @@ namespace RogueNaraka.UnitScripts
         void Reset()
         {
             unit = GetComponent<Unit>();
+            cachedTransform = transform;
         }
 
         public void Init(UnitData data)
@@ -62,6 +66,7 @@ namespace RogueNaraka.UnitScripts
                 this.decelerationRate = unit.data.decelerationRate;
             }
             moveState = MOVE_STATE.STOP;
+            curSpeed = 0;
         }
 
         public void SetSpeed(float speed)
@@ -70,7 +75,7 @@ namespace RogueNaraka.UnitScripts
         }
         
         /// <summary>목적지를 설정하고, MoveState를 ACCELERATE상태로 바꿉니다.</summary>
-        public void SetDestination(Vector3 pos, Action<bool> callback = null)
+        public void SetDestination(Vector3 pos, Action callback = null)
         {
             this.destination = BoardManager.instance.ClampToBoard(pos, CHECK_ADDED_BOARD_SIZE_X, CHECK_ADDED_BOARD_SIZE_Y);//목적지 보드 제한
             this.onArrivedCallback = callback;
@@ -130,17 +135,17 @@ namespace RogueNaraka.UnitScripts
             }
             /* 목적지에 가까워졌을 때, 방향이 바뀌는 것을 방지하기 위해 조건문 추가 */
             if (this.moveState != MOVE_STATE.DECELERATE)
-                this.moveDir = this.destination.SubtractVector3FromVector2(this.transform.position);
+                this.moveDir = this.destination.SubtractVector3FromVector2(this.cachedTransform.position);
             float distanceToDest = moveDir.sqrMagnitude;
             this.moveDir.Normalize();
-            this.transform.Translate(moveDir * this.curSpeed * TimeManager.Instance.FixedDeltaTime);
+            this.cachedTransform.Translate(moveDir * this.curSpeed * TimeManager.Instance.FixedDeltaTime);
             if(this.moveState != MOVE_STATE.DECELERATE && this.moveState != MOVE_STATE.STOP &&
                 distanceToDest <= MathHelpers.DecelerateDistance(this.decelerationRate, this.curSpeed)) {
                 this.moveState = MOVE_STATE.DECELERATE;
             }
         }
         private void CheckUnitInBoard() {
-            Vector2 changedPos = this.transform.position;
+            Vector2 changedPos = this.cachedTransform.position;
             
             bool isOut = false;
             if(changedPos.x < BoardManager.instance.boardRange[0].x + CHECK_ADDED_BOARD_SIZE_X) {
@@ -164,7 +169,7 @@ namespace RogueNaraka.UnitScripts
                 this.moveState = MOVE_STATE.DECELERATE;
                 this.curSpeed = 0.0f;
             }
-            this.transform.position = changedPos;
+            this.cachedTransform.position = changedPos;
         }
 
         private void Accelerate() {
@@ -182,7 +187,7 @@ namespace RogueNaraka.UnitScripts
                 this.moveState = MOVE_STATE.STOP;
                 unit.animator.SetBool("isWalk", false);
                 if(this.onArrivedCallback != null) {
-                    this.onArrivedCallback(true);
+                    this.onArrivedCallback();
                 }
                 this.moveDir = new Vector2(0.0f, 0.0f);
             }

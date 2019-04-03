@@ -99,10 +99,6 @@ namespace RogueNaraka.UnitScripts
                 //AudioManager.instance.StartCoroutine(AudioManager.instance.PlaySound(deathSFX, unit.cashedTransform));
                 AudioManager.instance.PlaySFX(sfx);
             }
-            if(unit.autoMoveable is FollowMoveableUnit)
-            {
-                unit.followMoveable.OnDeath();
-            }
             unit.followable.OnDeath();
             AnimatorStateInfo state;
             do

@@ -49,7 +49,6 @@ public class DeathEffect : MonoBehaviour {
 
     IEnumerator MoveCorou(float speed, Unit unit)
     {
-        Debug.Log(speed);
         Vector2 dir = (cachedTransform.position - unit.cachedTransform.position).normalized;
         Vector2 move = dir * speed;
         while (true)

@@ -6,9 +6,9 @@ namespace RogueNaraka.UnitScripts
 {
     public class FollowableUnit : MonoBehaviour
     {
-        public List<Unit> followers { get { return _followers; } }
+        public LinkedList<Unit> Followers { get { return followers; } }
         [SerializeField]
-        List<Unit> _followers = new List<Unit>();
+        LinkedList<Unit> followers = new LinkedList<Unit>();
 
         [SerializeField]
         Unit unit;
@@ -20,7 +20,7 @@ namespace RogueNaraka.UnitScripts
 
         public void Init(UnitData data)
         {
-            _followers.Clear();
+            followers.Clear();
         }
 
         public void OnDisable()
@@ -31,21 +31,20 @@ namespace RogueNaraka.UnitScripts
         public void AddFollower(Unit unit)
         {
             Debug.Log("AddFollower" + this.unit.name + " " + unit.name);
-            _followers.Add(unit);
-            unit.followMoveable.SetTarget(this.unit);
+            unit.followMoveable.Init(followers.AddLast(unit), this.unit);
         }
 
         public void RemoveFollower(Unit unit)
         {
-            if (_followers.Remove(unit))
-                unit.followMoveable.LostTarget();
+            followers.Remove(unit.followMoveable.Node);
         }
 
         public void OnDeath()
         {
-            for(int i = _followers.Count - 1; i >= 0; i--)
+            for(int i = followers.Count - 1; i >= 0; i--)
             {
-                RemoveFollower(_followers[i]);
+                followers.Last.Value.followMoveable.OnLostTarget();
+                followers.RemoveLast();
             }
         }
     }

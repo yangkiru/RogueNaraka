@@ -764,11 +764,11 @@ MonoBehaviour:
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
-    moveDelay: 0.01
-    moveDistance: 2
+    moveDelay: 0
+    moveDistance: 1
     moveSpeed: 5
-    accelerationRate: 0
-    decelerationRate: 0
+    accelerationRate: 2
+    decelerationRate: 100
     limitTime: 1
     shadowPos: {x: 0.2, y: -0.45}
     order: -200

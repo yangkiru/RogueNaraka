@@ -37,14 +37,15 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             leftDelay = Random.Range(delay * 0.5f, delay);
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (moveable.CurSpeed > 0 || unit.isStun)
                 return;
             
             if (leftDelay > 0)
             {
-                leftDelay -= Mathf.Max(0, Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f));
+                float amount = Time.fixedDeltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
+                leftDelay -= amount > 0 ? amount : 0;
                 return;
             }
             else if (leftDelay <= 0)
