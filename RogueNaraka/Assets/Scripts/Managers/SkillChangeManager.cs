@@ -133,8 +133,8 @@ public class SkillChangeManager : MonoBehaviour
         }
         do
         {
-            levelTxt.fontSize *= 0.9f;
             yield return null;
+            levelTxt.fontSize *= 0.9f;
         } while (levelTxt.fontSize >= originSize);
         levelTxt.fontSize = originSize;
     }
@@ -167,6 +167,7 @@ public class SkillChangeManager : MonoBehaviour
         //}
 
         changePnl.SetActive(false);
+        StopCoroutine("LevelTxtCorou");
         AudioManager.instance.PlaySFX("skillEquip");
 
         SkillManager.instance.skills[position].Init(data);
