@@ -61,6 +61,7 @@ namespace RogueNaraka.UnitScripts
             else {
                 this.decelerationRate = unit.data.decelerationRate;
             }
+            moveState = MOVE_STATE.STOP;
         }
 
         public void SetSpeed(float speed)
