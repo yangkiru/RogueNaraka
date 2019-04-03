@@ -145,6 +145,7 @@ public class UnitData : ICloneable
     public int weapon;
     public Stat stat;
     public RuntimeAnimatorController controller;
+    public RuntimeAnimatorController deathEffectController;
     public Color color = Color.white;
     public Color bulletColor = Color.white;
     public bool isFriendly;

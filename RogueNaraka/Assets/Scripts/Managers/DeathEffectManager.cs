@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using RogueNaraka.UnitScripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathEffectPool : MonoBehaviour
+public class DeathEffectManager : MonoBehaviour
 {
 
     public ObjectPool pool;
     public GameObject effectPrefab;
-    public static DeathEffectPool instance;
+    public RuntimeAnimatorController baseController;
+    public static DeathEffectManager instance;
     // Use this for initialization
     void Awake()
     {
@@ -15,11 +17,11 @@ public class DeathEffectPool : MonoBehaviour
         for (int i = 0; i < 200; i++)
         {
             GameObject obj = Instantiate(effectPrefab, Vector3.zero, Quaternion.identity, pool.transform);
-            pool.EnqueueObjectPool(obj);
+            this.pool.EnqueueObjectPool(obj);
         }
     }
 
-    public void Play(Transform trans)
+    public void Play(Unit unit)
     {
         //StartCoroutine(PlayCorou(trans));
         int rnd = Random.Range(3, 6);
@@ -32,9 +34,11 @@ public class DeathEffectPool : MonoBehaviour
             //    ef.animator.SetBool("isSmall", false);
             //else
             //    ef.animator.SetBool("isSmall", true);
-            ef.transform.position = trans.position + (Vector3)offset;
+
+            ef.Init(unit);
+                
+            ef.cachedTransform.position = unit.cachedTransform.position + (Vector3)offset;
             ef.gameObject.SetActive(true);
-            ef.StartCoroutine(ef.Stop(pool));
             //yield return new WaitForSeconds(0.1f);
         }
     }

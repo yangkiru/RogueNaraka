@@ -123,7 +123,7 @@ namespace RogueNaraka.UnitScripts
 
             if (unit.data.isDeathEffect)
             {
-                DeathEffectPool.instance.Play(transform);
+                DeathEffectManager.instance.Play(unit);
             }
 
             if (!unit.data.isCorpse)

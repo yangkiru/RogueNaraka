@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Slime1DeathEffectController
+  m_Controller: {fileID: 9100000, guid: c06f827e328a6cb4095c31a6890fb253, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a39c32ff78a768d408cf41178f18f738, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4120b8c41d3e5954d9867750148c5459, type: 2}

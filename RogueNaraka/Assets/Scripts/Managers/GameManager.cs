@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
     public LevelUpManager levelUpManager;
     public SoulShopManager soulShopManager;
     public SkillManager skillManager;
-    public DeathEffectPool deathEffectPool;
+    public DeathEffectManager deathEffectPool;
     public GameObject settingPnl;
     public GameObject pausePnl;
     public GameObject pauseBtn;

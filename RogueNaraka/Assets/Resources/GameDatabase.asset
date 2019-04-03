@@ -45,6 +45,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
@@ -99,6 +100,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 2b4571cd389cfba47b9675a11f2df9fa, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -152,6 +154,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 04c1bf2fcdf19c8408ac4a31c80ac0ed, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -205,6 +208,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -258,6 +262,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 3ef5c301aaa8efc4a88bf59106625e96, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -311,6 +316,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 608188ed8b50824429cf6311e8c646b0, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -364,6 +370,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 6b0c6498efea4a84ba9ae1867037af1b, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -417,6 +424,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 1e88895c007552b489e6b67bd2c9acdb, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -470,6 +478,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
+    deathEffectController: {fileID: 9100000, guid: c06f827e328a6cb4095c31a6890fb253,
+      type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -523,6 +533,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 5affb1d8803e4394d84cefbf8cf49a6c, type: 2}
+    deathEffectController: {fileID: 22100000, guid: c5c934cfd0b11d740a3419e0ee620993,
+      type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -576,6 +588,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
+    deathEffectController: {fileID: 22100000, guid: a6cd392170bc97e4baf681980670332e,
+      type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -630,6 +644,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 8b50d9526cedef34eb2a1b8c3a3d4944, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
@@ -684,6 +699,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 184c384e313182a43afa874a8da647ce, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
@@ -737,6 +753,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0.7921569}
     bulletColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.7921569}
     isFriendly: 1
