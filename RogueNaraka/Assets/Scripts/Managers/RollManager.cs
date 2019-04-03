@@ -618,33 +618,11 @@ public class RollManager : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator CheckRollEnd()
     {
-#if !DELAY
-#endif
-#if DELAY
-        yield return GameManager.instance.delayOneReal;
-#else
-        float t = 0;
-        while (t < 1)
+        yield return null;
+        do
         {
-            t += Time.unscaledDeltaTime;
             yield return null;
-        }
-#endif
-        while (true)
-        {
-            if (scroll.rolling <= 0)//회전하는 코루틴 개수
-                break;
-#if DELAY
-            yield return GameManager.instance.delayPointOneReal;
-#else
-            t = 0;
-            while (t < 0.1)
-            {
-                t += Time.unscaledDeltaTime;
-                yield return null;
-            }
-#endif
-        }
+        } while (scroll.rolling > 0);
         OnRollEnd();
     }
 
