@@ -1786,7 +1786,7 @@ MonoBehaviour:
       coolTime: 0
       effects:
       - type: 3
-        value: 2
+        value: 1
         time: 0
       values:
       - name: 1
