@@ -708,14 +708,14 @@ MonoBehaviour:
     isCorpse: 0
     move: 2
     tackleSize: 1
-    tackleDamage: 0.15
+    tackleDamage: 0.03
     tackleDelay: 0
     moveDelay: 0
     moveDistance: 0
     moveSpeed: 0
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 2
+    limitTime: 2.5
     shadowPos: {x: 0, y: -1}
     order: 100
     effects: []

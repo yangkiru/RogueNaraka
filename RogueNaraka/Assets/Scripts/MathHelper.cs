@@ -54,4 +54,9 @@ public static class MathHelpers
     public static float DecelerateDistance(float _decelerationRate, float _speed) {
         return Mathf.Max(Mathf.Pow(_speed, 2.0f) * (1 - _decelerationRate), 0.1f);
     }
+    public static Vector2 Vector2Clamp(Vector2 input, Vector2 boundMin, Vector2 boundMax)
+    {
+        return new Vector2(Mathf.Clamp(input.x, boundMin.x, boundMax.x),
+        Mathf.Clamp(input.y, boundMin.y, boundMax.y));
+    }
 }

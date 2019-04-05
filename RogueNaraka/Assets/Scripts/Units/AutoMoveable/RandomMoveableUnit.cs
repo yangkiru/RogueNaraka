@@ -17,22 +17,29 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             if (unit.targetable && unit.targetable.target && unit.targetable.targetDistance > unit.attackable.weapon.attackDistance)
             {
-                Vector2 vec = unit.targetable.target.cachedTransform.position - cashedTransform.position;
-                float s = unit.attackable.weapon.attackDistance;
-                float tss = unit.targetable.targetDistance - s;
-                float m = unit.data.moveDistance;
+                Vector2 vec = unit.targetable.target.cachedTransform.position - unit.cachedTransform.position;
+                float unitToAttackDistance = unit.targetable.targetDistance - unit.attackable.weapon.attackDistance;
 
-                float distance = (tss > m) ? m : unit.targetable.targetDistance;
-                Vector2 goal = (Vector2)cashedTransform.position + vec.normalized * distance;
+                Vector2 goal = (Vector2)unit.cachedTransform.position + vec.normalized * Mathf.Min(distance, unitToAttackDistance);
                 moveable.SetDestination(goal);
                 leftDelay = unit.data.moveDelay * 0.5f;
                 //Debug.DrawLine(cashedTransform.position, goal, Color.white, 2);
             }
             else
             {
-                Vector2 rnd = Random.insideUnitCircle.normalized * distance;
-                Vector2 goal = (Vector2)cashedTransform.position + rnd;
-                //Debug.DrawLine(cashedTransform.position, goal, Color.white, 2);
+                Vector2 goal;
+                float oppositeValue = 0.75f;
+                do
+                {
+                    Vector2 oppositeVector = (unit.cachedTransform.position - unit.targetable.target.cachedTransform.position).normalized * oppositeValue;
+
+                    Vector2 rnd = (Random.insideUnitCircle + oppositeVector).normalized * distance;
+
+                    goal = (Vector2)unit.cachedTransform.position + rnd;
+                    oppositeValue -= 0.1f;
+                } while (!BoardManager.IsPointInBoard(goal));
+                
+                Debug.DrawLine(unit.cachedTransform.position, goal, Color.yellow, 1);
                 moveable.SetDestination(goal);
             }
         }

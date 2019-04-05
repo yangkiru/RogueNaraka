@@ -52,8 +52,8 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             if (targetable && targetable.target)
             {
-                Vector2 vec = targetable.target.cachedTransform.position - cashedTransform.position;
-                Vector2 destination = (Vector2)cashedTransform.position + vec.normalized * unit.data.moveDistance;
+                Vector2 vec = targetable.target.cachedTransform.position - unit.cachedTransform.position;
+                Vector2 destination = (Vector2)unit.cachedTransform.position + vec.normalized * unit.data.moveDistance;
 
                 leftDelay = 5;
 
@@ -87,7 +87,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             float distance = this.distance * 0.5f;
             Vector2 dir = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
-            moveable.SetDestination((Vector2)cashedTransform.position + dir * distance);
+            moveable.SetDestination((Vector2)unit.cachedTransform.position + dir * distance);
             Debug.Log("Random" + dir);
             if (--rndCount <= 0)
                 state = STATE.RETURN;

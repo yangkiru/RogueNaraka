@@ -377,6 +377,8 @@ public class BoardManager : MonoBehaviour {
 
     public Vector3 ClampToBoard(Vector3 pos, float offsetX = 0, float offsetY = 0)
     {
+        if (IsPointInBoard(pos, true))
+            return pos;
         float x = Mathf.Clamp(pos.x, boardRange[0].x + offsetX, boardRange[1].x - offsetX);
         float y = Mathf.Clamp(pos.y, boardRange[0].y + offsetY, boardRange[1].y - offsetY);
         return new Vector3(x, y, pos.z);
@@ -385,8 +387,16 @@ public class BoardManager : MonoBehaviour {
     public static bool IsMouseInBoard()
     {
         Vector3 mp = GameManager.instance.GetMousePosition() + new Vector2(0, Pointer.instance.offset);
+        return IsPointInBoard(mp);
+    }
+
+    public static bool IsPointInBoard(Vector2 point, bool isInclusive = false)
+    {
         Vector3 min = BoardManager.instance.boardRange[0];
         Vector3 max = BoardManager.instance.boardRange[1];
-        return mp.x > min.x && mp.y > min.y && mp.x < max.x && mp.y < max.y;
+        if (!isInclusive)
+            return point.x > min.x && point.y > min.y && point.x < max.x && point.y < max.y;
+        else
+            return point.x >= min.x && point.y >= min.y && point.x <= max.x && point.y <= max.y;
     }
 }
