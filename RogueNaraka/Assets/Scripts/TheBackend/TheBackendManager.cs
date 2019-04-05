@@ -14,6 +14,10 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         void Awake() {
+            #if UNITY_EDITOR
+                this.gameObject.SetActive(false);
+                return;
+            #endif
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
                 .Builder()
                 .RequestServerAuthCode(false)
@@ -40,6 +44,20 @@ namespace RogueNaraka.TheBackendScripts {
 
             Invoke("AuthorizeFederationSync", 0.5f);
         }
+        
+        //bool tmpcheck = false;
+        //bool tmploginsuccess = false;
+        void Update() {
+            /*
+            if(!tmpcheck && tmploginsuccess) {
+                Backend.Event.EventList((list) => {
+                    var eventlist = Backend.Event.EventList().GetReturnValuetoJSON();
+                    Debug.LogError("Event!");
+                    Debug.Log(eventlist["rows"][0].ToJson());
+                });
+                tmpcheck = true;
+            }*/
+        }
 
         private void BackendInit() {
             Debug.Log(Backend.Utils.GetServerTime());
@@ -55,19 +73,25 @@ namespace RogueNaraka.TheBackendScripts {
         private void GPGSLogin() {
             if(Social.localUser.authenticated == true) {
                 BackendReturnObject BRO = Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google, "gpgs");
-                //접속 체크
-                Debug.LogError(Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google));
+                WorkAfterGPGSLogin();
             } else {
                 Social.localUser.Authenticate((bool success) => {
                     if(success) {
                         BackendReturnObject BRO = Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google, "gpgs");
-                        //접속 체크
-                        Debug.LogError(Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google));
+                        WorkAfterGPGSLogin();
                     } else {
                         Debug.LogError("GPGS Login Failed");
                     }
                 });
             }
+        }
+
+        private void WorkAfterGPGSLogin() {
+            //접속 체크
+            //Debug.LogError(Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google));
+            //푸시 설정
+            Backend.Android.PutDeviceToken();
+            //tmploginsuccess = true;
         }
 
         private string GetTokens() {

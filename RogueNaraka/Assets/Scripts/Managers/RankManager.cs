@@ -13,15 +13,7 @@ public class RankManager : MonoBehaviour
 
     public void Start()
     {
-        /*
-#if UNITY_ANDROID
-        if (Application.internetReachability == NetworkReachability.NotReachable)
-            return;
 
-        PlayGamesPlatform.Activate();
-        Login();
-#endif
-        */
     }
 
     string leaderBoardId = "CgkIvu-SvO4aEAIQAA";
