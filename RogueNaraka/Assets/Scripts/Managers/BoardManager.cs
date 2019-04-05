@@ -110,11 +110,12 @@ public class BoardManager : MonoBehaviour {
             }
         }
 
+        player.Teleport(spawnPoint);
+        player.rigid.velocity = Vector3.zero;
+
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
         
-        player.Teleport(spawnPoint);
-        isReady = true;
         fade.FadeIn();
     }
 
@@ -140,6 +141,7 @@ public class BoardManager : MonoBehaviour {
 
     public void OnFadeIn()
     {
+        isReady = true;
         if (!GameManager.instance.pausePnl.activeSelf && !GameManager.instance.settingPnl.activeSelf)
             GameManager.instance.SetPause(false);
         if (!player.deathable.isDeath)

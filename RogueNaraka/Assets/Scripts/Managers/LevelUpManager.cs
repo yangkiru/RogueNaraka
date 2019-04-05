@@ -64,6 +64,11 @@ public class LevelUpManager : MonoBehaviour
         fade.FadeOut();
     }
 
+    public void OnFadeOut()
+    {
+        LevelUp();
+    }
+
     public void LevelUp()
     {
         Debug.Log("LevelUp");

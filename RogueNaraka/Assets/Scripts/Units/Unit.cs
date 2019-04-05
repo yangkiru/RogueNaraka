@@ -290,6 +290,7 @@ namespace RogueNaraka.UnitScripts
                 Debug.Log("Enemy:" + name);
                 BoardManager.instance.enemies.Add(this);
             }
+            _tackleable.OnSpawn();
             if (_timeLimitable.time != 0)
                 _timeLimitable.enabled = true;
             if (_hpable.currentHp <= 0)
