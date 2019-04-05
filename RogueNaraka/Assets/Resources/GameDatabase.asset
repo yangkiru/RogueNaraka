@@ -654,7 +654,7 @@ MonoBehaviour:
     move: 7
     tackleSize: 1
     tackleDamage: 0.25
-    tackleDelay: 0.001
+    tackleDelay: 0
     moveDelay: 0
     moveDistance: 5
     moveSpeed: 1
