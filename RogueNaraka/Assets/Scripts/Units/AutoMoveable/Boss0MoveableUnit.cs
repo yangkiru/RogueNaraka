@@ -12,12 +12,15 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         int rndCount;
 
+        float restTime = 3;
+
         public STATE state;
         public override void Init(UnitData data)
         {
             base.Init(data);
             targetable = unit.targetable;
             leftDelay = 5.0f;
+            restTime = 3;
         }
 
         protected override void AutoMove()
@@ -96,7 +99,8 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         void Return()
         {
             moveable.SetDestination(BoardManager.instance.bossPoint, OnReturnEnd);
-            leftDelay = 3;
+            restTime -= 0.1f;
+            leftDelay = restTime;
         }
 
         void OnReturnEnd()

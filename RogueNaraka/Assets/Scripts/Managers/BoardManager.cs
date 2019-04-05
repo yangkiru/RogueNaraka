@@ -146,6 +146,8 @@ public class BoardManager : MonoBehaviour {
             GameManager.instance.SetPause(false);
         if (!player.deathable.isDeath)
             GameManager.instance.SetPauseBtn(true);
+
+        TutorialManager.instance.StartTutorial(6);
     }
 
     //void RandomEnemy(int leftCost)
