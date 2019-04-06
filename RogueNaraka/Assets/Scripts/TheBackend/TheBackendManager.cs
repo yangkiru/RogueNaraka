@@ -9,6 +9,13 @@ using RogueNaraka.SingletonPattern;
 
 namespace RogueNaraka.TheBackendScripts {
     public class TheBackendManager : MonoSingleton<TheBackendManager> {
+        private Dictionary<string, PushEvent> pushEventDictionary = new Dictionary<string, PushEvent>();
+
+        private string inDateForPushReward;
+
+        private bool isLoginSuccess;
+        public bool IsLoginSuccess { get { return this.isLoginSuccess; } }
+
         public override void OnDestroy() {
             base.OnDestroy();
         }
@@ -43,20 +50,7 @@ namespace RogueNaraka.TheBackendScripts {
             }
 
             Invoke("AuthorizeFederationSync", 0.5f);
-        }
-        
-        //bool tmpcheck = false;
-        //bool tmploginsuccess = false;
-        void Update() {
-            /*
-            if(!tmpcheck && tmploginsuccess) {
-                Backend.Event.EventList((list) => {
-                    var eventlist = Backend.Event.EventList().GetReturnValuetoJSON();
-                    Debug.LogError("Event!");
-                    Debug.Log(eventlist["rows"][0].ToJson());
-                });
-                tmpcheck = true;
-            }*/
+            StartCoroutine(ReadPushRewardInfo());
         }
 
         private void BackendInit() {
@@ -90,8 +84,9 @@ namespace RogueNaraka.TheBackendScripts {
             //접속 체크
             //Debug.LogError(Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google));
             //푸시 설정
+            Debug.Log("Logined!");
             Backend.Android.PutDeviceToken();
-            //tmploginsuccess = true;
+            this.isLoginSuccess = true;
         }
 
         private string GetTokens() {
@@ -102,6 +97,24 @@ namespace RogueNaraka.TheBackendScripts {
                 Debug.Log("접속되어있지 않습니다. PlayGamesPlatform.Instance.localUser.authenticated :  fail");
                 return null;
             }
+        }
+
+        private IEnumerator ReadPushRewardInfo() {
+            yield return new WaitUntil(() => this.isLoginSuccess);
+
+            Backend.GameInfo.GetPrivateContents("PushReward", (callback) => {
+                var pushList = callback.GetReturnValuetoJSON()["rows"];
+                if(pushList.Count == 0) {
+                    Param newPushRewardParam = new Param();
+                    Backend.GameInfo.Insert("PushReward", newPushRewardParam);
+                } else {
+                    this.inDateForPushReward = pushList[0]["inDate"]["S"].ToString();
+                    /*
+                    Param tmp = new Param();
+                    tmp.Add("Id2", true);
+                    Debug.LogWarning(Backend.GameInfo.Update("PushReward", pushList[0]["inDate"]["S"].ToString(), tmp));*/
+                }
+            });
         }
     }
 }
