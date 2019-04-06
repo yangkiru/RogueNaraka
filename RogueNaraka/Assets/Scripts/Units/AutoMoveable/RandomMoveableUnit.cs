@@ -20,7 +20,9 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 Vector2 vec = unit.targetable.target.cachedTransform.position - unit.cachedTransform.position;
                 float unitToAttackDistance = unit.targetable.targetDistance - unit.attackable.weapon.attackDistance;
 
-                Vector2 goal = (Vector2)unit.cachedTransform.position + vec.normalized * Mathf.Min(distance, unitToAttackDistance);
+                Vector2 goal = (Vector2)unit.cachedTransform.position + vec.normalized * Mathf.Max(Mathf.Min(distance, unitToAttackDistance), 0.5f);
+                //if (!BoardManager.IsPointInBoard(goal))
+                Debug.DrawLine(unit.cachedTransform.position, goal, Color.yellow, 1);
                 moveable.SetDestination(goal);
 
                 //Debug.DrawLine(cashedTransform.position, goal, Color.white, 2);
