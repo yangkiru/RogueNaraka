@@ -389,7 +389,10 @@ public class BoardManager : MonoBehaviour {
     public static bool IsMouseInBoard()
     {
         Vector3 mp = GameManager.instance.GetMousePosition() + new Vector2(0, Pointer.instance.offset);
-        return IsPointInBoard(mp);
+        if (mp.y < BoardManager.instance.boardRange[0].y)
+            return false;
+        mp = BoardManager.instance.ClampToBoard(mp);
+        return IsPointInBoard(mp, true);
     }
 
     public static bool IsPointInBoard(Vector2 point, bool isInclusive = false)

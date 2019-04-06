@@ -241,6 +241,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             distance = _skill.data.size;
             mp = (Vector2)player.transform.position + vec.normalized * distance;
         }
+        mp = BoardManager.instance.ClampToBoard(mp);
         _skill.Use(mp);
         if(_skill.data.useSFX.CompareTo(string.Empty) != 0)
             AudioManager.instance.PlaySFX(_skill.data.useSFX);

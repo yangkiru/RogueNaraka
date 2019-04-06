@@ -398,8 +398,7 @@ public class GameManager : MonoBehaviour {
         var mousePos = Input.mousePosition;
         if (mousePos.x < 0 || mousePos.x >= Screen.width || mousePos.y < 0 || mousePos.y >= Screen.height)
         {
-            Debug.LogWarning("MousePosition isn't inside of screen");
-            return Vector2.zero;
+            return boardManager.player.cachedTransform.position - new Vector3(0, Pointer.instance.offset);
         }
 
         Vector2 vec = mainCamera.ScreenToWorldPoint(Input.mousePosition);
