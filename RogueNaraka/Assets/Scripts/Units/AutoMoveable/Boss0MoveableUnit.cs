@@ -30,6 +30,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             base.Init(data);
             targetable = unit.targetable;
             leftDelay = 5.0f;
+            state = STATE.REST;
         }
 
         protected override void AutoMove()
@@ -74,7 +75,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             if (targetable && targetable.target)
             {
                 Vector2 vec = targetable.target.cachedTransform.position - unit.cachedTransform.position;
-                Vector2 destination = (Vector2)unit.cachedTransform.position + vec.normalized * unit.data.moveDistance;
+                Vector2 destination = (Vector2)unit.cachedTransform.position + vec.normalized * unit.data.moveDistance * 2;
 
                 leftDelay = 5;
 

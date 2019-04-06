@@ -50,7 +50,7 @@ namespace RogueNaraka.SkillScripts
             {
                 fromUnit.damageable.Damage(amount * 0.03f * BoardManager.instance.player.stat.GetCurrent(STAT.TEC));
                 if (!to.deathable.isDeath)
-                    to.hpable.Heal(amount * 0.025f);
+                    to.hpable.Heal(BoardManager.instance.player.stat.hpRegen * 0.025f + amount * 0.025f);
             }
         }
     }

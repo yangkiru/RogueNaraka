@@ -22,7 +22,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
                 Vector2 goal = (Vector2)unit.cachedTransform.position + vec.normalized * Mathf.Min(distance, unitToAttackDistance);
                 moveable.SetDestination(goal);
-                leftDelay = unit.data.moveDelay * 0.5f;
+
                 //Debug.DrawLine(cashedTransform.position, goal, Color.white, 2);
             }
             else if(unit.targetable && unit.targetable.target)
@@ -41,6 +41,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 
                 Debug.DrawLine(unit.cachedTransform.position, goal, Color.yellow, 1);
                 moveable.SetDestination(goal);
+                leftDelay = unit.data.moveDelay * 0.5f;
             }
         }
     }
