@@ -25,7 +25,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 leftDelay = unit.data.moveDelay * 0.5f;
                 //Debug.DrawLine(cashedTransform.position, goal, Color.white, 2);
             }
-            else
+            else if(unit.targetable && unit.targetable.target)
             {
                 Vector2 goal;
                 float oppositeValue = 0.75f;

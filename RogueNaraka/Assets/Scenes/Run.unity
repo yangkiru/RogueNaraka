@@ -2647,7 +2647,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts:
-  - 
+  - Skills and items that do not require location information can also be used as
+    a double touch.
   - "\uC704\uCE58 \uC815\uBCF4\uAC00 \uD544\uC694\uD558\uC9C0 \uC54A\uC740 \uAE30\uC220\uACFC
     \uC544\uC774\uD15C\uC740 \uB450 \uBC88 \uD130\uCE58\uB85C\uB3C4 \uC0AC\uC6A9\uD560
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
@@ -7107,7 +7108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237, y: -355.98004}
+  m_AnchoredPosition: {x: 237, y: -356}
   m_SizeDelta: {x: 418, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &137310557
@@ -7322,7 +7323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &139373078
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13995,7 +13996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts:
-  - 
+  - Your character automatically attacks and moves.
   - "\uB2F9\uC2E0\uC758 \uCE90\uB9AD\uD130\uB294 \uC790\uB3D9\uC73C\uB85C \uACF5\uACA9\uD558\uBA70
     \uC6C0\uC9C1\uC785\uB2C8\uB2E4."
   tmpro: {fileID: 298237666}
@@ -14699,7 +14700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237, y: -191.42}
+  m_AnchoredPosition: {x: 237, y: -191.375}
   m_SizeDelta: {x: 418, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &309935513
@@ -18333,7 +18334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237, y: -273.7}
+  m_AnchoredPosition: {x: 237, y: -273.75}
   m_SizeDelta: {x: 418, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &380196726
@@ -36760,7 +36761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237, y: -150.28}
+  m_AnchoredPosition: {x: 237, y: -150.25}
   m_SizeDelta: {x: 418, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &876638208
@@ -55697,7 +55698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -54.250046}
+  m_AnchoredPosition: {x: 0, y: -54.25004}
   m_SizeDelta: {x: 0, y: -108.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1373705877
@@ -58627,6 +58628,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428044338}
   m_CullTransparentMesh: 0
+--- !u!1 &1429424074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429424075}
+  - component: {fileID: 1429424076}
+  m_Layer: 0
+  m_Name: SFXPitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1429424075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429424074}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2049767583}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1429424076
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429424074}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243339931774326712, guid: f32ef46a1dca0374fae9b2e6d1ed9e2a,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1429728639
 GameObject:
   m_ObjectHideFlags: 0
@@ -62202,7 +62331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237, y: -109.14}
+  m_AnchoredPosition: {x: 237, y: -109.125}
   m_SizeDelta: {x: 418, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531635125
@@ -64225,7 +64354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -206.62502}
+  m_AnchoredPosition: {x: 0, y: -206.625}
   m_SizeDelta: {x: -0.006459713, y: 413.7562}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1585378097
@@ -65724,7 +65853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts:
-  - 
+  - You can drag-and-drop skills and items to use.
   - "\uAE30\uC220\uACFC \uC544\uC774\uD15C\uC744 \uB04C\uC5B4\uB2E4 \uB193\uC544 \uC0AC\uC6A9\uD560
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   tmpro: {fileID: 1638878359}
@@ -67710,7 +67839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237, y: -232.56}
+  m_AnchoredPosition: {x: 237, y: -232.5}
   m_SizeDelta: {x: 418, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672009066
@@ -76814,7 +76943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -222.87503}
+  m_AnchoredPosition: {x: 0, y: -222.875}
   m_SizeDelta: {x: 0, y: -445.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1805418193
@@ -80554,7 +80683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237, y: -314.84003}
+  m_AnchoredPosition: {x: 237, y: -314.875}
   m_SizeDelta: {x: 418, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910161555
@@ -84157,7 +84286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -259.30002}
+  m_AnchoredPosition: {x: 0, y: -115.08}
   m_SizeDelta: {x: 416.9, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2009742954
@@ -84173,7 +84302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts:
-  - 
+  - Your stats can be checked here.
   - "\uB2F9\uC2E0\uC758 \uB2A5\uB825\uCE58\uB294 \uC774\uACF3\uC5D0\uC11C \uD655\uC778\uD560
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   tmpro: {fileID: 2009742955}
@@ -85795,6 +85924,7 @@ Transform:
   m_Children:
   - {fileID: 244143261}
   - {fileID: 1950163787}
+  - {fileID: 1429424075}
   m_Father: {fileID: 0}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85934,6 +86064,7 @@ MonoBehaviour:
   - iceBreak
   music: {fileID: 244143262}
   SFX: {fileID: 1950163786}
+  SFXPitch: {fileID: 1429424076}
   btns:
   - {fileID: 1462264079}
   - {fileID: 1551967888}

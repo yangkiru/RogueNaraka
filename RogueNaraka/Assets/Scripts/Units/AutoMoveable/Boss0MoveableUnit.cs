@@ -12,7 +12,17 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         int rndCount;
 
-        float restTime = 3;
+        int maxPhase = 7;
+        public int phase
+        {
+            get
+            {
+                int value = (int)((1 - unit.hpable.currentHp / unit.hpable.maxHp) * 7);
+                lastPhase = value;
+                return value;
+            }
+        }
+        int lastPhase = -1;
 
         public STATE state;
         public override void Init(UnitData data)
@@ -20,7 +30,6 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             base.Init(data);
             targetable = unit.targetable;
             leftDelay = 5.0f;
-            restTime = 3;
         }
 
         protected override void AutoMove()
@@ -37,7 +46,16 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                     Random();
                     break;
                 case STATE.RETURN:
-                    Return();
+                    switch (phase)
+                    {
+                        case 0: Return(2);
+                            break;
+                        case 1: Return(1);
+                            break;
+                        default: Return(0.1f);
+                            break;
+                    }
+                    
                     break;
             }
         }
@@ -72,9 +90,8 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         void OnRushEnd()
         {
             leftDelay = 0;
-            unit.effectable.AddEffect(EFFECT.Stun, 0, 2);
+            unit.effectable.AddEffect(EFFECT.Stun, 0, 3);
             AudioManager.instance.PlaySFX("weaponUpgrade");
-            state = STATE.RANDOM;
             
             unit.animator.SetBool("isBeforeAttack", false);
             if (accelEffect != null)
@@ -83,29 +100,68 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 accelEffect = null;
             }
             CameraShake.instance.Shake(0.2f, 0.25f, 0.01f);
-            rndCount = 2;
+            switch(phase)
+            {
+                case 0:case 1:case 2:
+                    rndCount = 3;
+                    state = STATE.RANDOM;
+                    break;
+                case 3:
+                    rndCount = 2;
+                    state = STATE.RANDOM;
+                    break;
+                case 4:
+                    rndCount = 1;
+                    state = STATE.RANDOM;
+                    break;
+                case 5:
+                    state = STATE.RETURN;
+                    break;
+                case 6:
+                    state = STATE.RUSH;
+                    break;
+            }
         }
 
         void Random()
         {
+            if (--rndCount <= 0)
+                state = STATE.RETURN;
             float distance = this.distance * 0.5f;
             Vector2 dir = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
             moveable.SetDestination((Vector2)unit.cachedTransform.position + dir * distance);
             Debug.Log("Random" + dir);
-            if (--rndCount <= 0)
-                state = STATE.RETURN;
         }
 
-        void Return()
+        void Return(float restTime)
         {
             moveable.SetDestination(BoardManager.instance.bossPoint, OnReturnEnd);
-            restTime -= 0.1f;
             leftDelay = restTime;
         }
 
         void OnReturnEnd()
         {
             state = STATE.REST;
+        }
+
+        private void LateUpdate()
+        {
+            int lastPhase = this.lastPhase;
+            int phase = this.phase;
+            if (lastPhase != -1 && lastPhase != phase)
+            {
+                switch(phase)
+                {
+                    case 6:
+                        state = STATE.RUSH;
+                        break;
+                    default:
+                        state = STATE.RETURN;
+
+                        break;
+                }
+                AudioManager.instance.PlaySFX("boss0Spawn", 1 + phase * 0.1f);
+            }
         }
 
         [System.Serializable]
