@@ -172,7 +172,7 @@ public class SkillChangeManager : MonoBehaviour
 
         SkillManager.instance.skills[position].Init(data);
         SkillManager.instance.skills[position].LevelUp(level - 1);
-        RollManager.instance.SetRollPnl(false, RollManager.instance.isStageUp);
+        RollManager.instance.SetRollPnl(false);
     }
 
     /// <summary>

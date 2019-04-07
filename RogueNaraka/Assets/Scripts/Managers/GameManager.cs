@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour {
         
         PlayerPrefs.SetString("effect", string.Empty);
         PlayerPrefs.SetInt("isRun", 0);
-        PlayerPrefs.SetInt("isLevelUp", 0);
+        LevelUpManager.IsLevelUp = false;
         MoneyManager.instance.refiningRate = 0.3f;
 
         PlayerPrefs.SetInt("exp", 0);
@@ -233,22 +233,20 @@ public class GameManager : MonoBehaviour {
         else
             AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
 
-        if (PlayerPrefs.GetInt("isLevelUp") == 1)
+        if (LevelUpManager.IsLevelUp)
         {
             levelUpManager.LevelUp();
         }
-        else if (PlayerPrefs.GetInt("isFirstRoll") == 1)
+        else if (RollManager.IsFirstRoll)
         {
             SetPause(true);
-            RollManager.instance.SetRollPnl(true, false);
+            RollManager.instance.FirstRoll();
             //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         }
         else
         {
             boardManager.InitBoard();
         }
-
-        
     }
 
     private void LoadInit()
