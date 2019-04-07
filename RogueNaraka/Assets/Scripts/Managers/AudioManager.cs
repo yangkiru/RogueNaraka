@@ -255,7 +255,7 @@ public class AudioManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_ANDROID
         try
         {
-            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -sfxVolume);
+            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -1);
         }catch
         {}
 #endif
@@ -275,7 +275,7 @@ public class AudioManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_ANDROID
         try
         {
-            currentStreamID = currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -sfxVolume, 1, 0, pitch);
+            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -1, 1, 0, pitch);
         }catch
         {}
 #endif

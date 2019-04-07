@@ -390,7 +390,7 @@ public class SkillData:ICloneable
         for (int i = 0; i < result.Length; i++)
         {
             if (GameDatabase.instance.skills[i].isBasic)
-                result[i] = true;
+                result[i] = false;
         }
         if (isSave)
             SaveBoughtSkills(result);

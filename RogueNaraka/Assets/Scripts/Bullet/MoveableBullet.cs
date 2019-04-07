@@ -16,8 +16,6 @@ namespace RogueNaraka.BulletScripts
         Vector3 localAccel;
         [SerializeField]
         Vector3 worldAccel;
-        [SerializeField]
-        Vector3 direction;
 
         private void Reset()
         {
@@ -53,16 +51,15 @@ namespace RogueNaraka.BulletScripts
             }
             else
             {
-                direction = bullet.cachedTransform.right;
                 worldVelocity = velocity;
                 worldAccel = accel;
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawRay(bullet.cachedTransform.position, direction);
-        }
+        //private void OnDrawGizmos()
+        //{
+        //    Gizmos.DrawRay(bullet.cachedTransform.position, worldVelocity);
+        //}
 
         public void SetAccel(Vector3 accel, Space space)
         {
@@ -76,7 +73,7 @@ namespace RogueNaraka.BulletScripts
         {
             localVelocity += localAccel;
             worldVelocity += worldAccel;
-            Vector3 velocity = new Vector3(worldVelocity.x * direction.x, worldVelocity.y * direction.y, worldVelocity.z * worldVelocity.z);
+            Vector3 velocity = new Vector3(worldVelocity.x, worldVelocity.y, worldVelocity.z * worldVelocity.z);
             
             bullet.rigid.velocity = velocity + bullet.cachedTransform.TransformDirection(localVelocity);
         }

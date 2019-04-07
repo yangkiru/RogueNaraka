@@ -1511,6 +1511,40 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: 
+  - name: Tornado
+    id: 21
+    dmg: 0.5
+    related: 2
+    controller: {fileID: 22100000, guid: b7c9f28d11ccd024bb5535cc6dcef082, type: 2}
+    type: 3
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0.25
+    delay: 0.3
+    limitTime: 3
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 99999
+    isSplash: 1
+    isHitableWall: 1
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: -200
+    effects:
+    - type: 2
+      value: 0
+      time: 0.2
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   weapons:
   - name: MagicBall
     id: 0
@@ -2010,6 +2044,56 @@ MonoBehaviour:
         value: 0.1
       - name: 6
         value: -0.0075
+    description:
+    - Move fast summoning flames with dot damage. The dot damage of flames are proportional
+      to the technical stats.
+    - "\uC9C0\uC18D\uC801\uC73C\uB85C \uD654\uC5FC \uD53C\uD574\uB97C \uC8FC\uB294
+      \uBD88\uAF43\uC744 \uC18C\uD658\uD558\uBA70 \uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4.
+      \uD654\uC5FC \uD53C\uD574\uB294 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD55C\uB2E4."
+    useSFX: flameShoes
+  - name: Tornado
+    nameLang:
+    - Tornado
+    - "\uD1A0\uB124\uC774\uB3C4"
+    bulletIds: 15000000
+    unitIds: 
+    spr: {fileID: 21300000, guid: a7f16155d358e3244b507a421d56717c, type: 3}
+    id: 8
+    level: 1
+    cost: 500
+    coolTime: 3
+    coolTimeLeft: 0
+    manaCost: 1.5
+    size: 0.75
+    isCircleToPlayer: 1
+    isDeath: 0
+    isBasic: 0
+    effects:
+    - type: 4
+      value: 0
+      time: 1
+    - type: 0
+      value: 0
+      time: 0.3
+    values:
+    - name: 1
+      value: 3
+    - name: 2
+      value: 0.5
+    - name: 5
+      value: 2
+    levelUp:
+      manaCost: 0.75
+      size: 0
+      coolTime: 0
+      effects: []
+      values:
+      - name: 1
+        value: 1
+      - name: 2
+        value: 0.25
+      - name: 5
+        value: 0.5
     description:
     - Move fast summoning flames with dot damage. The dot damage of flames are proportional
       to the technical stats.

@@ -44704,7 +44704,6 @@ MonoBehaviour:
   stopped: 0
   isClickable: 0
   datas: []
-  isStageUp: 0
 --- !u!224 &1114166077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55698,7 +55697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -54.25}
+  m_AnchoredPosition: {x: 0, y: -54.250015}
   m_SizeDelta: {x: 0, y: -108.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1373705877
