@@ -312,6 +312,9 @@ public class RollManager : MonoBehaviour {
             {
                 switch(datas[i].type)
                 {
+                    case ROLL_TYPE.ALL:
+                        datas[i] = GetRandom(datas[i], ROLL_TYPE.ALL);
+                        break;
                     case ROLL_TYPE.ITEM:
                         if (datas[i].id >= GameDatabase.instance.items.Length)
                             return false;
