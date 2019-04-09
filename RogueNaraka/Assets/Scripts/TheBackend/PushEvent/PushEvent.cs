@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using UnityEngine;
 using RogueNaraka.TimeScripts;
 
@@ -26,7 +27,7 @@ namespace RogueNaraka.TheBackendScripts {
             }
             return false;
         }
-        public abstract void AcceptReward(DateTime _now);
+        public abstract Param AcceptReward(DateTime _now);
         public abstract void PrintInfo();
     }
 }

@@ -17,12 +17,12 @@ namespace RogueNaraka.TheBackendScripts {
             this.rewardSoulAmounts = _rewardInfoDic["SoulAmounts"];
         }
 
-        public override void AcceptReward(DateTime _now) {
+        public override Param AcceptReward(DateTime _now) {
             this.isRewarded = true;
             Param rewardParam = new Param();
             rewardParam.Add(string.Format("Id_{0}", this.pushEventId), _now.ToString("yyyy-MM-dd HH:mm:ss"));
-            TheBackendManager.Instance.SendParamToRewardedPushInfo(rewardParam);
             Debug.LogError(string.Format("Reward Soul! : {0} souls", this.rewardSoulAmounts));
+            return rewardParam;
         }
 
         public override void PrintInfo() {

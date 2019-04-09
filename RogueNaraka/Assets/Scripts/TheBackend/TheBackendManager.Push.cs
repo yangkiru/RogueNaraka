@@ -43,10 +43,6 @@ namespace RogueNaraka.TheBackendScripts {
             }
         }
 
-        internal void SendParamToRewardedPushInfo(Param _param) {
-            Backend.GameInfo.Update("PushReward", this.inDateForPushReward, _param);
-        }
-
         private void GetCahrtFimeName() {
             this.getFilenameProcess = PROCESS_GET_CHARTFILENAME.GETTING;
             Backend.Chart.GetChartList((callback) => {
@@ -179,7 +175,7 @@ namespace RogueNaraka.TheBackendScripts {
                 var enumerator = this.pushRewardDictionary.GetEnumerator();
                 while(enumerator.MoveNext()) {
                     if(enumerator.Current.Value.CheckAcceptable(currentDateTime)) {
-                        enumerator.Current.Value.AcceptReward(currentDateTime);
+                        Backend.GameInfo.Update("PushReward", this.inDateForPushReward, enumerator.Current.Value.AcceptReward(currentDateTime));
                         enumerator.Current.Value.PrintInfo();
                     }
                 }
