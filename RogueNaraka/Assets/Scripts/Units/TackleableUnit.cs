@@ -17,25 +17,26 @@ namespace RogueNaraka
 
         bool _isTackle;
 
-        List<CorouUnit> hits = new List<CorouUnit>();
+        //List<CorouUnit> hits = new List<CorouUnit>();
 
         public void Init(UnitData data)
         {
-            if (data.tackleSize > 0 && data.tackleDamage != 0 && data.tackleDelay != 0)
+            if (data.tackleSize > 0 && data.tackleDamage != 0 && data.tackleDelay > 0)
             {
                 _isTackle = true;
-                this.enabled = true;
+                //this.enabled = true;
             }
             else
             {
                 _isTackle = false;
-                this.enabled = false;
+                //this.enabled = false;
             }
         }
 
-        private void OnEnable()
+        public void OnSpawn()
         {
-            StartCoroutine(RepeatCorou());
+            if(_isTackle)
+                StartCoroutine(RepeatCorou());
         }
 
         //private void OnTriggerEnter2D(Collider2D collision)
@@ -87,6 +88,12 @@ namespace RogueNaraka
 
         IEnumerator RepeatCorou()
         {
+            yield return null;
+            do
+            {
+                yield return null;
+            } while (!BoardManager.instance.isReady);
+
             while (true)
             {
                 float t = unit.data.tackleDelay;
@@ -104,6 +111,7 @@ namespace RogueNaraka
 
         public void Tackle()
         {
+            Debug.Log("Tackle");
             BulletData bulletData = (BulletData)GameDatabase.instance.bullets[tackleBulletID].Clone();
             bulletData.size = unit.data.tackleSize;
             bulletData.dmg = unit.data.tackleDamage;

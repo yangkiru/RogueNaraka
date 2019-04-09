@@ -11,7 +11,8 @@ namespace RogueNaraka.UnitScripts
     {   
         const float CHECK_ADDED_BOARD_SIZE_X = 0.2f;
         const float CHECK_ADDED_BOARD_SIZE_Y = 0.2f;
-
+        const float CLAMP_BOARD_SIZE_X = CHECK_ADDED_BOARD_SIZE_X * 1.5f;
+        const float CLAMP_BOARD_SIZE_Y = CHECK_ADDED_BOARD_SIZE_Y * 1.5f;
         [SerializeField]
         Unit unit;
 
@@ -77,7 +78,7 @@ namespace RogueNaraka.UnitScripts
         /// <summary>목적지를 설정하고, MoveState를 ACCELERATE상태로 바꿉니다.</summary>
         public void SetDestination(Vector3 pos, Action callback = null)
         {
-            this.destination = BoardManager.instance.ClampToBoard(pos, CHECK_ADDED_BOARD_SIZE_X, CHECK_ADDED_BOARD_SIZE_Y);//목적지 보드 제한
+            this.destination = BoardManager.instance.ClampToBoard(pos, CLAMP_BOARD_SIZE_X, CLAMP_BOARD_SIZE_Y);//목적지 보드 제한
             this.onArrivedCallback = callback;
             this.moveState = MOVE_STATE.ACCELERATE;
             unit.animator.SetBool("isWalk", true);

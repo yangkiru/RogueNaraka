@@ -15,6 +15,12 @@ public class LevelUpManager : MonoBehaviour
 
     IEnumerator endStageCorou;
 
+    static public bool IsLevelUp
+    {
+        get { return PlayerPrefs.GetInt("isLevelUp") == 1; }
+        set { PlayerPrefs.SetInt("isLevelUp", value ? 1 : 0); }
+    }
+
     public Unit player { get { return BoardManager.instance.player; } }
 
     private void Awake()
@@ -64,23 +70,34 @@ public class LevelUpManager : MonoBehaviour
         fade.FadeOut();
     }
 
+    public void OnFadeOut()
+    {
+        LevelUp();
+    }
+
     public void LevelUp()
     {
         Debug.Log("LevelUp");
         BoardManager.instance.ClearStage();
+        BoardManager.instance.StageUp();
         GameManager.instance.SetPause(true);
-        PlayerPrefs.SetInt("isLevelUp", 1);
+        IsLevelUp = true;
         statManager.SyncStatUpgradeTxt();
         //SkillManager.instance.SetIsDragable(false);
         if (statManager.isLeftStatChanged)
         {
-            rollManager.SetRollPnl(true, true, false);
+            rollManager.SetRollPnl(true);
+            rollManager.SetShowCase(RollManager.ROLL_TYPE.ALL);
+            rollManager.SetOnFadeOut(rollManager.StageStart);
             statManager.SetStatPnl(true);
             //fade.FadeIn();
         }
         else
         {
             rollManager.SetRollPnl(true);
+            rollManager.SetShowCase(RollManager.ROLL_TYPE.ALL);
+            rollManager.Roll();
+            rollManager.SetOnFadeOut(rollManager.StageStart);
         }
         GameManager.instance.Save();
         time = 0;

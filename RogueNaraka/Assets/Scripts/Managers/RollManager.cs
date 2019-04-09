@@ -30,21 +30,39 @@ public class RollManager : MonoBehaviour {
     public bool isClickable;
     public bool isPause { get; set; }
     public RollData[] datas;
+    /// <summary>
+    /// reRoll 횟수
+    /// </summary>
     private int rollCount;
+    /// <summary>
+    /// roll 실행 횟수
+    /// </summary>
+    public static int LeftRoll
+    {
+        get { return PlayerPrefs.GetInt("leftRoll"); }
+        set { PlayerPrefs.SetInt("leftRoll", value); }
+    }
+
+    static public bool IsFirstRoll
+    {
+        get { return PlayerPrefs.GetInt("isFirstRoll") == 1; }
+        set { PlayerPrefs.SetInt("isFirstRoll", value ? 1 : 0); }
+    }
+
     private bool isSkillSelected;
-    public bool isStageUp;
 
     private int target;//선택된 SkillGUI
 
     public static RollManager instance;
 
+    public enum ROLL_TYPE { ALL, SKILL, STAT, ITEM }
+    ROLL_TYPE[] lastMode;
+
+    public event System.Action onFadeOut;
+
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-
+        instance = this;
         Init();
     }
     public void Init()
@@ -57,6 +75,7 @@ public class RollManager : MonoBehaviour {
             datas[i].id = -1;
         }
         isClickable = false;
+        isPassed = false;
         stopped = -1;
         selected = -1;
         rollCount = 0;
@@ -65,42 +84,49 @@ public class RollManager : MonoBehaviour {
         SetSelectPnl(false);
     }
 
-    void SetStatTxt(bool active, int position = -1)
+    /// <summary>
+    /// 쇼케이스 설정
+    /// </summary>
+    public void SetShowCase(params ROLL_TYPE[] mode)
     {
-        if (position == -1)
+        Init();
+        lastMode = mode;
+        if (!LoadDatas())
         {
-            for (int i = 0; i < statTxts.Length; i++)
+            SkillChangeManager.instance.Levels = 0;
+            for (int i = 0; i < showCases.Length; i++)
             {
-                if (active && datas[i].type == ROLL_TYPE.STAT)
+                RollData rnd = new RollData();
+                for (int j = 0; j < 50; j++)
                 {
-                    statTxts[i].text = string.Format("+{0}", datas[i].id + 1);
-                    statTxts[i].gameObject.SetActive(true);
+                    rnd = GetRandom(rnd, mode);
+                    if (IsSetable(i, rnd))
+                        break;
                 }
-                else
-                    statTxts[i].gameObject.SetActive(false);
+                showCases[i].enabled = true;
+                datas[i] = rnd;
+                SetSprite(i, GetSprite(datas[i]));
             }
+            string datasJson = JsonHelper.ToJson<RollData>(datas);
+            PlayerPrefs.SetString("rollDatas", datasJson);
         }
         else
         {
-            if (active && datas[position].type == ROLL_TYPE.STAT)
+            for (int i = 0; i < showCases.Length; i++)
             {
-                statTxts[position].text = string.Format("+{0}", datas[position].id + 1);
-                statTxts[position].gameObject.SetActive(true);
+                showCases[i].enabled = true;
+                SetSprite(i, GetSprite(datas[i]));
             }
-            else
-                statTxts[position].gameObject.SetActive(false);
         }
+        SetStatTxt(true);
     }
 
-    public void SetRollPnl(bool value, bool isStageUp = true, bool isRoll = true)
+    public void SetRollPnl(bool value)
     {
-        this.isStageUp = isStageUp;
         if (value)
         {
             GameManager.instance.SetPauseBtn(true);
             rollPnl.SetActive(value);
-            Init();
-            SetShowCase(isRoll);
             reRollTxt.text = "ReRoll";
             fade.FadeIn();
             if (Pointer.instance)
@@ -110,40 +136,85 @@ public class RollManager : MonoBehaviour {
         {
             ResetData();
 
-            if (!isStageUp)
-            {
-                PlayerPrefs.SetInt("isFirstRoll", 0);
-                SkillManager.instance.Save();
-                Item.instance.Save();
-            }
-            if (isStageUp)
-            {
-                BoardManager.instance.StageUp();
-                //BoardManager.instance.Save();
-                PlayerPrefs.SetInt("isLevelUp", 0);
-                //LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
-                GameManager.instance.Save();
-            }
+            SkillManager.instance.Save();
+            //if (!isStageUp)
+            //{
+            //    PlayerPrefs.SetInt("isFirstRoll", 0);
+            //    SkillManager.instance.Save();
+            //    Item.instance.Save();
+            //}
+            //if (isStageUp)
+            //{
+            //    BoardManager.instance.StageUp();
+            //    //BoardManager.instance.Save();
+            //    PlayerPrefs.SetInt("isLevelUp", 0);
+            //    //LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
+            //    GameManager.instance.Save();
+            //}
 
             //StatManager.instance.SetStatPnl(false);
-            fade.FadeOut();
+            Debug.Log(LeftRoll);
+            if (--LeftRoll <= 0)
+            {
+                LeftRoll = 0;
+                fade.FadeOut();
+            }
+            else
+            {
+                SetShowCase(lastMode);
+                Roll();
+            }
+
         }
+    }
+
+    public void FirstRoll()
+    {
+        if (RollManager.LeftRoll == 0)
+            RollManager.LeftRoll = 3;
+        RollManager.instance.SetShowCase(RollManager.ROLL_TYPE.SKILL);
+        RollManager.instance.SetRollPnl(true);
+        RollManager.instance.Roll();
+        RollManager.instance.SetOnFadeOut(RollManager.instance.GameStart);
+    }
+
+    public void GameStart()
+    {
+        IsFirstRoll = false;
+        Stat stat = Stat.DataToStat();
+        if (stat != null)
+            GameManager.instance.RunGame(stat);
+        //else
+        //    BoardManager.instance.fade.FadeIn();
+    }
+
+    public void StageStart()
+    {
+        BoardManager.instance.InitBoard();
+        LevelUpManager.IsLevelUp = false;
+    }
+
+    public void SetOnFadeOut(System.Action onFadeOut)
+    {
+        this.onFadeOut = onFadeOut;
     }
 
     public void OnFadeOut()
     {
         rollPnl.SetActive(false);
         StatManager.instance.statPnl.SetActive(false);
-        if (isStageUp)
-            BoardManager.instance.InitBoard();
-        else
-        {
-            Stat stat = Stat.DataToStat();
-            if (stat != null)
-                GameManager.instance.RunGame(stat);
-            //else
-            //    BoardManager.instance.fade.FadeIn();
-        }
+        if (onFadeOut != null)
+            onFadeOut.Invoke();
+        //if (isStageUp)
+        //    BoardManager.instance.InitBoard();
+        //else
+        //{
+        //    Stat stat = Stat.DataToStat();
+        //    if (stat != null)
+        //        GameManager.instance.RunGame(stat);
+        //    //else
+        //    //    BoardManager.instance.fade.FadeIn();
+        //}
     }
 
     bool isReRoll;//참이면 ReRoll 재 호출시 ReRoll 진행
@@ -212,7 +283,7 @@ public class RollManager : MonoBehaviour {
         else
         {
             isPassed = false;
-            SetRollPnl(false, isStageUp);
+            SetRollPnl(false);
         }
     }
 
@@ -241,6 +312,9 @@ public class RollManager : MonoBehaviour {
             {
                 switch(datas[i].type)
                 {
+                    case ROLL_TYPE.ALL:
+                        datas[i] = GetRandom(datas[i], ROLL_TYPE.ALL);
+                        break;
                     case ROLL_TYPE.ITEM:
                         if (datas[i].id >= GameDatabase.instance.items.Length)
                             return false;
@@ -251,8 +325,8 @@ public class RollManager : MonoBehaviour {
                         break;
                     case ROLL_TYPE.STAT:
                         break;
-                    case ROLL_TYPE.PASSIVE:
-                        break;
+                    //case ROLL_TYPE.PASSIVE:
+                    //    break;
                 }
             }
             return true;
@@ -349,13 +423,13 @@ public class RollManager : MonoBehaviour {
                     //    descTxt.text = string.Format(format, item.GetDescription());
                     //}
                     break;
-                case ROLL_TYPE.PASSIVE:
-                    manaUI.gameObject.SetActive(false);
-                    //selectedImg.sprite = GetSprite(data);
-                    typeTxt.text = "Passive";
-                    nameTxt.text = "패시브";
-                    descTxt.text = "패시브";
-                    break;
+                //case ROLL_TYPE.PASSIVE:
+                //    manaUI.gameObject.SetActive(false);
+                //    //selectedImg.sprite = GetSprite(data);
+                //    typeTxt.text = "Passive";
+                //    nameTxt.text = "패시브";
+                //    descTxt.text = "패시브";
+                //    break;
             }
 
             SetSelectPnl(true);
@@ -419,19 +493,19 @@ public class RollManager : MonoBehaviour {
                 if (slotSkill == null || slotSkill.data.id == -1)//슬롯이 비었으면
                 {
                     SkillManager.instance.SetSkill(selectedSkill, target);
-                    SetRollPnl(false, isStageUp);
+                    SetRollPnl(false);
                 }
                 else if (slotSkill.data.id == selectedSkill.id)//같은 스킬이면
                 {
                     SkillManager.instance.SetSkill(selectedSkill, target);
-                    SetRollPnl(false, isStageUp);
+                    SetRollPnl(false);
                 }
                 else//다른 스킬이면
                 {
                     if (slotSkill.data.level == 1)
                     {
                         SkillManager.instance.SetSkill(selectedSkill, target);
-                        SetRollPnl(false, isStageUp);
+                        SetRollPnl(false);
                     }
                     else
                         SkillChangeManager.instance.OpenChangePnl(selectedSkill, target);//스킬 교체 패널 오픈
@@ -443,14 +517,14 @@ public class RollManager : MonoBehaviour {
                 break;
             case ROLL_TYPE.ITEM:
                 Item.instance.EquipItem(rollData.id);
-                SetRollPnl(false, isStageUp);
+                SetRollPnl(false);
                 break;
-            case ROLL_TYPE.PASSIVE:
-                //selectedImg.sprite = GetSprite(data);
-                typeTxt.text = "Passive";
-                nameTxt.text = "패시브";
-                descTxt.text = "패시브";
-                break;
+            //case ROLL_TYPE.PASSIVE:
+            //    //selectedImg.sprite = GetSprite(data);
+            //    typeTxt.text = "Passive";
+            //    nameTxt.text = "패시브";
+            //    descTxt.text = "패시브";
+            //    break;
         }
     }
 
@@ -504,9 +578,9 @@ public class RollManager : MonoBehaviour {
                     case ROLL_TYPE.ITEM:
                         result = GameDatabase.instance.itemSprites[Item.instance.sprIds[data.id]].spr;
                         break;
-                    case ROLL_TYPE.PASSIVE:
-                        result = null;//수정 필요
-                        break;
+                    //case ROLL_TYPE.PASSIVE:
+                    //    result = null;//수정 필요
+                    //    break;
                 }
                 return result;
             }
@@ -516,20 +590,21 @@ public class RollManager : MonoBehaviour {
             }
         }
     }
-    public RollData GetRandom()
+    public RollData GetRandom(RollData result, params ROLL_TYPE[] modes)
     {
-        RollData result = new RollData();
-        if (isStageUp)
-            result.type = (ROLL_TYPE)Random.Range(0, 4);
-        else
-            result.type = ROLL_TYPE.SKILL;
-        switch (result.type)
+
+        int rnd = Random.Range(0, modes.Length);
+        result.type = modes[rnd];
+        switch (modes[rnd])
         {
+            case ROLL_TYPE.ALL:
+                int rndMode = Random.Range(1, (int)ROLL_TYPE.ITEM + 1);
+                return GetRandom(result, (ROLL_TYPE)rndMode);
             case ROLL_TYPE.SKILL:
                 do
                 {
                     result.id = Random.Range(0, GameDatabase.instance.skills.Length);
-                } while (!SkillData.IsBought(result.id));
+                } while (!SkillData.IsBought(result.id) && !GameDatabase.instance.skills[result.id].isBasic);
                 break;
             case ROLL_TYPE.STAT:
                 result.id = Random.Range(0, 3);
@@ -537,10 +612,10 @@ public class RollManager : MonoBehaviour {
             case ROLL_TYPE.ITEM:
                 result.id = Random.Range(0, GameDatabase.instance.items.Length);
                 break;
-            case ROLL_TYPE.PASSIVE:
-                result = GetRandom();
-                //result.id = Random.Range(0, GameDatabase.instance.skills.Length);//패시브의 길이로 수정
-                break;
+            //case ROLL_TYPE.PASSIVE:
+            //    result = GetRandom();
+            //    //result.id = Random.Range(0, GameDatabase.instance.skills.Length);//패시브의 길이로 수정
+            //    break;
         }
         return result;
     }
@@ -568,48 +643,8 @@ public class RollManager : MonoBehaviour {
             PlayerPrefs.SetInt("rollCount", rollCount);//Roll Count 저장
             PlayerPrefs.SetInt("stopped", stopped);//저장
         }
-        //Save Here
-        int spin = 1;
-        scroll.Spin(spin * 10 + stopped);
+        scroll.Spin(10 + stopped);
         StartCoroutine(CheckRollEnd());
-    }
-
-    /// <summary>
-    /// 쇼케이스 설정
-    /// </summary>
-    public void SetShowCase(bool isRoll = true)
-    {
-        if (!LoadDatas())
-        {
-            SkillChangeManager.instance.Levels = 0;
-            for (int i = 0; i < showCases.Length; i++)
-            {
-                RollData rnd;
-                for (int j = 0; j < 50; j++)
-                {
-                    rnd = GetRandom();
-                    if (IsSetable(i, rnd))
-                    {
-                        showCases[i].enabled = true;
-                        datas[i] = rnd;
-                    }
-                }
-                SetSprite(i, GetSprite(datas[i]));
-            }
-            string datasJson = JsonHelper.ToJson<RollData>(datas);
-            PlayerPrefs.SetString("rollDatas", datasJson);
-        }
-        else
-        {
-            for (int i = 0; i < showCases.Length; i++)
-            {
-                showCases[i].enabled = true;
-                SetSprite(i, GetSprite(datas[i]));
-            }
-        }
-        SetStatTxt(true);
-        if(isRoll)
-            Roll();
     }
 
     /// <summary>
@@ -662,6 +697,33 @@ public class RollManager : MonoBehaviour {
         imgRect.localScale = Vector3.one;
     }
 
+    void SetStatTxt(bool active, int position = -1)
+    {
+        if (position == -1)
+        {
+            for (int i = 0; i < statTxts.Length; i++)
+            {
+                if (active && datas[i].type == ROLL_TYPE.STAT)
+                {
+                    statTxts[i].text = string.Format("+{0}", datas[i].id + 1);
+                    statTxts[i].gameObject.SetActive(true);
+                }
+                else
+                    statTxts[i].gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (active && datas[position].type == ROLL_TYPE.STAT)
+            {
+                statTxts[position].text = string.Format("+{0}", datas[position].id + 1);
+                statTxts[position].gameObject.SetActive(true);
+            }
+            else
+                statTxts[position].gameObject.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// 스킬들의 중복검사
     /// </summary>
@@ -686,9 +748,6 @@ public class RollManager : MonoBehaviour {
     {
         return GameDatabase.instance.skills[id];
     }
-
-    public enum ROLL_TYPE
-    { SKILL, STAT, ITEM, PASSIVE}
 
     [System.Serializable]
     public struct RollData

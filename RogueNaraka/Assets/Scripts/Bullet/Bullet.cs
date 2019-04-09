@@ -163,7 +163,7 @@ namespace RogueNaraka.BulletScripts
             base.GetComponent<Renderer>().enabled = true;
             animator.enabled = true;
 
-            if (!data.shake.isOnHit && data.shake.power != 0 || data.shake.time != 0)
+            if (!data.shake.isOnHit && (data.shake.power != 0 || data.shake.time != 0))
                 shakeable.Shake();
             if (data.spawnSFX.CompareTo(string.Empty) != 0)
                 AudioManager.instance.PlaySFX(data.spawnSFX);

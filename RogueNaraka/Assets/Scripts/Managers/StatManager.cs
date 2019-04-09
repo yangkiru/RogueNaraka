@@ -75,6 +75,7 @@ public class StatManager : MonoBehaviour {
                 lastChance = false;
                 this.leftStat = 0;
                 rollManager.SetRollPnl(true);
+                
                 statPnl.SetActive(false);
             }
             else

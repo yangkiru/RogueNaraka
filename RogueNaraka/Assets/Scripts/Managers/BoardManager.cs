@@ -110,11 +110,12 @@ public class BoardManager : MonoBehaviour {
             }
         }
 
+        player.Teleport(spawnPoint);
+        player.rigid.velocity = Vector3.zero;
+
         //GameManager.instance.SetPause(true);
         InitStage(_stage);
         
-        player.Teleport(spawnPoint);
-        isReady = true;
         fade.FadeIn();
     }
 
@@ -140,10 +141,13 @@ public class BoardManager : MonoBehaviour {
 
     public void OnFadeIn()
     {
+        isReady = true;
         if (!GameManager.instance.pausePnl.activeSelf && !GameManager.instance.settingPnl.activeSelf)
             GameManager.instance.SetPause(false);
         if (!player.deathable.isDeath)
             GameManager.instance.SetPauseBtn(true);
+
+        TutorialManager.instance.StartTutorial(6);
     }
 
     //void RandomEnemy(int leftCost)
@@ -383,8 +387,19 @@ public class BoardManager : MonoBehaviour {
     public static bool IsMouseInBoard()
     {
         Vector3 mp = GameManager.instance.GetMousePosition() + new Vector2(0, Pointer.instance.offset);
+        if (mp.y < BoardManager.instance.boardRange[0].y)
+            return false;
+        mp = BoardManager.instance.ClampToBoard(mp);
+        return IsPointInBoard(mp, true);
+    }
+
+    public static bool IsPointInBoard(Vector2 point, bool isInclusive = false)
+    {
         Vector3 min = BoardManager.instance.boardRange[0];
         Vector3 max = BoardManager.instance.boardRange[1];
-        return mp.x > min.x && mp.y > min.y && mp.x < max.x && mp.y < max.y;
+        if (!isInclusive)
+            return point.x > min.x && point.y > min.y && point.x < max.x && point.y < max.y;
+        else
+            return point.x >= min.x && point.y >= min.y && point.x <= max.x && point.y <= max.y;
     }
 }

@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour {
         
         PlayerPrefs.SetString("effect", string.Empty);
         PlayerPrefs.SetInt("isRun", 0);
-        PlayerPrefs.SetInt("isLevelUp", 0);
+        LevelUpManager.IsLevelUp = false;
         MoneyManager.instance.refiningRate = 0.3f;
 
         PlayerPrefs.SetInt("exp", 0);
@@ -233,22 +233,20 @@ public class GameManager : MonoBehaviour {
         else
             AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
 
-        if (PlayerPrefs.GetInt("isLevelUp") == 1)
+        if (LevelUpManager.IsLevelUp)
         {
             levelUpManager.LevelUp();
         }
-        else if (PlayerPrefs.GetInt("isFirstRoll") == 1)
+        else if (RollManager.IsFirstRoll)
         {
             SetPause(true);
-            RollManager.instance.SetRollPnl(true, false);
+            RollManager.instance.FirstRoll();
             //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         }
         else
         {
             boardManager.InitBoard();
         }
-
-        
     }
 
     private void LoadInit()
@@ -398,8 +396,7 @@ public class GameManager : MonoBehaviour {
         var mousePos = Input.mousePosition;
         if (mousePos.x < 0 || mousePos.x >= Screen.width || mousePos.y < 0 || mousePos.y >= Screen.height)
         {
-            Debug.LogWarning("MousePosition isn't inside of screen");
-            return Vector2.zero;
+            return boardManager.player.cachedTransform.position - new Vector3(0, Pointer.instance.offset);
         }
 
         Vector2 vec = mainCamera.ScreenToWorldPoint(Input.mousePosition);

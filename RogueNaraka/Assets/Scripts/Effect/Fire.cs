@@ -10,7 +10,7 @@ namespace RogueNaraka.EffectScripts
 
         public override void Combine(EffectData dt)
         {
-            data.time += dt.value;
+            data.time = dt.value;
         }
 
         public override bool Equal(EffectData dt)

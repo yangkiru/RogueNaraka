@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource music;
     public AudioSource SFX;
+    public AudioSource SFXPitch;
 
     public Button[] btns;
 
@@ -254,7 +255,27 @@ public class AudioManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_ANDROID
         try
         {
-            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume);
+            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -1);
+        }catch
+        {}
+#endif
+    }
+
+    public void PlaySFX(string name, float pitch)
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (SFXClipDictionary.ContainsKey(name))
+        {
+            SFXPitch.pitch = pitch;
+            SFXPitch.PlayOneShot(SFXClipDictionary[name], sfxVolume);
+        }
+
+#endif
+
+#if !UNITY_EDITOR && UNITY_ANDROID
+        try
+        {
+            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -1, 1, 0, pitch);
         }catch
         {}
 #endif

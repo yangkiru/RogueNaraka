@@ -7,7 +7,6 @@ public class SkillChangeManager : MonoBehaviour
     static public SkillChangeManager instance;
 
     public GameObject changePnl;
-    public TextMeshProUGUI costTxt;
     public TextMeshProUGUI levelTxt;
 
     public int Levels
@@ -60,9 +59,6 @@ public class SkillChangeManager : MonoBehaviour
 
     int position;//스킬 슬롯 위치
     int level;//스킬 레벨
-    int cost;//소울 비용
-
-    float originSize = 0;
 
     private void Awake()
     {
@@ -93,9 +89,8 @@ public class SkillChangeManager : MonoBehaviour
             level = Level;
             //levelTxt.text = string.Format("{0} Level", level);
         }
-        
-        if(originSize != 0)
-            levelTxt.fontSize = originSize;
+
+        levelTxt.rectTransform.localScale = Vector3.one;
         StartCoroutine("LevelTxtCorou", level);
 
         //cost = GetChangeCost(level);
@@ -111,13 +106,13 @@ public class SkillChangeManager : MonoBehaviour
 
     IEnumerator LevelTxtCorou(int level)
     {
-        originSize = levelTxt.fontSize;
-        float maxSize = originSize * 3;
+        float maxSize = 3;
+        RectTransform rect = levelTxt.rectTransform;
         for (int i = 1; i <= level; i++)
         {
             levelTxt.text = string.Format("{0} Level", i);
 
-            levelTxt.fontSize = levelTxt.fontSize < maxSize ? levelTxt.fontSize * 1.2f : maxSize * 1.2f;
+            rect.localScale = (rect.localScale.x < maxSize) ? rect.localScale * 1.2f : new Vector3(maxSize * 1.2f, maxSize * 1.2f, 1);
 
             AudioManager.instance.PlaySFX(string.Format("weapon{0}", Random.Range(1, 4)));
 
@@ -126,17 +121,17 @@ public class SkillChangeManager : MonoBehaviour
             {
                 yield return null;
                 t -= Time.unscaledDeltaTime;
-                    levelTxt.fontSize *= 0.99f;
-                if (levelTxt.fontSize < originSize)
-                    levelTxt.fontSize = originSize;
+                    rect.localScale *= 0.99f;
+                if (rect.localScale.x < 1)
+                    rect.localScale = Vector3.one;
             } while (t > 0);
         }
         do
         {
             yield return null;
-            levelTxt.fontSize *= 0.9f;
-        } while (levelTxt.fontSize >= originSize);
-        levelTxt.fontSize = originSize;
+            rect.localScale *= 0.9f;
+        } while (rect.localScale.x > 1);
+        rect.localScale = Vector3.one;
     }
 
     /// <summary>
@@ -151,8 +146,8 @@ public class SkillChangeManager : MonoBehaviour
             return;
         level = _level;
 
-        cost = GetChangeCost(level);
-        costTxt.text = string.Format("{0} Soul", cost);
+        //cost = GetChangeCost(level);
+        //costTxt.text = string.Format("{0} Soul", cost);
         levelTxt.text = string.Format("{0} Level", level);
     }
 
@@ -172,7 +167,7 @@ public class SkillChangeManager : MonoBehaviour
 
         SkillManager.instance.skills[position].Init(data);
         SkillManager.instance.skills[position].LevelUp(level - 1);
-        RollManager.instance.SetRollPnl(false, RollManager.instance.isStageUp);
+        RollManager.instance.SetRollPnl(false);
     }
 
     /// <summary>

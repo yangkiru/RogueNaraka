@@ -11,7 +11,6 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         [SerializeField]
         protected MoveableUnit moveable;
 
-        protected Transform cashedTransform;
         protected float distance;
 
         [SerializeField]
@@ -23,11 +22,6 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             unit = GetComponent<Unit>();
             moveable = GetComponent<MoveableUnit>();
-        }
-
-        private void Awake()
-        {
-            cashedTransform = transform;
         }
 
         public virtual void Init(UnitData data)

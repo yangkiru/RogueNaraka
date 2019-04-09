@@ -20,7 +20,7 @@ namespace RogueNaraka.EffectScripts
         }
         public override void Combine(EffectData dt)
         {
-            data.time += dt.time;
+            this.data.time = dt.time;
         }
 
         protected override void OnInit()
