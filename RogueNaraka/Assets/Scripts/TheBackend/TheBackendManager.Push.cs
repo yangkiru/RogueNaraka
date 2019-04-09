@@ -134,7 +134,7 @@ namespace RogueNaraka.TheBackendScripts {
                     continue;
                 }
                 DateTime startDateTime = DateTime.Parse(_pushRewardChart[i]["startDateTime"]["S"].ToString());
-                DateTime endDateTime = DateTime.Parse(_pushRewardChart[i]["endDateTime"]["S"].ToString());
+                DateTime endDateTime = DateTime.Parse(_pushRewardChart[i]["endDateTime"]["S"].ToString()).AddMinutes(1);
                 
                 bool isRewarded = false;
                 if(this.rewardedPushDictionary.ContainsKey(pushEventId)
