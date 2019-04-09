@@ -5,6 +5,14 @@ using UnityEngine;
 
 namespace RogueNaraka.TheBackendScripts {
     public class PushSoulReward : PushEvent {
+        private int rewardSoulAmounts;
+
+        public override void Initialize(bool _isAccepted, Dictionary<string, int> _rewardInfoDic) {
+            this.type = PUSH_EVENT_TYPE.SOUL_REWARD;
+            this.isAccepted = _isAccepted;
+            this.rewardSoulAmounts = _rewardInfoDic["soulAmounts"];
+        }
+
         public override bool CheckAcceptable() {
             return false;
         }

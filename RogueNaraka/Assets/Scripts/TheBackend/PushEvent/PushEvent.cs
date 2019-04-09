@@ -9,12 +9,13 @@ namespace RogueNaraka.TheBackendScripts {
         END
     }
     public abstract class PushEvent {
-        private PUSH_EVENT_TYPE type;
-        private int pushEventId;
-        private bool isAccepted;
-        private DateTime startdateTime;
-        private DateTime endDateTime;
+        protected PUSH_EVENT_TYPE type;
+        protected int pushEventId;
+        protected bool isAccepted;
+        protected DateTime startdateTime;
+        protected DateTime endDateTime;
 
+        public abstract void Initialize(bool _isRewarded, Dictionary<string, int> _rewardInfoDic);
         public abstract bool CheckAcceptable();
         public abstract void AcceptReward();
     }
