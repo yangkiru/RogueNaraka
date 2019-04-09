@@ -31,6 +31,13 @@ namespace RogueNaraka.TimeScripts {
             
         }
 
-        
+        public bool CheckDateTimeInEventTime(DateTime _check, DateTime _start, DateTime _end) {
+            if(_check.CompareTo(_start) < 0) {
+                return false;
+            } else if(_check.CompareTo(_end) > 0) {
+                return false;
+            }
+            return true;
+        }
     }
 }

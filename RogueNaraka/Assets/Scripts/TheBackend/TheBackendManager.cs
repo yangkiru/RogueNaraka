@@ -21,8 +21,7 @@ namespace RogueNaraka.TheBackendScripts {
 
         void Start() {
             StartForLogin();
-            StartCoroutine(LoadRewardedPushInfo());
-            StartCoroutine(GetChartAsync());
+            StartForPush();            
         }
 
         private void BackendInit() {
