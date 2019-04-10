@@ -23,8 +23,17 @@ namespace RogueNaraka.TheBackendScripts {
             Param rewardParam = new Param();
             rewardParam.Add(string.Format("Id_{0}", this.pushEventId), _now.ToString("yyyy-MM-dd HH:mm:ss"));
             MoneyManager.instance.AddSoul(this.rewardSoulAmounts, true);
+            string pushRewardContext = "";
+            switch(GameManager.language) {
+                case Language.English:
+                    pushRewardContext = "You have acquired {0} Souls as a reward.";
+                break;
+                case Language.Korean:
+                    pushRewardContext = "보상으로 {0} 소울을 획득하였습니다.";
+                break;
+            } 
             PopUpManager.Instance.ActivateOneButtonPopUp(
-                string.Format("보상으로 {0} 소울을 획득하였습니다.", this.rewardSoulAmounts),
+                string.Format(pushRewardContext, this.rewardSoulAmounts),
                 (OneButtonPopUpController _popUp) => { 
                     _popUp.DeactivatePopUp(); 
                     PopUpManager.Instance.DeactivateBackPanel();

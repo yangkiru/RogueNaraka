@@ -10,19 +10,14 @@ namespace RogueNaraka.PopUpScripts {
         public Image BackPanel;
         public OneButtonPopUpController OneButtonPopUp;
         public OneButtonVerticalScrollPopUpController OneButtonVerticalScrollPopUp;
+        public PrivacyPolicyPopUpController PrivacyPolicyPopUp;
 
         void Start() {
             if(PlayerPrefs.GetInt("PrivacyPolicy") != 1) {
                 //개인정보 처리방침 팝업
-                string privacyPolicy = Resources.Load<TextAsset>("PrivacyPolicy/PrivacyPolicy_kor").text;
-                ActivateOneButtonPopUp(
-                    privacyPolicy,
-                    (OneButtonVerticalScrollPopUpController _popUp) => { 
-                        _popUp.DeactivatePopUp(); 
-                        PopUpManager.Instance.DeactivateBackPanel();
-                        GameManager.instance.SetPause(false);
-                    });
-                PlayerPrefs.SetInt("PrivacyPolicy", 1);
+                GameManager.instance.SetPause(true);
+                this.BackPanel.gameObject.SetActive(true);
+                this.PrivacyPolicyPopUp.ActivatePopUp();
                 //
             }
         }
