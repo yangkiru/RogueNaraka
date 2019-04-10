@@ -499,7 +499,7 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
-    deathSFX: 
+    deathSFX: bugDeath
     attackSFX: 
   - name: slime1
     id: 8
@@ -554,7 +554,7 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
-    deathSFX: 
+    deathSFX: bugDeath
     attackSFX: 
   - name: slime2
     id: 9
@@ -609,7 +609,7 @@ MonoBehaviour:
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
-    deathSFX: 
+    deathSFX: bugDeath
     attackSFX: 
   bosses:
   - name: Boss0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
     related: 0
     controller: {fileID: 22100000, guid: da63d2c42c766504b8345bff4b454923, type: 2}
     type: 4
-    localSpeed: 4
+    localSpeed: 6
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
@@ -1344,7 +1344,7 @@ MonoBehaviour:
     related: 0
     controller: {fileID: 22100000, guid: 22cbc4dea137a91418cf01a2004c6ea3, type: 2}
     type: 4
-    localSpeed: 4.5
+    localSpeed: 6.75
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
@@ -1424,7 +1424,7 @@ MonoBehaviour:
     related: 0
     controller: {fileID: 22100000, guid: fce69881dc12eb040ba0d611eecbde7d, type: 2}
     type: 4
-    localSpeed: 5
+    localSpeed: 7.5
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
