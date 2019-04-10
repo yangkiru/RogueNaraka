@@ -165,6 +165,7 @@ public class UnitData : ICloneable
     public Vector2 shadowPos;
     public Order order;
     public EffectData[] effects;
+    public EffectResistance[] resistances;
     public string deathSFX;
     public string attackSFX;
 
@@ -480,6 +481,13 @@ public struct EffectSpriteData
     public EFFECT type;
     public Sprite spr;
     public Sprite particle;
+}
+
+[Serializable]
+public class EffectResistance
+{
+    public EFFECT type;
+    public float value;
 }
 
 [Serializable]

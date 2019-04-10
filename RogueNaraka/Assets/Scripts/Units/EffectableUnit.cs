@@ -19,6 +19,9 @@ namespace RogueNaraka.UnitScripts
 
         public float effectDelay = 1;
 
+        [SerializeField]
+        protected float[] resistances = new float[(int)EFFECT.Accel+1];
+
         void Reset()
         {
             unit = GetComponent<Unit>();
@@ -36,6 +39,15 @@ namespace RogueNaraka.UnitScripts
         {
             _effects.Clear();
             dictionary.Clear();
+        }
+
+        private void OnEnable()
+        {
+            if (unit.data != null)
+            {
+                Debug.Log("Enabled");
+                InitResistance();
+            }
         }
 
         private void OnDisable()
@@ -85,6 +97,28 @@ namespace RogueNaraka.UnitScripts
         {
             EffectData effect = new EffectData(type, value, time);
             return AddEffect(effect, bullet, owner);
+        }
+
+        public void InitResistance()
+        {
+            for(int i = 0; i < resistances.Length; i++)
+            {
+                resistances[i] = 0;
+            }
+            AddResistance(unit.data.resistances);
+        }
+
+        public void AddResistance(params EffectResistance[] resistances)
+        {
+            for (int i = 0; i < resistances.Length; i++)
+            {
+                this.resistances[(int)resistances[i].type] += resistances[i].value;
+            }
+        }
+
+        public float GetResistance(EFFECT type)
+        {
+            return resistances[(int)type];
         }
     }
 }

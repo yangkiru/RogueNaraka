@@ -6,6 +6,7 @@ namespace RogueNaraka.EffectScripts
 {
     public class Ice : Effect
     {
+        float value;
         IEnumerator decelerateCorou;
         IEnumerator DecelerateCorou()
         {
@@ -25,14 +26,15 @@ namespace RogueNaraka.EffectScripts
 
         protected override void OnInit()
         {
-            target.stat.spdTemp -= data.value;
+            this.value = data.value * (1 - target.effectable.GetResistance(EFFECT.Ice));
+            target.stat.spdTemp -= this.value;
             decelerateCorou = DecelerateCorou();
             StartCoroutine(decelerateCorou);
         }
 
         protected override void OnDestroyEffect()
         {
-            target.stat.spdTemp += data.value;
+            target.stat.spdTemp += this.value;
             if(decelerateCorou != null)
             {
                 StopCoroutine(decelerateCorou);

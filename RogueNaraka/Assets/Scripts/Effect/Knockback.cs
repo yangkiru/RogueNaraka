@@ -31,7 +31,7 @@ namespace RogueNaraka.EffectScripts
                 vec = MathHelpers.DegreeToVector2(data.value).normalized;
             }
 
-            target.rigid.AddForce(vec * data.time);
+            target.rigid.AddForce(vec * data.time * (1 - target.effectable.GetResistance(EFFECT.Knockback)));
             Destroy();
         }
 
