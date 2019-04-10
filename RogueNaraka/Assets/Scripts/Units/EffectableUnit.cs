@@ -40,6 +40,8 @@ namespace RogueNaraka.UnitScripts
 
         private void OnDisable()
         {
+            if (!Application.isPlaying)
+                return;
             for(int i = 0; i < _effects.Count; i++)
             {
                 _effects[i].Destroy();
