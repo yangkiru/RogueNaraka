@@ -1562,7 +1562,7 @@ MonoBehaviour:
     effects:
     - type: 0
       value: 0
-      time: 0.3
+      time: 0.2
     - type: 4
       value: 0
       time: 3
@@ -2087,21 +2087,21 @@ MonoBehaviour:
     cost: 500
     coolTime: 3
     coolTimeLeft: 0
-    manaCost: 1.5
+    manaCost: 1
     size: 0.75
     isCircleToPlayer: 1
     isDeath: 0
-    isBasic: 0
+    isBasic: 1
     effects: []
     values:
     - name: 1
       value: 3
     - name: 2
-      value: 0.05
+      value: 0.025
     - name: 5
       value: 2
     levelUp:
-      manaCost: 0.75
+      manaCost: 0.7
       size: 0
       coolTime: 0
       effects: []
@@ -2109,9 +2109,7 @@ MonoBehaviour:
       - name: 1
         value: 1
       - name: 2
-        value: 0.025
-      - name: 5
-        value: 0.5
+        value: 0.01
     description:
     - Move fast summoning flames with dot damage. The dot damage of flames are proportional
       to the technical stats.
