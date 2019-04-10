@@ -41,6 +41,23 @@ namespace RogueNaraka.BulletScripts
         //    }
         //}
 
+        public Vector3 GetVelocity(Space space)
+        {
+            return space == Space.Self ? localVelocity : worldVelocity;
+        }
+
+        public Vector3 GetAccel(Space space)
+        {
+            return space == Space.Self ? localAccel : worldAccel;
+        }
+
+        public void GetValues(out Vector3 localVelocity, out Vector3 worldVelocity, out Vector3 localAccel, out Vector3 worldAccel)
+        {
+            localVelocity = this.localVelocity;
+            worldVelocity = this.worldVelocity;
+            localAccel = this.localAccel;
+            worldAccel = this.worldAccel;
+        }
         public void SetVelocity(Vector3 velocity, Vector3 accel, Space space)
         {
             //SetVelocity(velocity, space);

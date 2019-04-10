@@ -18,8 +18,10 @@ namespace RogueNaraka.SkillScripts
             BulletData data = (BulletData)GameDatabase.instance.bullets[this.data.bulletIds[0]].Clone();
 
             data.limitTime = GetValue(Value.Time).value;
-            data.worldSpeed = GetValue(Value.Accel).value;
+            data.worldSpeed = Mathf.Min(6.5f, GetValue(Value.Accel).value);
             data.dmg = GetValue(Value.Damage).value;
+            data.disapearDuration = 0.5f;
+            data.disapearStartTime = data.limitTime - 0.5f;
 
             Unit player = BoardManager.instance.player;
             Bullet tornado = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();

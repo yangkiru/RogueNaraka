@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 1426770371750627783}
   - component: {fileID: 1307021657860848083}
   - component: {fileID: 6279783528189844711}
+  - component: {fileID: 7590567112331911600}
   m_Layer: 11
   m_Name: Bullet
   m_TagString: Untagged
@@ -147,6 +148,7 @@ MonoBehaviour:
     pierce: 0
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -267,7 +269,6 @@ MonoBehaviour:
   worldVelocity: {x: 0, y: 0, z: 0}
   localAccel: {x: 0, y: 0, z: 0}
   worldAccel: {x: 0, y: 0, z: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &114574027343910540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,3 +548,16 @@ MonoBehaviour:
         - {x: -0.390625, y: 0.046875}
         - {x: -0.328125, y: 0.046875}
         - {x: -0.234375, y: -0.046875}
+--- !u!114 &7590567112331911600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040694008069246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b226ffae55c52444fbae4dc79da6f26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 114481818113872668}

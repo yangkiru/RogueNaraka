@@ -209,7 +209,25 @@ namespace RogueNaraka.BulletScripts.Hitable
             }
             else
             {
-                //Debug.Log(name + " hit " + coll.name + ":wall");
+                
+                if(bullet.data.isBounceable)
+                {
+                    Debug.Log(name + " hit " + coll.name + ":wall");
+                    BounceableBullet bounce = GetComponent<BounceableBullet>();
+                    Vector3 pos = coll.transform.position;
+                    BounceableBullet.DIRECTION direction;
+                    if (pos.y > BoardManager.instance.boardRange[1].y)
+                        direction = BounceableBullet.DIRECTION.UP;
+                    else if (pos.x > BoardManager.instance.boardRange[1].x)
+                        direction = BounceableBullet.DIRECTION.RIGHT;
+                    else if (pos.y < BoardManager.instance.boardRange[0].y)
+                        direction = BounceableBullet.DIRECTION.DOWN;
+                    else
+                        direction = BounceableBullet.DIRECTION.LEFT;
+
+                    Debug.Log(direction);
+                    bounce.Bounce(direction);
+                }
                 return HIT.WALL;
             }
         }

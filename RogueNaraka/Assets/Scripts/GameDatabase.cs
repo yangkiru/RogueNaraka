@@ -237,6 +237,7 @@ public class BulletData : ICloneable
     public int pierce;
     public bool isSplash;
     public bool isHitableWall;
+    public bool isBounceable;
     public ShakeData shake;
     public Order order;
     public EffectData[] effects;

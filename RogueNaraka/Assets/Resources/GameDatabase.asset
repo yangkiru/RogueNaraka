@@ -808,6 +808,7 @@ MonoBehaviour:
     pierce: 0
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0.01
       power: 0.01
@@ -839,6 +840,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -870,6 +872,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 1
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -901,6 +904,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 1
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -932,6 +936,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -963,6 +968,7 @@ MonoBehaviour:
     pierce: 99999
     isSplash: 0
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 0.1
       power: 0.05
@@ -994,6 +1000,7 @@ MonoBehaviour:
     pierce: 99999
     isSplash: 0
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 0.1
       power: 0.05
@@ -1025,6 +1032,7 @@ MonoBehaviour:
     pierce: 99999
     isSplash: 1
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1059,6 +1067,7 @@ MonoBehaviour:
     pierce: 99999
     isSplash: 1
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1090,6 +1099,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1121,6 +1131,7 @@ MonoBehaviour:
     pierce: 99999
     isSplash: 1
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 1
       power: 0.15
@@ -1162,6 +1173,7 @@ MonoBehaviour:
     pierce: 0
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1193,6 +1205,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1234,6 +1247,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1265,6 +1279,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0.01
       power: 0.01
@@ -1311,6 +1326,7 @@ MonoBehaviour:
     pierce: 0
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1342,6 +1358,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0.01
       power: 0.02
@@ -1389,6 +1406,7 @@ MonoBehaviour:
     pierce: 0
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1420,6 +1438,7 @@ MonoBehaviour:
     pierce: 1
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0.01
       power: 0.03
@@ -1466,6 +1485,7 @@ MonoBehaviour:
     pierce: 0
     isSplash: 0
     isHitableWall: 0
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1497,6 +1517,7 @@ MonoBehaviour:
     pierce: 99999
     isSplash: 1
     isHitableWall: 1
+    isBounceable: 0
     shake:
       time: 0
       power: 0
@@ -1513,7 +1534,7 @@ MonoBehaviour:
     spawnSFX: 
   - name: Tornado
     id: 21
-    dmg: 0.5
+    dmg: 0.05
     related: 2
     controller: {fileID: 22100000, guid: b7c9f28d11ccd024bb5535cc6dcef082, type: 2}
     type: 3
@@ -1524,13 +1545,14 @@ MonoBehaviour:
     guideSpeed: 0
     spinSpeed: 0
     size: 0.25
-    delay: 0.3
+    delay: 0.1
     limitTime: 3
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 99999
     isSplash: 1
     isHitableWall: 1
+    isBounceable: 1
     shake:
       time: 0
       power: 0
@@ -1538,9 +1560,12 @@ MonoBehaviour:
       isOnHit: 0
     order: -200
     effects:
-    - type: 2
+    - type: 0
       value: 0
-      time: 0.2
+      time: 0.3
+    - type: 4
+      value: 0
+      time: 3
     children: []
     onDestroy: []
     hitSFX: []
@@ -2067,18 +2092,12 @@ MonoBehaviour:
     isCircleToPlayer: 1
     isDeath: 0
     isBasic: 0
-    effects:
-    - type: 4
-      value: 0
-      time: 1
-    - type: 0
-      value: 0
-      time: 0.3
+    effects: []
     values:
     - name: 1
       value: 3
     - name: 2
-      value: 0.5
+      value: 0.05
     - name: 5
       value: 2
     levelUp:
@@ -2090,7 +2109,7 @@ MonoBehaviour:
       - name: 1
         value: 1
       - name: 2
-        value: 0.25
+        value: 0.025
       - name: 5
         value: 0.5
     description:

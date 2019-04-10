@@ -8,34 +8,25 @@ namespace RogueNaraka.EffectScripts
     {
         bool isStunParam;
 
-        IEnumerator decelerateCorou;
-        IEnumerator DecelerateCorou()
-        {
-            yield return null;
-            
-            while (target.moveable.CurSpeed > target.stat.spdTemp)
-            {
-                target.moveable.ForceToDecelerate(0.1f);
-                yield return null;
-            }
-            decelerateCorou = null;
-        }
         public override void Combine(EffectData dt)
         {
-            data.time += dt.time;
+            data.time = Mathf.Max(data.time, dt.time);
         }
 
         protected override void OnInit()
         {
             target.isStun = true;
-            try
+
+            AnimatorControllerParameter[] parameters = target.animator.parameters;
+
+            for(int i = 0; i < parameters.Length; i++)
             {
-                target.animator.SetBool("isStun", true);
-                isStunParam = true;
-            }
-            catch
-            {
-                isStunParam = false;
+                if(parameters[i].name.CompareTo("isStun") == 0)
+                {
+                    target.animator.SetBool("isStun", true);
+                    isStunParam = true;
+                    break;
+                }
             }
         }
 
@@ -50,7 +41,7 @@ namespace RogueNaraka.EffectScripts
 
         public override bool Equal(EffectData dt)
         {
-            return data.value == dt.value;
+            return true;
         }
     }
 }
