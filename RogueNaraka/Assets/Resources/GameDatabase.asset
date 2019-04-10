@@ -631,7 +631,7 @@ MonoBehaviour:
     weapon: -1
     stat:
       dmg: 10
-      spd: 20
+      spd: 10
       tec: 0
       hp: 1500
       mp: 0
@@ -668,14 +668,18 @@ MonoBehaviour:
     tackleDelay: 0
     moveDelay: 0
     moveDistance: 5
-    moveSpeed: 1
+    moveSpeed: 2
     accelerationRate: 0.3
     decelerationRate: 2
     limitTime: 0
     shadowPos: {x: 0, y: 0}
     order: 0
     effects: []
-    resistances: []
+    resistances:
+    - type: 4
+      value: 0.8
+    - type: 3
+      value: 0.5
     deathSFX: 
     attackSFX: 
   spawnables:
