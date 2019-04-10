@@ -164,12 +164,12 @@ namespace RogueNaraka.UnitScripts
                 isOut = true;
             }
 
-            /* 범위를 벗어났을 때, 감속 생략 */
-            if (isOut && this.moveState != MOVE_STATE.STOP)
-            {
-                this.moveState = MOVE_STATE.DECELERATE;
-                this.curSpeed = 0.0f;
-            }
+            ///* 범위를 벗어났을 때, 감속 생략 */
+            //if (isOut && this.moveState != MOVE_STATE.STOP)
+            //{
+            //    this.moveState = MOVE_STATE.DECELERATE;
+            //    this.curSpeed = 0.0f;
+            //}
             this.cachedTransform.position = changedPos;
         }
 
