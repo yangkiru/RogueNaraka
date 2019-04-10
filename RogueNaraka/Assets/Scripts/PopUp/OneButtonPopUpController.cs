@@ -10,13 +10,24 @@ namespace RogueNaraka.PopUpScripts {
         public TextMeshProUGUI Context;
         public Button Button;
 
-        public void SetPopUpData(string _context) {
-            this.Context.text = _context;;
+        public Action<OneButtonPopUpController> buttonAction;
+
+        /// <summary>Action 에 들어가는 인자는 팝업 자기 자신입니다.</summary>
+        public void SetPopUpData(string _context, Action<OneButtonPopUpController> _action) {
+            this.Context.text = _context;
+            this.buttonAction = _action;
+        }
+
+        public void ActivatePopUp() {
+            this.gameObject.SetActive(true);
+        }
+
+        public void DeactivatePopUp() {
+            this.gameObject.SetActive(false);
         }
 
         public void OnClickButton() {
-            this.gameObject.SetActive(false);
-            PopUpManager.Instance.DeActivateBackPanel();
+            this.buttonAction(this);
         }
     }
 }

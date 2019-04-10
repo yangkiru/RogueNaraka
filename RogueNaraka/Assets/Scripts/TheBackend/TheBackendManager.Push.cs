@@ -29,7 +29,7 @@ namespace RogueNaraka.TheBackendScripts {
         private Coroutine checkRewardPushesCoroutine;
 
         //릴리즈할때 반드시 해당 변수 false로 바꿔주세요!!!!!!
-        private bool isDevelop = true;
+        private bool isDevelop = false;
 
         void StartForPush() {
             StartCoroutine(LoadRewardedPushInfo());
