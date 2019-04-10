@@ -1899,7 +1899,7 @@ MonoBehaviour:
     id: 3
     level: 1
     cost: 50
-    coolTime: 3
+    coolTime: 4
     coolTimeLeft: 0
     manaCost: 1
     size: 1.2
