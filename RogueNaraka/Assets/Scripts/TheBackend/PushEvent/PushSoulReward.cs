@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BackEnd;
 using UnityEngine;
+using RogueNaraka.PopUpScripts;
 
 namespace RogueNaraka.TheBackendScripts {
     public class PushSoulReward : PushEvent {
@@ -22,7 +23,8 @@ namespace RogueNaraka.TheBackendScripts {
             Param rewardParam = new Param();
             rewardParam.Add(string.Format("Id_{0}", this.pushEventId), _now.ToString("yyyy-MM-dd HH:mm:ss"));
             MoneyManager.instance.AddSoul(this.rewardSoulAmounts, true);
-            Debug.LogError(string.Format("Reward Soul! : {0} souls", this.rewardSoulAmounts));
+            PopUpManager.Instance.ActivateOneButtonPopUp(string.Format("보상으로 {0} 소울을 획득하였습니다.", this.rewardSoulAmounts));
+            Debug.Log(string.Format("Reward Soul! : {0} souls", this.rewardSoulAmounts));
             return rewardParam;
         }
 
