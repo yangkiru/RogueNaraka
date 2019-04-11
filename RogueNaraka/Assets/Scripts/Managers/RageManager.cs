@@ -13,6 +13,7 @@ public class RageManager : MonoBehaviour
     public float soul = 1;
     public bool isRage;
 
+    public GameObject rageBtn;
     public GameObject ragePnl;
     public TextMeshProUGUI contentTxt;
     // Start is called before the first frame update
@@ -37,6 +38,11 @@ public class RageManager : MonoBehaviour
 
         ResetRage();
         Rage(rageLevel);
+        if (rageLevel > 0)
+            rageBtn.SetActive(true);
+        else
+            rageBtn.SetActive(false);
+        TxtUpdate();
         //StartCoroutine(EndCorou());
     }
 
@@ -57,6 +63,9 @@ public class RageManager : MonoBehaviour
         rageLevel = PlayerPrefs.GetInt("rageLevel");
         ResetRage();
         Rage(rageLevel);
+        if (rageLevel > 0)
+            rageBtn.SetActive(true);
+        TxtUpdate();
     }
 
     public void ResetRage()
@@ -67,23 +76,72 @@ public class RageManager : MonoBehaviour
         contentTxt.text = string.Empty;
     }
 
+    public void TxtUpdate()
+    {
+        contentTxt.text = string.Empty;
+        if(enemiesDmg != 0)
+        {
+            string str = string.Empty;
+            switch (GameManager.language)
+            {
+                case Language.English:
+                    str = string.Format("Enemies' Dmg x{0}\n", enemiesDmg);
+                    break;
+                case Language.Korean:
+                    str = string.Format("적들의 공격력 {0}배\n", enemiesDmg);
+                    break;
+            }
+            contentTxt.text += str;
+        }
+        if(enemiesHp != 0)
+        {
+            string str = string.Empty;
+            switch (GameManager.language)
+            {
+                case Language.English:
+                    str = string.Format("Enemies' Hp x{0}\n", enemiesHp);
+                    break;
+                case Language.Korean:
+                    str = string.Format("적들의 체력 {0}배\n", enemiesHp);
+                    break;
+            }
+            contentTxt.text += str;
+        }
+
+        if(soul != 0)
+        {
+            string str = string.Empty;
+            switch (GameManager.language)
+            {
+                case Language.English:
+                    str = string.Format("Soul Get x{0}\n", soul);
+                    break;
+                case Language.Korean:
+                    str = string.Format("얻는 영혼 {0}배\n", soul);
+                    break;
+            }
+            contentTxt.text += str;
+        }
+    }
+
     public void Rage(int level)
     {
         switch(level)
         {
             case 0:
                 return;
-            //case 1:
-            //    DmgUp(2f, level);
-            //    HpUp(2f, level);
-            //    break;
+            case 1:
+                DmgUp(4f, level);
+                HpUp(4f, level);
+                SoulUp(0.5f, level);
+                break;
             //case 2:
             //    DmgUp(2f, level);
             //    HpUp(2f, level);
             //    break;
             default:
-                DmgUp(4f, level);
-                HpUp(4f, level);
+                DmgUp(5f, level);
+                HpUp(5f, level);
                 SoulUp(0.5f, level);
                 break;
 
@@ -96,59 +154,17 @@ public class RageManager : MonoBehaviour
     {
         Debug.Log("DmgUp" + amount);
         enemiesDmg += amount;
-        if (level == rageLevel)
-        {
-            string str = string.Empty;
-            switch (GameManager.language)
-            {
-                case Language.English:
-                    str = string.Format("Enemies' Dmg {0}% Up", amount * 100);
-                    break;
-                case Language.Korean:
-                    str = string.Format("적들의 공격력 {0}% 증가", amount * 100);
-                    break;
-            }
-            contentTxt.text += str;
-        }
     }
 
     void HpUp(float amount, int level)
     {
         Debug.Log("HpUp" + amount);
         enemiesHp += amount;
-        if (level == rageLevel)
-        {
-            string str = string.Empty;
-            switch (GameManager.language)
-            {
-                case Language.English:
-                    str = string.Format("Enemies' Hp {0}% Up", amount * 100);
-                    break;
-                case Language.Korean:
-                    str = string.Format("적들의 체력 {0}% 증가", amount * 100);
-                    break;
-            }
-            contentTxt.text += str;
-        }
     }
 
     void SoulUp(float amount, int level)
     {
         Debug.Log("SoulUp" + amount);
         soul += amount;
-        if (level == rageLevel)
-        {
-            string str = string.Empty;
-            switch (GameManager.language)
-            {
-                case Language.English:
-                    str = string.Format("Soul Get {0}% Up", amount * 100);
-                    break;
-                case Language.Korean:
-                    str = string.Format("얻는 영혼 {0}% 증가", amount * 100);
-                    break;
-            }
-            contentTxt.text += str;
-        }
     }
 }

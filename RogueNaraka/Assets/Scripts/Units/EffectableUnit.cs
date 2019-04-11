@@ -52,7 +52,7 @@ namespace RogueNaraka.UnitScripts
 
         private void OnDisable()
         {
-            if (!Application.isPlaying)
+            if (!BoardManager.instance.effectPool)
                 return;
             for(int i = 0; i < _effects.Count; i++)
             {
