@@ -219,6 +219,7 @@ public class DeathManager : MonoBehaviour
     {
         SetDeathPnl(false);
 
+        RageManager.instance.rageBtn.SetActive(false);
         //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         PlayerPrefs.SetInt("isRun", 0);
         SkillManager.instance.ResetSave();
