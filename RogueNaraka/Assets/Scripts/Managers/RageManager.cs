@@ -15,6 +15,7 @@ public class RageManager : MonoBehaviour
 
     public GameObject rageBtn;
     public GameObject ragePnl;
+    public GameObject[] fireParticles;
     public TextMeshProUGUI contentTxt;
     // Start is called before the first frame update
     void Awake()
@@ -85,10 +86,10 @@ public class RageManager : MonoBehaviour
             switch (GameManager.language)
             {
                 case Language.English:
-                    str = string.Format("Enemies' Dmg x{0}\n", enemiesDmg);
+                    str = string.Format("Enemies' Dmg {0}% Up \n", (enemiesDmg-1) * 100);
                     break;
                 case Language.Korean:
-                    str = string.Format("적들의 공격력 {0}배\n", enemiesDmg);
+                    str = string.Format("적들의 공격력 {0}% 증가\n", (enemiesDmg-1) * 100);
                     break;
             }
             contentTxt.text += str;
@@ -99,10 +100,10 @@ public class RageManager : MonoBehaviour
             switch (GameManager.language)
             {
                 case Language.English:
-                    str = string.Format("Enemies' Hp x{0}\n", enemiesHp);
+                    str = string.Format("Enemies' Hp {0}% Up\n", (enemiesHp - 1) * 100);
                     break;
                 case Language.Korean:
-                    str = string.Format("적들의 체력 {0}배\n", enemiesHp);
+                    str = string.Format("적들의 체력 {0}% 증가\n", (enemiesHp - 1) * 100);
                     break;
             }
             contentTxt.text += str;
@@ -114,10 +115,10 @@ public class RageManager : MonoBehaviour
             switch (GameManager.language)
             {
                 case Language.English:
-                    str = string.Format("Soul Get x{0}\n", soul);
+                    str = string.Format("Soul Get {0}% Up\n", (soul-1)*100);
                     break;
                 case Language.Korean:
-                    str = string.Format("얻는 영혼 {0}배\n", soul);
+                    str = string.Format("얻는 영혼 {0}% 증가\n", (soul-1)*100);
                     break;
             }
             contentTxt.text += str;
@@ -129,12 +130,14 @@ public class RageManager : MonoBehaviour
         switch(level)
         {
             case 0:
+                fireParticles[0].SetActive(true);
+                fireParticles[1].SetActive(true);
                 return;
-            case 1:
-                DmgUp(4f, level);
-                HpUp(4f, level);
-                SoulUp(0.5f, level);
-                break;
+            //case 1:
+            //    DmgUp(5f, level);
+            //    HpUp(5f, level);
+            //    SoulUp(0.5f, level);
+            //    break;
             //case 2:
             //    DmgUp(2f, level);
             //    HpUp(2f, level);
