@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using BackEnd;
+using UnityEngine;
+using RogueNaraka.SingletonPattern;
+
+namespace RogueNaraka.TheBackendScripts {
+    public partial class TheBackendManager : MonoSingleton<TheBackendManager> {
+        public override void OnDestroy() {
+            base.OnDestroy();
+        }
+
+        void Awake() {
+            #if UNITY_EDITOR
+                this.gameObject.SetActive(false);
+                return;
+            #endif
+            AwakeForLogin();
+        }
+
+        void Start() {
+            StartForLogin();
+            StartForPush();            
+        }
+
+        private void BackendInit() {
+            Debug.Log(Backend.Utils.GetServerTime());
+        }
+    }
+}

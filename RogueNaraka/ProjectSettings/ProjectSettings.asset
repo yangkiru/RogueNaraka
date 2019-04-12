@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: dc890d74977b40647a45d3a3491e8d98, type: 3}
+  - logo: {fileID: 21300000, guid: e111a0e75e01dfe4cbdc458be78eb848, type: 3}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -245,7 +245,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/skrtm/Desktop/Keystore/user.keystore
+  AndroidKeystoreName: "C:/Users/kbh37/Desktop/\uB179\uC2A4\uBE45\uC2A4/\uBB38\uC11C/user.keystore"
   AndroidKeyaliasName: roguenaraka
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

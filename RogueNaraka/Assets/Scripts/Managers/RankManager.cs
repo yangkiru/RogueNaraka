@@ -13,13 +13,7 @@ public class RankManager : MonoBehaviour
 
     public void Start()
     {
-#if UNITY_ANDROID
-        if (Application.internetReachability == NetworkReachability.NotReachable)
-            return;
 
-        PlayGamesPlatform.Activate();
-        Login();
-#endif
     }
 
     string leaderBoardId = "CgkIvu-SvO4aEAIQAA";
@@ -57,7 +51,7 @@ public class RankManager : MonoBehaviour
     public void SendPlayerRank()
     {
         Debug.Log("SendPlayerRank:" + (long)BoardManager.instance.stage);
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         Login();
         Social.ReportScore((long)BoardManager.instance.stage, leaderBoardId, (bool success) =>
         {
