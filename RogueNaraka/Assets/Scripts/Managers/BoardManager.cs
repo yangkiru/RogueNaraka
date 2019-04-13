@@ -176,6 +176,9 @@ public class BoardManager : MonoBehaviour {
             AudioManager.instance.FadeInMusic(1);
         }
 
+        if (RageManager.instance.isRage)
+            RageManager.instance.BigPnlOpen();
+
         if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty)==0)
             AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         else

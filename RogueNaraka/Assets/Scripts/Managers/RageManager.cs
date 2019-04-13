@@ -15,9 +15,11 @@ public class RageManager : MonoBehaviour
     public bool isRage;
 
     public Button rageBtn;
-    public GameObject ragePnl;
+    public GameObject rageSmallPnl;
+    public Image rageBigPnl;
     public ParticleSystem[] fireParticles;
-    
+
+    public TextMeshProUGUI rageLevelTxt;
     public TextMeshProUGUI contentTxt;
     // Start is called before the first frame update
     void Awake()
@@ -41,6 +43,8 @@ public class RageManager : MonoBehaviour
 
         ResetRage();
         Rage(rageLevel);
+        isRage = true;
+
         if (rageLevel > 0)
             SetActiveSmallRageBtn(true);
         else
@@ -51,50 +55,82 @@ public class RageManager : MonoBehaviour
 
     public void SetActiveSmallRageBtn(bool value)
     {
-        rageBtn.gameObject.SetActive(value);
         if (value)
-            StartCoroutine("EndCorou");
+        {
+            rageBtn.interactable = true;
+            rageBtn.gameObject.SetActive(true);
+        }
         else
-            StopCoroutine("EndCorou");
+            StartCoroutine("SmallBtnCorou");
+
+        if (rageLevel > 1)
+        {
+            rageLevelTxt.text = string.Format("x{0}", rageLevel);
+            rageLevelTxt.gameObject.SetActive(true);
+        }
     }
 
-    IEnumerator EndCorou()
+    public void BigPnlOpen()
     {
-        float t = 2.5f;
+        StartCoroutine(BigPnlCorou());
+    }
+
+    IEnumerator BigPnlCorou()
+    {
+        rageBigPnl.gameObject.SetActive(true);
+        rageBigPnl.color = Color.black;
+        float t = 3;
         do
         {
             yield return null;
-            t -= Time.deltaTime;
+            t -= Time.unscaledDeltaTime;
         } while (t > 0);
 
-        t = 2.5f;
+        t = 2;
         float tt = t;
-        Color color = rageBtn.targetGraphic.color;
-        var main0 = fireParticles[0].main;
-        var main1 = fireParticles[1].main;
-        Color fireColor = main0.startColor.color;
-        float fireAlpha = 0.3921569f;
+        Color color = rageBigPnl.color;
 
-        fireColor.a = fireAlpha;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+            float amount = Time.unscaledDeltaTime / tt;
+            color.a -= amount;
+            rageBigPnl.color = color;
+        } while (t > 0);
 
-        color.a = 1;
-        rageBtn.targetGraphic.color = color;
-        main0.startColor = fireColor;
-        main1.startColor = fireColor;
+        rageBigPnl.gameObject.SetActive(false);
+        isRage = false;
+    }
+
+    IEnumerator SmallBtnCorou()
+    {
+        float t = 3f;
+        float tt = t;
+        Color color = Color.white;
+
+        rageBtn.interactable = false;
+        //var main0 = fireParticles[0].main;
+        //var main1 = fireParticles[1].main;
+        //Color fireColor = main0.startColor.color;
+        //float fireAlpha = 0.3921569f;
 
         do
         {
             yield return null;
             t -= Time.deltaTime;
-            float amount = Time.deltaTime / tt;
+            float amount = Time.unscaledDeltaTime / tt;
             color.a -= amount;
             rageBtn.targetGraphic.color = color;
-            fireColor.a -= amount * fireAlpha;
-            main0.startColor = fireColor;
-            main1.startColor = fireColor;
+            //fireColor.a -= amount * fireAlpha;
+            //main0.startColor = fireColor;
+            //main1.startColor = fireColor;
         } while (t > 0);
+
         rageBtn.gameObject.SetActive(false);
-        rageBtn.GetComponent<OnMouseButton>().onUp.Invoke();
+        color.a = 1;
+        rageBtn.targetGraphic.color = color;
+        //rageBtn.gameObject.SetActive(false);
     }
 
     public void CheckRage()
@@ -168,8 +204,6 @@ public class RageManager : MonoBehaviour
         switch(level)
         {
             case 0:
-                fireParticles[0].gameObject.SetActive(true);
-                fireParticles[1].gameObject.SetActive(true);
                 return;
             //case 1:
             //    DmgUp(5f, level);
