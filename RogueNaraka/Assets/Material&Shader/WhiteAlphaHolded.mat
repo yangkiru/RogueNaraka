@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Masked2
-  m_Shader: {fileID: 4800000, guid: 97e89d17d664e734c9f4e1898789e055, type: 3}
+  m_Name: WhiteAlphaHolded
+  m_Shader: {fileID: 4800000, guid: 4118b4e892513c04e948a70c8a472eeb, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
