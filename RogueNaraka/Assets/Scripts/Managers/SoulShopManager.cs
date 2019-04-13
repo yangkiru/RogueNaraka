@@ -386,6 +386,7 @@ public class SoulShopManager : MonoBehaviour
     public TextMeshProUGUI weaponLevelTxt;
     public Image weaponBar;
     public Button weaponExpBtn;
+    public Image weaponLevelUpPnl;
     int weapon = -1;
     int _weapon = -1;
 
@@ -446,14 +447,14 @@ public class SoulShopManager : MonoBehaviour
 
     IEnumerator AddWeaponExpCorou()
     {
-        float delay = 0.5f;
         int exp = PlayerPrefs.GetInt("exp");
-        int amount = 1;
         int speedUp = 0;
         int remain;
         int nextRemain;
         int currentLevel = GetWeaponLevel(exp, out remain);
         int lastLevel = currentLevel;
+        int amount = 1 + currentLevel;
+        float delay = 0.1f;
 
         bool isSuccess;
         do
@@ -481,6 +482,8 @@ public class SoulShopManager : MonoBehaviour
             currentLevel = WeaponPnlUpdate(exp);
             if(currentLevel != lastLevel)//무기 레벨 업
             {
+                StopCoroutine("WeaponLevelUpPnlCorou");
+                StartCoroutine("WeaponLevelUpPnlCorou");
                 yield break;
             }
             lastLevel = currentLevel;
@@ -496,10 +499,67 @@ public class SoulShopManager : MonoBehaviour
                 if (++speedUp > 10)
                 {
                     speedUp = 0;
-                    amount++;
+                    amount += currentLevel + 1;
                 }
             }
         } while (isSuccess);
+    }
+
+    IEnumerator WeaponLevelUpPnlCorou()
+    {
+        weaponLevelUpPnl.gameObject.SetActive(true);
+        weaponLevelUpPnl.color = Color.black;
+        weaponLevelUpPnl.rectTransform.localScale = Vector3.zero;
+        float value = 0;
+        Vector3 vec = new Vector3(0, 0, 1);
+
+        do
+        {
+            yield return null;
+            value += Time.unscaledDeltaTime * 5;
+            vec.x = value;
+            vec.y = value;
+            weaponLevelUpPnl.rectTransform.localScale = vec;
+        } while (value < 1.2f);
+        value = 1.2f;
+        vec.x = value;
+        vec.y = value;
+        weaponLevelUpPnl.rectTransform.localScale = vec;
+
+        do
+        {
+            yield return null;
+            value -= Time.unscaledDeltaTime * 2;
+            vec.x = value;
+            vec.y = value;
+            weaponLevelUpPnl.rectTransform.localScale = vec;
+        } while (value > 1f);
+        value = 1;
+        vec.x = value;
+        vec.y = value;
+        weaponLevelUpPnl.rectTransform.localScale = vec;
+
+        float t = 3;
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+        } while (t > 0);
+
+        t = 2;
+        float tt = t;
+        Color color = weaponLevelUpPnl.color;
+
+        do
+        {
+            yield return null;
+            t -= Time.unscaledDeltaTime;
+            float amount = Time.unscaledDeltaTime / tt;
+            color.a -= amount;
+            weaponLevelUpPnl.color = color;
+        } while (t > 0);
+
+        weaponLevelUpPnl.gameObject.SetActive(false);
     }
     #endregion
 
@@ -583,7 +643,7 @@ public class SoulShopManager : MonoBehaviour
         //    int result = GetRefiningRateCost(rate);
         //    Debug.Log(rate + " " + result);
         //}
-        PlayerPrefs.SetFloat("refiningRate", 0.3f);
+        PlayerPrefs.SetFloat("exp", 0);
     }
 
     /// <summary>

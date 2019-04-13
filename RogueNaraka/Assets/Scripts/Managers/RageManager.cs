@@ -57,8 +57,12 @@ public class RageManager : MonoBehaviour
     {
         if (value)
         {
+            StopCoroutine("SmallBtnCorou");
             rageBtn.interactable = true;
             rageBtn.gameObject.SetActive(true);
+            rageBtn.targetGraphic.color = Color.white;
+            fireParticles[0].gameObject.SetActive(true);
+            fireParticles[1].gameObject.SetActive(true);
         }
         else
             StartCoroutine("SmallBtnCorou");
@@ -68,6 +72,8 @@ public class RageManager : MonoBehaviour
             rageLevelTxt.text = string.Format("x{0}", rageLevel);
             rageLevelTxt.gameObject.SetActive(true);
         }
+        else
+            rageLevelTxt.gameObject.SetActive(false);
     }
 
     public void BigPnlOpen()
@@ -79,6 +85,38 @@ public class RageManager : MonoBehaviour
     {
         rageBigPnl.gameObject.SetActive(true);
         rageBigPnl.color = Color.black;
+
+        rageBigPnl.rectTransform.localScale = Vector3.zero;
+        float value = 0;
+        Vector3 vec = new Vector3(0, 0, 1);
+
+        do
+        {
+            yield return null;
+            value += Time.unscaledDeltaTime * 5;
+            vec.x = value;
+            vec.y = value;
+            rageBigPnl.rectTransform.localScale = vec;
+        } while (value < 1.2f);
+
+        value = 1.2f;
+        vec.x = value;
+        vec.y = value;
+        rageBigPnl.rectTransform.localScale = vec;
+
+        do
+        {
+            yield return null;
+            value -= Time.unscaledDeltaTime * 2;
+            vec.x = value;
+            vec.y = value;
+            rageBigPnl.rectTransform.localScale = vec;
+        } while (value > 1f);
+        value = 1;
+        vec.x = value;
+        vec.y = value;
+        rageBigPnl.rectTransform.localScale = vec;
+
         float t = 3;
         do
         {
@@ -160,10 +198,10 @@ public class RageManager : MonoBehaviour
             switch (GameManager.language)
             {
                 case Language.English:
-                    str = string.Format("Enemies' Dmg {0}% Up \n", (enemiesDmg-1) * 100);
+                    str = string.Format("Enemies' Dmg {0} times Up \n", enemiesDmg-1);
                     break;
                 case Language.Korean:
-                    str = string.Format("적들의 공격력 {0}% 증가\n", (enemiesDmg-1) * 100);
+                    str = string.Format("적들의 공격력 {0}배 증가\n", enemiesDmg-1);
                     break;
             }
             contentTxt.text += str;
@@ -174,10 +212,10 @@ public class RageManager : MonoBehaviour
             switch (GameManager.language)
             {
                 case Language.English:
-                    str = string.Format("Enemies' Hp {0}% Up\n", (enemiesHp - 1) * 100);
+                    str = string.Format("Enemies' Hp {0} times Up\n", enemiesHp - 1);
                     break;
                 case Language.Korean:
-                    str = string.Format("적들의 체력 {0}% 증가\n", (enemiesHp - 1) * 100);
+                    str = string.Format("적들의 체력 {0}배 증가\n", enemiesHp - 1);
                     break;
             }
             contentTxt.text += str;
@@ -189,10 +227,10 @@ public class RageManager : MonoBehaviour
             switch (GameManager.language)
             {
                 case Language.English:
-                    str = string.Format("Soul Get {0}% Up\n", (soul-1)*100);
+                    str = string.Format("Soul Get {0} times Up\n", soul-1);
                     break;
                 case Language.Korean:
-                    str = string.Format("얻는 영혼 {0}% 증가\n", (soul-1)*100);
+                    str = string.Format("얻는 영혼 {0}배 증가\n", soul-1);
                     break;
             }
             contentTxt.text += str;
