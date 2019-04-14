@@ -266,6 +266,7 @@ namespace RogueNaraka.UnitScripts
 
             _orderable.Init(data.order);
 
+            _effectable.Init();
 
             if (_data.effects != null)
             {

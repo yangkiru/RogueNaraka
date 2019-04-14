@@ -88,11 +88,14 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             }
         }
 
-        void OnRushEnd()
+        void OnRushEnd(bool isArrive)
         {
             leftDelay = 0;
-            unit.effectable.AddEffect(EFFECT.Stun, 0, 3);
-            AudioManager.instance.PlaySFX("weaponUpgrade");
+            if (isArrive)
+            {
+                unit.effectable.AddEffect(EFFECT.Stun, 0, 3);
+                AudioManager.instance.PlaySFX("weaponUpgrade");
+            }
             
             unit.animator.SetBool("isBeforeAttack", false);
             if (accelEffect != null)
@@ -140,7 +143,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
             leftDelay = restTime;
         }
 
-        void OnReturnEnd()
+        void OnReturnEnd(bool isArrive)
         {
             state = STATE.REST;
         }

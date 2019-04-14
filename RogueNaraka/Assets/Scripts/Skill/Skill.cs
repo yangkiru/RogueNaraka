@@ -46,7 +46,7 @@ namespace RogueNaraka.SkillScripts
             {
                 data.manaCost += data.levelUp.manaCost * reverse;
                 data.size += data.levelUp.size * reverse;
-                data.coolTime = Mathf.Max(0.01f, data.coolTime + data.levelUp.coolTime * reverse);
+                data.coolTime = Mathf.Max(0.3f, data.coolTime + data.levelUp.coolTime * reverse);
                 ;
                 for (int j = 0; j < data.levelUp.values.Length; j++)
                 {

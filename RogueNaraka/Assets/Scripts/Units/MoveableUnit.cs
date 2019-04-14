@@ -20,8 +20,8 @@ namespace RogueNaraka.UnitScripts
         Transform cachedTransform;
 
         private Vector2 destination;
-        private Action onArrivedCallback;
-        public Action OnArrivedCallback { get { return this.onArrivedCallback; } }
+        private Action<bool> onArrivedCallback;
+        public Action<bool> OnArrivedCallback { get { return this.onArrivedCallback; } }
 
         public float speed {
             get {
@@ -76,7 +76,7 @@ namespace RogueNaraka.UnitScripts
         }
         
         /// <summary>목적지를 설정하고, MoveState를 ACCELERATE상태로 바꿉니다.</summary>
-        public void SetDestination(Vector3 pos, Action callback = null)
+        public void SetDestination(Vector3 pos, Action<bool> callback = null)
         {
             this.destination = BoardManager.instance.ClampToBoard(pos, CLAMP_BOARD_SIZE_X, CLAMP_BOARD_SIZE_Y);//목적지 보드 제한
             this.onArrivedCallback = callback;
@@ -90,6 +90,10 @@ namespace RogueNaraka.UnitScripts
             this.moveState = MOVE_STATE.STOP;
             unit.animator.SetBool("isWalk", false);
             this.moveDir = new Vector2(0.0f, 0.0f);
+            if (this.onArrivedCallback != null)
+            {
+                this.onArrivedCallback(false);
+            }
         }
 
         public void ForceToDecelerate(float _decelerationRate) {
@@ -116,7 +120,10 @@ namespace RogueNaraka.UnitScripts
 
         private void Move() {
             if (unit.isStun)
+            {
+                this.curSpeed -= this.decelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime * (1 + factor);
                 return;
+            }
             switch(this.moveState) {
                 case MOVE_STATE.STOP:
                     return;
@@ -140,8 +147,10 @@ namespace RogueNaraka.UnitScripts
             float distanceToDest = moveDir.sqrMagnitude;
             this.moveDir.Normalize();
             this.cachedTransform.Translate(moveDir * this.curSpeed * TimeManager.Instance.FixedDeltaTime);
-            if(this.moveState != MOVE_STATE.DECELERATE && this.moveState != MOVE_STATE.STOP &&
-                distanceToDest <= MathHelpers.DecelerateDistance(this.decelerationRate, this.curSpeed)) {
+
+            if (this.moveState != MOVE_STATE.DECELERATE && this.moveState != MOVE_STATE.STOP &&
+                distanceToDest <= MathHelpers.DecelerateDistance(this.decelerationRate, this.curSpeed))
+            {
                 this.moveState = MOVE_STATE.DECELERATE;
             }
         }
@@ -164,12 +173,10 @@ namespace RogueNaraka.UnitScripts
                 isOut = true;
             }
 
-            ///* 범위를 벗어났을 때, 감속 생략 */
-            //if (isOut && this.moveState != MOVE_STATE.STOP)
-            //{
-            //    this.moveState = MOVE_STATE.DECELERATE;
-            //    this.curSpeed = 0.0f;
-            //}
+            if (isOut && this.moveState != MOVE_STATE.STOP)
+            {
+                this.moveState = MOVE_STATE.DECELERATE;
+            }
             this.cachedTransform.position = changedPos;
         }
 
@@ -188,7 +195,7 @@ namespace RogueNaraka.UnitScripts
                 this.moveState = MOVE_STATE.STOP;
                 unit.animator.SetBool("isWalk", false);
                 if(this.onArrivedCallback != null) {
-                    this.onArrivedCallback();
+                    this.onArrivedCallback(true);
                 }
                 this.moveDir = new Vector2(0.0f, 0.0f);
             }

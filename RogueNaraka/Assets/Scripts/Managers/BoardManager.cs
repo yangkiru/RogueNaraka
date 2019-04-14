@@ -46,33 +46,7 @@ public class BoardManager : MonoBehaviour {
     private void Awake()
     {
         instance = this;
-    }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(spawnPoint, 0.1f);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(goalPoint, 0.1f);
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(bossPoint, 0.1f);
-        if (boardRange.Length > 1)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(boardRange[0], 0.1f);
-            Gizmos.DrawWireSphere(boardRange[1], 0.1f);
-        }
-    }
-
-    public GameObject SpawnObj(GameObject prefab)
-    {
-        GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, unitPool.transform);
-        return obj;
-    }
-
-    public void InitBoard()
-    {
-        Debug.Log("InitBoard");
         int count = unitPool.GetCount();
         if (count < unitObjCount)//unit Pooling
         {
@@ -109,6 +83,33 @@ public class BoardManager : MonoBehaviour {
                 soulPool.EnqueueObjectPool(obj);
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(spawnPoint, 0.1f);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(goalPoint, 0.1f);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(bossPoint, 0.1f);
+        if (boardRange.Length > 1)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(boardRange[0], 0.1f);
+            Gizmos.DrawWireSphere(boardRange[1], 0.1f);
+        }
+    }
+
+    public GameObject SpawnObj(GameObject prefab)
+    {
+        GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, unitPool.transform);
+        return obj;
+    }
+
+    public void InitBoard()
+    {
+        Debug.Log("InitBoard");
 
         player.Teleport(spawnPoint);
         player.rigid.velocity = Vector3.zero;

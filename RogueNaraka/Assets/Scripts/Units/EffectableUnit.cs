@@ -27,27 +27,15 @@ namespace RogueNaraka.UnitScripts
             unit = GetComponent<Unit>();
         }
 
-        private void Start()
-        {
-            for(int i = 0; i < GameDatabase.instance.effects.Length; i++)
-            {
-                dictionary.Add((EFFECT)i, new List<Effect>());
-            }
-        }
-
         public void Init()
         {
             _effects.Clear();
             dictionary.Clear();
-        }
-
-        private void OnEnable()
-        {
-            if (unit.data != null)
+            for (int i = 0; i < GameDatabase.instance.effects.Length; i++)
             {
-                Debug.Log("Enabled");
-                InitResistance();
+                dictionary.Add((EFFECT)i, new List<Effect>());
             }
+            InitResistance();
         }
 
         private void OnDisable()
@@ -73,6 +61,7 @@ namespace RogueNaraka.UnitScripts
 
         public Effect AddEffect(EffectData data, Bullet bullet = null, Unit owner = null)
         {
+            Debug.Log(data);
             Effect effect = GetSameEffect(data);
             GameObject obj = effect == null ? BoardManager.instance.effectPool.DequeueObjectPool() : null;
 
