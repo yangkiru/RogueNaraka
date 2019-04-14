@@ -11,11 +11,6 @@ public class RankManager : MonoBehaviour
         instance = this;
     }
 
-    public void Start()
-    {
-
-    }
-
     string leaderBoardId = "CgkIvu-SvO4aEAIQAA";
 
     //int highScore;

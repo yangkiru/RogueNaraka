@@ -47,6 +47,5 @@ public class NetworkCheck : MonoBehaviour
         pnl.SetActive(false);
 
         AdMobManager.instance.Start();
-        RankManager.instance.Start();
     }
 }
