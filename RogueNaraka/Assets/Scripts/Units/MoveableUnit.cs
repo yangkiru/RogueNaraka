@@ -32,11 +32,15 @@ namespace RogueNaraka.UnitScripts
         float unitSpeed;
         public float factor;
 
+        public float AccelerationRate { get { return accelerationRate; } set { accelerationRate = value; } }
         private float accelerationRate;
         public float DecelerationRate { get { return decelerationRate; } set { decelerationRate = value; } }
         private float decelerationRate;
         private float curSpeed;
         public float CurSpeed { get { return this.curSpeed; } }
+
+        private float decelerationDistance;
+
         private Vector2 moveDir;
         public Vector2 MoveDir { get { return this.moveDir; } }
 
@@ -82,6 +86,7 @@ namespace RogueNaraka.UnitScripts
             this.onArrivedCallback = callback;
             this.moveState = MOVE_STATE.ACCELERATE;
             unit.animator.SetBool("isWalk", true);
+            decelerationDistance = Mathf.Max(0.1f, Mathf.InverseLerp(Vector2.Distance(cachedTransform.position, pos), 0, decelerationRate));
         }
 
         /// <summary>유닛을 즉시 멈춥니다.</summary>
@@ -121,7 +126,10 @@ namespace RogueNaraka.UnitScripts
         private void Move() {
             if (unit.isStun)
             {
-                this.curSpeed -= this.decelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime * (1 + factor);
+                if (this.curSpeed > 0)
+                    this.curSpeed -= this.decelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime * (1 + factor);
+                else
+                    this.curSpeed = 0;
                 return;
             }
             switch(this.moveState) {
@@ -148,8 +156,13 @@ namespace RogueNaraka.UnitScripts
             this.moveDir.Normalize();
             this.cachedTransform.Translate(moveDir * this.curSpeed * TimeManager.Instance.FixedDeltaTime);
 
+            //if (this.moveState != MOVE_STATE.DECELERATE && this.moveState != MOVE_STATE.STOP &&
+            //    distanceToDest <= MathHelpers.DecelerateDistance(this.decelerationRate, this.curSpeed))
+            //{
+            //    this.moveState = MOVE_STATE.DECELERATE;
+            //}
             if (this.moveState != MOVE_STATE.DECELERATE && this.moveState != MOVE_STATE.STOP &&
-                distanceToDest <= MathHelpers.DecelerateDistance(this.decelerationRate, this.curSpeed))
+                distanceToDest <= decelerationDistance)
             {
                 this.moveState = MOVE_STATE.DECELERATE;
             }
@@ -173,10 +186,10 @@ namespace RogueNaraka.UnitScripts
                 isOut = true;
             }
 
-            if (isOut && this.moveState != MOVE_STATE.STOP)
-            {
-                this.moveState = MOVE_STATE.DECELERATE;
-            }
+            //if (isOut && this.moveState != MOVE_STATE.STOP)
+            //{
+            //    this.moveState = MOVE_STATE.DECELERATE;
+            //}
             this.cachedTransform.position = changedPos;
         }
 
@@ -189,7 +202,7 @@ namespace RogueNaraka.UnitScripts
         }
 
         private void DecelerateForArrive() {
-            this.curSpeed -= this.decelerationRate * this.speed * TimeManager.Instance.FixedDeltaTime * (1 + factor);
+            this.curSpeed -= this.decelerationRate * (this.curSpeed + this.speed) * 0.5f * TimeManager.Instance.FixedDeltaTime * (1 + factor);
             if(this.curSpeed <= 0.0f) {
                 this.curSpeed = 0.0f;
                 this.moveState = MOVE_STATE.STOP;

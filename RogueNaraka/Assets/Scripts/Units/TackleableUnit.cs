@@ -111,7 +111,7 @@ namespace RogueNaraka
 
         public void Tackle()
         {
-            Debug.Log("Tackle");
+            //Debug.Log("Tackle");
             BulletData bulletData = (BulletData)GameDatabase.instance.bullets[tackleBulletID].Clone();
             bulletData.size = unit.data.tackleSize;
             bulletData.dmg = unit.data.tackleDamage;

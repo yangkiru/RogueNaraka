@@ -61,7 +61,6 @@ namespace RogueNaraka.UnitScripts
 
         public Effect AddEffect(EffectData data, Bullet bullet = null, Unit owner = null)
         {
-            Debug.Log(data);
             Effect effect = GetSameEffect(data);
             GameObject obj = effect == null ? BoardManager.instance.effectPool.DequeueObjectPool() : null;
 

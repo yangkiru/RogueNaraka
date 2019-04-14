@@ -5,9 +5,8 @@ using RogueNaraka.BulletScripts;
 
 namespace RogueNaraka.SkillScripts
 {
-    public class FlameShoes : Skill
+    public class FlameShoes : DashShoes
     {
-        bool isAttackable;
         public override void Use(Vector3 mp)
         {
             Run(mp);
@@ -17,11 +16,7 @@ namespace RogueNaraka.SkillScripts
         {
             Unit player = BoardManager.instance.player;
             player.autoMoveable.enabled = false;
-            if (player.attackable.enabled)
-            {
-                isAttackable = true;
-                player.attackable.enabled = false;
-            }
+            player.attackable.enabled = false;
             player.moveable.Stop();
             player.rigid.AddForce((mp - player.transform.position).normalized * Vector2.Distance(mp, player.transform.position) * 7);
             StartCoroutine(CheckEnd(mp));
@@ -30,8 +25,10 @@ namespace RogueNaraka.SkillScripts
         IEnumerator CheckEnd(Vector2 mp)
         {
             Unit player = BoardManager.instance.player;
-            float bestVelocity = player.rigid.velocity.sqrMagnitude;
-            float currentVelocity = bestVelocity;
+            yield return new WaitForFixedUpdate();
+            float remain = player.rigid.velocity.sqrMagnitude;
+            float before;
+            float after = remain;
 
             float flameDelay = GetValue(Value.Delay).value;
             float flameTime = flameDelay;
@@ -40,14 +37,18 @@ namespace RogueNaraka.SkillScripts
             BulletData flameData = (BulletData)GameDatabase.instance.bullets[data.bulletIds[0]].Clone();
             flameData.GetEffect(EFFECT.Fire).value = GetValue(Value.Fire).value * player.stat.GetCurrent(STAT.TEC);
 
-            while(bestVelocity == currentVelocity || bestVelocity * 0.1f < currentVelocity)
+            do
             {
-                yield return null;
+                before = after;
+                yield return new WaitForFixedUpdate();
+                after = player.rigid.velocity.sqrMagnitude;
+                float reduce = before - after;
+                if (reduce > 0)
+                {
+                    remain -= reduce;
+                }
 
-                currentVelocity = player.rigid.velocity.sqrMagnitude;
-                if (bestVelocity < currentVelocity)
-                    bestVelocity = currentVelocity;
-                flameTime -= Time.deltaTime;
+                flameTime -= Time.fixedDeltaTime;
 
                 if (flameTime <= 0)
                 {
@@ -62,15 +63,14 @@ namespace RogueNaraka.SkillScripts
                     }
                     flameTime = flameDelay;
                 }
-            } 
+            } while (remain > 3);
             OnRunEnd();
         }
 
         void OnRunEnd()
         {
             Unit player = BoardManager.instance.player;
-            if(isAttackable)
-                player.autoMoveable.enabled = true;
+            player.autoMoveable.enabled = true;
             player.attackable.enabled = true;
         }
     }
