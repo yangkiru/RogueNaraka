@@ -456,15 +456,15 @@ MonoBehaviour:
     attackSFX: 
   - name: slime0
     id: 7
-    cost: 1
+    cost: 0.3
     stage: 1
     maxStage: 9
     weapon: -1
     stat:
-      dmg: 1
+      dmg: 0.3
       spd: 0
       tec: 0
-      hp: 1
+      hp: 0.3
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 1
+      currentHp: 0.3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
@@ -512,15 +512,15 @@ MonoBehaviour:
     attackSFX: 
   - name: slime1
     id: 8
-    cost: 1
+    cost: 0.3
     stage: 1
     maxStage: 10
     weapon: -1
     stat:
-      dmg: 1
+      dmg: 0.3
       spd: 0
       tec: 0
-      hp: 1
+      hp: 0.3
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -538,7 +538,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 1
+      currentHp: 0.3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 5affb1d8803e4394d84cefbf8cf49a6c, type: 2}
@@ -568,15 +568,15 @@ MonoBehaviour:
     attackSFX: 
   - name: slime2
     id: 9
-    cost: 1
+    cost: 0.3
     stage: 1
     maxStage: 10
     weapon: -1
     stat:
-      dmg: 1
+      dmg: 0.3
       spd: 0
       tec: 0
-      hp: 1
+      hp: 0.3
       mp: 0
       hpRegen: 0
       mpRegen: 0
@@ -594,7 +594,7 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 1
+      currentHp: 0.3
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
@@ -1545,7 +1545,7 @@ MonoBehaviour:
     effects:
     - type: 2
       value: 0
-      time: 0.2
+      time: 2
     children: []
     onDestroy: []
     hitSFX: []
@@ -1791,13 +1791,15 @@ MonoBehaviour:
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d000000
   unitCosts:
   - cost: 1
-    unitId: 0000000001000000070000000800000009000000
+    unitId: 0000000001000000
   - cost: 2
     unitId: 0200000003000000
   - cost: 3
     unitId: 04000000
   - cost: 4
     unitId: 0500000006000000
+  - cost: 0.33
+    unitId: 070000000800000009000000
   skills:
   - name: ThunderStrike
     nameLang:
@@ -2076,7 +2078,7 @@ MonoBehaviour:
     - name: 0
       value: 5
     - name: 6
-      value: 0.1
+      value: 0.07
     - name: 7
       value: 0.1
     levelUp:
@@ -2087,8 +2089,6 @@ MonoBehaviour:
       values:
       - name: 7
         value: 0.1
-      - name: 6
-        value: -0.0075
     description:
     - Move fast summoning flames with dot damage. The dot damage of flames are proportional
       to the technical stats.

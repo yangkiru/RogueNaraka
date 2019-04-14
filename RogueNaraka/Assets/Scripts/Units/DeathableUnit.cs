@@ -43,7 +43,16 @@ namespace RogueNaraka.UnitScripts
 
         public void EnemyOnDeath()
         {
-            MoneyManager.instance.AddUnrefinedSoul((int)(unit.data.cost * RageManager.instance.soul));
+            float amount = unit.data.cost * RageManager.instance.soul;
+            float remain = (float)MoneyManager.instance.RemainSoul + amount - (int)amount;
+            if (remain >= 1)
+            {
+                amount = (int)amount + 1;
+                MoneyManager.instance.RemainSoul = remain - 1;
+            }
+            else
+                MoneyManager.instance.RemainSoul = remain;
+            MoneyManager.instance.AddUnrefinedSoul((int)amount);
             LevelUpManager.instance.RequestEndStageCorou();
         }
 

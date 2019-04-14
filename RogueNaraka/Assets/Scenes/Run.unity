@@ -94434,8 +94434,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -263, y: -207}
-  m_SizeDelta: {x: -450.00003, y: -770}
+  m_AnchoredPosition: {x: 292.6, y: 741.4001}
+  m_SizeDelta: {x: -248.43002, y: -752.42}
   m_Pivot: {x: -0.15, y: 1.2}
 --- !u!114 &1904657810
 MonoBehaviour:
@@ -94451,7 +94451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cachedTransform: {fileID: 1904657809}
   isMoveToMouse: 1
-  movePos: {x: -30, y: 0, z: 0}
+  movePos: {x: 0, y: 20, z: 0}
 --- !u!114 &1904657811
 MonoBehaviour:
   m_ObjectHideFlags: 0

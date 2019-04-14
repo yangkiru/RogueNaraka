@@ -68,7 +68,7 @@ public class GameDatabase : ScriptableObject
     [ContextMenu("UnitCostSync")]
     public void UnitCostSync()
     {
-        List<int> costList = new List<int>();
+        List<float> costList = new List<float>();
         for(int i = 0; i < enemies.Length; i++)
         {
             enemies[i].id = i;
@@ -130,7 +130,7 @@ public class GameDatabase : ScriptableObject
 [Serializable]
 public struct UnitCost
 {
-    public int cost;
+    public float cost;
     public int[] unitId;
 }
 
@@ -139,7 +139,7 @@ public class UnitData : ICloneable
 {
     public string name;
     public int id;
-    public int cost;
+    public float cost;
     public int stage;
     public int maxStage;
     public int weapon;

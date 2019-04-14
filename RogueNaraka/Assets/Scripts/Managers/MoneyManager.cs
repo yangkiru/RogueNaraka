@@ -24,6 +24,8 @@ public class MoneyManager : MonoBehaviour {
     }
     [SerializeField][ReadOnly]
     private int _soul;
+    public float RemainSoul { get { return remainSoul; } set { remainSoul = value; } }
+    private float remainSoul = 0;
 
     public float refiningRate { get { return PlayerPrefs.GetFloat("refiningRate"); } set { PlayerPrefs.SetFloat("refiningRate", value); } }
 

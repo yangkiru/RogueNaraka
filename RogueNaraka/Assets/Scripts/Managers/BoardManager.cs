@@ -186,7 +186,7 @@ public class BoardManager : MonoBehaviour {
             AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
 
 
-        int cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];
+        float cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];
 
         while(cost > 0)
             SpawnRandomEnemy(ref cost);
@@ -234,7 +234,7 @@ public class BoardManager : MonoBehaviour {
         StartCoroutine(StageTxtEffect());
     }
 
-    public void SpawnRandomEnemy(ref int cost)
+    public void SpawnRandomEnemy(ref float cost)
     {
         UnitCost[] unitCosts = GameDatabase.instance.unitCosts;//코스트 별 유닛들
 
