@@ -9,7 +9,7 @@ AnimatorOverrideController:
   m_Name: Slime2Controller
   m_Controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: bbc50bf140054f34c8ddc707fc233d3f, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: bbc50bf140054f34c8ddc707fc233d3f, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 389045224d1f5994691db022006116bc, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 93334271863df66458b94ba9f13a920b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a39c32ff78a768d408cf41178f18f738, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 81d48df1fde033847ad4afc52b8f4734, type: 2}

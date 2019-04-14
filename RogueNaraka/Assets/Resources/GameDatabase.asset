@@ -45,7 +45,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 5
     controller: {fileID: 9100000, guid: 2844019156390b340918dfde20743908, type: 2}
-    deathEffectController: {fileID: 0}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 1
@@ -486,7 +487,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
-    deathEffectController: {fileID: 9100000, guid: c06f827e328a6cb4095c31a6890fb253,
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
       type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
@@ -542,7 +543,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 5affb1d8803e4394d84cefbf8cf49a6c, type: 2}
-    deathEffectController: {fileID: 22100000, guid: c5c934cfd0b11d740a3419e0ee620993,
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
       type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
@@ -598,7 +599,7 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
-    deathEffectController: {fileID: 22100000, guid: a6cd392170bc97e4baf681980670332e,
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
       type: 2}
     color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1798,7 +1799,7 @@ MonoBehaviour:
     unitId: 04000000
   - cost: 4
     unitId: 0500000006000000
-  - cost: 0.33
+  - cost: 0.3
     unitId: 070000000800000009000000
   skills:
   - name: ThunderStrike
