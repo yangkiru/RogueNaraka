@@ -64,15 +64,15 @@ MonoBehaviour:
     decelerationRate: 0
     limitTime: 0
     shadowPos:
+    - {x: 0.15, y: -0.4}
+    - {x: 0.2, y: -0.45}
+    - {x: 0.15, y: -0.35}
+    - {x: 0.2, y: -0.45}
     - {x: 0.3, y: -0.4}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    - {x: 0, y: 0}
-    shadowZAngle: -125
+    - {x: 0.15, y: -0.45}
+    - {x: 0.15, y: -0.45}
+    - {x: 0.2, y: -0.45}
+    shadowZAngle: -135
     shadowXFlip: 1
     order: 0
     effects: []
@@ -129,7 +129,11 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos: []
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
     shadowZAngle: 0
     shadowXFlip: 0
     order: -100
@@ -186,7 +190,11 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos: []
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
     shadowZAngle: 0
     shadowXFlip: 0
     order: -100
@@ -243,9 +251,11 @@ MonoBehaviour:
     accelerationRate: 0.7
     decelerationRate: 0.5
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
-    shadowXFlip: 0
+    shadowPos:
+    - {x: 0.15, y: -0.25}
+    - {x: 0.2, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 1
     order: 100
     effects: []
     resistances: []
@@ -300,9 +310,11 @@ MonoBehaviour:
     accelerationRate: 0.7
     decelerationRate: 0.5
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
-    shadowXFlip: 0
+    shadowPos:
+    - {x: 0.15, y: -0.25}
+    - {x: 0.2, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 1
     order: 100
     effects: []
     resistances: []
@@ -357,9 +369,11 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
-    shadowXFlip: 0
+    shadowPos:
+    - {x: 0.2, y: -0.5}
+    - {x: 0.2, y: -0.5}
+    shadowZAngle: 180
+    shadowXFlip: 1
     order: 0
     effects: []
     resistances: []
@@ -414,8 +428,10 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
+    shadowPos:
+    - {x: 0.3, y: -0.6}
+    - {x: 0.15, y: -0.6}
+    shadowZAngle: -135
     shadowXFlip: 0
     order: 0
     effects: []
@@ -471,9 +487,11 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
-    shadowXFlip: 0
+    shadowPos:
+    - {x: 0.3, y: -0.6}
+    - {x: 0.15, y: -0.6}
+    shadowZAngle: -135
+    shadowXFlip: 1
     order: 0
     effects: []
     resistances: []
@@ -529,8 +547,9 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
+    shadowPos:
+    - {x: 0.08, y: -0.3}
+    shadowZAngle: 180
     shadowXFlip: 0
     order: 0
     effects: []
@@ -587,8 +606,9 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
+    shadowPos:
+    - {x: 0.08, y: -0.3}
+    shadowZAngle: 180
     shadowXFlip: 0
     order: 0
     effects: []
@@ -645,8 +665,9 @@ MonoBehaviour:
     accelerationRate: 0.5
     decelerationRate: 1
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
+    shadowPos:
+    - {x: 0.08, y: -0.3}
+    shadowZAngle: 180
     shadowXFlip: 0
     order: 0
     effects: []
@@ -703,9 +724,10 @@ MonoBehaviour:
     accelerationRate: 0.3
     decelerationRate: 2
     limitTime: 0
-    shadowPos: []
-    shadowZAngle: 0
-    shadowXFlip: 0
+    shadowPos:
+    - {x: 0.4, y: -1.5}
+    shadowZAngle: -150
+    shadowXFlip: 1
     order: 0
     effects: []
     resistances:

@@ -878,6 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitRenderer: {fileID: 212722301744784912}
+  UnitAnimator: {fileID: 95588626938235128}
   ShadowRenderer: {fileID: 212897293896442238}
 --- !u!1 &285925836271477854
 GameObject:

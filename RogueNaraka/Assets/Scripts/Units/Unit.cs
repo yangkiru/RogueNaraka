@@ -284,7 +284,7 @@ namespace RogueNaraka.UnitScripts
             _tackleable.Init(data);
 
             //그림자 세팅
-            this.shadow.Initialize(this.data.shadowZAngle);
+            this.shadow.Initialize(this.data.shadowZAngle, this.data.shadowXFlip, this.data.shadowPos);
         }
 
         public void Spawn(Vector3 position)
@@ -342,7 +342,7 @@ namespace RogueNaraka.UnitScripts
             moveable.enabled = false;
             if(autoMoveable) autoMoveable.enabled = false;
             if(attackable) attackable.enabled = false;
-            targetable.enabled = false;
+            if(targetable) targetable.enabled = false;
         }
 
         public void Kill(bool isTxt = true)
