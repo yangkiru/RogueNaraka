@@ -5,7 +5,7 @@ using RogueNaraka.BulletScripts;
 
 namespace RogueNaraka.SkillScripts
 {
-    public class FlameShoes : DashShoes
+    public class FlameShoes : Skill
     {
         public override void Use(Vector3 mp)
         {
