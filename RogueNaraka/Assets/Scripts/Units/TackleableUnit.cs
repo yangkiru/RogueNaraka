@@ -98,13 +98,14 @@ namespace RogueNaraka
             {
                 float t = unit.data.tackleDelay;
 
-                if(_isTackle)
+                if(_isTackle && BoardManager.instance.isReady)
                     Tackle();
 
                 do
                 {
                     yield return null;
-                    t -= Mathf.Max(Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f));
+                    if(!unit.isStun)
+                        t -= Mathf.Max(0, Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f));
                 } while (t > 0);
             }
         }
