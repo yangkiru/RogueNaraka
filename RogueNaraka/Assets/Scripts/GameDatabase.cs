@@ -162,6 +162,7 @@ public class UnitData : ICloneable
     public float accelerationRate;
     public float decelerationRate;
     public float limitTime;
+    public float rewardExp;
     public Vector2 shadowPos;
     public Order order;
     public EffectData[] effects;

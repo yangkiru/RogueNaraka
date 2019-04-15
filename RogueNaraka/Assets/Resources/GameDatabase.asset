@@ -63,6 +63,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 0
     shadowPos: {x: 0.2, y: -0.45}
     order: 0
     effects: []
@@ -119,6 +120,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 2
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
@@ -174,6 +176,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 3
     shadowPos: {x: 0.05, y: -0.05}
     order: -100
     effects: []
@@ -229,6 +232,7 @@ MonoBehaviour:
     accelerationRate: 0.7
     decelerationRate: 0.5
     limitTime: 0
+    rewardExp: 5
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
@@ -284,6 +288,7 @@ MonoBehaviour:
     accelerationRate: 0.7
     decelerationRate: 0.5
     limitTime: 0
+    rewardExp: 6.5
     shadowPos: {x: 0.05, y: -0.3}
     order: 100
     effects: []
@@ -339,6 +344,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 7
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -394,6 +400,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 6
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -449,6 +456,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 0
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -505,6 +513,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 1
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -561,6 +570,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
+    rewardExp: 1.3
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -617,6 +627,7 @@ MonoBehaviour:
     accelerationRate: 0.5
     decelerationRate: 1
     limitTime: 0
+    rewardExp: 1.5
     shadowPos: {x: 0.05, y: -0.3}
     order: 0
     effects: []
@@ -673,6 +684,7 @@ MonoBehaviour:
     accelerationRate: 0.3
     decelerationRate: 2
     limitTime: 0
+    rewardExp: 100
     shadowPos: {x: 0, y: 0}
     order: 0
     effects: []
@@ -733,6 +745,7 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 2.5
+    rewardExp: 0
     shadowPos: {x: 0, y: -1}
     order: 100
     effects: []
@@ -788,6 +801,7 @@ MonoBehaviour:
     accelerationRate: 2
     decelerationRate: 100
     limitTime: 1
+    rewardExp: 0
     shadowPos: {x: 0.2, y: -0.45}
     order: -200
     effects: []

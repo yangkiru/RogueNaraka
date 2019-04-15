@@ -1,6 +1,7 @@
 ﻿using RogueNaraka.UnitScripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,9 +20,15 @@ public class DeathManager : MonoBehaviour
     public TextMeshProUGUI unSoulTxt;
     public TextMeshProUGUI soulTxt;
 
+    private List<int> huntedUnitNumList = new List<int>();
+
     void Awake()
     {
         instance = this;
+        
+        for(int i = 0; i < GameDatabase.instance.enemies.Count(); ++i) {
+            this.huntedUnitNumList.Add(0);
+        }
     }
 
     public void SetDeathPnl(bool value)
@@ -254,5 +261,26 @@ public class DeathManager : MonoBehaviour
             imgRect.localScale = Vector3.Lerp(imgRect.localScale, origin, tt / t);
         }
         imgRect.localScale = origin;
+    }
+
+    public List<int> GetHuntedUnitNumList() {
+        return this.huntedUnitNumList.ToList();
+    }
+
+    public int GetHuntedUnitNum(int _unitId) {
+        if(_unitId < 0 || _unitId >= this.huntedUnitNumList.Count) {
+            throw new System.ArgumentException(string.Format("Unit Id is Incorrect! Id : {0}", _unitId));
+        }
+        return this.huntedUnitNumList[_unitId];
+    }
+
+    public void ReceiveHuntedUnit(int _unitId) {
+        this.huntedUnitNumList[_unitId] += 1;
+    }
+
+    public void ClearHuntedUnitList() {
+        for(int i = 0; i < this.huntedUnitNumList.Count; ++i) {
+            this.huntedUnitNumList[i] = 0;
+        }
     }
 }
