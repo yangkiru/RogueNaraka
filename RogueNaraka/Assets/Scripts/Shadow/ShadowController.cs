@@ -19,10 +19,15 @@ namespace RogueNaraka.ShadowScripts {
 
         void LateUpdate() {
             if(this.ShadowRenderer.sprite != this.UnitRenderer.sprite) {
-                this.ShadowRenderer.sprite = this.UnitRenderer.sprite;
-                if(this.wayChecker != null) {
+                
+                if (this.wayChecker != null)
+                {
+                    this.ShadowRenderer.sprite = this.UnitRenderer.sprite;
+                    this.ShadowRenderer.enabled = true;
                     this.wayChecker.CheckWay(UnitAnimator.GetFloat("x"), UnitAnimator.GetFloat("y"));
                 }
+                else
+                    this.ShadowRenderer.enabled = false;
             }
         }
 
@@ -31,6 +36,7 @@ namespace RogueNaraka.ShadowScripts {
             this.ShadowRenderer.flipX = _flipX;
             switch(_posArr.Length) {
                 case 0:
+                    this.wayChecker = null;
                 break;
                 case 1:
                     this.wayChecker = new OneWayShadowChecker(this, _posArr);

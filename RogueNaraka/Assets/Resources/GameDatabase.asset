@@ -787,9 +787,10 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 2.5
-    shadowPos: []
-    shadowZAngle: 0
-    shadowXFlip: 0
+    shadowPos:
+    - {x: 0.45, y: -1.58}
+    shadowZAngle: -150
+    shadowXFlip: 1
     order: 100
     effects: []
     resistances: []
