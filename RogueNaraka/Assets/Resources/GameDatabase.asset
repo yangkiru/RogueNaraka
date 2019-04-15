@@ -1589,6 +1589,44 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: 
+  - name: Crash
+    id: 22
+    dmg: 0.5
+    related: 2
+    controller: {fileID: 22100000, guid: a11c41e27517b5745baddafe24efd672, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 1
+    delay: 0.1
+    limitTime: 1
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    isSplash: 1
+    isHitableWall: 1
+    isBounceable: 0
+    shake:
+      time: 0.15
+      power: 0.2
+      gap: 0.01
+      isOnHit: 0
+    order: -200
+    effects:
+    - type: 0
+      value: 0
+      time: 0.2
+    - type: 4
+      value: 0
+      time: 3
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: iceBreak
   weapons:
   - name: MagicBall
     id: 0
@@ -2144,16 +2182,16 @@ MonoBehaviour:
     nameLang:
     - Jumping Shoes
     - "\uB3C4\uC57D \uC2E0\uBC1C"
-    bulletIds: 
+    bulletIds: 16000000
     unitIds: 
-    spr: {fileID: 21300000, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
-    id: 8
+    spr: {fileID: 21300000, guid: bb76797f234450d4683d9a9386f06487, type: 3}
+    id: 9
     level: 1
     cost: 500
-    coolTime: 3
+    coolTime: 7
     coolTimeLeft: 0
     manaCost: 1
-    size: 0.75
+    size: 2
     isCircleToPlayer: 1
     isDeath: 0
     isBasic: 1
@@ -2166,15 +2204,11 @@ MonoBehaviour:
     - name: 5
       value: 2
     levelUp:
-      manaCost: 0.7
-      size: 0
-      coolTime: 0
+      manaCost: 0.5
+      size: 0.5
+      coolTime: -0.5
       effects: []
-      values:
-      - name: 1
-        value: 1
-      - name: 2
-        value: 0.01
+      values: []
     description:
     - 
     - "\uBCBD\uC5D0 \uB2FF\uC73C\uBA74 \uD295\uAE30\uB294 \uD1A0\uB124\uC774\uB3C4\uB97C

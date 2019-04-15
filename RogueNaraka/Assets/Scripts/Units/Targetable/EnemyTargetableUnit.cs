@@ -18,7 +18,7 @@ namespace RogueNaraka.UnitScripts.Targetable
             {
                 if (isFirst)
                 {
-                    if (list[i].targetable.isTargetable)
+                    if (list[i].targetable.IsTargetable)
                     {
                         min = list[i];
                         minDistance = Distance(list[i]);
@@ -32,7 +32,7 @@ namespace RogueNaraka.UnitScripts.Targetable
 
                 }
 
-                if (!list[i].targetable.isTargetable)
+                if (!list[i].targetable.IsTargetable)
                     continue;
 
                 float newDistance = Distance(list[i]);

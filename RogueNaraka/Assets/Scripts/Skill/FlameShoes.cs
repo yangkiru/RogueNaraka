@@ -2,6 +2,7 @@
 using System.Collections;
 using RogueNaraka.UnitScripts;
 using RogueNaraka.BulletScripts;
+using RogueNaraka.TimeScripts;
 
 namespace RogueNaraka.SkillScripts
 {
@@ -48,7 +49,7 @@ namespace RogueNaraka.SkillScripts
                     remain -= reduce;
                 }
 
-                flameTime -= Time.fixedDeltaTime;
+                flameTime -= TimeManager.Instance.FixedDeltaTime;
 
                 if (flameTime <= 0)
                 {
