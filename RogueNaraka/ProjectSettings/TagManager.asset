@@ -21,7 +21,7 @@ TagManager:
   - StatOrb
   - StatPot
   - SoulParticle
-  - 
+  - s
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 4171345299
+    locked: 0
+  - name: Shadow
+    uniqueID: 564145225
     locked: 0
   - name: Object
     uniqueID: 1498647319
