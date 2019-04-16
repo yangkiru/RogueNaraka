@@ -212,7 +212,7 @@ namespace RogueNaraka.BulletScripts.Hitable
                 
                 if(bullet.data.isBounceable)
                 {
-                    Debug.Log(name + " hit " + coll.name + ":wall");
+                    //Debug.Log(name + " hit " + coll.name + ":wall");
                     BounceableBullet bounce = GetComponent<BounceableBullet>();
                     Vector3 pos = coll.transform.position;
                     BounceableBullet.DIRECTION direction;
@@ -225,7 +225,6 @@ namespace RogueNaraka.BulletScripts.Hitable
                     else
                         direction = BounceableBullet.DIRECTION.LEFT;
 
-                    Debug.Log(direction);
                     bounce.Bounce(direction);
                 }
                 return HIT.WALL;
