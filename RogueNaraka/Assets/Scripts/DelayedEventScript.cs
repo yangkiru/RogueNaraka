@@ -9,7 +9,7 @@ public class DelayedEventScript : MonoBehaviour
     public GameObject pauseObj;
     public DelayedEvent onEnd;
     // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(DelayCorou());
     }

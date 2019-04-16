@@ -19,6 +19,8 @@ public class DeathManager : MonoBehaviour
     public TextMeshProUGUI unSoulTxt;
     public TextMeshProUGUI soulTxt;
 
+    public Canvas stageCanvas;
+
     void Awake()
     {
         instance = this;
@@ -51,6 +53,8 @@ public class DeathManager : MonoBehaviour
         GameManager.instance.SetSettingBtn(true);
 
         AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomDeathMusic());
+
+        stageCanvas.sortingLayerName = "UI";
     }
 
     IEnumerator SoulPnlCorou(float t)
@@ -234,6 +238,8 @@ public class DeathManager : MonoBehaviour
         BoardManager.instance.player.mpable.SetFullMp();
 
         GameManager.instance.SetSettingBtn(true);
+
+        stageCanvas.sortingLayerName = "Wall";
     }
 
     public void OpenSoulShop()
