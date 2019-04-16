@@ -1693,11 +1693,11 @@ MonoBehaviour:
     guideSpeed: 0
     spinSpeed: 0
     size: 1
-    delay: 0.1
-    limitTime: 1
-    disapearStartTime: 0
-    disapearDuration: 0
-    pierce: 1
+    delay: 10
+    limitTime: 1.5
+    disapearStartTime: 0.5
+    disapearDuration: 1
+    pierce: 99999
     isSplash: 1
     isHitableWall: 1
     isBounceable: 0
