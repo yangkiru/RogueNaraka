@@ -117,7 +117,7 @@ public class RageManager : MonoBehaviour
         vec.y = value;
         rageBigPnl.rectTransform.localScale = vec;
 
-        float t = 3;
+        float t = 1.5f;
         do
         {
             yield return null;
