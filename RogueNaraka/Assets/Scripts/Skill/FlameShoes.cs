@@ -2,10 +2,11 @@
 using System.Collections;
 using RogueNaraka.UnitScripts;
 using RogueNaraka.BulletScripts;
+using RogueNaraka.TimeScripts;
 
 namespace RogueNaraka.SkillScripts
 {
-    public class FlameShoes : DashShoes
+    public class FlameShoes : Skill
     {
         public override void Use(Vector3 mp)
         {
@@ -48,7 +49,7 @@ namespace RogueNaraka.SkillScripts
                     remain -= reduce;
                 }
 
-                flameTime -= Time.fixedDeltaTime;
+                flameTime -= TimeManager.Instance.FixedDeltaTime;
 
                 if (flameTime <= 0)
                 {

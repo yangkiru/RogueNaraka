@@ -4,6 +4,7 @@ using UnityEngine;
 using RogueNaraka.UnitScripts.Targetable;
 using RogueNaraka.UnitScripts.AutoMoveable;
 using RogueNaraka.UnitScripts.Attackable;
+using RogueNaraka.ShadowScripts;
 
 namespace RogueNaraka.UnitScripts
 {
@@ -125,6 +126,8 @@ namespace RogueNaraka.UnitScripts
         public bool isStun;
 
         bool isDisabled;
+
+        public ShadowController shadow;
 
         #endregion
 
@@ -279,6 +282,9 @@ namespace RogueNaraka.UnitScripts
             _collider.enabled = true;
 
             _tackleable.Init(data);
+
+            //그림자 세팅
+            this.shadow.Initialize(this.data.shadowZAngle, this.data.shadowXFlip, this.data.shadowPos);
         }
 
         public void Spawn(Vector3 position)
@@ -336,7 +342,7 @@ namespace RogueNaraka.UnitScripts
             moveable.enabled = false;
             if(autoMoveable) autoMoveable.enabled = false;
             if(attackable) attackable.enabled = false;
-            targetable.enabled = false;
+            if(targetable) targetable.enabled = false;
         }
 
         public void Kill(bool isTxt = true)

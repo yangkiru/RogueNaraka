@@ -162,8 +162,9 @@ public class UnitData : ICloneable
     public float accelerationRate;
     public float decelerationRate;
     public float limitTime;
-    public float rewardExp;
-    public Vector2 shadowPos;
+    public Vector2[] shadowPos;
+    public float shadowZAngle;
+    public bool shadowXFlip;
     public Order order;
     public EffectData[] effects;
     public EffectResistance[] resistances;
@@ -588,8 +589,8 @@ public enum MOVE_TYPE
     RANDOM,
     RUSH,//근접 공격
     STATUE,//고정
-    DISTANCE,//거리 유지
-    RUN,//도망
+    DISTANCE,//거리 ?��?
+    RUN,//?�망
     REST_RUSH,
     FOLLOW,
     BOSS0

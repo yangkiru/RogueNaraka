@@ -63,8 +63,17 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 0
-    shadowPos: {x: 0.2, y: -0.45}
+    shadowPos:
+    - {x: 0.15, y: -0.4}
+    - {x: 0.2, y: -0.45}
+    - {x: 0.15, y: -0.35}
+    - {x: 0.2, y: -0.45}
+    - {x: 0.3, y: -0.4}
+    - {x: 0.15, y: -0.45}
+    - {x: 0.15, y: -0.45}
+    - {x: 0.2, y: -0.45}
+    shadowZAngle: -135
+    shadowXFlip: 1
     order: 0
     effects: []
     resistances: []
@@ -120,8 +129,13 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 2
-    shadowPos: {x: 0.05, y: -0.05}
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    shadowZAngle: 0
+    shadowXFlip: 0
     order: -100
     effects: []
     resistances: []
@@ -176,8 +190,13 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 3
-    shadowPos: {x: 0.05, y: -0.05}
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    shadowZAngle: 0
+    shadowXFlip: 0
     order: -100
     effects: []
     resistances: []
@@ -232,8 +251,11 @@ MonoBehaviour:
     accelerationRate: 0.7
     decelerationRate: 0.5
     limitTime: 0
-    rewardExp: 5
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.15, y: -0.25}
+    - {x: 0.2, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 1
     order: 100
     effects: []
     resistances: []
@@ -288,8 +310,11 @@ MonoBehaviour:
     accelerationRate: 0.7
     decelerationRate: 0.5
     limitTime: 0
-    rewardExp: 6.5
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.15, y: -0.25}
+    - {x: 0.2, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 1
     order: 100
     effects: []
     resistances: []
@@ -344,8 +369,11 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 7
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.2, y: -0.5}
+    - {x: 0.2, y: -0.5}
+    shadowZAngle: 180
+    shadowXFlip: 1
     order: 0
     effects: []
     resistances: []
@@ -400,8 +428,11 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 6
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.3, y: -0.6}
+    - {x: 0.15, y: -0.6}
+    shadowZAngle: -135
+    shadowXFlip: 0
     order: 0
     effects: []
     resistances: []
@@ -456,8 +487,11 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 0
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.3, y: -0.6}
+    - {x: 0.15, y: -0.6}
+    shadowZAngle: -135
+    shadowXFlip: 1
     order: 0
     effects: []
     resistances: []
@@ -513,8 +547,10 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 1
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.08, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 0
     order: 0
     effects: []
     resistances: []
@@ -570,8 +606,10 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    rewardExp: 1.3
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.08, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 0
     order: 0
     effects: []
     resistances: []
@@ -627,8 +665,10 @@ MonoBehaviour:
     accelerationRate: 0.5
     decelerationRate: 1
     limitTime: 0
-    rewardExp: 1.5
-    shadowPos: {x: 0.05, y: -0.3}
+    shadowPos:
+    - {x: 0.08, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 0
     order: 0
     effects: []
     resistances: []
@@ -684,8 +724,10 @@ MonoBehaviour:
     accelerationRate: 0.3
     decelerationRate: 2
     limitTime: 0
-    rewardExp: 100
-    shadowPos: {x: 0, y: 0}
+    shadowPos:
+    - {x: 0.4, y: -1.5}
+    shadowZAngle: -150
+    shadowXFlip: 1
     order: 0
     effects: []
     resistances:
@@ -745,8 +787,10 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 2.5
-    rewardExp: 0
-    shadowPos: {x: 0, y: -1}
+    shadowPos:
+    - {x: 0.45, y: -1.58}
+    shadowZAngle: -150
+    shadowXFlip: 1
     order: 100
     effects: []
     resistances: []
@@ -801,8 +845,9 @@ MonoBehaviour:
     accelerationRate: 2
     decelerationRate: 100
     limitTime: 1
-    rewardExp: 0
-    shadowPos: {x: 0.2, y: -0.45}
+    shadowPos: []
+    shadowZAngle: 0
+    shadowXFlip: 0
     order: -200
     effects: []
     resistances: []
@@ -1603,6 +1648,44 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: 
+  - name: Crash
+    id: 22
+    dmg: 0.5
+    related: 2
+    controller: {fileID: 22100000, guid: a11c41e27517b5745baddafe24efd672, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 1
+    delay: 0.1
+    limitTime: 1
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    isSplash: 1
+    isHitableWall: 1
+    isBounceable: 0
+    shake:
+      time: 0.15
+      power: 0.2
+      gap: 0.01
+      isOnHit: 0
+    order: -200
+    effects:
+    - type: 0
+      value: 0
+      time: 0.2
+    - type: 4
+      value: 0
+      time: 3
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: iceBreak
   weapons:
   - name: MagicBall
     id: 0
@@ -2146,6 +2229,45 @@ MonoBehaviour:
         value: 1
       - name: 2
         value: 0.01
+    description:
+    - "Shoot a tornado. The tornado bounces off the wall.\r\nWhen an enemy hits a
+      tornado, it is stunned (Damage is proportional to TEC )."
+    - "\uBCBD\uC5D0 \uB2FF\uC73C\uBA74 \uD295\uAE30\uB294 \uD1A0\uB124\uC774\uB3C4\uB97C
+      \uC3DC\uB2E4. \uD1A0\uB124\uC774\uB3C4\uC5D0 \uB2FF\uC73C\uBA74 \uAE30\uC220\uB825\uC5D0
+      \uBE44\uB840\uD558\uB294 \uD53C\uD574\uB97C \uC785\uACE0 \uAE30\uC808\uD558\uBA70
+      \uBC00\uB824\uB09C\uB2E4."
+    useSFX: flameShoes
+  - name: JumpingShoes
+    nameLang:
+    - Jumping Shoes
+    - "\uB3C4\uC57D \uC2E0\uBC1C"
+    bulletIds: 16000000
+    unitIds: 
+    spr: {fileID: 21300000, guid: bb76797f234450d4683d9a9386f06487, type: 3}
+    id: 9
+    level: 1
+    cost: 500
+    coolTime: 7
+    coolTimeLeft: 0
+    manaCost: 1
+    size: 2
+    isCircleToPlayer: 1
+    isDeath: 0
+    isBasic: 1
+    effects: []
+    values:
+    - name: 1
+      value: 3
+    - name: 2
+      value: 0.025
+    - name: 5
+      value: 2
+    levelUp:
+      manaCost: 0.5
+      size: 0.5
+      coolTime: -0.5
+      effects: []
+      values: []
     description:
     - 
     - "\uBCBD\uC5D0 \uB2FF\uC73C\uBA74 \uD295\uAE30\uB294 \uD1A0\uB124\uC774\uB3C4\uB97C
