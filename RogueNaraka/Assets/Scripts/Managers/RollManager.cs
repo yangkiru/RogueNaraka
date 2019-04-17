@@ -190,6 +190,7 @@ public class RollManager : MonoBehaviour {
 
     public void StageStart()
     {
+        BoardManager.instance.StageUp();
         BoardManager.instance.InitBoard();
         LevelUpManager.IsLevelUp = false;
     }

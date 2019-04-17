@@ -79,7 +79,6 @@ public class LevelUpManager : MonoBehaviour
     {
         Debug.Log("LevelUp");
         BoardManager.instance.ClearStage();
-        BoardManager.instance.StageUp();
         GameManager.instance.SetPause(true);
         IsLevelUp = true;
         statManager.SyncStatUpgradeTxt();
