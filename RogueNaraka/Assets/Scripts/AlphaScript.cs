@@ -1,30 +1,51 @@
-﻿using System.Collections;
+﻿using RogueNaraka.TimeScripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AlphaScript : MonoBehaviour
 {
-    public Image mainImage;
-    public TMPro.TextMeshProUGUI mainTxt;
+    public GameObject target;
+    Image mainImage;
+    TMPro.TextMeshProUGUI mainTxt;
     public Image[] images;
     public TMPro.TextMeshProUGUI[] txts;
     public ParticleSystem[] particles;
+
+    public bool isAlphaDownOnEnable;
+    public float alphaDownDelay;
+    public float alphaDownTime;
 
     float originAlpha;
     float currentAlpha;
     float lastAlpha = -1;
 
+    event System.Action onAlphaZero;
+    float leftTime;
+
     List<float> alphas = new List<float>();
+
+    enum STATE { NOT_READY, READY, DOWN }
+    STATE currentState;
+    STATE lastState;
 
     private void Reset()
     {
         mainImage = GetComponent<Image>();
         mainTxt = GetComponent<TMPro.TextMeshProUGUI>();
+        target = mainImage ? mainImage.gameObject : mainTxt.gameObject;
+    }
+
+    private void OnEnable()
+    {
+        currentState = isAlphaDownOnEnable ? STATE.READY : STATE.NOT_READY;
     }
 
     private void Start()
     {
+        mainImage = target.GetComponent<Image>();
+        mainTxt = target.GetComponent<TMPro.TextMeshProUGUI>();
         originAlpha = mainImage ? mainImage.color.a : mainTxt ? mainTxt.color.a : 1;
         for (int i = 0; i < images.Length; i++)
         {
@@ -36,8 +57,55 @@ public class AlphaScript : MonoBehaviour
             alphas.Add(particles[i].main.startColor.color.a);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        switch(currentState)
+        {
+            case STATE.NOT_READY:
+                break;
+            case STATE.READY:
+                if (currentState != lastState)
+                {
+                    leftTime = alphaDownDelay;
+                    lastState = currentState;
+                }
+                leftTime -= TimeManager.Instance.FixedDeltaTime;
+                if (leftTime <= 0)
+                    currentState = STATE.DOWN;
+                break;
+            case STATE.DOWN:
+                if (currentState != lastState)
+                {
+                    leftTime = alphaDownTime;
+                    lastState = currentState;
+                }
+                leftTime -= TimeManager.Instance.FixedDeltaTime;
+                Color color = mainImage ? mainImage.color : mainTxt ? mainTxt.color : Color.clear;
+                if (alphaDownTime == 0)
+                    color.a = 0;
+                else
+                    color.a = Mathf.Lerp(0, originAlpha, leftTime / alphaDownTime);
+                if (mainImage)
+                    mainImage.color = color;
+                else if (mainTxt)
+                    mainTxt.color = color;
+                else
+                    Debug.LogError("AlphaScript:Doesn't have Image or Text.");
+                if (leftTime <= 0)
+                {
+                    if (onAlphaZero != null)
+                        onAlphaZero.Invoke();
+                    currentState = STATE.NOT_READY;
+                    target.SetActive(false);
+                    color.a = originAlpha;
+                    if (mainImage)
+                        mainImage.color = color;
+                    else if (mainTxt)
+                        mainTxt.color = color;
+                }
+                break;
+        }
+
         currentAlpha = mainImage ? mainImage.color.a : mainTxt ? mainTxt.color.a : 1;
 
         if (lastAlpha != currentAlpha)
