@@ -3257,7 +3257,7 @@ MonoBehaviour:
     size: 0.75
     isCircleToPlayer: 1
     isDeath: 0
-    isBasic: 1
+    isBasic: 0
     effects: []
     values:
     - name: 1
@@ -3300,7 +3300,7 @@ MonoBehaviour:
     size: 2
     isCircleToPlayer: 1
     isDeath: 0
-    isBasic: 1
+    isBasic: 0
     effects: []
     values:
     - name: 1
