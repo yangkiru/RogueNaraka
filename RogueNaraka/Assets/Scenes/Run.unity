@@ -14465,6 +14465,11 @@ MonoBehaviour:
   isAlphaDownOnEnable: 0
   alphaDownDelay: 0
   alphaDownTime: 0
+  onAlphaZero:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AlphaScript+AlphaEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &198046428
 GameObject:
   m_ObjectHideFlags: 0
@@ -46794,6 +46799,11 @@ MonoBehaviour:
   isAlphaDownOnEnable: 0
   alphaDownDelay: 0
   alphaDownTime: 0
+  onAlphaZero:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AlphaScript+AlphaEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!223 &950153914
 Canvas:
   m_ObjectHideFlags: 0
@@ -52083,6 +52093,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1895354597}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: Pump
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -93292,9 +93313,9 @@ RectTransform:
   m_Father: {fileID: 1904657809}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 115.785, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1842967632
@@ -95658,6 +95679,7 @@ GameObject:
   - component: {fileID: 1895354600}
   - component: {fileID: 1895354599}
   - component: {fileID: 1895354601}
+  - component: {fileID: 1895354602}
   m_Layer: 5
   m_Name: PreparingBanner
   m_TagString: Untagged
@@ -95742,6 +95764,33 @@ MonoBehaviour:
   isAlphaDownOnEnable: 1
   alphaDownDelay: 1.5
   alphaDownTime: 2
+  onAlphaZero:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AlphaScript+AlphaEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &1895354602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895354597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e264fa5cb6049b54d828cafd1007d4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pumpSize: {x: 1.2, y: 1.2, z: 1}
+  upTime: 0.1
+  downTime: 0.1
+  isPumpOnEnable: 1
+  cachedTransform: {fileID: 1895354598}
+  onPumpEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1895750801
 GameObject:
   m_ObjectHideFlags: 0
@@ -99247,6 +99296,11 @@ MonoBehaviour:
   isAlphaDownOnEnable: 0
   alphaDownDelay: 0
   alphaDownTime: 0
+  onAlphaZero:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AlphaScript+AlphaEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &1999330945
 MonoBehaviour:
   m_ObjectHideFlags: 0
