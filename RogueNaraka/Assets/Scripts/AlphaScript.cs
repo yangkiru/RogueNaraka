@@ -74,7 +74,7 @@ public class AlphaScript : MonoBehaviour
                     leftTime = alphaDownDelay;
                     lastState = currentState;
                 }
-                leftTime -= TimeManager.Instance.FixedDeltaTime;
+                leftTime -= Time.fixedUnscaledDeltaTime;
                 if (leftTime <= 0)
                     currentState = STATE.DOWN;
                 break;
@@ -84,7 +84,7 @@ public class AlphaScript : MonoBehaviour
                     leftTime = alphaDownTime;
                     lastState = currentState;
                 }
-                leftTime -= TimeManager.Instance.FixedDeltaTime;
+                leftTime -= Time.fixedUnscaledDeltaTime;
                 Color color = mainImage ? mainImage.color : mainTxt ? mainTxt.color : Color.clear;
                 if (alphaDownTime == 0)
                     color.a = 0;

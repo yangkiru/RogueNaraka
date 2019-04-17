@@ -63,7 +63,7 @@ public class PumpScript : MonoBehaviour
                         leftTime = upTime;
                         lastState = currentState;
                     }
-                    leftTime -= TimeManager.Instance.FixedDeltaTime;
+                    leftTime -= Time.fixedUnscaledDeltaTime;
                     Vector3 size;
                     if (leftTime <= 0)
                     {
@@ -84,7 +84,7 @@ public class PumpScript : MonoBehaviour
                         leftTime = downTime;
                         lastState = currentState;
                     }
-                    leftTime -= TimeManager.Instance.FixedDeltaTime;
+                    leftTime -= Time.fixedUnscaledDeltaTime;
                     Vector3 size;
                     if (leftTime <= 0)
                     {
