@@ -392,7 +392,7 @@ public class SoulShopManager : MonoBehaviour
     public TextMeshProUGUI weaponDescriptionTxt;
     public Image weaponBar;
     public Button weaponExpBtn;
-    public Image weaponLevelUpPnl;
+    public GameObject weaponLevelUpBanner;
     int weaponId = -1;
     int _weaponId = -1;
 
@@ -538,8 +538,7 @@ public class SoulShopManager : MonoBehaviour
             currentLevel = WeaponPnlUpdate(exp);
             if(currentLevel != lastLevel)//무기 레벨 업
             {
-                StopCoroutine("WeaponLevelUpPnlCorou");
-                StartCoroutine("WeaponLevelUpPnlCorou");
+                weaponLevelUpBanner.SetActive(true);
                 yield break;
             }
             lastLevel = currentLevel;
@@ -559,63 +558,6 @@ public class SoulShopManager : MonoBehaviour
                 }
             }
         } while (isSuccess);
-    }
-
-    IEnumerator WeaponLevelUpPnlCorou()
-    {
-        weaponLevelUpPnl.gameObject.SetActive(true);
-        weaponLevelUpPnl.color = Color.black;
-        weaponLevelUpPnl.rectTransform.localScale = Vector3.zero;
-        float value = 0;
-        Vector3 vec = new Vector3(0, 0, 1);
-
-        do
-        {
-            yield return null;
-            value += Time.unscaledDeltaTime * 5;
-            vec.x = value;
-            vec.y = value;
-            weaponLevelUpPnl.rectTransform.localScale = vec;
-        } while (value < 1.2f);
-        value = 1.2f;
-        vec.x = value;
-        vec.y = value;
-        weaponLevelUpPnl.rectTransform.localScale = vec;
-
-        do
-        {
-            yield return null;
-            value -= Time.unscaledDeltaTime * 2;
-            vec.x = value;
-            vec.y = value;
-            weaponLevelUpPnl.rectTransform.localScale = vec;
-        } while (value > 1f);
-        value = 1;
-        vec.x = value;
-        vec.y = value;
-        weaponLevelUpPnl.rectTransform.localScale = vec;
-
-        float t = 1.5f;
-        do
-        {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-        } while (t > 0);
-
-        t = 2;
-        float tt = t;
-        Color color = weaponLevelUpPnl.color;
-
-        do
-        {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-            float amount = Time.unscaledDeltaTime / tt;
-            color.a -= amount;
-            weaponLevelUpPnl.color = color;
-        } while (t > 0);
-
-        weaponLevelUpPnl.gameObject.SetActive(false);
     }
     #endregion
 

@@ -11,6 +11,7 @@ public class PumpScript : MonoBehaviour
     public float upTime;
     public float downTime;
 
+    public bool isUnsclaedTime;
     public bool isPumpOnEnable;
 
     public Transform cachedTransform;
@@ -50,7 +51,7 @@ public class PumpScript : MonoBehaviour
         currentState = STATE.UP;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         switch(currentState)
         {
@@ -63,7 +64,7 @@ public class PumpScript : MonoBehaviour
                         leftTime = upTime;
                         lastState = currentState;
                     }
-                    leftTime -= Time.fixedUnscaledDeltaTime;
+                    leftTime -= isUnsclaedTime ? TimeManager.Instance.UnscaledDeltaTime : TimeManager.Instance.DeltaTime;
                     Vector3 size;
                     if (leftTime <= 0)
                     {
@@ -84,7 +85,7 @@ public class PumpScript : MonoBehaviour
                         leftTime = downTime;
                         lastState = currentState;
                     }
-                    leftTime -= Time.fixedUnscaledDeltaTime;
+                    leftTime -= isUnsclaedTime ? TimeManager.Instance.UnscaledDeltaTime : TimeManager.Instance.DeltaTime;
                     Vector3 size;
                     if (leftTime <= 0)
                     {

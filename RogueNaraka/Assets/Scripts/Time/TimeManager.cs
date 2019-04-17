@@ -24,6 +24,21 @@ namespace RogueNaraka.TimeScripts {
             }
         }
 
+        public float UnscaledDeltaTime
+        {
+            get
+            {
+                if (Time.unscaledDeltaTime > MAX_DELTA_TIME)
+                {
+                    return MAX_DELTA_TIME;
+                }
+                else
+                {
+                    return Time.unscaledDeltaTime;
+                }
+            }
+        }
+
         /// <summary> 유니티 fixedDeltaTime을 리턴합니다. </summary>
         public float FixedDeltaTime { get { return Time.fixedDeltaTime; } }
         

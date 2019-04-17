@@ -16,6 +16,7 @@ public class AlphaScript : MonoBehaviour
     public ParticleSystem[] particles;
 
     public bool isAlphaDownOnEnable;
+    public bool isUnsclaedTime;
     public float alphaDownDelay;
     public float alphaDownTime;
 
@@ -62,7 +63,7 @@ public class AlphaScript : MonoBehaviour
             alphas.Add(particles[i].main.startColor.color.a);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         switch(currentState)
         {
@@ -74,7 +75,7 @@ public class AlphaScript : MonoBehaviour
                     leftTime = alphaDownDelay;
                     lastState = currentState;
                 }
-                leftTime -= Time.fixedUnscaledDeltaTime;
+                leftTime -= isUnsclaedTime ? TimeManager.Instance.UnscaledDeltaTime : TimeManager.Instance.DeltaTime;
                 if (leftTime <= 0)
                     currentState = STATE.DOWN;
                 break;
@@ -84,7 +85,7 @@ public class AlphaScript : MonoBehaviour
                     leftTime = alphaDownTime;
                     lastState = currentState;
                 }
-                leftTime -= Time.fixedUnscaledDeltaTime;
+                leftTime -= isUnsclaedTime ? TimeManager.Instance.UnscaledDeltaTime : TimeManager.Instance.DeltaTime;
                 Color color = mainImage ? mainImage.color : mainTxt ? mainTxt.color : Color.clear;
                 if (alphaDownTime == 0)
                     color.a = 0;

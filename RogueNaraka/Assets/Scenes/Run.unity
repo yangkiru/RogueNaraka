@@ -14455,7 +14455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6385194ee198c46a99b915de819c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 193602790}
   images: []
   txts:
   - {fileID: 1477898156}
@@ -14463,6 +14463,7 @@ MonoBehaviour:
   - {fileID: 1213085216}
   - {fileID: 192088538}
   isAlphaDownOnEnable: 0
+  isUnsclaedTime: 0
   alphaDownDelay: 0
   alphaDownTime: 0
   onAlphaZero:
@@ -32795,7 +32796,7 @@ GameObject:
   - component: {fileID: 571599944}
   - component: {fileID: 571599943}
   m_Layer: 5
-  m_Name: RightFire
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37592,7 +37593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41700003, y: 0.25124994}
   m_AnchorMax: {x: 0.896, y: 0.44750002}
-  m_AnchoredPosition: {x: 0, y: 0.74998474}
+  m_AnchoredPosition: {x: 0, y: 0.75}
   m_SizeDelta: {x: 0, y: 0.5000076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &693158421
@@ -46711,8 +46712,9 @@ GameObject:
   - component: {fileID: 950153911}
   - component: {fileID: 950153913}
   - component: {fileID: 950153914}
+  - component: {fileID: 950153915}
   m_Layer: 5
-  m_Name: BigPanel
+  m_Name: RageBanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46727,7 +46729,7 @@ RectTransform:
   m_GameObject: {fileID: 950153909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.00032, y: 1.00032, z: 1.00032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 130545720}
   - {fileID: 1289782056}
@@ -46789,16 +46791,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6385194ee198c46a99b915de819c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 950153909}
   images:
   - {fileID: 130545721}
   - {fileID: 415925357}
   txts:
   - {fileID: 1289782059}
   particles: []
-  isAlphaDownOnEnable: 0
-  alphaDownDelay: 0
-  alphaDownTime: 0
+  isAlphaDownOnEnable: 1
+  isUnsclaedTime: 0
+  alphaDownDelay: 1.5
+  alphaDownTime: 2
   onAlphaZero:
     m_PersistentCalls:
       m_Calls: []
@@ -46825,6 +46828,29 @@ Canvas:
   m_SortingLayerID: 1797976757
   m_SortingOrder: 5
   m_TargetDisplay: 0
+--- !u!114 &950153915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950153909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e264fa5cb6049b54d828cafd1007d4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pumpSize: {x: 1.2, y: 1.2, z: 1}
+  upTime: 0.1
+  downTime: 0.2
+  isUnsclaedTime: 0
+  isPumpOnEnable: 1
+  cachedTransform: {fileID: 950153910}
+  onPumpEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &956187150
 GameObject:
   m_ObjectHideFlags: 0
@@ -47904,7 +47930,7 @@ MonoBehaviour:
   weaponDescriptionTxt: {fileID: 1044718377}
   weaponBar: {fileID: 188485882}
   weaponExpBtn: {fileID: 1279502953}
-  weaponLevelUpPnl: {fileID: 1999330945}
+  weaponLevelUpBanner: {fileID: 1999330942}
   soulRefRateNameTxt: {fileID: 348526532}
   soulRefRateValueTxt: {fileID: 2008528798}
   soulRefRateBtnTxt: {fileID: 398555302}
@@ -71216,7 +71242,7 @@ MonoBehaviour:
   isRage: 0
   rageBtn: {fileID: 193602792}
   rageSmallPnl: {fileID: 1904657808}
-  rageBigPnl: {fileID: 950153911}
+  rageBanner: {fileID: 950153909}
   fireParticles:
   - {fileID: 1213085216}
   - {fileID: 192088538}
@@ -93313,9 +93339,9 @@ RectTransform:
   m_Father: {fileID: 1904657809}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 115.785, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15, y: -15}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1842967632
@@ -95762,6 +95788,7 @@ MonoBehaviour:
   - {fileID: 1610591183}
   particles: []
   isAlphaDownOnEnable: 1
+  isUnsclaedTime: 0
   alphaDownDelay: 1.5
   alphaDownTime: 2
   onAlphaZero:
@@ -95784,6 +95811,7 @@ MonoBehaviour:
   pumpSize: {x: 1.2, y: 1.2, z: 1}
   upTime: 0.1
   downTime: 0.1
+  isUnsclaedTime: 1
   isPumpOnEnable: 1
   cachedTransform: {fileID: 1895354598}
   onPumpEnd:
@@ -99245,8 +99273,9 @@ GameObject:
   - component: {fileID: 1999330946}
   - component: {fileID: 1999330945}
   - component: {fileID: 1999330944}
+  - component: {fileID: 1999330947}
   m_Layer: 5
-  m_Name: LevelUpPnl
+  m_Name: LevelUpBanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99286,16 +99315,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6385194ee198c46a99b915de819c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1999330942}
   images:
   - {fileID: 2082381580}
   - {fileID: 571599943}
   txts:
   - {fileID: 696241888}
   particles: []
-  isAlphaDownOnEnable: 0
-  alphaDownDelay: 0
-  alphaDownTime: 0
+  isAlphaDownOnEnable: 1
+  isUnsclaedTime: 1
+  alphaDownDelay: 1.5
+  alphaDownTime: 2
   onAlphaZero:
     m_PersistentCalls:
       m_Calls: []
@@ -99338,6 +99368,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999330942}
   m_CullTransparentMesh: 0
+--- !u!114 &1999330947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999330942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e264fa5cb6049b54d828cafd1007d4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pumpSize: {x: 1.2, y: 1.2, z: 0}
+  upTime: 0.1
+  downTime: 0.2
+  isUnsclaedTime: 1
+  isPumpOnEnable: 1
+  cachedTransform: {fileID: 1999330943}
+  onPumpEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &2000002714
 GameObject:
   m_ObjectHideFlags: 0
@@ -103347,7 +103400,7 @@ GameObject:
   - component: {fileID: 2082381581}
   - component: {fileID: 2082381580}
   m_Layer: 5
-  m_Name: LeftFire
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
