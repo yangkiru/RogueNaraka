@@ -1,7 +1,9 @@
 ﻿using RogueNaraka.TimeScripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AlphaScript : MonoBehaviour
@@ -21,7 +23,10 @@ public class AlphaScript : MonoBehaviour
     float currentAlpha;
     float lastAlpha = -1;
 
-    event System.Action onAlphaZero;
+    public AlphaEvent OnAlphaZero { get { return onAlphaZero; } set { onAlphaZero = value; } }
+
+    [SerializeField]
+    AlphaEvent onAlphaZero;
     float leftTime;
 
     List<float> alphas = new List<float>();
@@ -135,4 +140,7 @@ public class AlphaScript : MonoBehaviour
             lastAlpha = currentAlpha;
         }
     }
+
+    [Serializable]
+    public class AlphaEvent : UnityEvent { }
 }
