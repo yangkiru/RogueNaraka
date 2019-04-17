@@ -28,8 +28,8 @@ namespace RogueNaraka.TierScripts {
                 this.currentExp = 0.0d;
             }
             //test
-            this.playerLevel = 1;
-            this.currentExp = 0.0d;
+            //this.playerLevel = 1;
+            //this.currentExp = 0.0d;
         }
 
         public void GainExp(float _exp) {
@@ -38,7 +38,7 @@ namespace RogueNaraka.TierScripts {
 
         public void SaveExp() {
             //test
-            this.totalGainExpInGame = 2000.0d;
+            //this.totalGainExpInGame = 2000.0d;
             //
             this.currentExp += this.totalGainExpInGame;
             while(this.currentExp >= GameDatabase.instance.requiredExpTable[this.playerLevel - 1]) {
