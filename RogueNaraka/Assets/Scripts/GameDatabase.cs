@@ -197,6 +197,8 @@ public class PlayerWeaponData
     public int level;
     public int cost;
     public int id;
+    [TextArea]
+    public string[] description;
 }
 
 [Serializable]

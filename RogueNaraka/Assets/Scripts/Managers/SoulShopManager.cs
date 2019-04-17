@@ -148,6 +148,9 @@ public class SoulShopManager : MonoBehaviour
 
         WeaponPnlUpdate(PlayerPrefs.GetInt("exp"));
         preparingPnl.SetActive(false);
+
+        weaponId = -1;
+        _weaponId = -1;
     }
 
     public void SoulPnlOpen()
@@ -384,11 +387,14 @@ public class SoulShopManager : MonoBehaviour
     public GameObject weaponPnl;
     public TextMeshProUGUI weaponSoulTxt;
     public TextMeshProUGUI weaponLevelTxt;
+    public TextMeshProUGUI weaponDPSTxt;
+    public TextMeshProUGUI weaponRangeTxt;
+    public TextMeshProUGUI weaponDescriptionTxt;
     public Image weaponBar;
     public Button weaponExpBtn;
     public Image weaponLevelUpPnl;
-    int weapon = -1;
-    int _weapon = -1;
+    int weaponId = -1;
+    int _weaponId = -1;
 
     public void StartAddWeaponExp()
     {
@@ -416,18 +422,68 @@ public class SoulShopManager : MonoBehaviour
         
         weaponLevelTxt.text = string.Format("{0} Level", data.level);
 
-        weapon = data.id;
-        if (weapon != _weapon)
+        weaponId = data.id;
+        if (weaponId != _weaponId)
         {
-            _weapon = weapon;
+            _weaponId = weaponId;
             Unit player = BoardManager.instance.player;
+            WeaponData weapon = GameDatabase.instance.weapons[weaponId];
             if (player)
             {
                 player.data.weapon = data.id;
                 player.attackable.Init((WeaponData)GameDatabase.instance.weapons[data.id].Clone());
+                string translatedDPS = string.Empty;
+                string translatedRange = string.Empty;
+                switch(GameManager.language)
+                {
+                    default:
+                        translatedDPS = "DPS";
+                        translatedRange = "Range";
+                        break;
+                    case Language.Korean:
+                        translatedDPS = "초당피해량";
+                        translatedRange = "사거리";
+                        break;
+                }
+                weaponDPSTxt.text = string.Format("{0}-{1}", translatedDPS, GetWeaponDPS(weapon).ToString("##0.##"));
+                weaponRangeTxt.text = string.Format("{0}-{1}", translatedRange, weapon.attackDistance.ToString("##0.##"));
+                
+                weaponDescriptionTxt.text = GetWeaponDescription(data);
             }
         }
         return data.level;
+    }
+
+    string GetWeaponDescription(PlayerWeaponData data)
+    {
+        string description;
+        if (data.description.Length > (int)GameManager.language)
+            description = data.description[(int)GameManager.language];
+        else if (data.description.Length > 1)
+            description = data.description[0];
+        else
+            description = string.Empty;
+        return description;
+    }
+
+    float GetWeaponDPS(WeaponData data)
+    {
+        float DPS = GetBulletDPS(GameDatabase.instance.bullets[data.startBulletId]);
+        for (int i = 0; i < data.children.Length; i++)
+            DPS += GetBulletDPS(GameDatabase.instance.bullets[data.children[i].bulletId]);
+        return DPS;
+    }
+
+    float GetBulletDPS(BulletData data)
+    {
+        float DPS = 0;
+        if (data.pierce == 1)
+            DPS = data.dmg;
+        else
+            DPS = 1 / Mathf.Max(data.delay, 0.01f) * data.dmg;
+        for (int i = 0; i < data.children.Length; i++)
+            DPS += GetBulletDPS(GameDatabase.instance.bullets[data.children[i].bulletId]);
+        return DPS;
     }
 
     int GetWeaponLevel(int exp, out int remain)

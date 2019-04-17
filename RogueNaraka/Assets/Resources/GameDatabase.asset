@@ -2918,21 +2918,43 @@ MonoBehaviour:
   - level: 0
     cost: 500
     id: 6
+    description:
+    - Small Sword
+    - "\uC18C\uD615 \uAC80"
   - level: 1
     cost: 1000
     id: 7
+    description:
+    - Medium Sword
+    - "\uC911\uD615 \uAC80"
   - level: 2
     cost: 2000
     id: 8
+    description:
+    - Large Sword
+    - "\uB300\uD615 \uAC80"
   - level: 3
     cost: 3000
     id: 9
+    description:
+    - 'Small Sword x2
+
+      Large Sword'
+    - "\uC18C\uD615 \uAC80 x2\n\uB300\uD615 \uAC80"
   - level: 4
     cost: 5000
     id: 10
+    description:
+    - 'Medium Sword x2
+
+      Large Sword'
+    - "\uC911\uD615 \uAC80 x2\n\uB300\uD615 \uAC80"
   - level: 5
     cost: 0
     id: 11
+    description:
+    - Large Sword x3
+    - "\uB300\uD615 \uAC80 x3"
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d000000
   unitCosts:
   - cost: 1
