@@ -29,7 +29,7 @@ public class GameDatabase : ScriptableObject
     public static int enemyLayer = 9;
     public static int wallLayer = 10;
     public UnitData playerBase;
-    public float[] requiredExpTable;
+    public double[] requiredExpTable;
     public UnitData[] enemies;
     public UnitData[] bosses;
     public UnitData[] spawnables;

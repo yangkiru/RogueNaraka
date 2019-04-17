@@ -77,12 +77,12 @@ public class DeathManager : MonoBehaviour
     {
         //lv, 경험�? ?�팅
         int playerOriginLv = TierManager.Instance.PlayerLevel;
-        float curExp = TierManager.Instance.CurrentExp;
-        float maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
+        double curExp = TierManager.Instance.CurrentExp;
+        double maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
         this.curLvTxt.text = playerOriginLv.ToString();
         this.nextLvTxt.text = (playerOriginLv + 1).ToString();
         this.expNumTxt.text = string.Format("{0}  /  {1}", curExp, maxExp);
-        this.ExpGauge.fillAmount = curExp / maxExp;
+        this.ExpGauge.fillAmount = (float)(curExp / maxExp);
         //
 
         TierManager.Instance.SaveExp();
@@ -314,35 +314,35 @@ public class DeathManager : MonoBehaviour
         }
     }
 
-    private IEnumerator StartGainExpAnimation(int _originLv, float _originExp) {
-        float upExpPerSecond = TierManager.Instance.TotalGainExpInGame * UP_PER_EXP_SPEED;
-        float min_upExpPerSecond = upExpPerSecond * 0.08f;
-        float maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
-        float remainUpExp = TierManager.Instance.TotalGainExpInGame;
+    private IEnumerator StartGainExpAnimation(int _originLv, double _originExp) {
+        double upExpPerSecond = TierManager.Instance.TotalGainExpInGame * UP_PER_EXP_SPEED;
+        double min_upExpPerSecond = upExpPerSecond * 0.08d;
+        double maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
+        double remainUpExp = TierManager.Instance.TotalGainExpInGame;
         while(_originLv < TierManager.Instance.PlayerLevel 
             || _originExp < TierManager.Instance.CurrentExp) {
             yield return new WaitForFixedUpdate();
-            if(remainUpExp <= TierManager.Instance.TotalGainExpInGame * 0.2f) {
-                upExpPerSecond *= 0.95f;
+            if(remainUpExp <= TierManager.Instance.TotalGainExpInGame * 0.2d) {
+                upExpPerSecond *= 0.95d;
                 if(upExpPerSecond < min_upExpPerSecond) {
                     upExpPerSecond = min_upExpPerSecond;
                 }
             }
-            float upExp = upExpPerSecond * TimeManager.Instance.FixedDeltaTime;
+            double upExp = upExpPerSecond * TimeManager.Instance.FixedDeltaTime;
             _originExp += upExp;
             remainUpExp -= upExp;
             if(_originExp >= maxExp) {
                 _originLv++;
-                _originExp = 0.0f;
+                _originExp = 0.0d;
                 maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
                 this.curLvTxt.text = _originLv.ToString();
                 this.nextLvTxt.text = (_originLv + 1).ToString();
             }
             this.expNumTxt.text = string.Format("{0}  /  {1}", (int)_originExp, (int)maxExp);
-            this.ExpGauge.fillAmount = _originExp / maxExp;
+            this.ExpGauge.fillAmount = (float)(_originExp / maxExp);
         }
         this.expNumTxt.text = string.Format("{0}  /  {1}", (int)TierManager.Instance.CurrentExp
             , (int)GameDatabase.instance.requiredExpTable[TierManager.Instance.PlayerLevel - 1]);
-        this.ExpGauge.fillAmount = TierManager.Instance.CurrentExp / GameDatabase.instance.requiredExpTable[TierManager.Instance.PlayerLevel - 1];
+        this.ExpGauge.fillAmount = (float)(TierManager.Instance.CurrentExp / GameDatabase.instance.requiredExpTable[TierManager.Instance.PlayerLevel - 1]);
     }
 }

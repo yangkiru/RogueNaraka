@@ -247,6 +247,7 @@ MonoBehaviour:
     - {x: -0, y: -0}
     shadowZAngle: 0
     shadowXFlip: 0
+    gainExp: 0
     order: 0
     effects: []
     resistances: []
