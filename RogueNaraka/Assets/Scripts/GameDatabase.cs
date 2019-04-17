@@ -584,7 +584,7 @@ public enum ATTACK_TYPE
 [Serializable]
 public enum Value
 {
-    Amount, Time, Damage, LifeSteal, Hp, Accel, Delay, Fire
+    Amount, Time, Damage, LifeSteal, Hp, Accel, Delay, Fire, HpRegen
 }
 
 [Serializable]
