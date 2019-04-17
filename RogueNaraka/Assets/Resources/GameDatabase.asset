@@ -74,11 +74,43 @@ MonoBehaviour:
     - {x: 0.2, y: -0.45}
     shadowZAngle: -135
     shadowXFlip: 1
+    gainExp: 0
     order: 0
     effects: []
     resistances: []
     deathSFX: playerDeath
     attackSFX: 
+  requiredExpTable:
+  - 100
+  - 200
+  - 300
+  - 400
+  - 500
+  - 600
+  - 700
+  - 800
+  - 900
+  - 1000
+  - 1100
+  - 1200
+  - 1300
+  - 1400
+  - 1500
+  - 1600
+  - 1700
+  - 1800
+  - 1900
+  - 2000
+  - 2100
+  - 2200
+  - 2300
+  - 2400
+  - 2500
+  - 2600
+  - 2700
+  - 2800
+  - 2900
+  - 3000
   enemies:
   - name: Bug0
     id: 0
@@ -136,6 +168,7 @@ MonoBehaviour:
     - {x: 0.07, y: -0.1}
     shadowZAngle: 0
     shadowXFlip: 0
+    gainExp: 2
     order: -100
     effects: []
     resistances: []
@@ -197,6 +230,7 @@ MonoBehaviour:
     - {x: 0.07, y: -0.1}
     shadowZAngle: 0
     shadowXFlip: 0
+    gainExp: 3
     order: -100
     effects: []
     resistances: []
@@ -256,6 +290,7 @@ MonoBehaviour:
     - {x: 0.2, y: -0.3}
     shadowZAngle: 180
     shadowXFlip: 1
+    gainExp: 5
     order: 100
     effects: []
     resistances: []
@@ -315,6 +350,7 @@ MonoBehaviour:
     - {x: 0.2, y: -0.3}
     shadowZAngle: 180
     shadowXFlip: 1
+    gainExp: 6.5
     order: 100
     effects: []
     resistances: []
@@ -374,6 +410,7 @@ MonoBehaviour:
     - {x: 0.2, y: -0.5}
     shadowZAngle: 180
     shadowXFlip: 1
+    gainExp: 7
     order: 0
     effects: []
     resistances: []
@@ -433,6 +470,7 @@ MonoBehaviour:
     - {x: 0.15, y: -0.6}
     shadowZAngle: -135
     shadowXFlip: 0
+    gainExp: 6
     order: 0
     effects: []
     resistances: []
@@ -492,6 +530,7 @@ MonoBehaviour:
     - {x: 0.15, y: -0.6}
     shadowZAngle: -135
     shadowXFlip: 1
+    gainExp: 0
     order: 0
     effects: []
     resistances: []
@@ -551,6 +590,7 @@ MonoBehaviour:
     - {x: 0.08, y: -0.3}
     shadowZAngle: 180
     shadowXFlip: 0
+    gainExp: 1
     order: 0
     effects: []
     resistances: []
@@ -610,6 +650,7 @@ MonoBehaviour:
     - {x: 0.08, y: -0.3}
     shadowZAngle: 180
     shadowXFlip: 0
+    gainExp: 1.3
     order: 0
     effects: []
     resistances: []
@@ -669,6 +710,7 @@ MonoBehaviour:
     - {x: 0.08, y: -0.3}
     shadowZAngle: 180
     shadowXFlip: 0
+    gainExp: 1.5
     order: 0
     effects: []
     resistances: []
@@ -728,6 +770,7 @@ MonoBehaviour:
     - {x: 0.4, y: -1.5}
     shadowZAngle: -150
     shadowXFlip: 1
+    gainExp: 100
     order: 0
     effects: []
     resistances:
@@ -791,6 +834,7 @@ MonoBehaviour:
     - {x: 0.45, y: -1.58}
     shadowZAngle: -150
     shadowXFlip: 1
+    gainExp: 0
     order: 100
     effects: []
     resistances: []
@@ -848,6 +892,7 @@ MonoBehaviour:
     shadowPos: []
     shadowZAngle: 0
     shadowXFlip: 0
+    gainExp: 0
     order: -200
     effects: []
     resistances: []

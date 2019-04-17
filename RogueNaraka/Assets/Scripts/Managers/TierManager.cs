@@ -17,8 +17,26 @@ namespace RogueNaraka.TierScripts {
             base.OnDestroy();
         }
 
+        void Start() {
+            //레벨 세팅
+            this.playerLevel = PlayerPrefs.GetInt("PlayerLv");
+            if(this.playerLevel == 0) {
+                this.playerLevel = 1;
+                this.currentExp = 0.0f;
+            }
+        }
+
         public void GainExp(float _exp) {
             this.totalGainExpInGame += _exp;
+        }
+
+        public void SaveExp() {
+            this.totalGainExpInGame = 1200.0f;
+            this.currentExp += this.totalGainExpInGame;
+            while(this.currentExp >= GameDatabase.instance.requiredExpTable[this.playerLevel - 1]) {
+                this.currentExp -= GameDatabase.instance.requiredExpTable[this.playerLevel - 1];
+                this.playerLevel++;
+            }
         }
     }
 }

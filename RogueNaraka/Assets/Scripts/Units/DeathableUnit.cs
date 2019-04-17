@@ -55,6 +55,7 @@ namespace RogueNaraka.UnitScripts
             MoneyManager.instance.AddUnrefinedSoul((int)amount);
             LevelUpManager.instance.RequestEndStageCorou();
             DeathManager.instance.ReceiveHuntedUnit(this.unit.data.id);
+            TierScripts.TierManager.Instance.GainExp(this.unit.data.gainExp);
         }
 
         public void BossOnDeath()

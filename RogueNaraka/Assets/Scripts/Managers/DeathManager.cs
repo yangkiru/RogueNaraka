@@ -5,9 +5,14 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using RogueNaraka.TierScripts;
+using RogueNaraka.TimeScripts;
 
 public class DeathManager : MonoBehaviour
 {
+    //초당 오르는 게임내 얻은 경험치퍼센트입니다.
+    const float UP_PER_EXP_SPEED = 0.5f;
+
     public static DeathManager instance;
 
     public GameObject[] btnLayout;
@@ -19,6 +24,11 @@ public class DeathManager : MonoBehaviour
     public TextMeshProUGUI soulRefiningRateTxt;
     public TextMeshProUGUI unSoulTxt;
     public TextMeshProUGUI soulTxt;
+
+    public TextMeshProUGUI curLvTxt;
+    public TextMeshProUGUI nextLvTxt;
+    public TextMeshProUGUI expNumTxt;
+    public Image ExpGauge;
 
     private List<int> huntedUnitNumList = new List<int>();
 
@@ -62,6 +72,19 @@ public class DeathManager : MonoBehaviour
 
     IEnumerator SoulPnlCorou(float t)
     {
+        //lv, 경험치 세팅
+        int playerOriginLv = TierManager.Instance.PlayerLevel;
+        float curExp = TierManager.Instance.CurrentExp;
+        float maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
+        this.curLvTxt.text = playerOriginLv.ToString();
+        this.nextLvTxt.text = (playerOriginLv + 1).ToString();
+        this.expNumTxt.text = string.Format("{0}  /  {1}", curExp, maxExp);
+        this.ExpGauge.fillAmount = curExp / maxExp;
+        //
+
+        TierManager.Instance.SaveExp();
+        yield return new WaitForSecondsRealtime(1.5f);
+
         do
         {
             yield return null;
@@ -77,6 +100,8 @@ public class DeathManager : MonoBehaviour
             btnLayout[0].SetActive(true);
             btnLayout[1].SetActive(true);
         }
+
+        StartCoroutine(StartGainExpAnimation(playerOriginLv, curExp));
     }
 
     public void SetSoulPnl(bool value)
@@ -282,5 +307,27 @@ public class DeathManager : MonoBehaviour
         for(int i = 0; i < this.huntedUnitNumList.Count; ++i) {
             this.huntedUnitNumList[i] = 0;
         }
+    }
+
+    private IEnumerator StartGainExpAnimation(int _originLv, float _originExp) {
+        float upExpPerSecond = TierManager.Instance.TotalGainExpInGame * UP_PER_EXP_SPEED;
+        float maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
+        while(_originLv < TierManager.Instance.PlayerLevel 
+            || _originExp < TierManager.Instance.CurrentExp) {
+            yield return new WaitForFixedUpdate();
+            _originExp += upExpPerSecond * TimeManager.Instance.FixedDeltaTime;
+            if(_originExp >= maxExp) {
+                _originLv++;
+                _originExp = 0.0f;
+                maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
+                this.curLvTxt.text = _originLv.ToString();
+                this.nextLvTxt.text = (_originLv + 1).ToString();
+            }
+            this.expNumTxt.text = string.Format("{0}  /  {1}", (int)_originExp, (int)maxExp);
+            this.ExpGauge.fillAmount = _originExp / maxExp;
+        }
+        this.expNumTxt.text = string.Format("{0}  /  {1}", (int)TierManager.Instance.CurrentExp
+            , (int)GameDatabase.instance.requiredExpTable[TierManager.Instance.PlayerLevel - 1]);
+        this.ExpGauge.fillAmount = TierManager.Instance.CurrentExp / GameDatabase.instance.requiredExpTable[TierManager.Instance.PlayerLevel - 1];
     }
 }
