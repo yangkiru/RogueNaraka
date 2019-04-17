@@ -57,7 +57,6 @@ public class RageManager : MonoBehaviour
     {
         if (value)
         {
-            StopCoroutine("SmallBtnCorou");
             rageBtn.interactable = true;
             rageBtn.gameObject.SetActive(true);
             rageBtn.targetGraphic.color = Color.white;
@@ -65,7 +64,7 @@ public class RageManager : MonoBehaviour
             fireParticles[1].gameObject.SetActive(true);
         }
         else
-            StartCoroutine("SmallBtnCorou");
+            rageBtn.gameObject.SetActive(false);
 
         if (rageLevel > 1)
         {
