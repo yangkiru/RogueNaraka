@@ -75,7 +75,7 @@ public class DeathManager : MonoBehaviour
 
     IEnumerator SoulPnlCorou(float t)
     {
-        //lv, 경험�? ?�팅
+        //lv, 경험치 세팅
         int playerOriginLv = TierManager.Instance.PlayerLevel;
         double curExp = TierManager.Instance.CurrentExp;
         double maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
@@ -319,9 +319,12 @@ public class DeathManager : MonoBehaviour
         double min_upExpPerSecond = upExpPerSecond * 0.08d;
         double maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
         double remainUpExp = TierManager.Instance.TotalGainExpInGame;
+
+        WaitForFixedUpdate waitFixedFrame = new WaitForFixedUpdate();
+
         while(_originLv < TierManager.Instance.PlayerLevel 
             || _originExp < TierManager.Instance.CurrentExp) {
-            yield return new WaitForFixedUpdate();
+            yield return waitFixedFrame;
             if(remainUpExp <= TierManager.Instance.TotalGainExpInGame * 0.2d) {
                 upExpPerSecond *= 0.95d;
                 if(upExpPerSecond < min_upExpPerSecond) {

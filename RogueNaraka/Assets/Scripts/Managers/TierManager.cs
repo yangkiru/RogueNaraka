@@ -20,14 +20,16 @@ namespace RogueNaraka.TierScripts {
         void Start() {
             //레벨 세팅
             this.playerLevel = PlayerPrefs.GetInt("PlayerLv");
-            this.currentExp = double.Parse(PlayerPrefs.GetString("PlayerExp"));
+            if(PlayerPrefs.GetString("PlayerExp") != "") {
+                this.currentExp = double.Parse(PlayerPrefs.GetString("PlayerExp"));
+            }
             if(this.playerLevel == 0) {
                 this.playerLevel = 1;
-                this.currentExp = 0.0f;
+                this.currentExp = 0.0d;
             }
             //test
             this.playerLevel = 1;
-            this.currentExp = 0.0f;
+            this.currentExp = 0.0d;
         }
 
         public void GainExp(float _exp) {
