@@ -20,10 +20,14 @@ namespace RogueNaraka.TierScripts {
         void Start() {
             //레벨 세팅
             this.playerLevel = PlayerPrefs.GetInt("PlayerLv");
+            this.currentExp = PlayerPrefs.GetFloat("PlayerExp");
             if(this.playerLevel == 0) {
                 this.playerLevel = 1;
                 this.currentExp = 0.0f;
             }
+            //test
+            //this.playerLevel = 1;
+            //this.currentExp = 0.0f;
         }
 
         public void GainExp(float _exp) {
@@ -31,12 +35,16 @@ namespace RogueNaraka.TierScripts {
         }
 
         public void SaveExp() {
-            this.totalGainExpInGame = 1200.0f;
+            //test
+            //this.totalGainExpInGame = 2000.0f;
+            //
             this.currentExp += this.totalGainExpInGame;
             while(this.currentExp >= GameDatabase.instance.requiredExpTable[this.playerLevel - 1]) {
                 this.currentExp -= GameDatabase.instance.requiredExpTable[this.playerLevel - 1];
                 this.playerLevel++;
             }
+            PlayerPrefs.SetInt("PlayerLv", this.playerLevel);
+            PlayerPrefs.SetFloat("PlayerExp", this.currentExp);
         }
     }
 }

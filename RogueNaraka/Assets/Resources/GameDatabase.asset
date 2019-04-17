@@ -770,7 +770,7 @@ MonoBehaviour:
     - {x: 0.4, y: -1.5}
     shadowZAngle: -150
     shadowXFlip: 1
-    gainExp: 100
+    gainExp: 60
     order: 0
     effects: []
     resistances:

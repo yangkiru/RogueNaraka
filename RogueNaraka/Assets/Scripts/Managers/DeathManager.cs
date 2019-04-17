@@ -10,7 +10,7 @@ using RogueNaraka.TimeScripts;
 
 public class DeathManager : MonoBehaviour
 {
-    //초당 ?�르?? 게임?? ?��? 경험치퍼?�트?�니??.
+    //초당 ?�르?? 게임?? ?��? 경험치퍼?�트?�니??.
     const float UP_PER_EXP_SPEED = 0.5f;
 
     public static DeathManager instance;
@@ -75,7 +75,7 @@ public class DeathManager : MonoBehaviour
 
     IEnumerator SoulPnlCorou(float t)
     {
-        //lv, 경험�? ?�팅
+        //lv, 경험�? ?�팅
         int playerOriginLv = TierManager.Instance.PlayerLevel;
         float curExp = TierManager.Instance.CurrentExp;
         float maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
@@ -316,11 +316,21 @@ public class DeathManager : MonoBehaviour
 
     private IEnumerator StartGainExpAnimation(int _originLv, float _originExp) {
         float upExpPerSecond = TierManager.Instance.TotalGainExpInGame * UP_PER_EXP_SPEED;
+        float min_upExpPerSecond = upExpPerSecond * 0.08f;
         float maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
+        float remainUpExp = TierManager.Instance.TotalGainExpInGame;
         while(_originLv < TierManager.Instance.PlayerLevel 
             || _originExp < TierManager.Instance.CurrentExp) {
             yield return new WaitForFixedUpdate();
-            _originExp += upExpPerSecond * TimeManager.Instance.FixedDeltaTime;
+            if(remainUpExp <= TierManager.Instance.TotalGainExpInGame * 0.2f) {
+                upExpPerSecond *= 0.95f;
+                if(upExpPerSecond < min_upExpPerSecond) {
+                    upExpPerSecond = min_upExpPerSecond;
+                }
+            }
+            float upExp = upExpPerSecond * TimeManager.Instance.FixedDeltaTime;
+            _originExp += upExp;
+            remainUpExp -= upExp;
             if(_originExp >= maxExp) {
                 _originLv++;
                 _originExp = 0.0f;
