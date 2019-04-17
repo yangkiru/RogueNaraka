@@ -326,9 +326,10 @@ public class DeathManager : MonoBehaviour
             || _originExp < TierManager.Instance.CurrentExp) {
             yield return waitFixedFrame;
             if(remainUpExp <= TierManager.Instance.TotalGainExpInGame * 0.2d) {
-                upExpPerSecond *= 0.95d;
-                if(upExpPerSecond < min_upExpPerSecond) {
+                if(upExpPerSecond <= min_upExpPerSecond) {
                     upExpPerSecond = min_upExpPerSecond;
+                } else {
+                    upExpPerSecond *= 0.95d;
                 }
             }
             double upExp = upExpPerSecond * TimeManager.Instance.FixedDeltaTime;
