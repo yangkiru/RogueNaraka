@@ -26,19 +26,19 @@ namespace RogueNaraka.SkillScripts
             Unit player = BoardManager.instance.player;
             Bullet tornado = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             tornado.Init(player, data);
+            tornado.hitable.OnDamage += OnTornadoHit;
             tornado.Spawn(player.cachedTransform.position);
             Vector3 dir = mp - player.cachedTransform.position;
             tornado.shootable.Shoot(dir, Vector3.zero, data.localSpeed, data.worldSpeed, data.localAccel, data.worldAccel, false);
+        }
 
-            //Unit soldier = BoardManager.instance.unitPool.DequeueObjectPool().GetComponent<Unit>();
-            //UnitData unitData = (UnitData)GameDatabase.instance.spawnables[data.unitIds[0]].Clone();
-            //unitData.stat.dmg = BoardManager.instance.player.stat.GetCurrent(STAT.TEC);
-            //unitData.stat.hp = GetValue(Value.Hp).value;
-            //unitData.stat.currentHp = unitData.stat.hp;
-            //unitData.limitTime = GetValue(Value.Time).value;
-            //soldier.Init(unitData);
-            //soldier.Spawn(mp);
-            //soldier.collider.isTrigger = true;
+        private void OnTornadoHit(Bullet from, Unit to)
+        {
+            BulletData dustData = GameDatabase.instance.bullets[data.bulletIds[1]];
+            Bullet dust = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+
+            dust.Init(from.ownerable.unit, dustData);
+            dust.Spawn(to.cachedTransform.position);
         }
     }
 }

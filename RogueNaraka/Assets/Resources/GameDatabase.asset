@@ -1693,8 +1693,40 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: 
-  - name: Crash
+  - name: TornadoDust
     id: 22
+    dmg: 0
+    related: 2
+    controller: {fileID: 22100000, guid: f92889ad8b2f6cb4c96e1a33f89f922a, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.001
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 0
+    isSplash: 0
+    isHitableWall: 0
+    isBounceable: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 200
+    effects: []
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
+  - name: Crash
+    id: 23
     dmg: 0.5
     related: 2
     controller: {fileID: 22100000, guid: a11c41e27517b5745baddafe24efd672, type: 2}
@@ -1706,11 +1738,11 @@ MonoBehaviour:
     guideSpeed: 0
     spinSpeed: 0
     size: 1
-    delay: 0.1
-    limitTime: 1
-    disapearStartTime: 0
-    disapearDuration: 0
-    pierce: 1
+    delay: 10
+    limitTime: 1.5
+    disapearStartTime: 0.5
+    disapearDuration: 1
+    pierce: 99999
     isSplash: 1
     isHitableWall: 1
     isBounceable: 0
@@ -2243,7 +2275,7 @@ MonoBehaviour:
     nameLang:
     - Tornado
     - "\uD1A0\uB124\uC774\uB3C4"
-    bulletIds: 15000000
+    bulletIds: 1500000016000000
     unitIds: 
     spr: {fileID: 21300000, guid: a7f16155d358e3244b507a421d56717c, type: 3}
     id: 8
@@ -2286,7 +2318,7 @@ MonoBehaviour:
     nameLang:
     - Jumping Shoes
     - "\uB3C4\uC57D \uC2E0\uBC1C"
-    bulletIds: 16000000
+    bulletIds: 17000000
     unitIds: 
     spr: {fileID: 21300000, guid: bb76797f234450d4683d9a9386f06487, type: 3}
     id: 9

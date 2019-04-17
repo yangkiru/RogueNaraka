@@ -10,7 +10,7 @@ using RogueNaraka.TimeScripts;
 
 public class DeathManager : MonoBehaviour
 {
-    //초당 오르는 게임내 얻은 경험치퍼센트입니다.
+    //초당 ?�르?? 게임?? ?��? 경험치퍼?�트?�니??.
     const float UP_PER_EXP_SPEED = 0.5f;
 
     public static DeathManager instance;
@@ -31,6 +31,7 @@ public class DeathManager : MonoBehaviour
     public Image ExpGauge;
 
     private List<int> huntedUnitNumList = new List<int>();
+    public Canvas stageCanvas;
 
     void Awake()
     {
@@ -68,11 +69,13 @@ public class DeathManager : MonoBehaviour
         GameManager.instance.SetSettingBtn(true);
 
         AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomDeathMusic());
+
+        stageCanvas.sortingLayerName = "UI";
     }
 
     IEnumerator SoulPnlCorou(float t)
     {
-        //lv, 경험치 세팅
+        //lv, 경험�? ?�팅
         int playerOriginLv = TierManager.Instance.PlayerLevel;
         float curExp = TierManager.Instance.CurrentExp;
         float maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
@@ -266,6 +269,8 @@ public class DeathManager : MonoBehaviour
         BoardManager.instance.player.mpable.SetFullMp();
 
         GameManager.instance.SetSettingBtn(true);
+
+        stageCanvas.sortingLayerName = "Wall";
     }
 
     public void OpenSoulShop()
