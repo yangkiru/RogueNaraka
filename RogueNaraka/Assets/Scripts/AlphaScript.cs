@@ -65,7 +65,7 @@ public class AlphaScript : MonoBehaviour
 
     private void Update()
     {
-        switch(currentState)
+        switch (currentState)
         {
             case STATE.NOT_READY:
                 break;
@@ -109,36 +109,30 @@ public class AlphaScript : MonoBehaviour
                     else if (mainTxt)
                         mainTxt.color = color;
                 }
+
+                float value = Mathf.InverseLerp(0, originAlpha, color.a);
+                for (int i = 0; i < images.Length; i++)
+                {
+                    color = images[i].color;
+                    color.a = alphas[i] * value;
+                    images[i].color = color;
+                }
+                for (int i = 0; i < txts.Length; i++)
+                {
+                    color = txts[i].color;
+                    color.a = alphas[images.Length + i] * value;
+                    txts[i].color = color;
+                }
+                for (int i = 0; i < particles.Length; i++)
+                {
+                    color = particles[i].main.startColor.color;
+                    color.a = alphas[images.Length + txts.Length + i] * value;
+                    var main = particles[i].main;
+                    var startColor = main.startColor;
+                    startColor.color = color;
+                    main.startColor = startColor;
+                }
                 break;
-        }
-
-        currentAlpha = mainImage ? mainImage.color.a : mainTxt ? mainTxt.color.a : 1;
-
-        if (lastAlpha != currentAlpha)
-        {
-            float value = Mathf.InverseLerp(0, originAlpha, currentAlpha);
-            for(int i = 0; i < images.Length; i++)
-            {
-                Color color = images[i].color;
-                color.a = alphas[i] * value;
-                images[i].color = color;
-            }
-            for (int i = 0; i < txts.Length; i++)
-            {
-                Color color = txts[i].color;
-                color.a = alphas[images.Length + i] * value;
-                txts[i].color = color;
-            }
-            for (int i = 0; i < particles.Length; i++)
-            {
-                Color color = particles[i].main.startColor.color;
-                color.a = alphas[images.Length + txts.Length + i] * value;
-                var main = particles[i].main;
-                var startColor = main.startColor;
-                startColor.color = color;
-                main.startColor = startColor;
-            }
-            lastAlpha = currentAlpha;
         }
     }
 
