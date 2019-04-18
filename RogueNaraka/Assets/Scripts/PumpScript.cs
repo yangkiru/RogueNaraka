@@ -53,7 +53,7 @@ public class PumpScript : MonoBehaviour
 
     private void Update()
     {
-        switch(currentState)
+        switch (currentState)
         {
             case STATE.NONE:
                 break;

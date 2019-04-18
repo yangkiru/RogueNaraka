@@ -106,7 +106,7 @@ public class SkillChangeManager : MonoBehaviour
 
     IEnumerator LevelTxtCorou(int level)
     {
-        float maxSize = 3;
+        float maxSize = 2;
         RectTransform rect = levelTxt.rectTransform;
         for (int i = 1; i <= level; i++)
         {

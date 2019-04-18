@@ -12,7 +12,7 @@ public class RageManager : MonoBehaviour
     public float enemiesDmg = 1;
     public float enemiesHp = 1;
     public float soul = 1;
-    public bool isRage;
+    public bool isRage { get; set; }
 
     public Button rageBtn;
     public GameObject rageSmallPnl;
