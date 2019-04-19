@@ -588,6 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 114302036002021230}
+  isFollow: 1
 --- !u!95 &95588626938235128
 Animator:
   serializedVersion: 3

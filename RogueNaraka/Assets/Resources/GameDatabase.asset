@@ -2009,7 +2009,7 @@ MonoBehaviour:
     spinSpeed: 0
     size: 0
     delay: 0
-    limitTime: 0.01
+    limitTime: 0.001
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 1

@@ -13,6 +13,8 @@ namespace RogueNaraka.UnitScripts
         [SerializeField]
         Unit unit;
 
+        public bool isFollow = true;
+
         private void Reset()
         {
             unit = GetComponent<Unit>();
