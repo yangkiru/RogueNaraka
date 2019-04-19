@@ -11,6 +11,10 @@ namespace RogueNaraka.TheBackendScripts {
             base.OnDestroy();
         }
 
+        private WaitForSecondsRealtime waitForOneSeconds = new WaitForSecondsRealtime(1.0f);
+        private WaitForSecondsRealtime waitForTenSeconds = new WaitForSecondsRealtime(10.0f);
+        private WaitForSecondsRealtime waitForThirtySeconds = new WaitForSecondsRealtime(30.0f);
+
         void Awake() {
             #if UNITY_EDITOR
                 this.gameObject.SetActive(false);
