@@ -94,10 +94,10 @@ namespace RogueNaraka.TheBackendScripts {
                 switch(this.getFilenameProcess) {
                     case PROCESS_GET_CHARTFILENAME.NOT_GET:
                         GetCahrtFimeName();
-                        yield return new WaitForSecondsRealtime(1.0f);
+                        yield return this.waitForOneSeconds;
                     break;
                     case PROCESS_GET_CHARTFILENAME.GETTING:
-                        yield return new WaitForSecondsRealtime(1.0f);
+                        yield return this.waitForOneSeconds;
                     break;
                     case PROCESS_GET_CHARTFILENAME.GOT:
                         Backend.Chart.GetChartContents(this.pushRewardChartFileName, (chartContentscallback) => {
@@ -108,9 +108,9 @@ namespace RogueNaraka.TheBackendScripts {
                             }
                         });
                         if(this.getFilenameProcess == PROCESS_GET_CHARTFILENAME.GOT) {
-                            yield return new WaitForSecondsRealtime(30.0f);
+                            yield return this.waitForThirtySeconds;
                         } else {
-                            yield return new WaitForSecondsRealtime(10.0f);
+                            yield return this.waitForTenSeconds;
                         }
                     break;
                 }
@@ -180,7 +180,7 @@ namespace RogueNaraka.TheBackendScripts {
                     }
                 }
 
-                yield return new WaitForSecondsRealtime(30.0f);
+                yield return this.waitForThirtySeconds;
             }
         }
     }
