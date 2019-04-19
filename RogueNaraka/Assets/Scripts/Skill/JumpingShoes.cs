@@ -29,10 +29,20 @@ namespace RogueNaraka.SkillScripts
         {
             Unit player = BoardManager.instance.player;
 
+            player.rigid.AddForce(new Vector2(0, 75));
+            player.shadow.enabled = false;
+            Transform shadowTransform = player.shadow.transform;
+            shadowTransform.SetParent(null);
+            Vector3 shadowScale = shadowTransform.localScale;
             do
             {
                 yield return null;
                 time -= TimeManager.Instance.DeltaTime;
+                shadowScale.x -= TimeManager.Instance.DeltaTime;
+                shadowScale.y -= TimeManager.Instance.DeltaTime;
+                shadowTransform.localScale = shadowScale;
+                if (player.cachedTransform.position.y > BoardManager.instance.boardRange[1].y - 1)
+                    player.renderer.enabled = false;
             } while (time > 0);
 
             player.cachedTransform.position = mp;
@@ -47,6 +57,13 @@ namespace RogueNaraka.SkillScripts
         void OnJumpEnd()
         {
             Unit player = BoardManager.instance.player;
+            player.renderer.enabled = true;
+            
+            Transform shadowTransform = player.shadow.transform;
+            shadowTransform.localScale = Vector3.one;
+            shadowTransform.SetParent(player.cachedTransform);
+            player.shadow.enabled = true;
+            player.rigid.velocity = Vector2.zero;
             player.collider.enabled = true;
             player.autoMoveable.enabled = true;
             player.attackable.enabled = true;

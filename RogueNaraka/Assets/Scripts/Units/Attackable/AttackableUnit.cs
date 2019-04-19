@@ -85,7 +85,6 @@ namespace RogueNaraka.UnitScripts.Attackable
             data.onDestroy = list.ToArray();
 
             bullet.Spawn(unit, data, transform.position);
-            bullet.renderer.color = unit.data.bulletColor;
             bullet.shootable.Shoot(unit.targetable.direction, _weapon.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
             afterAttackCorou = AfterAttack();
             StartCoroutine(afterAttackCorou);

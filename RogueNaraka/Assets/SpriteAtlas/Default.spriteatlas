@@ -78,7 +78,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 6f333ebf892543f45bcfc27e93c51c4b, type: 3}
     - {fileID: 102900000, guid: f1e759ef8d601a2488a493e7fa45f7a8, type: 3}
     - {fileID: 102900000, guid: ec4a08cc03cebae4589a41b36d8baaf9, type: 3}
-    totalSpriteSurfaceArea: 4669858
+    totalSpriteSurfaceArea: 4679858
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -273,6 +273,7 @@ SpriteAtlas:
   - {fileID: 21300012, guid: d2e8ce940a27a2b419bffa2c9f9a766b, type: 3}
   - {fileID: 21300010, guid: d2e8ce940a27a2b419bffa2c9f9a766b, type: 3}
   - {fileID: 21300008, guid: d2e8ce940a27a2b419bffa2c9f9a766b, type: 3}
+  - {fileID: 21300000, guid: 21ec68d495c417e4eac43809929c657c, type: 3}
   - {fileID: 21300000, guid: 4aed85f411c4db34893abfc12314cad8, type: 3}
   - {fileID: 21300000, guid: dd9d07f406e80c54d98900f6a56b7294, type: 3}
   - {fileID: 21300000, guid: 0689f4050408c654d8e0d087487cd521, type: 3}
@@ -906,6 +907,7 @@ SpriteAtlas:
   - skill4_spr_scarecrowSoldier_hit_6
   - skill4_spr_scarecrowSoldier_hit_5
   - skill4_spr_scarecrowSoldier_hit_4
+  - skill_spr_jumpShoes_crash
   - Icon-48
   - paused
   - magic_spin1
@@ -1219,7 +1221,7 @@ SpriteAtlas:
   - skill_spr_iceBreak
   - dmg
   - UI_Wea_R
-  - skill_spr_jumpShoes_crash
+  - skill_spr_jumpShoes_crash_bak
   - skill_icon_iceBreak
   - effect_heal_particle
   - pnl_orange_big

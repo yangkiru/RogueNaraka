@@ -88,7 +88,16 @@ namespace RogueNaraka.BulletScripts
         {
             gameObject.SetActive(true);
 
-            renderer.color = Color.white;
+            if (owner.data.bulletColor == Color.clear)
+                renderer.color = data.color;
+            else
+                renderer.color = owner.data.bulletColor;
+
+            if (owner.data.bulletOrder != Order.Mid)
+                orderable.Init(owner.data.bulletOrder);
+            else
+
+                orderable.Init(this.data.order);
 
             transform.rotation = Quaternion.identity;
             moveable.Init();
@@ -141,8 +150,6 @@ namespace RogueNaraka.BulletScripts
             guideable.enabled = false;
 
             disapearable.Init(this.data);
-
-            orderable.Init(this.data.order);
 
             spinable.Init(this.data);
         }

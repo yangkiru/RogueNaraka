@@ -170,29 +170,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fb8c668037abc43bc47be987d0829d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveable: {fileID: 114798437530957502}
-  _stopBeforeAttackable: {fileID: 114517530178566646}
-  _stopAfterAttackable: {fileID: 114519388432992828}
-  _dontStopAttackable: {fileID: 114189907379417390}
-  _enemyTargetable: {fileID: 114581098381244704}
-  _friendlyTargetable: {fileID: 114675008330108068}
-  _autoMoveable: {fileID: 0}
-  _randomMoveable: {fileID: 114847344676331612}
-  _rushMoveable: {fileID: 114116071741596666}
-  _restRushMoveable: {fileID: 5803475585598790251}
-  _followMoveable: {fileID: 410936814330744879}
-  _boss0Moveable: {fileID: 2215865072240927729}
-  _damageable: {fileID: 114360932324936328}
-  _hpable: {fileID: 114504902211139030}
-  _mpable: {fileID: 114946238239239822}
-  _deathable: {fileID: 114598801868555584}
-  _effectable: {fileID: 114369404985621176}
-  _timeLimitable: {fileID: 2605540994433798053}
-  _orderable: {fileID: 3900195907407459146}
-  _followable: {fileID: 606372875436568407}
-  _tackleable: {fileID: 310890433804304187}
-  _animator: {fileID: 95588626938235128}
-  _data:
+  moveable: {fileID: 114798437530957502}
+  attackable: {fileID: 0}
+  stopBeforeAttackable: {fileID: 114517530178566646}
+  stopAfterAttackable: {fileID: 114519388432992828}
+  dontStopAttackable: {fileID: 114189907379417390}
+  targetable: {fileID: 0}
+  enemyTargetable: {fileID: 114581098381244704}
+  friendlyTargetable: {fileID: 114675008330108068}
+  autoMoveable: {fileID: 0}
+  randomMoveable: {fileID: 114847344676331612}
+  rushMoveable: {fileID: 114116071741596666}
+  restRushMoveable: {fileID: 5803475585598790251}
+  followMoveable: {fileID: 410936814330744879}
+  boss0Moveable: {fileID: 2215865072240927729}
+  damageable: {fileID: 114360932324936328}
+  hpable: {fileID: 114504902211139030}
+  mpable: {fileID: 114946238239239822}
+  deathable: {fileID: 114598801868555584}
+  effectable: {fileID: 114369404985621176}
+  timeLimitable: {fileID: 2605540994433798053}
+  orderable: {fileID: 3900195907407459146}
+  followable: {fileID: 606372875436568407}
+  tackleable: {fileID: 310890433804304187}
+  animator: {fileID: 95588626938235128}
+  data:
     name: 
     id: 0
     cost: 0
@@ -226,7 +228,7 @@ MonoBehaviour:
       statPoints: 0
     controller: {fileID: 0}
     deathEffectController: {fileID: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
     bulletColor: {r: 1, g: 1, b: 1, a: 1}
     isFriendly: 0
     isStanding: 0
@@ -242,20 +244,19 @@ MonoBehaviour:
     accelerationRate: 0
     decelerationRate: 0
     limitTime: 0
-    shadowPos:
-    - {x: 1.6847162, y: 0}
-    - {x: -0, y: -0}
+    shadowPos: []
     shadowZAngle: 0
     shadowXFlip: 0
     gainExp: 0
     order: 0
+    bulletOrder: 0
     effects: []
     resistances: []
     deathSFX: 
     attackSFX: 
-  _rigid: {fileID: 50410147267040436}
-  _renderer: {fileID: 212722301744784912}
-  _collider: {fileID: 60075246512643172}
+  rigid: {fileID: 50410147267040436}
+  renderer: {fileID: 212722301744784912}
+  collider: {fileID: 60075246512643172}
   cachedTransform: {fileID: 4616481813884920}
   isStun: 0
   shadow: {fileID: 2348185833054558175}

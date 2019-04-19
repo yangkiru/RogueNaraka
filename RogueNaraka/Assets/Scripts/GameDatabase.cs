@@ -147,8 +147,8 @@ public class UnitData : ICloneable
     public Stat stat;
     public RuntimeAnimatorController controller;
     public RuntimeAnimatorController deathEffectController;
-    public Color color = Color.white;
-    public Color bulletColor = Color.white;
+    public Color color = Color.clear;
+    public Color bulletColor = Color.clear;
     public bool isFriendly;
     public bool isStanding;
     public bool isDeathEffect;
@@ -168,6 +168,7 @@ public class UnitData : ICloneable
     public bool shadowXFlip;
     public float gainExp;
     public Order order;
+    public Order bulletOrder = Order.Mid;
     public EffectData[] effects;
     public EffectResistance[] resistances;
     public string deathSFX;
@@ -226,6 +227,7 @@ public class BulletData : ICloneable
 {
     public string name;
     public int id;
+    public Color color = Color.white;
     public float dmg;
     public STAT related;
     public RuntimeAnimatorController controller;
