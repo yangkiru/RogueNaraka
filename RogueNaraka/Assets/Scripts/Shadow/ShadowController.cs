@@ -18,7 +18,7 @@ namespace RogueNaraka.ShadowScripts {
         private WayShadowChecker wayChecker;
 
         void LateUpdate() {
-            if(this.ShadowRenderer.sprite != this.UnitRenderer.sprite) {
+            if(this.ShadowRenderer.sprite.name != this.UnitRenderer.sprite.name) {
                 
                 if (this.wayChecker != null)
                 {
