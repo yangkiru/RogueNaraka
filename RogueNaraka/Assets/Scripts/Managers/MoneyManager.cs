@@ -130,7 +130,7 @@ public class MoneyManager : MonoBehaviour {
 
     public void MoneyUpdate()
     {
-        Debug.Log("MoneyUpdate");
+        //Debug.Log("MoneyUpdate");
         soulTxt.text = string.Format("Soul {0}", _soul.ToString());
         unrefinedSoulTxt.text = string.Format("UnSoul {0}", _unrefinedSoul.ToString());
     }

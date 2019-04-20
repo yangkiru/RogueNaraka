@@ -88,17 +88,6 @@ namespace RogueNaraka.BulletScripts
         {
             gameObject.SetActive(true);
 
-            if (owner.data.bulletColor == Color.clear)
-                renderer.color = data.color;
-            else
-                renderer.color = owner.data.bulletColor;
-
-            if (owner.data.bulletOrder != Order.Mid)
-                orderable.Init(owner.data.bulletOrder);
-            else
-
-                orderable.Init(this.data.order);
-
             transform.rotation = Quaternion.identity;
             moveable.Init();
             moveable.enabled = false;
@@ -106,6 +95,22 @@ namespace RogueNaraka.BulletScripts
             ownerable.SetOwner(owner);
             this.data = (BulletData)data.Clone();
             name = this.data.name;
+
+            if (owner.data.bulletColor == Color.clear)
+                renderer.color = data.color;
+            else
+                renderer.color = owner.data.bulletColor;
+
+            if (owner.data.bulletOrder != Order.Mid)
+            {
+                Debug.Log(owner.name + "'s " + name + " sorting order is " + owner.data.bulletOrder);
+                orderable.Init(owner.data.bulletOrder);
+            }
+            else
+            {
+                Debug.Log(owner.name + "'s " + name + " sorting order is " + this.data.order);
+                orderable.Init(this.data.order);
+            }
 
             //Hitable
             if (hitable)
