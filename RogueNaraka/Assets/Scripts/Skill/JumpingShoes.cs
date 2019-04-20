@@ -3,6 +3,7 @@ using System.Collections;
 using RogueNaraka.UnitScripts;
 using RogueNaraka.BulletScripts;
 using RogueNaraka.TimeScripts;
+using System.Collections.Generic;
 
 namespace RogueNaraka.SkillScripts
 {
@@ -63,6 +64,9 @@ namespace RogueNaraka.SkillScripts
                 shadowScale.x -= amount;
                 shadowScale.y -= amount;
                 shadowTransform.localScale = shadowScale;
+                for (LinkedListNode<Unit> i = player.followable.Followers.First; i != null; i = i.Next)
+                    i.Value.cachedTransform.localScale = shadowScale;
+
                 if (player.cachedTransform.position.y > BoardManager.instance.boardRange[1].y - 1)
                 {
                     player.renderer.enabled = false;
@@ -85,6 +89,12 @@ namespace RogueNaraka.SkillScripts
             Unit player = BoardManager.instance.player;
             player.renderer.enabled = true;
             player.followable.isFollow = true;
+            for (LinkedListNode<Unit> i = player.followable.Followers.First; i != null; i = i.Next)
+            {
+                i.Value.cachedTransform.localScale = Vector3.one;
+                i.Value.cachedTransform.position = player.cachedTransform.position;
+            }
+
             Transform shadowTransform = player.shadow.transform;
             shadowTransform.localScale = Vector3.one;
             shadowTransform.SetParent(player.cachedTransform);

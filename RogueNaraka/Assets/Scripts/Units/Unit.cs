@@ -123,6 +123,7 @@ namespace RogueNaraka.UnitScripts
                 BoardManager.instance.enemies.Remove(this);
 
             DisableAll();
+            cachedTransform.localScale = Vector3.one;
             isDisabled = false;
         }
 
