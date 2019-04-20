@@ -19,6 +19,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public bool isCool;
 
     bool isMouseDown;
+    bool isDoubleClick;
 
     private SkillManager skillManager
     { get { return SkillManager.instance; } }
@@ -79,15 +80,16 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             {
                 if (doubleClickCorou == null)
                 {
+                    Pointer.instance.SetPointer(true);
                     doubleClickCorou = DoubleClickCorou();
                     StartCoroutine(doubleClickCorou);
                 }
                 else
-                    isMouseDown = true;
+                    isDoubleClick = true;
             }
             else
             {
-                isMouseDown = true;
+                
                 skillManager.circle.SetCircle(_skill.data.size);
                 skillManager.circle.SetEnable(true);
                 if (skill.data.isCircleToPlayer)
@@ -97,6 +99,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 Pointer.instance.SetPointer(true);
             }
 
+            isMouseDown = true;
             ManaScript.instance.SetNeedMana(true, _skill.data.manaCost);
         }
     }
@@ -106,15 +109,17 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     IEnumerator DoubleClickCorou()
     {
         float t = 0.2f;
-        isMouseDown = false;
+        isDoubleClick = false;
         do
         {
             yield return null;
             t -= Time.unscaledDeltaTime;
-            if (isMouseDown)
+            if (isDoubleClick)
             {
                 if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
                     UseSkill();
+                Pointer.instance.SetPointer(false);
+                isDoubleClick = false;
                 isMouseDown = false;
             }
         } while (t > 0);
