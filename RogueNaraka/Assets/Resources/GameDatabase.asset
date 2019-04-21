@@ -2703,7 +2703,7 @@ MonoBehaviour:
     id: 22
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0
-    related: 2
+    related: 0
     controller: {fileID: 22100000, guid: f92889ad8b2f6cb4c96e1a33f89f922a, type: 2}
     type: 2
     localSpeed: 0
@@ -2771,6 +2771,39 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: iceBreak
+  - name: DashDust
+    id: 24
+    color: {r: 1, g: 1, b: 1, a: 1}
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 5c63aa55daf1e4b4788d2aaab003f2fa, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.001
+    disapearStartTime: 0.5
+    disapearDuration: 1
+    pierce: 0
+    isSplash: 0
+    isHitableWall: 0
+    isBounceable: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: -200
+    effects: []
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   weapons:
   - name: MagicBall
     id: 0
@@ -3233,7 +3266,7 @@ MonoBehaviour:
     nameLang:
     - Dash Shoes
     - "\uC9C8\uC8FC \uC2E0\uBC1C"
-    bulletIds: 
+    bulletIds: 18000000
     unitIds: 
     spr: {fileID: 21300000, guid: ec4df30b369eef248a09a0e169996604, type: 3}
     id: 6
@@ -3246,11 +3279,10 @@ MonoBehaviour:
     isCircleToPlayer: 1
     isDeath: 0
     isBasic: 1
-    effects:
-    - type: 15
-      value: 1
-      time: 2
-    values: []
+    effects: []
+    values:
+    - name: 6
+      value: 0.05
     levelUp:
       manaCost: 0.25
       size: 0.5
@@ -3317,7 +3349,7 @@ MonoBehaviour:
     size: 0.75
     isCircleToPlayer: 1
     isDeath: 0
-    isBasic: 0
+    isBasic: 1
     effects: []
     values:
     - name: 1

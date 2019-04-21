@@ -36,9 +36,9 @@ namespace RogueNaraka.SkillScripts
         {
             BulletData dustData = GameDatabase.instance.bullets[data.bulletIds[1]];
             Bullet dust = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-
             dust.Init(from.ownerable.unit, dustData);
             dust.Spawn(to.cachedTransform.position);
+            dust.cachedTransform.rotation = MathHelpers.GetRandomAngle(0, 360);
         }
     }
 }

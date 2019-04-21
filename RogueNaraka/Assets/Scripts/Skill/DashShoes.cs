@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.UnitScripts;
 using RogueNaraka.EffectScripts;
+using RogueNaraka.BulletScripts;
 
 namespace RogueNaraka.SkillScripts
 {
@@ -26,15 +27,36 @@ namespace RogueNaraka.SkillScripts
 
         IEnumerator CheckEnd(Vector2 mp)
         {
+            WaitForFixedUpdate wait = new WaitForFixedUpdate();
             Unit player = BoardManager.instance.player;
-            yield return new WaitForFixedUpdate();
+            yield return wait;
             float remain = player.rigid.velocity.sqrMagnitude;
             float before;
             float after = remain;
+            float delay = GetValue(Value.Delay).value;
+            float t = delay;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Vector2 rnd = Random.insideUnitCircle * 0.35f;
+                Bullet dust = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+                dust.Init(BoardManager.instance.player, GameDatabase.instance.bullets[data.bulletIds[0]]);
+                dust.Spawn(BoardManager.instance.player.cachedTransform.position + (Vector3)rnd);
+                dust.cachedTransform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+            }
             do
             {
                 before = after;
-                yield return new WaitForFixedUpdate();
+                yield return wait;
+                t -= Time.fixedDeltaTime;
+                if (t <= 0)
+                {
+                    t = delay;
+                    Bullet dust = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+                    dust.Init(BoardManager.instance.player, GameDatabase.instance.bullets[data.bulletIds[0]]);
+                    dust.Spawn(BoardManager.instance.player.cachedTransform.position);
+                }
+
                 after = player.rigid.velocity.sqrMagnitude;
                 float reduce = before - after;
                 if (reduce > 0)

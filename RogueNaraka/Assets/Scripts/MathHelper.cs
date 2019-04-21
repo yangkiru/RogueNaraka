@@ -59,4 +59,8 @@ public static class MathHelpers
         return new Vector2(Mathf.Clamp(input.x, boundMin.x, boundMax.x),
         Mathf.Clamp(input.y, boundMin.y, boundMax.y));
     }
+    public static Quaternion GetRandomAngle(float min = 0, float max = 360)
+    {
+        return Quaternion.Euler(0, 0, Random.Range(min, max));
+    }
 }

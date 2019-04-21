@@ -78,7 +78,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 6f333ebf892543f45bcfc27e93c51c4b, type: 3}
     - {fileID: 102900000, guid: f1e759ef8d601a2488a493e7fa45f7a8, type: 3}
     - {fileID: 102900000, guid: ec4a08cc03cebae4589a41b36d8baaf9, type: 3}
-    totalSpriteSurfaceArea: 4679858
+    totalSpriteSurfaceArea: 4679714
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -193,7 +193,14 @@ SpriteAtlas:
   - {fileID: 21300006, guid: 9fe659d211f3f9f4ab24a5a2bea52591, type: 3}
   - {fileID: 21300000, guid: 9fe659d211f3f9f4ab24a5a2bea52591, type: 3}
   - {fileID: 21300002, guid: 9fe659d211f3f9f4ab24a5a2bea52591, type: 3}
+  - {fileID: 21300006, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
+  - {fileID: 21300004, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
+  - {fileID: 21300002, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
   - {fileID: 21300000, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
+  - {fileID: 21300014, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
+  - {fileID: 21300012, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
+  - {fileID: 21300010, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
+  - {fileID: 21300008, guid: 3df7cbe293d150a4c8bcc7f4d620cc0a, type: 3}
   - {fileID: 21300002, guid: 2093fbf2739aa9247958397b65dea31b, type: 3}
   - {fileID: 21300000, guid: 2093fbf2739aa9247958397b65dea31b, type: 3}
   - {fileID: 21300006, guid: 2093fbf2739aa9247958397b65dea31b, type: 3}
@@ -827,7 +834,14 @@ SpriteAtlas:
   - bone0R_3
   - bone0R_0
   - bone0R_1
-  - skill_spr_dashShoes_dust
+  - skill_spr_dashShoes_dust_3
+  - skill_spr_dashShoes_dust_2
+  - skill_spr_dashShoes_dust_1
+  - skill_spr_dashShoes_dust_0
+  - skill_spr_dashShoes_dust_7
+  - skill_spr_dashShoes_dust_6
+  - skill_spr_dashShoes_dust_5
+  - skill_spr_dashShoes_dust_4
   - spr_prunD_1
   - spr_prunD_0
   - spr_prunD_3
