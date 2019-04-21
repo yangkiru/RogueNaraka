@@ -87,7 +87,7 @@ namespace RogueNaraka.UnitScripts
         {
             if (deathCorou == null)
             {
-                Debug.Log(name + " death");
+                //Debug.Log(name + " death");
                 deathCorou = DeathCorou();
                 StartCoroutine(deathCorou);
             }

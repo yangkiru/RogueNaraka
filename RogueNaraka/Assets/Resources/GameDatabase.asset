@@ -2132,7 +2132,7 @@ MonoBehaviour:
     dmg: 0
     related: 0
     controller: {fileID: 22100000, guid: 04290e155ba3f334da07ff9e0e3d3e10, type: 2}
-    type: 3
+    type: 0
     localSpeed: 0
     worldSpeed: 0
     localAccel: 0
@@ -2747,8 +2747,8 @@ MonoBehaviour:
     spinSpeed: 0
     size: 1
     delay: 10
-    limitTime: 1.5
-    disapearStartTime: 0.5
+    limitTime: 3
+    disapearStartTime: 2
     disapearDuration: 1
     pierce: 99999
     isSplash: 1

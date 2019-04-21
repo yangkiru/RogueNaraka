@@ -256,7 +256,7 @@ public class BoardManager : MonoBehaviour {
         if(able.Count <= 0)
         {
             cost = 0;
-            Debug.Log("No More Spawnable Enemies");
+            //Debug.Log("No More Spawnable Enemies");
             return;
         }
 

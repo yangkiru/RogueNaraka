@@ -34,7 +34,7 @@ public class LevelUpManager : MonoBehaviour
         if (endStageCorou != null)
             return;
 
-        Debug.Log("StartEndStageCoroutine!!!");
+        //Debug.Log("StartEndStageCoroutine!!!");
         endStageCorou = EndStageCorou();
         StartCoroutine(EndStageCorou());
     }
