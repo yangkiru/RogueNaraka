@@ -103,12 +103,12 @@ namespace RogueNaraka.BulletScripts
 
             if (owner.data.bulletOrder != Order.Mid)
             {
-                Debug.Log(owner.name + "'s " + name + " sorting order is " + owner.data.bulletOrder);
+                //Debug.Log(owner.name + "'s " + name + " sorting order is " + owner.data.bulletOrder);
                 orderable.Init(owner.data.bulletOrder);
             }
             else
             {
-                Debug.Log(owner.name + "'s " + name + " sorting order is " + this.data.order);
+                //Debug.Log(owner.name + "'s " + name + " sorting order is " + this.data.order);
                 orderable.Init(this.data.order);
             }
 

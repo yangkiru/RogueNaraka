@@ -127,8 +127,11 @@ public class StatOrbManager : MonoBehaviour
         }
 
         GameManager.instance.StatTextUpdate(stat);
-        PlayerPrefs.SetInt("isFirstRoll", 1);
-        RollManager.instance.FirstRoll();
+
+        if (GameManager.instance.IsFirstGame)
+            RollManager.instance.FirstGame();
+        else
+            RollManager.instance.FirstRoll();
         //GameManager.instance.RunGame(stat);
     }
 

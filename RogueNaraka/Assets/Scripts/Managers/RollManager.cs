@@ -37,13 +37,15 @@ public class RollManager : MonoBehaviour {
     /// <summary>
     /// roll 실행 횟수
     /// </summary>
-    public static int LeftRoll
+    public int LeftRoll
     {
-        get { return PlayerPrefs.GetInt("leftRoll"); }
-        set { PlayerPrefs.SetInt("leftRoll", value); }
+        get { return PlayerPrefs.GetInt("leftRoll");}
+        set { leftRoll = value; PlayerPrefs.SetInt("leftRoll", value); }
     }
 
-    static public bool IsFirstRoll
+    public int leftRoll;
+
+    public bool IsFirstRoll
     {
         get { return PlayerPrefs.GetInt("isFirstRoll") == 1; }
         set { PlayerPrefs.SetInt("isFirstRoll", value ? 1 : 0); }
@@ -59,6 +61,7 @@ public class RollManager : MonoBehaviour {
     ROLL_TYPE[] lastMode;
 
     public event System.Action onFadeOut;
+    public event System.Action onLeftRoll;
 
     void Awake()
     {
@@ -96,15 +99,18 @@ public class RollManager : MonoBehaviour {
             SkillChangeManager.instance.Levels = 0;
             for (int i = 0; i < showCases.Length; i++)
             {
-                RollData rnd = new RollData();
+                RollData rnd;
                 for (int j = 0; j < 50; j++)
                 {
-                    rnd = GetRandom(rnd, mode);
-                    if (IsSetable(i, rnd))
+                    rnd = GetRandom(mode);
+                    if (IsSetable(i, rnd) || j == 49)
+                    {
+                        datas[i] = rnd;
                         break;
+                    }
                 }
                 showCases[i].enabled = true;
-                datas[i] = rnd;
+                
                 SetSprite(i, GetSprite(datas[i]));
             }
             string datasJson = JsonHelper.ToJson<RollData>(datas);
@@ -112,6 +118,62 @@ public class RollManager : MonoBehaviour {
         }
         else
         {
+            for (int i = 0; i < showCases.Length; i++)
+            {
+                showCases[i].enabled = true;
+                SetSprite(i, GetSprite(datas[i]));
+            }
+        }
+        SetStatTxt(true);
+    }
+
+    public void SetShowCase(RollData selected, params RollData[] datas)
+    {
+        Init();
+        if (!LoadDatas())
+        {
+            this.datas = datas;
+            for (int i = datas.Length; i < showCases.Length; i++)
+            {
+                this.datas[i] = datas[Random.Range(0, datas.Length)];
+                Debug.Log("RANDOM");
+            }
+
+            this.stopped = -1;
+
+            for (int i = 0; i < showCases.Length; i++)
+            {
+                if (this.datas[i].type == selected.type && this.datas[i].id == selected.id)
+                {
+                    this.stopped = i;
+                }
+                showCases[i].enabled = true;
+
+                SetSprite(i, GetSprite(datas[i]));
+                Debug.Log("Set:" + datas[i].id);
+            }
+
+            if (this.stopped == -1)
+            {
+                int rnd = Random.Range(0, 10);
+                this.datas[rnd] = selected;
+                showCases[rnd].enabled = true;
+                SetSprite(rnd, GetSprite(datas[rnd]));
+                this.stopped = rnd;
+                Debug.Log("No Stopped");
+            }
+
+            if (--stopped < 0)
+                stopped = 9;
+
+            string datasJson = JsonHelper.ToJson<RollData>(datas);
+            PlayerPrefs.SetString("rollDatas", datasJson);
+
+            PlayerPrefs.SetInt("stopped", stopped);
+        }
+        else
+        {
+            Debug.Log("RollData, params RollData[] : ShowCase Loaded");
             for (int i = 0; i < showCases.Length; i++)
             {
                 showCases[i].enabled = true;
@@ -153,7 +215,6 @@ public class RollManager : MonoBehaviour {
             //}
 
             //StatManager.instance.SetStatPnl(false);
-            Debug.Log(LeftRoll);
             if (--LeftRoll <= 0)
             {
                 LeftRoll = 0;
@@ -161,8 +222,14 @@ public class RollManager : MonoBehaviour {
             }
             else
             {
-                SetShowCase(lastMode);
-                Roll();
+                if (onLeftRoll == null)
+                {
+                    SetShowCase(lastMode);
+                    Roll();
+                }
+                else
+                    onLeftRoll.Invoke();
+
             }
 
         }
@@ -170,16 +237,17 @@ public class RollManager : MonoBehaviour {
 
     public void FirstRoll()
     {
-        if (RollManager.LeftRoll == 0)
-            RollManager.LeftRoll = 3;
-        RollManager.instance.SetShowCase(RollManager.ROLL_TYPE.SKILL);
-        RollManager.instance.SetRollPnl(true);
-        RollManager.instance.Roll();
-        RollManager.instance.SetOnFadeOut(RollManager.instance.GameStart);
+        if (LeftRoll == 0)
+            LeftRoll = 3;
+        SetShowCase(ROLL_TYPE.SKILL);
+        SetRollPnl(true);
+        Roll();
+        SetOnFadeOut(GameStart);
     }
 
     public void GameStart()
     {
+        Debug.Log("GameStart");
         IsFirstRoll = false;
         Stat stat = Stat.DataToStat();
         if (stat != null)
@@ -193,6 +261,72 @@ public class RollManager : MonoBehaviour {
         BoardManager.instance.StageUp();
         BoardManager.instance.InitBoard();
         LevelUpManager.IsLevelUp = false;
+    }
+
+    public void FirstGame()
+    {
+        Debug.Log("FirstGame");
+        if (LeftRoll == 0)
+        {
+            LeftRoll = 3;
+            RollData[] datas = new RollData[showCases.Length];
+            for (int i = 0; i < datas.Length; i++)
+            {
+                datas[i] = GetRandom(ROLL_TYPE.SKILL);
+            }
+            RollData thunder = new RollData();
+            thunder.type = ROLL_TYPE.SKILL;
+            thunder.id = 0;
+            SetShowCase(thunder, datas);
+        }
+        else
+        {
+            OnLeftRollFirstGame();
+        }
+        SetRollPnl(true);
+        Roll();
+        SetOnFadeOut(GameStart);
+        SetOnLeftRoll(OnLeftRollFirstGame);
+    }
+
+    public void OnLeftRollFirstGame()
+    {
+        Debug.Log("OnLeftRollFirstGame:" + LeftRoll);
+        RollData[] datas = new RollData[showCases.Length];
+        for (int i = 0; i < datas.Length; i++)
+        {
+            datas[i] = GetRandom(ROLL_TYPE.SKILL);
+        }
+        switch(LeftRoll)
+        {
+            case 2:
+                {
+                    Debug.Log("Ice");
+                    RollData ice = new RollData();
+                    ice.type = ROLL_TYPE.SKILL;
+                    ice.id = 1;
+                    SetShowCase(ice, datas);
+                    Roll();
+                    break;
+                }
+            case 1:
+                {
+                    Debug.Log("Genesis");
+                    RollData genesis = new RollData();
+                    genesis.type = ROLL_TYPE.SKILL;
+                    genesis.id = 2;
+                    SetShowCase(genesis, datas);
+                    SetOnLeftRoll(null);
+                    Roll();
+                    GameManager.instance.IsFirstGame = false;
+                    break;
+                }
+        }
+    }
+
+    public void SetOnLeftRoll(System.Action onLeftRoll)
+    {
+        this.onLeftRoll = onLeftRoll;
     }
 
     public void SetOnFadeOut(System.Action onFadeOut)
@@ -314,7 +448,7 @@ public class RollManager : MonoBehaviour {
                 switch(datas[i].type)
                 {
                     case ROLL_TYPE.ALL:
-                        datas[i] = GetRandom(datas[i], ROLL_TYPE.ALL);
+                        datas[i] = GetRandom( ROLL_TYPE.ALL);
                         break;
                     case ROLL_TYPE.ITEM:
                         if (datas[i].id >= GameDatabase.instance.items.Length)
@@ -465,12 +599,15 @@ public class RollManager : MonoBehaviour {
 
     public void OnMouse()
     {
-        dragImg.sprite = GetSprite(datas[selected]);
-        Vector3 pos = GameManager.instance.GetMousePosition();
-        dragImg.rectTransform.position = pos;
-        Vector3 local = dragImg.rectTransform.localPosition;
-        local.z = 2;
-        dragImg.rectTransform.localPosition = local;
+        if (selected > 0)
+        {
+            dragImg.sprite = GetSprite(datas[selected]);
+            Vector3 pos = GameManager.instance.GetMousePosition();
+            dragImg.rectTransform.position = pos;
+            Vector3 local = dragImg.rectTransform.localPosition;
+            local.z = 2;
+            dragImg.rectTransform.localPosition = local;
+        }
     }
 
     public void OnMouseUp()
@@ -483,6 +620,9 @@ public class RollManager : MonoBehaviour {
         dragImg.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 결정되었을 때 호출
+    /// </summary>
     public void Ok()
     {
         RollData rollData = datas[selected];
@@ -591,16 +731,17 @@ public class RollManager : MonoBehaviour {
             }
         }
     }
-    public RollData GetRandom(RollData result, params ROLL_TYPE[] modes)
+    public RollData GetRandom(params ROLL_TYPE[] modes)
     {
-
+        RollData result = new RollData();
         int rnd = Random.Range(0, modes.Length);
+
         result.type = modes[rnd];
         switch (modes[rnd])
         {
             case ROLL_TYPE.ALL:
                 int rndMode = Random.Range(1, (int)ROLL_TYPE.ITEM + 1);
-                return GetRandom(result, (ROLL_TYPE)rndMode);
+                return GetRandom((ROLL_TYPE)rndMode);
             case ROLL_TYPE.SKILL:
                 do
                 {

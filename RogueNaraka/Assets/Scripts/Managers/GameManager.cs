@@ -12,7 +12,6 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
-    const bool isReset = false;
     public static Language language;
 
     [SerializeField][ReadOnly]
@@ -48,6 +47,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField][ReadOnly]
     private bool _isPause;
 
+    public bool IsFirstGame { get { return PlayerPrefs.GetInt("isFirstGame") == 1; } set { PlayerPrefs.SetInt("isFirstGame", value ? 1 : 0); } }
+
     private IEnumerator autoSaveCoroutine;
 
     private void Awake()
@@ -58,12 +59,6 @@ public class GameManager : MonoBehaviour {
         Debug.unityLogger.logEnabled = false;
 #endif
         instance = this;
-
-        //업데이트된 버전이 초기화가 필요하면
-        if (isReset && PlayerPrefs.GetInt(Application.version) == 0)
-        {
-            PlayerPrefs.SetInt("isReset", 0);
-        }
 
         string lang = PlayerPrefs.GetString("language");
         try
@@ -198,6 +193,8 @@ public class GameManager : MonoBehaviour {
         RollManager.instance.ResetData();
 
         PlayerPrefs.SetInt("isReset", 1);
+
+        PlayerPrefs.SetInt("isFirstGame", 1);
     }
 
     public void RunGame(Stat stat)
@@ -238,10 +235,13 @@ public class GameManager : MonoBehaviour {
         {
             levelUpManager.LevelUp();
         }
-        else if (RollManager.IsFirstRoll)
+        else if (RollManager.instance.IsFirstRoll)
         {
             SetPause(true);
-            RollManager.instance.FirstRoll();
+            if(IsFirstGame)
+                RollManager.instance.FirstGame();
+            else
+                RollManager.instance.FirstRoll();
             //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         }
         else
@@ -273,6 +273,8 @@ public class GameManager : MonoBehaviour {
         skillManager.ResetSave();
         Item.instance.ResetSave();
         soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
+
+        RollManager.instance.IsFirstRoll = true;
     }
 
     public void Load()

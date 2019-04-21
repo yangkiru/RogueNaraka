@@ -254,6 +254,8 @@ public class DeathManager : MonoBehaviour
     {
         SetDeathPnl(false);
 
+        RollManager.instance.IsFirstRoll = true;
+
         RageManager.instance.SetActiveSmallRageBtn(false);
         //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         PlayerPrefs.SetInt("isRun", 0);
