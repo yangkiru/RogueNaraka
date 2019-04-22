@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FabricSettings
   m_EditorClassIdentifier: 
   email: kbh3719net@gmail.com
-  rawToken: '{"access_token":"bc498889e6d57f2674a2feb696991e3cf2294a590d5b8295d3bc734983914422","refresh_token":"34b5690f19cd6a72ffd1573f6de6483ba7b7c0e3fcd5f10800983614e5f8aec6","token_type":"bearer","expires_in":86400}'
+  rawToken: '{"access_token":"422275ab1323c4265f4ca388c3b5592593c3fd0b36cae217a0413630819579ac","refresh_token":"5cc490d9f91eb712569e9921a300d5256a66897b34903cb6d9fd8bace82f8c7d","token_type":"bearer","expires_in":86400}'
   organization:
     Name: Noxbix
     Id: 5c91f3a24d8f5b79af00484b
@@ -32,7 +32,7 @@ MonoBehaviour:
     Enabled: 1
     Meta:
     - Key: ConfiguredTimestamp
-      Value: 1553496389
+      Value: 1555916895
       Platform: 
     - Key: Dependencies
       Value: '[{"name":"Crashlytics-Android","version":"2.9.7"},{"name":"Crashlytics-Core-Android","version":"2.6.6"},{"name":"Fabric-Android","version":"1.4.6"},{"name":"Answers-Android","version":"1.4.5"},{"name":"Beta-Android","version":"1.2.10"},{"name":"Crashlytics-iOS","version":"3.12.0"},{"name":"Crashlytics-Wrapper-iOS","version":"0.0.0"},{"name":"Crashlytics-Wrapper-Android","version":"0.0.0"}]'
