@@ -2766,7 +2766,7 @@ MonoBehaviour:
       time: 0.2
     - type: 4
       value: 0
-      time: 3
+      time: 12
     children: []
     onDestroy: []
     hitSFX: []
@@ -3419,7 +3419,7 @@ MonoBehaviour:
     id: 9
     level: 1
     cost: 500
-    coolTime: 7
+    coolTime: 5
     coolTimeLeft: 0
     manaCost: 1
     size: 2
@@ -3437,7 +3437,7 @@ MonoBehaviour:
     levelUp:
       manaCost: 0.5
       size: 0.5
-      coolTime: -0.5
+      coolTime: 0
       effects: []
       values: []
     description:
