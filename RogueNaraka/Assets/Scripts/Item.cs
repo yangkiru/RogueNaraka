@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
 
     public TextMeshProUGUI amountTxt;
 
-    private Image img;
+    public Image img;
     public int[] sprIds;
     public bool[] isKnown;
     public int amount;
@@ -33,7 +33,6 @@ public class Item : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        img = GetComponent<Image>();
     }
 
     public void InitItem()
