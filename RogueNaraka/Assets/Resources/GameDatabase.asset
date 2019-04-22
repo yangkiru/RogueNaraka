@@ -3428,18 +3428,16 @@ MonoBehaviour:
     isBasic: 1
     effects: []
     values:
-    - name: 0
-      value: 5
     - name: 2
-      value: 0.025
-    - name: 5
-      value: 2
+      value: 0.25
     levelUp:
       manaCost: 0.5
       size: 0.5
       coolTime: 0
       effects: []
-      values: []
+      values:
+      - name: 2
+        value: 0.25
     description:
     - It jumps to the target point and inflicts damage proportional to the TEC around
       it. The enemy is stunned.

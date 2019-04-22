@@ -75,9 +75,13 @@ namespace RogueNaraka.SkillScripts
                 }
             } while (time > 0);
 
-            BulletData crashData = GameDatabase.instance.bullets[data.bulletIds[0]];
-            Bullet crashBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+            float dmg = GetValue(Value.Damage).value + 0.25f * player.stat.GetCurrent(STAT.TEC);
 
+            BulletData crashData = GameDatabase.instance.bullets[data.bulletIds[0]].Clone() as BulletData;
+            crashData.dmg = dmg;
+
+            Bullet crashBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+            crashBullet.Init(player, crashData);
             crashBullet.Spawn(player, crashData, mp);
 
             OnJumpEnd();
