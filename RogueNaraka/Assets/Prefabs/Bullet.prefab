@@ -29,8 +29,8 @@ GameObject:
   - component: {fileID: 3793362596285630770}
   - component: {fileID: 1426770371750627783}
   - component: {fileID: 1307021657860848083}
-  - component: {fileID: 6279783528189844711}
   - component: {fileID: 7590567112331911600}
+  - component: {fileID: 3789064328484307322}
   m_Layer: 11
   m_Name: Bullet
   m_TagString: Untagged
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1498647319
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -130,6 +130,7 @@ MonoBehaviour:
   data:
     name: 
     id: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0
     related: 0
     controller: {fileID: 0}
@@ -165,7 +166,7 @@ MonoBehaviour:
   rigid: {fileID: 3793362596285630770}
   polygon: {fileID: 1426770371750627783}
   circle: {fileID: 1307021657860848083}
-  advanced: {fileID: 6279783528189844711}
+  physics: {fileID: 3789064328484307322}
   cachedTransform: {fileID: 4215614072316304}
 --- !u!114 &1655965979807426877
 MonoBehaviour:
@@ -487,67 +488,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3125
---- !u!114 &6279783528189844711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040694008069246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c55c83d4c4dd1145ad5fbbab3c3df36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AlphaTolerance: 15
-  DistanceThreshold: 0
-  Scale: 1
-  Decompose: 0
-  RunInPlayMode: 1
-  UseCache: 1
-  lastAlphaTolerance: 15
-  lastScale: 1
-  lastDistanceThreshold: 0
-  lastDecompose: 0
-  lastSprite: {fileID: 0}
-  lastRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 20
-    height: 20
-  lastOffset: {x: 15, y: 10}
-  lastPixelsPerUnit: 32
-  lastFlipX: 0
-  lastFlipY: 0
-  editorCache:
-  - Key:
-      Texture: {fileID: 2800000, guid: 351ae5d626b876b45a228347658ec0ab, type: 3}
-      Rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 20
-        height: 20
-    Value:
-      List:
-      - Array:
-        - {x: -0.046875, y: -0.140625}
-        - {x: 0.046875, y: -0.140625}
-        - {x: 0.109375, y: -0.109375}
-        - {x: 0.140625, y: -0.046875}
-        - {x: 0.140625, y: 0.046875}
-        - {x: 0.109375, y: 0.109375}
-        - {x: 0.046875, y: 0.140625}
-        - {x: -0.046875, y: 0.140625}
-        - {x: -0.140625, y: 0.078125}
-        - {x: -0.171875, y: 0.046875}
-        - {x: -0.234375, y: 0.078125}
-        - {x: -0.328125, y: 0.078125}
-        - {x: -0.453125, y: 0.015625}
-        - {x: -0.390625, y: 0.046875}
-        - {x: -0.328125, y: 0.046875}
-        - {x: -0.234375, y: -0.046875}
 --- !u!114 &7590567112331911600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,3 +501,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 114481818113872668}
+--- !u!114 &3789064328484307322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040694008069246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a9df2913589b148b9f76560f302d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 212126601148893928}
+  coll: {fileID: 1426770371750627783}

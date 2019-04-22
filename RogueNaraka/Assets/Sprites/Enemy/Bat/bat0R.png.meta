@@ -106,11 +106,30 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 10, y: -1}
+        - {x: 10, y: 9}
+        - {x: 7, y: 8}
+        - {x: 5, y: 9}
+        - {x: 1, y: 6}
+        - {x: -1, y: 9}
+        - {x: -2, y: 9}
+        - {x: -6, y: 6}
+        - {x: -8, y: 9}
+        - {x: -10, y: 8}
+        - {x: -10, y: 1}
+        - {x: -7, y: -2}
+        - {x: -7, y: -4}
+        - {x: -5, y: -7}
+        - {x: -2, y: -8}
+        - {x: 3, y: -8}
+        - {x: 8, y: -4}
+        - {x: 8, y: -2}
+        - {x: 9, y: -2}
+      tessellationDetail: 1
       bones: []
       spriteID: ec98196d0492cc540af4ec2d09517e00
       vertices: []
@@ -126,11 +145,26 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 7, y: 9}
+        - {x: 5, y: 9}
+        - {x: 1, y: 6}
+        - {x: -1, y: 9}
+        - {x: -2, y: 9}
+        - {x: -6, y: 6}
+        - {x: -9, y: 6}
+        - {x: -10, y: 5}
+        - {x: -10, y: -1}
+        - {x: -5, y: -7}
+        - {x: -2, y: -8}
+        - {x: 3, y: -8}
+        - {x: 10, y: -3}
+        - {x: 10, y: 6}
+        - {x: 8, y: 5}
+      tessellationDetail: 1
       bones: []
       spriteID: e7a6fe6fe0128f547bef76abb29f893f
       vertices: []
@@ -146,11 +180,29 @@ TextureImporter:
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 10, y: 4}
+        - {x: 8, y: 5}
+        - {x: 8, y: 8}
+        - {x: 6, y: 10}
+        - {x: 5, y: 10}
+        - {x: 1, y: 7}
+        - {x: -1, y: 10}
+        - {x: -2, y: 10}
+        - {x: -6, y: 6}
+        - {x: -10, y: 1}
+        - {x: -10, y: -5}
+        - {x: -8, y: -6}
+        - {x: -6, y: -4}
+        - {x: -2, y: -7}
+        - {x: 3, y: -7}
+        - {x: 7, y: -4}
+        - {x: 9, y: -6}
+        - {x: 10, y: -6}
+      tessellationDetail: 1
       bones: []
       spriteID: 084e8688dd053c849ad8b6a696488789
       vertices: []

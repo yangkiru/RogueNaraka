@@ -16,13 +16,11 @@ namespace RogueNaraka.BulletScripts.Hitable
                 case BULLET_TYPE.DYNAMIC_CIRCLE:
                     bullet.circle.enabled = true;
                     bullet.polygon.enabled = false;
-                    bullet.advanced.enabled = false;
                     bullet.circle.radius = data.size;
                     break;
                 case BULLET_TYPE.DYNAMIC_POLY:
                     bullet.circle.enabled = false;
                     bullet.polygon.enabled = true;
-                    bullet.advanced.enabled = true;
                     break;
                 default:
                     break;

@@ -52976,6 +52976,7 @@ MonoBehaviour:
   stopped: 0
   isClickable: 0
   datas: []
+  leftRoll: 0
 --- !u!224 &1114166077
 RectTransform:
   m_ObjectHideFlags: 0

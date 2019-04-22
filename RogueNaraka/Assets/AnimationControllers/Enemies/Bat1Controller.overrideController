@@ -4,13 +4,14 @@
 AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Bat1Controller
   m_Controller: {fileID: 9100000, guid: 9659801ddaac0a64991aa8b63de447a6, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: bbc50bf140054f34c8ddc707fc233d3f, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: bbc50bf140054f34c8ddc707fc233d3f, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: b2de6b3a03489fe4eac1246311f7df23, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 392938d18a5e99a48a46a1a229f0aef1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7269b4a3bb47d7b40adca24d1aea74f7, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: de5ebd813b369784a881bd2ea4e5788b, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 95286ffb696c1a046b7c2183b48cdd14, type: 2}

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.UnitScripts;
 using RogueNaraka.BulletScripts.Hitable;
-using DigitalRuby.AdvancedPolygonCollider;
 
 namespace RogueNaraka.BulletScripts
 {
@@ -45,7 +44,7 @@ namespace RogueNaraka.BulletScripts
         public PolygonCollider2D polygon;
         public CircleCollider2D circle;
 
-        public AdvancedPolygonCollider advanced;
+        public PhysicsCollider physics;
 
         public Transform cachedTransform;
 
@@ -79,8 +78,8 @@ namespace RogueNaraka.BulletScripts
 
             polygon = GetComponent<PolygonCollider2D>();
             circle = GetComponent<CircleCollider2D>();
-            advanced = GetComponent<AdvancedPolygonCollider>();
 
+            physics = GetComponent<PhysicsCollider>();
             cachedTransform = transform;
         }
 
@@ -120,16 +119,16 @@ namespace RogueNaraka.BulletScripts
             {
                 case BULLET_TYPE.CIRCLE_CAST:
                     hitable = hitableCircleCast;
-                    advanced.enabled = false;
+                    physics.enabled = false;
                     break;
                 case BULLET_TYPE.DYNAMIC_CIRCLE:
                 case BULLET_TYPE.DYNAMIC_POLY:
                     hitable = hitableTrigger;
-                    advanced.enabled = true;
+                    physics.enabled = true;
                     break;
                 case BULLET_TYPE.RAY_CAST:
                     hitable = hitableRaycast;
-                    advanced.enabled = false;
+                    physics.enabled = false;
                     break;
                 default:
                     break;
