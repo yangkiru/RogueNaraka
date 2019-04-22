@@ -111,7 +111,6 @@ namespace RogueNaraka.SkillScripts
 
                 effect.Init((Vector2)player.cachedTransform.position + Random.insideUnitCircle * 0.25f, player.cachedTransform.position, 1.5f);
                 //effect.cachedTransform.position = (Vector2)player.cachedTransform.position + Random.insideUnitCircle.normalized * 1.3f;
-                effect.gameObject.SetActive(true);
             }
 
         }

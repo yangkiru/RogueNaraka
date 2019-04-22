@@ -26,10 +26,13 @@ public class DeathEffect : MonoBehaviour {
             this.unit = unit;
             animator.runtimeAnimatorController = !unit.data.deathEffectController ?
                 DeathEffectManager.instance.baseController : unit.data.deathEffectController;
+            if (animator.runtimeAnimatorController.animationClips[0].name.CompareTo("Empty") == 0)
+                return;
         }
         cachedTransform.position = position;
         this.speed = speed;
         move = ((Vector2)cachedTransform.position - center).normalized * speed;
+        gameObject.SetActive(true);
     }
 
     void OnEnable()
@@ -51,7 +54,11 @@ public class DeathEffect : MonoBehaviour {
 
     private void Update()
     {
+        
         cachedTransform.Translate(move * Time.deltaTime);
+
+        
+
     }
 
     /// <summary>

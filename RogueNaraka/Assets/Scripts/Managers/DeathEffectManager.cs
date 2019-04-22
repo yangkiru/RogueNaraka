@@ -36,8 +36,6 @@ public class DeathEffectManager : MonoBehaviour
             //    ef.animator.SetBool("isSmall", true);
 
             ef.Init(unit.cachedTransform.position + (Vector3)offset, unit.cachedTransform.position, 0.3f, unit);
-                
-            ef.gameObject.SetActive(true);
             //yield return new WaitForSeconds(0.1f);
         }
     }
