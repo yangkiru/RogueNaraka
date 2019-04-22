@@ -2665,7 +2665,7 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0.05
     related: 2
-    controller: {fileID: 22100000, guid: b7c9f28d11ccd024bb5535cc6dcef082, type: 2}
+    controller: {fileID: 9100000, guid: 88ea6031a91d8994586c942e94e20571, type: 2}
     type: 3
     localSpeed: 0
     worldSpeed: 0
@@ -3376,7 +3376,7 @@ MonoBehaviour:
     id: 8
     level: 1
     cost: 500
-    coolTime: 3
+    coolTime: 5
     coolTimeLeft: 0
     manaCost: 1
     size: 0.75
@@ -3425,11 +3425,11 @@ MonoBehaviour:
     size: 2
     isCircleToPlayer: 1
     isDeath: 0
-    isBasic: 0
+    isBasic: 1
     effects: []
     values:
-    - name: 1
-      value: 3
+    - name: 0
+      value: 5
     - name: 2
       value: 0.025
     - name: 5
@@ -3441,11 +3441,12 @@ MonoBehaviour:
       effects: []
       values: []
     description:
-    - 
-    - "\uBCBD\uC5D0 \uB2FF\uC73C\uBA74 \uD295\uAE30\uB294 \uD1A0\uB124\uC774\uB3C4\uB97C
-      \uC3DC\uB2E4. \uD1A0\uB124\uC774\uB3C4\uC5D0 \uB2FF\uC73C\uBA74 \uAE30\uC220\uB825\uC5D0
-      \uBE44\uB840\uD558\uB294 \uD53C\uD574\uB97C \uC785\uACE0 \uAE30\uC808\uD558\uBA70
-      \uBC00\uB824\uB09C\uB2E4."
+    - It jumps to the target point and inflicts damage proportional to the TEC around
+      it. The enemy is stunned.
+    - "\uC0AC\uC6A9\uD55C \uC704\uCE58\uB85C \uB3C4\uC57D\uD55C\uB2E4. \uCC29\uC9C0
+      \uC2DC \uC8FC\uBCC0\uC5D0 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
+      \uD53C\uD574\uB97C \uC900\uB2E4. \uD53C\uD574\uB97C \uBC1B\uC740 \uC801\uC740
+      \uAE30\uC808\uD558\uBA70 \uBC00\uB824\uB09C\uB2E4."
     useSFX: flameShoes
   items:
   - name: HealPotion
