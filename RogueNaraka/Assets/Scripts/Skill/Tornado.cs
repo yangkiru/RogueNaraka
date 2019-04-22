@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.BulletScripts;
 using RogueNaraka.UnitScripts;
+using RogueNaraka.TimeScripts;
 
 namespace RogueNaraka.SkillScripts
 {
@@ -30,6 +31,7 @@ namespace RogueNaraka.SkillScripts
             tornado.Spawn(player.cachedTransform.position);
             Vector3 dir = mp - player.cachedTransform.position;
             tornado.shootable.Shoot(dir, Vector3.zero, data.localSpeed, data.worldSpeed, data.localAccel, data.worldAccel, false);
+            StartCoroutine("TornadoDust", tornado);
         }
 
         private void OnTornadoHit(Bullet from, Unit to)
@@ -39,6 +41,36 @@ namespace RogueNaraka.SkillScripts
             dust.Init(from.ownerable.unit, dustData);
             dust.Spawn(to.cachedTransform.position);
             dust.cachedTransform.rotation = MathHelpers.GetRandomAngle(0, 360);
+        }
+
+        IEnumerator TornadoDust(Bullet bullet)
+        {
+            BulletData dustData = GameDatabase.instance.bullets[data.bulletIds[2]];
+            float t = 0.2f;
+            float tt = t;
+            do
+            {
+                yield return null;
+                t -= TimeManager.Instance.DeltaTime;
+                if (t < 0)
+                {
+                    t = tt;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Bullet dust = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
+                        dust.Init(bullet.ownerable.unit, dustData);
+                        Vector2 offset = new Vector2(i == 0 ? -0.2f : i == 1 ? 0.2f : 0, -0.5f);//Random.Range(-0.75f, 0.75f)
+                        dust.Spawn(bullet.cachedTransform.position + (Vector3)offset);
+                        dust.cachedTransform.rotation = MathHelpers.GetRandomAngle();
+                        dust.shootable.Shoot(i == 0 ? Vector2.left : i == 1 ? Vector2.right : Vector2.zero, Vector3.zero, 0, 0.5f, 0, 0, false);
+                    }
+                }
+            } while (bullet.gameObject.activeSelf);            
+        }
+
+        private void OnDisable()
+        {
+            StopCoroutine("TornadoDust");
         }
     }
 }

@@ -1,17 +1,14 @@
 fileFormatVersion: 2
-guid: d8152a97a4cfb7b41954737d8257c3d4
+guid: 1a0bdf811c6c68a41927d70e1a8159b2
 TextureImporter:
   fileIDToRecycleName:
-    21300000: skill_spr_tornado_dust_0
-    21300002: skill_spr_tornado_dust_1
-    21300004: skill_spr_tornado_dust_2
-    21300006: skill_spr_tornado_dust_3
-    21300008: skill_spr_tornado_dust_4
-    21300010: skill_spr_tornado_dust_5
-    21300012: skill_spr_tornado_dust_6
-    21300014: skill_spr_tornado_dust_7
-    21300016: skill_spr_tornado_dust_8
-    21300018: skill_spr_tornado_dust_9
+    21300000: skill_spr_tornado_hit_0
+    21300002: skill_spr_tornado_hit_1
+    21300004: skill_spr_tornado_hit_2
+    21300006: skill_spr_tornado_hit_3
+    21300008: skill_spr_tornado_hit_4
+    21300010: skill_spr_tornado_hit_5
+    21300012: skill_spr_tornado_hit_6
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -41,7 +38,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -55,7 +52,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -73,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -84,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,7 +92,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,13 +102,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skill_spr_tornado_dust_0
+      name: skill_spr_tornado_hit_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 24
-        height: 24
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,19 +116,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbac914872253924c98c239a6932edb6
+      spriteID: 2dca8433cb71bcd4b92bb368d81c1031
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill_spr_tornado_dust_1
+      name: skill_spr_tornado_hit_1
       rect:
         serializedVersion: 2
-        x: 24
+        x: 20
         y: 0
-        width: 24
-        height: 24
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,19 +136,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d28565e3761d58644b1f37804e552b56
+      spriteID: ef77801f580086341955bb5d58d9dedc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill_spr_tornado_dust_2
+      name: skill_spr_tornado_hit_2
       rect:
         serializedVersion: 2
-        x: 48
+        x: 40
         y: 0
-        width: 24
-        height: 24
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,19 +156,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cac6a6bf4513e834d9f7daca5fd7f26e
+      spriteID: b277e766ef124fd4795cb194dca212c0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill_spr_tornado_dust_3
+      name: skill_spr_tornado_hit_3
       rect:
         serializedVersion: 2
-        x: 72
+        x: 60
         y: 0
-        width: 24
-        height: 24
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,19 +176,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e92305a4fe01ef4fa4d38080ffee03e
+      spriteID: 7f51e1806831c7a419b6bbf599fbdac1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill_spr_tornado_dust_4
+      name: skill_spr_tornado_hit_4
       rect:
         serializedVersion: 2
-        x: 96
+        x: 80
         y: 0
-        width: 24
-        height: 24
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,19 +196,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 281e2c4b9d7c633458aa3738876bc0f8
+      spriteID: 4549e93055a364c479347cb1ae2b36b2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skill_spr_tornado_dust_5
+      name: skill_spr_tornado_hit_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 565831f3e6c60874ba62987472d9423e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skill_spr_tornado_hit_6
       rect:
         serializedVersion: 2
         x: 120
         y: 0
-        width: 24
-        height: 24
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,87 +236,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3457d7b341e2ec4d8fea2676df5bb2b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skill_spr_tornado_dust_6
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2dee9d94484af684092537f1878cc948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skill_spr_tornado_dust_7
-      rect:
-        serializedVersion: 2
-        x: 168
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 377212fcf067b0b4f95173f052d383d5
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skill_spr_tornado_dust_8
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 833403260590bbd44b1101d40be1ce42
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skill_spr_tornado_dust_9
-      rect:
-        serializedVersion: 2
-        x: 216
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f6690f128977fc4daafe260fec912ed
+      spriteID: df2a807b8f7c8474da9346ac8c38bae3
       vertices: []
       indices: 
       edges: []
@@ -307,7 +244,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3836c1508bd7b4d44abda00e19897229
+    spriteID: 3b3855a042f07bf4d8c4e562330ed4b1
     vertices: []
     indices: 
     edges: []

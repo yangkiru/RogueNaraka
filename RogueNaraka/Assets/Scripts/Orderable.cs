@@ -10,8 +10,8 @@ public class Orderable : MonoBehaviour
     [SerializeField]
     SpriteRenderer render;
 
-    float pos;
-    float _pos;
+    float pos = 0;
+    float _pos = 0;
 
     private void Reset()
     {
@@ -21,6 +21,7 @@ public class Orderable : MonoBehaviour
     public void Init(Order order)
     {
         this.order = order;
+        render.sortingOrder = (int)order;
     }
 
     private void Update()

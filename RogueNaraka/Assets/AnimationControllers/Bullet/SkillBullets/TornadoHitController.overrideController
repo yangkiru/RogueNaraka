@@ -6,10 +6,10 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TornadoDustController
+  m_Name: TornadoHitController
   m_Controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 13924e178168109498a9ce5e1d7aea03, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: d09ab4465510c204d970a7395d55e5b7, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 76253f689302b3949a13c56052fead7c, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: bbc50bf140054f34c8ddc707fc233d3f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 76253f689302b3949a13c56052fead7c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c093f4cde1ded334b863b0123f2af4b5, type: 2}

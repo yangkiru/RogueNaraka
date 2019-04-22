@@ -2687,7 +2687,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: -200
+    order: -100
     effects:
     - type: 0
       value: 0
@@ -2699,7 +2699,7 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: 
-  - name: TornadoDust
+  - name: TornadoHit
     id: 22
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0
@@ -2789,6 +2789,39 @@ MonoBehaviour:
     limitTime: 0.001
     disapearStartTime: 0.5
     disapearDuration: 1
+    pierce: 0
+    isSplash: 0
+    isHitableWall: 0
+    isBounceable: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: -200
+    effects: []
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
+  - name: TornadoDust
+    id: 25
+    color: {r: 1, g: 1, b: 1, a: 1}
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 3d915a9b942a2e54b9361ba5ac5c322f, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 1
+    disapearStartTime: 0
+    disapearDuration: 0
     pierce: 0
     isSplash: 0
     isHitableWall: 0
@@ -3337,7 +3370,7 @@ MonoBehaviour:
     nameLang:
     - Tornado
     - "\uD1A0\uB124\uC774\uB3C4"
-    bulletIds: 1500000016000000
+    bulletIds: 150000001600000019000000
     unitIds: 
     spr: {fileID: 21300000, guid: a7f16155d358e3244b507a421d56717c, type: 3}
     id: 8

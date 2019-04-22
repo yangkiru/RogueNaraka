@@ -78,7 +78,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 6f333ebf892543f45bcfc27e93c51c4b, type: 3}
     - {fileID: 102900000, guid: f1e759ef8d601a2488a493e7fa45f7a8, type: 3}
     - {fileID: 102900000, guid: ec4a08cc03cebae4589a41b36d8baaf9, type: 3}
-    totalSpriteSurfaceArea: 4678910
+    totalSpriteSurfaceArea: 4684670
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -130,6 +130,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c39db481ece824946b557285f4d4f87b, type: 3}
   - {fileID: 21300002, guid: c39db481ece824946b557285f4d4f87b, type: 3}
   - {fileID: 21300000, guid: 708e1f81b47bee448a6f201ccf946acc, type: 3}
+  - {fileID: 21300006, guid: 1a0bdf811c6c68a41927d70e1a8159b2, type: 3}
+  - {fileID: 21300004, guid: 1a0bdf811c6c68a41927d70e1a8159b2, type: 3}
+  - {fileID: 21300002, guid: 1a0bdf811c6c68a41927d70e1a8159b2, type: 3}
+  - {fileID: 21300000, guid: 1a0bdf811c6c68a41927d70e1a8159b2, type: 3}
+  - {fileID: 21300012, guid: 1a0bdf811c6c68a41927d70e1a8159b2, type: 3}
+  - {fileID: 21300010, guid: 1a0bdf811c6c68a41927d70e1a8159b2, type: 3}
+  - {fileID: 21300008, guid: 1a0bdf811c6c68a41927d70e1a8159b2, type: 3}
   - {fileID: 21300000, guid: 41599ac15918a6349923c6b7d72a9c1f, type: 3}
   - {fileID: 21300010, guid: 4f6a68e1d6c81ab4d86e1853f71653c9, type: 3}
   - {fileID: 21300008, guid: 4f6a68e1d6c81ab4d86e1853f71653c9, type: 3}
@@ -425,11 +432,14 @@ SpriteAtlas:
   - {fileID: 21300012, guid: 75341c87c8f9d064196a694935f2bc29, type: 3}
   - {fileID: 21300008, guid: 75341c87c8f9d064196a694935f2bc29, type: 3}
   - {fileID: 21300010, guid: 75341c87c8f9d064196a694935f2bc29, type: 3}
+  - {fileID: 21300016, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
+  - {fileID: 21300018, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300004, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300006, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300000, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300002, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300012, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
+  - {fileID: 21300014, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300008, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300010, guid: d8152a97a4cfb7b41954737d8257c3d4, type: 3}
   - {fileID: 21300000, guid: 48767b9782ca3bb49a5e43b1a1c7f9b7, type: 3}
@@ -771,6 +781,13 @@ SpriteAtlas:
   - player_r_0
   - player_r_1
   - stat
+  - skill_spr_tornado_hit_3
+  - skill_spr_tornado_hit_2
+  - skill_spr_tornado_hit_1
+  - skill_spr_tornado_hit_0
+  - skill_spr_tornado_hit_6
+  - skill_spr_tornado_hit_5
+  - skill_spr_tornado_hit_4
   - pnl_white
   - slime0_death_5
   - slime0_death_4
@@ -1066,11 +1083,14 @@ SpriteAtlas:
   - skill0_spr0_thunderStrike_6
   - skill0_spr0_thunderStrike_4
   - skill0_spr0_thunderStrike_5
+  - skill_spr_tornado_dust_8
+  - skill_spr_tornado_dust_9
   - skill_spr_tornado_dust_2
   - skill_spr_tornado_dust_3
   - skill_spr_tornado_dust_0
   - skill_spr_tornado_dust_1
   - skill_spr_tornado_dust_6
+  - skill_spr_tornado_dust_7
   - skill_spr_tornado_dust_4
   - skill_spr_tornado_dust_5
   - soulShopIcon

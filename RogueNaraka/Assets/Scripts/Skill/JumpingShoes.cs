@@ -104,6 +104,16 @@ namespace RogueNaraka.SkillScripts
             player.autoMoveable.enabled = true;
             player.attackable.enabled = true;
             player.targetable.IsTargetable = true;
+
+            for (int i = 0; i < 20; i++)
+            {
+                DeathEffect effect = DeathEffectManager.instance.pool.DequeueObjectPool().GetComponent<DeathEffect>();
+
+                effect.Init((Vector2)player.cachedTransform.position + Random.insideUnitCircle * 0.25f, player.cachedTransform.position, 1.5f);
+                //effect.cachedTransform.position = (Vector2)player.cachedTransform.position + Random.insideUnitCircle.normalized * 1.3f;
+                effect.gameObject.SetActive(true);
+            }
+
         }
     }
 }

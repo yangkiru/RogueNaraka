@@ -10,18 +10,26 @@ public class DeathEffect : MonoBehaviour {
     public Transform cachedTransform;
     Unit unit;
 
+    float speed;
 
+    Vector2 move;
 
     private void Awake()
     {
         cachedTransform = transform;
     }
 
-    public void Init(Unit unit)
+    public void Init(Vector2 position, Vector2 center, float speed, Unit unit = null)
     {
-        this.unit = unit;
-        animator.runtimeAnimatorController = !unit.data.deathEffectController ?
-            DeathEffectManager.instance.baseController : unit.data.deathEffectController;
+        if (unit)
+        {
+            this.unit = unit;
+            animator.runtimeAnimatorController = !unit.data.deathEffectController ?
+                DeathEffectManager.instance.baseController : unit.data.deathEffectController;
+        }
+        cachedTransform.position = position;
+        this.speed = speed;
+        move = ((Vector2)cachedTransform.position - center).normalized * speed;
     }
 
     void OnEnable()
@@ -39,23 +47,11 @@ public class DeathEffect : MonoBehaviour {
                     animator.SetBool("isSmall", true);
                 //return;
             }
-
-
-        moveCorou = MoveCorou(Random.Range(0, 0.3f), unit);
-        StartCoroutine(moveCorou);
     }
 
-    IEnumerator moveCorou;
-
-    IEnumerator MoveCorou(float speed, Unit unit)
+    private void Update()
     {
-        Vector2 dir = (cachedTransform.position - unit.cachedTransform.position).normalized;
-        Vector2 move = dir * speed;
-        while (true)
-        {
-            yield return null;
-            cachedTransform.Translate(move * Time.deltaTime);
-        }
+        cachedTransform.Translate(move * Time.deltaTime);
     }
 
     /// <summary>
@@ -63,12 +59,9 @@ public class DeathEffect : MonoBehaviour {
     /// </summary>
     public void EnqueueToPool()
     {
-        if (moveCorou != null)
-        {
-            StopCoroutine(moveCorou);
-            moveCorou = null;
-        }
         unit = null;
+        speed = 0;
+        move = Vector2.zero;
         DeathEffectManager.instance.pool.EnqueueObjectPool(this.gameObject);
     }
 }
