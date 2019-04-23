@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using RogueNaraka.TimeScripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,13 +48,19 @@ namespace RogueNaraka.BulletScripts
         {
             Bullet child = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             child.Init(bullet.ownerable.unit, GameDatabase.instance.bullets[data.bulletId]);
-            child.renderer.sortingOrder = bullet.renderer.sortingOrder + data.sortingOrder;
+            //child.renderer.sortingOrder = bullet.renderer.sortingOrder + data.sortingOrder;
             child.spawnable.StartCoroutine(child.spawnable.BulletSpawn(bullet, data));
         }
 
         public IEnumerator BulletSpawn(Bullet parent, BulletChildData data)
         {
-            yield return new WaitForSeconds(data.startTime);
+            float t = data.startTime;
+
+            do
+            {
+                yield return null;
+                t -= TimeManager.Instance.DeltaTime;
+            } while (t > 0);
 
             bullet.Spawn(parent.cachedTransform.position);
             bullet.renderer.color = parent.renderer.color;
@@ -68,7 +75,13 @@ namespace RogueNaraka.BulletScripts
 
             bullet.cachedTransform.rotation = parent.cachedTransform.rotation;
 
-            yield return new WaitForSeconds(data.waitTime);
+            t = data.waitTime;
+
+            do
+            {
+                yield return null;
+                t -= TimeManager.Instance.DeltaTime;
+            } while (t > 0);
 
             if (data.angle >= 0)
             {
