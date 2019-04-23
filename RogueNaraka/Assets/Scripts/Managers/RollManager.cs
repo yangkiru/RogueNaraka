@@ -60,8 +60,9 @@ public class RollManager : MonoBehaviour {
     public enum ROLL_TYPE { ALL, SKILL, STAT, ITEM }
     ROLL_TYPE[] lastMode;
 
-    public event System.Action onFadeOut;
+    public event System.Action onDecided;
     public event System.Action onLeftRoll;
+    public event System.Action onFadeOut;
 
     void Awake()
     {
@@ -149,7 +150,7 @@ public class RollManager : MonoBehaviour {
                 }
                 showCases[i].enabled = true;
 
-                SetSprite(i, GetSprite(datas[i]));
+                SetSprite(i, GetSprite(this.datas[i]));
                 Debug.Log("Set:" + datas[i].id);
             }
 
@@ -158,7 +159,7 @@ public class RollManager : MonoBehaviour {
                 int rnd = Random.Range(0, 10);
                 this.datas[rnd] = selected;
                 showCases[rnd].enabled = true;
-                SetSprite(rnd, GetSprite(datas[rnd]));
+                SetSprite(rnd, GetSprite(this.datas[rnd]));
                 this.stopped = rnd;
                 Debug.Log("No Stopped");
             }
@@ -166,7 +167,7 @@ public class RollManager : MonoBehaviour {
             if (--stopped < 0)
                 stopped = 9;
 
-            string datasJson = JsonHelper.ToJson<RollData>(datas);
+            string datasJson = JsonHelper.ToJson<RollData>(this.datas);
             PlayerPrefs.SetString("rollDatas", datasJson);
 
             PlayerPrefs.SetInt("stopped", stopped);
@@ -177,7 +178,7 @@ public class RollManager : MonoBehaviour {
             for (int i = 0; i < showCases.Length; i++)
             {
                 showCases[i].enabled = true;
-                SetSprite(i, GetSprite(datas[i]));
+                SetSprite(i, GetSprite(this.datas[i]));
             }
         }
         SetStatTxt(true);
@@ -218,6 +219,8 @@ public class RollManager : MonoBehaviour {
             if (--LeftRoll <= 0)
             {
                 LeftRoll = 0;
+                if (onDecided != null)
+                    onDecided.Invoke();
                 fade.FadeOut();
             }
             else
@@ -242,13 +245,15 @@ public class RollManager : MonoBehaviour {
         SetShowCase(ROLL_TYPE.SKILL);
         SetRollPnl(true);
         Roll();
+        SetOnPnlClose(delegate () {
+            IsFirstRoll = false;
+        });
         SetOnFadeOut(GameStart);
     }
 
     public void GameStart()
     {
         Debug.Log("GameStart");
-        IsFirstRoll = false;
         Stat stat = Stat.DataToStat();
         if (stat != null)
             GameManager.instance.RunGame(stat);
@@ -256,17 +261,11 @@ public class RollManager : MonoBehaviour {
         //    BoardManager.instance.fade.FadeIn();
     }
 
-    public void StageStart()
-    {
-        BoardManager.instance.StageUp();
-        BoardManager.instance.InitBoard();
-        LevelUpManager.IsLevelUp = false;
-    }
-
     public void FirstGame()
     {
         Debug.Log("FirstGame");
-        if (LeftRoll == 0)
+        leftRoll = LeftRoll;
+        if (leftRoll == 0 || leftRoll == 3)
         {
             LeftRoll = 3;
             RollData[] datas = new RollData[showCases.Length];
@@ -286,21 +285,27 @@ public class RollManager : MonoBehaviour {
         SetRollPnl(true);
         Roll();
         SetOnFadeOut(GameStart);
+        SetOnPnlClose(delegate () {
+            IsFirstRoll = false;
+            GameManager.instance.IsFirstGame = false;
+        });
         SetOnLeftRoll(OnLeftRollFirstGame);
     }
 
     public void OnLeftRollFirstGame()
     {
         Debug.Log("OnLeftRollFirstGame:" + LeftRoll);
-        RollData[] datas = new RollData[showCases.Length];
-        for (int i = 0; i < datas.Length; i++)
-        {
-            datas[i] = GetRandom(ROLL_TYPE.SKILL);
-        }
+        
         switch(LeftRoll)
         {
             case 2:
                 {
+                    RollData[] datas = new RollData[showCases.Length];
+                    for (int i = 0; i < datas.Length; i++)
+                    {
+                        datas[i] = GetRandom(ROLL_TYPE.SKILL);
+                    }
+
                     Debug.Log("Ice");
                     RollData ice = new RollData();
                     ice.type = ROLL_TYPE.SKILL;
@@ -311,14 +316,19 @@ public class RollManager : MonoBehaviour {
                 }
             case 1:
                 {
-                    Debug.Log("Genesis");
-                    RollData genesis = new RollData();
-                    genesis.type = ROLL_TYPE.SKILL;
-                    genesis.id = 2;
-                    SetShowCase(genesis, datas);
+                    RollData[] datas = new RollData[showCases.Length];
+                    for (int i = 0; i < datas.Length; i++)
+                    {
+                        datas[i] = GetRandom(ROLL_TYPE.SKILL);
+                    }
+
+                    Debug.Log("DashShoes");
+                    RollData dashshoes = new RollData();
+                    dashshoes.type = ROLL_TYPE.SKILL;
+                    dashshoes.id = 6;
+                    SetShowCase(dashshoes, datas);
                     SetOnLeftRoll(null);
                     Roll();
-                    GameManager.instance.IsFirstGame = false;
                     break;
                 }
         }
@@ -327,6 +337,11 @@ public class RollManager : MonoBehaviour {
     public void SetOnLeftRoll(System.Action onLeftRoll)
     {
         this.onLeftRoll = onLeftRoll;
+    }
+
+    public void SetOnPnlClose(System.Action onPnlClose)
+    {
+        this.onDecided = onPnlClose;
     }
 
     public void SetOnFadeOut(System.Action onFadeOut)
@@ -448,7 +463,7 @@ public class RollManager : MonoBehaviour {
                 switch(datas[i].type)
                 {
                     case ROLL_TYPE.ALL:
-                        datas[i] = GetRandom( ROLL_TYPE.ALL);
+                        datas[i] = GetRandom(ROLL_TYPE.ALL);
                         break;
                     case ROLL_TYPE.ITEM:
                         if (datas[i].id >= GameDatabase.instance.items.Length)
@@ -599,7 +614,7 @@ public class RollManager : MonoBehaviour {
 
     public void OnMouse()
     {
-        if (selected > 0)
+        if (selected != -1)
         {
             dragImg.sprite = GetSprite(datas[selected]);
             Vector3 pos = GameManager.instance.GetMousePosition();

@@ -1876,8 +1876,8 @@ MonoBehaviour:
     shadowZAngle: 0
     shadowXFlip: 0
     gainExp: 0
-    order: -200
-    bulletOrder: -200
+    order: -300
+    bulletOrder: -300
     effects: []
     resistances: []
     deathSFX: shadowEnd
@@ -3317,7 +3317,7 @@ MonoBehaviour:
     - name: 6
       value: 0.05
     levelUp:
-      manaCost: 0.25
+      manaCost: 0.5
       size: 0.5
       coolTime: -0.5
       effects: []
@@ -3429,7 +3429,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: 2
-      value: 0.25
+      value: 0.8
     levelUp:
       manaCost: 0.5
       size: 0.5
@@ -3437,7 +3437,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 2
-        value: 0.25
+        value: 0.5
     description:
     - It jumps to the target point and inflicts damage proportional to the TEC around
       it. The enemy is stunned.

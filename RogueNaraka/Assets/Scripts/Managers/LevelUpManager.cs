@@ -83,21 +83,20 @@ public class LevelUpManager : MonoBehaviour
         IsLevelUp = true;
         statManager.SyncStatUpgradeTxt();
         //SkillManager.instance.SetIsDragable(false);
+        rollManager.SetRollPnl(true);
+        rollManager.SetShowCase(RollManager.ROLL_TYPE.ALL);
+        rollManager.SetOnPnlClose(delegate()
+        {
+            BoardManager.instance.StageUp();
+            LevelUpManager.IsLevelUp = false;
+            BoardManager.instance.Save();
+        });
+        rollManager.SetOnFadeOut(BoardManager.instance.InitBoard);
+
         if (statManager.isLeftStatChanged)
-        {
-            rollManager.SetRollPnl(true);
-            rollManager.SetShowCase(RollManager.ROLL_TYPE.ALL);
-            rollManager.SetOnFadeOut(rollManager.StageStart);
             statManager.SetStatPnl(true);
-            //fade.FadeIn();
-        }
         else
-        {
-            rollManager.SetRollPnl(true);
-            rollManager.SetShowCase(RollManager.ROLL_TYPE.ALL);
             rollManager.Roll();
-            rollManager.SetOnFadeOut(rollManager.StageStart);
-        }
         GameManager.instance.Save();
         time = 0;
         player.moveable.Stop();

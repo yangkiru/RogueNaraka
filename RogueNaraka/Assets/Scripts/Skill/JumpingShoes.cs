@@ -75,7 +75,7 @@ namespace RogueNaraka.SkillScripts
                 }
             } while (time > 0);
 
-            float dmg = GetValue(Value.Damage).value + 0.25f * player.stat.GetCurrent(STAT.TEC);
+            float dmg = GetValue(Value.Damage).value;
 
             BulletData crashData = GameDatabase.instance.bullets[data.bulletIds[0]].Clone() as BulletData;
             crashData.dmg = dmg;

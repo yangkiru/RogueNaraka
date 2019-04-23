@@ -39,7 +39,8 @@ namespace RogueNaraka.SkillScripts
             BulletData dustData = GameDatabase.instance.bullets[data.bulletIds[1]];
             Bullet dust = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             dust.Init(from.ownerable.unit, dustData);
-            dust.Spawn(to.cachedTransform.position);
+            Vector3 pos = (from.cachedTransform.position - to.cachedTransform.position) * 0.25f;
+            dust.Spawn(to.cachedTransform.position + pos);
             dust.cachedTransform.rotation = MathHelpers.GetRandomAngle(0, 360);
         }
 
@@ -65,7 +66,7 @@ namespace RogueNaraka.SkillScripts
                         dust.shootable.Shoot(i == 0 ? Vector2.left : i == 1 ? Vector2.right : Vector2.zero, Vector3.zero, 0, 0.5f, 0, 0, false);
                     }
                 }
-            } while (bullet.gameObject.activeSelf);            
+            } while (bullet.gameObject.activeSelf);
         }
 
         private void OnDisable()
