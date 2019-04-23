@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.BulletScripts;
 using RogueNaraka.UnitScripts;
+using RogueNaraka.TimeScripts;
 
 namespace RogueNaraka.SkillScripts
 {
@@ -15,6 +16,7 @@ namespace RogueNaraka.SkillScripts
 
         IEnumerator SpawnThunder(Vector3 mp)
         {
+            WaitForFixedUpdate wait = new WaitForFixedUpdate();
             float amount = GetValue(Value.Amount).value;
             float size = Mathf.Min(data.size, 3.6f);
             //Debug.Log("Thunder" + amount);
@@ -37,8 +39,8 @@ namespace RogueNaraka.SkillScripts
                 float time = delay;
                 do
                 {
-                    yield return null;
-                    time -= Time.deltaTime;
+                    yield return wait;
+                    time -= TimeManager.Instance.FixedDeltaTime;
                 } while (time > 0);
 
             } while (amount > 0);

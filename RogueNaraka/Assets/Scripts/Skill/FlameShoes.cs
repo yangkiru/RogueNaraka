@@ -25,8 +25,9 @@ namespace RogueNaraka.SkillScripts
 
         IEnumerator CheckEnd(Vector2 mp)
         {
+            WaitForFixedUpdate wait = new WaitForFixedUpdate();
             Unit player = BoardManager.instance.player;
-            yield return new WaitForFixedUpdate();
+            yield return wait;
             float remain = player.rigid.velocity.sqrMagnitude;
             float before;
             float after = remain;
@@ -41,7 +42,7 @@ namespace RogueNaraka.SkillScripts
             do
             {
                 before = after;
-                yield return new WaitForFixedUpdate();
+                yield return wait;
                 after = player.rigid.velocity.sqrMagnitude;
                 float reduce = before - after;
                 if (reduce > 0)

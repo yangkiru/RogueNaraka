@@ -36,7 +36,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         protected override void AutoMove()
         {
-            if (!this.target.followable.isFollow)
+            if (this.target && !this.target.followable.isFollow)
                 return;
             if(this.node != null)
             {

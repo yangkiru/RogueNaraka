@@ -243,12 +243,12 @@ namespace RogueNaraka.UnitScripts
             gameObject.SetActive(true);
             if (data.isFriendly && !BoardManager.instance.friendlies.Contains(this))
             {
-                Debug.Log("Friendly:" + name);
+                //Debug.Log("Friendly:" + name);
                 BoardManager.instance.friendlies.Add(this);
             }
             else if (!data.isFriendly && !BoardManager.instance.enemies.Contains(this))
             {
-                Debug.Log("Enemy:" + name);
+                //Debug.Log("Enemy:" + name);
                 BoardManager.instance.enemies.Add(this);
             }
             tackleable.OnSpawn();

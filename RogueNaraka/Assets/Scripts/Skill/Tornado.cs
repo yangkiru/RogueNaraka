@@ -46,13 +46,14 @@ namespace RogueNaraka.SkillScripts
 
         IEnumerator TornadoDust(Bullet bullet)
         {
+            WaitForFixedUpdate wait = new WaitForFixedUpdate();
             BulletData dustData = GameDatabase.instance.bullets[data.bulletIds[2]];
             float t = 0.2f;
             float tt = t;
             do
             {
-                yield return null;
-                t -= TimeManager.Instance.DeltaTime;
+                yield return wait;
+                t -= TimeManager.Instance.FixedDeltaTime;
                 if (t < 0)
                 {
                     t = tt;
