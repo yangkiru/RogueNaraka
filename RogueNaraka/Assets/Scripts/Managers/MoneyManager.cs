@@ -31,6 +31,9 @@ public class MoneyManager : MonoBehaviour {
 
     public static MoneyManager instance = null;
 
+    private bool loaded = false;
+    public bool Loaded { get {return this.loaded; } }
+
     public void Awake()
     {
         if (instance == null)
@@ -120,6 +123,7 @@ public class MoneyManager : MonoBehaviour {
     {
         SetUnrefinedSoul(PlayerPrefs.GetInt("unrefinedSoul"));
         SetSoul(PlayerPrefs.GetInt("soul"));
+        this.loaded = true;
     }
 
     public void ResetData()
