@@ -167,9 +167,7 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         private IEnumerator CheckRewardPushes() {
-            yield return new WaitUntil(() => this.isLoginSuccess);
-            yield return new WaitUntil(() => this.isLoadedRewardedPushInfo);
-            yield return new WaitUntil(() => MoneyManager.instance.Loaded);
+            yield return new WaitUntil(() => this.isLoginSuccess && this.isLoadedRewardedPushInfo && MoneyManager.instance.Loaded);
 
             while(true) {
                 DateTime currentDateTime = DateTime.Parse(Backend.Utils.GetServerTime().GetReturnValuetoJSON()["utcTime"].ToString());
