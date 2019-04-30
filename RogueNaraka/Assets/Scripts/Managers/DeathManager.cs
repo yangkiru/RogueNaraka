@@ -86,9 +86,10 @@ public class DeathManager : MonoBehaviour
         this.ExpGauge.fillAmount = (float)(curExp / maxExp);
         //
         //Backend ClearedStage 갱신
+        /*
         if(TheBackendManager.Instance.gameObject.activeSelf) {
             TheBackendManager.Instance.UpdateClearedStage(BoardManager.instance.ClearedStage);
-        }
+        }*/
         //
 
         TierManager.Instance.SaveExp();
