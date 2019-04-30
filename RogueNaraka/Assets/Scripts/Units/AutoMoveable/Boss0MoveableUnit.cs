@@ -12,12 +12,12 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
 
         int rndCount;
 
-        int maxPhase = 7;
+        const int maxPhase = 7;
         public int phase
         {
             get
             {
-                int value = (int)((1 - unit.hpable.currentHp / unit.hpable.maxHp) * 7);
+                int value = (int)((1 - unit.hpable.currentHp / unit.hpable.maxHp) * maxPhase);
                 lastPhase = value;
                 return value;
             }

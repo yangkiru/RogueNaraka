@@ -37,7 +37,7 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnMouse()
     {
-        if (_skill.data.id != -1 && (!player.deathable.isDeath || _skill.data.isDeath) && !GameManager.instance.isPause)
+        if (_skill && _skill.data.id != -1 && (!player.deathable.isDeath || _skill.data.isDeath) && !GameManager.instance.isPause)
         {
             pointer.PositionToMouse();
         }

@@ -14,12 +14,14 @@ public class AudioManager : MonoBehaviour
     public AudioSetting[] audioSettings;
     private enum AudioGroups { Master, Music, SFX };
 
-    public AudioClip[] musicClips;
+    //public AudioClip[] musicClips;
 
 #if UNITY_EDITOR
+    public DefaultAsset[] musics;
     public DefaultAsset[] SFXs;
 #endif
 
+    public string[] musicNames;
     public string[] SFXNames;
 
     public AudioSource music;
@@ -29,52 +31,80 @@ public class AudioManager : MonoBehaviour
     public Button[] btns;
 
     public float sfxVolume = 0.5f;
+    public float musicVolume = 0.5f;
 
-    public string currentMainMusic;
-    public string currentDeathMusic;
+    public string currentMainMusic = string.Empty;
+    public string currentDeathMusic = string.Empty;
     public string[] playMusics;
     public string[] deathMusics;
     public string[] bossMusics;
 
-    Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
 #if UNITY_EDITOR
+    Dictionary<string, AudioClip> musicClipDictionary = new Dictionary<string, AudioClip>();
     Dictionary<string, AudioClip> SFXClipDictionary = new Dictionary<string, AudioClip>();
 #endif
-#if UNITY_ANDROID && !UNITY_EDITOR
-    int currentStreamID;
-    Dictionary<string, int> fileIDDictionary = new Dictionary<string, int>();
-#endif
+    int currentMusicStreamID = -1;
+    string currentMusicName = string.Empty;
+    Dictionary<string, int> musicFileIDDictionary = new Dictionary<string, int>();
+
+    int currentSFXStreamID;
+    Dictionary<string, int> SFXFileIDDictionary = new Dictionary<string, int>();
 
     void Awake()
     {
         instance = this;
         AndroidNativeAudio.makePool();
-        for (int i = 0; i < musicClips.Length; i++)
-        {
-            musicClipDictionary.Add(musicClips[i].name, musicClips[i]);
-        }
+        //for (int i = 0; i < musicClips.Length; i++)
+        //{
+        //    musicClipDictionary.Add(musicClips[i].name, musicClips[i]);
+        //}
 #if UNITY_EDITOR || UNITY_STANDALONE
+        for (int i = 0; i < musicNames.Length; i++)
+        {
+            StartCoroutine(LoadClipCoroutine("Music", musicNames[i], AudioType.OGGVORBIS, OnMusicLoadingCompleted));
+        }
         for (int i = 0; i < SFXNames.Length; i++)
         {
-            StartCoroutine(LoadClipCoroutine(SFXNames[i], OnAudioClipLoadingCompleted));
+            StartCoroutine(LoadClipCoroutine("SFX", SFXNames[i], AudioType.WAV, OnSFXLoadingCompleted));
+        }
+#else
+        for (int i = 0; i < SFXNames.Length; i++)
+        {
+            SFXFileIDDictionary.Add(SFXNames[i], AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i])));
         }
 #endif
 
-#if UNITY_ANDROID && !UNITY_EDITOR
-        for (int i = 0; i < SFXNames.Length; i++)
-        {
-            fileIDDictionary.Add(SFXNames[i], AndroidNativeAudio.load(string.Format("SFX/{0}.wav", SFXNames[i])));
-        }
-#endif
+        //for (int i = 0; i < musicNames.Length; i++)
+        //{
+        //    musicFileIDDictionary.Add(musicNames[i], ANAMusic.load(string.Format("Music/{0}.ogg", musicNames[i]), false, false));
+        //}
 
         BtnSound();
     }
 
-    #if UNITY_EDITOR || UNITY_STANDALONE
-    IEnumerator LoadClipCoroutine(string name, System.Action<AudioClip> onLoadingCompleted)
+#if UNITY_EDITOR || UNITY_STANDALONE
+    IEnumerator LoadClipCoroutine(string folder, string name, AudioType type, System.Action<AudioClip> onLoadingCompleted)
     {
-        string file = (string.Format("{0}/SFX/{1}.wav", Application.streamingAssetsPath, name));
-        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(file, AudioType.WAV))
+        string format = string.Empty;
+
+
+        switch (type)
+        {
+            case AudioType.WAV:
+                format = "wav";
+                break;
+            case AudioType.AIFF:
+                format = "aif";
+                break;
+            case AudioType.OGGVORBIS:
+                format = "ogg";
+                break;
+        }
+
+        string file = (string.Format("{0}/{1}/{2}.{3}", Application.streamingAssetsPath, folder, name, format));
+
+
+        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(file, type))
         {
             yield return www.SendWebRequest();
 
@@ -92,18 +122,28 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void OnAudioClipLoadingCompleted(AudioClip clip)
+    void OnSFXLoadingCompleted(AudioClip clip)
     {
         SFXClipDictionary.Add(clip.name, clip);
     }
 
-    [ContextMenu("Temp")]
-    void Temp()
+    void OnMusicLoadingCompleted(AudioClip clip)
+    {
+        musicClipDictionary.Add(clip.name, clip);
+    }
+
+    [ContextMenu("SyncNames")]
+    void SyncNames()
     {
         SFXNames = new string[SFXs.Length];
         for (int i = 0; i < SFXs.Length; i++)
         {
             SFXNames[i] = SFXs[i].name;
+        }
+        musicNames = new string[musics.Length];
+        for (int i = 0; i < musics.Length; i++)
+        {
+            musicNames[i] = musics[i].name;
         }
     }
 #endif
@@ -165,10 +205,24 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicVolume(float value)
     {
-        if(value <= -20)
-            audioSettings[(int)AudioGroups.Music].SetExposedParam(-80);
-        else
-            audioSettings[(int)AudioGroups.Music].SetExposedParam(value);
+        //if(value <= -20)
+        //    audioSettings[(int)AudioGroups.Music].SetExposedParam(-80);
+        //else
+        //    audioSettings[(int)AudioGroups.Music].SetExposedParam(value);
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        audioSettings[(int)AudioGroups.Music].SetExposedParam(value);
+#endif
+
+        musicVolume = Mathf.InverseLerp(audioSettings[(int)AudioGroups.Music].slider.minValue,
+    audioSettings[(int)AudioGroups.Music].slider.maxValue, value);
+#if UNITY_EDITOR || UNITY_STANDALONE
+        music.volume = musicVolume;
+#else
+        if(currentMusicStreamID != -1)
+            ANAMusic.setVolume(currentMusicStreamID, musicVolume);
+#endif
+        PlayerPrefs.SetFloat(audioSettings[(int)AudioGroups.Music].exposedParam, value);
     }
 
     public void SetSFXVolume(float value)
@@ -177,11 +231,9 @@ public class AudioManager : MonoBehaviour
         audioSettings[(int)AudioGroups.SFX].SetExposedParam(value);
 #endif
 
-#if UNITY_ANDROID
-                sfxVolume = Mathf.InverseLerp(audioSettings[(int)AudioGroups.SFX].slider.minValue,
-            audioSettings[(int)AudioGroups.SFX].slider.maxValue, value) * SFX.volume;
+        sfxVolume = Mathf.InverseLerp(audioSettings[(int)AudioGroups.SFX].slider.minValue,
+    audioSettings[(int)AudioGroups.SFX].slider.maxValue, value) * SFX.volume;
         PlayerPrefs.SetFloat(audioSettings[(int)AudioGroups.SFX].exposedParam, value);
-#endif
 
     }
 
@@ -190,47 +242,192 @@ public class AudioManager : MonoBehaviour
     //    audioSettings[audio].Mute();
     //}
 
+    public void LoadMusic(string name)
+    {
+#if !UNITY_EDITOR && UNITY_ANDROID
+        currentMusicName = name;
+        ANAMusic.load(string.Format("Music/{0}.ogg", name));
+#endif
+    }
+
+    void OnMusicLoaded(int ID)
+    {
+        currentMusicStreamID = ID;
+        ANAMusic.setVolume(ID, musicVolume);
+        ANAMusic.setLooping(ID, true);
+    }
+
     public void PlayMusic(string name)
     {
+        Debug.Log("PlayMusic:"+name);
+#if UNITY_EDITOR || UNITY_STANDALONE
         if (music.clip && music.clip.name.CompareTo(name) == 0)
-            return;
+        {
+            if (music.isPlaying)
+                return;
+            else
+            {
+                music.Play();
+                return;
+            }
+        }
 
-        Debug.Log(string.Format("PlayMusic {0}", name));
+#elif !UNITY_EDITOR && UNITY_ANDROID
+        if (currentMusicName.CompareTo(name) == 0)
+        {
+            if (currentMusicStreamID == -1 || ANAMusic.isPlaying(currentMusicStreamID))
+                return;
+            else
+            {
+                ANAMusic.play(currentMusicStreamID);
+                return;
+            }
+        }
+#endif
+
+        //Debug.Log(string.Format("PlayMusic {0}", name));
+        //if (musicClipDictionary.ContainsKey(name))
+        //{
+        //    music.clip = musicClipDictionary[name];
+        //    music.Play();
+        //}
+        //else
+        //{
+        //    music.Stop();
+        //    music.clip = null;
+        //}
+
+        StopMusic();
+
+#if UNITY_EDITOR || UNITY_STANDALONE
         if (musicClipDictionary.ContainsKey(name))
         {
             music.clip = musicClipDictionary[name];
             music.Play();
         }
-        else
-        {
-            music.Stop();
-            music.clip = null;
-        }
+#endif
+#if !UNITY_EDITOR && UNITY_ANDROID
+        currentMusicName = name;
+        currentMusicStreamID = ANAMusic.load(string.Format("Music/{0}.ogg", name), false, false, OnMusicLoadedPlay);
+#endif
+    }
+
+    public void OnMusicLoadedPlay(int ID)
+    {
+        ANAMusic.setVolume(ID, musicVolume);
+        ANAMusic.setLooping(ID, true);
+        ANAMusic.play(ID);
     }
 
     public void StopMusic()
     {
-        music.Stop();
-    }
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if(music.clip)
+            music.Stop();
 
-    public void FadeInMusic(float time)
-    {
-        Debug.Log("FadeInMusic");
-        float volume = music.volume;
-        music.volume = 0;
-        StartCoroutine(FadeInMusicCorou(volume, time));
-    }
-
-    IEnumerator FadeInMusicCorou(float volume, float time)
-    {
-        float t = 0;
-        do
+#else
+        //    ANAMusic.pause(currentMusicStreamID);
+        //    ANAMusic.seekTo(currentMusicStreamID, 0);
+        if(currentMusicStreamID != -1)
         {
-            yield return null;
-            t += Time.unscaledDeltaTime / time;
-            music.volume = Mathf.Lerp(0, volume, t);
-        } while (t < 1);
+            ANAMusic.release(currentMusicStreamID);
+            currentMusicStreamID = -1;
+            currentMusicName = string.Empty;
+        }
+#endif
+    }
+
+    public void TogglePauseMusic()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (music.isPlaying)
+            music.Pause();
+        else
+            music.UnPause();
+#else
+        if (currentMusicStreamID != -1)
+        {
+            if (ANAMusic.isPlaying(currentMusicStreamID))
+                ANAMusic.pause(currentMusicStreamID);
+            else
+                ANAMusic.play(currentMusicStreamID);
+        }
+#endif
+    }
+
+    public void FadeInMusic(float time, System.Action onEnd = null)
+    {
+        StartCoroutine(FadeInMusicCorou(musicVolume, time, onEnd));
+    }
+
+    IEnumerator FadeInMusicCorou(float volume, float time, System.Action onEnd)
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        music.volume = 0;
+#else
+        if (currentMusicStreamID == -1)
+            yield break;
+        else
+            ANAMusic.setVolume(currentMusicStreamID, 0);
+#endif
+
+        float t = 0;
+        if (time > 0)
+        {
+            do
+            {
+                yield return null;
+                t += Time.unscaledDeltaTime / time;
+#if UNITY_EDITOR || UNITY_STANDALONE
+                music.volume = Mathf.Lerp(0, volume, t);
+#else
+            ANAMusic.setVolume(currentMusicStreamID, Mathf.Lerp(0, volume, t));
+#endif
+            } while (t < 1);
+        }
+#if UNITY_EDITOR || UNITY_STANDALONE
         music.volume = volume;
+#else
+        ANAMusic.setVolume(currentMusicStreamID, volume);
+#endif
+        if (onEnd != null)
+            onEnd.Invoke();
+    }
+
+    public void FadeOutMusic(float time, System.Action onEnd = null)
+    {
+        StartCoroutine(FadeOutMusicCorou(musicVolume, time, onEnd));
+    }
+
+    IEnumerator FadeOutMusicCorou(float volume, float time, System.Action onEnd)
+    {
+        float lastVolume = musicVolume;
+#if !UNITY_EDITOR && UNITY_ANDROID
+        if (currentMusicStreamID == -1)
+            yield break;
+#endif
+
+        float t = 0;
+        if (time > 0)
+        {
+            do
+            {
+                yield return null;
+                t += Time.unscaledDeltaTime / time;
+#if UNITY_EDITOR || UNITY_STANDALONE
+                music.volume = Mathf.Lerp(lastVolume, 0, t);
+#else
+            ANAMusic.setVolume(currentMusicStreamID, Mathf.Lerp(lastVolume, 0, t));
+#endif
+            } while (t < 1);
+        }
+#if UNITY_EDITOR || UNITY_STANDALONE
+        music.volume = 0;
+#else
+        ANAMusic.setVolume(currentMusicStreamID, 0);
+#endif
+        if (onEnd != null)
+            onEnd.Invoke();
     }
 
     //public IEnumerator PlaySound(AudioSource source, Transform parent)
@@ -253,11 +450,7 @@ public class AudioManager : MonoBehaviour
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
-        try
-        {
-            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -1);
-        }catch
-        {}
+            currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume, -1);
 #endif
     }
 
@@ -275,7 +468,7 @@ public class AudioManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_ANDROID
         try
         {
-            currentStreamID = AndroidNativeAudio.play(fileIDDictionary[name], sfxVolume, -1, 1, 0, pitch);
+            currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume, -1, 1, 0, pitch);
         }catch
         {}
 #endif
@@ -287,7 +480,7 @@ public class AudioManager : MonoBehaviour
         SFX.Stop();
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
-        AndroidNativeAudio.stop(currentStreamID);
+        AndroidNativeAudio.stop(currentSFXStreamID);
 #endif
     }
 
@@ -295,10 +488,14 @@ public class AudioManager : MonoBehaviour
     void OnApplicationQuit()
     {
         // Clean up when done
-        List<int> list = new List<int>(fileIDDictionary.Values);
-        for (int i = 0; i < list.Count; i++)
+        List<int> list = new List<int>(SFXFileIDDictionary.Values);
+        for (int i = list.Count; i >= 0; i--)
             AndroidNativeAudio.unload(list[i]);
         AndroidNativeAudio.releasePool();
+
+        list = new List<int>(musicFileIDDictionary.Values);
+        for (int i = 0; i < list.Count; i++)
+            ANAMusic.release(list[i]);
     }
 #endif
 }

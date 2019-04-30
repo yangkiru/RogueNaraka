@@ -77,7 +77,8 @@ namespace RogueNaraka.UnitScripts
                 }
                 soulParticle.Init(unit.cachedTransform.position, soul);
             }
-            
+
+            AudioManager.instance.FadeOutMusic(2);
             AudioManager.instance.GetRandomMainMusic();
             RageManager.instance.Rage();
             BoardManager.instance.boss = null;
@@ -147,11 +148,6 @@ namespace RogueNaraka.UnitScripts
         {
             _isDeath = false;
             unit.animator.SetBool("isDeath", false);
-        }
-
-        public void StopMusic()
-        {
-            AudioManager.instance.StopMusic();
         }
     }
 }

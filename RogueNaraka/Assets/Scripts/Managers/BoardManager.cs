@@ -172,19 +172,19 @@ public class BoardManager : MonoBehaviour {
             StartCoroutine(StageTxtEffect(true));
             return;
         }
-        else if (stage != 1 && stage % 30 == 1)
-        {
-            AudioManager.instance.FadeInMusic(1);
-        }
 
         if (RageManager.instance.isRage)
             RageManager.instance.BigPnlOpen();
 
-        if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty)==0)
+        if (AudioManager.instance.currentMainMusic.CompareTo(string.Empty)==0)
             AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
         else
             AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
 
+        if (stage != 1 && stage % 30 == 1)
+        {
+            AudioManager.instance.FadeInMusic(1);
+        }
 
         float cost = GameDatabase.instance.stageCosts[(stage - 1) % 30];
 

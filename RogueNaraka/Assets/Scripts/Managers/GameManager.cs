@@ -53,9 +53,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake()
     {
-#if UNITY_EDITOR
-        Debug.unityLogger.logEnabled = true;
-#else
+#if !UNITY_EDITOR
         Debug.unityLogger.logEnabled = false;
 #endif
         instance = this;
@@ -213,23 +211,12 @@ public class GameManager : MonoBehaviour {
         
         boardManager.SpawnPlayer(playerData);
 
-        if (playerData.stat.currentHp <= 0)
-        {
-            player.gameObject.SetActive(false);
-            DeathManager.instance.OnDeath();
-        }
-
         StatTextUpdate(stat);
 
         SkillManager.instance.Load();
         Item.instance.Load();
 
         RageManager.instance.CheckRage();
-
-        if(AudioManager.instance.currentMainMusic.CompareTo(string.Empty) == 0)
-            AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
-        else
-            AudioManager.instance.PlayMusic(AudioManager.instance.currentMainMusic);
 
         if (LevelUpManager.IsLevelUp)
         {
@@ -247,6 +234,12 @@ public class GameManager : MonoBehaviour {
         else
         {
             boardManager.InitBoard();
+        }
+
+        if (playerData.stat.currentHp <= 0)
+        {
+            player.gameObject.SetActive(false);
+            DeathManager.instance.OnDeath();
         }
     }
 

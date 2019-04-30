@@ -16,7 +16,7 @@ public class DeathManager : MonoBehaviour
     public static DeathManager instance;
 
     public GameObject[] btnLayout;
-    public Image deathPnl;
+    public GameObject deathPnl;
     public Image soulPnl;
 
     public Image youDied;
@@ -44,7 +44,7 @@ public class DeathManager : MonoBehaviour
 
     public void SetDeathPnl(bool value)
     {
-        deathPnl.gameObject.SetActive(value);
+        deathPnl.SetActive(value);
         //CameraShake.instance.Shake(0.2f, 0.2f, 0.01f);
         if (value)
         {
@@ -56,6 +56,7 @@ public class DeathManager : MonoBehaviour
 
     public void OnDeath()
     {
+        Debug.Log("OnDeath");
         //RankManager.instance.SendPlayerRank();
         if(BoardManager.instance.player)
             GameManager.instance.Save();

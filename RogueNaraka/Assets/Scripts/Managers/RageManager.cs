@@ -174,19 +174,19 @@ public class RageManager : MonoBehaviour
 
     void DmgUp(float amount, int level)
     {
-        Debug.Log("DmgUp" + amount);
+        //Debug.Log("DmgUp" + amount);
         enemiesDmg += amount;
     }
 
     void HpUp(float amount, int level)
     {
-        Debug.Log("HpUp" + amount);
+        //Debug.Log("HpUp" + amount);
         enemiesHp += amount;
     }
 
     void SoulUp(float amount, int level)
     {
-        Debug.Log("SoulUp" + amount);
+        //Debug.Log("SoulUp" + amount);
         soul += amount;
     }
 }

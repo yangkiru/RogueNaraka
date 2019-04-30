@@ -72,7 +72,7 @@ public class SoulShopManager : MonoBehaviour
             
             GameManager.instance.moneyManager.Load();
 
-            lastMusic = AudioManager.instance.music.clip.name;
+            //AudioManager.
             AudioManager.instance.PlayMusic("cave");
             
             menuBtns[menu].onClick.Invoke();
@@ -84,7 +84,6 @@ public class SoulShopManager : MonoBehaviour
         {
             shopPnl.SetActive(false);
 
-            AudioManager.instance.PlayMusic(lastMusic);
             if(DeathManager.instance.deathPnl.gameObject.activeSelf || StatOrbManager.instance.pnl.activeSelf)
                 GameManager.instance.SetSettingBtn(true);
             else
