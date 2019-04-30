@@ -22,17 +22,6 @@ namespace RogueNaraka.NotificationScripts {
         private Queue<NotificationData> notificationDataQueue = new Queue<NotificationData>();
         private bool isPlaying;
 
-        void Start() {
-            Invoke("CheckNoti", 3.0f);
-        }
-
-        void CheckNoti() {
-            for(int i = 0; i < 5; ++i) {
-                EnqueueNotificationData("브론즈 4를 달성하셨습니다.");
-                EnqueueNotificationData("Bronze 5로 떨어지셨습니다.");
-            }
-        }
-
         void LateUpdate() {
             if(!isPlaying && this.notificationDataQueue.Count > 0) {
                 StartCoroutine(PlayNotificationWindowCoroutine());

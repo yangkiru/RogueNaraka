@@ -12,6 +12,9 @@ namespace RogueNaraka.TheBackendScripts {
         private bool isLoginSuccess;
         public bool IsLoginSuccess { get { return this.isLoginSuccess; } }
 
+        private string userInDate;
+        public string UserInDate { get { return this.userInDate; } }
+
         void AwakeForLogin() {
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
                 .Builder()
@@ -70,6 +73,9 @@ namespace RogueNaraka.TheBackendScripts {
             Debug.Log("Logined!");
             Backend.Android.PutDeviceToken();
             this.isLoginSuccess = true;
+            Backend.BMember.GetUserInfo((callback) => {
+                this.userInDate = callback.GetReturnValuetoJSON()["row"]["inDate"].ToString();
+            });
         }
 
         private string GetTokens() {
