@@ -3572,3 +3572,100 @@ MonoBehaviour:
   langFonts:
   - 
   - 
+  TierDataes:
+  - type: 0
+    tier_num: 0
+    requiredRankingPercent: 100
+  - type: 1
+    tier_num: 5
+    requiredRankingPercent: 68
+  - type: 1
+    tier_num: 4
+    requiredRankingPercent: 64
+  - type: 1
+    tier_num: 3
+    requiredRankingPercent: 60
+  - type: 1
+    tier_num: 2
+    requiredRankingPercent: 56
+  - type: 1
+    tier_num: 1
+    requiredRankingPercent: 52
+  - type: 2
+    tier_num: 5
+    requiredRankingPercent: 48
+  - type: 2
+    tier_num: 4
+    requiredRankingPercent: 45
+  - type: 2
+    tier_num: 3
+    requiredRankingPercent: 42
+  - type: 2
+    tier_num: 2
+    requiredRankingPercent: 38
+  - type: 2
+    tier_num: 1
+    requiredRankingPercent: 34
+  - type: 3
+    tier_num: 5
+    requiredRankingPercent: 30
+  - type: 3
+    tier_num: 4
+    requiredRankingPercent: 27
+  - type: 3
+    tier_num: 3
+    requiredRankingPercent: 24
+  - type: 3
+    tier_num: 2
+    requiredRankingPercent: 21
+  - type: 3
+    tier_num: 1
+    requiredRankingPercent: 19
+  - type: 4
+    tier_num: 5
+    requiredRankingPercent: 16
+  - type: 4
+    tier_num: 4
+    requiredRankingPercent: 14
+  - type: 4
+    tier_num: 3
+    requiredRankingPercent: 12
+  - type: 4
+    tier_num: 2
+    requiredRankingPercent: 10
+  - type: 4
+    tier_num: 1
+    requiredRankingPercent: 8
+  - type: 5
+    tier_num: 5
+    requiredRankingPercent: 6
+  - type: 5
+    tier_num: 4
+    requiredRankingPercent: 5
+  - type: 5
+    tier_num: 3
+    requiredRankingPercent: 4.5
+  - type: 5
+    tier_num: 2
+    requiredRankingPercent: 4
+  - type: 5
+    tier_num: 1
+    requiredRankingPercent: 3.5
+  - type: 6
+    tier_num: 5
+    requiredRankingPercent: 3
+  - type: 6
+    tier_num: 4
+    requiredRankingPercent: 2.5
+  - type: 6
+    tier_num: 3
+    requiredRankingPercent: 2
+  - type: 6
+    tier_num: 2
+    requiredRankingPercent: 1.5
+  - type: 6
+    tier_num: 1
+    requiredRankingPercent: 1
+  - type: 7
+    tier_num: 0
+    requiredRankingPercent: 0
