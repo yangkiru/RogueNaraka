@@ -11,6 +11,17 @@ namespace RogueNaraka.TheBackendScripts {
         private string inDateForClearedStage;
         private bool isLoadedClearedStage;
         private bool isLoadedRankData;
+        private int clearedStageRank;
+
+        public void UpdateClearedStage(int _clearedStage) {
+            if(this.clearedStageRank >= _clearedStage) {
+                return;
+            }
+            Param updateParam = new Param();
+            updateParam.Add("ClearedStage", _clearedStage);
+            Backend.GameInfo.Update("stage", inDateForClearedStage, updateParam);
+            this.clearedStageRank = _clearedStage;
+        }
 
         private void StartForRank() {
             StartCoroutine(LoadInDateForClearedStage());
@@ -24,7 +35,8 @@ namespace RogueNaraka.TheBackendScripts {
                 var rankingList = callback.GetReturnValuetoJSON()["rows"];
                 if(rankingList.Count == 0) {
                     Param newParam = new Param();
-                    newParam.Add("ClearedStage", 0);
+                    this.clearedStageRank = 0;
+                    newParam.Add("ClearedStage", this.clearedStageRank);
                     Backend.GameInfo.Insert("stage", newParam, (insertCallback) => {
                         Backend.GameInfo.GetPrivateContents("stage", (reCallback) => {
                             this.inDateForClearedStage = reCallback.GetReturnValuetoJSON()["rows"][0]["inDate"]["S"].ToString();
@@ -32,6 +44,9 @@ namespace RogueNaraka.TheBackendScripts {
                     });
                 } else {
                     this.inDateForClearedStage = rankingList[0]["inDate"]["S"].ToString();
+                    this.clearedStageRank = -5;
+                    this.clearedStageRank = int.Parse(rankingList[0]["ClearedStage"]["N"].ToString());
+                    Debug.LogWarningFormat("Cleared Stage : {0}", this.clearedStageRank);
                 }
                 this.isLoadedClearedStage = true;
             });

@@ -7,10 +7,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using RogueNaraka.TierScripts;
 using RogueNaraka.TimeScripts;
+using RogueNaraka.TheBackendScripts;
 
 public class DeathManager : MonoBehaviour
 {
-    //초당 ?�르?? 게임?? ?��? 경험치퍼?�트?�니??.
+    //게임내 얻은 경험치의 초당 오르는 퍼센트 속도입니다.
     const float UP_PER_EXP_SPEED = 0.5f;
 
     public static DeathManager instance;
@@ -83,6 +84,11 @@ public class DeathManager : MonoBehaviour
         this.nextLvTxt.text = (playerOriginLv + 1).ToString();
         this.expNumTxt.text = string.Format("{0}  /  {1}", curExp, maxExp);
         this.ExpGauge.fillAmount = (float)(curExp / maxExp);
+        //
+        //Backend ClearedStage 갱신
+        if(TheBackendManager.Instance.gameObject.activeSelf) {
+            TheBackendManager.Instance.UpdateClearedStage(BoardManager.instance.ClearedStage);
+        }
         //
 
         TierManager.Instance.SaveExp();

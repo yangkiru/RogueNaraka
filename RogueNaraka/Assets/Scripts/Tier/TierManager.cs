@@ -11,6 +11,8 @@ namespace RogueNaraka.TierScripts {
         public double CurrentExp { get { return this.currentExp; } }
         private double totalGainExpInGame;
         public double TotalGainExpInGame { get { return this.totalGainExpInGame; } }
+        private TierData currentTier;
+        public TierData CurrentTier { get { return this.currentTier; } }
 
         /// <summary> 해당 클래스 사용 종료 시 반드시 해당 함수를 실행해주세요. </summary>
         public override void OnDestroy() {
@@ -27,9 +29,6 @@ namespace RogueNaraka.TierScripts {
                 this.playerLevel = 1;
                 this.currentExp = 0.0d;
             }
-            //test
-            //this.playerLevel = 1;
-            //this.currentExp = 0.0d;
         }
 
         public void GainExp(float _exp) {
@@ -37,9 +36,6 @@ namespace RogueNaraka.TierScripts {
         }
 
         public void SaveExp() {
-            //test
-            //this.totalGainExpInGame = 2000.0d;
-            //
             this.currentExp += this.totalGainExpInGame;
             while(this.currentExp >= GameDatabase.instance.requiredExpTable[this.playerLevel - 1]) {
                 this.currentExp -= GameDatabase.instance.requiredExpTable[this.playerLevel - 1];
