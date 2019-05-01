@@ -15,6 +15,8 @@ namespace RogueNaraka.TheBackendScripts {
         private string userInDate;
         public string UserInDate { get { return this.userInDate; } }
 
+        private bool isSavedUserInData;
+
         void AwakeForLogin() {
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
                 .Builder()
@@ -75,6 +77,7 @@ namespace RogueNaraka.TheBackendScripts {
             this.isLoginSuccess = true;
             Backend.BMember.GetUserInfo((callback) => {
                 this.userInDate = callback.GetReturnValuetoJSON()["row"]["inDate"].ToString();
+                this.isSavedUserInData = true;
             });
         }
 

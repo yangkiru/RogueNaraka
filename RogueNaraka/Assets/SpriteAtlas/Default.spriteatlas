@@ -78,7 +78,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 6f333ebf892543f45bcfc27e93c51c4b, type: 3}
     - {fileID: 102900000, guid: f1e759ef8d601a2488a493e7fa45f7a8, type: 3}
     - {fileID: 102900000, guid: ec4a08cc03cebae4589a41b36d8baaf9, type: 3}
-    totalSpriteSurfaceArea: 4684670
+    totalSpriteSurfaceArea: 4703920
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -254,6 +254,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ea29dae38d6914e4f94487d5c0abd754, type: 3}
   - {fileID: 21300000, guid: 3dd81e047ca05ab4282ce865ec902419, type: 3}
   - {fileID: 21300000, guid: 4c56701470110b94eba4f368b88b36c2, type: 3}
+  - {fileID: 21300000, guid: de11032455fed3a47bfe65aa9bfe29ff, type: 3}
   - {fileID: 21300000, guid: 80896b2449d020040a763e8508202aa4, type: 3}
   - {fileID: 21300002, guid: 80896b2449d020040a763e8508202aa4, type: 3}
   - {fileID: 21300004, guid: 80896b2449d020040a763e8508202aa4, type: 3}
@@ -603,6 +604,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: caaeff1be02fc8144845d3e17ffe77b9, type: 3}
   - {fileID: 21300000, guid: ec5ab43b67ffaf8489f0a74c1fab7238, type: 3}
   - {fileID: 21300000, guid: b1facb6bf9c37d34eb5b0b7ff44d3ae0, type: 3}
+  - {fileID: 21300000, guid: d399157b27881ee43bc5fb2f275ef05f, type: 3}
   - {fileID: 21300000, guid: c448808b8032425489d509e75c3288b9, type: 3}
   - {fileID: 21300000, guid: e8aebc8b8d8357d47ac52280c72d94e4, type: 3}
   - {fileID: 21300000, guid: f3b1c19b6c4b920408c00ef1c1131247, type: 3}
@@ -652,6 +654,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6dcd604daae0808409a7b879b138dec7, type: 3}
   - {fileID: 21300006, guid: 6dcd604daae0808409a7b879b138dec7, type: 3}
   - {fileID: 21300004, guid: 6dcd604daae0808409a7b879b138dec7, type: 3}
+  - {fileID: 21300000, guid: 54b96cbdf32b78d449808d7398a105ab, type: 3}
   - {fileID: 21300000, guid: cde1ecbdea345b548b1fad4c996df3b9, type: 3}
   - {fileID: 21300004, guid: 54c5c3dd60a2a8441b1af2f5b9ddde80, type: 3}
   - {fileID: 21300006, guid: 54c5c3dd60a2a8441b1af2f5b9ddde80, type: 3}
@@ -664,6 +667,7 @@ SpriteAtlas:
   - {fileID: 21300012, guid: af9348edb062f8040bb29d4dbfdb62f9, type: 3}
   - {fileID: 21300018, guid: af9348edb062f8040bb29d4dbfdb62f9, type: 3}
   - {fileID: 21300016, guid: af9348edb062f8040bb29d4dbfdb62f9, type: 3}
+  - {fileID: 21300000, guid: 7124c7fd0e3ab8845b92320fa0adb248, type: 3}
   - {fileID: 21300000, guid: bd332ffde59b3ae49b996c85ec458b96, type: 3}
   - {fileID: 21300000, guid: 6fd7bb1ef3ef21b47a79cd0e3cdebfc1, type: 3}
   - {fileID: 21300018, guid: 1734ad1e7cf3cda4ca778d4a73e03b04, type: 3}
@@ -712,6 +716,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6d391c3fe59f8dd48b41f4c4caa8ba6e, type: 3}
   - {fileID: 21300000, guid: 40b22e3f37905984c9a7f2258b86c849, type: 3}
   - {fileID: 21300000, guid: c6aa255f0a3edbb4c874749826af96ca, type: 3}
+  - {fileID: 21300000, guid: 54da565fd7979204c9ca72771dfb958d, type: 3}
   - {fileID: 21300000, guid: 1b900e5f9cf07394b87c29d2b67c4494, type: 3}
   - {fileID: 21300002, guid: 72d67f5f58431c544a7c3d1040da32bc, type: 3}
   - {fileID: 21300000, guid: 72d67f5f58431c544a7c3d1040da32bc, type: 3}
@@ -761,7 +766,7 @@ SpriteAtlas:
   - onDeath_10
   - onDeath_11
   - spd
-  - emblem_01_iron
+  - emblem_iron
   - hr
   - ExpUpGauge
   - whiteBall
@@ -905,6 +910,7 @@ SpriteAtlas:
   - ui tab
   - pause
   - restartBtn
+  - emblem_silver
   - bat1R_0
   - bat1R_1
   - bat1R_2
@@ -1254,6 +1260,7 @@ SpriteAtlas:
   - skill_icon_scarecrowSoldier
   - btn2
   - skill_spr_iceBreak
+  - emblem_challenger
   - dmg
   - UI_Wea_R
   - skill_icon_iceBreak
@@ -1279,7 +1286,7 @@ SpriteAtlas:
   - Icon-36
   - tile2
   - Icon-72
-  - emblem_01_bronze
+  - emblem_bronze
   - pointset
   - enemy0_run_b_3
   - enemy0_run_b_2
@@ -1303,6 +1310,7 @@ SpriteAtlas:
   - bonehead0LBA_0
   - bonehead0LBA_3
   - bonehead0LBA_2
+  - emblem_diamond
   - btn
   - player_f_2
   - player_f_3
@@ -1315,6 +1323,7 @@ SpriteAtlas:
   - flame_0
   - flame_3
   - flame_2
+  - emblem_platinum
   - we_m_1
   - titleExit
   - bug1LD_1
@@ -1363,6 +1372,7 @@ SpriteAtlas:
   - mana
   - ssssta_ball
   - BottomUI
+  - emblem_gold
   - titleNew
   - bug0LU_1
   - bug0LU_0

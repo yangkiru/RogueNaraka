@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace RogueNaraka.TierScripts {
     public enum TIER_TYPE {
-        IRON,
-        BRONZE,
-        SILVER,
-        GOLD,
-        PLATINUM,
-        DIAMOND,
-        CHALLENGER,
+        Iron,
+        Bronze,
+        Silver,
+        Gold,
+        Platinum,
+        Diamond,
+        Challenger,
         END
     }
 
@@ -20,5 +20,6 @@ namespace RogueNaraka.TierScripts {
         public TIER_TYPE type;
         public int tier_num;
         public float requiredRankingPercent;
+        public Sprite emblem;
     }
 }

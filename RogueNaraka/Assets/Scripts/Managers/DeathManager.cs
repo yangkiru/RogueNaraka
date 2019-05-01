@@ -11,8 +11,9 @@ using RogueNaraka.TheBackendScripts;
 
 public class DeathManager : MonoBehaviour
 {
-    //게임내 얻은 경험치의 초당 오르는 퍼센트 속도입니다.
     const float UP_PER_EXP_SPEED = 0.5f;
+    const float CHANGE_SCALE_OF_TIER_EMBLEM_SPEED = 2.5f;
+    const float MAX_SCALE_OF_TIER = 1.5f;
 
     public static DeathManager instance;
 
@@ -26,6 +27,13 @@ public class DeathManager : MonoBehaviour
     public TextMeshProUGUI unSoulTxt;
     public TextMeshProUGUI soulTxt;
 
+    [Header("Tier Object")]
+    public Image TierEmblem;
+    public TextMeshProUGUI TierName;
+    public GameObject AdvanceBanner;
+    public TextMeshProUGUI BannerText;
+
+    [Header("Level And Exp Object")]
     public TextMeshProUGUI curLvTxt;
     public TextMeshProUGUI nextLvTxt;
     public TextMeshProUGUI expNumTxt;
@@ -84,17 +92,22 @@ public class DeathManager : MonoBehaviour
         this.nextLvTxt.text = (playerOriginLv + 1).ToString();
         this.expNumTxt.text = string.Format("{0}  /  {1}", curExp, maxExp);
         this.ExpGauge.fillAmount = (float)(curExp / maxExp);
-        //
+        //Tier 세팅
+        this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
+        this.TierName.text = string.Format("- {0} {1} Tier -"
+            , TierManager.Instance.CurrentTier.type
+            , TierManager.Instance.CurrentTier.tier_num);
         //Backend ClearedStage 갱신
-        /*
         if(TheBackendManager.Instance.gameObject.activeSelf) {
-            TheBackendManager.Instance.UpdateClearedStage(BoardManager.instance.ClearedStage);
-        }*/
+            TheBackendManager.Instance.UpdateRankData(BoardManager.instance.ClearedStage);
+        }
         //
 
         TierManager.Instance.SaveExp();
         yield return new WaitForSecondsRealtime(1.5f);
-
+        if(TheBackendManager.Instance.gameObject.activeSelf) {
+            yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
+        }
         do
         {
             yield return null;
@@ -112,6 +125,9 @@ public class DeathManager : MonoBehaviour
         }
 
         StartCoroutine(StartGainExpAnimation(playerOriginLv, curExp));
+        if(TierManager.Instance.CheckIfTierHaveChanged()) {
+            StartCoroutine(StartChangeTierAnimation());
+        }
     }
 
     public void SetSoulPnl(bool value)
@@ -357,5 +373,53 @@ public class DeathManager : MonoBehaviour
         this.expNumTxt.text = string.Format("{0}  /  {1}", (int)TierManager.Instance.CurrentExp
             , (int)GameDatabase.instance.requiredExpTable[TierManager.Instance.PlayerLevel - 1]);
         this.ExpGauge.fillAmount = (float)(TierManager.Instance.CurrentExp / GameDatabase.instance.requiredExpTable[TierManager.Instance.PlayerLevel - 1]);
+    }
+
+    private IEnumerator StartChangeTierAnimation() {
+        string bannerTextFormat = "";
+        if(TierManager.Instance.IsAdvanced) {
+            switch(GameManager.language) {
+                case Language.English:
+                    bannerTextFormat = "Promote {0} {1}!";
+                break;
+                case Language.Korean:
+                    bannerTextFormat = "{0} {1}로 승급했습니다!";
+                break;
+            }
+        } else {
+            switch(GameManager.language) {
+                case Language.English:
+                    bannerTextFormat = "Demote {0} {1}";
+                break;
+                case Language.Korean:
+                    bannerTextFormat = "{0} {1}로 강등했습니다.";
+                break;
+            }
+        }
+        this.BannerText.text = string.Format(bannerTextFormat
+            , TierManager.Instance.CurrentTier.type
+            , TierManager.Instance.CurrentTier.tier_num != 0 ? TierManager.Instance.CurrentTier.tier_num.ToString() : "");
+
+        WaitForFixedUpdate waitFixedFrame = new WaitForFixedUpdate();
+        //Pause
+        yield return new WaitForSecondsRealtime(0.3f);
+        //Banner
+        this.AdvanceBanner.SetActive(true);
+        //Change
+            this.TierEmblem.transform.localScale = new Vector2(MAX_SCALE_OF_TIER, MAX_SCALE_OF_TIER);
+            this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
+            this.TierName.text = string.Format("- {0} {1} Tier -"
+            , TierManager.Instance.CurrentTier.type
+            , TierManager.Instance.CurrentTier.tier_num);
+
+        //Smaller
+        while(this.TierEmblem.transform.localScale.x >= 1.0f) {
+            this.TierEmblem.transform.localScale -= new Vector3(
+                CHANGE_SCALE_OF_TIER_EMBLEM_SPEED
+                , CHANGE_SCALE_OF_TIER_EMBLEM_SPEED
+                , 0.0f) * TimeManager.Instance.FixedDeltaTime;
+            yield return waitFixedFrame;            
+        }
+        this.TierEmblem.transform.localScale = new Vector2(1.0f, 1.0f);
     }
 }

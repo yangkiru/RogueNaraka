@@ -26,6 +26,7 @@ namespace RogueNaraka.TheBackendScripts {
         void Start() {
             StartForLogin();
             StartForPush();
+            StartForRank();
         }
 
         private void BackendInit() {
