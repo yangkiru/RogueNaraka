@@ -43,9 +43,6 @@ public class BoardManager : MonoBehaviour {
     private int _stage;
     public bool isReady;
 
-    private int clearedStage;
-    public int ClearedStage { get { return this.clearedStage; } }
-
     private void Awake()
     {
         instance = this;
@@ -382,7 +379,7 @@ public class BoardManager : MonoBehaviour {
         }
         boss = null;
         Fillable.bossHp.gameObject.SetActive(false);
-        this.clearedStage = this._stage;
+        //this.clearedStage = this._stage;
     }
 
     public Vector3 ClampToBoard(Vector3 pos, float offsetX = 0, float offsetY = 0)

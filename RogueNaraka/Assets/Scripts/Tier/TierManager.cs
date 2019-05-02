@@ -21,7 +21,9 @@ namespace RogueNaraka.TierScripts {
         public TierData CurrentTier { get { return this.currentTier; } }
         private bool isAdvanced;
         public bool IsAdvanced { get { return this.isAdvanced; } }
-        
+        private bool isCheckedToChangeTier;
+        public bool IsCheckedToChangeTier { get { return this.isCheckedToChangeTier; } }
+
         private int currentTierIdx;
 
         public TierData NextTier { get { return GameDatabase.instance.TierDataes[this.currentTierIdx + 1]; } }
@@ -83,7 +85,7 @@ namespace RogueNaraka.TierScripts {
 
         public IEnumerator CheckIfTierHaveChangedForGameStart() {
             yield return new WaitUntil(() => this.isLoaded && TheBackendManager.Instance.IsLoadedRankData);
-
+            
             if(CheckIfTierHaveChanged()) {
                 string textFormat = "";
                 if(this.isAdvanced) {
@@ -109,6 +111,7 @@ namespace RogueNaraka.TierScripts {
                     string.Format(textFormat, this.currentTier.type
                         , this.CurrentTier.tier_num != 0 ? this.CurrentTier.tier_num.ToString() : "" ));
             }
+            this.isCheckedToChangeTier = true;
         }
 
         private void LoadData() {

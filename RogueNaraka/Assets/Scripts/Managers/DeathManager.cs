@@ -43,6 +43,8 @@ public class DeathManager : MonoBehaviour
     private List<int> huntedUnitNumList = new List<int>();
     public Canvas stageCanvas;
 
+    private bool isClickableCloseBtn;
+
     void Awake()
     {
         instance = this;
@@ -86,9 +88,10 @@ public class DeathManager : MonoBehaviour
 
     IEnumerator SoulPnlCorou(float t)
     {
-        if(TheBackendManager.Instance.gameObject.activeSelf) {
-            yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
-        }
+        this.isClickableCloseBtn = false;
+        #if !UNITY_EDITOR
+            yield return new WaitUntil(() => TierManager.Instance.IsCheckedToChangeTier);
+        #endif
         //lv, 경험치 세팅
         int playerOriginLv = TierManager.Instance.PlayerLevel;
         double curExp = TierManager.Instance.CurrentExp;
@@ -116,13 +119,15 @@ public class DeathManager : MonoBehaviour
             , TierManager.Instance.NextTier.requiredRankingPercent);
         //Backend ClearedStage 갱신
         if(TheBackendManager.Instance.gameObject.activeSelf) {
-            TheBackendManager.Instance.UpdateRankData(BoardManager.instance.ClearedStage);
+            TheBackendManager.Instance.UpdateRankData(PlayerPrefs.GetInt("stage") - 1);
         }
         //
-
         TierManager.Instance.SaveExp();
         yield return new WaitForSecondsRealtime(1.5f);
-
+        
+        if(TheBackendManager.Instance.gameObject.activeSelf) {
+            yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
+        }
         do
         {
             yield return null;
@@ -143,6 +148,7 @@ public class DeathManager : MonoBehaviour
         if(TierManager.Instance.CheckIfTierHaveChanged()) {
             StartCoroutine(StartChangeTierAnimation());
         }
+        this.isClickableCloseBtn = true;
     }
 
     public void SetSoulPnl(bool value)
@@ -278,6 +284,9 @@ public class DeathManager : MonoBehaviour
 
     public void OnSoulRefiningRatePnlClose()
     {
+        if(!this.isClickableCloseBtn) {
+            return;
+        }
         StopCoroutine(soulCorou);
         MoneyManager.instance.RefineSoul(rate);
         SetSoulPnl(false);

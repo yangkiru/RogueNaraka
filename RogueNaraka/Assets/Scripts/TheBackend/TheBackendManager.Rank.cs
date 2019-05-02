@@ -40,21 +40,25 @@ namespace RogueNaraka.TheBackendScripts {
 
         private IEnumerator LoadRankDataCoroutine() {
             yield return new WaitUntil(() => this.isLoginSuccess && this.isSavedUserInDate);
+
             SavedFormDataForGetRank();
             UnityWebRequest www = UnityWebRequest.Post(
                 this.RequestURL, this.formDataForGetRank);
             yield return www.SendWebRequest();
+
             if(www.isNetworkError || www.isHttpError) {
                 Debug.LogWarning(www.error);
             } else {
                 JsonData respondJson = JsonMapper.ToObject(www.downloadHandler.text);
                 if(respondJson["result"].ToString() == "1") {
                     Debug.LogWarning("Error : Failed to Load RankData");
-                } else if(respondJson["score"] != null) {
-                    this.clearedStageForRank = int.Parse(respondJson["score"].ToString());
-                    int total = int.Parse(respondJson["total"].ToString());
-                    int ranking = total - int.Parse(respondJson["value"].ToString());
-                    this.topPercentToClearStageForRank = (float)ranking / total * 100.0f;
+                } else {
+                    if(respondJson["score"] != null) {
+                        this.clearedStageForRank = int.Parse(respondJson["score"].ToString());
+                        int total = int.Parse(respondJson["total"].ToString());
+                        int ranking = total - int.Parse(respondJson["value"].ToString());
+                        this.topPercentToClearStageForRank = (float)ranking / total * 100.0f;    
+                    }
 
                     this.isLoadedRankData = true;
                 }
