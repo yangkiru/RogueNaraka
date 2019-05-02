@@ -87,7 +87,7 @@ namespace RogueNaraka.TierScripts {
                 if(this.isAdvanced) {
                     switch(GameManager.language) {
                         case Language.English:
-                            textFormat = "Promote {0} {1}!";
+                            textFormat = "Promoted to {0} {1}!";
                         break;
                         case Language.Korean:
                             textFormat = "{0} {1}로 승급했습니다!";
@@ -96,7 +96,7 @@ namespace RogueNaraka.TierScripts {
                 } else {
                     switch(GameManager.language) {
                         case Language.English:
-                            textFormat = "Demote {0} {1}";
+                            textFormat = "Downgraded to {0} {1}.";
                         break;
                         case Language.Korean:
                             textFormat = "{0} {1}로 강등했습니다.";

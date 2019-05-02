@@ -96,7 +96,7 @@ public class DeathManager : MonoBehaviour
         this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
         this.TierName.text = string.Format("- {0} {1} Tier -"
             , TierManager.Instance.CurrentTier.type
-            , TierManager.Instance.CurrentTier.tier_num);
+            , TierManager.Instance.CurrentTier.tier_num != 0 ? TierManager.Instance.CurrentTier.tier_num.ToString() : "");
         //Backend ClearedStage 갱신
         if(TheBackendManager.Instance.gameObject.activeSelf) {
             TheBackendManager.Instance.UpdateRankData(BoardManager.instance.ClearedStage);
@@ -380,7 +380,7 @@ public class DeathManager : MonoBehaviour
         if(TierManager.Instance.IsAdvanced) {
             switch(GameManager.language) {
                 case Language.English:
-                    bannerTextFormat = "Promote {0} {1}!";
+                    bannerTextFormat = "Promoted to {0} {1}!";
                 break;
                 case Language.Korean:
                     bannerTextFormat = "{0} {1}로 승급했습니다!";
@@ -389,7 +389,7 @@ public class DeathManager : MonoBehaviour
         } else {
             switch(GameManager.language) {
                 case Language.English:
-                    bannerTextFormat = "Demote {0} {1}";
+                    bannerTextFormat = "Downgraded to {0} {1}.";
                 break;
                 case Language.Korean:
                     bannerTextFormat = "{0} {1}로 강등했습니다.";
@@ -410,7 +410,7 @@ public class DeathManager : MonoBehaviour
             this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
             this.TierName.text = string.Format("- {0} {1} Tier -"
             , TierManager.Instance.CurrentTier.type
-            , TierManager.Instance.CurrentTier.tier_num);
+            , TierManager.Instance.CurrentTier.tier_num != 0 ? TierManager.Instance.CurrentTier.tier_num.ToString() : "");
 
         //Smaller
         while(this.TierEmblem.transform.localScale.x >= 1.0f) {
