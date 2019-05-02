@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.SkillScripts;
+using RogueNaraka.TierScripts;
 
 public class GameDatabase : ScriptableObject
 {
@@ -50,6 +51,8 @@ public class GameDatabase : ScriptableObject
 
     public StatLang[] statLang;
     public string[] langFonts;
+
+    public TierData[] TierDataes;
 
     void OnEnable()
     {

@@ -3572,3 +3572,132 @@ MonoBehaviour:
   langFonts:
   - 
   - 
+  TierDataes:
+  - type: 0
+    tier_num: 0
+    requiredRankingPercent: 100
+    emblem: {fileID: 21300000, guid: 29ff7e903d6c246488e08e9b1cb12462, type: 3}
+  - type: 1
+    tier_num: 5
+    requiredRankingPercent: 68
+    emblem: {fileID: 21300000, guid: 2a314d4c12a606b43abfe5f1d5d341a6, type: 3}
+  - type: 1
+    tier_num: 4
+    requiredRankingPercent: 64
+    emblem: {fileID: 21300000, guid: 2a314d4c12a606b43abfe5f1d5d341a6, type: 3}
+  - type: 1
+    tier_num: 3
+    requiredRankingPercent: 60
+    emblem: {fileID: 21300000, guid: 2a314d4c12a606b43abfe5f1d5d341a6, type: 3}
+  - type: 1
+    tier_num: 2
+    requiredRankingPercent: 56
+    emblem: {fileID: 21300000, guid: 2a314d4c12a606b43abfe5f1d5d341a6, type: 3}
+  - type: 1
+    tier_num: 1
+    requiredRankingPercent: 52
+    emblem: {fileID: 21300000, guid: 2a314d4c12a606b43abfe5f1d5d341a6, type: 3}
+  - type: 2
+    tier_num: 5
+    requiredRankingPercent: 48
+    emblem: {fileID: 21300000, guid: de11032455fed3a47bfe65aa9bfe29ff, type: 3}
+  - type: 2
+    tier_num: 4
+    requiredRankingPercent: 45
+    emblem: {fileID: 21300000, guid: de11032455fed3a47bfe65aa9bfe29ff, type: 3}
+  - type: 2
+    tier_num: 3
+    requiredRankingPercent: 42
+    emblem: {fileID: 21300000, guid: de11032455fed3a47bfe65aa9bfe29ff, type: 3}
+  - type: 2
+    tier_num: 2
+    requiredRankingPercent: 38
+    emblem: {fileID: 21300000, guid: de11032455fed3a47bfe65aa9bfe29ff, type: 3}
+  - type: 2
+    tier_num: 1
+    requiredRankingPercent: 34
+    emblem: {fileID: 21300000, guid: de11032455fed3a47bfe65aa9bfe29ff, type: 3}
+  - type: 3
+    tier_num: 5
+    requiredRankingPercent: 30
+    emblem: {fileID: 21300000, guid: 54da565fd7979204c9ca72771dfb958d, type: 3}
+  - type: 3
+    tier_num: 4
+    requiredRankingPercent: 27
+    emblem: {fileID: 21300000, guid: 54da565fd7979204c9ca72771dfb958d, type: 3}
+  - type: 3
+    tier_num: 3
+    requiredRankingPercent: 24
+    emblem: {fileID: 21300000, guid: 54da565fd7979204c9ca72771dfb958d, type: 3}
+  - type: 3
+    tier_num: 2
+    requiredRankingPercent: 21
+    emblem: {fileID: 21300000, guid: 54da565fd7979204c9ca72771dfb958d, type: 3}
+  - type: 3
+    tier_num: 1
+    requiredRankingPercent: 19
+    emblem: {fileID: 21300000, guid: 54da565fd7979204c9ca72771dfb958d, type: 3}
+  - type: 4
+    tier_num: 5
+    requiredRankingPercent: 16
+    emblem: {fileID: 21300000, guid: 7124c7fd0e3ab8845b92320fa0adb248, type: 3}
+  - type: 4
+    tier_num: 4
+    requiredRankingPercent: 14
+    emblem: {fileID: 21300000, guid: 7124c7fd0e3ab8845b92320fa0adb248, type: 3}
+  - type: 4
+    tier_num: 3
+    requiredRankingPercent: 12
+    emblem: {fileID: 21300000, guid: 7124c7fd0e3ab8845b92320fa0adb248, type: 3}
+  - type: 4
+    tier_num: 2
+    requiredRankingPercent: 10
+    emblem: {fileID: 21300000, guid: 7124c7fd0e3ab8845b92320fa0adb248, type: 3}
+  - type: 4
+    tier_num: 1
+    requiredRankingPercent: 8
+    emblem: {fileID: 21300000, guid: 7124c7fd0e3ab8845b92320fa0adb248, type: 3}
+  - type: 5
+    tier_num: 5
+    requiredRankingPercent: 6
+    emblem: {fileID: 21300000, guid: 54b96cbdf32b78d449808d7398a105ab, type: 3}
+  - type: 5
+    tier_num: 4
+    requiredRankingPercent: 5
+    emblem: {fileID: 21300000, guid: 54b96cbdf32b78d449808d7398a105ab, type: 3}
+  - type: 5
+    tier_num: 3
+    requiredRankingPercent: 4.5
+    emblem: {fileID: 21300000, guid: 54b96cbdf32b78d449808d7398a105ab, type: 3}
+  - type: 5
+    tier_num: 2
+    requiredRankingPercent: 4
+    emblem: {fileID: 21300000, guid: 54b96cbdf32b78d449808d7398a105ab, type: 3}
+  - type: 5
+    tier_num: 1
+    requiredRankingPercent: 3.5
+    emblem: {fileID: 21300000, guid: 54b96cbdf32b78d449808d7398a105ab, type: 3}
+  - type: 6
+    tier_num: 5
+    requiredRankingPercent: 3
+    emblem: {fileID: 21300000, guid: d399157b27881ee43bc5fb2f275ef05f, type: 3}
+  - type: 6
+    tier_num: 4
+    requiredRankingPercent: 2.5
+    emblem: {fileID: 21300000, guid: d399157b27881ee43bc5fb2f275ef05f, type: 3}
+  - type: 6
+    tier_num: 3
+    requiredRankingPercent: 2
+    emblem: {fileID: 21300000, guid: d399157b27881ee43bc5fb2f275ef05f, type: 3}
+  - type: 6
+    tier_num: 2
+    requiredRankingPercent: 1.5
+    emblem: {fileID: 21300000, guid: d399157b27881ee43bc5fb2f275ef05f, type: 3}
+  - type: 6
+    tier_num: 1
+    requiredRankingPercent: 1
+    emblem: {fileID: 21300000, guid: d399157b27881ee43bc5fb2f275ef05f, type: 3}
+  - type: 7
+    tier_num: 0
+    requiredRankingPercent: 0
+    emblem: {fileID: 0}

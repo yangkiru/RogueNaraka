@@ -245,7 +245,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/skrtm/Desktop/Keystore/user.keystore
+  AndroidKeystoreName: "C:/Users/kbh37/Desktop/NoxBix/\uBB38\uC11C/user.keystore"
   AndroidKeyaliasName: roguenaraka
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

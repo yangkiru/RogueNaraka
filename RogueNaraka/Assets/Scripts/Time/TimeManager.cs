@@ -41,10 +41,6 @@ namespace RogueNaraka.TimeScripts {
 
         /// <summary> 유니티 fixedDeltaTime을 리턴합니다. </summary>
         public float FixedDeltaTime { get { return Time.fixedDeltaTime; } }
-        
-        void Update() {
-            
-        }
 
         public bool CheckDateTimeInEventTime(DateTime _check, DateTime _start, DateTime _end) {
             if(_check.CompareTo(_start) < 0) {
