@@ -39,7 +39,7 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         private IEnumerator LoadRankDataCoroutine() {
-            yield return new WaitUntil(() => this.isLoginSuccess && this.isSavedUserInData);
+            yield return new WaitUntil(() => this.isLoginSuccess && this.isSavedUserInDate);
             SavedFormDataForGetRank();
             UnityWebRequest www = UnityWebRequest.Post(
                 this.RequestURL, this.formDataForGetRank);
@@ -62,7 +62,7 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         private IEnumerator UploadRankDataCoroutine(int _clearedStage) {
-            yield return new WaitUntil(() => this.isLoginSuccess);
+            yield return new WaitUntil(() => this.isLoginSuccess && this.isSavedUserInDate);
 
             WWWForm formData = new WWWForm();
             formData.AddField("userid", this.userInDate);

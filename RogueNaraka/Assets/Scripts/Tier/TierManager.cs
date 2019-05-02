@@ -24,6 +24,8 @@ namespace RogueNaraka.TierScripts {
         
         private int currentTierIdx;
 
+        public TierData NextTier { get { return GameDatabase.instance.TierDataes[this.currentTierIdx + 1]; } }
+
         /// <summary> 해당 클래스 사용 종료 시 반드시 해당 함수를 실행해주세요. </summary>
         public override void OnDestroy() {
             base.OnDestroy();

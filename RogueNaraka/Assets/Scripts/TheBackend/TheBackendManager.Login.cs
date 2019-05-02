@@ -15,7 +15,7 @@ namespace RogueNaraka.TheBackendScripts {
         private string userInDate;
         public string UserInDate { get { return this.userInDate; } }
 
-        private bool isSavedUserInData;
+        private bool isSavedUserInDate;
 
         void AwakeForLogin() {
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
@@ -75,10 +75,8 @@ namespace RogueNaraka.TheBackendScripts {
             Debug.Log("Logined!");
             Backend.Android.PutDeviceToken();
             this.isLoginSuccess = true;
-            Backend.BMember.GetUserInfo((callback) => {
-                this.userInDate = callback.GetReturnValuetoJSON()["row"]["inDate"].ToString();
-                this.isSavedUserInData = true;
-            });
+            this.userInDate = Backend.BMember.GetUserInfo().GetReturnValuetoJSON()["row"]["inDate"].ToString();
+            this.isSavedUserInDate = true;
         }
 
         private string GetTokens() {

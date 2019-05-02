@@ -1,5 +1,4 @@
-﻿using RogueNaraka.UnitScripts;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -8,6 +7,7 @@ using UnityEngine.UI;
 using RogueNaraka.TierScripts;
 using RogueNaraka.TimeScripts;
 using RogueNaraka.TheBackendScripts;
+using RogueNaraka.UnitScripts;
 
 public class DeathManager : MonoBehaviour
 {
@@ -30,6 +30,7 @@ public class DeathManager : MonoBehaviour
     [Header("Tier Object")]
     public Image TierEmblem;
     public TextMeshProUGUI TierName;
+    public TextMeshProUGUI NextTierRequirement;
     public GameObject AdvanceBanner;
     public TextMeshProUGUI BannerText;
 
@@ -85,6 +86,9 @@ public class DeathManager : MonoBehaviour
 
     IEnumerator SoulPnlCorou(float t)
     {
+        if(TheBackendManager.Instance.gameObject.activeSelf) {
+            yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
+        }
         //lv, 경험치 세팅
         int playerOriginLv = TierManager.Instance.PlayerLevel;
         double curExp = TierManager.Instance.CurrentExp;
@@ -98,6 +102,18 @@ public class DeathManager : MonoBehaviour
         this.TierName.text = string.Format("- {0} {1} Tier -"
             , TierManager.Instance.CurrentTier.type
             , TierManager.Instance.CurrentTier.tier_num != 0 ? TierManager.Instance.CurrentTier.tier_num.ToString() : "");
+        string textFormat = "";
+        switch(GameManager.language) {
+            case Language.English:
+                textFormat = "Current Top {0}%\nNext Tier : Top {1}%";
+            break;
+            case Language.Korean:
+                textFormat = "현재 상위 {0}%\n다음 티어 : 상위 {1}%";
+            break;
+        }
+        this.NextTierRequirement.text = string.Format(textFormat
+            , Mathf.Floor(TheBackendManager.Instance.TopPercentToClearStageForRank * 100) * 0.01f
+            , TierManager.Instance.NextTier.requiredRankingPercent);
         //Backend ClearedStage 갱신
         if(TheBackendManager.Instance.gameObject.activeSelf) {
             TheBackendManager.Instance.UpdateRankData(BoardManager.instance.ClearedStage);
@@ -106,9 +122,7 @@ public class DeathManager : MonoBehaviour
 
         TierManager.Instance.SaveExp();
         yield return new WaitForSecondsRealtime(1.5f);
-        if(TheBackendManager.Instance.gameObject.activeSelf) {
-            yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
-        }
+
         do
         {
             yield return null;
@@ -412,6 +426,18 @@ public class DeathManager : MonoBehaviour
             this.TierName.text = string.Format("- {0} {1} Tier -"
             , TierManager.Instance.CurrentTier.type
             , TierManager.Instance.CurrentTier.tier_num != 0 ? TierManager.Instance.CurrentTier.tier_num.ToString() : "");
+            string textFormat = "";
+            switch(GameManager.language) {
+                case Language.English:
+                    textFormat = "Current Top {0}%\nNext Tier : Top {1}%";
+                break;
+                case Language.Korean:
+                    textFormat = "현재 상위 {0}%\n다음 티어 : 상위 {1}%";
+                break;
+            }
+            this.NextTierRequirement.text = string.Format(textFormat
+                , Mathf.Floor(TheBackendManager.Instance.TopPercentToClearStageForRank * 100) * 0.01f
+                , TierManager.Instance.NextTier.requiredRankingPercent);
 
         //Smaller
         while(this.TierEmblem.transform.localScale.x >= 1.0f) {
