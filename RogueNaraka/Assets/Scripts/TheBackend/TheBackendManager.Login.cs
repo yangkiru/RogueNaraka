@@ -31,12 +31,9 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         void StartForLogin() {
-            Debug.LogWarning("Start Backend For Login :: 1");
             if(!Backend.IsInitialized) {
                 Backend.Initialize(BRO => {
-                    Debug.LogWarning("Start Backend For Login5");
                     if(BRO.IsSuccess()) {
-                        Debug.LogWarning("Start Backend For Login1");
                         BackendInit();
                         AuthorizeFederationSync();
                     } else {
@@ -44,7 +41,6 @@ namespace RogueNaraka.TheBackendScripts {
                     }
                 });
             } else {
-                Debug.LogWarning("Start Backend For Login2");
                 BackendInit();
                 AuthorizeFederationSync();
             }
@@ -57,7 +53,6 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         private void GPGSLogin() {
-            Debug.LogWarning("Start Backend For Login10");
             if(Social.localUser.authenticated == true) {
                 BackendReturnObject BRO = Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google, "gpgs");
                 WorkAfterGPGSLogin();
