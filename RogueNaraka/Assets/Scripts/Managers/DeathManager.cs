@@ -89,9 +89,7 @@ public class DeathManager : MonoBehaviour
     IEnumerator SoulPnlCorou(float t)
     {
         this.isClickableCloseBtn = false;
-        #if !UNITY_EDITOR
-            yield return new WaitUntil(() => TierManager.Instance.IsCheckedToChangeTier);
-        #endif
+
         //lv, 경험치 세팅
         int playerOriginLv = TierManager.Instance.PlayerLevel;
         double curExp = TierManager.Instance.CurrentExp;

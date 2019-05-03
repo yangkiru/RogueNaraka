@@ -16,7 +16,6 @@ namespace RogueNaraka.PopUpScripts {
         public void SetPopUpData(string _context, Action<OneButtonPopUpController> _action) {
             this.Context.text = _context;
             this.buttonAction = _action;
-            Debug.LogError(this.Context.rectTransform.sizeDelta);
         }
 
         public void OnClickButton() {
