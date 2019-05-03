@@ -489,7 +489,7 @@ public class AudioManager : MonoBehaviour
     {
         // Clean up when done
         List<int> list = new List<int>(SFXFileIDDictionary.Values);
-        for (int i = list.Count; i >= 0; i--)
+        for (int i = 0; i < list.Count; i++)
             AndroidNativeAudio.unload(list[i]);
         AndroidNativeAudio.releasePool();
 
