@@ -47,11 +47,11 @@ namespace RogueNaraka.TheBackendScripts {
             yield return www.SendWebRequest();
 
             if(www.isNetworkError || www.isHttpError) {
-                Debug.LogWarning(www.error);
+                Debug.LogError(www.error);
             } else {
                 JsonData respondJson = JsonMapper.ToObject(www.downloadHandler.text);
                 if(respondJson["result"].ToString() == "1") {
-                    Debug.LogWarning("Error : Failed to Load RankData");
+                    Debug.LogError("Error : Failed to Load RankData");
                 } else {
                     if(respondJson["score"] != null) {
                         this.clearedStageForRank = int.Parse(respondJson["score"].ToString());
@@ -76,11 +76,11 @@ namespace RogueNaraka.TheBackendScripts {
                 this.RequestURL, formData);
             yield return www.SendWebRequest();
             if(www.isNetworkError || www.isHttpError) {
-                Debug.LogWarning(www.error);
+                Debug.LogError(www.error);
             } else {
                 JsonData respondJson = JsonMapper.ToObject(www.downloadHandler.text);
                 if(respondJson["result"].ToString() == "1") {
-                    Debug.LogWarning("Error : Failed to Load RankData");
+                    Debug.LogError("Error : Failed to Load RankData");
                 } else {
                     this.clearedStageForRank = _clearedStage;
                     int total = int.Parse(respondJson["total"].ToString());
@@ -98,11 +98,11 @@ namespace RogueNaraka.TheBackendScripts {
             yield return www.SendWebRequest();
 
             if(www.isNetworkError || www.isHttpError) {
-                Debug.LogWarning(www.error);
+                Debug.LogError(www.error);
             } else {
                 JsonData respondJson = JsonMapper.ToObject(www.downloadHandler.text);
                 if(respondJson["result"].ToString() == "1") {
-                    Debug.LogWarning("Error : Failed to Load RankData");
+                    Debug.LogError("Error : Failed to Load RankData");
                 } else if(respondJson["score"] != null) {
                     this.clearedStageForRank = int.Parse(respondJson["score"].ToString());
                     int total = int.Parse(respondJson["total"].ToString());

@@ -63,7 +63,7 @@ namespace RogueNaraka.TierScripts {
                     if(GameDatabase.instance.TierDataes[i].requiredRankingPercent >= TheBackendManager.Instance.TopPercentToClearStageForRank) {
                         this.currentTierIdx = i;
                         this.currentTier = GameDatabase.instance.TierDataes[i];
-                        PlayerPrefs.SetInt("PlayerTier", this.currentTierIdx);
+                        PlayerPrefs.SetInt("PlayerLoadTier", this.currentTierIdx);
                         this.isAdvanced = false;
                         return true;
                     }
@@ -73,7 +73,7 @@ namespace RogueNaraka.TierScripts {
                     if(GameDatabase.instance.TierDataes[i + 1].requiredRankingPercent < TheBackendManager.Instance.TopPercentToClearStageForRank) {
                         this.currentTierIdx = i;
                         this.currentTier = GameDatabase.instance.TierDataes[i];
-                        PlayerPrefs.SetInt("PlayerTier", this.currentTierIdx);
+                        PlayerPrefs.SetInt("PlayerLoadTier", this.currentTierIdx);
                         this.isAdvanced = true;
                         return true;
                     }
@@ -125,7 +125,11 @@ namespace RogueNaraka.TierScripts {
                 this.currentExp = 0.0d;
             }
             //티어 세팅
-            this.currentTierIdx = PlayerPrefs.GetInt("PlayerTier");
+            if(UnityEngine.PlayerPrefs.HasKey("PlayerLoadTier")) {
+                this.currentTierIdx = PlayerPrefs.GetInt("PlayerLoadTier");
+            } else {
+                this.currentTierIdx = 0;
+            }
             this.currentTier = GameDatabase.instance.TierDataes[this.currentTierIdx];
             //
             this.isLoaded = true;

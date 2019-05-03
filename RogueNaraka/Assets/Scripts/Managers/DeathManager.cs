@@ -96,7 +96,7 @@ public class DeathManager : MonoBehaviour
         double maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
         this.curLvTxt.text = playerOriginLv.ToString();
         this.nextLvTxt.text = (playerOriginLv + 1).ToString();
-        this.expNumTxt.text = string.Format("{0}  /  {1}", curExp, maxExp);
+        this.expNumTxt.text = string.Format("{0}  /  {1}", (int)curExp, (int)maxExp);
         this.ExpGauge.fillAmount = (float)(curExp / maxExp);
         //Tier 세팅
         this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
