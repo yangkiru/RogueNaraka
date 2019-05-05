@@ -35,14 +35,21 @@ public class RageManager : MonoBehaviour
     public void Rage()
     {
         Debug.Log("Rage");
-        rageLevel = PlayerPrefs.GetInt("rageLevel") + 1;
+
+        Rage(PlayerPrefs.GetInt("rageLevel") + 1);
+        //StartCoroutine(EndCorou());
+    }
+
+    public void Rage(int level)
+    {
+        rageLevel = level;
         PlayerPrefs.SetInt("rageLevel", rageLevel);
         //ragePnl.SetActive(true);
 
         //PlayerPrefs.SetInt("isRun", 0);
 
         ResetRage();
-        Rage(rageLevel);
+        RageFunction(rageLevel);
         isRage = true;
 
         if (rageLevel > 0)
@@ -50,7 +57,6 @@ public class RageManager : MonoBehaviour
         else
             rageBtn.gameObject.SetActive(false);
         TxtUpdate();
-        //StartCoroutine(EndCorou());
     }
 
     public void SetActiveSmallRageBtn(bool value)
@@ -84,7 +90,7 @@ public class RageManager : MonoBehaviour
     {
         rageLevel = PlayerPrefs.GetInt("rageLevel");
         ResetRage();
-        Rage(rageLevel);
+        RageFunction(rageLevel);
         if (rageLevel > 0)
             SetActiveSmallRageBtn(true);
         TxtUpdate();
@@ -146,7 +152,7 @@ public class RageManager : MonoBehaviour
         }
     }
 
-    public void Rage(int level)
+    public void RageFunction(int level)
     {
         switch(level)
         {
@@ -168,7 +174,7 @@ public class RageManager : MonoBehaviour
                 break;
 
         }
-        Rage(level - 1);
+        RageFunction(level - 1);
         return;
     }
 

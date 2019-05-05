@@ -36,7 +36,13 @@ public class BoardManager : MonoBehaviour {
     public List<Unit> corpses = new List<Unit>();
 
     public TextMeshProUGUI stageTxt;
-
+    /// <summary>
+    /// PlayerPrefs value
+    /// </summary>
+    public int Stage { get { return PlayerPrefs.GetInt("stage"); } set { PlayerPrefs.SetInt("stage", value); } }
+    /// <summary>
+    /// Local value
+    /// </summary>
     public int stage
     { get { return _stage; } }
     [SerializeField]

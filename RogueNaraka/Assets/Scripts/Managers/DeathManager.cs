@@ -297,19 +297,32 @@ public class DeathManager : MonoBehaviour
 
     public void ReGame()
     {
+        if (StageSkipManager.Instance.GetSkipableStage() != 0)
+            StageSkipManager.Instance.SetStageSkipPnl(true);
+        else
+        {
+            EndGame();
+            PlayerPrefs.SetInt("isRun", 0);
+            GameManager.instance.Load();
+        }
         SetDeathPnl(false);
 
+        
+    }
+
+    public void EndGame()
+    {
         RollManager.instance.IsFirstRoll = true;
 
         RageManager.instance.SetActiveSmallRageBtn(false);
         //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
-        PlayerPrefs.SetInt("isRun", 0);
+        
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
         Item.instance.InitItem();
 
         BoardManager.instance.ClearStage();
-        GameManager.instance.Load();
+
         PlayerPrefs.SetFloat("lastRefiningRate", 0);
 
         BoardManager.instance.player.hpable.SetFullHp();

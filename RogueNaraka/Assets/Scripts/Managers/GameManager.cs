@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
 #if !UNITY_EDITOR
-        Debug.unityLogger.logEnabled = false;
+        Debug.unityLogger.logEnabled = true;
 #endif
         instance = this;
 
@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void LoadInit()
+    public void LoadInit(int stage = 1)
     {
         UnitData playerBase = (UnitData)GameDatabase.instance.playerBase.Clone();
         Stat stat = Stat.JsonToStat(PlayerPrefs.GetString("stat"));
@@ -261,7 +261,7 @@ public class GameManager : MonoBehaviour {
 
         moneyManager.Load();
 
-        PlayerPrefs.SetInt("stage", 1);
+        BoardManager.instance.Stage = stage;
   
         skillManager.ResetSave();
         Item.instance.ResetSave();

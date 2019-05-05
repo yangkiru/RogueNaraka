@@ -6,28 +6,14 @@ public class RankManager : MonoBehaviour
 {
     public static RankManager instance;
 
+    public int highScore { get { return PlayerPrefs.GetInt("highScore"); } set { PlayerPrefs.SetInt("highScore", value); } }
+
     private void Awake()
     {
         instance = this;
     }
 
     string leaderBoardId = "CgkIvu-SvO4aEAIQAA";
-
-    //int highScore;
-    //public int GetHighScore(out bool isHighScoreUpdate)
-    //{
-    //    int last = PlayerPrefs.GetInt("highScore");
-    //    int current = BoardManager.instance.stage;
-    //    int result = Mathf.Max(last, current);
-
-    //    if (last == result) isHighScoreUpdate = true;
-    //    else isHighScoreUpdate = false;
-    //    if (isHighScoreUpdate)
-    //        Debug.Log("It's HighScore:" + result);
-    //    else
-    //        Debug.Log("It's not HighScore:" + result);
-    //    return result;
-    //}
 
     public void Login()
     {
@@ -46,6 +32,7 @@ public class RankManager : MonoBehaviour
     public void SendPlayerRank()
     {
         Debug.Log("SendPlayerRank:" + (long)BoardManager.instance.stage);
+        highScore = Mathf.Max(highScore, BoardManager.instance.stage);
 #if UNITY_ANDROID && !UNITY_EDITOR
         Login();
         Social.ReportScore((long)BoardManager.instance.stage, leaderBoardId, (bool success) =>
