@@ -8,7 +8,7 @@ using RogueNaraka.SingletonPattern;
 namespace RogueNaraka.TheBackendScripts {
     public partial class TheBackendManager : MonoSingleton<TheBackendManager> {
         private WWWForm formDataForGetRank;
-        private string RequestURL = "http://ec2-15-164-100-193.ap-northeast-2.compute.amazonaws.com/userRanking.php";
+        private string RequestURL = "https://roguenaraka.com/userRanking.php";
         private int clearedStageForRank;
 
         private bool isLoadedRankData;

@@ -73,10 +73,10 @@ namespace RogueNaraka.TheBackendScripts {
             //Debug.LogError(Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google));
             //푸시 설정
             Debug.Log("Logined!");
-            Backend.Android.PutDeviceToken();
             this.isLoginSuccess = true;
             this.userInDate = Backend.BMember.GetUserInfo().GetReturnValuetoJSON()["row"]["inDate"].ToString();
             this.isSavedUserInDate = true;
+            Backend.Android.PutDeviceToken();
         }
 
         private string GetTokens() {
