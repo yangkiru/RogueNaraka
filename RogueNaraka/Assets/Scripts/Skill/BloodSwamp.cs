@@ -44,7 +44,7 @@ namespace RogueNaraka.SkillScripts
 
             if (!from.ownerable.unit.deathable.isDeath)
             {
-                float result = BoardManager.instance.player.stat.GetCurrent(STAT.HPREGEN) * hpRegenDmg + lifeSteal;
+                float result = BoardManager.instance.player.stat.GetCurrent(STAT.HR) * hpRegenDmg + lifeSteal;
                 fromUnit.damageable.Damage(result);
                 if (!to.deathable.isDeath)
                     to.hpable.Heal(result);

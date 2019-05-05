@@ -16,11 +16,11 @@ public class MpRegenBuff : Effect
 
     protected override void OnDestroyEffect()
     {
-        target.stat.AddTemp(STAT.MPREGEN, -data.value);
+        target.stat.AddTemp(STAT.MR, -data.value);
     }
 
     protected override void OnInit()
     {
-        target.stat.AddTemp(STAT.MPREGEN, data.value);
+        target.stat.AddTemp(STAT.MR, data.value);
     }
 }

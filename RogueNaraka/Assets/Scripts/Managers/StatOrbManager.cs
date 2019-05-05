@@ -96,7 +96,7 @@ public class StatOrbManager : MonoBehaviour
         current--;
         IconEffect();
         bombParticle.Play();
-        if(used == rndStat.statPoints || (currentStat == STAT.MPREGEN && stat.mpRegen == stat.mpRegenMax))
+        if(used == rndStat.statPoints || (currentStat == STAT.MR && stat.mpRegen == stat.mpRegenMax))
         {
             StartCoroutine(OnLastOverflow());
         }
@@ -204,7 +204,7 @@ public class StatOrbManager : MonoBehaviour
 
     IEnumerator StatCorou(Stat stat)
     {
-        for(int i = 0; i <= (int)STAT.MPREGEN; i++)
+        for(int i = 0; i <= (int)STAT.MR; i++)
         {
             float t = 0.5f;
             while (t > 0)

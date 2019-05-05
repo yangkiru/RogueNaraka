@@ -51,48 +51,48 @@ public class Stat : ICloneable
         get { return dmgTemp + spdTemp + tecTemp + hpTemp + mpTemp + hpRegenTemp + mpRegenTemp; }
     }
 
-    public bool AddOrigin(STAT type, float amount, bool isCheck = false)
+    public bool AddOrigin(STAT type, float amount, bool isCheck = false, bool isIgnoreMax = false)
     {
         switch(type)
         {
             case STAT.DMG:
-                if (dmg + amount > dmgMax)
+                if (!isIgnoreMax && dmg + amount > dmgMax)
                     return false;
                 if(!isCheck)
                     dmg += amount;
                 return true;
             case STAT.SPD:
-                if (spd + amount > spdMax)
+                if (!isIgnoreMax && spd + amount > spdMax)
                     return false;
                 if (!isCheck)
                     spd += amount;
                 return true;
             case STAT.TEC:
-                if (tec + amount > tecMax)
+                if (!isIgnoreMax && tec + amount > tecMax)
                     return false;
                 if (!isCheck)
                     tec += amount;
                 return true;
             case STAT.HP:
-                if (hp + amount > hpMax)
+                if (!isIgnoreMax && hp + amount > hpMax)
                     return false;
                 if (!isCheck)
                     hp += amount;
                 return true;
             case STAT.MP:
-                if (mp + amount > mpMax)
+                if (!isIgnoreMax && mp + amount > mpMax)
                     return false;
                 if (!isCheck)
                     mp += amount;
                 return true;
-            case STAT.HPREGEN:
-                if (hpRegen + amount > hpRegenMax)
+            case STAT.HR:
+                if (!isIgnoreMax && hpRegen + amount > hpRegenMax)
                     return false;
                 if (!isCheck)
                     hpRegen += amount;
                 return true;
-            case STAT.MPREGEN:
-                if (mpRegen + amount > mpRegenMax)
+            case STAT.MR:
+                if (!isIgnoreMax && mpRegen + amount > mpRegenMax)
                     return false;
                 if (!isCheck)
                     mpRegen += amount;
@@ -120,13 +120,13 @@ public class Stat : ICloneable
             case STAT.MP:
                 mpMax += amount;
                 break;
-            case STAT.HPREGEN:
+            case STAT.HR:
                 hpRegenMax += amount;
                 break;
-            case STAT.MPREGEN:
+            case STAT.MR:
                 mpRegenMax += amount;
                 break;
-            case STAT.STATPOINT:
+            case STAT.SP:
                 statPoints += (int)amount;
                 break;
         }
@@ -151,10 +151,10 @@ public class Stat : ICloneable
             case STAT.MP:
                 mpTemp += amount;
                 break;
-            case STAT.HPREGEN:
+            case STAT.HR:
                 hpRegenTemp += amount;
                 break;
-            case STAT.MPREGEN:
+            case STAT.MR:
                 mpRegenTemp += amount;
                 break;
         }
@@ -190,10 +190,10 @@ public class Stat : ICloneable
             case STAT.MP:
                 mp = value;
                 break;
-            case STAT.HPREGEN:
+            case STAT.HR:
                 hpRegen = value;
                 break;
-            case STAT.MPREGEN:
+            case STAT.MR:
                 mpRegen = value;
                 break;
         }
@@ -224,10 +224,36 @@ public class Stat : ICloneable
                 return hp;
             case STAT.MP:
                 return mp;
-            case STAT.HPREGEN:
+            case STAT.HR:
                 return hpRegen;
-            case STAT.MPREGEN:
+            case STAT.MR:
                 return mpRegen;
+            case STAT.SP:
+                return statPoints;
+        }
+        return -1;
+    }
+
+    public float GetOrigin(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return dmg;
+            case 1:
+                return spd;
+            case 2:
+                return tec;
+            case 3:
+                return hp;
+            case 4:
+                return mp;
+            case 5:
+                return hpRegen;
+            case 6:
+                return mpRegen;
+            case 7:
+                return statPoints;
         }
         return -1;
     }
@@ -246,10 +272,36 @@ public class Stat : ICloneable
                 return hp + hpTemp;
             case STAT.MP:
                 return mp + mpTemp;
-            case STAT.HPREGEN:
+            case STAT.HR:
                 return hpRegen + hpRegenTemp;
-            case STAT.MPREGEN:
+            case STAT.MR:
                 return mpRegen + mpRegenTemp;
+            case STAT.SP:
+                return statPoints;
+        }
+        return -1;
+    }
+    
+    public float GetCurrent(int type)
+    {
+        switch(type)
+        {
+            case 0:
+                return dmg + dmgTemp;
+            case 1:
+                return spd + spdTemp;
+            case 2:
+                return tec + tecTemp;
+            case 3:
+                return hp + hpTemp;
+            case 4:
+                return mp + mpTemp;
+            case 5:
+                return hpRegen + hpRegenTemp;
+            case 6:
+                return mpRegen + mpRegenTemp;
+            case 7:
+                return statPoints;
         }
         return -1;
     }
@@ -268,11 +320,11 @@ public class Stat : ICloneable
                 return hpMax;
             case STAT.MP:
                 return mpMax;
-            case STAT.HPREGEN:
+            case STAT.HR:
                 return hpRegenMax;
-            case STAT.MPREGEN:
+            case STAT.MR:
                 return mpRegenMax;
-            case STAT.STATPOINT:
+            case STAT.SP:
                 return statPoints;
         }
         return -1;
@@ -314,5 +366,5 @@ public class Stat : ICloneable
 [Serializable]
 public enum STAT
 {
-    DMG, SPD, TEC, HP, HPREGEN, MP, MPREGEN, STATPOINT
+    DMG, SPD, TEC, HP, HR, MP, MR, SP
 }

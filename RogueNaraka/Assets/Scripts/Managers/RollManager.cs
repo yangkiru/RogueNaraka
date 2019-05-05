@@ -255,8 +255,19 @@ public class RollManager : MonoBehaviour {
     {
         Debug.Log("GameStart");
         Stat stat = Stat.DataToStat();
-        if (stat != null)
-            GameManager.instance.RunGame(stat);
+        if (StageSkipManager.Instance.IsSkipStage && StageSkipManager.Instance.SelectedStage != 1)
+        {
+            StageSkipManager.Instance.selectedStage = StageSkipManager.Instance.SelectedStage;
+            StageSkipManager.Instance.AddRandomStat(stat, StageSkipManager.Instance.GetRandomStatAmount());
+            Stat.StatToData(stat);
+            StageSkipManager.Instance.SetResultPnl(true);
+            StageSkipManager.Instance.IsSkipStage = false;
+        }
+        else
+        {
+            if (stat != null)
+                GameManager.instance.RunGame(stat);
+        }
         //else
         //    BoardManager.instance.fade.FadeIn();
     }

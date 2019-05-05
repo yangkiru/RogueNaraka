@@ -236,13 +236,13 @@ public class SoulShopManager : MonoBehaviour
             case STAT.MP:
                 target = stat.mpMax;
                 break;
-            case STAT.HPREGEN:
+            case STAT.HR:
                 target = stat.hpRegenMax;
                 break;
-            case STAT.MPREGEN:
+            case STAT.MR:
                 target = stat.mpRegenMax;
                 break;
-            case STAT.STATPOINT:
+            case STAT.SP:
                 target = stat.statPoints;
                 break;
         }
