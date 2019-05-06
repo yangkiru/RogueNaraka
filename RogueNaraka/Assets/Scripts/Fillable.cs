@@ -14,6 +14,8 @@ public class Fillable : MonoBehaviour
     public FILLABLE unitType;
 
     public static Fillable bossHp;
+    public static Fillable playerHp;
+    public static Fillable playerMp;
 
     private float t = 1;
 
@@ -21,10 +23,18 @@ public class Fillable : MonoBehaviour
 
     private void Awake()
     {
-        if(unitType == FILLABLE.BOSS)
+        switch(unitType)
         {
-            bossHp = this;
-            gameObject.SetActive(false);
+            case FILLABLE.BOSS:
+                bossHp = this;
+                gameObject.SetActive(false);
+                break;
+            case FILLABLE.PLAYER:
+                if (type == TYPE.HEALTH)
+                    playerHp = this;
+                else
+                    playerMp = this;
+                break;
         }
     }
 

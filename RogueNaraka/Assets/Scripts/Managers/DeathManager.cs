@@ -297,7 +297,7 @@ public class DeathManager : MonoBehaviour
 
     public void ReGame()
     {
-        if (StageSkipManager.Instance.GetSkipableStage() != 0)
+        if (StageSkipManager.Instance.GetSkipableStage() != 1)
             StageSkipManager.Instance.SetStageSkipPnl(true);
         else
         {
@@ -325,8 +325,8 @@ public class DeathManager : MonoBehaviour
 
         PlayerPrefs.SetFloat("lastRefiningRate", 0);
 
-        BoardManager.instance.player.hpable.SetFullHp();
-        BoardManager.instance.player.mpable.SetFullMp();
+        Fillable.playerHp.img.fillAmount = 1;
+        Fillable.playerMp.img.fillAmount = 1;
 
         GameManager.instance.SetSettingBtn(true);
 

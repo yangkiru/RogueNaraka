@@ -81,7 +81,7 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
 
     public int GetSkipableStage()
     {
-        Debug.Log((RankManager.instance.highScore - 1) / 30 * 30 + 1);
+        //Debug.Log((RankManager.instance.highScore - 1) / 30 * 30 + 1);
         return (RankManager.instance.highScore - 1) / 30 * 30 + 1;
     }
 

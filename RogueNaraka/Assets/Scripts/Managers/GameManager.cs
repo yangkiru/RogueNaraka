@@ -169,7 +169,6 @@ public class GameManager : MonoBehaviour {
         moneyManager.ResetData();
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
-        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
 
         UnitData playerBase = GameDatabase.instance.playerBase;
 
@@ -265,7 +264,6 @@ public class GameManager : MonoBehaviour {
   
         skillManager.ResetSave();
         Item.instance.ResetSave();
-        soulShopManager.ShopStage(SoulShopManager.SHOPSTAGE.SET);
 
         RollManager.instance.IsFirstRoll = true;
     }

@@ -33,30 +33,6 @@ public class SoulShopManager : MonoBehaviour
             instance = this;
     }
 
-    public enum SHOPSTAGE
-    { SET, DECREASE, SYNC}
-    /// <summary>
-    /// ShopStage 관련 함수
-    /// </summary>
-    /// <param name="act"></param>
-    public void ShopStage(SHOPSTAGE act)
-    {
-        switch(act)
-        {
-            case SHOPSTAGE.SET:
-                _shopStage = 5;
-                PlayerPrefs.SetInt("shopStage", shopStage);
-                break;
-            case SHOPSTAGE.DECREASE:
-                _shopStage--;
-                PlayerPrefs.SetInt("shopStage", shopStage);
-                break;
-            case SHOPSTAGE.SYNC:
-                _shopStage = PlayerPrefs.GetInt("shopStage");
-                break;
-        }
-    }
-
     string lastMusic = string.Empty;
 
     /// <summary>

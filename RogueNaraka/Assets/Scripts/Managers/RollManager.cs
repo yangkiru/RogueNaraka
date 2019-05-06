@@ -246,6 +246,8 @@ public class RollManager : MonoBehaviour {
         SetOnPnlClose(delegate () {
             IsFirstRoll = false;
         });
+
+        GameManager.instance.SetPause(true);
         SetOnFadeOut(GameStart);
     }
 
@@ -261,6 +263,7 @@ public class RollManager : MonoBehaviour {
             Stat.StatToData(stat);
             StageSkipManager.Instance.SetResultPnl(true);
             StageSkipManager.Instance.IsSkipStage = false;
+            GameManager.instance.SetPause(true);
         }
         else
         {
@@ -628,7 +631,8 @@ public class RollManager : MonoBehaviour {
 
     public void OnUp()
     {
-        Ok();
+        if(selected != -1)
+            Ok();
         dragImg.rectTransform.position = restPosition;
         dragImg.sprite = null;
         dragImg.gameObject.SetActive(false);

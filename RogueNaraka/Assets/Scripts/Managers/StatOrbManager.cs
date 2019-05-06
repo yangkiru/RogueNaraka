@@ -52,6 +52,7 @@ public class StatOrbManager : MonoBehaviour
             orb.transform.localPosition = Vector3.zero;
             list.Add(orb.GetComponent<StatOrb>());
             orb.SetActive(true);
+            orb.GetComponent<StatOrb>().rigid.velocity = Random.insideUnitCircle * 5f;
         }
     }
 
@@ -160,6 +161,7 @@ public class StatOrbManager : MonoBehaviour
             icon.rectTransform.localScale = Vector3.Lerp(icon.rectTransform.localScale, Vector3.one, 1 - iconTime * 2);
         }
         icon.rectTransform.localScale = Vector3.one;
+        size = 1;
         iconEffectCorou = null;
     }
 

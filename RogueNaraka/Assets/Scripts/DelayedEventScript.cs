@@ -8,6 +8,7 @@ public class DelayedEventScript : MonoBehaviour
     public float time;
     public GameObject pauseObj;
     public DelayedEvent onEnd;
+    public bool isUnscaledTime;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -21,7 +22,7 @@ public class DelayedEventScript : MonoBehaviour
         {
             yield return null;
             if(!pauseObj || !pauseObj.activeSelf)
-                t -= Time.deltaTime;
+                t -= isUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
         } while (t > 0);
         if(onEnd != null)
             onEnd.Invoke();

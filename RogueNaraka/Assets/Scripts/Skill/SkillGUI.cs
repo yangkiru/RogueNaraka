@@ -104,7 +104,7 @@ public class SkillGUI : MonoBehaviour
 
     public void OnDrag()
     {
-        if (_skill && _skill.data.id != -1 && (!player.deathable.isDeath || _skill.data.isDeath) && !GameManager.instance.isPause)
+        if (_skill && _skill.data.id != -1 && ((player && !player.deathable.isDeath) || _skill.data.isDeath) && !GameManager.instance.isPause)
         {
             if (_skill.data.size != 0)
             {
@@ -121,7 +121,7 @@ public class SkillGUI : MonoBehaviour
     {
         skillManager.circle.SetEnable(false);
         ManaScript.instance.SetNeedMana(false);
-        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
+        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && ((player && !player.deathable.isDeath) || _skill.data.isDeath) && IsMana())
         {
             UseSkill();
         }
@@ -131,7 +131,7 @@ public class SkillGUI : MonoBehaviour
     public void OnEnterUp()
     {
         ManaScript.instance.SetNeedMana(false);
-        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && _skill.data.size == 0 && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
+        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && _skill.data.size == 0 && ((player && !player.deathable.isDeath) || _skill.data.isDeath) && IsMana())
         {
             UseSkill();
         }
