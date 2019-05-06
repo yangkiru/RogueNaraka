@@ -125,11 +125,7 @@ namespace RogueNaraka.TierScripts {
                 this.currentExp = 0.0d;
             }
             //티어 세팅
-            if(UnityEngine.PlayerPrefs.HasKey("PlayerLoadTier")) {
-                this.currentTierIdx = PlayerPrefs.GetInt("PlayerLoadTier");
-            } else {
-                this.currentTierIdx = 0;
-            }
+            this.currentTierIdx = PlayerPrefs.GetInt("PlayerLoadTier");
             this.currentTier = GameDatabase.instance.TierDataes[this.currentTierIdx];
             //
             this.isLoaded = true;
