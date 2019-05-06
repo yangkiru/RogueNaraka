@@ -8,8 +8,11 @@ using RogueNaraka.UnitScripts;
 using RogueNaraka.BulletScripts;
 using RogueNaraka.SkillScripts;
 
-public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SkillGUI : MonoBehaviour
 {
+    public static int pointedSkill;
+    public int PointedSkill { get { return pointedSkill; } set { pointedSkill = value; } }
+
     public Pointer pointer;
     public Image img;
     public Image coolImg;
@@ -17,9 +20,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TextMeshProUGUI coolTimeTxt;
     public int position;
     public bool isCool;
-
-    bool isMouseDown;
-    bool isDoubleClick;
 
     private SkillManager skillManager
     { get { return SkillManager.instance; } }
@@ -29,23 +29,10 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Skill skill { get { return _skill; } }
     Skill _skill;
 
-    void Update()
+    public void OnEnter()
     {
-        if (isMouseDown)
-            OnMouse();
-    }
-
-    public void OnMouse()
-    {
-        if (_skill && _skill.data.id != -1 && (!player.deathable.isDeath || _skill.data.isDeath) && !GameManager.instance.isPause)
-        {
-            pointer.PositionToMouse();
-        }
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if(RollManager.instance.selectPnl.activeSelf && _skill)
+        pointedSkill = position;
+        if (RollManager.instance.selectPnl.activeSelf && _skill)
         {
             RollManager.RollData data = RollManager.instance.datas[RollManager.instance.selected];
             if (data.type == RollManager.ROLL_TYPE.SKILL)
@@ -59,8 +46,9 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnExit()
     {
+        pointedSkill = -1;
         if (RollManager.instance.selectPnl.activeSelf && _skill)
         {
             RollManager.RollData data = RollManager.instance.datas[RollManager.instance.selected];
@@ -72,67 +60,78 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    public void OnMouseDown()
+    public void OnDown()
     {
         if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause)
         {
-            if (_skill.data.size <= 0)
+            if (_skill.data.size != 0)
             {
-                if (doubleClickCorou == null)
-                {
-                    Pointer.instance.SetPointer(true);
-                    doubleClickCorou = DoubleClickCorou();
-                    StartCoroutine(doubleClickCorou);
-                }
-                else
-                    isDoubleClick = true;
-            }
-            else
-            {
-                
                 skillManager.circle.SetCircle(_skill.data.size);
                 skillManager.circle.SetEnable(true);
                 if (skill.data.isCircleToPlayer)
                     skillManager.circle.SetParent(BoardManager.instance.player.cachedTransform);
                 else
                     skillManager.circle.SetParent(pointer.cashedTransform);
-                Pointer.instance.SetPointer(true);
             }
-
-            isMouseDown = true;
+            Pointer.instance.SetPointer(true);
+            Pointer.instance.PositionToMouse();
             ManaScript.instance.SetNeedMana(true, _skill.data.manaCost);
         }
     }
 
-    IEnumerator doubleClickCorou;
+    //IEnumerator doubleClickCorou;
 
-    IEnumerator DoubleClickCorou()
+    //IEnumerator DoubleClickCorou()
+    //{
+    //    float t = 0.2f;
+    //    isDoubleClick = false;
+    //    do
+    //    {
+    //        yield return null;
+    //        t -= Time.unscaledDeltaTime;
+    //        if (isDoubleClick)
+    //        {
+    //            if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
+    //                UseSkill();
+    //            Pointer.instance.SetPointer(false);
+    //            isDoubleClick = false;
+    //            isMouseDown = false;
+    //        }
+    //    } while (t > 0);
+    //    yield return null;
+    //    doubleClickCorou = null;
+    //}
+
+    public void OnDrag()
     {
-        float t = 0.2f;
-        isDoubleClick = false;
-        do
+        if (_skill && _skill.data.id != -1 && (!player.deathable.isDeath || _skill.data.isDeath) && !GameManager.instance.isPause)
         {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-            if (isDoubleClick)
+            if (_skill.data.size != 0)
             {
-                if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
-                    UseSkill();
-                Pointer.instance.SetPointer(false);
-                isDoubleClick = false;
-                isMouseDown = false;
+                if (skill.data.isCircleToPlayer)
+                    skillManager.circle.SetParent(BoardManager.instance.player.cachedTransform);
+                else
+                    skillManager.circle.SetParent(pointer.cashedTransform);
             }
-        } while (t > 0);
-        yield return null;
-        doubleClickCorou = null;
+            pointer.PositionToMouse();
+        }
     }
 
-    public void OnMouseUp()
+    public void OnUp()
     {
-        isMouseDown = false;
         skillManager.circle.SetEnable(false);
         ManaScript.instance.SetNeedMana(false);
         if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
+        {
+            UseSkill();
+        }
+        pointer.SetPointer(false);
+    }
+
+    public void OnEnterUp()
+    {
+        ManaScript.instance.SetNeedMana(false);
+        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && _skill.data.size == 0 && (!player.deathable.isDeath || _skill.data.isDeath) && IsMana())
         {
             UseSkill();
         }
@@ -168,8 +167,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             _skill.data.id = -1;
             Destroy(_skill);
         }
-
-        doubleClickCorou = null;
     }
 
     public void Init(SkillData dt)
@@ -193,8 +190,6 @@ public class SkillGUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         img.color = Color.white;
         levelTxt.text = string.Format("+{0}", _skill.data.level);
         levelTxt.enabled = true;
-
-        doubleClickCorou = null;
     }
 
     public void LevelUp(int amount)

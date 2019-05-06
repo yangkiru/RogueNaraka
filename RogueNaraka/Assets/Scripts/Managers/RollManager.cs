@@ -53,8 +53,6 @@ public class RollManager : MonoBehaviour {
 
     private bool isSkillSelected;
 
-    private int target;//선택된 SkillGUI
-
     public static RollManager instance;
 
     public enum ROLL_TYPE { ALL, SKILL, STAT, ITEM }
@@ -258,6 +256,7 @@ public class RollManager : MonoBehaviour {
         if (StageSkipManager.Instance.IsSkipStage && StageSkipManager.Instance.SelectedStage != 1)
         {
             StageSkipManager.Instance.selectedStage = StageSkipManager.Instance.SelectedStage;
+            StageSkipManager.Instance.AddBook(StageSkipManager.Instance.GetRandomBookAmount());
             StageSkipManager.Instance.AddRandomStat(stat, StageSkipManager.Instance.GetRandomStatAmount());
             Stat.StatToData(stat);
             StageSkipManager.Instance.SetResultPnl(true);
@@ -453,7 +452,6 @@ public class RollManager : MonoBehaviour {
         selectPnl.SetActive(value);
         if (!value)
         {
-            target = -1;
             selected = -1;
         }
     }
@@ -597,33 +595,25 @@ public class RollManager : MonoBehaviour {
         }
     }
 
-    void Update()
-    {
-        if (isMouseDown)
-            OnMouse();
-    }
 
-    public void OnMouseClick(int position)
+    public void OnClick(int position)
     {
         if (selected == position && datas[selected].type == ROLL_TYPE.STAT)
             Ok();
     }
-
-    bool isMouseDown;
     
-    public void OnMouseDown(int position)
+    public void OnDown(int position)
     {
         if (selected != position)
             return;
         if (datas[selected].type != ROLL_TYPE.STAT)
         {
-            isMouseDown = true;
             dragImg.sprite = GetSprite(datas[selected]);
             dragImg.gameObject.SetActive(true);
         }
     }
 
-    public void OnMouse()
+    public void OnDrag()
     {
         if (selected != -1)
         {
@@ -636,11 +626,9 @@ public class RollManager : MonoBehaviour {
         }
     }
 
-    public void OnMouseUp()
+    public void OnUp()
     {
-        if(target != -1)
-            Ok();
-        isMouseDown = false;
+        Ok();
         dragImg.rectTransform.position = restPosition;
         dragImg.sprite = null;
         dragImg.gameObject.SetActive(false);
@@ -655,27 +643,29 @@ public class RollManager : MonoBehaviour {
         switch (rollData.type)
         {
             case ROLL_TYPE.SKILL:
+                if (SkillGUI.pointedSkill == -1)
+                    break;
                 SkillData selectedSkill = GameDatabase.instance.skills[rollData.id];//선택된 스킬 데이터
-                Skill slotSkill = SkillManager.instance.skills[target].skill;//해당 슬롯에 장착된 스킬
+                Skill slotSkill = SkillManager.instance.skills[SkillGUI.pointedSkill].skill;//해당 슬롯에 장착된 스킬
                 if (slotSkill == null || slotSkill.data.id == -1)//슬롯이 비었으면
                 {
-                    SkillManager.instance.SetSkill(selectedSkill, target);
+                    SkillManager.instance.SetSkill(selectedSkill, SkillGUI.pointedSkill);
                     SetRollPnl(false);
                 }
                 else if (slotSkill.data.id == selectedSkill.id)//같은 스킬이면
                 {
-                    SkillManager.instance.SetSkill(selectedSkill, target);
+                    SkillManager.instance.SetSkill(selectedSkill, SkillGUI.pointedSkill);
                     SetRollPnl(false);
                 }
                 else//다른 스킬이면
                 {
                     if (slotSkill.data.level == 1)
                     {
-                        SkillManager.instance.SetSkill(selectedSkill, target);
+                        SkillManager.instance.SetSkill(selectedSkill, SkillGUI.pointedSkill);
                         SetRollPnl(false);
                     }
                     else
-                        SkillChangeManager.instance.OpenChangePnl(selectedSkill, target);//스킬 교체 패널 오픈
+                        SkillChangeManager.instance.OpenChangePnl(selectedSkill, SkillGUI.pointedSkill);//스킬 교체 패널 오픈
                 }
                 //SetRollPnl(false, isStageUp);
                 break;
@@ -683,8 +673,11 @@ public class RollManager : MonoBehaviour {
                 StatManager.instance.SetStatPnl(true, rollData.id + 1);
                 break;
             case ROLL_TYPE.ITEM:
-                Item.instance.EquipItem(rollData.id);
-                SetRollPnl(false);
+                if (Item.isPointed)
+                {
+                    Item.instance.EquipItem(rollData.id);
+                    SetRollPnl(false);
+                }
                 break;
             //case ROLL_TYPE.PASSIVE:
             //    //selectedImg.sprite = GetSprite(data);
@@ -695,38 +688,18 @@ public class RollManager : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// SkillUI를 클릭하면 호출
-    /// </summary>
-    /// <param name="position"></param>
-    public void SelectSkill(int position)
-    {
-        if (isClickable && selected != -1 && datas[selected].type == ROLL_TYPE.SKILL)
-        {
-            Debug.Log("Skill Added,position:" + position + " id:" + datas[selected].id);
-            target = position;
-        }
-    }
-
-    /// <summary>
-    /// ItemUI를 클릭하면 호출
-    /// </summary>
-    public void SelectItem(bool value)
-    {
-        if (selected != -1 && datas[selected].type == ROLL_TYPE.ITEM)
-        {
-            if (value)//선택 전
-            {
-                Debug.Log("Item Added");
-                target = 0;
-            }
-            else
-            {
-                Debug.Log("Item Canceled");
-                target = -1;
-            }
-        }
-    }
+    ///// <summary>
+    ///// SkillUI를 가리키면 호출
+    ///// </summary>
+    ///// <param name="position"></param>
+    //public void SelectSkill(int position)
+    //{
+    //    if (isClickable && selected != -1 && datas[selected].type == ROLL_TYPE.SKILL)
+    //    {
+    //        //Debug.Log("Skill Added,position:" + position + " id:" + datas[selected].id);
+    //        target = position;
+    //    }
+    //}
 
     public Sprite GetSprite(RollData data)
     {

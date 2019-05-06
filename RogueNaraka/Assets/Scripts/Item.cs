@@ -10,6 +10,8 @@ public class Item : MonoBehaviour
 {
 
     public static Item instance = null;
+    public static bool isPointed = false;
+    public bool IsPointed { get { return isPointed; } set { isPointed = value; } }
     public ItemData data
     { get { return _data; } }
     [SerializeField][ReadOnly]
@@ -27,8 +29,6 @@ public class Item : MonoBehaviour
 
     public RectTransform[] points;
 
-    bool isMouseDown;
-
     private void Awake()
     {
         if (instance == null)
@@ -40,8 +40,6 @@ public class Item : MonoBehaviour
         _data.id = -1;
         img.color = Color.clear;
         amount = 0;
-        doubleClickCorou = null;
-        mouseCorou = null;
         ItemAmountUpdate();
     }
 
@@ -71,7 +69,9 @@ public class Item : MonoBehaviour
             isKnown = new bool[GameDatabase.instance.items.Length];
             InitItem();
             //확정 아이템
-            isKnown[0] = true; isKnown[1] = true;
+            for(int i = 0; i < GameDatabase.instance.items.Length; i++)
+                if(GameDatabase.instance.items[i].spriteId != -1)
+                    isKnown[i] = true;
             Save();
             PlayerPrefs.SetInt("isItemFirst", 1);
         }
@@ -100,15 +100,18 @@ public class Item : MonoBehaviour
                     {
                         if (i < isKnown.Length)
                             temp.Add(isKnown[i]);//작으면 그대로 삽입
-                        else
-                            temp.Add(false);//크면 false로 초기화
+                        else //크면
+                            temp.Add(GameDatabase.instance.items[i].spriteId != -1);//spriteId가 있으면 true 초기화
                     }
                     isKnown = temp.ToArray();
                 }
             }
-            else//초기화됨?
+            else//처음은 아니지만 데이터가 날아감?
             {
                 isKnown = new bool[GameDatabase.instance.items.Length];
+                for (int i = 0; i < GameDatabase.instance.items.Length; i++)
+                    if (GameDatabase.instance.items[i].spriteId != -1)
+                        isKnown[i] = true;
             }
             if (itemData != -1 && GameDatabase.instance.items.Length > itemData)
             {
@@ -125,14 +128,17 @@ public class Item : MonoBehaviour
     private void SetRandomSprite()
     {
         sprIds = new int[GameDatabase.instance.itemSprites.Length];
-        //확정
-        sprIds[0] = 0;
-        sprIds[1] = 1;
+        
         List<int> temp = new List<int>();
-        for (int i = 2; i < sprIds.Length; i++)
-            temp.Add(i);
+        for (int i = 0; i < sprIds.Length; i++)
+        {
+            if (GameDatabase.instance.items[i].spriteId == -1)//무작위 리스트에 추가
+                temp.Add(i);
+            else
+                sprIds[i] = GameDatabase.instance.items[i].spriteId;//확정
+        }
         int leng = temp.Count;
-        for (int i = 2; i < leng; i++)
+        for (int i = 0; i < leng; i++)
         {
             int rnd = Random.Range(0, temp.Count);
             sprIds[i] = temp[rnd];
@@ -234,8 +240,8 @@ public class Item : MonoBehaviour
             return;
         amount--;
         ItemAmountUpdate();
-        circle.SetCircle(_data.size);
-        circle.MoveCircleToMouse();
+        //circle.SetCircle(_data.size);
+        //circle.MoveCircleToMouse();
         Pointer.instance.SetPointer(false);
         isKnown[_data.id] = true;
 
@@ -278,6 +284,11 @@ public class Item : MonoBehaviour
                     BoardManager.instance.player.mpable.Heal(_data.value * BoardManager.instance.player.data.stat.GetCurrent(STAT.MP));
                     AudioManager.instance.PlaySFX("drink");
                     break;
+                case 2:
+                    Debug.Log("SkillBook");
+                    SkillManager.instance.skills[SkillGUI.pointedSkill].LevelUp(1);
+                    AudioManager.instance.PlaySFX("skillLevelUp");
+                    break;
             }
         }
         if(amount <= 0)
@@ -294,93 +305,58 @@ public class Item : MonoBehaviour
     //    points[1].position = new Vector3((mid + mp.x) / 2, (points[0].position.y + points[2].position.y) / 2, 0);
     //}
 
-    public void OnMouseDown()
+    public void OnDown()
     {
+        //Debug.Log("OnDown");
         if (_data.id != -1)
         {
-            if (_data.size <= 0)
-            {
-                if (doubleClickCorou == null)
-                {
-                    doubleClickCorou = DoubleClickCorou();
-                    StartCoroutine(doubleClickCorou);
-                }
-                else
-                    isMouseDown = true;
-
-            }
-            else
+            Pointer.instance.SetPointer(true);
+            Pointer.instance.PositionToMouse();
+            if (_data.size > 0)
             {
                 circle.MoveCircleToMouse();
                 circle.SetCircle(_data.size);
                 circle.SetEnable(true);
-                Pointer.instance.SetPointer(true);
-                //line.enabled = true;
-                isMouseDown = true;
-
-                if(mouseCorou == null)
-                {
-                    mouseCorou = MouseCorou();
-                    StartCoroutine(mouseCorou);
-                }
             }
         }
     }
 
-    IEnumerator mouseCorou;
-    IEnumerator doubleClickCorou;
-
-    IEnumerator MouseCorou()
+    public void OnDrag()
     {
-        while (isMouseDown)
-        {
-            OnMouse();
-            yield return null;
-        }
-        mouseCorou = null;
-    }
-
-    IEnumerator DoubleClickCorou()
-    {
-        float t = 0.2f;
-        isMouseDown = false;
-        do
-        {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-            if (isMouseDown)
-            {
-                UseItem();
-                isMouseDown = false;
-            }
-        } while (t > 0);
-        yield return null;
-        doubleClickCorou = null;
-    }
-
-
-    public void OnMouse()
-    {
+        //Debug.Log("OnDrag");
         if (_data.id != -1)
         {
             circle.MoveCircleToMouse();
             Pointer.instance.PositionToMouse();
-            //DrawLine();
         }
     }
 
-    public void OnMouseUp()
+    public void OnUp()
     {
-        //line.enabled = false;
+        //Debug.Log("OnUp");
         circle.SetEnable(false);
         Pointer.instance.SetPointer(false);
         if (_data.id != -1)
         {
-            if(BoardManager.IsMouseInBoard())
+            if(data.isTargetToSkill)
+            {
+                if (SkillGUI.pointedSkill != -1 && SkillManager.instance.skills[SkillGUI.pointedSkill].skill)
+                    UseItem();
+            }
+            else if(BoardManager.IsMouseInBoard())
             {
                 UseItem();
             }
         }
-        isMouseDown = false;
+    }
+
+    public void OnEnterUp()
+    {
+        Debug.Log("OnEnterUp");
+        if (_data.id != -1)
+        {
+            if (_data.size == 0 && !_data.isTargetToSkill)
+                UseItem();
+        }
     }
 }

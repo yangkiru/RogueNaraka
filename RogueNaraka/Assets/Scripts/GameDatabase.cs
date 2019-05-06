@@ -529,8 +529,11 @@ public struct ItemData
     public string name;
     public string[] nameLang;
     public int id;
+    public int spriteId;
     public float value;
     public float size;
+
+    public bool isTargetToSkill;
     [TextArea]
     public string[] description;
 

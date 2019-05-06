@@ -14501,6 +14501,14 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &193602793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20567,11 +20575,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -23722,7 +23730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -26717,7 +26725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -26804,7 +26812,7 @@ MonoBehaviour:
     lineCount: 5
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -27625,7 +27633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -27708,7 +27716,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -29913,7 +29921,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29929,7 +29937,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29944,7 +29952,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29962,6 +29970,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &502477133
 MonoBehaviour:
@@ -30369,7 +30396,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30385,7 +30412,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30400,7 +30427,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30418,6 +30445,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &509586637
 MonoBehaviour:
@@ -32734,7 +32780,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32750,7 +32796,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32765,7 +32811,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32783,6 +32829,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &539563612
 MonoBehaviour:
@@ -32832,13 +32897,14 @@ GameObject:
   - component: {fileID: 542562253}
   - component: {fileID: 542562256}
   - component: {fileID: 542562255}
+  - component: {fileID: 542562254}
   m_Layer: 5
   m_Name: BookAmountTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &542562253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32858,6 +32924,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -92.970276}
   m_SizeDelta: {x: 249.8, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &542562254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542562252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e264fa5cb6049b54d828cafd1007d4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pumpSize: {x: 1.2, y: 1.2, z: 1}
+  upTime: 0.1
+  downTime: 0.2
+  isUnsclaedTime: 1
+  isPumpOnEnable: 1
+  cachedTransform: {fileID: 542562253}
+  onPumpEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2049767584}
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: skillEquip
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1636457866}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &542562255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34156,8 +34267,10 @@ MonoBehaviour:
     name: 
     nameLang: []
     id: 0
+    spriteId: 0
     value: 0
     size: 0
+    isTargetToSkill: 0
     description: []
   circle: {fileID: 37812797}
   line: {fileID: 0}
@@ -34216,7 +34329,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 582290418}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34231,7 +34344,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 582290418}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34245,8 +34358,8 @@ MonoBehaviour:
   _onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectItem
+      - m_Target: {fileID: 582290418}
+        m_MethodName: set_IsPointed
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34260,9 +34373,39 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectItem
+      - m_Target: {fileID: 582290418}
+        m_MethodName: set_IsPointed
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 582290418}
+        m_MethodName: OnEnterUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 582290418}
+        m_MethodName: OnDrag
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -35171,11 +35314,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -41123,7 +41266,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 755337020}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -41138,7 +41281,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 755337020}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -41152,9 +41295,9 @@ MonoBehaviour:
   _onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectSkill
-        m_Mode: 3
+      - m_Target: {fileID: 755337020}
+        m_MethodName: OnEnter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -41167,13 +41310,43 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectSkill
-        m_Mode: 3
+      - m_Target: {fileID: 755337020}
+        m_MethodName: OnExit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 755337020}
+        m_MethodName: OnEnterUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 755337020}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -46286,11 +46459,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -49945,7 +50118,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -49961,7 +50134,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -49976,7 +50149,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -49994,6 +50167,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &999439382
 MonoBehaviour:
@@ -54273,7 +54465,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -54289,7 +54481,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -54304,7 +54496,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -54322,6 +54514,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1107289843
 MonoBehaviour:
@@ -65850,7 +66061,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1255047360}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -65865,7 +66076,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1255047360}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -65879,9 +66090,9 @@ MonoBehaviour:
   _onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectSkill
-        m_Mode: 3
+      - m_Target: {fileID: 1255047360}
+        m_MethodName: OnEnter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -65894,13 +66105,43 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectSkill
-        m_Mode: 3
+      - m_Target: {fileID: 1255047360}
+        m_MethodName: OnExit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1255047360}
+        m_MethodName: OnEnterUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1255047360}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -66669,6 +66910,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1279502954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66786,7 +67035,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -66802,7 +67051,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -66817,7 +67066,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -66835,6 +67084,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1281995652
 MonoBehaviour:
@@ -68919,7 +69187,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1329915886}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -68934,7 +69202,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1329915886}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -68948,9 +69216,9 @@ MonoBehaviour:
   _onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectSkill
-        m_Mode: 3
+      - m_Target: {fileID: 1329915886}
+        m_MethodName: OnEnter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -68963,13 +69231,43 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1114166076}
-        m_MethodName: SelectSkill
-        m_Mode: 3
+      - m_Target: {fileID: 1329915886}
+        m_MethodName: OnExit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1329915886}
+        m_MethodName: OnEnterUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1329915886}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -68986,13 +69284,14 @@ GameObject:
   - component: {fileID: 1333420449}
   - component: {fileID: 1333420451}
   - component: {fileID: 1333420450}
+  - component: {fileID: 1333420452}
   m_Layer: 5
   m_Name: BookImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1333420449
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69032,7 +69331,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 7996f203b076baa4197fa80b71dbba8a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe1f74d06b929014c888ce6dcf4f6a0d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -69049,6 +69348,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333420448}
   m_CullTransparentMesh: 0
+--- !u!114 &1333420452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333420448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e264fa5cb6049b54d828cafd1007d4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pumpSize: {x: 1.2, y: 1.2, z: 1}
+  upTime: 0.1
+  downTime: 0.2
+  isUnsclaedTime: 1
+  isPumpOnEnable: 1
+  cachedTransform: {fileID: 1333420449}
+  onPumpEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 542562252}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1339483197
 GameObject:
   m_ObjectHideFlags: 0
@@ -75699,6 +76032,7 @@ GameObject:
   - component: {fileID: 1467525981}
   - component: {fileID: 1467525980}
   - component: {fileID: 1467525979}
+  - component: {fileID: 1467525982}
   m_Layer: 5
   m_Name: BookTitle
   m_TagString: Untagged
@@ -75865,6 +76199,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467525977}
   m_CullTransparentMesh: 0
+--- !u!114 &1467525982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467525977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e264fa5cb6049b54d828cafd1007d4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pumpSize: {x: 1.2, y: 1.2, z: 1}
+  upTime: 0.1
+  downTime: 0.2
+  isUnsclaedTime: 1
+  isPumpOnEnable: 1
+  cachedTransform: {fileID: 1467525978}
+  onPumpEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1333420448}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1467864050
 GameObject:
   m_ObjectHideFlags: 0
@@ -78478,7 +78846,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -78494,7 +78862,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -78509,7 +78877,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -78527,6 +78895,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1528149731
 MonoBehaviour:
@@ -79820,7 +80207,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -79836,7 +80223,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -79851,7 +80238,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -79869,6 +80256,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1560028033
 MonoBehaviour:
@@ -81102,11 +81508,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -82652,13 +83058,14 @@ GameObject:
   - component: {fileID: 1636457870}
   - component: {fileID: 1636457869}
   - component: {fileID: 1636457868}
+  - component: {fileID: 1636457871}
   m_Layer: 5
   m_Name: StatTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1636457867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -82818,6 +83225,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636457866}
   m_CullTransparentMesh: 0
+--- !u!114 &1636457871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636457866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e264fa5cb6049b54d828cafd1007d4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pumpSize: {x: 1.2, y: 1.2, z: 1}
+  upTime: 0.1
+  downTime: 0.2
+  isUnsclaedTime: 1
+  isPumpOnEnable: 1
+  cachedTransform: {fileID: 1636457867}
+  onPumpEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 881804512}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1638132305
 GameObject:
   m_ObjectHideFlags: 0
@@ -85297,7 +85738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -91189,6 +91630,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2049767584}
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: statChange
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: PumpScript+PumpEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &1713558286
@@ -91289,11 +91741,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -94594,7 +95046,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -94610,7 +95062,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -94625,7 +95077,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -94643,6 +95095,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1797732475
 MonoBehaviour:
@@ -102531,11 +103002,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -104506,11 +104977,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -105225,6 +105696,7 @@ MonoBehaviour:
   stageTxt: {fileID: 1771163007}
   stageSkipPnl: {fileID: 1062797610}
   resultPnl: {fileID: 1632024412}
+  bookAmountTxt: {fileID: 542562255}
   statAmountTxt: {fileID: 881804515}
   statTxts:
   - {fileID: 1713558286}
@@ -106313,11 +106785,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -107691,7 +108163,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseClick
+        m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -107707,7 +108179,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseDown
+        m_MethodName: OnDown
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -107722,7 +108194,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1114166076}
-        m_MethodName: OnMouseUp
+        m_MethodName: OnUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -107740,6 +108212,25 @@ MonoBehaviour:
   _onExit:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onEnterUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _onDrag:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: OnDrag
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ButtonEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &2078066772
 MonoBehaviour:

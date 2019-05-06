@@ -13,6 +13,7 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
     public GameObject stageSkipPnl;
 
     public GameObject resultPnl;
+    public TextMeshProUGUI bookAmountTxt;
     public TextMeshProUGUI statAmountTxt;
     public TextMeshProUGUI[] statTxts;
 
@@ -114,6 +115,23 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
     {
         int value = selectedStage / 30;
         return Random.Range(value * 15, value * 45 + 1);
+    }
+
+    public void AddBook(int amount)
+    {
+        switch (GameManager.language)
+        {
+            case Language.English:
+                bookAmountTxt.text = string.Format("{0} Books", amount);
+                break;
+            case Language.Korean:
+                bookAmountTxt.text = string.Format("{0} 개", amount);
+                break;
+        }
+        Item.instance.Load();
+        Item.instance.SyncData(2);
+        Item.instance.amount = amount;
+        Item.instance.Save();
     }
 
     public void AddRandomStat(Stat stat, int amount)

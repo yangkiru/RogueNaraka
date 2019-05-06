@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [AddComponentMenu("CustomButton/OnMouseButton")]
-public class OnMouseButton : Button {
+public class OnMouseButton : Button, IDragHandler {
 
     [SerializeField]
     ButtonEvent _onDown = new ButtonEvent();
@@ -16,6 +16,10 @@ public class OnMouseButton : Button {
     ButtonEvent _onEnter = new ButtonEvent();
     [SerializeField]
     ButtonEvent _onExit = new ButtonEvent();
+    [SerializeField]
+    ButtonEvent _onEnterUp = new ButtonEvent();
+    [SerializeField]
+    ButtonEvent _onDrag = new ButtonEvent();
 
     protected OnMouseButton() { }
 
@@ -65,6 +69,29 @@ public class OnMouseButton : Button {
             return;
 
         _onExit.Invoke();
+    }
+
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        if (!interactable)
+            return;
+        base.OnPointerClick(eventData);
+
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+
+        _onEnterUp.Invoke();
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (!interactable)
+            return;
+
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
+
+        _onDrag.Invoke();
     }
 
     public ButtonEvent onDown

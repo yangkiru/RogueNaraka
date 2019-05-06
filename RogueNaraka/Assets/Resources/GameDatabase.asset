@@ -3451,8 +3451,10 @@ MonoBehaviour:
     - Heal Potion
     - "\uCCB4\uB825 \uD68C\uBCF5 \uBB3C\uC57D"
     id: 0
+    spriteId: 0
     value: 1
     size: 0
+    isTargetToSkill: 0
     description:
     - If you drink this portion, you can restore your helath.
     - "\uB9C8\uC2DC\uBA74 \uCCB4\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uD560 \uC218
@@ -3462,25 +3464,40 @@ MonoBehaviour:
     - Mana Potion
     - "\uB9C8\uB825 \uD68C\uBCF5 \uBB3C\uC57D"
     id: 1
+    spriteId: 1
     value: 1
     size: 0
+    isTargetToSkill: 0
     description:
     - If you drink this portion, you can restore your mana
     - "\uB9C8\uC2DC\uBA74 \uB9C8\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uD560 \uC218
       \uC788\uB2E4."
+  - name: SkillBook
+    nameLang:
+    - Skill Book
+    - "\uAE30\uC220 \uCC45"
+    id: 2
+    spriteId: 2
+    value: 1
+    size: 0
+    isTargetToSkill: 1
+    description:
+    - 
+    - "\uAE30\uC220 \uC2AC\uB86F\uC5D0 \uC0AC\uC6A9\uD558\uBA74 \uAE30\uC220\uC744
+      \uAC15\uD654\uD560 \uC218 \uC788\uB2E4."
   itemSprites:
   - id: 0
     name: HealPotion
     spr: {fileID: 21300000, guid: 7996f203b076baa4197fa80b71dbba8a, type: 3}
-    description: 'Heal
-
-      Value = Tec : {0} = {1}'
+    description: 
   - id: 1
     name: ManaPotion
     spr: {fileID: 21300000, guid: 8f9ff21c71e685341bda4e59e6afabc9, type: 3}
-    description: 'ManaHeal(Can be over the max)
-
-      Value = Tec : {0} = {1}'
+    description: 
+  - id: 1
+    name: SkillBook
+    spr: {fileID: 21300000, guid: fe1f74d06b929014c888ce6dcf4f6a0d, type: 3}
+    description: 
   effects:
   - name: Stun
     type: 0
