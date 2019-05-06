@@ -45,7 +45,6 @@ public class AudioManager : MonoBehaviour
 #endif
     int currentMusicStreamID = -1;
     string currentMusicName = string.Empty;
-    Dictionary<string, int> musicFileIDDictionary = new Dictionary<string, int>();
 
     int currentSFXStreamID;
     Dictionary<string, int> SFXFileIDDictionary = new Dictionary<string, int>();
@@ -493,9 +492,12 @@ public class AudioManager : MonoBehaviour
             AndroidNativeAudio.unload(list[i]);
         AndroidNativeAudio.releasePool();
 
-        list = new List<int>(musicFileIDDictionary.Values);
-        for (int i = 0; i < list.Count; i++)
-            ANAMusic.release(list[i]);
+        if(currentMusicStreamID != -1)
+        {
+            ANAMusic.release(currentMusicStreamID);
+            currentMusicStreamID = -1;
+            currentMusicName = string.Empty;
+        }
     }
 #endif
 }
