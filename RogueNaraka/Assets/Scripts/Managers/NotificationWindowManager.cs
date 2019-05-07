@@ -22,6 +22,11 @@ namespace RogueNaraka.NotificationScripts {
         private Queue<NotificationData> notificationDataQueue = new Queue<NotificationData>();
         private bool isPlaying;
 
+        void Start() {
+            LocalPushManager.Instance.Initialize();
+            //LocalPushManager.Instance.SetLocalPush();
+        }
+
         void LateUpdate() {
             if(!isPlaying && this.notificationDataQueue.Count > 0) {
                 StartCoroutine(PlayNotificationWindowCoroutine());
