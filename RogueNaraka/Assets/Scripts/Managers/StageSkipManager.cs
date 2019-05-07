@@ -107,14 +107,14 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
 
     public int GetRandomBookAmount()
     {
-        int value = selectedStage / 30 + 1;
-        return Random.Range(value * 3, value * 10 + 1);
+        int value = selectedStage / 30;
+        return Random.Range(value * 2, value * 7 + 1);
     }
 
     public int GetRandomStatAmount()
     {
         int value = selectedStage / 30;
-        return Random.Range(value * 15, value * 45 + 1);
+        return Random.Range(value * 15, value * 30 + 1);
     }
 
     public void AddBook(int amount)

@@ -10,7 +10,7 @@ using RogueNaraka.SkillScripts;
 
 public class SkillGUI : MonoBehaviour
 {
-    public static int pointedSkill;
+    public static int pointedSkill = -1;
     public int PointedSkill { get { return pointedSkill; } set { pointedSkill = value; } }
 
     public Pointer pointer;

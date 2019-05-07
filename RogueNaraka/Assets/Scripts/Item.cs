@@ -236,8 +236,6 @@ public class Item : MonoBehaviour
 
     public void UseItem()
     {
-        if (BoardManager.instance.player.deathable.isDeath)
-            return;
         amount--;
         ItemAmountUpdate();
         //circle.SetCircle(_data.size);
@@ -336,7 +334,7 @@ public class Item : MonoBehaviour
         //Debug.Log("OnUp");
         circle.SetEnable(false);
         Pointer.instance.SetPointer(false);
-        if (_data.id != -1)
+        if (_data.id != -1 && BoardManager.instance.player && !BoardManager.instance.player.deathable.isDeath)
         {
             if(data.isTargetToSkill)
             {
@@ -352,8 +350,8 @@ public class Item : MonoBehaviour
 
     public void OnEnterUp()
     {
-        Debug.Log("OnEnterUp");
-        if (_data.id != -1)
+        //Debug.Log("OnEnterUp");
+        if (_data.id != -1 && BoardManager.instance.player && !BoardManager.instance.player.deathable.isDeath)
         {
             if (_data.size == 0 && !_data.isTargetToSkill)
                 UseItem();
