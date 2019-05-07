@@ -38764,6 +38764,9 @@ MonoBehaviour:
   expNumTxt: {fileID: 1065805367}
   ExpGauge: {fileID: 2095834997}
   stageCanvas: {fileID: 1083821332}
+  SoulRefiningPnl: {fileID: 0}
+  RefiningPercentText: {fileID: 0}
+  RemainTimeText: {fileID: 0}
 --- !u!1 &683743895
 GameObject:
   m_ObjectHideFlags: 0
@@ -71636,7 +71639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -54.249985}
+  m_AnchoredPosition: {x: 0, y: -54.24997}
   m_SizeDelta: {x: 0, y: -107.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1373705877
