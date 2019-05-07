@@ -3717,3 +3717,20 @@ MonoBehaviour:
     tier_num: 0
     requiredRankingPercent: 0
     emblem: {fileID: 0}
+  requiredMinutesForSoulRefineArray:
+  - endAmount: 200
+    requiredMinutes: 0
+  - endAmount: 300
+    requiredMinutes: 1
+  - endAmount: 500
+    requiredMinutes: 5
+  - endAmount: 700
+    requiredMinutes: 15
+  - endAmount: 900
+    requiredMinutes: 30
+  - endAmount: 1200
+    requiredMinutes: 60
+  - endAmount: 2000
+    requiredMinutes: 120
+  - endAmount: 2147483647
+    requiredMinutes: 180
