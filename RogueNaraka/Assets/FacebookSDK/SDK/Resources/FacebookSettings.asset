@@ -26,7 +26,8 @@ MonoBehaviour:
   frictionlessRequests: 1
   iosURLSuffix: 
   appLinkSchemes:
-  - list: []
+  - list:
+    - 
   uploadAccessToken: 
   autoLogAppEventsEnabled: 1
   advertiserIDCollectionEnabled: 1
