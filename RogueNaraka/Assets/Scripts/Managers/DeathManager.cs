@@ -52,6 +52,11 @@ public partial class DeathManager : MonoBehaviour
         for(int i = 0; i < GameDatabase.instance.enemies.Count(); ++i) {
             this.huntedUnitNumList.Add(0);
         }
+
+        //Load Refining Data
+        if(PlayerPrefs.GetInt("IsRefining") == 1) {
+            this.isRefining = true;
+        }
     }
 
     public void SetDeathPnl(bool value)
@@ -137,8 +142,13 @@ public partial class DeathManager : MonoBehaviour
         }
         else
         {
-            SetActiveSoulRefiningPnl(true);
-            SetSoulRefineData(this.rate, 15);
+            if(this.isRefining) {
+                SetActiveSoulRefiningPnl(true);
+                Debug.LogWarning(MoneyManager.instance.unrefinedSoul);
+                SetSoulRefineData(this.rate, MoneyManager.instance.unrefinedSoul);
+            } else {
+                SetActiveBtnLayout(true);
+            }
         }
 
         StartCoroutine(StartGainExpAnimation(playerOriginLv, curExp));
@@ -291,7 +301,7 @@ public partial class DeathManager : MonoBehaviour
         //MoneyManager.instance.RefineSoul(rate);
         SetSoulPnl(false);
         SetActiveSoulRefiningPnl(true);
-        SetSoulRefineData(this.rate, 15);
+        SetSoulRefineData(this.rate, MoneyManager.instance.unrefinedSoul);
     }
 
     public void OnADReward()
