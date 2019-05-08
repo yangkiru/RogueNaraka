@@ -53,6 +53,7 @@ public class GameDatabase : ScriptableObject
     public string[] langFonts;
 
     public TierData[] TierDataes;
+    public RequiredMinutesForSoulRefine[] requiredMinutesForSoulRefineArray;
 
     void OnEnable()
     {
@@ -568,6 +569,12 @@ public class StatLang
 {
     public string lang;
     public string[] items;
+}
+
+[Serializable]
+public class RequiredMinutesForSoulRefine {
+    public int endAmount;
+    public double requiredMinutes;
 }
 
 [Serializable]

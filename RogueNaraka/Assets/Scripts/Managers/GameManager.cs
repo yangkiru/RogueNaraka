@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
 #if !UNITY_EDITOR
-        Debug.unityLogger.logEnabled = true;
+        Debug.unityLogger.logEnabled = false;
 #endif
         instance = this;
 
@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("RunGame");
         moneyManager.Load();
+        DeathManager.instance.LoadRefiningData();
         
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
         playerData.weapon = GetPlayerWeapon(PlayerPrefs.GetInt("exp")).id;

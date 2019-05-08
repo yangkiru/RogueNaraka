@@ -9,7 +9,7 @@ using RogueNaraka.TimeScripts;
 using RogueNaraka.TheBackendScripts;
 using RogueNaraka.UnitScripts;
 
-public class DeathManager : MonoBehaviour
+public partial class DeathManager : MonoBehaviour
 {
     const float UP_PER_EXP_SPEED = 0.5f;
     const float CHANGE_SCALE_OF_TIER_EMBLEM_SPEED = 2.5f;
@@ -60,8 +60,7 @@ public class DeathManager : MonoBehaviour
         //CameraShake.instance.Shake(0.2f, 0.2f, 0.01f);
         if (value)
         {
-            btnLayout[0].SetActive(false);
-            btnLayout[1].SetActive(false);
+            SetActiveBtnLayout(false);
             StartCoroutine(PumpCorou(youDied.rectTransform, 3, 0.5f));
         }
     }
@@ -138,8 +137,11 @@ public class DeathManager : MonoBehaviour
         }
         else
         {
-            btnLayout[0].SetActive(true);
-            btnLayout[1].SetActive(true);
+            if(this.isRefining) {
+                SetActiveSoulRefiningPnl(true);
+            } else {
+                SetActiveBtnLayout(true);
+            }
         }
 
         StartCoroutine(StartGainExpAnimation(playerOriginLv, curExp));
@@ -169,10 +171,13 @@ public class DeathManager : MonoBehaviour
         else
         {
             soulPnl.gameObject.SetActive(false);
-            btnLayout[0].SetActive(true);
-            btnLayout[1].SetActive(true);
             PlayerPrefs.SetFloat("lastRefiningRate", -1);
         }
+    }
+
+    public void SetActiveBtnLayout(bool _active) {
+        btnLayout[0].SetActive(_active);
+        btnLayout[1].SetActive(_active);
     }
 
     IEnumerator SoulRefiningRateTxtCorou(float rate)
@@ -286,8 +291,10 @@ public class DeathManager : MonoBehaviour
             return;
         }
         StopCoroutine(soulCorou);
-        MoneyManager.instance.RefineSoul(rate);
+        //MoneyManager.instance.RefineSoul(rate);
         SetSoulPnl(false);
+        SetActiveSoulRefiningPnl(true);
+        SetSoulRefineData(rate);
     }
 
     public void OnADReward()

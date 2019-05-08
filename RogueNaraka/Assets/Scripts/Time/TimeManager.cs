@@ -12,6 +12,8 @@ namespace RogueNaraka.TimeScripts {
         }
 
         const float MAX_DELTA_TIME = 0.5f;
+        
+        private List<Timer> timerList = new List<Timer>();
 
         /// <summary> 유니티 deltaTime을 리턴합니다. MAX_DELTA_TIME보다 큰 경우 MAX_DELTA_TIME을 리턴합니다. </summary>
         public float DeltaTime { 
@@ -42,6 +44,17 @@ namespace RogueNaraka.TimeScripts {
         /// <summary> 유니티 fixedDeltaTime을 리턴합니다. </summary>
         public float FixedDeltaTime { get { return Time.fixedDeltaTime; } }
 
+        void Update() {
+            DateTime now = DateTime.Now;
+            for(int i = this.timerList.Count - 1; i >= 0; --i) {
+                this.timerList[i].UpdateTimer(now);
+                if(this.timerList[i].IsEnded) {
+                    this.timerList.RemoveAt(i);
+                }
+            }
+        }
+
+        /// <summary> _check 시간이 _start 와 _end 사이에 있는 시간인지 체크합니다.. </summary>
         public bool CheckDateTimeInEventTime(DateTime _check, DateTime _start, DateTime _end) {
             if(_check.CompareTo(_start) < 0) {
                 return false;
@@ -49,6 +62,13 @@ namespace RogueNaraka.TimeScripts {
                 return false;
             }
             return true;
+        }
+
+        public Timer AddTimer(DateTime _endTime) {
+            Timer newTimer = new Timer(_endTime);
+            this.timerList.Add(newTimer);
+
+            return newTimer;
         }
     }
 }
