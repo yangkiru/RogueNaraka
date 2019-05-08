@@ -23,8 +23,9 @@ namespace RogueNaraka.NotificationScripts {
         private bool isPlaying;
 
         void Start() {
-            LocalPushManager.Instance.Initialize();
-            //LocalPushManager.Instance.SetLocalPush();
+            #if !UNITY_EDITOR
+                LocalPushManager.Instance.Initialize();
+            #endif
         }
 
         void LateUpdate() {

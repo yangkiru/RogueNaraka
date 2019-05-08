@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using RogueNaraka.PopUpScripts;
+using RogueNaraka.NotificationScripts;
 
 //About Soul Refine Fuction
 public partial class DeathManager : MonoBehaviour {
@@ -16,7 +17,9 @@ public partial class DeathManager : MonoBehaviour {
     private float oriRefineRate;
     private DateTime endRefineDateTime;
     private TimeSpan oriRemainTime;
-    private int unrefinedSoulAmount;
+    private LocalPushManager.AndroidLocalPush refineLocalPush;
+    
+    private Coroutine checkRemainTimeCoroutine;
 
     public void SetActiveSoulRefiningPnl(bool _active) {
         if(_active) {
@@ -27,22 +30,36 @@ public partial class DeathManager : MonoBehaviour {
         }
     }
 
-    public void SetSoulRefineData(float _refineRate, int _unrefinedSoulAmount) {
+    public void SetSoulRefineData(float _refineRate) {
         this.oriRefineRate = _refineRate;
-        int refinedSoulAmount = (int)(_unrefinedSoulAmount * _refineRate);
-        MoneyManager.instance.AddSoul(refinedSoulAmount, true);
-        this.unrefinedSoulAmount = _unrefinedSoulAmount - refinedSoulAmount;
-        double minutesForRefine = GetMinutesForRefineSoul(this.unrefinedSoulAmount);
+        double minutesForRefine = GetMinutesForRefineSoul(
+            (int)(MoneyManager.instance.unrefinedSoul * (1.0f - this.oriRefineRate)));
         if(minutesForRefine == 0) {
             SetActiveSoulRefiningPnl(false);
-            GainRefinedSoul(this.unrefinedSoulAmount);
+            GainRefinedSoul();
         } else {
             this.isRefining = true;
-            PlayerPrefs.SetInt("IsRefining", 1);
-            PlayerPrefs.SetInt("UnrefinedSoulAmount", this.unrefinedSoulAmount);
             this.endRefineDateTime = DateTime.Now.AddMinutes(minutesForRefine);
-            this.RefiningPercentText.text = string.Format("{0} %", (int)(_refineRate * 100.0f));
-            StartCoroutine(CheckRemainTime());
+            this.RefiningPercentText.text = string.Format("{0} %", (int)(this.oriRefineRate * 100.0f));
+            #if !UNITY_EDITOR
+                int msgIdx = UnityEngine.Random.Range(0, 3);
+                switch(msgIdx) {
+                    case 0:
+                        this.refineLocalPush = LocalPushManager.Instance.SetLocalPush("소울 정제 완료!", "주인공을 강화해주세요.", this.endRefineDateTime);
+                    break;
+                    case 1:
+                        this.refineLocalPush = LocalPushManager.Instance.SetLocalPush("소울 정제가 완료 되었습니다.", "나라카로 돌아오세요!", this.endRefineDateTime);
+                    break;
+                    case 2:
+                        this.refineLocalPush = LocalPushManager.Instance.SetLocalPush("소울 정제가 완료 되었습니다.", "지금 바로 업그레이드하세요!", this.endRefineDateTime);
+                    break;
+                }
+            #endif
+            //Save
+            PlayerPrefs.SetInt("IsRefining", 1);
+            PlayerPrefs.SetString("EndRefineDateTime", this.endRefineDateTime.ToString());
+            PlayerPrefs.SetFloat("OriRefineRate", this.oriRefineRate);
+            this.checkRemainTimeCoroutine = StartCoroutine(CheckRemainTime());
         }
     }
 
@@ -61,7 +78,20 @@ public partial class DeathManager : MonoBehaviour {
         } while(remainTime.TotalSeconds > 0);
 
         SetActiveSoulRefiningPnl(false);
-        GainRefinedSoul(this.unrefinedSoulAmount);
+        GainRefinedSoul();
+    }
+
+    public void LoadRefiningData() {
+        //Load Refining Data
+        if(PlayerPrefs.GetInt("IsRefining") == 1) {
+            this.isRefining = true;
+        }
+        if(PlayerPrefs.GetString("EndRefineDateTime") != "") {
+            this.endRefineDateTime = DateTime.Parse(PlayerPrefs.GetString("EndRefineDateTime"));
+            this.checkRemainTimeCoroutine = StartCoroutine(CheckRemainTime());
+        }
+        this.oriRefineRate = PlayerPrefs.GetFloat("OriRefineRate");
+        this.RefiningPercentText.text = string.Format("{0} %", (int)(this.oriRefineRate * 100.0f));
     }
 
     private double GetMinutesForRefineSoul(int _unrefinedSoulAmount) {
@@ -73,9 +103,7 @@ public partial class DeathManager : MonoBehaviour {
         throw new ArgumentException(string.Format("Not Correct Refine Soul Amount : {0}", _unrefinedSoulAmount));
     }
 
-    private void GainRefinedSoul(int _refinedSoul) {
-        MoneyManager.instance.AddSoul(_refinedSoul, true);
-        PlayerPrefs.SetInt("UnrefinedSoulAmount", 0);
+    private void GainRefinedSoul(float _refineRate = 1.0f) {
         string popupContext = "";
         switch(GameManager.language) {
             case Language.English:
@@ -86,21 +114,31 @@ public partial class DeathManager : MonoBehaviour {
             break;
         }
         PopUpManager.Instance.ActivateOneButtonPopUp(
-            string.Format(popupContext, _refinedSoul),
+            string.Format(popupContext, (int)(MoneyManager.instance.unrefinedSoul * _refineRate)),
             (OneButtonPopUpController _popup) => {
                 _popup.DeactivatePopUp();
                 PopUpManager.Instance.DeactivateBackPanel();
                 GameManager.instance.SetPause(false);
             });
         this.isRefining = false;
+
+        MoneyManager.instance.RefineSoul(_refineRate);
+        
         PlayerPrefs.SetInt("IsRefining", 0);
+        PlayerPrefs.SetString("EndRefineDateTime", "");
+        PlayerPrefs.SetFloat("OriRefineRate", 0.0f);
     }
 
     ///<summary>소울 즉시 정제 버튼 클릭 함수</summary>
     public void OnClickNowRefineButton() {
+        #if !UNITY_EDITOR
+            LocalPushManager.Instance.CancelLocalPush(this.refineLocalPush);
+        #endif
+        StopCoroutine(this.checkRemainTimeCoroutine);
         this.isRefining = false;
         PlayerPrefs.SetInt("IsRefining", 0);
-        MoneyManager.instance.RefineSoul();
+        GainRefinedSoul(this.oriRefineRate);
+        this.refineLocalPush = null;
         SetActiveSoulRefiningPnl(false);
     }
 }

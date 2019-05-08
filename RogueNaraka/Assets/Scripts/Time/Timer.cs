@@ -5,11 +5,13 @@ using UnityEngine;
 
 namespace RogueNaraka.TimeScripts {
     public class Timer {
-        private bool isEnded;
-        private DateTime endTime;
         private List<IReceiverFromTimer> receiverList = new List<IReceiverFromTimer>();
 
+        private bool isEnded;
         public bool IsEnded { get { return isEnded; } }
+
+        private DateTime endTime;
+        public DateTime EndTime { get { return this.endTime; } }
 
         internal Timer(DateTime _endTime) {
             this.isEnded = false;
@@ -18,6 +20,10 @@ namespace RogueNaraka.TimeScripts {
 
         public void AddReceiver(IReceiverFromTimer _receiver) {
             this.receiverList.Add(_receiver);
+        }
+
+        public TimeSpan GetRemainTime() {
+            return this.endTime - DateTime.Now;
         }
 
         internal void UpdateTimer(DateTime _now) {

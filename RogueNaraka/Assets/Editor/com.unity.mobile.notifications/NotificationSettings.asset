@@ -21,7 +21,6 @@ MonoBehaviour:
     - UnityAPSReleaseEnvironment
     - UnityNotificationRequestAuthorizationForRemoteNotificationsOnAppLaunch
     - UnityRemoteNotificationForegroundPresentationOptions
-    - UnityAddRemoteNotificationCapability
     values:
     - True
     - -1
@@ -29,7 +28,6 @@ MonoBehaviour:
     - False
     - False
     - -1
-    - False
   AndroidNotificationEditorSettingsValues:
     keys:
     - UnityNotificationAndroidRescheduleOnDeviceRestart

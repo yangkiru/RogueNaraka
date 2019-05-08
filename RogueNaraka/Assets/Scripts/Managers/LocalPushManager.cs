@@ -23,22 +23,33 @@ namespace RogueNaraka.NotificationScripts {
             AndroidNotificationCenter.RegisterNotificationChannel(channel);
         }
 
-        public void SetLocalPush(string _title, string _text, DateTime _fireTime) {
+        public AndroidLocalPush SetLocalPush(string _title, string _text, DateTime _fireTime) {
             var newLocalPush = new AndroidLocalPush(_title, _text, _fireTime);
             this.localPushList.Add(newLocalPush);
-            AndroidNotificationCenter.SendNotification(newLocalPush.notification, "roguenaraka");
+            var id = AndroidNotificationCenter.SendNotification(newLocalPush.notification, "roguenaraka");
+            newLocalPush.SetId(id);
+            return newLocalPush;
         }
 
-        public struct AndroidLocalPush {
+        public void CancelLocalPush(AndroidLocalPush _push) {
+            this.localPushList.Remove(_push);
+            AndroidNotificationCenter.CancelNotification(_push.id);
+        }
+
+        public class AndroidLocalPush {
             public AndroidNotification notification;
-            public bool isPushed;
             public DateTime fireTime;
+            public int id;
 
             internal AndroidLocalPush(string _title, string _text, DateTime _fireTime) {
                 this.notification = new AndroidNotification(_title, _text, _fireTime);
                 this.notification.LargeIcon = "icon_0";
-                this.isPushed = false;
                 this.fireTime = _fireTime;
+                this.id = -1;
+            }
+
+            internal void SetId(int _id) {
+                this.id = _id;
             }
         }
     }
