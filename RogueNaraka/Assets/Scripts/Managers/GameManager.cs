@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("RunGame");
         moneyManager.Load();
-        DeathManager.instance.LoadRefiningData();
+        //DeathManager.instance.LoadRefiningData();
         
         UnitData playerData = (UnitData)GameDatabase.instance.playerBase.Clone();
         playerData.weapon = GetPlayerWeapon(PlayerPrefs.GetInt("exp")).id;

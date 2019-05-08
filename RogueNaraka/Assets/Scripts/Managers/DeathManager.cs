@@ -137,11 +137,7 @@ public partial class DeathManager : MonoBehaviour
         }
         else
         {
-            if(this.isRefining) {
-                SetActiveSoulRefiningPnl(true);
-            } else {
-                SetActiveBtnLayout(true);
-            }
+            SetActiveBtnLayout(true);
         }
 
         StartCoroutine(StartGainExpAnimation(playerOriginLv, curExp));
@@ -171,6 +167,7 @@ public partial class DeathManager : MonoBehaviour
         else
         {
             soulPnl.gameObject.SetActive(false);
+            SetActiveBtnLayout(true);
             PlayerPrefs.SetFloat("lastRefiningRate", -1);
         }
     }
@@ -291,10 +288,8 @@ public partial class DeathManager : MonoBehaviour
             return;
         }
         StopCoroutine(soulCorou);
-        //MoneyManager.instance.RefineSoul(rate);
+        MoneyManager.instance.RefineSoul(rate);
         SetSoulPnl(false);
-        SetActiveSoulRefiningPnl(true);
-        SetSoulRefineData(rate);
     }
 
     public void OnADReward()
