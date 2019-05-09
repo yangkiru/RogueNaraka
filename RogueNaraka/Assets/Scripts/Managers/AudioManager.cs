@@ -495,8 +495,6 @@ public class AudioManager : MonoBehaviour
         if(currentMusicStreamID != -1)
         {
             ANAMusic.release(currentMusicStreamID);
-            currentMusicStreamID = -1;
-            currentMusicName = string.Empty;
         }
     }
 #endif
