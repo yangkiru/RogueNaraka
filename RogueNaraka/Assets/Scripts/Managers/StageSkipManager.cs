@@ -131,8 +131,17 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
     public void AddRandomStat(Stat stat, int amount)
     {
         randomStat = new Stat();
-        statAmountTxt.text = amount.ToString();
-        while(stat.sumMax != stat.sumOrigin)
+        switch (GameManager.language)
+        {
+            case Language.English:
+                statAmountTxt.text = string.Format("{0} Stats", amount);
+                break;
+            case Language.Korean:
+                statAmountTxt.text = string.Format("{0} 개", amount);
+                break;
+        }
+
+        while (stat.sumMax != stat.sumOrigin)
         {
             if (amount <= 0)
                 break;

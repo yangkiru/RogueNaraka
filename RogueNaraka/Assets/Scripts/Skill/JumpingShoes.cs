@@ -22,21 +22,20 @@ namespace RogueNaraka.SkillScripts
 
         IEnumerator JumpCorou(Vector2 mp, float time)
         {
-            WaitForFixedUpdate wait = new WaitForFixedUpdate();
             float tt = time;
             Unit player = BoardManager.instance.player;
 
             while (jumping > 0)
             {
                 data.coolTimeLeft = data.coolTime;
-                yield return wait;
+                yield return null;
                 if (jumping <= 0)
                 {
                     float t = 0.25f;
                     do
                     {
-                        yield return wait;
-                        t -= TimeManager.Instance.FixedDeltaTime;
+                        yield return null;
+                        t -= TimeManager.Instance.DeltaTime;
                     } while (t > 0);
                 }
             }
@@ -59,8 +58,8 @@ namespace RogueNaraka.SkillScripts
 
             do
             {
-                yield return wait;
-                time -= TimeManager.Instance.FixedDeltaTime;
+                yield return null;
+                time -= TimeManager.Instance.DeltaTime;
                 float amount = TimeManager.Instance.DeltaTime * tt;
                 shadowScale.x -= amount;
                 shadowScale.y -= amount;
@@ -83,7 +82,7 @@ namespace RogueNaraka.SkillScripts
 
             Bullet crashBullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             crashBullet.Init(player, crashData);
-            crashBullet.Spawn(player, crashData, mp);
+            crashBullet.Spawn(mp);
 
             OnJumpEnd();
         }
