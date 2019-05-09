@@ -86,10 +86,10 @@ public class Fillable : MonoBehaviour
             switch (unitType)
             {
                 case FILLABLE.PLAYER:
-                    unit = BoardManager.instance.player;
+                    unit = BoardManager.instance ? BoardManager.instance.player : null;
                     break;
                 case FILLABLE.BOSS:
-                    unit = BoardManager.instance.boss;
+                    unit = BoardManager.instance ? BoardManager.instance.boss : null;
                     break;
             }
             if (unit && unit.deathable.isDeath)

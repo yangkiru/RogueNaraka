@@ -44,6 +44,8 @@ namespace RogueNaraka.TimeScripts {
         /// <summary> 유니티 fixedDeltaTime을 리턴합니다. </summary>
         public float FixedDeltaTime { get { return Time.fixedDeltaTime; } }
 
+        public float FixedUnscaledDeltaTime { get { return Time.fixedUnscaledDeltaTime; } }
+
         void Update() {
             DateTime now = DateTime.Now;
             for(int i = this.timerList.Count - 1; i >= 0; --i) {

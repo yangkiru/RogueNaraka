@@ -87,13 +87,7 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
 
     public void SetResultPnl(bool value)
     {
-        if (value)
-        {
-            for (int i = 0; i < statTxts.Length; i++)
-                statTxts[i].gameObject.SetActive(false);
-            statAmountTxt.gameObject.SetActive(true);
-        }
-        else
+        if (!value)
         {
             Debug.Log("SetResultPnl:false");
             Stat stat = Stat.DataToStat();
