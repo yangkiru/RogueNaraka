@@ -29,6 +29,9 @@ public partial class DeathManager : MonoBehaviour
 
     [Header("Tier Object")]
     public Image TierEmblem;
+    public Image TierEffect_L;
+    public Image TierEffect_R;
+    public Sprite[] TierEffect;
     public TextMeshProUGUI TierName;
     public TextMeshProUGUI NextTierRequirement;
     public GameObject AdvanceBanner;
@@ -39,6 +42,8 @@ public partial class DeathManager : MonoBehaviour
     public TextMeshProUGUI nextLvTxt;
     public TextMeshProUGUI expNumTxt;
     public Image ExpGauge;
+    public Image LvUpEffect_L;
+    public Image LvUpEffect_R;
 
     private List<int> huntedUnitNumList = new List<int>();
     public Canvas stageCanvas;
@@ -97,6 +102,8 @@ public partial class DeathManager : MonoBehaviour
         this.nextLvTxt.text = (playerOriginLv + 1).ToString();
         this.expNumTxt.text = string.Format("{0}  /  {1}", (int)curExp, (int)maxExp);
         this.ExpGauge.fillAmount = (float)(curExp / maxExp);
+        this.LvUpEffect_L.gameObject.SetActive(false);
+        this.LvUpEffect_R.gameObject.SetActive(false);
         //Tier 세팅
         this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
         this.TierName.text = string.Format("- {0} {1} Tier -"
@@ -114,6 +121,8 @@ public partial class DeathManager : MonoBehaviour
         this.NextTierRequirement.text = string.Format(textFormat
             , Mathf.Floor(TheBackendManager.Instance.TopPercentToClearStageForRank * 100) * 0.01f
             , TierManager.Instance.NextTier.requiredRankingPercent);
+        this.TierEffect_L.gameObject.SetActive(false);
+        this.TierEffect_R.gameObject.SetActive(false);
         //Backend ClearedStage 갱신
         if(TheBackendManager.Instance.gameObject.activeSelf) {
             TheBackendManager.Instance.UpdateRankData(PlayerPrefs.GetInt("stage") - 1);
@@ -377,7 +386,7 @@ public partial class DeathManager : MonoBehaviour
     }
 
     private IEnumerator StartGainExpAnimation(int _originLv, double _originExp) {
-        double upExpPerSecond = TierManager.Instance.TotalGainExpInGame * UP_PER_EXP_SPEED;
+        double upExpPerSecond = (TierManager.Instance.TotalGainExpInGame) * UP_PER_EXP_SPEED;
         double min_upExpPerSecond = upExpPerSecond * 0.08d;
         double maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
         double remainUpExp = TierManager.Instance.TotalGainExpInGame;
@@ -403,6 +412,8 @@ public partial class DeathManager : MonoBehaviour
                 maxExp = GameDatabase.instance.requiredExpTable[_originLv - 1];
                 this.curLvTxt.text = _originLv.ToString();
                 this.nextLvTxt.text = (_originLv + 1).ToString();
+                this.LvUpEffect_L.gameObject.SetActive(true);
+                this.LvUpEffect_R.gameObject.SetActive(true);
             }
             this.expNumTxt.text = string.Format("{0}  /  {1}", (int)_originExp, (int)maxExp);
             this.ExpGauge.fillAmount = (float)(_originExp / maxExp);
@@ -414,6 +425,8 @@ public partial class DeathManager : MonoBehaviour
 
     private IEnumerator StartChangeTierAnimation() {
         string bannerTextFormat = "";
+        this.TierEffect_L.gameObject.SetActive(true);
+        this.TierEffect_R.gameObject.SetActive(true);
         if(TierManager.Instance.IsAdvanced) {
             switch(GameManager.language) {
                 case Language.English:
@@ -423,6 +436,8 @@ public partial class DeathManager : MonoBehaviour
                     bannerTextFormat = "{0} {1}로 승급했습니다!";
                 break;
             }
+            this.TierEffect_L.sprite = this.TierEffect[0];
+            this.TierEffect_R.sprite = this.TierEffect[1];
         } else {
             switch(GameManager.language) {
                 case Language.English:
@@ -432,6 +447,8 @@ public partial class DeathManager : MonoBehaviour
                     bannerTextFormat = "{0} {1}로 강등했습니다.";
                 break;
             }
+            this.TierEffect_L.sprite = this.TierEffect[2];
+            this.TierEffect_R.sprite = this.TierEffect[3];
         }
         this.BannerText.text = string.Format(bannerTextFormat
             , TierManager.Instance.CurrentTier.type
