@@ -18,6 +18,9 @@ namespace RogueNaraka.TheBackendScripts {
         private bool isSavedUserInDate;
         public bool IsSavedUserInDate { get { return this.isSavedUserInDate; } }
 
+        private bool isLogoutState;
+        public bool IsLogoutState { get { return this.isLogoutState; } }
+
         void AwakeForLogin() {
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
                 .Builder()
@@ -86,6 +89,15 @@ namespace RogueNaraka.TheBackendScripts {
             } else {
                 Debug.Log("접속되어있지 않습니다. PlayGamesPlatform.Instance.localUser.authenticated :  fail");
                 return null;
+            }
+        }
+
+        public void ClickOnLogoutButton() {
+            if(!this.isLogoutState) {
+                //로그아웃
+                ((PlayGamesPlatform)Social.Active).SignOut();
+            } else {
+                //로그인
             }
         }
     }

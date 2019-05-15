@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 97e43e86f5dfe4cb4a0eeee600af6b43
+guid: 9f2edbf81053418f879076c05f816dc2
+labels:
+- gvh
+- gvh_targets-editor
+- gvh_version-5.6.0
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -19,7 +23,7 @@ PluginImporter:
   - first:
       Editor: Editor
     second:
-      enabled: 0
+      enabled: 1
       settings:
         DefaultValueInitialized: true
   - first:
