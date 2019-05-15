@@ -19702,6 +19702,7 @@ GameObject:
   - component: {fileID: 294901491}
   - component: {fileID: 294901493}
   - component: {fileID: 294901492}
+  - component: {fileID: 294901494}
   m_Layer: 5
   m_Name: SoulShopPanel
   m_TagString: Untagged
@@ -19771,6 +19772,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294901490}
   m_CullTransparentMesh: 0
+--- !u!114 &294901494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294901490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 294901494}
+        m_MethodName: OnClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1494127717}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &295233558
 GameObject:
   m_ObjectHideFlags: 0
@@ -34779,6 +34808,7 @@ GameObject:
   - component: {fileID: 585709942}
   - component: {fileID: 585709941}
   - component: {fileID: 585709940}
+  - component: {fileID: 585709943}
   m_Layer: 5
   m_Name: PauseBtn
   m_TagString: Untagged
@@ -34920,6 +34950,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585709938}
   m_CullTransparentMesh: 0
+--- !u!114 &585709943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585709938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 585709943}
+        m_MethodName: OnClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 585709940}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &586862069
 GameObject:
   m_ObjectHideFlags: 0
@@ -39768,6 +39826,7 @@ GameObject:
   - component: {fileID: 709879579}
   - component: {fileID: 709879581}
   - component: {fileID: 709879580}
+  - component: {fileID: 709879582}
   m_Layer: 5
   m_Name: PausePnl
   m_TagString: Untagged
@@ -39832,6 +39891,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709879578}
   m_CullTransparentMesh: 0
+--- !u!114 &709879582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709879578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1213261076}
+        m_MethodName: SetPause
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 709879578}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1114166076}
+        m_MethodName: set_isPause
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &713713473
 GameObject:
   m_ObjectHideFlags: 0
@@ -75110,6 +75219,7 @@ GameObject:
   - component: {fileID: 1412142939}
   - component: {fileID: 1412142941}
   - component: {fileID: 1412142940}
+  - component: {fileID: 1412142942}
   m_Layer: 5
   m_Name: SettingPnl
   m_TagString: Untagged
@@ -75175,6 +75285,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412142938}
   m_CullTransparentMesh: 0
+--- !u!114 &1412142942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412142938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1213261076}
+        m_MethodName: SetSettingPnl
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1415120276
 GameObject:
   m_ObjectHideFlags: 0
@@ -106833,8 +106971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ca34064e9dce2459b2c22cfb70e854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseBtn: {fileID: 585709940}
-  settingBtn: {fileID: 0}
 --- !u!224 &2008284950
 RectTransform:
   m_ObjectHideFlags: 0
