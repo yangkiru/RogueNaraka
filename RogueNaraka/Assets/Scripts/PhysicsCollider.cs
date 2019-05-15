@@ -22,7 +22,7 @@ public class PhysicsCollider : MonoBehaviour
         int current = renderer.sprite.GetInstanceID();
         if (last != current)
         {
-            for (int i = 0; i < coll.pathCount; i++) coll.SetPath(i, null);
+            //for (int i = 0; i < coll.pathCount; i++) coll.SetPath(i, null);
             coll.pathCount = renderer.sprite.GetPhysicsShapeCount();
 
             List<Vector2> path = new List<Vector2>();
