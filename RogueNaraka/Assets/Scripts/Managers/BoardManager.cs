@@ -116,8 +116,8 @@ public class BoardManager : MonoBehaviour {
     public void InitBoard()
     {
         Debug.Log("InitBoard");
+        isReady = false;
 
-        player.Teleport(spawnPoint);
         player.rigid.velocity = Vector3.zero;
 
         //GameManager.instance.SetPause(true);
@@ -153,6 +153,7 @@ public class BoardManager : MonoBehaviour {
             GameManager.instance.SetPause(false);
         if (!player.deathable.isDeath)
             GameManager.instance.SetPauseBtn(true);
+        player.collider.enabled = true;
 
         TutorialManager.instance.StartTutorial(6);
     }
@@ -167,8 +168,6 @@ public class BoardManager : MonoBehaviour {
 
     private void InitStage(int stage)
     {
-        isReady = false;
-
         //Debug.Log("SetStage(" + stage + ")");
         if(stage != 0 && stage % 30 == 0)
         {
@@ -194,46 +193,6 @@ public class BoardManager : MonoBehaviour {
 
         while(cost > 0)
             SpawnRandomEnemy(ref cost);
-        //for (int i = able.Count-1; i >= 1; i--)
-        //{
-        //    int amount = Random.Range(0, (cost / able[i]) + 1);
-        //    List<int> ids = new List<int>();
-
-        //    for(int j = 0; j < unitCosts[i].unitId.Length; j++)//stage 제한
-        //    {
-        //        int temp = unitCosts[i].unitId[j];
-        //        if (GameDatabase.instance.enemies[temp].stage <= (_stage % 30))
-        //            ids.Add(temp);
-                
-        //    }
-        //    if (ids.Count > 0)
-        //    {
-        //        for (int j = 0; j < amount; j++)
-        //        {
-        //            int index = Random.Range(0, ids.Count);
-        //            SpawnEnemy(ids[index]);
-        //            cost -= unitCosts[i].cost;
-        //        }
-        //    }
-        //    if (cost <= 1)
-        //        break;
-        //}
-        //for (int i = 0; i < cost; i++)
-        //{
-        //    List<int> ids = new List<int>();
-        //    for (int j = 0; j < unitCosts[0].unitId.Length; j++)//stage 제한
-        //    {
-        //        int temp = unitCosts[0].unitId[j];
-        //        if (GameDatabase.instance.enemies[temp].stage <= _stage)
-        //            ids.Add(temp);
-        //    }
-        //    if (ids.Count > 0)
-        //    {
-        //        int index = Random.Range(0, ids.Count);
-        //        //Debug.Log("index:" + index + " ids.Count:" + ids.Count + " ids[index]:" + ids[index]);
-        //        SpawnEnemy(ids[index]);
-        //    }
-        //}
 
         StartCoroutine(StageTxtEffect());
     }

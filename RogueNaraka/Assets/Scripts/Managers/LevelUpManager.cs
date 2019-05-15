@@ -72,6 +72,8 @@ public class LevelUpManager : MonoBehaviour
 
     public void OnFadeOut()
     {
+        player.Teleport(BoardManager.instance.spawnPoint);
+        player.collider.enabled = false;
         LevelUp();
     }
 
