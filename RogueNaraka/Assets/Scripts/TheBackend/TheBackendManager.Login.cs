@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using BackEnd;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using RogueNaraka.SingletonPattern;
+using RogueNaraka.NotificationScripts;
 
 namespace RogueNaraka.TheBackendScripts {
     public partial class TheBackendManager : MonoSingleton<TheBackendManager> {
+        public TextMeshProUGUI logoutBtnText;
+
         private bool isLoginSuccess;
         public bool IsLoginSuccess { get { return this.isLoginSuccess; } }
 
@@ -18,19 +22,11 @@ namespace RogueNaraka.TheBackendScripts {
         private bool isSavedUserInDate;
         public bool IsSavedUserInDate { get { return this.isSavedUserInDate; } }
 
-        private bool isLogoutState;
-        public bool IsLogoutState { get { return this.isLogoutState; } }
+        private bool isLogout;
+        public bool IsLogout { get { return this.isLogout; } }
 
         void AwakeForLogin() {
-            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
-                .Builder()
-                .RequestServerAuthCode(false)
-                .RequestIdToken()
-                .RequestEmail()
-                .Build();
-            PlayGamesPlatform.InitializeInstance(config);
-            PlayGamesPlatform.DebugLogEnabled = true;
-            PlayGamesPlatform.Activate();
+            ActivatePlayGamesPlatform();
         }
 
         void StartForLogin() {
@@ -49,6 +45,18 @@ namespace RogueNaraka.TheBackendScripts {
             }
         }
 
+        private void ActivatePlayGamesPlatform() {
+            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
+                .Builder()
+                .RequestServerAuthCode(false)
+                .RequestIdToken()
+                .RequestEmail()
+                .Build();
+            PlayGamesPlatform.InitializeInstance(config);
+            PlayGamesPlatform.DebugLogEnabled = true;
+            PlayGamesPlatform.Activate();
+        }
+
         private void AuthorizeFederationSync() {
             //안드로이드
             GPGSLogin();
@@ -65,6 +73,7 @@ namespace RogueNaraka.TheBackendScripts {
                         BackendReturnObject BRO = Backend.BMember.AuthorizeFederation(GetTokens(), FederationType.Google, "gpgs");
                         WorkAfterGPGSLogin();
                     } else {
+                        //로그인 실패
                         Debug.LogError("GPGS Login Failed");
                     }
                 });
@@ -92,12 +101,39 @@ namespace RogueNaraka.TheBackendScripts {
             }
         }
 
+        ///<summary>Click Logout Button</summary>
         public void ClickOnLogoutButton() {
-            if(!this.isLogoutState) {
-                //로그아웃
+            if(!this.isLogout) {
+                //Logout
+                Backend.BMember.Logout();
                 ((PlayGamesPlatform)Social.Active).SignOut();
+                this.logoutBtnText.text = "Login";
+                this.isLogout = true;
+                PlayerPrefs.SetInt("IsLogout", 1);
+                switch(GameManager.language) {
+                    case Language.English:
+                        NotificationWindowManager.Instance.EnqueueNotificationData("You've logged out.");
+                    break;
+                    case Language.Korean:
+                        NotificationWindowManager.Instance.EnqueueNotificationData("로그아웃 했습니다.");
+                    break;
+                }
+                
             } else {
-                //로그인
+                //Login
+                ActivatePlayGamesPlatform();
+                StartForLogin();
+                this.logoutBtnText.text = "Logout";
+                this.isLogout = false;
+                PlayerPrefs.SetInt("IsLogout", 0);
+                switch(GameManager.language) {
+                    case Language.English:
+                        NotificationWindowManager.Instance.EnqueueNotificationData("You're logged in.");
+                    break;
+                    case Language.Korean:
+                        NotificationWindowManager.Instance.EnqueueNotificationData("로그인 했습니다.");
+                    break;
+                }
             }
         }
     }

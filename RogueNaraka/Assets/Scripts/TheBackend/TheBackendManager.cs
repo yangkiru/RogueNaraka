@@ -20,17 +20,32 @@ namespace RogueNaraka.TheBackendScripts {
                 this.gameObject.SetActive(false);
                 return;
             #endif
-            AwakeForLogin();
+            if(PlayerPrefs.GetInt("IsLogout") == 0) {
+                AwakeForLogin();
+            }
         }
 
         void Start() {
-            StartForLogin();
-            StartForPush();
-            StartForRank();
+            if(PlayerPrefs.GetInt("IsLogout") == 0) {
+                StartForLogin();
+                StartForPush();
+                StartForRank();
+                this.isLogout = false;
+                this.logoutBtnText.text = "Logout";
+            } else {
+                this.isLogout = true;
+                this.logoutBtnText.text = "Login";
+            }
+        }
+
+        public void StopBackend() {
+            StopForPush();
         }
 
         private void BackendInit() {
             Debug.Log(Backend.Utils.GetServerTime());
         }
+
+        
     }
 }
