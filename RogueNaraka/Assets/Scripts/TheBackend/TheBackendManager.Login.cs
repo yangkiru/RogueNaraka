@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using RogueNaraka.SingletonPattern;
 using RogueNaraka.NotificationScripts;
+using RogueNaraka.PopUpScripts;
 
 namespace RogueNaraka.TheBackendScripts {
     public partial class TheBackendManager : MonoSingleton<TheBackendManager> {
@@ -75,6 +76,10 @@ namespace RogueNaraka.TheBackendScripts {
                     } else {
                         //로그인 실패
                         Debug.LogError("GPGS Login Failed");
+                        this.logoutBtnText.text = "Login";
+                        this.isLogout = true;
+                        PlayerPrefs.SetInt("IsLogout", 1);
+                        ActiveLogoutPopup();
                     }
                 });
             }
@@ -87,6 +92,7 @@ namespace RogueNaraka.TheBackendScripts {
             Debug.Log("Logined!");
             this.isLoginSuccess = true;
             this.userInDate = Backend.BMember.GetUserInfo().GetReturnValuetoJSON()["row"]["inDate"].ToString();
+            PlayerPrefs.SetString("UserInDateWithoutGPS", this.userInDate);
             this.isSavedUserInDate = true;
             Backend.Android.PutDeviceToken();
         }
@@ -99,6 +105,25 @@ namespace RogueNaraka.TheBackendScripts {
                 Debug.Log("접속되어있지 않습니다. PlayGamesPlatform.Instance.localUser.authenticated :  fail");
                 return null;
             }
+        }
+
+        private void ActiveLogoutPopup() {
+            string popUpContext = "";
+            switch(GameManager.language) {
+                case Language.English:
+                    popUpContext = "If you don't log in to Google Play Service, there may be restrictions on the use of some content.\n You can login again at any time in the Settings window.";
+                break;
+                case Language.Korean:
+                    popUpContext = "구글 플레이 로그인을 하지 않을 경우 일부 컨텐츠의 이용에 제한이 있을 수 있습니다.\n설정 창에서 언제든지 다시 로그인 후 이용하실 수 있습니다.";
+                break;
+            } 
+            PopUpManager.Instance.ActivateOneButtonPopUp(
+                popUpContext,
+                (OneButtonPopUpController _popUp) => { 
+                    _popUp.DeactivatePopUp(); 
+                    PopUpManager.Instance.DeactivateBackPanel();
+                    GameManager.instance.SetPause(false);
+                });
         }
 
         ///<summary>Click Logout Button</summary>

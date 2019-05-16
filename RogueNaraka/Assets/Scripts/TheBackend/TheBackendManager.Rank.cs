@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 using UnityEngine;
@@ -30,6 +31,14 @@ namespace RogueNaraka.TheBackendScripts {
 
         private void StartForRank() {
             StartCoroutine(LoadRankDataCoroutine());
+        }
+
+        private void StartForRankWithoutGPSLogin() {
+            this.userInDate = PlayerPrefs.GetString("UserInDateWithoutGPS");
+            if(this.userInDate == "") {
+                this.userInDate = DateTime.Now.ToString();
+                PlayerPrefs.SetString("UserInDateWithoutGPS", this.userInDate);
+            }
         }
 
         private void SavedFormDataForGetRank() {
