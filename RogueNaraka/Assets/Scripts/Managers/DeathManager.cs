@@ -50,6 +50,8 @@ public partial class DeathManager : MonoBehaviour
 
     private bool isClickableCloseBtn;
 
+    public float tt { get; set; }
+
     void Awake()
     {
         instance = this;
@@ -129,7 +131,12 @@ public partial class DeathManager : MonoBehaviour
         }
         //
         TierManager.Instance.SaveExp();
-        yield return new WaitForSecondsRealtime(1.5f);
+        tt = 1.5f;
+        do
+        {
+            yield return null;
+            tt -= TimeManager.Instance.UnscaledDeltaTime;
+        } while (tt > 0);
         
         if(TheBackendManager.Instance.gameObject.activeSelf) {
             yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
@@ -316,13 +323,11 @@ public partial class DeathManager : MonoBehaviour
             PlayerPrefs.SetInt("isRun", 0);
             GameManager.instance.Load();
         }
-        SetDeathPnl(false);
-
-        
     }
 
     public void EndGame()
     {
+        SetDeathPnl(false);
         RollManager.instance.IsFirstRoll = true;
 
         RageManager.instance.SetActiveSmallRageBtn(false);

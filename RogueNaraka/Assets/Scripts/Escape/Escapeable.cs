@@ -3,41 +3,55 @@ using System.Collections;
 using UnityEngine.Events;
 using System;
 using UnityEngine.UI;
-
-public class Escapeable : MonoBehaviour
+namespace RogueNaraka.Escapeable
 {
-    public EscapeEvent onEscape;
-    bool isQuitting = false;
-    public void OnEscape()
+    public class Escapeable : MonoBehaviour
     {
-        if (onEscape != null)
-            onEscape.Invoke();
-    }
+        public EscapeEvent onEscape;
 
-    private void OnEnable()
-    {
-        EscapeManager.Instance.Stack.Push(this);
-    }
+        bool isQuitting = false;
+        public void OnEscape()
+        {
+            if (onEscape != null)
+                onEscape.Invoke();
+        }
 
-    private void OnDisable()
-    {
-        if (!isQuitting && EscapeManager.Instance.Stack.Count != 0)
-            EscapeManager.Instance.Stack.Pop();
-    }
+        private void OnEnable()
+        {
+            EscapeManager.Instance.Stack.Push(this);
+        }
 
-    public void OnClick(Button btn)
-    {
-        if (btn.onClick != null)
-            btn.onClick.Invoke();
-    }
+        private void OnDisable()
+        {
+            if (!isQuitting && EscapeManager.Instance.Stack.Count != 0)
+            {
+                if (EscapeManager.Instance.Stack.Peek() == this)
+                    EscapeManager.Instance.Stack.Pop();
+                else
+                    EscapeManager.Instance.Stack.Remove(this);
+            }
+            
+        }
 
-    private void OnApplicationQuit()
-    {
-        isQuitting = true;
-    }
+        public void OnClick(Button btn)
+        {
+            if (btn.onClick != null)
+                btn.onClick.Invoke();
+        }
 
-    [Serializable]
-    public class EscapeEvent : UnityEvent
-    {
+        public void ClearOnEscape(Escapeable escapeable)
+        {
+            escapeable.onEscape.RemoveAllListeners();
+        }
+
+        private void OnApplicationQuit()
+        {
+            isQuitting = true;
+        }
+
+        [Serializable]
+        public class EscapeEvent : UnityEvent
+        {
+        }
     }
 }

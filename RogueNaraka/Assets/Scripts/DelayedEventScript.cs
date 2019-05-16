@@ -28,6 +28,12 @@ public class DelayedEventScript : MonoBehaviour
             onEnd.Invoke();
     }
 
+    public void OnEnd()
+    {
+        if (onEnd != null)
+            onEnd.Invoke();
+    }
+
 
     [System.Serializable]
     public class DelayedEvent : UnityEvent

@@ -53,7 +53,7 @@ public class SoulShopManager : MonoBehaviour
             
             menuBtns[menu].onClick.Invoke();
 
-            GameManager.instance.settingBtn.SetActive(false);
+            //GameManager.instance.settingBtn.SetActive(false);
             
         }
         else
