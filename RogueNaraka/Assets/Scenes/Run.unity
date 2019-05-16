@@ -68019,6 +68019,7 @@ GameObject:
   - component: {fileID: 1267629983}
   - component: {fileID: 1267629982}
   - component: {fileID: 1267629981}
+  - component: {fileID: 1267629984}
   m_Layer: 5
   m_Name: StatAlertPnlBack
   m_TagString: Untagged
@@ -68083,6 +68084,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0025024414, y: 0}
   m_SizeDelta: {x: -0.0050049, y: -0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1267629984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267629980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1267629980}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1270520704
 GameObject:
   m_ObjectHideFlags: 0
@@ -81484,6 +81513,7 @@ GameObject:
   - component: {fileID: 1552022173}
   - component: {fileID: 1552022175}
   - component: {fileID: 1552022174}
+  - component: {fileID: 1552022176}
   m_Layer: 5
   m_Name: StatPnl
   m_TagString: Untagged
@@ -81549,6 +81579,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552022172}
   m_CullTransparentMesh: 0
+--- !u!114 &1552022176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552022172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1632865326}
+        m_MethodName: SetStatPnl
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1552539907
 GameObject:
   m_ObjectHideFlags: 0

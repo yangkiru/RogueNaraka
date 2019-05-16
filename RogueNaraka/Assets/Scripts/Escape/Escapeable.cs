@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Escapeable : MonoBehaviour
 {
     public EscapeEvent onEscape;
+    bool isQuitting = false;
     public void OnEscape()
     {
         if (onEscape != null)
@@ -20,7 +21,7 @@ public class Escapeable : MonoBehaviour
 
     private void OnDisable()
     {
-        if (EscapeManager.Instance.Stack.Count != 0)
+        if (!isQuitting && EscapeManager.Instance.Stack.Count != 0)
             EscapeManager.Instance.Stack.Pop();
     }
 
@@ -28,6 +29,11 @@ public class Escapeable : MonoBehaviour
     {
         if (btn.onClick != null)
             btn.onClick.Invoke();
+    }
+
+    private void OnApplicationQuit()
+    {
+        isQuitting = true;
     }
 
     [Serializable]

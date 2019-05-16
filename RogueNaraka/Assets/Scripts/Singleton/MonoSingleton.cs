@@ -13,7 +13,7 @@ namespace RogueNaraka.SingletonPattern {
                         instance = new GameObject("@" + typeof(T).ToString(), typeof(T)).GetComponent<T>();
                         Debug.Log(string.Format("Create MonoSingleton Instance! Component Name : {0}", instance.name));
                     }
-                    DontDestroyOnLoad(instance);
+                    //DontDestroyOnLoad(instance);
                 }
                 return instance;
             }
