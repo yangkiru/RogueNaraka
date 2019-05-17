@@ -33,6 +33,7 @@ namespace RogueNaraka.TheBackendScripts {
                 this.isLogout = false;
                 this.logoutBtnText.text = "Logout";
             } else {
+                StartForRankWithoutGPSLogin();
                 this.isLogout = true;
                 this.logoutBtnText.text = "Login";
             }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GooglePlayGames;
+using RogueNaraka.PopUpScripts;
+using RogueNaraka.TheBackendScripts;
 
 public class RankManager : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class RankManager : MonoBehaviour
 
     string leaderBoardId = "CgkIvu-SvO4aEAIQAA";
 
+    /*
     public void Login()
     {
         if (Social.localUser.authenticated)
@@ -27,26 +30,28 @@ public class RankManager : MonoBehaviour
             else
                 Debug.Log("Login Failed");
         });
-    }
+    }*/
 
     public void SendPlayerRank()
     {
         Debug.Log("SendPlayerRank:" + (long)BoardManager.instance.stage);
         highScore = Mathf.Max(highScore, BoardManager.instance.stage);
 #if UNITY_ANDROID && !UNITY_EDITOR
-        Login();
-        Social.ReportScore((long)BoardManager.instance.stage, leaderBoardId, (bool success) =>
-        {
-            if (success)
+        //Login();
+        if(TheBackendManager.Instance.IsLoginSuccess) {
+            Social.ReportScore((long)BoardManager.instance.stage, leaderBoardId, (bool success) =>
             {
-                Debug.Log("Score Updated");
-            }
-            else
-            {
-                //upload highscore failed
-                Debug.Log("Failed Score Updating");
-            }
-        });
+                if (success)
+                {
+                    Debug.Log("Score Updated");
+                }
+                else
+                {
+                    //upload highscore failed
+                    Debug.Log("Failed Score Updating");
+                }
+            });
+        }
 #endif
     }
 
@@ -66,8 +71,27 @@ public class RankManager : MonoBehaviour
 
     public void ShowRank()
     {
-        Login();
-        Social.ShowLeaderboardUI();
+        //Login();
+        if(TheBackendManager.Instance.IsLoginSuccess) {
+            Social.ShowLeaderboardUI();
+        } else {
+            string popUpContext = "";
+            switch(GameManager.language) {
+                case Language.English:
+                    popUpContext = "Not available while logging out.";
+                break;
+                case Language.Korean:
+                    popUpContext = "로그아웃 상태에서는 이용하실 수 없습니다.";
+                break;
+            } 
+            PopUpManager.Instance.ActivateOneButtonPopUp(
+                popUpContext,
+                (OneButtonPopUpController _popUp) => { 
+                    _popUp.DeactivatePopUp(); 
+                    PopUpManager.Instance.DeactivateBackPanel();
+                    GameManager.instance.SetPause(false);
+                });
+        }
     }
 
     //public void SetLocalRank()

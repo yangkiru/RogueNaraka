@@ -39,6 +39,7 @@ namespace RogueNaraka.TheBackendScripts {
                 this.userInDate = DateTime.Now.ToString();
                 PlayerPrefs.SetString("UserInDateWithoutGPS", this.userInDate);
             }
+            this.isSavedUserInDate = true;
         }
 
         private void SavedFormDataForGetRank() {
@@ -75,7 +76,7 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         private IEnumerator UploadRankDataCoroutine(int _clearedStage) {
-            yield return new WaitUntil(() => this.isLoginSuccess && this.isSavedUserInDate);
+            yield return new WaitUntil(() => this.isSavedUserInDate);
 
             WWWForm formData = new WWWForm();
             formData.AddField("userid", this.userInDate);
@@ -89,7 +90,7 @@ namespace RogueNaraka.TheBackendScripts {
             } else {
                 JsonData respondJson = JsonMapper.ToObject(www.downloadHandler.text);
                 if(respondJson["result"].ToString() == "1") {
-                    Debug.LogError("Error : Failed to Load RankData");
+                    Debug.LogError("Error : Failed to Upload RankData");
                 } else {
                     this.clearedStageForRank = _clearedStage;
                     int total = int.Parse(respondJson["total"].ToString());
