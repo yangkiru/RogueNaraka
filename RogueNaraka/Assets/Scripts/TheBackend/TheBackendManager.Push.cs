@@ -26,14 +26,20 @@ namespace RogueNaraka.TheBackendScripts {
         private bool isGetPushRewardChartFileName;
         private bool isLoadedRewardedPushInfo;
 
+        private Coroutine getChartAsyncCoroutine;
         private Coroutine checkRewardPushesCoroutine;
 
         //릴리즈할때 반드시 해당 변수 false로 바꿔주세요!!!!!!
         private bool isDevelop = false;
 
-        void StartForPush() {
+        private void StartForPush() {
             StartCoroutine(LoadRewardedPushInfo());
-            StartCoroutine(GetChartAsync());
+            this.getChartAsyncCoroutine = StartCoroutine(GetChartAsync());
+        }
+
+        private void StopForPush() {
+            StopCoroutine(this.getChartAsyncCoroutine);
+            this.getChartAsyncCoroutine = null;
         }
 
         public void PrintAllPushRewardInfoes() {
