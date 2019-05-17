@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using RogueNaraka.Escapeable;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class TutorialManager : MonoBehaviour
     public bool isPlaying;
     public GameObject pausePnl;
     public GameObject settingPnl;
+
+    public Button skipBtn;
 
     public static TutorialManager instance;
 
@@ -49,6 +53,19 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    public void SkipTutorial()
+    {
+        for (int i = 0; i < startTexts.Length; i++)
+        {
+            GameObject parent = startTexts[i].transform.parent.gameObject;
+            if(parent.activeSelf)
+            {
+                parent.GetComponent<Escapeable>().OnEscape();
+                return;
+            }
+        }
+        
+    }
 
     bool isPauseBtn;
 
@@ -56,17 +73,18 @@ public class TutorialManager : MonoBehaviour
     {
         if (isTutorial[i])
         {
+            skipBtn.gameObject.SetActive(true);
+            isPauseBtn = GameManager.instance.pauseBtn.activeSelf;
+            GameManager.instance.SetSettingBtn(true);
             //Debug.Log("StartTutorial" + i + ":" + PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)));
             startTexts[i].TextOn();
             isPlaying = true;
-            if (GameManager.instance.pauseBtn.activeSelf)
-                isPauseBtn = true;
-            GameManager.instance.SetSettingBtn(true);
         }
     }
 
     public void EndTutorial(int i)
     {
+        skipBtn.gameObject.SetActive(false);
         isTutorial[i] = false;
         PlayerPrefs.SetInt(string.Format("isTutorial{0}", i), 1);
         //Debug.Log("EndTutorial" + i + ":" + PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)));

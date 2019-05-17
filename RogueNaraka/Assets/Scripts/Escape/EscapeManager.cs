@@ -21,6 +21,12 @@ namespace RogueNaraka.Escapeable
             }
         }
 
+        public void SetTop(Escapeable item)
+        {
+            if(stack.Contains(item))
+                stack.SetTop(item);
+        }
+
         [ContextMenu("CheckStack")]
         public void CheckStack()
         {
@@ -56,6 +62,12 @@ namespace RogueNaraka.Escapeable
             T result = resultNode.Value;
             this.Remove(resultNode);
             return result;
+        }
+
+        public void SetTop(T item)
+        {
+            Remove(item);
+            Push(item);
         }
     }
 }

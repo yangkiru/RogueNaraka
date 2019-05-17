@@ -6,6 +6,7 @@ using TMPro;
 using System.Linq;
 using RogueNaraka.ScrollScripts;
 using RogueNaraka.UnitScripts;
+using RogueNaraka.Escapeable;
 
 public class SoulShopManager : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class SoulShopManager : MonoBehaviour
     {
         if (value)
         {
+            GameManager.instance.SetSettingBtn(true);
             shopPnl.SetActive(true);
             
             GameManager.instance.moneyManager.Load();
@@ -60,10 +62,13 @@ public class SoulShopManager : MonoBehaviour
         {
             shopPnl.SetActive(false);
 
-            if(DeathManager.instance.deathPnl.gameObject.activeSelf || StatOrbManager.instance.pnl.activeSelf)
+            if (DeathManager.instance.deathPnl.gameObject.activeSelf || StatOrbManager.instance.pnl.activeSelf)
                 GameManager.instance.SetSettingBtn(true);
             else
+            {
                 GameManager.instance.SetPauseBtn(true);
+                EscapeManager.Instance.SetTop(GameManager.instance.pausePnl.GetComponent<Escapeable>());
+            }
             if (StatManager.instance.statPnl.activeSelf)
                 StatManager.instance.SyncStatUpgradeTxt();
             if(DeathManager.instance.deathPnl.gameObject.activeSelf)
