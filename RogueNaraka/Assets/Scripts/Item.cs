@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
     public void InitItem()
     {
         _data.id = -1;
-        img.color = Color.clear;
+        img.enabled = false;
         amount = 0;
         ItemAmountUpdate();
     }
@@ -224,7 +224,7 @@ public class Item : MonoBehaviour
     public void SyncSprite()
     {
         img.sprite = GameDatabase.instance.itemSprites[sprIds[_data.id]].spr;
-        img.color = Color.white;
+        img.enabled = true;
     }
 
     [ContextMenu("Spawn")]
