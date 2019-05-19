@@ -10,12 +10,15 @@ namespace RogueNaraka.TheBackendScripts {
     public partial class TheBackendManager : MonoSingleton<TheBackendManager> {
         private WWWForm formDataForGetRank;
         private string RequestURL = "https://roguenaraka.com/userRanking.php";
-        private int clearedStageForRank;
+        
 
         private bool isLoadedRankData;
         public bool IsLoadedRankData { get { return this.isLoadedRankData; } }
         private bool isRefreshing;
         public bool IsRefreshing { get { return this.isRefreshing; } }
+
+        private int clearedStageForRank;
+        public int ClearedStageForRank { get { return this.clearedStageForRank; } }
 
         private float topPercentToClearStageForRank = 100.0f;
         public float TopPercentToClearStageForRank { get { return this.topPercentToClearStageForRank; } }

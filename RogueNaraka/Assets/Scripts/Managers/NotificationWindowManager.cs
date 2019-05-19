@@ -18,6 +18,7 @@ namespace RogueNaraka.NotificationScripts {
         public RectTransform WindowRectTransform;
         public Image WindowImage;
         public TextMeshProUGUI WindowText;
+        public GameObject HighScoreBanner;
 
         private Queue<NotificationData> notificationDataQueue = new Queue<NotificationData>();
         private bool isPlaying;
@@ -36,6 +37,10 @@ namespace RogueNaraka.NotificationScripts {
 
         public void EnqueueNotificationData(string _text, Sprite _sprite = null) {
             this.notificationDataQueue.Enqueue(new NotificationData(_sprite, _text));
+        }
+
+        public void ActiveHighScoreBanner() {
+            this.HighScoreBanner.SetActive(true);
         }
 
         private IEnumerator PlayNotificationWindowCoroutine() {

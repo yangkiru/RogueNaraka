@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using RogueNaraka.UnitScripts;
 using TMPro;
+using RogueNaraka.NotificationScripts;
+using RogueNaraka.TheBackendScripts;
 
 public class BoardManager : MonoBehaviour {
 
@@ -48,6 +50,8 @@ public class BoardManager : MonoBehaviour {
     [SerializeField]
     private int _stage;
     public bool isReady;
+
+    private bool isNotifiedHighScore;
 
     private void Awake()
     {
@@ -195,6 +199,15 @@ public class BoardManager : MonoBehaviour {
             SpawnRandomEnemy(ref cost);
 
         StartCoroutine(StageTxtEffect());
+
+        #if !UNITY_EDITOR
+        if(stage == 1) {
+            this.isNotifiedHighScore = false;
+        } else if(!this.isNotifiedHighScore && TheBackendManager.Instance.ClearedStageForRank + 1 < stage) {
+            this.isNotifiedHighScore = true;
+            NotificationWindowManager.Instance.ActiveHighScoreBanner();
+        }
+        #endif
     }
 
     public void SpawnRandomEnemy(ref float cost)
