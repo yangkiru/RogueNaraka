@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.Events;
 using System;
 using UnityEngine.UI;
+using RogueNaraka.UnityEventTracker;
 namespace RogueNaraka.Escapeable
 {
     public class Escapeable : MonoBehaviour
@@ -13,7 +14,10 @@ namespace RogueNaraka.Escapeable
         public void OnEscape()
         {
             if (onEscape != null)
+            {
+                //EventTracker.TrackEvent(onEscape, this.gameObject);
                 onEscape.Invoke();
+            }
         }
 
         private void OnEnable()
