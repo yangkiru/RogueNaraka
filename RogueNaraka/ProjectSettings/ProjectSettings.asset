@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.3.0.20
+  bundleVersion: 1.3.0.22
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -163,7 +163,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.NoxBix.RogueNaraka
   buildNumber: {}
-  AndroidBundleVersionCode: 76
+  AndroidBundleVersionCode: 78
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -256,7 +256,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: "C:/Users/kbh37/Desktop/NoxBix/\uBB38\uC11C/user.keystore"
+  AndroidKeystoreName: C:/Users/skrtm/Desktop/Keystore/user.keystore
   AndroidKeyaliasName: roguenaraka
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

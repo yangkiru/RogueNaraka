@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour {
     public DeathEffectManager deathEffectPool;
     public GameObject settingPnl;
     public GameObject pausePnl;
-    public GameObject pauseBtn;
-    public GameObject settingBtn;
+    public Button pauseBtn;
+    public Button settingBtn;
 
     public Camera mainCamera;
 
@@ -365,14 +365,14 @@ public class GameManager : MonoBehaviour {
 
     public void SetSettingBtn(bool value)
     {
-        settingBtn.SetActive(value);
-        pauseBtn.SetActive(!value);
+        settingBtn.gameObject.SetActive(value);
+        pauseBtn.gameObject.SetActive(!value);
     }
 
     public void SetPauseBtn(bool value)
     {
-        settingBtn.SetActive(!value);
-        pauseBtn.SetActive(value);
+        settingBtn.gameObject.SetActive(!value);
+        pauseBtn.gameObject.SetActive(value);
     }
 
     public void SetSettingPnl(bool value)
@@ -412,5 +412,11 @@ public class GameManager : MonoBehaviour {
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void OnApplicationFocus(bool focus)
+    {
+        if (!focus && pauseBtn.gameObject.activeSelf && !pausePnl.activeSelf)
+            pauseBtn.onClick.Invoke();
     }
 }

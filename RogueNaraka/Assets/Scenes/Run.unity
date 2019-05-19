@@ -36222,7 +36222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.104583345, y: 0.25124994}
   m_AnchorMax: {x: 0.27100003, y: 0.45000002}
-  m_AnchoredPosition: {x: -0.5, y: 0.9999924}
+  m_AnchoredPosition: {x: -0.5, y: 1}
   m_SizeDelta: {x: 49, y: 52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582290416
@@ -69067,8 +69067,8 @@ MonoBehaviour:
   deathEffectPool: {fileID: 1007604975}
   settingPnl: {fileID: 1412142938}
   pausePnl: {fileID: 709879578}
-  pauseBtn: {fileID: 585709938}
-  settingBtn: {fileID: 2020092796}
+  pauseBtn: {fileID: 585709940}
+  settingBtn: {fileID: 2020092798}
   mainCamera: {fileID: 2062417050}
   languageBtns:
   - {fileID: 848876930}
@@ -76623,6 +76623,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
+--- !u!114 &1366045260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366045255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEscape:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1366045260}
+        m_MethodName: OnClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 312226212}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: RogueNaraka.Escapeable.Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1366286070
 GameObject:
   m_ObjectHideFlags: 0
@@ -76791,34 +76819,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -93.5}
   m_SizeDelta: {x: 305.01, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1366045260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366045255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 070c1134bb889844cada16d16287c1df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onEscape:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1366045260}
-        m_MethodName: OnClick
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 312226212}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: RogueNaraka.Escapeable.Escapeable+EscapeEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1366955756
 GameObject:
   m_ObjectHideFlags: 0
@@ -93131,13 +93131,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681664318}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:

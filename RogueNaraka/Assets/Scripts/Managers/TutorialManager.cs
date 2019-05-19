@@ -74,7 +74,7 @@ public class TutorialManager : MonoBehaviour
         if (isTutorial[i])
         {
             skipBtn.gameObject.SetActive(true);
-            isPauseBtn = GameManager.instance.pauseBtn.activeSelf;
+            isPauseBtn = GameManager.instance.pauseBtn.gameObject.activeSelf;
             GameManager.instance.SetSettingBtn(true);
             //Debug.Log("StartTutorial" + i + ":" + PlayerPrefs.GetInt(string.Format("isTutorial{0}", i)));
             startTexts[i].TextOn();
