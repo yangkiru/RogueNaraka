@@ -414,9 +414,11 @@ public class GameManager : MonoBehaviour {
         Application.Quit();
     }
 
+#if !UNITY_EDITOR
     public void OnApplicationFocus(bool focus)
     {
         if (!focus && pauseBtn.gameObject.activeSelf && !pausePnl.activeSelf)
             pauseBtn.onClick.Invoke();
     }
+#endif
 }
