@@ -443,6 +443,19 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(string name)
     {
+        string[] str = name.Split(':');
+        if(str.Length > 1)
+        {
+            float pitch;
+            if (float.TryParse(str[1], out pitch))
+            {
+                //Debug.Log("SFX:" + str[0] + pitch);
+                PlaySFX(str[0], pitch);
+                return;
+            }
+            else
+                Debug.LogErrorFormat("PlaySFX-Pitch Parsing False");
+        }
 #if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
             SFX.PlayOneShot(SFXClipDictionary[name], sfxVolume);

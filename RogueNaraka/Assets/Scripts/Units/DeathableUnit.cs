@@ -105,11 +105,10 @@ namespace RogueNaraka.UnitScripts
             unit.animator.SetBool("isDeath", true);
             unit.collider.enabled = false;
             unit.DisableAll();
-            string sfx = unit.data.deathSFX;
-            if (sfx.CompareTo(string.Empty) != 0)
+            string[] sfx = unit.data.deathSFX;
+            if (sfx.Length != 0)
             {
-                //AudioManager.instance.StartCoroutine(AudioManager.instance.PlaySound(deathSFX, unit.cashedTransform));
-                AudioManager.instance.PlaySFX(sfx);
+                AudioManager.instance.PlaySFX(sfx[Random.Range(0, sfx.Length)]);
             }
             unit.followable.OnDeath();
             AnimatorStateInfo state;

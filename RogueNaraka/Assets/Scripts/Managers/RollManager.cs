@@ -802,6 +802,8 @@ public class RollManager : MonoBehaviour {
         do
         {
             yield return null;
+            if (!rollPnl.activeSelf)
+                yield break;
         } while (scroll.rolling > 0);
         OnRollEnd();
     }

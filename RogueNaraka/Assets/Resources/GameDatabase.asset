@@ -79,7 +79,7 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: playerDeath
+    deathSFX: []
     attackSFX: 
   requiredExpTable:
   - 150
@@ -1144,7 +1144,8 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: bugDeath
+    deathSFX:
+    - bugDeath
     attackSFX: 
   - name: Bug1
     id: 1
@@ -1207,7 +1208,8 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: bugDeath
+    deathSFX:
+    - bugDeath
     attackSFX: 
   - name: Bat0
     id: 2
@@ -1268,7 +1270,8 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: batDeath
+    deathSFX:
+    - batDeath
     attackSFX: 
   - name: Bat1
     id: 3
@@ -1329,7 +1332,8 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: batDeath
+    deathSFX:
+    - batDeath
     attackSFX: 
   - name: BoneDragon0
     id: 4
@@ -1390,7 +1394,8 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: boneDragonDeath
+    deathSFX:
+    - boneDragonDeath
     attackSFX: 
   - name: BoneHead0
     id: 5
@@ -1451,7 +1456,8 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: boneHeadDeath
+    deathSFX:
+    - boneHeadDeath
     attackSFX: 
   - name: DragonHead0
     id: 6
@@ -1512,7 +1518,7 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: boneHeadDeath
+    deathSFX: []
     attackSFX: 
   - name: slime0
     id: 7
@@ -1573,7 +1579,11 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: bugDeath
+    deathSFX:
+    - slimeDeath:0.75
+    - slimeDeath:1
+    - slimeDeath:1.25
+    - slimeDeath:1.5
     attackSFX: 
   - name: slime1
     id: 8
@@ -1634,7 +1644,11 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: bugDeath
+    deathSFX:
+    - slimeDeath:0.75
+    - slimeDeath:1
+    - slimeDeath:1.25
+    - slimeDeath:1.5
     attackSFX: 
   - name: slime2
     id: 9
@@ -1695,7 +1709,11 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: bugDeath
+    deathSFX:
+    - slimeDeath:0.75
+    - slimeDeath:1
+    - slimeDeath:1.25
+    - slimeDeath:1.5
     attackSFX: 
   bosses:
   - name: Boss0
@@ -1760,7 +1778,7 @@ MonoBehaviour:
       value: 0.8
     - type: 3
       value: 0.5
-    deathSFX: 
+    deathSFX: []
     attackSFX: 
   spawnables:
   - name: ScarecrowSoldier
@@ -1821,7 +1839,7 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: 
+    deathSFX: []
     attackSFX: 
   - name: Shadow
     id: 1
@@ -1880,7 +1898,7 @@ MonoBehaviour:
     bulletOrder: -300
     effects: []
     resistances: []
-    deathSFX: shadowEnd
+    deathSFX: []
     attackSFX: 
   unitMask:
     serializedVersion: 2

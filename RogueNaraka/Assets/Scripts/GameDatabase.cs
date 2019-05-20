@@ -175,7 +175,7 @@ public class UnitData : ICloneable
     public Order bulletOrder = Order.Mid;
     public EffectData[] effects;
     public EffectResistance[] resistances;
-    public string deathSFX;
+    public string[] deathSFX;
     public string attackSFX;
 
     public object Clone()

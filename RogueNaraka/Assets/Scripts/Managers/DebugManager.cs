@@ -157,6 +157,11 @@ public class DebugManager : MonoBehaviour {
         }
     }
 
+    public void ReadPlaySFX(TMP_InputField input)
+    {
+        AudioManager.instance.PlaySFX(input.text);
+    }
+
     public void SetDebugPnl(bool value)
     {
         debugPnl.SetActive(true);
