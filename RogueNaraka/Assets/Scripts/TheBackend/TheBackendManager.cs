@@ -20,9 +20,6 @@ namespace RogueNaraka.TheBackendScripts {
                 this.gameObject.SetActive(false);
                 return;
             #endif
-            if(PlayerPrefs.GetInt("IsLogout") == 0) {
-                AwakeForLogin();
-            }
         }
 
         void Start() {

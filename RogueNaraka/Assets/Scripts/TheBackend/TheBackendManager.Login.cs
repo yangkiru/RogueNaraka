@@ -26,11 +26,11 @@ namespace RogueNaraka.TheBackendScripts {
         private bool isLogout;
         public bool IsLogout { get { return this.isLogout; } }
 
-        void AwakeForLogin() {
-            ActivatePlayGamesPlatform();
-        }
+        private bool isLogining;
 
         void StartForLogin() {
+            this.isLogining = true;
+            ActivatePlayGamesPlatform();
             if(!Backend.IsInitialized) {
                 Backend.Initialize(BRO => {
                     if(BRO.IsSuccess()) {
@@ -80,6 +80,7 @@ namespace RogueNaraka.TheBackendScripts {
                         this.isLogout = true;
                         PlayerPrefs.SetInt("IsLogout", 1);
                         ActiveLogoutPopup();
+                        this.isLogining = false;
                     }
                 });
             }
@@ -95,6 +96,7 @@ namespace RogueNaraka.TheBackendScripts {
             PlayerPrefs.SetString("UserInDateWithoutGPS", this.userInDate);
             this.isSavedUserInDate = true;
             Backend.Android.PutDeviceToken();
+            this.isLogining = false;
         }
 
         private string GetTokens() {
@@ -126,28 +128,12 @@ namespace RogueNaraka.TheBackendScripts {
                 });
         }
 
-        ///<summary>Click Logout Button</summary>
-        public void ClickOnLogoutButton() {
-            if(!this.isLogout) {
-                //Logout
-                Backend.BMember.Logout();
-                ((PlayGamesPlatform)Social.Active).SignOut();
-                this.logoutBtnText.text = "Login";
-                this.isLogout = true;
-                PlayerPrefs.SetInt("IsLogout", 1);
-                switch(GameManager.language) {
-                    case Language.English:
-                        NotificationWindowManager.Instance.EnqueueNotificationData("You've logged out.");
-                    break;
-                    case Language.Korean:
-                        NotificationWindowManager.Instance.EnqueueNotificationData("로그아웃 했습니다.");
-                    break;
-                }
-                
-            } else {
-                //Login
-                ActivatePlayGamesPlatform();
-                StartForLogin();
+        public IEnumerator ClickOnLoginButtonCoroutine() {
+            StartForLogin();
+            
+            yield return new WaitUntil(() => !this.isLogining);
+
+            if(this.isLoginSuccess) {
                 this.logoutBtnText.text = "Logout";
                 this.isLogout = false;
                 PlayerPrefs.SetInt("IsLogout", 0);
@@ -159,6 +145,30 @@ namespace RogueNaraka.TheBackendScripts {
                         NotificationWindowManager.Instance.EnqueueNotificationData("로그인 했습니다.");
                     break;
                 }
+            }
+        }
+
+        ///<summary>Click Logout Button</summary>
+        public void ClickOnLogoutButton() {
+            if(!this.isLogout) {
+                //Logout
+                Backend.BMember.Logout();
+                ((PlayGamesPlatform)Social.Active).SignOut();
+                this.logoutBtnText.text = "Login";
+                this.isLoginSuccess = false;
+                this.isLogout = true;
+                PlayerPrefs.SetInt("IsLogout", 1);
+                switch(GameManager.language) {
+                    case Language.English:
+                        NotificationWindowManager.Instance.EnqueueNotificationData("You've logged out.");
+                    break;
+                    case Language.Korean:
+                        NotificationWindowManager.Instance.EnqueueNotificationData("로그아웃 했습니다.");
+                    break;
+                }
+            } else {
+                //Login
+                StartCoroutine(ClickOnLoginButtonCoroutine());
             }
         }
     }
