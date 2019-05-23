@@ -50,6 +50,7 @@ namespace RogueNaraka.SkillScripts
             BulletData dustData = GameDatabase.instance.bullets[data.bulletIds[2]];
             float t = 0.2f;
             float tt = t;
+            int id = AudioManager.instance.PlaySFXLoop("tornado");
             do
             {
                 yield return wait;
@@ -68,6 +69,7 @@ namespace RogueNaraka.SkillScripts
                     }
                 }
             } while (bullet.gameObject.activeSelf);
+            AudioManager.instance.FadeOutSFX(id, 1);
         }
 
         private void OnDisable()

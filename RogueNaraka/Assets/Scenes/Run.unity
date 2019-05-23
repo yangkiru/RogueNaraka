@@ -106369,7 +106369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 111.28, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1842967632
@@ -116335,6 +116335,7 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 08a4b584d4165bc48b48d95b3b095522, type: 3}
   - {fileID: 102900000, guid: c7ebf39a63bdbf742af7c3671147ec03, type: 3}
   - {fileID: 102900000, guid: b6b37f6d3c61a0e48bd668ecdfe6ad84, type: 3}
+  - {fileID: 102900000, guid: d265c91594d5e324bb6490b51a69dc9a, type: 3}
   musicNames:
   - cave
   - peace1
@@ -116400,6 +116401,7 @@ MonoBehaviour:
   - boneHeadAttack
   - iceBreak
   - slimeDeath
+  - tornado
   music: {fileID: 244143262}
   SFX: {fileID: 1950163786}
   SFXPitch: {fileID: 1429424076}
