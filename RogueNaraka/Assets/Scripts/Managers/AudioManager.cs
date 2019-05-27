@@ -442,7 +442,7 @@ public class AudioManager : MonoBehaviour
     //    sourceTransform.SetParent(parent);
     //}
 
-    public int PlaySFX(string name)
+    public void PlaySFX(string name)
     {
         string[] str = name.Split(':');
         if(str.Length > 1)
@@ -451,8 +451,7 @@ public class AudioManager : MonoBehaviour
             if (float.TryParse(str[1], out pitch))
             {
                 //Debug.Log("SFX:" + str[0] + pitch);
-                currentSFXStreamID = PlaySFX(str[0], pitch);
-                return currentSFXStreamID;
+                PlaySFX(str[0], pitch);
             }
             else
                 Debug.LogErrorFormat("PlaySFX-Pitch Parsing False");
@@ -466,12 +465,10 @@ public class AudioManager : MonoBehaviour
 
 #if !UNITY_EDITOR && UNITY_ANDROID
             currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume, -1);
-            return currentSFXStreamID;
 #endif
-        return currentSFXStreamID;
     }
 
-    public int PlaySFX(string name, float pitch, float volumeFactor = 1)
+    public void PlaySFX(string name, float pitch, float volumeFactor = 1)
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
@@ -485,14 +482,13 @@ public class AudioManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_ANDROID
         currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume * volumeFactor, -1, 1, 0, pitch);
 #endif
-        return currentSFXStreamID;
     }
 
     public int PlaySFXLoop(string name, float pitch = 1, float volumeFactor = 1)
     {
-        int id = PlaySFX(name, pitch, volumeFactor);
-        AndroidNativeAudio.setLoop(id, -1);
-        return id;
+        PlaySFX(name, pitch, volumeFactor);
+        AndroidNativeAudio.setLoop(currentSFXStreamID, -1);
+        return currentSFXStreamID;
     }
 
     public void FadeOutSFX(int id, float t)
