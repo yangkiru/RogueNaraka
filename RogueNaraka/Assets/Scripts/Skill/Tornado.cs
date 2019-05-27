@@ -50,7 +50,7 @@ namespace RogueNaraka.SkillScripts
             BulletData dustData = GameDatabase.instance.bullets[data.bulletIds[2]];
             float t = 0.2f;
             float tt = t;
-            int id = AudioManager.instance.PlaySFXLoop("tornado");
+            int id = AudioManager.instance.PlaySFXLoop("tornado", 1, 4);
             do
             {
                 yield return wait;

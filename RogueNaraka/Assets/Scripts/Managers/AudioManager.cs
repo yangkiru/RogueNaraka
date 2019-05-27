@@ -471,26 +471,26 @@ public class AudioManager : MonoBehaviour
         return currentSFXStreamID;
     }
 
-    public int PlaySFX(string name, float pitch)
+    public int PlaySFX(string name, float pitch, float volumeFactor = 1)
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
         {
             SFXPitch.pitch = pitch;
-            SFXPitch.PlayOneShot(SFXClipDictionary[name], sfxVolume);
+            SFXPitch.PlayOneShot(SFXClipDictionary[name], sfxVolume * volumeFactor);
         }
 
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
-        currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume, -1, 1, 0, pitch);
+        currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume * volumeFactor, -1, 1, 0, pitch);
 #endif
         return currentSFXStreamID;
     }
 
-    public int PlaySFXLoop(string name)
+    public int PlaySFXLoop(string name, float pitch = 1, float volumeFactor = 1)
     {
-        int id = PlaySFX(name);
+        int id = PlaySFX(name, pitch, volumeFactor);
         AndroidNativeAudio.setLoop(id, -1);
         return id;
     }
@@ -524,6 +524,16 @@ public class AudioManager : MonoBehaviour
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
         AndroidNativeAudio.stop(currentSFXStreamID);
+#endif
+    }
+
+    public void StopSFX(int id)
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        SFX.Stop();
+#endif
+#if !UNITY_EDITOR && UNITY_ANDROID
+        AndroidNativeAudio.stop(id);
 #endif
     }
 
