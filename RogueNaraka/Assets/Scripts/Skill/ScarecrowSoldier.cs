@@ -7,12 +7,12 @@ namespace RogueNaraka.SkillScripts
 {
     public class ScarecrowSoldier : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
-            SpawnScarecrowSoldier(mp);
+            SpawnScarecrowSoldier(ref mp);
         }
 
-        void SpawnScarecrowSoldier(Vector3 mp)
+        void SpawnScarecrowSoldier(ref Vector3 mp)
         {
             Unit soldier = BoardManager.instance.unitPool.DequeueObjectPool().GetComponent<Unit>();
             UnitData unitData = (UnitData)GameDatabase.instance.spawnables[data.unitIds[0]].Clone();

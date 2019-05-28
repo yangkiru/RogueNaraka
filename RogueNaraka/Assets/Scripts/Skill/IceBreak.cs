@@ -7,12 +7,12 @@ namespace RogueNaraka.SkillScripts
 {
     public class IceBreak : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
-            SpawnIce(mp);
+            SpawnIce(ref mp);
         }
 
-        void SpawnIce(Vector3 mp)
+        void SpawnIce(ref Vector3 mp)
         {
             Bullet ice = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             BulletData iceData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());

@@ -7,12 +7,12 @@ namespace RogueNaraka.SkillScripts
 {
     public class Genesis : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
-            SpawnGenesis(mp);
+            SpawnGenesis(ref mp);
         }
 
-        void SpawnGenesis(Vector3 mp)
+        void SpawnGenesis(ref Vector3 mp)
         {
             Bullet beam = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
             BulletData beamData = (BulletData)(GameDatabase.instance.bullets[data.bulletIds[0]].Clone());

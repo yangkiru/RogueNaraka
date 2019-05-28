@@ -8,12 +8,12 @@ namespace RogueNaraka.SkillScripts
 {
     public class BloodSwamp : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
-            SpawnBloodSwamp(mp);
+            SpawnBloodSwamp(ref mp);
         }
 
-        void SpawnBloodSwamp(Vector3 mp)
+        void SpawnBloodSwamp(ref Vector3 mp)
         {
             float rndAngle = Random.Range(0, 360);
             Vector2 rndPos = new Vector2(Random.Range(-data.size + 1.5f, data.size - 1.5f), Random.Range(-data.size + 1.5f, data.size - 1.5f));

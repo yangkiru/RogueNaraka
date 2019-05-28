@@ -10,12 +10,12 @@ namespace RogueNaraka.SkillScripts
     public class JumpingShoes : Skill
     {
         public static int jumping = 0;
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
-            Jump(mp);
+            Jump(ref mp);
         }
 
-        void Jump(Vector3 mp)
+        void Jump(ref Vector3 mp)
         {
             StartCoroutine(JumpCorou(mp, 0.75f));
         }

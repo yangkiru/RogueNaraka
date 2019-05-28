@@ -9,12 +9,12 @@ namespace RogueNaraka.SkillScripts
 {
     public class Tornado : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
-            ShootTornado(mp);
+            ShootTornado(ref mp);
         }
 
-        void ShootTornado(Vector3 mp)
+        void ShootTornado(ref Vector3 mp)
         {
             BulletData data = (BulletData)GameDatabase.instance.bullets[this.data.bulletIds[0]].Clone();
 

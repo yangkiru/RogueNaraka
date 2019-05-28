@@ -7,7 +7,7 @@ namespace RogueNaraka.SkillScripts
 {
     public class Shadow : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
             SpawnShadow();
         }

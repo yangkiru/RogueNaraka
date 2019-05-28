@@ -9,7 +9,7 @@ namespace RogueNaraka.SkillScripts
 {
     public class ThunderStrike : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
             StartCoroutine(SpawnThunder(mp));
         }

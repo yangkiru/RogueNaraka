@@ -123,7 +123,7 @@ public class SkillGUI : MonoBehaviour
         ManaScript.instance.SetNeedMana(false);
         if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && ((player && !player.deathable.isDeath) || _skill.data.isDeath) && IsMana())
         {
-            UseSkill();
+            UseSkill(false);
         }
         pointer.SetPointer(false);
     }
@@ -131,9 +131,9 @@ public class SkillGUI : MonoBehaviour
     public void OnEnterUp()
     {
         ManaScript.instance.SetNeedMana(false);
-        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && _skill.data.size == 0 && ((player && !player.deathable.isDeath) || _skill.data.isDeath) && IsMana())
+        if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && ((player && !player.deathable.isDeath) || _skill.data.isDeath) && IsMana())
         {
-            UseSkill();
+            UseSkill(true);
         }
         pointer.SetPointer(false);
     }
@@ -224,11 +224,15 @@ public class SkillGUI : MonoBehaviour
             coolTimeTxt.enabled = true;
     }
 
-    public void UseSkill()
+    public void UseSkill(bool isMpToPlayer)
     {
         if (_skill.data.coolTimeLeft > 0)
             return;
-        Vector3 mp = GameManager.instance.GetMousePosition() + new Vector2(0, pointer.offset);
+        Vector3 mp;
+        if (!isMpToPlayer)
+            mp = GameManager.instance.GetMousePosition() + new Vector2(0, pointer.offset);
+        else
+            mp = BoardManager.instance.player.cachedTransform.position;
         float distance = Vector2.Distance(mp, player.transform.position);
         Vector2 vec = mp - player.transform.position;
 
@@ -236,13 +240,16 @@ public class SkillGUI : MonoBehaviour
 
         UseMana();
 
-        if (_skill.data.isCircleToPlayer && distance > _skill.data.size)
+        if (!isMpToPlayer)
         {
-            distance = _skill.data.size;
-            mp = (Vector2)player.transform.position + vec.normalized * distance;
+            if (_skill.data.isCircleToPlayer && distance > _skill.data.size)
+            {
+                distance = _skill.data.size;
+                mp = (Vector2)player.transform.position + vec.normalized * distance;
+            }
+            mp = BoardManager.instance.ClampToBoard(mp);
         }
-        mp = BoardManager.instance.ClampToBoard(mp);
-        _skill.Use(mp);
+        _skill.Use(ref mp);
         if(_skill.data.useSFX.CompareTo(string.Empty) != 0)
             AudioManager.instance.PlaySFX(_skill.data.useSFX);
 

@@ -8,12 +8,12 @@ namespace RogueNaraka.SkillScripts
 {
     public class FlameShoes : Skill
     {
-        public override void Use(Vector3 mp)
+        public override void Use(ref Vector3 mp)
         {
-            Run(mp);
+            Run(ref mp);
         }
 
-        void Run(Vector3 mp)
+        void Run(ref Vector3 mp)
         {
             Unit player = BoardManager.instance.player;
             player.autoMoveable.enabled = false;

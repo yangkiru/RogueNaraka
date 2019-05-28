@@ -84,6 +84,6 @@ namespace RogueNaraka.SkillScripts
             }
         }
 
-        public abstract void Use(Vector3 mp);
+        public abstract void Use(ref Vector3 mp);
     }
 }
