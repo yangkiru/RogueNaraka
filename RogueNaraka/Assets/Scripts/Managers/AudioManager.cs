@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using RogueNaraka.TimeScripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -451,14 +452,15 @@ public class AudioManager : MonoBehaviour
             {
                 //Debug.Log("SFX:" + str[0] + pitch);
                 PlaySFX(str[0], pitch);
-                return;
             }
             else
                 Debug.LogErrorFormat("PlaySFX-Pitch Parsing False");
         }
 #if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
+        {
             SFX.PlayOneShot(SFXClipDictionary[name], sfxVolume);
+        }
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
@@ -466,24 +468,49 @@ public class AudioManager : MonoBehaviour
 #endif
     }
 
-    public void PlaySFX(string name, float pitch)
+    public void PlaySFX(string name, float pitch, float volumeFactor = 1)
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
         {
             SFXPitch.pitch = pitch;
-            SFXPitch.PlayOneShot(SFXClipDictionary[name], sfxVolume);
+            SFXPitch.PlayOneShot(SFXClipDictionary[name], sfxVolume * volumeFactor);
         }
 
 #endif
 
 #if !UNITY_EDITOR && UNITY_ANDROID
-        try
-        {
-            currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume, -1, 1, 0, pitch);
-        }catch
-        {}
+        currentSFXStreamID = AndroidNativeAudio.play(SFXFileIDDictionary[name], sfxVolume * volumeFactor, -1, 1, 0, pitch);
 #endif
+    }
+
+    public int PlaySFXLoop(string name, float pitch = 1, float volumeFactor = 1)
+    {
+        PlaySFX(name, pitch, volumeFactor);
+        AndroidNativeAudio.setLoop(currentSFXStreamID, -1);
+        return currentSFXStreamID;
+    }
+
+    public void FadeOutSFX(int id, float t)
+    {
+#if !UNITY_EDITOR && UNITY_ANDROID
+        StartCoroutine(FadeOutSFXCorou(id, t));
+#endif
+    }
+
+    IEnumerator FadeOutSFXCorou(int id, float t)
+    {
+        float tt = 0;
+        if (t != 0)
+        {
+            do
+            {
+                yield return null;
+                tt += TimeManager.Instance.UnscaledDeltaTime / t;
+                AndroidNativeAudio.setVolume(id, Mathf.Lerp(sfxVolume, 0, tt));
+            } while (tt < 1);
+        }
+        AndroidNativeAudio.stop(id);
     }
 
     public void StopSFX()
@@ -493,6 +520,16 @@ public class AudioManager : MonoBehaviour
 #endif
 #if !UNITY_EDITOR && UNITY_ANDROID
         AndroidNativeAudio.stop(currentSFXStreamID);
+#endif
+    }
+
+    public void StopSFX(int id)
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        SFX.Stop();
+#endif
+#if !UNITY_EDITOR && UNITY_ANDROID
+        AndroidNativeAudio.stop(id);
 #endif
     }
 
