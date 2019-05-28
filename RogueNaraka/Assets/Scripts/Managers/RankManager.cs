@@ -89,7 +89,6 @@ public class RankManager : MonoBehaviour
                 (OneButtonPopUpController _popUp) => { 
                     _popUp.DeactivatePopUp(); 
                     PopUpManager.Instance.DeactivateBackPanel();
-                    GameManager.instance.SetPause(false);
                 });
         }
     }
