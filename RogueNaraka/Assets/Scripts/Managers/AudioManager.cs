@@ -455,6 +455,7 @@ public class AudioManager : MonoBehaviour
             }
             else
                 Debug.LogErrorFormat("PlaySFX-Pitch Parsing False");
+            return;
         }
 #if UNITY_EDITOR || UNITY_STANDALONE
         if (SFXClipDictionary.ContainsKey(name))
