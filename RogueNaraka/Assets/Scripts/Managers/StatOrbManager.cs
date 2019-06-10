@@ -25,12 +25,21 @@ public class StatOrbManager : MonoBehaviour
     public TextMeshProUGUI statNameTxt;
     public TextMeshProUGUI statValueTxt;
 
-    public List<StatOrb> list = new List<StatOrb>();
+    private List<List<StatOrb>> statOrblistForShoot = new List<List<StatOrb>>();
+    private int statOrblistForShootTotalCount { 
+        get {
+            int count = 0;
+            for(int i = 0; i < this.statOrblistForShoot.Count; ++i) {
+                count += this.statOrblistForShoot[i].Count;
+            }
+            return count;
+        }
+    }
 
     STAT currentStat;
-    Stat rndStat;
-    public Stat stat { get { return _stat; } } 
-    Stat _stat;
+    Stat resultStatOfShootStatOrb;
+    public Stat MaxStat { get { return this.maxStat; } } 
+    Stat maxStat;
 
     int used;
     int current;
@@ -42,29 +51,45 @@ public class StatOrbManager : MonoBehaviour
         {
             orbPool.EnqueueObjectPool(Instantiate(orbPrefab));
         }
-    }
-
-    public void SpawnOrb(int n)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            GameObject orb = orbPool.DequeueObjectPool();
-            orb.transform.localPosition = Vector3.zero;
-            list.Add(orb.GetComponent<StatOrb>());
-            orb.SetActive(true);
-            orb.GetComponent<StatOrb>().rigid.velocity = Random.insideUnitCircle * 5f;
+        for (int i = 0; i <= (int)STAT.MR; ++i) {
+            this.statOrblistForShoot.Add(new List<StatOrb>());
         }
     }
 
-    public void Shoot(int n, float delay)
+    public void SpawnOrb(Stat _resultStatOfShootStatOrb)
     {
-        if(list.Count >= n)
-            StartCoroutine(ShootCorou(n, delay));
+        int addStatValue = 0;
+        int statPoints = 0;
+
+        for(int i = 0; i <= (int)STAT.MR; ++i) {
+            statPoints = (int)_resultStatOfShootStatOrb.GetOrigin((STAT)i);
+            addStatValue = GetFirstStatValueForStatOrb(_resultStatOfShootStatOrb.statPoints);
+
+            for (int remainStatPoints = statPoints; remainStatPoints > 0; remainStatPoints -= addStatValue) {
+            if(remainStatPoints < addStatValue) {
+                    addStatValue = GetStatValueForStatOrb(remainStatPoints);
+                }
+                StatOrb orb = orbPool.DequeueObjectPool().GetComponent<StatOrb>();
+                orb.Init(addStatValue);
+                orb.transform.localPosition = Vector3.zero;
+                orb.gameObject.SetActive(true);
+                orb.GetComponent<StatOrb>().rigid.velocity = Random.insideUnitCircle * 5f;
+                statOrblistForShoot[i].Add(orb);
+            }
+        }
+    }
+
+    public void Shoot(int n, float delay, STAT _type)
+    {
+        
+        if(statOrblistForShootTotalCount >= n) {
+            StartCoroutine(ShootCorou(n, delay, _type));
+        }
     }
 
     public void Shoot(StatOrb orbRoot)
     {
-        orbRoot.startPoint.transform.position = orbRoot.orb.transform.position;
+        orbRoot.startPoint.transform.position = orbRoot.StatOrbImage.transform.position;
         orbRoot.endPoint.transform.position = endPoint.transform.position;
         orbRoot.trs.MoveObject = true;
         orbRoot.trs.DistanceRatio = 0;
@@ -73,12 +98,12 @@ public class StatOrbManager : MonoBehaviour
         AudioManager.instance.PlaySFX("statFire");
     }
 
-    IEnumerator ShootCorou(int n, float delay)
+    IEnumerator ShootCorou(int n, float delay, STAT _type)
     {
         for (int i = 0; i < n; i++)
         {
-            Shoot(list[list.Count - 1]);
-            list.RemoveAt(list.Count - 1);
+            Shoot(this.statOrblistForShoot[(int)_type][this.statOrblistForShoot[(int)_type].Count - 1]);
+            this.statOrblistForShoot[(int)_type].RemoveAt(this.statOrblistForShoot[(int)_type].Count - 1);
             //CameraShake.instance.Shake(0.1f, 0.1f, 0.001f);
             float t = delay;
             while (t > 0)
@@ -89,20 +114,21 @@ public class StatOrbManager : MonoBehaviour
         }
     }
 
-    void OnOverflow(GameObject obj)
+    void OnOverflow(GameObject _objOfOrb)
     {
-        _stat.AddOrigin(currentStat, 1);
+        StatOrb orb = _objOfOrb.GetComponent<StatOrb>();
+        this.maxStat.AddOrigin(currentStat, orb.Value);
         StatTxtUpdate();
-        used++;
+        used += orb.Value;
         current--;
         IconEffect();
         bombParticle.Play();
-        if(used == rndStat.statPoints || (currentStat == STAT.MR && stat.mpRegen == stat.mpRegenMax))
+        if(used == this.resultStatOfShootStatOrb.statPoints || (currentStat == STAT.MR && this.maxStat.mpRegen == this.maxStat.mpRegenMax))
         {
             StartCoroutine(OnLastOverflow());
         }
         AudioManager.instance.PlaySFX("statDestroy");
-        orbPool.EnqueueObjectPool(obj);
+        orbPool.EnqueueObjectPool(_objOfOrb);
     }
 
 
@@ -116,18 +142,20 @@ public class StatOrbManager : MonoBehaviour
             yield return null;
             t -= Time.deltaTime;
         }
-        _stat.currentHp = _stat.GetCurrent(STAT.HP);
-        _stat.currentMp = _stat.GetCurrent(STAT.MP);
+        this.maxStat.currentHp = this.maxStat.GetCurrent(STAT.HP);
+        this.maxStat.currentMp = this.maxStat.GetCurrent(STAT.MP);
         pnl.SetActive(false);
-        Stat.StatToData(_stat);
+        Stat.StatToData(this.maxStat);
         Stat.StatToData(null, "randomStat");
         
-        for(int i = 0; i < list.Count; i++)
+        for(int statIdx = 0; statIdx < statOrblistForShoot.Count; statIdx++)
         {
-            orbPool.EnqueueObjectPool(list[i].gameObject);
+            for(int i = 0; i < statOrblistForShoot[statIdx].Count; ++i) {
+                orbPool.EnqueueObjectPool(statOrblistForShoot[statIdx][i].gameObject);
+            }
         }
 
-        GameManager.instance.StatTextUpdate(stat);
+        GameManager.instance.StatTextUpdate(this.maxStat);
 
         if (GameManager.instance.IsFirstGame)
             RollManager.instance.FirstGame();
@@ -174,17 +202,17 @@ public class StatOrbManager : MonoBehaviour
         StatTxtUpdate();
     }
 
-    public void SetActive(bool value, Stat rndStat = null, Stat stat = null)
+    public void SetActive(bool _value, Stat _resultStatOfShootStatOrb = null, Stat _maxStat = null)
     {
-        if (value && rndStat != null && stat != null)
+        if (_value && _resultStatOfShootStatOrb != null && _maxStat != null)
         {
             used = 0;
-            this.rndStat = rndStat;
-            this._stat = stat;
+            this.resultStatOfShootStatOrb = _resultStatOfShootStatOrb;
+            this.maxStat = _maxStat;
             StatTxtUpdate();
             pnl.SetActive(true);
-            SpawnOrb(rndStat.statPoints);
-            StartCoroutine(StatCorou(rndStat));
+            SpawnOrb(_resultStatOfShootStatOrb);
+            StartCoroutine(StatCorou(_resultStatOfShootStatOrb));
             GameManager.instance.SetPause(false);
 
             TutorialManager.instance.StartTutorial(1);
@@ -192,7 +220,7 @@ public class StatOrbManager : MonoBehaviour
 
             fade.FadeIn();
         }
-        else if (!value)
+        else if (!_value)
         {
             pnl.SetActive(false);
             fade.FadeOut();
@@ -219,13 +247,13 @@ public class StatOrbManager : MonoBehaviour
             SetStat((STAT)i);
             AudioManager.instance.PlaySFX("statChange");
 
-            int amount = (int)stat.GetOrigin((STAT)i);
+            int amount = this.statOrblistForShoot[i].Count;
             current = amount;
             if (amount > 0)
             {
                 float delay = Mathf.Pow(0.75f, amount);
 
-                Shoot(amount, delay);
+                Shoot(amount, delay, (STAT)i);
 
                 while (current > 0)
                 {
@@ -261,6 +289,43 @@ public class StatOrbManager : MonoBehaviour
     void StatTxtUpdate()
     { 
         statNameTxt.text = string.Format("{0}\n({1})", GameDatabase.instance.statLang[(int)GameManager.language].items[(int)currentStat], currentStat.ToString());
-        statValueTxt.text = string.Format("{0}/{1}", _stat.GetOrigin(currentStat), _stat.GetMax(currentStat));
+        statValueTxt.text = string.Format("{0}/{1}", this.maxStat.GetOrigin(currentStat), this.maxStat.GetMax(currentStat));
+    }
+    
+    private int GetFirstStatValueForStatOrb(int _statPoint) {
+        int idx_forFirstStat = _statPoint / 100;
+        const int MAX_INDEX = 10;
+        idx_forFirstStat = idx_forFirstStat > MAX_INDEX ? MAX_INDEX : idx_forFirstStat;
+        switch(idx_forFirstStat) {
+            case 0:
+                return 1;
+            case 1:
+                return 2;
+            case 2:
+                return 4;
+            case 3:
+                return 6;
+            case 4:
+                return 8;
+            case 5:
+                return 10;
+            case 6:
+                return 12;
+            case 7:
+                return 14;
+            case 8:
+                return 16;
+            case 9:
+                return 18;
+            case 10:
+                return 20;
+        }
+        throw new System.ArgumentException(string.Format("Invalid StatPoint! : {0}", _statPoint));
+    }
+
+    private int GetStatValueForStatOrb(int _statPoint) {
+        int statValue = (_statPoint / 2) * 2;
+        statValue = statValue <= 0 ? 1 : statValue;
+        return statValue;
     }
 }

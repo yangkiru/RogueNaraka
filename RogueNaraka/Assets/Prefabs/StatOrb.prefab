@@ -249,7 +249,7 @@ MonoBehaviour:
   hidden: 0
   parent: {fileID: 744504853472929913}
   ccName: 
-  distance: 7.0878115
+  distance: 1782.3727
   handlesScale: 1
   handlesColor: {r: 1, g: 1, b: 1, a: 1}
   onOverflowParameter: {fileID: 0}
@@ -284,7 +284,19 @@ MonoBehaviour:
   cursor: {fileID: 744504853472929918}
   startPoint: {fileID: 744504853682586001}
   endPoint: {fileID: 744504853176165925}
-  orb: {fileID: 744504853603639344}
+  StatOrbImage: {fileID: 5852703191254602061}
+  StatOrbSpriteArr:
+  - {fileID: 21300000, guid: e94d30273a8d8404ca002e0cd7446cf9, type: 3}
+  - {fileID: 21300000, guid: 3386078a63453fb4990fa7dda4ce185b, type: 3}
+  - {fileID: 21300000, guid: be22cad4105946641962d5cecdefbbb9, type: 3}
+  - {fileID: 21300000, guid: 8bd499ca7c12cb847bde502f898ec1ac, type: 3}
+  - {fileID: 21300000, guid: 9f7358bac2e219747bc0c1027b8bf1f7, type: 3}
+  - {fileID: 21300000, guid: fd71199ea96236f409e0063f37961c3f, type: 3}
+  - {fileID: 21300000, guid: 75eca3fcb8236fa4ea95ec8be0a9c594, type: 3}
+  - {fileID: 21300000, guid: a6cfc360db90e9b45918c7f89560acd4, type: 3}
+  - {fileID: 21300000, guid: dd615dd8c9069f74696c2499b0149a2b, type: 3}
+  - {fileID: 21300000, guid: 7cff39dd437f5ff4282435b54d5291ae, type: 3}
+  - {fileID: 21300000, guid: a2eec01d18e919e47aecd030a8418e89, type: 3}
   rigid: {fileID: 744504853603639357}
   speed: 0
 --- !u!1 &744504853603639344
