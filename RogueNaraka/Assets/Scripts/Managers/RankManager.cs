@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GooglePlayGames;
+//using GooglePlayGames;
 using RogueNaraka.PopUpScripts;
 using RogueNaraka.TheBackendScripts;
 

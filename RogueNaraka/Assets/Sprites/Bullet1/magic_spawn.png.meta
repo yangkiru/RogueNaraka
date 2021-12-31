@@ -1,45 +1,117 @@
 fileFormatVersion: 2
 guid: 53b6b47620ef0d04388873788f5d20ed
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: monster_att_ef1_0
-    21300002: monster_att_ef1_1
-    21300004: monster_att_ef1_2
-    21300006: monster_att_ef1_3
-    21300008: monster_att_ef1_4
-    21300010: monster_att_ef1_5
-    21300012: monster_att_ef1_6
-    21300014: monster_att_ef1_7
-    21300016: monster_att_ef1_8
-    21300018: magic_ball0_destroy_0
-    21300020: magic_ball0_destroy_1
-    21300022: magic_ball_destroy_2
-    21300024: magic_ball_destroy_3
-    21300026: magic_ball_destroy_4
-    21300028: magic_ball_destroy_5
-    21300030: magic_ball_destroy_6
-    21300032: magic_ball_destroy_7
-    21300034: magic_ball_destroy_8
-    21300036: magic_ball0_destroy_2
-    21300038: magic_ball0_destroy_3
-    21300040: magic_ball0_destroy_4
-    21300042: magic_ball0_destroy_5
-    21300044: magic_ball0_destroy_6
-    21300046: magic_ball0_destroy_7
-    21300048: magic_ball0_destroy_8
-    21300050: magic_ball0_destroy_9
-    21300052: magic_spawn_0
-    21300054: magic_spawn_1
-    21300056: magic_spawn_2
-    21300058: magic_spawn_3
-    21300060: magic_spawn_4
-    21300062: magic_spawn_5
-    21300064: magic_spawn_6
-    21300066: magic_spawn_7
-    21300068: magic_spawn_8
-    21300070: magic_spawn_9
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: monster_att_ef1_0
+  - first:
+      213: 21300002
+    second: monster_att_ef1_1
+  - first:
+      213: 21300004
+    second: monster_att_ef1_2
+  - first:
+      213: 21300006
+    second: monster_att_ef1_3
+  - first:
+      213: 21300008
+    second: monster_att_ef1_4
+  - first:
+      213: 21300010
+    second: monster_att_ef1_5
+  - first:
+      213: 21300012
+    second: monster_att_ef1_6
+  - first:
+      213: 21300014
+    second: monster_att_ef1_7
+  - first:
+      213: 21300016
+    second: monster_att_ef1_8
+  - first:
+      213: 21300018
+    second: magic_ball0_destroy_0
+  - first:
+      213: 21300020
+    second: magic_ball0_destroy_1
+  - first:
+      213: 21300022
+    second: magic_ball_destroy_2
+  - first:
+      213: 21300024
+    second: magic_ball_destroy_3
+  - first:
+      213: 21300026
+    second: magic_ball_destroy_4
+  - first:
+      213: 21300028
+    second: magic_ball_destroy_5
+  - first:
+      213: 21300030
+    second: magic_ball_destroy_6
+  - first:
+      213: 21300032
+    second: magic_ball_destroy_7
+  - first:
+      213: 21300034
+    second: magic_ball_destroy_8
+  - first:
+      213: 21300036
+    second: magic_ball0_destroy_2
+  - first:
+      213: 21300038
+    second: magic_ball0_destroy_3
+  - first:
+      213: 21300040
+    second: magic_ball0_destroy_4
+  - first:
+      213: 21300042
+    second: magic_ball0_destroy_5
+  - first:
+      213: 21300044
+    second: magic_ball0_destroy_6
+  - first:
+      213: 21300046
+    second: magic_ball0_destroy_7
+  - first:
+      213: 21300048
+    second: magic_ball0_destroy_8
+  - first:
+      213: 21300050
+    second: magic_ball0_destroy_9
+  - first:
+      213: 21300052
+    second: magic_spawn_0
+  - first:
+      213: 21300054
+    second: magic_spawn_1
+  - first:
+      213: 21300056
+    second: magic_spawn_2
+  - first:
+      213: 21300058
+    second: magic_spawn_3
+  - first:
+      213: 21300060
+    second: magic_spawn_4
+  - first:
+      213: 21300062
+    second: magic_spawn_5
+  - first:
+      213: 21300064
+    second: magic_spawn_6
+  - first:
+      213: 21300066
+    second: magic_spawn_7
+  - first:
+      213: 21300068
+    second: magic_spawn_8
+  - first:
+      213: 21300070
+    second: magic_spawn_9
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -59,6 +131,7 @@ TextureImporter:
   isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -68,8 +141,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -90,11 +163,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -105,7 +182,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -116,7 +194,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -127,7 +206,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -138,6 +218,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -157,6 +238,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 9028b89564e02ab4f8ce440a1bd1db2a
+      internalID: 21300052
       vertices: []
       indices: 
       edges: []
@@ -177,6 +259,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 492d9bfc4e9130a43bfe490b4b92c633
+      internalID: 21300054
       vertices: []
       indices: 
       edges: []
@@ -197,6 +280,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: bda40d757e4a61643ad4b76ff44244c3
+      internalID: 21300056
       vertices: []
       indices: 
       edges: []
@@ -217,6 +301,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 08fa277c24e8937478a40cf86e977692
+      internalID: 21300058
       vertices: []
       indices: 
       edges: []
@@ -237,6 +322,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 98a04b23af886814286e4199c67bb487
+      internalID: 21300060
       vertices: []
       indices: 
       edges: []
@@ -257,6 +343,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c5c2a37a4aceed5498e202b593b9a042
+      internalID: 21300062
       vertices: []
       indices: 
       edges: []
@@ -277,6 +364,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e6129e907bdb87f4aa1330c1d803dd33
+      internalID: 21300064
       vertices: []
       indices: 
       edges: []
@@ -297,6 +385,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 064254b10265e254f8a992f6935e77ec
+      internalID: 21300066
       vertices: []
       indices: 
       edges: []
@@ -317,6 +406,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6afd3e2ce52e7db45886d7e72e709b32
+      internalID: 21300068
       vertices: []
       indices: 
       edges: []
@@ -337,6 +427,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 149c548a386543a4c951a86da015a473
+      internalID: 21300070
       vertices: []
       indices: 
       edges: []
@@ -345,10 +436,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: Bullet
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

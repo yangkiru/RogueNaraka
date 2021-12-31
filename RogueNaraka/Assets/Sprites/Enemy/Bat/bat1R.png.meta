@@ -1,12 +1,18 @@
 fileFormatVersion: 2
 guid: 80896b2449d020040a763e8508202aa4
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: bat1R_0
-    21300002: bat1R_1
-    21300004: bat1R_2
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: bat1R_0
+  - first:
+      213: 21300002
+    second: bat1R_1
+  - first:
+      213: 21300004
+    second: bat1R_2
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -26,6 +32,7 @@ TextureImporter:
   isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -35,8 +42,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -57,11 +64,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -72,7 +83,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -83,7 +95,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -94,6 +107,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -132,6 +146,7 @@ TextureImporter:
       tessellationDetail: 1
       bones: []
       spriteID: 4983ec8c4d73dec459d1e523d65f546b
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -167,6 +182,7 @@ TextureImporter:
       tessellationDetail: 1
       bones: []
       spriteID: 16c57345cc55fdc41bb7b87380490b48
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -205,6 +221,7 @@ TextureImporter:
       tessellationDetail: 1
       bones: []
       spriteID: c59b90abe89c51b4db7446c71183403a
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -213,10 +230,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: ef29d6d8826ad914b844788e1718ae80
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: Enemy
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

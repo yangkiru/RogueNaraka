@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using BackEnd;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
+//using GooglePlayGames;
+//using GooglePlayGames.BasicApi;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -47,6 +47,7 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         private void ActivatePlayGamesPlatform() {
+            /*
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
                 .Builder()
                 .RequestServerAuthCode(false)
@@ -56,6 +57,7 @@ namespace RogueNaraka.TheBackendScripts {
             PlayGamesPlatform.InitializeInstance(config);
             PlayGamesPlatform.DebugLogEnabled = true;
             PlayGamesPlatform.Activate();
+            */
         }
 
         private void AuthorizeFederationSync() {
@@ -100,13 +102,15 @@ namespace RogueNaraka.TheBackendScripts {
         }
 
         private string GetTokens() {
+            /*
             if(PlayGamesPlatform.Instance.localUser.authenticated) {
                 string _IDtoken = PlayGamesPlatform.Instance.GetIdToken();
                 return _IDtoken;
             } else {
                 Debug.Log("접속되어있지 않습니다. PlayGamesPlatform.Instance.localUser.authenticated :  fail");
                 return null;
-            }
+            }*/
+            return null;
         }
 
         private void ActiveLogoutPopup() {
@@ -153,7 +157,7 @@ namespace RogueNaraka.TheBackendScripts {
             if(!this.isLogout) {
                 //Logout
                 Backend.BMember.Logout();
-                ((PlayGamesPlatform)Social.Active).SignOut();
+                //((PlayGamesPlatform)Social.Active).SignOut();
                 this.logoutBtnText.text = "Login";
                 this.isLoginSuccess = false;
                 this.isLogout = true;

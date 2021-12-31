@@ -1,15 +1,27 @@
 fileFormatVersion: 2
 guid: ec49ed1325d0c894697c2e446261e344
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: skill_spr_tornado_0
-    21300002: skill_spr_tornado_1
-    21300004: skill_spr_tornado_2
-    21300006: skill_spr_tornado_3
-    21300008: skill_spr_tornado_4
-    21300010: skill_spr_tornado_5
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: skill_spr_tornado_0
+  - first:
+      213: 21300002
+    second: skill_spr_tornado_1
+  - first:
+      213: 21300004
+    second: skill_spr_tornado_2
+  - first:
+      213: 21300006
+    second: skill_spr_tornado_3
+  - first:
+      213: 21300008
+    second: skill_spr_tornado_4
+  - first:
+      213: 21300010
+    second: skill_spr_tornado_5
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -29,6 +41,7 @@ TextureImporter:
   isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -38,8 +51,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -60,11 +73,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,7 +92,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -86,7 +104,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -97,6 +116,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -139,6 +159,7 @@ TextureImporter:
       tessellationDetail: 0.4
       bones: []
       spriteID: 16d53bb428f66aa448c1ee982144c26d
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -180,6 +201,7 @@ TextureImporter:
       tessellationDetail: 0.4
       bones: []
       spriteID: 979043ad47581c84ebf892690ac7cc38
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -221,6 +243,7 @@ TextureImporter:
       tessellationDetail: 0.4
       bones: []
       spriteID: bc27acd8e172ffa4782dde922459df90
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -264,6 +287,7 @@ TextureImporter:
       tessellationDetail: 0.4
       bones: []
       spriteID: b94691c41086f8c4abb42767b4527b81
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -314,6 +338,7 @@ TextureImporter:
       tessellationDetail: 0.4
       bones: []
       spriteID: 0bb1429acae8d094abeed71813c1bcdf
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -356,6 +381,7 @@ TextureImporter:
       tessellationDetail: 0.4
       bones: []
       spriteID: 7d9a01318e43dc643a136e11cf5f91fa
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -364,10 +390,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 307b8863fc27f784781b85f498514ec5
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: Skill
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
