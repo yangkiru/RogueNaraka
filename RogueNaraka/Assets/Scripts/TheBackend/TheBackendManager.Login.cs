@@ -26,6 +26,9 @@ namespace RogueNaraka.TheBackendScripts {
         private bool isLogout;
         public bool IsLogout { get { return this.isLogout; } }
 
+        private string userNickName = "";
+        public string UserNickName { get { return this.userNickName; } }
+
         private bool isLogining;
 
         void StartForLogin() {
@@ -44,11 +47,16 @@ namespace RogueNaraka.TheBackendScripts {
                 BackendInit();
                 AuthorizeFederationSync();
             }
+            this.userNickName = PlayerPrefs.GetString("Player_NickName");
+        }
+
+        public void SetUserNickName(string _name) {
+            this.userNickName = _name;
+            PlayerPrefs.SetString("Player_NickName", _name);
         }
 
         private void ActivatePlayGamesPlatform() {
-            /*
-            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
+            /*PlayGamesClientConfiguration config = new PlayGamesClientConfiguration
                 .Builder()
                 .RequestServerAuthCode(false)
                 .RequestIdToken()
@@ -109,7 +117,8 @@ namespace RogueNaraka.TheBackendScripts {
             } else {
                 Debug.Log("접속되어있지 않습니다. PlayGamesPlatform.Instance.localUser.authenticated :  fail");
                 return null;
-            }*/
+            }
+            */
             return null;
         }
 
