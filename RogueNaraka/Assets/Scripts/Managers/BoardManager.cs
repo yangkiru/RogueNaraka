@@ -199,15 +199,6 @@ public class BoardManager : MonoBehaviour {
             SpawnRandomEnemy(ref cost);
 
         StartCoroutine(StageTxtEffect());
-
-        #if !UNITY_EDITOR
-        if(stage == 1) {
-            this.isNotifiedHighScore = false;
-        } else if(!this.isNotifiedHighScore && TheBackendManager.Instance.ClearedStageForRank + 1 < stage) {
-            this.isNotifiedHighScore = true;
-            NotificationWindowManager.Instance.ActiveHighScoreBanner();
-        }
-        #endif
     }
 
     public void SpawnRandomEnemy(ref float cost)
