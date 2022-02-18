@@ -75,11 +75,9 @@ public partial class DeathManager : MonoBehaviour
     public void OnDeath()
     {
         Debug.Log("OnDeath");
-        //RankManager.instance.SendPlayerRank();
         if(BoardManager.instance.player)
             GameManager.instance.Save();
 
-        RankManager.instance.SendPlayerRank();
 
         SetDeathPnl(true);
 
@@ -96,41 +94,41 @@ public partial class DeathManager : MonoBehaviour
     {
         this.isClickableCloseBtn = false;
 
-        //lv, 경험치 세팅
-        int playerOriginLv = TierManager.Instance.PlayerLevel;
-        double curExp = TierManager.Instance.CurrentExp;
-        double maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
-        this.curLvTxt.text = playerOriginLv.ToString();
-        this.nextLvTxt.text = (playerOriginLv + 1).ToString();
-        this.expNumTxt.text = string.Format("{0}  /  {1}", (int)curExp, (int)maxExp);
-        this.ExpGauge.fillAmount = (float)(curExp / maxExp);
-        this.LvUpEffect_L.gameObject.SetActive(false);
-        this.LvUpEffect_R.gameObject.SetActive(false);
-        //Tier 세팅
-        this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
-        this.TierName.text = string.Format("- {0} {1} Tier -"
-            , TierManager.Instance.CurrentTier.type
-            , TierManager.Instance.CurrentTier.tier_num != 0 ? TierManager.Instance.CurrentTier.tier_num.ToString() : "");
-        string textFormat = "";
-        switch(GameManager.language) {
-            case Language.English:
-                textFormat = "Current Top {0}%\nNext Tier : Top {1}%";
-            break;
-            case Language.Korean:
-                textFormat = "현재 상위 {0}%\n다음 티어 : 상위 {1}%";
-            break;
-        }
-        this.NextTierRequirement.text = string.Format(textFormat
-            , Mathf.Floor(TheBackendManager.Instance.TopPercentToClearStageForRank * 100) * 0.01f
-            , TierManager.Instance.NextTier.requiredRankingPercent);
-        this.TierEffect_L.gameObject.SetActive(false);
-        this.TierEffect_R.gameObject.SetActive(false);
-        //Backend ClearedStage 갱신
-        if(TheBackendManager.Instance.gameObject.activeSelf) {
-            TheBackendManager.Instance.UpdateRankData(PlayerPrefs.GetInt("stage") - 1);
-        }
-        //
-        TierManager.Instance.SaveExp();
+        // //lv, 경험치 세팅
+        // int playerOriginLv = TierManager.Instance.PlayerLevel;
+        // double curExp = TierManager.Instance.CurrentExp;
+        // double maxExp = GameDatabase.instance.requiredExpTable[playerOriginLv - 1];
+        // this.curLvTxt.text = playerOriginLv.ToString();
+        // this.nextLvTxt.text = (playerOriginLv + 1).ToString();
+        // this.expNumTxt.text = string.Format("{0}  /  {1}", (int)curExp, (int)maxExp);
+        // this.ExpGauge.fillAmount = (float)(curExp / maxExp);
+        // this.LvUpEffect_L.gameObject.SetActive(false);
+        // this.LvUpEffect_R.gameObject.SetActive(false);
+        // //Tier 세팅
+        // this.TierEmblem.sprite = TierManager.Instance.CurrentTier.emblem;
+        // this.TierName.text = string.Format("- {0} {1} Tier -"
+        //     , TierManager.Instance.CurrentTier.type
+        //     , TierManager.Instance.CurrentTier.tier_num != 0 ? TierManager.Instance.CurrentTier.tier_num.ToString() : "");
+        // string textFormat = "";
+        // switch(GameManager.language) {
+        //     case Language.English:
+        //         textFormat = "Current Top {0}%\nNext Tier : Top {1}%";
+        //     break;
+        //     case Language.Korean:
+        //         textFormat = "현재 상위 {0}%\n다음 티어 : 상위 {1}%";
+        //     break;
+        // }
+        // this.NextTierRequirement.text = string.Format(textFormat
+        //     , Mathf.Floor(TheBackendManager.Instance.TopPercentToClearStageForRank * 100) * 0.01f
+        //     , TierManager.Instance.NextTier.requiredRankingPercent);
+        // this.TierEffect_L.gameObject.SetActive(false);
+        // this.TierEffect_R.gameObject.SetActive(false);
+        // //Backend ClearedStage 갱신
+        // if(TheBackendManager.Instance.gameObject.activeSelf) {
+        //     TheBackendManager.Instance.UpdateRankData(PlayerPrefs.GetInt("stage") - 1);
+        // }
+        // //
+        // TierManager.Instance.SaveExp();
         tt = 1.5f;
         do
         {
@@ -156,10 +154,10 @@ public partial class DeathManager : MonoBehaviour
             SetActiveBtnLayout(true);
         }
 
-        StartCoroutine(StartGainExpAnimation(playerOriginLv, curExp));
-        if(TierManager.Instance.CheckIfTierHaveChanged()) {
-            StartCoroutine(StartChangeTierAnimation());
-        }
+        // StartCoroutine(StartGainExpAnimation(playerOriginLv, curExp));
+        // if(TierManager.Instance.CheckIfTierHaveChanged()) {
+        //     StartCoroutine(StartChangeTierAnimation());
+        // }
         this.isClickableCloseBtn = true;
     }
 
@@ -178,7 +176,7 @@ public partial class DeathManager : MonoBehaviour
             StartCoroutine(PumpCorou(soulPnl.rectTransform, 0f, 0.25f));
             soulCorou = SoulCorou();
             StartCoroutine(soulCorou);
-            AdMobManager.instance.RequestRewardBasedVideo();
+            //AdMobManager.instance.RequestRewardBasedVideo();
         }
         else
         {
@@ -315,14 +313,9 @@ public partial class DeathManager : MonoBehaviour
 
     public void ReGame()
     {
-        if (StageSkipManager.Instance.GetSkipableStage() != 1)
-            StageSkipManager.Instance.SetStageSkipPnl(true);
-        else
-        {
-            EndGame();
-            PlayerPrefs.SetInt("isRun", 0);
-            GameManager.instance.Load();
-        }
+        EndGame();
+        PlayerPrefs.SetInt("isRun", 0);
+        GameManager.instance.Load();
     }
 
     public void EndGame()

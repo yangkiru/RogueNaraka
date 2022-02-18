@@ -215,7 +215,7 @@ public class StatOrbManager : MonoBehaviour
             StartCoroutine(StatCorou(_resultStatOfShootStatOrb));
             GameManager.instance.SetPause(false);
 
-            TutorialManager.instance.StartTutorial(1);
+            //TutorialManager.instance.StartTutorial(1);
             bombParticle.gameObject.SetActive(true);
 
             fade.FadeIn();

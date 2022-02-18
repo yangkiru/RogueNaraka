@@ -102,7 +102,7 @@ public class SoulShopManager : MonoBehaviour
         statPnl.SetActive(true);
         SyncStatUpgradeTxt();
         preparingPnl.SetActive(false);
-        TutorialManager.instance.StartTutorial(3);
+        //TutorialManager.instance.StartTutorial(3);
     }
 
     public void SkillPnlOpen()
@@ -158,7 +158,7 @@ public class SoulShopManager : MonoBehaviour
             soulRefRateBtnTxt.text = "Up";
             soulRefRateBtn.interactable = true;
         }
-        TutorialManager.instance.StartTutorial(4);
+        //TutorialManager.instance.StartTutorial(4);
     }
 
     #region stat

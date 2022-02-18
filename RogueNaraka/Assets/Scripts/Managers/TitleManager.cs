@@ -15,30 +15,11 @@ namespace RogueNaraka.TitleScripts {
 
         private bool isAbleToGoMain;
 
-        private void Start() {
-            StartCoroutine(CheckToCanGoMain());
-        }
-
         public void OnClick() {
-            if(!isAbleToGoMain) {
-                return;
-            }
-
-            AdMobManager.instance.RequestBanner();
+            //AdMobManager.instance.RequestBanner();
             AudioManager.instance.PlaySFX("gameStart");
             this.Fade.FadeOut();
             this.Grid.SetActive(true);
         }
-
-        private IEnumerator CheckToCanGoMain() {
-            WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
-            this.ProcessText.text = "Logining...";
-            float time = 0.0f;
-
-            yield return waitForFixedUpdate;
-
-            this.ProcessText.text = "Touch To Start";
-            this.isAbleToGoMain = true;
-        } 
     }
 }

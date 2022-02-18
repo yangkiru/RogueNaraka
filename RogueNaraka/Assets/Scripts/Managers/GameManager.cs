@@ -379,7 +379,7 @@ public class GameManager : MonoBehaviour {
     {
         settingPnl.SetActive(value);
 
-        TutorialManager.instance.isPause = value;
+        //TutorialManager.instance.isPause = value;
         if (StatOrbManager.instance.pnl.activeSelf && !TutorialManager.instance.isPlaying)
         {
             GameManager.instance.SetPause(value);

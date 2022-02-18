@@ -821,10 +821,10 @@ public class RollManager : MonoBehaviour {
         switch(datas[(stopped + 1) % 10].type)
         {
             case ROLL_TYPE.SKILL:
-                TutorialManager.instance.StartTutorial(2);
+                //TutorialManager.instance.StartTutorial(2);
                 break;
             case ROLL_TYPE.ITEM:
-                TutorialManager.instance.StartTutorial(5);
+                //TutorialManager.instance.StartTutorial(5);
                 break;
         }
     }

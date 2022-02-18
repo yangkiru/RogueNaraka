@@ -159,7 +159,7 @@ public class BoardManager : MonoBehaviour {
             GameManager.instance.SetPauseBtn(true);
         player.collider.enabled = true;
 
-        TutorialManager.instance.StartTutorial(6);
+        //TutorialManager.instance.StartTutorial(6);
     }
 
     //void RandomEnemy(int leftCost)
