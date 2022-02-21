@@ -136,14 +136,14 @@ public partial class DeathManager : MonoBehaviour
             tt -= TimeManager.Instance.UnscaledDeltaTime;
         } while (tt > 0);
         
-        if(TheBackendManager.Instance.gameObject.activeSelf) {
-            yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
-        }
-        do
-        {
-            yield return null;
-            t -= Time.unscaledDeltaTime;
-        } while (t > 0);
+        // if(TheBackendManager.Instance.gameObject.activeSelf) {
+        //     yield return new WaitUntil(() => !TheBackendManager.Instance.IsRefreshing);
+        // }
+        // do
+        // {
+        //     yield return null;
+        //     t -= Time.unscaledDeltaTime;
+        // } while (t > 0);
 
         if (PlayerPrefs.GetFloat("lastRefiningRate") != -1)
         {
