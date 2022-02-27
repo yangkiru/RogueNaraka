@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 114486251479679990}
   - component: {fileID: 3900195907407459146}
   - component: {fileID: 905503909068768735}
+  - component: {fileID: 7769842608181752198}
   m_Layer: 8
   m_Name: Unit
   m_TagString: Player
@@ -124,6 +125,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -135,6 +138,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -171,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveable: {fileID: 114798437530957502}
+  clickToMoveable: {fileID: 7769842608181752198}
   attackable: {fileID: 0}
   stopBeforeAttackable: {fileID: 114517530178566646}
   stopAfterAttackable: {fileID: 114519388432992828}
@@ -252,7 +257,7 @@ MonoBehaviour:
     bulletOrder: 0
     effects: []
     resistances: []
-    deathSFX: 
+    deathSFX: []
     attackSFX: 
   rigid: {fileID: 50410147267040436}
   renderer: {fileID: 212722301744784912}
@@ -708,6 +713,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderer: {fileID: 212722301744784912}
   coll: {fileID: 60075246512643172}
+--- !u!114 &7769842608181752198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380923796952252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd44561a2d30e06408e654a412b8a0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsActive: 0
 --- !u!1 &1580669940765378
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +771,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1580669940765378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -814,6 +832,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -825,6 +845,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

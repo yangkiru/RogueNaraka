@@ -25,6 +25,7 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         bool isBeforeAnimation;
         bool isAfterAnimation;
+        public bool IsAttackable {get;set;}
 
         void Reset()
         {
@@ -37,6 +38,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             afterAttackCorou = null;
             WeaponData weapon = (WeaponData)GameDatabase.instance.weapons[data.weapon].Clone();
             Init(weapon);
+            IsAttackable = true;
         }
 
         public void Init(WeaponData data)
@@ -104,7 +106,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             do
             {
                 yield return null;
-                leftDelay -= unit.isStun ? 0 : 1 * Mathf.Max(Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f), 0);
+                leftDelay -= (IsAttackable ? 1 : 0) * (unit.isStun ? 0 : 1) * Mathf.Max(Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f), 0);
             } while (leftDelay > 0);
             if (!isMoveForced && isBeforeAnimation)
                 unit.animator.SetBool("isBeforeAttack", false);
@@ -131,7 +133,7 @@ namespace RogueNaraka.UnitScripts.Attackable
             do
             {
                 yield return null;
-                leftDelay -= unit.isStun ? 0 : 1 * Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
+                leftDelay -= (IsAttackable ? 1 : 0) * (unit.isStun ? 0 : 1) * Time.deltaTime * (1 + unit.stat.GetCurrent(STAT.SPD) * 0.1f);
             } while (leftDelay > 0);
 
             if (!isMoveForced && isAfterAnimation)
@@ -174,7 +176,6 @@ namespace RogueNaraka.UnitScripts.Attackable
             //Debug.Log("LookTarget");
             unit.animator.SetFloat("x", unit.targetable.direction.x);
             unit.animator.SetFloat("y", unit.targetable.direction.y);
-            unit.animator.SetBool("isWalk", true);
         }
 
 

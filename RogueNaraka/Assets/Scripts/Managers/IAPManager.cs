@@ -210,7 +210,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
                 break;
             case PRODUCT_REMOVE_AD:
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-                AdMobManager.instance.RemoveAds();
                 break;
             default:
                 Debug.Log(string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id));
@@ -296,7 +295,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
                     break;
                 case PRODUCT_REMOVE_AD:
                     Debug.Log(string.Format("RestorePurchase: PASS. Product: '{0}'", productID));
-                    AdMobManager.instance.RemoveAds();
                     break;
                 default:
                     Debug.Log(string.Format("RestorePurchase: FAIL. Unrecognized id: '{0}'", productID));

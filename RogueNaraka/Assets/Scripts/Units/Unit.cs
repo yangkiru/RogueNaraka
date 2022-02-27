@@ -13,6 +13,7 @@ namespace RogueNaraka.UnitScripts
         #region field
 
         public MoveableUnit moveable;
+        public ClickToMoveableUnit clickToMoveable;
 
         #region attackable
 
@@ -77,6 +78,7 @@ namespace RogueNaraka.UnitScripts
         void Reset()
         {
             moveable = GetComponent<MoveableUnit>();
+            clickToMoveable = GetComponent<ClickToMoveableUnit>();
             stopBeforeAttackable = GetComponent<StopBeforeAttackableUnit>();
             stopAfterAttackable = GetComponent<StopAfterAttackableUnit>();
             dontStopAttackable = GetComponent<DontStopAttackableUnit>();
@@ -145,9 +147,6 @@ namespace RogueNaraka.UnitScripts
             deathable.Init();
             animator.runtimeAnimatorController = this.data.controller;
 
-            moveable.Init(this.data);
-            moveable.enabled = true;
-
             if (attackable)
                 attackable.enabled = false;
             if (this.data.weapon >= 0)
@@ -176,6 +175,11 @@ namespace RogueNaraka.UnitScripts
             targetable.enabled = true;
 
             DisableAutoMoveables();
+
+            moveable.Init(this.data);
+            moveable.enabled = true;
+            clickToMoveable.IsActive = false
+            ;
             switch(this.data.move)
             {
                 case MOVE_TYPE.RANDOM:
@@ -192,6 +196,9 @@ namespace RogueNaraka.UnitScripts
                     break;
                 case MOVE_TYPE.BOSS0:
                     autoMoveable = boss0Moveable;
+                    break;
+                case MOVE_TYPE.CLICKTOMOVE:
+                    clickToMoveable.IsActive = true;
                     break;
                 default:
                     autoMoveable = null;

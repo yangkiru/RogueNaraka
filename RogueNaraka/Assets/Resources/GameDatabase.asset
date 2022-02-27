@@ -53,7 +53,7 @@ MonoBehaviour:
     isStanding: 1
     isDeathEffect: 0
     isCorpse: 0
-    move: 0
+    move: 8
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
@@ -3230,8 +3230,11 @@ MonoBehaviour:
       - name: 3
         value: 0.025
     description:
-    - "Summon a blood swamp absorbing health from target enemies.\r\nThe damage and
-      the amount of recovery are proportional to health regen stats and count of reinforcement."
+    - 'Summon a blood swamp absorbing health from target enemies.
+
+      The damage
+      and the amount of recovery are proportional to health regen stats and count
+      of reinforcement.'
     - "\uC801\uC758 \uCCB4\uB825\uC744 \uD761\uC218\uD558\uB294 \uB2AA\uC744 \uC18C\uD658\uD55C\uB2E4.
       \uD53C\uD574\uB7C9\uACFC \uD68C\uBCF5\uB7C9\uC740 \uCCB4\uB825 \uD68C\uBCF5\uB825\uACFC
       \uAC15\uD654\uB7C9\uC5D0 \uBE44\uB840\uD55C\uB2E4."
@@ -3276,8 +3279,9 @@ MonoBehaviour:
     - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
       \uD5C8\uC218\uC544\uBE44\uB97C \uC18C\uD658\uD55C\uB2E4. \uD5C8\uC218\uC544\uBE44\uAC00
       \uC18C\uD658\uB418\uC5C8\uC744 \uB54C, \uB9CC\uC57D \uC801\uB4E4\uC5D0\uAC8C
-      \uD50C\uB808\uC774\uC5B4\uBCF4\uB2E4 \uD5C8\uC218\uC544\uBE44\uAC00 \uB354 \uAC00\uAE4C\uC6B8
-      \uACBD\uC6B0 \uC801\uB4E4\uC740 \uD5C8\uC218\uC544\uBE44\uB97C \uACF5\uACA9\uD55C\uB2E4."
+      \uD50C\uB808\uC774\uC5B4\uBCF4\uB2E4 \uD5C8\uC218\uC544\uBE44\uAC00 \uB354
+      \uAC00\uAE4C\uC6B8 \uACBD\uC6B0 \uC801\uB4E4\uC740 \uD5C8\uC218\uC544\uBE44\uB97C
+      \uACF5\uACA9\uD55C\uB2E4."
     useSFX: scarecrow
   - name: Shadow
     nameLang:
@@ -3420,8 +3424,10 @@ MonoBehaviour:
       - name: 2
         value: 0.01
     description:
-    - "Shoot a tornado. The tornado bounces off the wall.\r\nWhen an enemy hits a
-      tornado, it is stunned (Damage is proportional to TEC )."
+    - 'Shoot a tornado. The tornado bounces off the wall.
+
+      When an enemy hits
+      a tornado, it is stunned (Damage is proportional to TEC ).'
     - "\uBCBD\uC5D0 \uB2FF\uC73C\uBA74 \uD295\uAE30\uB294 \uD1A0\uB124\uC774\uB3C4\uB97C
       \uC3DC\uB2E4. \uD1A0\uB124\uC774\uB3C4\uC5D0 \uB2FF\uC73C\uBA74 \uAE30\uC220\uB825\uC5D0
       \uBE44\uB840\uD558\uB294 \uD53C\uD574\uB97C \uC785\uACE0 \uAE30\uC808\uD558\uBA70

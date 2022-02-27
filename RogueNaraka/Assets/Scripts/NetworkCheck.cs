@@ -45,7 +45,5 @@ public class NetworkCheck : MonoBehaviour
         } while (Application.internetReachability == NetworkReachability.NotReachable);
         networkCheckCorou = null;
         pnl.SetActive(false);
-
-        AdMobManager.instance.Start();
     }
 }

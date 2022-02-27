@@ -612,7 +612,8 @@ public enum MOVE_TYPE
     RUN,//?�망
     REST_RUSH,
     FOLLOW,
-    BOSS0
+    BOSS0,
+    CLICKTOMOVE
 }
 
 [Serializable]
