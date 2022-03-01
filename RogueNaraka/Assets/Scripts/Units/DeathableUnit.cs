@@ -52,7 +52,7 @@ namespace RogueNaraka.UnitScripts
             }
             else
                 MoneyManager.instance.RemainSoul = remain;
-            MoneyManager.instance.AddUnrefinedSoul((int)amount);
+            MoneyManager.instance.AddSoul((int)amount, false);
             LevelUpManager.instance.RequestEndStageCorou();
             DeathManager.instance.ReceiveHuntedUnit(this.unit.data.id);
             //TierScripts.TierManager.Instance.GainExp(this.unit.data.gainExp);
