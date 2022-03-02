@@ -26,7 +26,6 @@ public partial class DeathManager : MonoBehaviour {
             this.SoulRefiningPnl.gameObject.SetActive(true);
         } else {
             this.SoulRefiningPnl.gameObject.SetActive(false);
-            SetActiveBtnLayout(true);
         }
     }
 

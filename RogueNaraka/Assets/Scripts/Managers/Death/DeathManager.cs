@@ -67,7 +67,6 @@ public partial class DeathManager : MonoBehaviour
         //CameraShake.instance.Shake(0.2f, 0.2f, 0.01f);
         if (value)
         {
-            SetActiveBtnLayout(false);
             StartCoroutine(PumpCorou(youDied.rectTransform, 3, 0.5f));
         }
     }
@@ -81,7 +80,7 @@ public partial class DeathManager : MonoBehaviour
 
         SetDeathPnl(true);
 
-        StartCoroutine(SoulPnlCorou(1));
+        StartCoroutine(OpenResultCorou());
 
         GameManager.instance.SetSettingBtn(true);
 
@@ -104,10 +103,6 @@ public partial class DeathManager : MonoBehaviour
         if (PlayerPrefs.GetFloat("lastRefiningRate") != -1)
         {
             SetSoulPnl(true);
-        }
-        else
-        {
-            SetActiveBtnLayout(true);
         }
 
         this.isClickableCloseBtn = true;
@@ -133,14 +128,8 @@ public partial class DeathManager : MonoBehaviour
         else
         {
             soulPnl.gameObject.SetActive(false);
-            SetActiveBtnLayout(true);
             PlayerPrefs.SetFloat("lastRefiningRate", -1);
         }
-    }
-
-    public void SetActiveBtnLayout(bool _active) {
-        btnLayout[0].SetActive(_active);
-        btnLayout[1].SetActive(_active);
     }
 
     IEnumerator SoulRefiningRateTxtCorou(float rate)
