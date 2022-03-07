@@ -16,7 +16,8 @@ namespace RogueNaraka.SkillScripts
         void Run(ref Vector3 mp)
         {
             Unit player = BoardManager.instance.player;
-            player.autoMoveable.enabled = false;
+            if(player.autoMoveable != null)
+                player.autoMoveable.enabled = false;
             player.attackable.enabled = false;
             player.moveable.Stop();
             player.rigid.AddForce((mp - player.transform.position).normalized * Vector2.Distance(mp, player.transform.position) * 7);
@@ -72,7 +73,8 @@ namespace RogueNaraka.SkillScripts
         void OnRunEnd()
         {
             Unit player = BoardManager.instance.player;
-            player.autoMoveable.enabled = true;
+            if(player.autoMoveable != null)
+                player.autoMoveable.enabled = true;
             player.attackable.enabled = true;
         }
     }

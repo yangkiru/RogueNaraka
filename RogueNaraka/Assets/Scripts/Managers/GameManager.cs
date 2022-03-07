@@ -337,7 +337,6 @@ public class GameManager : MonoBehaviour {
         statTxt[1].text = player.data.stat.spd.ToString();
         statTxt[2].text = player.data.stat.tec.ToString();
         statTxt[3].text = player.data.stat.hp.ToString();
-        statTxt[4].text = player.data.stat.hpRegen.ToString();
         statTxt[5].text = player.data.stat.mp.ToString();
         statTxt[6].text = player.data.stat.mpRegen.ToString();
     }
@@ -348,7 +347,6 @@ public class GameManager : MonoBehaviour {
         statTxt[1].text = stat.spd.ToString();
         statTxt[2].text = stat.tec.ToString();
         statTxt[3].text = stat.hp.ToString();
-        statTxt[4].text = stat.hpRegen.ToString();
         statTxt[5].text = stat.mp.ToString();
         statTxt[6].text = stat.mpRegen.ToString();
     }

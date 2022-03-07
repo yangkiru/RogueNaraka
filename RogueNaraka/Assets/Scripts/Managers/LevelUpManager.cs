@@ -84,7 +84,7 @@ public class LevelUpManager : MonoBehaviour
         BoardManager.instance.ClearStage();
         GameManager.instance.SetPause(true);
         IsLevelUp = true;
-        statManager.SyncStatUpgradeTxt();
+        //statManager.SyncStatUpgradeTxt();
         //SkillManager.instance.SetIsDragable(false);
         rollManager.SetRollPnl(true);
         rollManager.SetShowCase(RollManager.ROLL_TYPE.ALL);

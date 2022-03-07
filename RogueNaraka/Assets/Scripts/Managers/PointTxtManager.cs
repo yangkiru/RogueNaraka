@@ -22,9 +22,9 @@ public class PointTxtManager : MonoBehaviour {
 
     public void SpawnTxt()
     {
-        GameObject obj = Instantiate(txtObj, Vector3.zero, new Quaternion(0, 0, 0, 0));
+        GameObject obj = Instantiate(txtObj, Vector3.zero, Quaternion.identity);
         obj.transform.SetParent(transform);
-        obj.transform.localScale = new Vector3(1, 1, 1);
+        obj.transform.localScale = Vector3.one;
         txtPool.EnqueueObjectPool(obj);
     }
 

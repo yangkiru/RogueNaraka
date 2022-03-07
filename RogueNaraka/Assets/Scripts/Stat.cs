@@ -12,7 +12,6 @@ public class Stat : ICloneable
     public float tec;
     public float hp;
     public float mp;
-    public float hpRegen;
     public float mpRegen;
 
     public float dmgMax;
@@ -38,7 +37,7 @@ public class Stat : ICloneable
 
     public float sumOrigin
     {
-        get { return dmg + spd + tec + hp + mp + hpRegen + mpRegen; }
+        get { return dmg + spd + tec + hp + mp + mpRegen; }
     }
 
     public float sumMax
@@ -85,12 +84,6 @@ public class Stat : ICloneable
                 if (!isCheck)
                     mp += amount;
                 return true;
-            case STAT.HR:
-                if (!isIgnoreMax && hpRegen + amount > hpRegenMax)
-                    return false;
-                if (!isCheck)
-                    hpRegen += amount;
-                return true;
             case STAT.MR:
                 if (!isIgnoreMax && mpRegen + amount > mpRegenMax)
                     return false;
@@ -120,9 +113,6 @@ public class Stat : ICloneable
             case STAT.MP:
                 mpMax += amount;
                 break;
-            case STAT.HR:
-                hpRegenMax += amount;
-                break;
             case STAT.MR:
                 mpRegenMax += amount;
                 break;
@@ -151,9 +141,6 @@ public class Stat : ICloneable
             case STAT.MP:
                 mpTemp += amount;
                 break;
-            case STAT.HR:
-                hpRegenTemp += amount;
-                break;
             case STAT.MR:
                 mpRegenTemp += amount;
                 break;
@@ -167,7 +154,6 @@ public class Stat : ICloneable
         tec = s.tec;
         hp = s.hp;
         mp = s.mp;
-        hpRegen = s.hpRegen;
         mpRegen = s.mpRegen;
     }
 
@@ -189,9 +175,6 @@ public class Stat : ICloneable
                 break;
             case STAT.MP:
                 mp = value;
-                break;
-            case STAT.HR:
-                hpRegen = value;
                 break;
             case STAT.MR:
                 mpRegen = value;
@@ -224,8 +207,6 @@ public class Stat : ICloneable
                 return hp;
             case STAT.MP:
                 return mp;
-            case STAT.HR:
-                return hpRegen;
             case STAT.MR:
                 return mpRegen;
             case STAT.SP:
@@ -249,10 +230,8 @@ public class Stat : ICloneable
             case 4:
                 return mp;
             case 5:
-                return hpRegen;
-            case 6:
                 return mpRegen;
-            case 7:
+            case 6:
                 return statPoints;
         }
         return -1;
@@ -272,8 +251,6 @@ public class Stat : ICloneable
                 return hp + hpTemp;
             case STAT.MP:
                 return mp + mpTemp;
-            case STAT.HR:
-                return hpRegen + hpRegenTemp;
             case STAT.MR:
                 return mpRegen + mpRegenTemp;
             case STAT.SP:
@@ -297,10 +274,8 @@ public class Stat : ICloneable
             case 4:
                 return mp + mpTemp;
             case 5:
-                return hpRegen + hpRegenTemp;
-            case 6:
                 return mpRegen + mpRegenTemp;
-            case 7:
+            case 6:
                 return statPoints;
         }
         return -1;
@@ -320,8 +295,6 @@ public class Stat : ICloneable
                 return hpMax;
             case STAT.MP:
                 return mpMax;
-            case STAT.HR:
-                return hpRegenMax;
             case STAT.MR:
                 return mpRegenMax;
             case STAT.SP:
@@ -366,5 +339,5 @@ public class Stat : ICloneable
 [Serializable]
 public enum STAT
 {
-    DMG, SPD, TEC, HP, HR, MP, MR, SP
+    DMG, SPD, TEC, HP, MP, MR, SP
 }

@@ -41,7 +41,8 @@ namespace RogueNaraka.SkillScripts
             }
 
             player.collider.enabled = false;
-            player.autoMoveable.enabled = false;
+            if(player.autoMoveable != null)
+                player.autoMoveable.enabled = false;
             player.attackable.enabled = false;
             player.targetable.IsTargetable = false;
             player.moveable.Stop();
@@ -105,7 +106,8 @@ namespace RogueNaraka.SkillScripts
             player.shadow.enabled = true;
             player.rigid.velocity = Vector2.zero;
             player.collider.enabled = true;
-            player.autoMoveable.enabled = true;
+            if(player.autoMoveable != null)
+                player.autoMoveable.enabled = true;
             player.attackable.enabled = true;
             player.targetable.IsTargetable = true;
 

@@ -25,7 +25,6 @@ MonoBehaviour:
       tec: 1
       hp: 1
       mp: 1
-      hpRegen: 1
       mpRegen: 1
       dmgMax: 5
       spdMax: 5
@@ -59,8 +58,8 @@ MonoBehaviour:
     tackleDelay: 0
     moveDelay: 1
     moveDistance: 1
-    moveSpeed: 1
-    accelerationRate: 0
+    moveSpeed: 0.7
+    accelerationRate: 2
     decelerationRate: 0
     limitTime: 0
     shadowPos:
@@ -1096,7 +1095,6 @@ MonoBehaviour:
       tec: 0
       hp: 3
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1160,7 +1158,6 @@ MonoBehaviour:
       tec: 0
       hp: 6
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1224,7 +1221,6 @@ MonoBehaviour:
       tec: 0
       hp: 5
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1286,7 +1282,6 @@ MonoBehaviour:
       tec: 0
       hp: 8
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1348,7 +1343,6 @@ MonoBehaviour:
       tec: 0
       hp: 25
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1410,7 +1404,6 @@ MonoBehaviour:
       tec: 0
       hp: 14
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1472,7 +1465,6 @@ MonoBehaviour:
       tec: 0
       hp: 8
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1533,7 +1525,6 @@ MonoBehaviour:
       tec: 0
       hp: 0.3
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1598,7 +1589,6 @@ MonoBehaviour:
       tec: 0
       hp: 0.3
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1663,7 +1653,6 @@ MonoBehaviour:
       tec: 0
       hp: 0.3
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1729,7 +1718,6 @@ MonoBehaviour:
       tec: 0
       hp: 1500
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1794,7 +1782,6 @@ MonoBehaviour:
       tec: 0
       hp: 2
       mp: 0
-      hpRegen: 0
       mpRegen: 0
       dmgMax: 0
       spdMax: 0
@@ -1854,7 +1841,6 @@ MonoBehaviour:
       tec: 1
       hp: 1
       mp: 1
-      hpRegen: 1
       mpRegen: 1
       dmgMax: 5
       spdMax: 5
