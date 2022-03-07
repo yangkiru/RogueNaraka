@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 553358633947530481}
   - component: {fileID: 553358633947530486}
   m_Layer: 14
-  m_Name: SoulParticle
+  m_Name: CoinParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5289023435027803299}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -190,7 +190,7 @@ SpriteRenderer:
   m_SortingLayerID: 1797976757
   m_SortingLayer: 6
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 516cf7829eab94643a16f3f079fe04c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3cdb8567ffe1cc4198a141e559e2c0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
