@@ -51,7 +51,7 @@ public class StatOrbManager : MonoBehaviour
         {
             orbPool.EnqueueObjectPool(Instantiate(orbPrefab));
         }
-        for (int i = 0; i <= (int)STAT.MR; ++i) {
+        for (int i = 0; i <= (int)STAT.MP; ++i) {
             this.statOrblistForShoot.Add(new List<StatOrb>());
         }
     }
@@ -61,7 +61,7 @@ public class StatOrbManager : MonoBehaviour
         int addStatValue = 0;
         int statPoints = 0;
 
-        for(int i = 0; i <= (int)STAT.MR; ++i) {
+        for(int i = 0; i <= (int)STAT.MP; ++i) {
             statPoints = (int)_resultStatOfShootStatOrb.GetOrigin((STAT)i);
             addStatValue = GetFirstStatValueForStatOrb(_resultStatOfShootStatOrb.statPoints);
 
@@ -123,7 +123,7 @@ public class StatOrbManager : MonoBehaviour
         current--;
         IconEffect();
         bombParticle.Play();
-        if(used == this.resultStatOfShootStatOrb.statPoints || (currentStat == STAT.MR && this.maxStat.mpRegen == this.maxStat.mpRegenMax))
+        if(used == this.resultStatOfShootStatOrb.statPoints)
         {
             StartCoroutine(OnLastOverflow());
         }
@@ -234,7 +234,7 @@ public class StatOrbManager : MonoBehaviour
 
     IEnumerator StatCorou(Stat stat)
     {
-        for(int i = 0; i <= (int)STAT.MR; i++)
+        for(int i = 0; i <= (int)STAT.MP; i++)
         {
             float t = 0.5f;
             while (t > 0)

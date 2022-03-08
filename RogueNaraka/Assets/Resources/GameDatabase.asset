@@ -25,7 +25,6 @@ MonoBehaviour:
       tec: 1
       hp: 1
       mp: 1
-      mpRegen: 1
       dmgMax: 5
       spdMax: 5
       tecMax: 5
@@ -1095,7 +1094,6 @@ MonoBehaviour:
       tec: 0
       hp: 3
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1158,7 +1156,6 @@ MonoBehaviour:
       tec: 0
       hp: 6
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1221,7 +1218,6 @@ MonoBehaviour:
       tec: 0
       hp: 5
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1282,7 +1278,6 @@ MonoBehaviour:
       tec: 0
       hp: 8
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1343,7 +1338,6 @@ MonoBehaviour:
       tec: 0
       hp: 25
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1404,7 +1398,6 @@ MonoBehaviour:
       tec: 0
       hp: 14
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1465,7 +1458,6 @@ MonoBehaviour:
       tec: 0
       hp: 8
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1525,7 +1517,6 @@ MonoBehaviour:
       tec: 0
       hp: 0.3
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1589,7 +1580,6 @@ MonoBehaviour:
       tec: 0
       hp: 0.3
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1653,7 +1643,6 @@ MonoBehaviour:
       tec: 0
       hp: 0.3
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1718,7 +1707,6 @@ MonoBehaviour:
       tec: 0
       hp: 1500
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1782,7 +1770,6 @@ MonoBehaviour:
       tec: 0
       hp: 2
       mp: 0
-      mpRegen: 0
       dmgMax: 0
       spdMax: 0
       tecMax: 0
@@ -1841,7 +1828,6 @@ MonoBehaviour:
       tec: 1
       hp: 1
       mp: 1
-      mpRegen: 1
       dmgMax: 5
       spdMax: 5
       tecMax: 5
@@ -3582,9 +3568,7 @@ MonoBehaviour:
     - Speed
     - Technique
     - Health Point
-    - Health Regen
     - Mana Point
-    - Mana Regen
     - Stat Point
   - lang: Korean
     items:
@@ -3592,9 +3576,7 @@ MonoBehaviour:
     - "\uC21C\uBC1C\uB825"
     - "\uAE30\uC220\uB825"
     - "\uCCB4\uB825"
-    - "\uCCB4\uB825 \uD68C\uBCF5\uB825"
     - "\uB9C8\uB825"
-    - "\uB9C8\uB825 \uD68C\uBCF5\uB825"
     - "\uC2A4\uD0EF \uD3EC\uC778\uD2B8"
   langFonts:
   - 

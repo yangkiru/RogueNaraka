@@ -145,14 +145,14 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
         {
             if (amount <= 0)
                 break;
-            STAT type = (STAT)Random.Range(0, (int)STAT.MR + 1);
+            STAT type = (STAT)Random.Range(0, (int)STAT.MP + 1);
             if (stat.AddOrigin(type, 1))
             {
                 randomStat.AddOrigin(type, 1, false, true);
                 amount--;
             }
         }
-        for (int i = 0; i < (int)STAT.MR + 1; i++)
+        for (int i = 0; i < (int)STAT.MP + 1; i++)
         {
             statTxts[i].text = string.Format("{0} {1}", ((STAT)i).ToString(), randomStat.GetOrigin(i));
         }

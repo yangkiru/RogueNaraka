@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("RandomStat " + stat.statPoints);
         while(statPoint > 0)
         {
-            int type = Random.Range(0, (int)STAT.MR + 1);
+            int type = Random.Range(0, (int)STAT.MP + 1);
             if (stat.AddOrigin((STAT)type, 1))
             {
                 //Debug.Log(((STAT)type).ToString());
@@ -250,7 +250,7 @@ public class GameManager : MonoBehaviour {
         stat.SetOrigin(playerBase.stat);
         Stat randomStat = new Stat();
         randomStat.SetMax(stat);
-        for (int i = 0; i < (int)STAT.MR + 1; i++)
+        for (int i = 0; i < (int)STAT.MP + 1; i++)
             randomStat.AddMax((STAT)i, -playerBase.stat.GetOrigin((STAT)i));
         randomStat.statPoints = stat.statPoints;
         RandomStat(randomStat);
@@ -338,7 +338,6 @@ public class GameManager : MonoBehaviour {
         statTxt[2].text = player.data.stat.tec.ToString();
         statTxt[3].text = player.data.stat.hp.ToString();
         statTxt[5].text = player.data.stat.mp.ToString();
-        statTxt[6].text = player.data.stat.mpRegen.ToString();
     }
 
     public void StatTextUpdate(Stat stat)
@@ -348,7 +347,6 @@ public class GameManager : MonoBehaviour {
         statTxt[2].text = stat.tec.ToString();
         statTxt[3].text = stat.hp.ToString();
         statTxt[5].text = stat.mp.ToString();
-        statTxt[6].text = stat.mpRegen.ToString();
     }
 
     public void SetPause(bool value)

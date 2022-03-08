@@ -17,7 +17,7 @@ namespace RogueNaraka.UnitScripts
         public float regenTime { get { return 1; } }
         float currentTime;
 
-        public float regenMp { get { return stat.mpRegen * 0.1f; } }
+        public float regenSpeed = 1;
 
         Stat stat;
 
@@ -78,21 +78,40 @@ namespace RogueNaraka.UnitScripts
             stat.currentMp = _currentMp;
         }
 
-        void Regen()
+        // void Regen()
+        // {
+        //     if (unit.deathable.isDeath)
+        //         return;
+        //     currentTime += Time.deltaTime;
+        //     if (currentTime >= regenTime)
+        //     {
+        //         AddMp(stat.mpMax * 0.1f);
+        //         currentTime = 0;
+        //     }
+        // }
+
+        IEnumerator RegenCorou()
         {
-            if (unit.deathable.isDeath)
-                return;
-            currentTime += Time.deltaTime;
-            if (currentTime >= regenTime)
+            while (true)
             {
-                AddMp(regenMp);
-                currentTime = 0;
+                float t = regenTime;
+                do
+                {
+                    yield return null;
+                    t -= Time.deltaTime * regenSpeed;
+                } while (t > 0);
+                if(!unit.deathable.isDeath)
+                    AddMp(maxMp * 0.1f);
             }
         }
 
-        private void Update()
-        {
-            Regen();
+        // private void Update()
+        // {
+        //     Regen();
+        // }
+
+        private void OnEnable(){
+            StartCoroutine(RegenCorou());
         }
     }
 }
