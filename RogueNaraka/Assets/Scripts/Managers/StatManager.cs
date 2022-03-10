@@ -119,7 +119,7 @@ public class StatManager : MonoBehaviour {
 
     public void SyncStatUpgradeTxt()
     {
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < upgradeTxt.Length; i++)
         {
             upgradeTxt[i].text = string.Format("{0}/{1}", player.data.stat.GetOrigin((STAT)i), player.data.stat.GetMax((STAT)i));
         }

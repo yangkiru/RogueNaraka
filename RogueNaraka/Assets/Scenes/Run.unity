@@ -26638,7 +26638,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -34038,7 +34038,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 6
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -47378,29 +47378,20 @@ MonoBehaviour:
   statUpgradeTxt:
   - {fileID: 362283085}
   - {fileID: 115751523}
-  - {fileID: 0}
   - {fileID: 1807951733}
-  - {fileID: 0}
   - {fileID: 1460819927}
-  - {fileID: 0}
   - {fileID: 2089453564}
   statUpgradeBtnTxt:
   - {fileID: 1036643834}
   - {fileID: 830901102}
-  - {fileID: 0}
   - {fileID: 212062811}
-  - {fileID: 0}
   - {fileID: 276776204}
-  - {fileID: 0}
   - {fileID: 486090971}
   statUpgradeBtn:
   - {fileID: 1489381482}
   - {fileID: 129439000}
-  - {fileID: 0}
   - {fileID: 1152419992}
-  - {fileID: 0}
   - {fileID: 1203665589}
-  - {fileID: 0}
   - {fileID: 640102964}
   skillScrollView: {fileID: 114112727}
   weaponPnl: {fileID: 1230826286}
@@ -54992,7 +54983,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -57182,7 +57173,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -81879,7 +81870,6 @@ MonoBehaviour:
   upgradeTxt:
   - {fileID: 1007657836}
   - {fileID: 36708988}
-  - {fileID: 0}
   - {fileID: 1478587160}
   - {fileID: 1650955495}
   leftStatTxt: {fileID: 1943678348}
@@ -84153,7 +84143,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -100029,13 +100019,11 @@ MonoBehaviour:
   icons:
   - {fileID: 21300000, guid: c78242428b3971641bf04a4fc0c6adb5, type: 3}
   - {fileID: 21300000, guid: 3f192fb9df2bb0047a5ccb6d8673c3f1, type: 3}
-  - {fileID: 21300000, guid: 5d42f90c35ddc2645af851b998dad42d, type: 3}
   - {fileID: 21300000, guid: 0a6e6cbb39ca69c4db1dd956b7372c57, type: 3}
   - {fileID: 21300000, guid: 8424c49f92158d845ad44c12ba1b0666, type: 3}
   smallIcons:
   - {fileID: 21300000, guid: c448808b8032425489d509e75c3288b9, type: 3}
   - {fileID: 21300000, guid: a5ff6480ac0a83c4ba0c2deb7b4a63ac, type: 3}
-  - {fileID: 21300000, guid: a19ad4cce722f0e4697be0879dbd063f, type: 3}
   - {fileID: 21300000, guid: d518959a486afaa4e959dd88b9a22a0a, type: 3}
   - {fileID: 21300000, guid: 0782c93ee169ae44b90c48ddec9c2144, type: 3}
   statNameTxt: {fileID: 341940492}

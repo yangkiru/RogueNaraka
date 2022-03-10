@@ -3496,7 +3496,6 @@ MonoBehaviour:
     items:
     - Damage
     - Speed
-    - Technique
     - Health Point
     - Mana Point
     - Stat Point
@@ -3504,7 +3503,6 @@ MonoBehaviour:
     items:
     - "\uACF5\uACA9\uB825"
     - "\uC21C\uBC1C\uB825"
-    - "\uAE30\uC220\uB825"
     - "\uCCB4\uB825"
     - "\uB9C8\uB825"
     - "\uC2A4\uD0EF \uD3EC\uC778\uD2B8"
