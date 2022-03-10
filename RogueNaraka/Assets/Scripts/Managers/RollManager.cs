@@ -198,22 +198,7 @@ public class RollManager : MonoBehaviour {
             ResetData();
 
             SkillManager.instance.Save();
-            //if (!isStageUp)
-            //{
-            //    PlayerPrefs.SetInt("isFirstRoll", 0);
-            //    SkillManager.instance.Save();
-            //    Item.instance.Save();
-            //}
-            //if (isStageUp)
-            //{
-            //    BoardManager.instance.StageUp();
-            //    //BoardManager.instance.Save();
-            //    PlayerPrefs.SetInt("isLevelUp", 0);
-            //    //LevelUpManager.instance.StartCoroutine(LevelUpManager.instance.EndLevelUp());
-            //    GameManager.instance.Save();
-            //}
 
-            //StatManager.instance.SetStatPnl(false);
             if (--LeftRoll <= 0)
             {
                 LeftRoll = 0;
@@ -368,16 +353,6 @@ public class RollManager : MonoBehaviour {
         StatManager.instance.statPnl.SetActive(false);
         if (onFadeOut != null)
             onFadeOut.Invoke();
-        //if (isStageUp)
-        //    BoardManager.instance.InitBoard();
-        //else
-        //{
-        //    Stat stat = Stat.DataToStat();
-        //    if (stat != null)
-        //        GameManager.instance.RunGame(stat);
-        //    //else
-        //    //    BoardManager.instance.fade.FadeIn();
-        //}
     }
 
     bool isReRoll;//참이면 ReRoll 재 호출시 ReRoll 진행
@@ -527,7 +502,7 @@ public class RollManager : MonoBehaviour {
     private bool IsSelectable(int position)
     {
         //if (stopped == position || (stopped + 1) % 10 == position || (stopped + 2) % 10 == position)
-        if ((stopped + 1) % 10 == position)
+        if ((stopped + 1) % 10 == position || (stopped) % 10 == position || (stopped + 2) % 10 == position)
             return true;
         else
             return false;
@@ -601,26 +576,30 @@ public class RollManager : MonoBehaviour {
 
     public void OnClick(int position)
     {
-        if (selected == position && datas[selected].type == ROLL_TYPE.STAT)
-            Ok();
+        if ((selected == position || position == (selected-1)%showCases.Length || position == (selected+1)%showCases.Length) && datas[position].type == ROLL_TYPE.STAT)
+            Ok(position);
     }
     
     public void OnDown(int position)
     {
-        if (selected != position)
-            return;
-        if (datas[selected].type != ROLL_TYPE.STAT)
-        {
-            dragImg.sprite = GetSprite(datas[selected]);
+        Debug.Log(position);
+        // if (position != selected || position != ((selected-1)%showCases.Length) || position != ((selected+1)%showCases.Length))
+        //     return;
+        Select(position);
+        if (datas[position].type != ROLL_TYPE.STAT)
+        {            
+            dragImg.sprite = GetSprite(datas[position]);
             dragImg.gameObject.SetActive(true);
         }
     }
 
-    public void OnDrag()
+    public void OnDrag(int position)
     {
         if (selected != -1)
         {
-            dragImg.sprite = GetSprite(datas[selected]);
+            RollData rollData = datas[position];
+            dragImg.gameObject.SetActive(rollData.type != ROLL_TYPE.STAT);
+            dragImg.sprite = GetSprite(datas[position]);
             Vector3 pos = GameManager.instance.GetMousePosition();
             dragImg.rectTransform.position = pos;
             Vector3 local = dragImg.rectTransform.localPosition;
@@ -629,10 +608,13 @@ public class RollManager : MonoBehaviour {
         }
     }
 
-    public void OnUp()
+    public void OnUp(int position)
     {
-        if(selected != -1)
-            Ok();
+        if(selected != -1) {
+            RollData rollData = datas[position];
+            if (rollData.type != ROLL_TYPE.STAT)
+                Ok(position);
+        }
         dragImg.rectTransform.position = restPosition;
         dragImg.sprite = null;
         dragImg.gameObject.SetActive(false);
@@ -641,9 +623,9 @@ public class RollManager : MonoBehaviour {
     /// <summary>
     /// 결정되었을 때 호출
     /// </summary>
-    public void Ok()
+    public void Ok(int position)
     {
-        RollData rollData = datas[selected];
+        RollData rollData = datas[position];
         switch (rollData.type)
         {
             case ROLL_TYPE.SKILL:
@@ -833,15 +815,21 @@ public class RollManager : MonoBehaviour {
     {
         float size = 1.5f;
         float t = 0.5f;
-        RectTransform imgRect = showCases[(stopped + 1) % 10].rectTransform;
-        imgRect.localScale = new Vector3(size, size, 0);
+        RectTransform[] imgRect = new RectTransform[3];
+        imgRect[0] = showCases[(stopped) % 10].rectTransform;
+        imgRect[1] = showCases[(stopped + 1) % 10].rectTransform;
+        imgRect[2] = showCases[(stopped + 2) % 10].rectTransform;
+        for(int i = 0 ; i < 3; i ++)
+            imgRect[i].localScale = new Vector3(size, size, 0);
         while (t > 0)
         {
             yield return null;
             t -= Time.unscaledDeltaTime;
-            imgRect.localScale = Vector3.Lerp(imgRect.localScale, Vector3.one, 1 - t * 2);
+            for(int i = 0 ; i < 3; i ++)
+                imgRect[i].localScale = Vector3.Lerp(imgRect[i].localScale, Vector3.one, 1 - t * 2);
         }
-        imgRect.localScale = Vector3.one;
+        for(int i = 0 ; i < 3; i ++)
+            imgRect[i].localScale = Vector3.one;
     }
 
     void SetStatTxt(bool active, int position = -1)
