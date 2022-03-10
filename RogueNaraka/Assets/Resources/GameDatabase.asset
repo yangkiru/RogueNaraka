@@ -22,19 +22,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 1
-      tec: 1
       hp: 1
       mp: 1
       dmgMax: 5
       spdMax: 5
-      tecMax: 5
       hpMax: 5
       mpMax: 5
-      hpRegenMax: 5
-      mpRegenMax: 5
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1091,19 +1086,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 0
-      tec: 0
       hp: 3
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1153,19 +1143,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 0
-      tec: 0
       hp: 6
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1215,19 +1200,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 4
-      tec: 0
       hp: 5
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1275,19 +1255,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 5
-      tec: 0
       hp: 8
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1335,19 +1310,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 0
-      tec: 0
       hp: 25
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1395,19 +1365,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 0
-      tec: 0
       hp: 14
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1455,19 +1420,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 0
-      tec: 0
       hp: 8
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1514,19 +1474,14 @@ MonoBehaviour:
     stat:
       dmg: 0.3
       spd: 0
-      tec: 0
       hp: 0.3
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1577,19 +1532,14 @@ MonoBehaviour:
     stat:
       dmg: 0.3
       spd: 0
-      tec: 0
       hp: 0.3
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1640,19 +1590,14 @@ MonoBehaviour:
     stat:
       dmg: 0.3
       spd: 0
-      tec: 0
       hp: 0.3
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1704,19 +1649,14 @@ MonoBehaviour:
     stat:
       dmg: 10
       spd: 10
-      tec: 0
       hp: 1500
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1767,19 +1707,14 @@ MonoBehaviour:
     stat:
       dmg: 0
       spd: 0
-      tec: 0
       hp: 2
       mp: 0
       dmgMax: 0
       spdMax: 0
-      tecMax: 0
       hpMax: 0
       mpMax: 0
-      hpRegenMax: 0
-      mpRegenMax: 0
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -1825,19 +1760,14 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 1
-      tec: 1
       hp: 1
       mp: 1
       dmgMax: 5
       spdMax: 5
-      tecMax: 5
       hpMax: 5
       mpMax: 5
-      hpRegenMax: 5
-      mpRegenMax: 5
       dmgTemp: 0
       spdTemp: 0
-      tecTemp: 0
       hpTemp: 0
       mpTemp: 0
       hpRegenTemp: 0
@@ -2055,7 +1985,7 @@ MonoBehaviour:
     id: 5
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0.06
-    related: 2
+    related: 0
     controller: {fileID: 22100000, guid: a016a5d25f314554b9cda7aedd5996ee, type: 2}
     type: 0
     localSpeed: 0
@@ -2088,7 +2018,7 @@ MonoBehaviour:
     id: 6
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0.06
-    related: 2
+    related: 0
     controller: {fileID: 22100000, guid: 30c0ba08d2084a845bbe1b4edde7d422, type: 2}
     type: 0
     localSpeed: 0
@@ -2190,7 +2120,7 @@ MonoBehaviour:
     id: 9
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0
-    related: 3
+    related: 2
     controller: {fileID: 22100000, guid: 743522a24d1f9114b9b6464c01a7fe38, type: 2}
     type: 0
     localSpeed: 2
@@ -2223,7 +2153,7 @@ MonoBehaviour:
     id: 10
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0
-    related: 2
+    related: 0
     controller: {fileID: 9100000, guid: 309ae9a11ed36054f991dc2ee6e60bfc, type: 2}
     type: 0
     localSpeed: 0
@@ -2654,7 +2584,7 @@ MonoBehaviour:
     id: 21
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0.05
-    related: 2
+    related: 0
     controller: {fileID: 9100000, guid: 88ea6031a91d8994586c942e94e20571, type: 2}
     type: 3
     localSpeed: 0
@@ -2726,7 +2656,7 @@ MonoBehaviour:
     id: 23
     color: {r: 1, g: 1, b: 1, a: 0.8}
     dmg: 0.5
-    related: 2
+    related: 0
     controller: {fileID: 22100000, guid: a11c41e27517b5745baddafe24efd672, type: 2}
     type: 0
     localSpeed: 0

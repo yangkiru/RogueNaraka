@@ -18,7 +18,7 @@ namespace RogueNaraka.UnitScripts
         }
 
         private void Update(){
-            if (IsActive && Input.GetMouseButtonDown(0)){
+            if (IsActive && Time.timeScale != 0 && Input.GetMouseButtonDown(0)){
                 clickPoint = GameManager.instance.GetMousePosition();
                 if(!BoardManager.IsMouseInBoard()) return;
                 unit.attackable.IsAttackable = false;

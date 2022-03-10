@@ -208,9 +208,6 @@ public class SoulShopManager : MonoBehaviour
             case STAT.SPD:
                 target = stat.spdMax;
                 break;
-            case STAT.TEC:
-                target = stat.tecMax;
-                break;
             case STAT.HP:
                 target = stat.hpMax;
                 break;

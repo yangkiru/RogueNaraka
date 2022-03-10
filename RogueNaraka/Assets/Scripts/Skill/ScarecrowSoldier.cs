@@ -16,7 +16,7 @@ namespace RogueNaraka.SkillScripts
         {
             Unit soldier = BoardManager.instance.unitPool.DequeueObjectPool().GetComponent<Unit>();
             UnitData unitData = (UnitData)GameDatabase.instance.spawnables[data.unitIds[0]].Clone();
-            unitData.stat.dmg = BoardManager.instance.player.stat.GetCurrent(STAT.TEC);
+            unitData.stat.dmg = BoardManager.instance.player.stat.GetCurrent(STAT.DMG);
             unitData.stat.hp = GetValue(Value.Hp).value;
             unitData.stat.currentHp = unitData.stat.hp;
             unitData.limitTime = GetValue(Value.Time).value;
