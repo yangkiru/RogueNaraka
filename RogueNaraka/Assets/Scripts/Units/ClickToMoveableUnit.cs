@@ -21,14 +21,7 @@ namespace RogueNaraka.UnitScripts
             if (IsActive && Time.timeScale != 0 && Input.GetMouseButtonDown(0)){
                 clickPoint = GameManager.instance.GetMousePosition();
                 if(!BoardManager.IsMouseInBoard()) return;
-                unit.attackable.IsAttackable = false;
-                moveable.SetDestination(clickPoint, EnableAttackable);
-            }
-        }
-
-        private void EnableAttackable(bool isArrive){
-            if (unit.attackable != null){
-                unit.attackable.IsAttackable = true;
+                moveable.SetDestination(clickPoint);
             }
         }
     }
