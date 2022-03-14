@@ -2827,7 +2827,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
-    attackDistance: 3
+    attackDistance: 100
   - name: SwordMedium
     id: 7
     type: 2
@@ -2837,7 +2837,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
-    attackDistance: 4
+    attackDistance: 100
   - name: SwordBig
     id: 8
     type: 2
@@ -2847,7 +2847,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
-    attackDistance: 5
+    attackDistance: 100
   - name: SwordBSS
     id: 9
     type: 2
@@ -2877,7 +2877,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
-    attackDistance: 5
+    attackDistance: 100
   - name: SwordBMM
     id: 10
     type: 2
@@ -2907,7 +2907,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
-    attackDistance: 5
+    attackDistance: 100
   - name: SwordBBB
     id: 11
     type: 2
@@ -2937,7 +2937,7 @@ MonoBehaviour:
     offset: {x: 0, y: 0.3, z: 0}
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
-    attackDistance: 5
+    attackDistance: 100
   playerWeapons:
   - level: 0
     cost: 500
