@@ -20,7 +20,9 @@ namespace RogueNaraka.UnitScripts
         private void Update(){
             if (IsActive && Time.timeScale != 0 && Input.GetMouseButtonDown(0)){
                 clickPoint = GameManager.instance.GetMousePosition();
-                if(!BoardManager.IsMouseInBoard()) return;
+                if(clickPoint.x < BoardManager.instance.boardRange[0].x || clickPoint.x > BoardManager.instance.boardRange[1].x ||
+                    clickPoint.y < BoardManager.instance.boardRange[0].y || clickPoint.y > BoardManager.instance.boardRange[1].y
+                ) return;
                 moveable.SetDestination(clickPoint);
             }
         }
