@@ -70,17 +70,12 @@ public class StatManager : MonoBehaviour {
                     rollManager.SetRollPnl(false);
                 }
             }
-            else if(this.leftStat <= 0)
+            else
             {
                 lastChance = false;
                 this.leftStat = 0;
                 rollManager.SetRollPnl(true);
                 
-                statPnl.SetActive(false);
-            }
-            else
-            {
-                lastChance = false;
                 statPnl.SetActive(false);
             }
         }
