@@ -23,8 +23,14 @@ namespace RogueNaraka.UnitScripts
                 if(clickPoint.x < BoardManager.instance.boardRange[0].x || clickPoint.x > BoardManager.instance.boardRange[1].x ||
                     clickPoint.y < BoardManager.instance.boardRange[0].y || clickPoint.y > BoardManager.instance.boardRange[1].y
                 ) return;
-                moveable.SetDestination(clickPoint);
+                GameManager.instance.movePointer.transform.position = clickPoint;
+                GameManager.instance.movePointer.SetActive(true);
+                moveable.SetDestination(clickPoint, DisableMovePointer);
             }
+        }
+
+        private void DisableMovePointer(bool isArrive) {
+            GameManager.instance.movePointer.SetActive(false);
         }
     }
 }

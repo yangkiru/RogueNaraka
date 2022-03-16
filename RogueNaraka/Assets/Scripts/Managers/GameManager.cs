@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
 
     public Button[] languageBtns;
 
+    public GameObject movePointer;
+
     public Unit player
     {
         get { return boardManager.player; }
