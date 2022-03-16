@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace RogueNaraka.BulletScripts
 {
@@ -15,7 +16,8 @@ namespace RogueNaraka.BulletScripts
 
         public void Shake()
         {
-            CameraShake.instance.Shake(bullet.data.shake);
+            GameManager.instance.ShakeCamera(bullet.data.shake.power, bullet.data.shake.time, bullet.data.shake.gap);
+            //CameraShake.instance.Shake(bullet.data.shake);
         }
     }
 }

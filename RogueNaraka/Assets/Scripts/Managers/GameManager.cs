@@ -9,7 +9,7 @@ using RogueNaraka.TierScripts;
 using TMPro;
 using System.Linq;
 
-public class GameManager : MonoBehaviour {
+public partial class GameManager : MonoBehaviour {
 
     public static Language language;
 
