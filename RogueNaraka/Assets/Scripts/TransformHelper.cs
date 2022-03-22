@@ -10,6 +10,8 @@ public class TransformHelper : MonoBehaviour
     public bool isMoveToMouse;
     public Vector3 movePos;
 
+    public Camera cam;
+
     private void Reset()
     {
         cachedTransform = GetComponent<Transform>();
@@ -17,8 +19,11 @@ public class TransformHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isMoveToMouse)
-            cachedTransform.position = GameManager.instance.GetMousePosition();
+        if(isMoveToMouse){
+            Vector3 pos = cam.ScreenToWorldPoint(Input.mousePosition);
+            pos.z = cachedTransform.parent.transform.position.z;
+            cachedTransform.position = pos;
+        }
     }
 
     public void Move()

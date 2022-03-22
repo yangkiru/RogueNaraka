@@ -113,7 +113,7 @@ namespace RogueNaraka.UnitScripts
                     t -= Time.deltaTime * regenSpeed;
                 } while (t > 0);
                 if(!unit.deathable.isDeath && _currentHp > 0)
-                    AddHp(maxHp * 0.1f);
+                    AddHp(maxHp * 0.1f * unit.data.hpRegen);
             }
         }
 

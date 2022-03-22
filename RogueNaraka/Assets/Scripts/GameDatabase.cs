@@ -148,6 +148,7 @@ public class UnitData : ICloneable
     public int stage;
     public int maxStage;
     public int weapon;
+    public float hpRegen;
     public Stat stat;
     public RuntimeAnimatorController controller;
     public RuntimeAnimatorController deathEffectController;

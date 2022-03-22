@@ -19,6 +19,7 @@ MonoBehaviour:
     stage: 0
     maxStage: 0
     weapon: 5
+    hpRegen: 1
     stat:
       dmg: 1
       spd: 1
@@ -1083,6 +1084,7 @@ MonoBehaviour:
     stage: 4
     maxStage: 0
     weapon: 2
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 0
@@ -1140,6 +1142,7 @@ MonoBehaviour:
     stage: 7
     maxStage: 0
     weapon: 2
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 0
@@ -1197,6 +1200,7 @@ MonoBehaviour:
     stage: 12
     maxStage: 0
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 4
@@ -1252,6 +1256,7 @@ MonoBehaviour:
     stage: 16
     maxStage: 0
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 5
@@ -1307,6 +1312,7 @@ MonoBehaviour:
     stage: 17
     maxStage: 0
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 0
@@ -1362,6 +1368,7 @@ MonoBehaviour:
     stage: 19
     maxStage: 0
     weapon: 1
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 0
@@ -1417,6 +1424,7 @@ MonoBehaviour:
     stage: 1000
     maxStage: 0
     weapon: 1
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 0
@@ -1471,6 +1479,7 @@ MonoBehaviour:
     stage: 1
     maxStage: 9
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 0.3
       spd: 0
@@ -1529,6 +1538,7 @@ MonoBehaviour:
     stage: 1
     maxStage: 10
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 0.3
       spd: 0
@@ -1587,6 +1597,7 @@ MonoBehaviour:
     stage: 1
     maxStage: 10
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 0.3
       spd: 0
@@ -1646,6 +1657,7 @@ MonoBehaviour:
     stage: 0
     maxStage: 0
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 10
       spd: 10
@@ -1704,6 +1716,7 @@ MonoBehaviour:
     stage: 0
     maxStage: 0
     weapon: -1
+    hpRegen: 0
     stat:
       dmg: 0
       spd: 0
@@ -1757,6 +1770,7 @@ MonoBehaviour:
     stage: 0
     maxStage: 0
     weapon: 5
+    hpRegen: 0
     stat:
       dmg: 1
       spd: 1
