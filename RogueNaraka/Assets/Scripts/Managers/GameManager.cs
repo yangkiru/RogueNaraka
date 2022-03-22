@@ -144,6 +144,7 @@ public partial class GameManager : MonoBehaviour {
     public void Save()
     {
         moneyManager.Save();
+        RageManager.instance.Save();
 
         EffectData[] effectDatas = new EffectData[player.effectable.effects.Count];
         for (int i = 0; i < effectDatas.Length; i++)

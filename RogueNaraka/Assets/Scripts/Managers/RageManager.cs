@@ -32,6 +32,10 @@ public class RageManager : MonoBehaviour
         PlayerPrefs.SetInt("rageLevel", 0);
     }
 
+    public void Save(){
+        PlayerPrefs.SetInt("rageLevel", rageLevel);
+    }
+
     public void Rage()
     {
         Debug.Log("Rage");
@@ -43,10 +47,6 @@ public class RageManager : MonoBehaviour
     public void Rage(int level)
     {
         rageLevel = level;
-        PlayerPrefs.SetInt("rageLevel", rageLevel);
-        //ragePnl.SetActive(true);
-
-        //PlayerPrefs.SetInt("isRun", 0);
 
         ResetRage();
         RageFunction(rageLevel);
