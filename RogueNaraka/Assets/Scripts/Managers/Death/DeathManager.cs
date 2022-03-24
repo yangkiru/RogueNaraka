@@ -80,7 +80,7 @@ public partial class DeathManager : MonoBehaviour
 
         SetDeathPnl(true);
 
-        StartCoroutine(OpenResultCorou());
+        StartCoroutine(OpenBtnPnlCorou());
 
         GameManager.instance.SetSettingBtn(true);
 
