@@ -3036,9 +3036,9 @@ MonoBehaviour:
       - name: 0
         value: 20
     description:
-    - Summon lightning of which damage is proportional to the technical stats.
-    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
-      \uBC88\uAC1C\uB97C \uCE5C\uB2E4."
+    - Summon lightning a random number of amount within the range.
+    - "\uBC94\uC704 \uC548\uC5D0 \uBB34\uC791\uC704 \uAC1C\uC218\uC758 \uD53C\uD574\uB97C
+      \uC8FC\uB294 \uBC88\uAC1C\uB97C \uCE5C\uB2E4."
     useSFX: thunderStrike
   - name: IceBreak
     nameLang:
@@ -3076,9 +3076,9 @@ MonoBehaviour:
       - name: 1
         value: 0.25
     description:
-    - Summon ice plane that reduces enemies' speed temporarily.
-    - "\uC21C\uBC1C\uB825\uC744 \uC77C\uC2DC\uC801\uC73C\uB85C \uAC10\uC18C\uC2DC\uD0A4\uB294
-      \uBE59\uD310\uC744 \uC18C\uD658\uD55C\uB2E4."
+    - Summon ice plane that reduces enemies' attack&move speed temporarily.
+    - "\uACF5\uACA9 \uC18D\uB3C4\uC640 \uC774\uB3D9 \uC18D\uB3C4\uB97C \uC77C\uC2DC\uC801\uC73C\uB85C
+      \uAC10\uC18C\uC2DC\uD0A4\uB294 \uBE59\uD310\uC744 \uC18C\uD658\uD55C\uB2E4."
     useSFX: iceBreak
   - name: Genesis
     nameLang:
@@ -3110,8 +3110,8 @@ MonoBehaviour:
       - name: 2
         value: 0.15
     description:
-    - Shoot beam of which damage is proportional to the technical stats.
-    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
+    - Shoot a beam that causes damage to the range for a certain period of time.
+    - "\uBC94\uC704\uC5D0 \uC77C\uC815\uC2DC\uAC04 \uD53C\uD574\uB97C \uC785\uD788\uB294
       \uBE54\uC744 \uC3DC\uB2E4."
     useSFX: genesis
   - name: BloodSwamp
@@ -3146,14 +3146,11 @@ MonoBehaviour:
       - name: 3
         value: 0.025
     description:
-    - 'Summon a blood swamp absorbing health from target enemies.
-
-      The damage
-      and the amount of recovery are proportional to health regen stats and count
-      of reinforcement.'
+    - Summon a blood swamp life steal from target enemies.The damage and the amount
+      of recovery are proportional to health stats.
     - "\uC801\uC758 \uCCB4\uB825\uC744 \uD761\uC218\uD558\uB294 \uB2AA\uC744 \uC18C\uD658\uD55C\uB2E4.
-      \uD53C\uD574\uB7C9\uACFC \uD68C\uBCF5\uB7C9\uC740 \uCCB4\uB825 \uD68C\uBCF5\uB825\uACFC
-      \uAC15\uD654\uB7C9\uC5D0 \uBE44\uB840\uD55C\uB2E4."
+      \uD50C\uB808\uC774\uC5B4\uC758 \uCCB4\uB825\uC774 \uB192\uC544\uC9C0\uBA74
+      \uAC15\uD574\uC9C4\uB2E4."
     useSFX: blood
   - name: ScarecrowSoldier
     nameLang:
@@ -3189,15 +3186,10 @@ MonoBehaviour:
       - name: 1
         value: 0.5
     description:
-    - Summon a Scarecrow Soldier of which damage is proportional to the technical
-      stats. When the Scarecrow Soldier is summoned, enemies will focus on it instead
-      of player if it is closer to the enemies than player.
-    - "\uD53C\uD574\uB7C9\uC774 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
-      \uD5C8\uC218\uC544\uBE44\uB97C \uC18C\uD658\uD55C\uB2E4. \uD5C8\uC218\uC544\uBE44\uAC00
-      \uC18C\uD658\uB418\uC5C8\uC744 \uB54C, \uB9CC\uC57D \uC801\uB4E4\uC5D0\uAC8C
-      \uD50C\uB808\uC774\uC5B4\uBCF4\uB2E4 \uD5C8\uC218\uC544\uBE44\uAC00 \uB354
-      \uAC00\uAE4C\uC6B8 \uACBD\uC6B0 \uC801\uB4E4\uC740 \uD5C8\uC218\uC544\uBE44\uB97C
-      \uACF5\uACA9\uD55C\uB2E4."
+    - Summon a Scarecrow Soldier. When the Scarecrow Soldier is summoned, enemies
+      can focus on it.
+    - "\uC801\uC774 \uBAA9\uD45C\uB85C \uC0BC\uC744 \uC218 \uC788\uB294 \uD5C8\uC218\uC544\uBE44
+      \uBCD1\uC0AC\uB97C \uC18C\uD658\uD55C\uB2E4."
     useSFX: scarecrow
   - name: Shadow
     nameLang:
@@ -3230,8 +3222,8 @@ MonoBehaviour:
         value: 1.5
     description:
     - Summon shadow of which damage is half of the player's damage stat.
-    - "\uD50C\uB808\uC774\uC5B4\uC758 \uC808\uBC18\uC758 \uACF5\uACA9\uB825\uC744
-      \uAC16\uB294 \uADF8\uB9BC\uC790\uB97C \uC18C\uD658\uD55C\uB2E4."
+    - "\uD50C\uB808\uC774\uC5B4\uC758 \uACF5\uACA9\uB825 \uC808\uBC18\uC744 \uAC16\uB294
+      \uADF8\uB9BC\uC790\uB97C \uC18C\uD658\uD55C\uB2E4."
     useSFX: shadowStart
   - name: DashShoes
     nameLang:
@@ -3298,11 +3290,10 @@ MonoBehaviour:
       - name: 7
         value: 0.1
     description:
-    - Move fast summoning flames with dot damage. The dot damage of flames are proportional
-      to the technical stats.
+    - Move fast summoning flames with dot damage.
     - "\uC9C0\uC18D\uC801\uC73C\uB85C \uD654\uC5FC \uD53C\uD574\uB97C \uC8FC\uB294
-      \uBD88\uAF43\uC744 \uC18C\uD658\uD558\uBA70 \uBE60\uB974\uAC8C \uC774\uB3D9\uD55C\uB2E4.
-      \uD654\uC5FC \uD53C\uD574\uB294 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD55C\uB2E4."
+      \uBD88\uAF43\uC744 \uC18C\uD658\uD558\uBA70 \uBAA9\uD45C\uB85C \uBE60\uB974\uAC8C
+      \uC774\uB3D9\uD55C\uB2E4."
     useSFX: flameShoes
   - name: Tornado
     nameLang:
@@ -3340,14 +3331,11 @@ MonoBehaviour:
       - name: 2
         value: 0.01
     description:
-    - 'Shoot a tornado. The tornado bounces off the wall.
-
-      When an enemy hits
-      a tornado, it is stunned (Damage is proportional to TEC ).'
+    - Shoot a tornado. The tornado bounces off the wall.When an enemy hits a tornado,
+      it is stunned.
     - "\uBCBD\uC5D0 \uB2FF\uC73C\uBA74 \uD295\uAE30\uB294 \uD1A0\uB124\uC774\uB3C4\uB97C
-      \uC3DC\uB2E4. \uD1A0\uB124\uC774\uB3C4\uC5D0 \uB2FF\uC73C\uBA74 \uAE30\uC220\uB825\uC5D0
-      \uBE44\uB840\uD558\uB294 \uD53C\uD574\uB97C \uC785\uACE0 \uAE30\uC808\uD558\uBA70
-      \uBC00\uB824\uB09C\uB2E4."
+      \uC3DC\uB2E4. \uC801\uC774 \uD1A0\uB124\uC774\uB3C4\uC5D0 \uB2FF\uC73C\uBA74
+      \uD53C\uD574\uB97C \uBC1B\uACE0 \uAE30\uC808\uD558\uBA70 \uBC00\uB824\uB09C\uB2E4."
     useSFX: flameShoes
   - name: JumpingShoes
     nameLang:
@@ -3379,12 +3367,10 @@ MonoBehaviour:
       - name: 2
         value: 0.5
     description:
-    - It jumps to the target point and inflicts damage proportional to the TEC around
-      it. The enemy is stunned.
-    - "\uC0AC\uC6A9\uD55C \uC704\uCE58\uB85C \uB3C4\uC57D\uD55C\uB2E4. \uCC29\uC9C0
-      \uC2DC \uC8FC\uBCC0\uC5D0 \uAE30\uC220\uB825\uC5D0 \uBE44\uB840\uD558\uB294
-      \uD53C\uD574\uB97C \uC900\uB2E4. \uD53C\uD574\uB97C \uBC1B\uC740 \uC801\uC740
-      \uAE30\uC808\uD558\uBA70 \uBC00\uB824\uB09C\uB2E4."
+    - It jumps to the target point cause damage. When an enemy hits a crash, it is
+      stunned and knockedback.
+    - "\uBAA9\uD45C\uB85C \uB3C4\uC57D\uD574 \uD53C\uD574\uB97C \uC900\uB2E4. \uD53C\uD574\uB97C
+      \uBC1B\uC740 \uC801\uC740 \uAE30\uC808\uD558\uBA70 \uBC00\uB824\uB09C\uB2E4."
     useSFX: flameShoes
   items:
   - name: HealPotion
