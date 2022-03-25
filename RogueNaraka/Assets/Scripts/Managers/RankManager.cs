@@ -2,7 +2,7 @@
 using System.Collections;
 //using GooglePlayGames;
 using RogueNaraka.PopUpScripts;
-using RogueNaraka.TheBackendScripts;
+//using RogueNaraka.TheBackendScripts;
 
 public class RankManager : MonoBehaviour
 {
@@ -38,7 +38,8 @@ public class RankManager : MonoBehaviour
         highScore = Mathf.Max(highScore, BoardManager.instance.stage);
 #if UNITY_ANDROID && !UNITY_EDITOR
         //Login();
-        if(TheBackendManager.Instance.IsLoginSuccess) {
+        //if(TheBackendManager.Instance.IsLoginSuccess) {
+        if(false) {
             Social.ReportScore((long)BoardManager.instance.stage, leaderBoardId, (bool success) =>
             {
                 if (success)
@@ -72,7 +73,8 @@ public class RankManager : MonoBehaviour
     public void ShowRank()
     {
         //Login();
-        if(TheBackendManager.Instance.IsLoginSuccess) {
+        //if(TheBackendManager.Instance.IsLoginSuccess) {
+        if(false) {
             Social.ShowLeaderboardUI();
         } else {
             string popUpContext = "";
@@ -83,11 +85,11 @@ public class RankManager : MonoBehaviour
                 case Language.Korean:
                     popUpContext = "로그아웃 상태에서는 이용하실 수 없습니다.";
                 break;
-            } 
+            }
             PopUpManager.Instance.ActivateOneButtonPopUp(
                 popUpContext,
-                (OneButtonPopUpController _popUp) => { 
-                    _popUp.DeactivatePopUp(); 
+                (OneButtonPopUpController _popUp) => {
+                    _popUp.DeactivatePopUp();
                     PopUpManager.Instance.DeactivateBackPanel();
                 });
         }

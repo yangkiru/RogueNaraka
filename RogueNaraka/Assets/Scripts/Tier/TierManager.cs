@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RogueNaraka.SingletonPattern;
-using RogueNaraka.TheBackendScripts;
+//using RogueNaraka.TheBackendScripts;
 using RogueNaraka.NotificationScripts;
 
 namespace RogueNaraka.TierScripts {
@@ -39,7 +39,7 @@ namespace RogueNaraka.TierScripts {
                 StartCoroutine(CheckIfTierHaveChangedForGameStart());
             #endif
         }
-        
+
         public void GainExp(float _exp) {
             this.totalGainExpInGame += _exp;
         }
@@ -55,6 +55,7 @@ namespace RogueNaraka.TierScripts {
         }
 
         public bool CheckIfTierHaveChanged() {
+          /*
             if(GameDatabase.instance.TierDataes[this.currentTierIdx + 1].requiredRankingPercent < TheBackendManager.Instance.TopPercentToClearStageForRank) {
                 if(GameDatabase.instance.TierDataes[this.currentTierIdx].requiredRankingPercent >= TheBackendManager.Instance.TopPercentToClearStageForRank) {
                     return false;
@@ -79,13 +80,14 @@ namespace RogueNaraka.TierScripts {
                     }
                 }
             }
-            
-            throw new System.IndexOutOfRangeException("Failed to Find Correct Tier");
+
+            throw new System.IndexOutOfRangeException("Failed to Find Correct Tier");*/
+            return false;
         }
 
         public IEnumerator CheckIfTierHaveChangedForGameStart() {
-            yield return new WaitUntil(() => this.isLoaded && TheBackendManager.Instance.IsLoadedRankData);
-            
+            yield return new WaitUntil(() => this.isLoaded && false);// TheBackendManager.Instance.IsLoadedRankData);
+
             if(CheckIfTierHaveChanged()) {
                 string textFormat = "";
                 if(this.isAdvanced) {

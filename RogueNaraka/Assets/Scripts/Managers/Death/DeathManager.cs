@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using RogueNaraka.TierScripts;
 using RogueNaraka.TimeScripts;
-using RogueNaraka.TheBackendScripts;
+//using RogueNaraka.TheBackendScripts;
 using RogueNaraka.UnitScripts;
 
 public partial class DeathManager : MonoBehaviour
@@ -55,7 +55,7 @@ public partial class DeathManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        
+
         for(int i = 0; i < GameDatabase.instance.enemies.Count(); ++i) {
             this.huntedUnitNumList.Add(0);
         }
@@ -266,7 +266,7 @@ public partial class DeathManager : MonoBehaviour
 
         RageManager.instance.SetActiveSmallRageBtn(false);
         //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
-        
+
         SkillManager.instance.ResetSave();
         Item.instance.ResetSave();
         Item.instance.InitItem();
@@ -332,7 +332,7 @@ public partial class DeathManager : MonoBehaviour
 
         WaitForFixedUpdate waitFixedFrame = new WaitForFixedUpdate();
 
-        while(_originLv < TierManager.Instance.PlayerLevel 
+        while(_originLv < TierManager.Instance.PlayerLevel
             || _originExp < TierManager.Instance.CurrentExp) {
             yield return waitFixedFrame;
             if(remainUpExp <= TierManager.Instance.TotalGainExpInGame * 0.2d) {
@@ -413,9 +413,9 @@ public partial class DeathManager : MonoBehaviour
                     textFormat = "현재 상위 {0}%\n다음 티어 : 상위 {1}%";
                 break;
             }
-            this.NextTierRequirement.text = string.Format(textFormat
+            /*this.NextTierRequirement.text = string.Format(textFormat
                 , Mathf.Floor(TheBackendManager.Instance.TopPercentToClearStageForRank * 100) * 0.01f
-                , TierManager.Instance.NextTier.requiredRankingPercent);
+                , TierManager.Instance.NextTier.requiredRankingPercent);*/
 
         //Smaller
         while(this.TierEmblem.transform.localScale.x >= 1.0f) {
@@ -423,7 +423,7 @@ public partial class DeathManager : MonoBehaviour
                 CHANGE_SCALE_OF_TIER_EMBLEM_SPEED
                 , CHANGE_SCALE_OF_TIER_EMBLEM_SPEED
                 , 0.0f) * TimeManager.Instance.FixedDeltaTime;
-            yield return waitFixedFrame;            
+            yield return waitFixedFrame;
         }
         this.TierEmblem.transform.localScale = new Vector2(1.0f, 1.0f);
     }
