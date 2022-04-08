@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: com.AweTome.RandomMage
-  productName: com.AweTome.RandomMage
+  companyName: AweTome
+  productName: Random Mage
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
@@ -136,7 +136,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1.6
+  bundleVersion: 0.1.7
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -162,7 +162,7 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 13
+  AndroidBundleVersionCode: 14
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -249,7 +249,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /Users/kimjuik/Downloads/ikproduction.keystore
+  AndroidKeystoreName: '{dedicated}: Downloads/ikproduction.jks'
   AndroidKeyaliasName: naraka
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1
@@ -765,6 +765,7 @@ PlayerSettings:
   cloudServicesEnabled:
     Purchasing: 0
     UNet: 1
+    Unity Ads: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -778,11 +779,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 1fcff29b-616c-4eca-9b57-bdfd5f4db68e
+  cloudProjectId: 72106a8f-dacc-4e2f-be37-deaac417058c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: RandomMage
-  organizationId: noxbix
+  projectName: Random Mage
+  organizationId: kimjuik
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 1
   virtualTexturingSupportEnabled: 0
