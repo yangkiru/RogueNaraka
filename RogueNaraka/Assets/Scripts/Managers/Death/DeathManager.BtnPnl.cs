@@ -4,6 +4,7 @@ using UnityEngine;
 public partial class DeathManager : MonoBehaviour {
     [Header("BtnPnl")]
     public Transform btnPnl;
+    public InterstitialAds interstitialAds;
     private const float OPEN_SPEED = 1.5f;
     private const float CLOSE_SPEED = 1.5f;
 
@@ -17,5 +18,6 @@ public partial class DeathManager : MonoBehaviour {
             closeTime += Time.deltaTime * CLOSE_SPEED;
             btnPnl.localScale = Vector3.Lerp(btnPnl.localScale, Vector3.one, closeTime);
         } while(closeTime < 1);
+        interstitialAds.Show();
     }
 }

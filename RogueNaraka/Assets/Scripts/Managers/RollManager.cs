@@ -19,6 +19,7 @@ public class RollManager : MonoBehaviour {
     public TextMeshProUGUI descTxt;
     public TextMeshProUGUI reRollTxt;
     public TextMeshProUGUI[] statTxts;
+    public InterstitialAds interstitialAds;
 
     public Fade fade;
     public ManaUI manaUI;
@@ -795,6 +796,8 @@ public class RollManager : MonoBehaviour {
     /// </summary>
     public void OnRollEnd()
     {
+        if(BoardManager.instance.stage % 10 == 0 && BoardManager.instance.stage != 0)
+            interstitialAds.Show();
         isClickable = true;
         StartCoroutine(IconEffectCorou());
         Select((stopped + 1) % 10);
