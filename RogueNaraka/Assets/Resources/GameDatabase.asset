@@ -1370,7 +1370,7 @@ MonoBehaviour:
     weapon: 1
     hpRegen: 0
     stat:
-      dmg: 1
+      dmg: 8
       spd: 0
       hp: 14
       mp: 0
