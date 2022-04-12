@@ -5,7 +5,7 @@ AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: EmptyController
+  m_Name: EmptyBulletController
   m_Controller: {fileID: 9100000, guid: cef042ddfd1f10645a5adff7fb04b5d7, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 13924e178168109498a9ce5e1d7aea03, type: 2}

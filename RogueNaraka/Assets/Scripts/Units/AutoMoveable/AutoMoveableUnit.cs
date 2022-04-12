@@ -28,7 +28,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
         {
             distance = data.moveDistance;
             delay = data.moveDelay;
-            leftDelay = Random.Range(delay * 0.5f, delay);
+            leftDelay = Random.Range(0, delay);
         }
 
         void FixedUpdate()
@@ -43,7 +43,7 @@ namespace RogueNaraka.UnitScripts.AutoMoveable
                 return;
             }
             else if (leftDelay <= 0)
-                leftDelay = delay;
+                leftDelay = delay * Random.Range(0.6f, 1.4f);
             AutoMove();
         }
 

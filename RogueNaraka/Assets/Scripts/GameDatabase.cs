@@ -149,33 +149,40 @@ public class UnitData : ICloneable
     public int maxStage;
     public int weapon;
     public float hpRegen;
-    public Stat stat;
-    public RuntimeAnimatorController controller;
-    public RuntimeAnimatorController deathEffectController;
-    public Color color = Color.clear;
-    public Color bulletColor = Color.clear;
     public bool isFriendly;
     public bool isStanding;
     public bool isDeathEffect;
     public bool isCorpse;
+    public float limitTime;
+    public Stat stat;
+    public RuntimeAnimatorController controller;
+    public RuntimeAnimatorController deathEffectController;
+    [Header("Color")]
+    public Color color = Color.clear;
+    public Color bulletColor = Color.clear;
     public MOVE_TYPE move;
+    [Header("Tackle")]
+    public int tackleBulletID = 3;
     public float tackleSize;
     public float tackleDamage;
     public float tackleDelay;
+    [Header("Move")]
     public float moveDelay;
     public float moveDistance;
     public float moveSpeed;
     public float accelerationRate;
     public float decelerationRate;
-    public float limitTime;
+    [Header("Shadow")]
     public Vector2[] shadowPos;
     public float shadowZAngle;
     public bool shadowXFlip;
     public float gainExp;
     public Order order;
     public Order bulletOrder = Order.Mid;
+    [Header("Effect")]
     public EffectData[] effects;
     public EffectResistance[] resistances;
+    [Header("SFX")]
     public string[] deathSFX;
     public string attackSFX;
 

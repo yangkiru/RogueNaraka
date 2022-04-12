@@ -9,8 +9,6 @@ namespace RogueNaraka
 
     public class TackleableUnit : MonoBehaviour
     {
-        const int tackleBulletID = 3;
-
         public Unit unit;
 
         public bool isTackle { get { return _isTackle; } set { _isTackle = value; } }
@@ -21,7 +19,7 @@ namespace RogueNaraka
 
         public void Init(UnitData data)
         {
-            if (data.tackleSize > 0 && data.tackleDamage != 0 && data.tackleDelay > 0)
+            if (data.tackleSize > 0 && data.tackleDelay > 0)
             {
                 _isTackle = true;
                 //this.enabled = true;
@@ -113,7 +111,7 @@ namespace RogueNaraka
         public void Tackle()
         {
             //Debug.Log("Tackle");
-            BulletData bulletData = (BulletData)GameDatabase.instance.bullets[tackleBulletID].Clone();
+            BulletData bulletData = (BulletData)GameDatabase.instance.bullets[unit.data.tackleBulletID].Clone();
             bulletData.size = unit.data.tackleSize;
             bulletData.dmg = unit.data.tackleDamage;
 

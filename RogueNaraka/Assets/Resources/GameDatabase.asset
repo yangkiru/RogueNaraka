@@ -20,6 +20,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: 5
     hpRegen: 1
+    isFriendly: 1
+    isStanding: 1
+    isDeathEffect: 0
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 1
       spd: 1
@@ -43,11 +48,8 @@ MonoBehaviour:
       type: 2}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 1
-    isStanding: 1
-    isDeathEffect: 0
-    isCorpse: 0
     move: 8
+    tackleBulletID: 3
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
@@ -56,7 +58,6 @@ MonoBehaviour:
     moveSpeed: 0.7
     accelerationRate: 2
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.15, y: -0.4}
     - {x: 0.2, y: -0.45}
@@ -1085,6 +1086,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: 2
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 1
       spd: 0
@@ -1107,11 +1113,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 0
-    isDeathEffect: 1
-    isCorpse: 0
     move: 1
+    tackleBulletID: 3
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
@@ -1120,7 +1123,6 @@ MonoBehaviour:
     moveSpeed: 0.7
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.05, y: -0.2}
     - {x: 0.07, y: -0.1}
@@ -1143,6 +1145,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: 2
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 1
       spd: 0
@@ -1165,11 +1172,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 0
-    isDeathEffect: 1
-    isCorpse: 0
     move: 1
+    tackleBulletID: 3
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
@@ -1178,7 +1182,6 @@ MonoBehaviour:
     moveSpeed: 0.7
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.05, y: -0.2}
     - {x: 0.07, y: -0.1}
@@ -1201,6 +1204,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 1
       spd: 4
@@ -1223,11 +1231,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 1
-    isDeathEffect: 1
-    isCorpse: 0
     move: 5
+    tackleBulletID: 3
     tackleSize: 0.3
     tackleDamage: 0.25
     tackleDelay: 0.3
@@ -1236,7 +1241,6 @@ MonoBehaviour:
     moveSpeed: 1.8
     accelerationRate: 0.7
     decelerationRate: 0.5
-    limitTime: 0
     shadowPos:
     - {x: 0.15, y: -0.25}
     - {x: 0.2, y: -0.3}
@@ -1257,6 +1261,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 1
       spd: 5
@@ -1279,11 +1288,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 1
-    isDeathEffect: 1
-    isCorpse: 0
     move: 5
+    tackleBulletID: 3
     tackleSize: 0.3
     tackleDamage: 0.3
     tackleDelay: 0.3
@@ -1292,7 +1298,6 @@ MonoBehaviour:
     moveSpeed: 2.25
     accelerationRate: 0.7
     decelerationRate: 0.5
-    limitTime: 0
     shadowPos:
     - {x: 0.15, y: -0.25}
     - {x: 0.2, y: -0.3}
@@ -1313,6 +1318,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 1
       spd: 0
@@ -1335,11 +1345,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 1
-    isDeathEffect: 1
-    isCorpse: 0
     move: 1
+    tackleBulletID: 3
     tackleSize: 0.35
     tackleDamage: 0.5
     tackleDelay: 1
@@ -1348,7 +1355,6 @@ MonoBehaviour:
     moveSpeed: 1
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.2, y: -0.5}
     - {x: 0.2, y: -0.5}
@@ -1369,6 +1375,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: 1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 8
       spd: 0
@@ -1391,11 +1402,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 1
-    isDeathEffect: 1
-    isCorpse: 0
     move: 0
+    tackleBulletID: 3
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
@@ -1404,7 +1412,6 @@ MonoBehaviour:
     moveSpeed: 1
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.3, y: -0.6}
     - {x: 0.15, y: -0.6}
@@ -1425,6 +1432,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: 1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 1
       spd: 0
@@ -1447,11 +1459,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 1
-    isDeathEffect: 1
-    isCorpse: 0
     move: 0
+    tackleBulletID: 3
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
@@ -1460,7 +1469,6 @@ MonoBehaviour:
     moveSpeed: 1.5
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.3, y: -0.6}
     - {x: 0.15, y: -0.6}
@@ -1480,6 +1488,11 @@ MonoBehaviour:
     maxStage: 9
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 0.3
       spd: 0
@@ -1499,15 +1512,11 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
-    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
-      type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 0
-    isDeathEffect: 1
-    isCorpse: 0
     move: 1
+    tackleBulletID: 3
     tackleSize: 0.3
     tackleDamage: 0.03
     tackleDelay: 1
@@ -1516,7 +1525,6 @@ MonoBehaviour:
     moveSpeed: 1.5
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.08, y: -0.3}
     shadowZAngle: 180
@@ -1539,6 +1547,11 @@ MonoBehaviour:
     maxStage: 10
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 0.3
       spd: 0
@@ -1558,15 +1571,11 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 5affb1d8803e4394d84cefbf8cf49a6c, type: 2}
-    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
-      type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 0
-    isDeathEffect: 1
-    isCorpse: 0
     move: 1
+    tackleBulletID: 3
     tackleSize: 0.3
     tackleDamage: 0.05
     tackleDelay: 1
@@ -1575,7 +1584,6 @@ MonoBehaviour:
     moveSpeed: 1.5
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 0
     shadowPos:
     - {x: 0.08, y: -0.3}
     shadowZAngle: 180
@@ -1598,6 +1606,11 @@ MonoBehaviour:
     maxStage: 10
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
       dmg: 0.3
       spd: 0
@@ -1617,15 +1630,11 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
-    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
-      type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 0
-    isDeathEffect: 1
-    isCorpse: 0
     move: 1
+    tackleBulletID: 3
     tackleSize: 0.3
     tackleDamage: 0.08
     tackleDelay: 1
@@ -1634,7 +1643,6 @@ MonoBehaviour:
     moveSpeed: 1.5
     accelerationRate: 0.5
     decelerationRate: 1
-    limitTime: 0
     shadowPos:
     - {x: 0.08, y: -0.3}
     shadowZAngle: 180
@@ -1653,14 +1661,19 @@ MonoBehaviour:
   - name: Mud0
     id: 10
     cost: 1
-    stage: 5
+    stage: 6
     maxStage: 0
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
     stat:
-      dmg: 0.3
+      dmg: 1
       spd: 0
-      hp: 0.3
+      hp: 4
       mp: 0
       dmgMax: 0
       spdMax: 0
@@ -1672,42 +1685,37 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 0.3
+      currentHp: 4
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: e6b47c92d1973b44593b3809e68307b4, type: 2}
-    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
-      type: 2}
+    deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 0
-    isDeathEffect: 1
-    isCorpse: 0
     move: 1
-    tackleSize: 0.3
-    tackleDamage: 0.08
+    tackleBulletID: 26
+    tackleSize: 0.5
+    tackleDamage: 0.3
     tackleDelay: 1
-    moveDelay: 0.5
+    moveDelay: 1
     moveDistance: 0.5
-    moveSpeed: 1.5
-    accelerationRate: 0.5
-    decelerationRate: 1
-    limitTime: 0
+    moveSpeed: 0.3
+    accelerationRate: 0
+    decelerationRate: 0
     shadowPos:
-    - {x: 0.08, y: -0.3}
-    shadowZAngle: 180
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    shadowZAngle: 0
     shadowXFlip: 0
-    gainExp: 0.3
-    order: 0
+    gainExp: 1
+    order: -100
     bulletOrder: 0
     effects: []
     resistances: []
     deathSFX:
-    - slimeDeath:0.75
-    - slimeDeath:1
-    - slimeDeath:1.25
-    - slimeDeath:1.5
+    - bugDeath
     attackSFX: 
   bosses:
   - name: Boss0
@@ -1717,6 +1725,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: -1
     hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 0
+    isCorpse: 1
+    limitTime: 0
     stat:
       dmg: 10
       spd: 10
@@ -1739,11 +1752,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 0
-    isStanding: 0
-    isDeathEffect: 0
-    isCorpse: 1
     move: 7
+    tackleBulletID: 3
     tackleSize: 1
     tackleDamage: 0.25
     tackleDelay: 0
@@ -1752,7 +1762,6 @@ MonoBehaviour:
     moveSpeed: 2
     accelerationRate: 0.3
     decelerationRate: 2
-    limitTime: 0
     shadowPos:
     - {x: 0.4, y: -1.5}
     shadowZAngle: -150
@@ -1776,6 +1785,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: -1
     hpRegen: 0
+    isFriendly: 1
+    isStanding: 1
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 2.5
     stat:
       dmg: 0
       spd: 0
@@ -1798,11 +1812,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
-    isFriendly: 1
-    isStanding: 1
-    isDeathEffect: 1
-    isCorpse: 0
     move: 2
+    tackleBulletID: 3
     tackleSize: 1
     tackleDamage: 0.03
     tackleDelay: 0
@@ -1811,7 +1822,6 @@ MonoBehaviour:
     moveSpeed: 0
     accelerationRate: 0
     decelerationRate: 0
-    limitTime: 2.5
     shadowPos:
     - {x: 0.45, y: -1.58}
     shadowZAngle: -150
@@ -1830,6 +1840,11 @@ MonoBehaviour:
     maxStage: 0
     weapon: 5
     hpRegen: 0
+    isFriendly: 1
+    isStanding: 1
+    isDeathEffect: 0
+    isCorpse: 0
+    limitTime: 1
     stat:
       dmg: 1
       spd: 1
@@ -1852,11 +1867,8 @@ MonoBehaviour:
     deathEffectController: {fileID: 0}
     color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0.7921569}
     bulletColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.7921569}
-    isFriendly: 1
-    isStanding: 1
-    isDeathEffect: 0
-    isCorpse: 0
     move: 6
+    tackleBulletID: 3
     tackleSize: 0
     tackleDamage: 0
     tackleDelay: 0
@@ -1865,7 +1877,6 @@ MonoBehaviour:
     moveSpeed: 5
     accelerationRate: 2
     decelerationRate: 100
-    limitTime: 1
     shadowPos: []
     shadowZAngle: 0
     shadowXFlip: 0
@@ -2830,6 +2841,42 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: 
+  - name: SlowTackle
+    id: 26
+    color: {r: 1, g: 1, b: 1, a: 1}
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    type: 0
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.001
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    isSplash: 1
+    isHitableWall: 1
+    isBounceable: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 0
+    effects:
+    - type: 1
+      value: 0.8
+      time: 1
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   weapons:
   - name: MagicBall
     id: 0
@@ -3055,7 +3102,7 @@ MonoBehaviour:
   stageCosts: 030000000500000007000000090000000b0000000d0000000f00000011000000130000001500000017000000190000001b0000001d0000001f00000021000000230000002500000027000000290000002b0000002d0000002f00000031000000330000003500000037000000390000003b0000003d000000
   unitCosts:
   - cost: 1
-    unitId: 0000000001000000
+    unitId: 00000000010000000a000000
   - cost: 2
     unitId: 0200000003000000
   - cost: 3
@@ -3491,8 +3538,8 @@ MonoBehaviour:
     particle: {fileID: 0}
   - name: Slow
     type: 1
-    spr: {fileID: 0}
-    particle: {fileID: 0}
+    spr: {fileID: 21300000, guid: f6d8c2e1e5547a34b95588e0e511d831, type: 3}
+    particle: {fileID: 21300000, guid: f6d8c2e1e5547a34b95588e0e511d831, type: 3}
   - name: Fire
     type: 2
     spr: {fileID: 21300000, guid: 795840edeea4cd544855947dc0fcdd7e, type: 3}
