@@ -1473,7 +1473,7 @@ MonoBehaviour:
     resistances: []
     deathSFX: []
     attackSFX: 
-  - name: slime0
+  - name: Slime0
     id: 7
     cost: 0.3
     stage: 1
@@ -1532,7 +1532,7 @@ MonoBehaviour:
     - slimeDeath:1.25
     - slimeDeath:1.5
     attackSFX: 
-  - name: slime1
+  - name: Slime1
     id: 8
     cost: 0.3
     stage: 1
@@ -1591,7 +1591,7 @@ MonoBehaviour:
     - slimeDeath:1.25
     - slimeDeath:1.5
     attackSFX: 
-  - name: slime2
+  - name: Slime2
     id: 9
     cost: 0.3
     stage: 1
@@ -1617,6 +1617,65 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    bulletColor: {r: 0, g: 0, b: 0, a: 0}
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    move: 1
+    tackleSize: 0.3
+    tackleDamage: 0.08
+    tackleDelay: 1
+    moveDelay: 0.5
+    moveDistance: 0.5
+    moveSpeed: 1.5
+    accelerationRate: 0.5
+    decelerationRate: 1
+    limitTime: 0
+    shadowPos:
+    - {x: 0.08, y: -0.3}
+    shadowZAngle: 180
+    shadowXFlip: 0
+    gainExp: 0.3
+    order: 0
+    bulletOrder: 0
+    effects: []
+    resistances: []
+    deathSFX:
+    - slimeDeath:0.75
+    - slimeDeath:1
+    - slimeDeath:1.25
+    - slimeDeath:1.5
+    attackSFX: 
+  - name: Mud0
+    id: 10
+    cost: 1
+    stage: 5
+    maxStage: 0
+    weapon: -1
+    hpRegen: 0
+    stat:
+      dmg: 0.3
+      spd: 0
+      hp: 0.3
+      mp: 0
+      dmgMax: 0
+      spdMax: 0
+      hpMax: 0
+      mpMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 0.3
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 9100000, guid: e6b47c92d1973b44593b3809e68307b4, type: 2}
     deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
       type: 2}
     color: {r: 0, g: 0, b: 0, a: 0}
