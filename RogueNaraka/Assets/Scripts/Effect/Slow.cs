@@ -13,7 +13,7 @@ namespace RogueNaraka.EffectScripts{
 
         public override bool Equal(EffectData dt)
         {
-            return dt.value == data.value;
+            return false;
         }
 
         protected override void OnDestroyEffect()

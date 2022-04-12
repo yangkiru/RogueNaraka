@@ -54,7 +54,7 @@ namespace RogueNaraka.UnitScripts.Attackable
 
         protected virtual void Attack()
         {
-            if (unit.targetable.direction == Vector2.zero)
+            if (unit.targetable.direction == Vector2.zero && unit.hpable.currentHp <= 0)
                 return;
             Bullet bullet = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
 

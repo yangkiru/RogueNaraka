@@ -96,7 +96,7 @@ namespace RogueNaraka
             {
                 float t = unit.data.tackleDelay;
 
-                if(_isTackle && BoardManager.instance.isReady)
+                if(_isTackle && BoardManager.instance.isReady && unit.hpable.currentHp > 0)
                     Tackle();
 
                 do
