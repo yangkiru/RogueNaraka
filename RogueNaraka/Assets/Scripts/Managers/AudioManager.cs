@@ -31,8 +31,8 @@ public class AudioManager : MonoBehaviour
 
     public Button[] btns;
 
-    public float sfxVolume = 0.5f;
-    public float musicVolume = 0.5f;
+    public float sfxVolume = 0.3f;
+    public float musicVolume = 0.3f;
 
     public string currentMainMusic = string.Empty;
     public string currentDeathMusic = string.Empty;

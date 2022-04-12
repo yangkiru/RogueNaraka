@@ -1490,7 +1490,7 @@ MonoBehaviour:
     hpRegen: 0
     isFriendly: 0
     isStanding: 0
-    isDeathEffect: 1
+    isDeathEffect: 0
     isCorpse: 0
     limitTime: 0
     stat:
@@ -1512,7 +1512,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: c5f77192b3575794a8ef42e101df60e9, type: 2}
-    deathEffectController: {fileID: 0}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
     move: 1
@@ -1549,7 +1550,7 @@ MonoBehaviour:
     hpRegen: 0
     isFriendly: 0
     isStanding: 0
-    isDeathEffect: 1
+    isDeathEffect: 0
     isCorpse: 0
     limitTime: 0
     stat:
@@ -1571,7 +1572,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 5affb1d8803e4394d84cefbf8cf49a6c, type: 2}
-    deathEffectController: {fileID: 0}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
     move: 1
@@ -1608,7 +1610,7 @@ MonoBehaviour:
     hpRegen: 0
     isFriendly: 0
     isStanding: 0
-    isDeathEffect: 1
+    isDeathEffect: 0
     isCorpse: 0
     limitTime: 0
     stat:
@@ -1630,7 +1632,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 22100000, guid: 0776334c87ba66d44adba15da8221c32, type: 2}
-    deathEffectController: {fileID: 0}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
     move: 1
@@ -1667,7 +1670,7 @@ MonoBehaviour:
     hpRegen: 0
     isFriendly: 0
     isStanding: 0
-    isDeathEffect: 1
+    isDeathEffect: 0
     isCorpse: 0
     limitTime: 0
     stat:
@@ -1689,7 +1692,8 @@ MonoBehaviour:
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: e6b47c92d1973b44593b3809e68307b4, type: 2}
-    deathEffectController: {fileID: 0}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
     move: 1
@@ -1715,7 +1719,127 @@ MonoBehaviour:
     effects: []
     resistances: []
     deathSFX:
-    - bugDeath
+    - slimeDeath
+    attackSFX: 
+  - name: Mud1
+    id: 11
+    cost: 1.5
+    stage: 10
+    maxStage: 0
+    weapon: -1
+    hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 0
+    isCorpse: 0
+    limitTime: 0
+    stat:
+      dmg: 2
+      spd: 1
+      hp: 8
+      mp: 0
+      dmgMax: 0
+      spdMax: 0
+      hpMax: 0
+      mpMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 8
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 22100000, guid: 8aa0b3f48d073d242883b52e6a10762a, type: 2}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    bulletColor: {r: 0, g: 0, b: 0, a: 0}
+    move: 1
+    tackleBulletID: 26
+    tackleSize: 0.5
+    tackleDamage: 0.3
+    tackleDelay: 1
+    moveDelay: 1
+    moveDistance: 0.5
+    moveSpeed: 0.3
+    accelerationRate: 0
+    decelerationRate: 0
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    shadowZAngle: 0
+    shadowXFlip: 0
+    gainExp: 1
+    order: -100
+    bulletOrder: 0
+    effects: []
+    resistances: []
+    deathSFX:
+    - slimeDeath
+    attackSFX: 
+  - name: Mud2
+    id: 12
+    cost: 2
+    stage: 14
+    maxStage: 0
+    weapon: -1
+    hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 0
+    isCorpse: 0
+    limitTime: 0
+    stat:
+      dmg: 3
+      spd: 2
+      hp: 12
+      mp: 0
+      dmgMax: 0
+      spdMax: 0
+      hpMax: 0
+      mpMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 8
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 22100000, guid: 8aa0b3f48d073d242883b52e6a10762a, type: 2}
+    deathEffectController: {fileID: 9100000, guid: 9edf9dfb0b900e44d9276a53fff53c8f,
+      type: 2}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    bulletColor: {r: 0, g: 0, b: 0, a: 0}
+    move: 1
+    tackleBulletID: 26
+    tackleSize: 0.5
+    tackleDamage: 0.3
+    tackleDelay: 1
+    moveDelay: 1
+    moveDistance: 0.5
+    moveSpeed: 0.3
+    accelerationRate: 0
+    decelerationRate: 0
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    shadowZAngle: 0
+    shadowXFlip: 0
+    gainExp: 1
+    order: -100
+    bulletOrder: 0
+    effects: []
+    resistances: []
+    deathSFX:
+    - slimeDeath
     attackSFX: 
   bosses:
   - name: Boss0
@@ -3104,13 +3228,15 @@ MonoBehaviour:
   - cost: 1
     unitId: 00000000010000000a000000
   - cost: 2
-    unitId: 0200000003000000
+    unitId: 02000000030000000c000000
   - cost: 3
     unitId: 04000000
   - cost: 4
     unitId: 0500000006000000
   - cost: 0.3
     unitId: 070000000800000009000000
+  - cost: 1.5
+    unitId: 0b000000
   skills:
   - name: ThunderStrike
     nameLang:
