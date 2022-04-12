@@ -3357,7 +3357,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: 2
-      value: 0.8
+      value: 0.4
     levelUp:
       manaCost: 0.5
       size: 0.5
@@ -3365,7 +3365,7 @@ MonoBehaviour:
       effects: []
       values:
       - name: 2
-        value: 0.5
+        value: 0.2
     description:
     - It jumps to the target point cause damage. When an enemy hits a crash, it is
       stunned and knockedback.

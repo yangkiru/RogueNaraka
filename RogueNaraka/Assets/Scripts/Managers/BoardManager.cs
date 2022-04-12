@@ -276,7 +276,7 @@ public class BoardManager : MonoBehaviour {
         Vector2 pos;
         do
         {
-            float radius = PolyNav.PolyNav2D.current.radiusOffset;
+            float radius = 1;
             float x = Random.Range(boardRange[0].x + radius, boardRange[1].x - radius);
             float y = Random.Range(boardRange[0].y + radius, boardRange[1].y - radius);
             pos = new Vector2(x, y);
