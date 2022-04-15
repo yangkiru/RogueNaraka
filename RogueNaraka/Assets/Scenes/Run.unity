@@ -37757,9 +37757,7 @@ MonoBehaviour:
   SoulRefiningPnl: {fileID: 0}
   RefiningPercentText: {fileID: 0}
   RemainTimeText: {fileID: 0}
-  btnLayout:
-  - {fileID: 0}
-  - {fileID: 0}
+  btnLayout: []
   deathPnl: {fileID: 1865770088}
   soulPnl: {fileID: 703067000}
   youDied: {fileID: 1697750893}

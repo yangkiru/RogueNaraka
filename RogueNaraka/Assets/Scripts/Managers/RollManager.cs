@@ -735,6 +735,12 @@ public class RollManager : MonoBehaviour {
                 } while (!SkillData.IsBought(result.id) && !GameDatabase.instance.skills[result.id].isBasic);
                 break;
             case ROLL_TYPE.STAT:
+                switch(Random.Range(0, 10)){
+                    case 9: result.id = 2; break;
+                    case 8: case 7: case 6: result.id = 1; break;
+                    default: result.id = 0; break;
+                }
+                
                 result.id = Random.Range(0, 3);
                 break;
             case ROLL_TYPE.ITEM:
