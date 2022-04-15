@@ -271,6 +271,7 @@ public partial class DeathManager : MonoBehaviour
         Item.instance.ResetSave();
         Item.instance.InitItem();
 
+        BoardManager.instance.SetStage(0);
         BoardManager.instance.ClearStage();
 
         PlayerPrefs.SetFloat("lastRefiningRate", 0);
