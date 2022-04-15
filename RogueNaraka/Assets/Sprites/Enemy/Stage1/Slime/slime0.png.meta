@@ -1,0 +1,269 @@
+fileFormatVersion: 2
+guid: 036923c9b3dac144e9e48199d0174e83
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: slime0_3
+  - first:
+      213: 21300002
+    second: slime0_0
+  - first:
+      213: 21300004
+    second: slime0_1
+  - first:
+      213: 21300006
+    second: slime0_2
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 49.25
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: slime0_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 12, y: 5}
+        - {x: 10, y: 10}
+        - {x: 7, y: 12}
+        - {x: -7, y: 12}
+        - {x: -10, y: 10}
+        - {x: -12, y: 5}
+        - {x: -12, y: -2}
+        - {x: -11, y: -3}
+        - {x: -11, y: -5}
+        - {x: -8, y: -9}
+        - {x: -5, y: -10}
+        - {x: 5, y: -10}
+        - {x: 8, y: -9}
+        - {x: 11, y: -5}
+        - {x: 12, y: -2}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 3afa30609ca184c42b92d2cc7e90b99a
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime0_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 11, y: 5}
+        - {x: 6, y: 10}
+        - {x: 3, y: 11}
+        - {x: -3, y: 11}
+        - {x: -6, y: 10}
+        - {x: -11, y: 5}
+        - {x: -12, y: 2}
+        - {x: -12, y: -8}
+        - {x: -8, y: -12}
+        - {x: 8, y: -12}
+        - {x: 12, y: -8}
+        - {x: 12, y: 2}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 14187d5283b504d4b9a1ecb1eef71f98
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime0_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 12, y: 2}
+        - {x: 6, y: 7}
+        - {x: 4, y: 7}
+        - {x: 3, y: 8}
+        - {x: -3, y: 8}
+        - {x: -4, y: 7}
+        - {x: -6, y: 7}
+        - {x: -12, y: 2}
+        - {x: -12, y: -8}
+        - {x: -8, y: -12}
+        - {x: 8, y: -12}
+        - {x: 12, y: -8}
+      tessellationDetail: 1
+      bones: []
+      spriteID: a0bbe54e4a579bf4ab8c822c566329d9
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime0_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 10, y: 2}
+        - {x: 7, y: 3}
+        - {x: 4, y: 3}
+        - {x: 3, y: 4}
+        - {x: -3, y: 4}
+        - {x: -4, y: 3}
+        - {x: -7, y: 3}
+        - {x: -10, y: 2}
+        - {x: -12, y: -1}
+        - {x: -12, y: -8}
+        - {x: -8, y: -12}
+        - {x: 8, y: -12}
+        - {x: 12, y: -8}
+        - {x: 12, y: -1}
+      tessellationDetail: 1
+      bones: []
+      spriteID: 148a1126dba58484599068934bdf57fb
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 584cc480be63f7c44956e2e858e00a5b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: Enemy
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
