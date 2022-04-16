@@ -1844,9 +1844,9 @@ MonoBehaviour:
   - name: Mushroom0
     id: 13
     cost: 2
-    stage: 99999
+    stage: 11
     maxStage: 0
-    weapon: -1
+    weapon: 12
     hpRegen: 0
     isFriendly: 0
     isStanding: 0
@@ -1854,9 +1854,9 @@ MonoBehaviour:
     isCorpse: 0
     limitTime: 0
     stat:
-      dmg: 3
-      spd: 2
-      hp: 12
+      dmg: 1
+      spd: 0
+      hp: 10
       mp: 0
       dmgMax: 0
       spdMax: 0
@@ -1868,10 +1868,69 @@ MonoBehaviour:
       mpTemp: 0
       hpRegenTemp: 0
       mpRegenTemp: 0
-      currentHp: 8
+      currentHp: 10
       currentMp: 0
       statPoints: 0
     controller: {fileID: 9100000, guid: 430f3472c3c3de040ac0e69a32030e1a, type: 2}
+    deathEffectController: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    bulletColor: {r: 0, g: 0, b: 0, a: 0}
+    move: 0
+    tackleBulletID: 3
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
+    moveDelay: 1
+    moveDistance: 0.5
+    moveSpeed: 0.8
+    accelerationRate: 0
+    decelerationRate: 0
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    shadowZAngle: 0
+    shadowXFlip: 0
+    gainExp: 1
+    order: -100
+    bulletOrder: 0
+    effects: []
+    resistances: []
+    deathSFX:
+    - bugDeath
+    attackSFX: 
+  - name: Mushroom1
+    id: 14
+    cost: 3
+    stage: 16
+    maxStage: 0
+    weapon: 12
+    hpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
+    stat:
+      dmg: 2
+      spd: 0
+      hp: 15
+      mp: 0
+      dmgMax: 0
+      spdMax: 0
+      hpMax: 0
+      mpMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      hpRegenTemp: 0
+      mpRegenTemp: 0
+      currentHp: 15
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 22100000, guid: 30b307d740ada664e8609a8a376eac4d, type: 2}
     deathEffectController: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     bulletColor: {r: 0, g: 0, b: 0, a: 0}
@@ -3063,19 +3122,19 @@ MonoBehaviour:
   - name: Spore
     id: 27
     color: {r: 1, g: 1, b: 1, a: 1}
-    dmg: 0.25
+    dmg: 1
     related: 0
-    controller: {fileID: 22100000, guid: 26051ac8c18eb6d449b546e3e186ceb9, type: 2}
+    controller: {fileID: 9100000, guid: 2c860b7019438ac4aa5fc06f39cb80d0, type: 2}
     type: 0
-    localSpeed: 0
+    localSpeed: 0.5
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
     guideSpeed: 0
     spinSpeed: 0
     size: 0.3
-    delay: 0
-    limitTime: 1
+    delay: 1
+    limitTime: 3
     disapearStartTime: 0
     disapearDuration: 0
     pierce: 99999
@@ -3087,7 +3146,7 @@ MonoBehaviour:
       power: 0
       gap: 0
       isOnHit: 0
-    order: 0
+    order: 100
     effects: []
     children: []
     onDestroy: []
@@ -3274,6 +3333,86 @@ MonoBehaviour:
     beforeAttackDelay: 0.25
     afterAttackDelay: 0.75
     attackDistance: 100
+  - name: Spore
+    id: 12
+    type: 1
+    startBulletId: 27
+    children:
+    - name: Spore
+      bulletId: 27
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 45
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: Spore
+      bulletId: 27
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 90
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: Spore
+      bulletId: 27
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 135
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: Spore
+      bulletId: 27
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 180
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: Spore
+      bulletId: 27
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 225
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: Spore
+      bulletId: 27
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 270
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: Spore
+      bulletId: 27
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 315
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    onDestroy: []
+    offset: {x: 0, y: 0, z: 0}
+    beforeAttackDelay: 1
+    afterAttackDelay: 1
+    attackDistance: 4
   playerWeapons:
   - level: 0
     cost: 500

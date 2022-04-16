@@ -85,11 +85,11 @@ namespace RogueNaraka.BulletScripts
 
             if (data.angle >= 0)
             {
-                Vector3 direction = Quaternion.AngleAxis(data.angle, Vector3.back) * bullet.cachedTransform.rotation.eulerAngles;
-                bullet.shootable.Shoot(direction.normalized, data.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
+                bullet.cachedTransform.Rotate(0, 0, data.angle);
+                bullet.shootable.Shoot(parent.cachedTransform.rotation, data.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel, false);
             }
             else
-                bullet.shootable.Shoot(parent.cachedTransform.rotation, data.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel);
+                bullet.shootable.Shoot(parent.cachedTransform.rotation, data.offset, bullet.data.localSpeed, bullet.data.worldSpeed, bullet.data.localAccel, bullet.data.worldAccel, false);
             if (data.isRepeat && parent.gameObject.activeSelf)
                 parent.spawnable.BulletInit(data);
         }
