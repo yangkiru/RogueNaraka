@@ -1844,7 +1844,7 @@ MonoBehaviour:
   - name: Mushroom0
     id: 13
     cost: 2
-    stage: 9999
+    stage: 99999
     maxStage: 0
     weapon: -1
     hpRegen: 0

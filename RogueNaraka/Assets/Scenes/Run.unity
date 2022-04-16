@@ -40010,15 +40010,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 3.25, y: 6}
-      - {x: 3.25, y: 0.25}
-      - {x: 5, y: -2}
-      - {x: 5, y: 8}
-      - {x: -5, y: 8}
-      - {x: -5, y: -2}
-      - {x: 5, y: -2}
-      - {x: 3.25, y: 0.25}
-      - {x: -3.25, y: 0.25}
       - {x: -3.25, y: 6}
+      - {x: -3.25, y: 0.25}
+      - {x: 3.25, y: 0.25}
 --- !u!4 &752147869
 Transform:
   m_ObjectHideFlags: 0
@@ -43980,7 +43974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcfaeccf9f4b9146a619ee139ab95a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
+  map: {fileID: 752147865}
   boardManager: {fileID: 834756104}
 --- !u!114 &834756107
 MonoBehaviour:
@@ -86401,6 +86395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1650647375}
+  - component: {fileID: 1650647376}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -86448,6 +86443,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1650647376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650647374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e349bd7fad2fc448946664afa99a06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1650955493
 GameObject:
   m_ObjectHideFlags: 0
@@ -103308,7 +103315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 292.5, y: 741.49945}
+  m_AnchoredPosition: {x: 292.5, y: 741.4995}
   m_SizeDelta: {x: -248.43002, y: -752.42}
   m_Pivot: {x: -0.15, y: 1.2}
 --- !u!114 &1904657810
