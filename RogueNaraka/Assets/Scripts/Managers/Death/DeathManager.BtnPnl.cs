@@ -15,7 +15,7 @@ public partial class DeathManager : MonoBehaviour {
         btnPnl.gameObject.SetActive(true);
         do {
             yield return null;
-            closeTime += Time.deltaTime * CLOSE_SPEED;
+            closeTime += Time.unscaledDeltaTime * CLOSE_SPEED;
             btnPnl.localScale = Vector3.Lerp(btnPnl.localScale, Vector3.one, closeTime);
         } while(closeTime < 1);
         interstitialAds.Show();
