@@ -47,7 +47,7 @@ public class GameDatabase : ScriptableObject
     public ItemData[] items;
     public ItemSpriteData[] itemSprites;
     public EffectSpriteData[] effects;
-    public Sprite statSprite;
+    public Sprite[] statSprites;
 
     public StatLang[] statLang;
     public string[] langFonts;

@@ -124,7 +124,7 @@ public class RollManager : MonoBehaviour {
                 SetSprite(i, GetSprite(datas[i]));
             }
         }
-        SetStatTxt(true);
+        //SetStatTxt(true);
     }
 
     public void SetShowCase(RollData selected, params RollData[] datas)
@@ -180,7 +180,7 @@ public class RollManager : MonoBehaviour {
                 SetSprite(i, GetSprite(this.datas[i]));
             }
         }
-        SetStatTxt(true);
+        //SetStatTxt(true);
     }
 
     public void SetRollPnl(bool value)
@@ -534,14 +534,27 @@ public class RollManager : MonoBehaviour {
                     if (data.id + 1 > 1)
                         point += "s";
                     nameTxt.text = (data.id + 1) + point;
-                    switch (GameManager.language)
-                    {
-                        default:
-                            descTxt.text = string.Format("You will get {0} Stat {1}.", (data.id + 1), point);
-                            break;
-                        case Language.Korean:
-                            descTxt.text = string.Format("{0}의 스탯 포인트를 획득한다.", (data.id + 1));
-                            break;
+                    if (data.id != 8){
+                        switch (GameManager.language)
+                        {
+                            default:
+                                descTxt.text = string.Format("You will get {0} {1} Stat {2}.", (data.id/4)+1, GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)], point);
+                                break;
+                            case Language.Korean:
+                                descTxt.text = string.Format("{0}의 {1} 스탯 포인트를 획득한다.", (data.id/4)+1, GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)]);
+                                break;
+                        }
+                    }
+                    else {
+                        switch (GameManager.language)
+                        {
+                            default:
+                                descTxt.text = string.Format("You will get All Stat Points.", (data.id/4)+1, GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)]);
+                                break;
+                            case Language.Korean:
+                                descTxt.text = string.Format("모든 스탯 포인트를 획득한다.");
+                                break;
+                        }
                     }
                     break;
                 case ROLL_TYPE.ITEM:
@@ -657,7 +670,27 @@ public class RollManager : MonoBehaviour {
                 //SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.STAT:
-                StatManager.instance.SetStatPnl(true, rollData.id + 1);
+                bool isClosePnl = true;
+                switch(rollData.id){
+                    case 0:case 1:case 2:case 3:
+                    isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)rollData.id, 1);
+                    break;
+                    case 4:case 5:case 6:case 7:
+                    isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)(rollData.id-4), 2);
+                    if (!isClosePnl)
+                        isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)(rollData.id-4), 1);
+                    break;
+                    case 8:
+                    for(int i = 0; i < 4; i++)
+                        isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)i, 1) || isClosePnl;
+                    break;
+                }
+
+                if (isClosePnl) {
+                    Stat.StatToData(BoardManager.instance.player.data.stat);
+                    GameManager.instance.StatTextUpdate();
+                    SetRollPnl(false);
+                }
                 break;
             case ROLL_TYPE.ITEM:
                 if (Item.isPointed)
@@ -700,7 +733,7 @@ public class RollManager : MonoBehaviour {
                         result = GameDatabase.instance.skills[data.id].spr;
                         break;
                     case ROLL_TYPE.STAT:
-                        result = GameDatabase.instance.statSprite;
+                        result = GameDatabase.instance.statSprites[data.id];
                         break;
                     case ROLL_TYPE.ITEM:
                         result = GameDatabase.instance.itemSprites[Item.instance.sprIds[data.id]].spr;
@@ -735,13 +768,15 @@ public class RollManager : MonoBehaviour {
                 } while (!SkillData.IsBought(result.id) && !GameDatabase.instance.skills[result.id].isBasic);
                 break;
             case ROLL_TYPE.STAT:
-                switch(Random.Range(0, 10)){
-                    case 9: result.id = 2; break;
-                    case 8: case 7: case 6: result.id = 1; break;
-                    default: result.id = 0; break;
+                float rndStat = Random.Range(0f, 1f);
+                int rndStatType = Random.Range(0, 4);
+                if(rndStat > 0.3f){ // 1개 짜리 스탯
+                    result.id = rndStatType;
+                } else if (rndStat > 0.01f){ // 2개 짜리 스탯
+                    result.id = 4+rndStatType;
+                } else { // ALL 스탯
+                    result.id = 8;
                 }
-                
-                result.id = Random.Range(0, 3);
                 break;
             case ROLL_TYPE.ITEM:
                 result.id = Random.Range(0, GameDatabase.instance.items.Length);

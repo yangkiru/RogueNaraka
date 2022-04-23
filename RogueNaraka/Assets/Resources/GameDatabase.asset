@@ -3461,7 +3461,7 @@ MonoBehaviour:
   - cost: 2
     unitId: 02000000030000000c0000000d000000
   - cost: 3
-    unitId: 04000000
+    unitId: 040000000e000000
   - cost: 4
     unitId: 0500000006000000
   - cost: 0.3
@@ -3953,7 +3953,16 @@ MonoBehaviour:
     type: 15
     spr: {fileID: 0}
     particle: {fileID: 0}
-  statSprite: {fileID: 21300000, guid: 708e1f81b47bee448a6f201ccf946acc, type: 3}
+  statSprites:
+  - {fileID: 21300000, guid: 13518052242a19c4889bee68a36edefa, type: 3}
+  - {fileID: 21300000, guid: dbb81130f2b4dad4f81bf7741a152643, type: 3}
+  - {fileID: 21300000, guid: e1a8d2c6394be8c4f95d12b4d5703e43, type: 3}
+  - {fileID: 21300000, guid: 9bad395660bc7ec4ea140da42c123326, type: 3}
+  - {fileID: 21300000, guid: 7dbb80f8ef62e9d45960fbc312966b50, type: 3}
+  - {fileID: 21300000, guid: 5c0bd55c6fde0324ca1212ab39868ee6, type: 3}
+  - {fileID: 21300000, guid: bf4c148dd2fd2be4291f530608acd6d6, type: 3}
+  - {fileID: 21300000, guid: 053b1eff492edb04c92b5cd914442e98, type: 3}
+  - {fileID: 21300000, guid: 5c0bd55c6fde0324ca1212ab39868ee6, type: 3}
   statLang:
   - lang: English
     items:
