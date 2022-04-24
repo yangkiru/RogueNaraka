@@ -34,13 +34,8 @@ public class RollManager : MonoBehaviour {
 
     public const int ALL_STAT_LANG_INDEX = 5;
 
-    /// <summary>
-    /// reRoll 횟수
-    /// </summary>
     private int rollCount;
-    /// <summary>
-    /// roll 실행 횟수
-    /// </summary>
+
     public int LeftRoll
     {
         get { return PlayerPrefs.GetInt("leftRoll");}
@@ -65,6 +60,8 @@ public class RollManager : MonoBehaviour {
     public event System.Action onDecided;
     public event System.Action onLeftRoll;
     public event System.Action onFadeOut;
+
+    List<int> statList = new List<int>();
 
     void Awake()
     {
@@ -761,7 +758,6 @@ public class RollManager : MonoBehaviour {
     {
         RollData result = new RollData();
         int rnd = Random.Range(0, modes.Length);
-
         result.type = modes[rnd];
         switch (modes[rnd])
         {
@@ -775,12 +771,25 @@ public class RollManager : MonoBehaviour {
                 } while (!SkillData.IsBought(result.id) && !GameDatabase.instance.skills[result.id].isBasic);
                 break;
             case ROLL_TYPE.STAT:
+                if(BoardManager.instance.player.stat.sumMax == BoardManager.instance.player.stat.sumOrigin){
+                    GetRandom(ROLL_TYPE.ITEM, ROLL_TYPE.SKILL);
+                    break;
+                }
                 float rndStat = Random.Range(0f, 1f);
-                int rndStatType = Random.Range(0, 4);
+                statList.Clear();
+                for(int i = 0; i < 4; i++) {
+                    if (BoardManager.instance.player.stat.GetMax(i) > BoardManager.instance.player.stat.GetOrigin(i)){
+                        statList.Add(i);
+                    }
+                }
+                int rndStatType = Random.Range(0, statList.Count);
                 if(rndStat > 0.3f){ // 1개 짜리 스탯
-                    result.id = rndStatType;
+                    result.id = statList[rndStatType];
                 } else if (rndStat > 0.01f){ // 2개 짜리 스탯
-                    result.id = 4+rndStatType;
+                    if (BoardManager.instance.player.stat.GetOrigin(rndStatType) + 1 >= BoardManager.instance.player.stat.GetMax(rndStatType))
+                        result.id = statList[rndStatType]; // 부족해서 1개 짜리 스탯
+                    else
+                        result.id = 4+statList[rndStatType];
                 } else { // ALL 스탯
                     result.id = 8;
                 }

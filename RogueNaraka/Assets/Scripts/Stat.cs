@@ -241,6 +241,23 @@ public class Stat : ICloneable
         }
         return -1;
     }
+    public float GetMax(int type)
+    {
+        switch ((STAT)type)
+        {
+            case STAT.DMG:
+                return dmgMax;
+            case STAT.SPD:
+                return spdMax;
+            case STAT.HP:
+                return hpMax;
+            case STAT.MP:
+                return mpMax;
+            case STAT.SP:
+                return statPoints;
+        }
+        return -1;
+    }
 
     public static Stat JsonToStat(string stat)
     {
