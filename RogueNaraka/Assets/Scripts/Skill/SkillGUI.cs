@@ -29,6 +29,13 @@ public class SkillGUI : MonoBehaviour
     public Skill skill { get { return _skill; } }
     Skill _skill;
 
+    private bool isDragging = false;
+
+    private void Update(){
+        if (isDragging)
+            ManaScript.instance.SetNeedMana(true, _skill.data.manaCost);
+    }
+
     public void OnEnter()
     {
         pointedSkill = position;
@@ -114,13 +121,16 @@ public class SkillGUI : MonoBehaviour
                     skillManager.circle.SetParent(pointer.cashedTransform);
             }
             pointer.PositionToMouse();
+            isDragging = true;
         }
     }
 
     public void OnUp()
     {
+        isDragging = false;
         skillManager.circle.SetEnable(false);
         ManaScript.instance.SetNeedMana(false);
+        ManaScript.instance.noMana.gameObject.SetActive(false);
         if (_skill && _skill.data.id != -1 && !GameManager.instance.isPause && BoardManager.IsMouseInBoard() && ((player && !player.deathable.isDeath) || _skill.data.isDeath) && IsMana())
         {
             UseSkill(false);
@@ -146,10 +156,12 @@ public class SkillGUI : MonoBehaviour
     public bool IsMana()
     {
         bool result = player.mpable.currentMp >= _skill.data.manaCost;
-        if (!result)
-        {
-            ManaScript.instance.StartCoroutine(ManaScript.instance.NeedMana(_skill.data.manaCost));
-            ManaScript.instance.StartCoroutine(ManaScript.instance.NoMana());
+        if(!result) {
+            if(ManaScript.instance.NoManaCoroutine != null) StopCoroutine(ManaScript.instance.NoManaCoroutine);
+            if(player.mpable.maxMp <= _skill.data.manaCost)
+                ManaScript.instance.NoManaCoroutine = StartCoroutine(ManaScript.instance.NoMaxMana());
+            else
+                ManaScript.instance.NoManaCoroutine = StartCoroutine(ManaScript.instance.NoMana());
         }
         return result;
     }

@@ -3970,7 +3970,7 @@ MonoBehaviour:
     - Speed
     - Health Point
     - Mana Point
-    - Start Stat
+    - Power Orb
     - All Stat
   - lang: Korean
     items:
@@ -3978,7 +3978,7 @@ MonoBehaviour:
     - "\uC21C\uBC1C\uB825"
     - "\uCCB4\uB825"
     - "\uB9C8\uB825"
-    - "\uC2DC\uC791 \uC2A4\uD0EF"
+    - "\uD798\uC758 \uAD6C\uC2AC"
     - "\uBAA8\uB4E0 \uC2A4\uD0EF"
   langFonts:
   - 
