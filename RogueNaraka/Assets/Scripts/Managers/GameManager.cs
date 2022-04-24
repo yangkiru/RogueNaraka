@@ -236,13 +236,12 @@ public partial class GameManager : MonoBehaviour {
         else
         {
             boardManager.InitBoard();
-        }
-
-        if (playerData.stat.currentHp <= 0)
-        {
-            player.gameObject.SetActive(false);
-            Debug.Log("Death On Load");
-            DeathManager.instance.OnDeath();
+            if (playerData.stat.currentHp <= 0)
+            {
+                player.gameObject.SetActive(false);
+                Debug.Log("Death On Load");
+                DeathManager.instance.OnDeath();
+            }
         }
     }
 

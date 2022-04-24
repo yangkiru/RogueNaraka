@@ -3962,7 +3962,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5c0bd55c6fde0324ca1212ab39868ee6, type: 3}
   - {fileID: 21300000, guid: bf4c148dd2fd2be4291f530608acd6d6, type: 3}
   - {fileID: 21300000, guid: 053b1eff492edb04c92b5cd914442e98, type: 3}
-  - {fileID: 21300000, guid: 5c0bd55c6fde0324ca1212ab39868ee6, type: 3}
+  - {fileID: 21300000, guid: 5ed81dbae4dd95e49bd0ee748f9d22a9, type: 3}
   statLang:
   - lang: English
     items:
@@ -3970,14 +3970,16 @@ MonoBehaviour:
     - Speed
     - Health Point
     - Mana Point
-    - Stat Point
+    - Start Stat
+    - All Stat
   - lang: Korean
     items:
     - "\uACF5\uACA9\uB825"
     - "\uC21C\uBC1C\uB825"
     - "\uCCB4\uB825"
     - "\uB9C8\uB825"
-    - "\uC2A4\uD0EF \uD3EC\uC778\uD2B8"
+    - "\uC2DC\uC791 \uC2A4\uD0EF"
+    - "\uBAA8\uB4E0 \uC2A4\uD0EF"
   langFonts:
   - 
   - 

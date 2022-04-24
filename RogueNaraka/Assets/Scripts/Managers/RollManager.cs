@@ -31,6 +31,9 @@ public class RollManager : MonoBehaviour {
     public bool isClickable;
     public bool isPause { get; set; }
     public RollData[] datas;
+
+    public const int ALL_STAT_LANG_INDEX = 5;
+
     /// <summary>
     /// reRoll 횟수
     /// </summary>
@@ -531,17 +534,21 @@ public class RollManager : MonoBehaviour {
                     manaUI.gameObject.SetActive(false);
                     typeTxt.text = GameManager.language == Language.Korean ? "능력치" : "Stat";
                     string point = "Point";
+                    string statName = GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)];
                     if (data.id + 1 > 1)
                         point += "s";
-                    nameTxt.text = (data.id + 1) + point;
+                    if (data.id != 8)
+                        nameTxt.text = (data.id/4)+1+ " " + statName;
+                    else
+                        nameTxt.text = GameDatabase.instance.statLang[(int)GameManager.language].items[ALL_STAT_LANG_INDEX];
                     if (data.id != 8){
                         switch (GameManager.language)
                         {
                             default:
-                                descTxt.text = string.Format("You will get {0} {1} Stat {2}.", (data.id/4)+1, GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)], point);
+                                descTxt.text = string.Format("You will get {0} {1} Stat {2}.", (data.id/4)+1, statName, point);
                                 break;
                             case Language.Korean:
-                                descTxt.text = string.Format("{0}의 {1} 스탯 포인트를 획득한다.", (data.id/4)+1, GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)]);
+                                descTxt.text = string.Format("{0}의 {1} 스탯 포인트를 획득한다.", (data.id/4)+1, statName);
                                 break;
                         }
                     }
@@ -549,7 +556,7 @@ public class RollManager : MonoBehaviour {
                         switch (GameManager.language)
                         {
                             default:
-                                descTxt.text = string.Format("You will get All Stat Points.", (data.id/4)+1, GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)]);
+                                descTxt.text = string.Format("You will get All Stat Points.", (data.id/4)+1, statName);
                                 break;
                             case Language.Korean:
                                 descTxt.text = string.Format("모든 스탯 포인트를 획득한다.");
