@@ -17,12 +17,15 @@ namespace RogueNaraka.ShadowScripts {
 
         private WayShadowChecker wayChecker;
 
+        private bool flipX;
+
         void LateUpdate() {
             if(this.ShadowRenderer.sprite.name != this.UnitRenderer.sprite.name) {
                 
                 if (this.wayChecker != null)
                 {
                     this.ShadowRenderer.sprite = this.UnitRenderer.sprite;
+                    this.ShadowRenderer.flipX = this.flipX ^ this.UnitRenderer.flipX; // XOR
                     this.ShadowRenderer.enabled = true;
                     this.wayChecker.CheckWay(UnitAnimator.GetFloat("x"), UnitAnimator.GetFloat("y"));
                 }
@@ -33,7 +36,7 @@ namespace RogueNaraka.ShadowScripts {
 
         public void Initialize(float _angleZ, bool _flipX, Vector2[] _posArr) {
             this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, _angleZ);
-            this.ShadowRenderer.flipX = _flipX;
+            flipX = _flipX;
             switch(_posArr.Length) {
                 case 0:
                     this.wayChecker = null;
