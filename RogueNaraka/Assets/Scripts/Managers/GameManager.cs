@@ -335,18 +335,15 @@ public partial class GameManager : MonoBehaviour {
 
     public void StatTextUpdate()
     {
-        statTxt[0].text = player.data.stat.dmg.ToString();
-        statTxt[1].text = player.data.stat.spd.ToString();
-        statTxt[2].text = player.data.stat.hp.ToString();
-        statTxt[3].text = player.data.stat.mp.ToString();
+        StatTextUpdate(player.data.stat);
     }
 
     public void StatTextUpdate(Stat stat)
     {
-        statTxt[0].text = stat.dmg.ToString();
-        statTxt[1].text = stat.spd.ToString();
-        statTxt[2].text = stat.hp.ToString();
-        statTxt[3].text = stat.mp.ToString();
+        statTxt[0].text = stat.dmg.ToString()+"/"+stat.dmgMax.ToString();
+        statTxt[1].text = stat.spd.ToString()+"/"+stat.spdMax.ToString();
+        statTxt[2].text = stat.hp.ToString()+"/"+stat.hpMax.ToString();
+        statTxt[3].text = stat.mp.ToString()+"/"+stat.mpMax.ToString();
     }
 
     public void SetPause(bool value)
