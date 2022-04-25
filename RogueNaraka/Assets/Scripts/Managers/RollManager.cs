@@ -771,10 +771,6 @@ public class RollManager : MonoBehaviour {
                 } while (!SkillData.IsBought(result.id) && !GameDatabase.instance.skills[result.id].isBasic);
                 break;
             case ROLL_TYPE.STAT:
-                if(BoardManager.instance.player.stat.sumMax == BoardManager.instance.player.stat.sumOrigin){
-                    GetRandom(ROLL_TYPE.ITEM, ROLL_TYPE.SKILL);
-                    break;
-                }
                 float rndStat = Random.Range(0f, 1f);
                 statList.Clear();
                 for(int i = 0; i < 4; i++) {
@@ -782,6 +778,10 @@ public class RollManager : MonoBehaviour {
                         statList.Add(i);
                     }
                 }
+
+                if(statList.Count <= 0) // FULL STAT
+                    return GetRandom(ROLL_TYPE.ITEM, ROLL_TYPE.SKILL);
+
                 int rndStatType = Random.Range(0, statList.Count);
                 if(rndStat > 0.3f){ // 1개 짜리 스탯
                     result.id = statList[rndStatType];

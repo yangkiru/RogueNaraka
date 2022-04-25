@@ -41,7 +41,7 @@ public class Stat : ICloneable
 
     public float sumTemp
     {
-        get { return dmgTemp + spdTemp + hpTemp + mpTemp + hpRegenTemp + mpRegenTemp; }
+        get { return dmgTemp + spdTemp + hpTemp + mpTemp; }
     }
 
     public bool AddOrigin(STAT type, float amount, bool isCheck = false, bool isIgnoreMax = false)
