@@ -44,26 +44,7 @@ namespace RogueNaraka.SkillScripts
                 } while (time > 0);
 
             } while (amount > 0);
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    for (int j = 0; j < amount; j++)
-            //    {
-            //        Vector2 rnd = Random.insideUnitCircle * data.size;
-            //        Bullet thunder = BoardManager.instance.bulletPool.DequeueObjectPool().GetComponent<Bullet>();
-            //        int rndDirection = Random.Range(0, 2);
-            //        thunder.Init(BoardManager.instance.player, GameDatabase.instance.bullets[data.bulletIds[rndDirection]]);
-            //        float rndAngle = Random.Range(0, 360);
-            //        thunder.transform.rotation = Quaternion.Euler(0, 0, rndAngle);
-            //        thunder.Spawn((Vector2)mp + rnd);
-            //    }
-
-            //    float time = delay;
-            //    do
-            //    {
-            //        yield return null;
-            //        time -= Time.deltaTime;
-            //    } while (time > 0);
-            //}
+            SelfDestroy();
         }
     }
 }

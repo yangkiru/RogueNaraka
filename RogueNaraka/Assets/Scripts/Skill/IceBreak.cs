@@ -10,6 +10,7 @@ namespace RogueNaraka.SkillScripts
         public override void Use(ref Vector3 mp)
         {
             SpawnIce(ref mp);
+            SelfDestroy();
         }
 
         void SpawnIce(ref Vector3 mp)

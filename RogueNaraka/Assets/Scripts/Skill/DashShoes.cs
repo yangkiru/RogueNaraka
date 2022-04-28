@@ -75,6 +75,7 @@ namespace RogueNaraka.SkillScripts
             if (player.autoMoveable != null)
                 player.autoMoveable.enabled = true;
             player.attackable.enabled = true;
+            SelfDestroy();
         }
 
         //void Run(Vector3 mp)

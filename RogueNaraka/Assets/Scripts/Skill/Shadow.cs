@@ -10,6 +10,7 @@ namespace RogueNaraka.SkillScripts
         public override void Use(ref Vector3 mp)
         {
             SpawnShadow();
+            SelfDestroy();
         }
 
         void SpawnShadow()

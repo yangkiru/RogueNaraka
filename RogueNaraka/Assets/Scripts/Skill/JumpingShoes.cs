@@ -104,6 +104,7 @@ namespace RogueNaraka.SkillScripts
             shadowTransform.localScale = Vector3.one;
             shadowTransform.SetParent(player.cachedTransform);
             player.shadow.enabled = true;
+            player.shadow.Initialize(player.data.shadowZAngle, player.data.shadowXFlip, player.data.shadowPos);
             player.rigid.velocity = Vector2.zero;
             player.collider.enabled = true;
             if(player.autoMoveable != null)
@@ -118,7 +119,7 @@ namespace RogueNaraka.SkillScripts
                 effect.Init((Vector2)player.cachedTransform.position + Random.insideUnitCircle * 0.25f, player.cachedTransform.position, 1.5f);
                 //effect.cachedTransform.position = (Vector2)player.cachedTransform.position + Random.insideUnitCircle.normalized * 1.3f;
             }
-
+            SelfDestroy();
         }
     }
 }

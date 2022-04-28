@@ -11,6 +11,7 @@ namespace RogueNaraka.SkillScripts
         public override void Use(ref Vector3 mp)
         {
             SpawnBloodSwamp(ref mp);
+            SelfDestroy();
         }
 
         void SpawnBloodSwamp(ref Vector3 mp)

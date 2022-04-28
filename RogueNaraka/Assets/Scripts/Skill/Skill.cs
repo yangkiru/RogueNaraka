@@ -95,5 +95,10 @@ namespace RogueNaraka.SkillScripts
         }
 
         public abstract void Use(ref Vector3 mp);
+
+        public virtual void SelfDestroy(){
+            if (gui == null)
+                Destroy(this);
+        }
     }
 }

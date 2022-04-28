@@ -76,6 +76,7 @@ namespace RogueNaraka.SkillScripts
             if(player.autoMoveable != null)
                 player.autoMoveable.enabled = true;
             player.attackable.enabled = true;
+            SelfDestroy();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace RogueNaraka.SkillScripts
         public override void Use(ref Vector3 mp)
         {
             Heal(ref mp);
+            SelfDestroy();
         }
 
         void Heal(ref Vector3 mp)

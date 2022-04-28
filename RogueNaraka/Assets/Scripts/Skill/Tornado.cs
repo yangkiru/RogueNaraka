@@ -70,6 +70,7 @@ namespace RogueNaraka.SkillScripts
                 }
             } while (bullet.gameObject.activeSelf);
             AudioManager.instance.FadeOutSFX(id, 1);
+            SelfDestroy();
         }
 
         private void OnDisable()

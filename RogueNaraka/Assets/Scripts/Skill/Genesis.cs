@@ -10,6 +10,7 @@ namespace RogueNaraka.SkillScripts
         public override void Use(ref Vector3 mp)
         {
             SpawnGenesis(ref mp);
+            SelfDestroy();
         }
 
         void SpawnGenesis(ref Vector3 mp)
