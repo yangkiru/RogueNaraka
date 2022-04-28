@@ -607,8 +607,8 @@ public class RollManager : MonoBehaviour {
 
     public void OnClick(int position)
     {
-        if ((selected == position || position == (selected-1)%showCases.Length || position == (selected+1)%showCases.Length) && datas[position].type == ROLL_TYPE.STAT)
-            Ok(position);
+        // if ((selected == position || position == (selected-1)%showCases.Length || position == (selected+1)%showCases.Length) && datas[position].type == ROLL_TYPE.STAT)
+        //     Ok(position);
     }
     
     public void OnDown(int position)
@@ -617,11 +617,10 @@ public class RollManager : MonoBehaviour {
         // if (position != selected || position != ((selected-1)%showCases.Length) || position != ((selected+1)%showCases.Length))
         //     return;
         Select(position);
-        if (datas[position].type != ROLL_TYPE.STAT)
-        {            
-            dragImg.sprite = GetSprite(datas[position]);
-            dragImg.gameObject.SetActive(true);
-        }
+        if (datas[position].type == ROLL_TYPE.STAT)
+            BottomGUI.Instance.HighlightOn();
+        dragImg.sprite = GetSprite(datas[position]);
+        dragImg.gameObject.SetActive(true);
     }
 
     public void OnDrag(int position)
@@ -629,7 +628,7 @@ public class RollManager : MonoBehaviour {
         if (selected != -1)
         {
             RollData rollData = datas[position];
-            dragImg.gameObject.SetActive(rollData.type != ROLL_TYPE.STAT);
+            dragImg.gameObject.SetActive(true);
             dragImg.sprite = GetSprite(datas[position]);
             Vector3 pos = GameManager.instance.GetMousePosition();
             dragImg.rectTransform.position = pos;
@@ -642,10 +641,11 @@ public class RollManager : MonoBehaviour {
     public void OnUp(int position)
     {
         if(selected != -1) {
-            RollData rollData = datas[position];
-            if (rollData.type != ROLL_TYPE.STAT)
-                Ok(position);
+            Ok(position);
+        } else if (BottomGUI.Instance.IsMouseEnter && datas[position].type == ROLL_TYPE.STAT){
+            Ok(position);
         }
+        BottomGUI.Instance.HighlightOff();
         dragImg.rectTransform.position = restPosition;
         dragImg.sprite = null;
         dragImg.gameObject.SetActive(false);
@@ -687,25 +687,30 @@ public class RollManager : MonoBehaviour {
                 //SetRollPnl(false, isStageUp);
                 break;
             case ROLL_TYPE.STAT:
-                bool isClosePnl = true;
-                switch(rollData.id){
-                    case 0:case 1:case 2:case 3:
-                    isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)rollData.id, 1);
-                    break;
-                    case 4:case 5:case 6:case 7:
-                    isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)(rollData.id-4), 2);
-                    if (!isClosePnl)
-                        isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)(rollData.id-4), 1);
-                    break;
-                    case 8:
-                    for(int i = 0; i < 4; i++)
-                        isClosePnl = BoardManager.instance.player.data.stat.AddOrigin((STAT)i, 1) || isClosePnl;
-                    break;
-                }
-
-                if (isClosePnl) {
+                if (BottomGUI.Instance.IsMouseEnter){
+                    TextMeshProUGUI txt;
+                    switch(rollData.id){
+                        case 0:case 1:case 2:case 3:
+                        BoardManager.instance.player.data.stat.AddOrigin((STAT)rollData.id, 1);
+                        txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[rollData.id].transform.position, 1, Color.green, "#");
+                        StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f));
+                        break;
+                        case 4:case 5:case 6:case 7:
+                        BoardManager.instance.player.data.stat.AddOrigin((STAT)(rollData.id-4), 2);
+                        txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[(rollData.id-4)].transform.position, 2, Color.yellow, "#");
+                        StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f));
+                        break;
+                        case 8:
+                        for(int i = 0; i < 4; i++) {
+                            BoardManager.instance.player.data.stat.AddOrigin((STAT)i, 1);
+                            txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[i].transform.position, 1, Color.red, "#");
+                            StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f));
+                        }
+                        break;
+                    }
                     Stat.StatToData(BoardManager.instance.player.data.stat);
                     GameManager.instance.StatTextUpdate();
+                    AudioManager.instance.PlaySFX("skillEquip");
                     SetRollPnl(false);
                 }
                 break;
@@ -775,7 +780,7 @@ public class RollManager : MonoBehaviour {
         switch (modes[rnd])
         {
             case ROLL_TYPE.ALL:
-                int rndMode = Random.Range(1, (int)ROLL_TYPE.STAT + 1);
+                int rndMode = Random.Range(1, 3);
                 return GetRandom((ROLL_TYPE)rndMode);
             case ROLL_TYPE.SKILL:
                 do
@@ -793,7 +798,7 @@ public class RollManager : MonoBehaviour {
                 }
 
                 if(statList.Count <= 0) // FULL STAT
-                    return GetRandom(ROLL_TYPE.ITEM, ROLL_TYPE.SKILL);
+                    return GetRandom(ROLL_TYPE.SKILL);
 
                 int rndStatType = Random.Range(0, statList.Count);
                 if(rndStat > 0.3f){ // 1개 짜리 스탯

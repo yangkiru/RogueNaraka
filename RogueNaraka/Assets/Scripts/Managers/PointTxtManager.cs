@@ -110,7 +110,7 @@ public class PointTxtManager : MonoBehaviour {
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
-    IEnumerator Shoot(TextMeshProUGUI txt, float time)
+    public IEnumerator Shoot(TextMeshProUGUI txt, float time)
     {
         float rnd = Random.Range(-0.01f, 0.01f);
         float acel = Random.Range(0.75f, 1f);
@@ -131,7 +131,7 @@ public class PointTxtManager : MonoBehaviour {
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
-    IEnumerator AlphaDown(TextMeshProUGUI txt, float delay, float speed)
+    public IEnumerator AlphaDown(TextMeshProUGUI txt, float delay, float speed)
     {
         while(delay > 0)
         {
