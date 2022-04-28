@@ -149,6 +149,7 @@ public class UnitData : ICloneable
     public int maxStage;
     public int weapon;
     public float hpRegen;
+    public float mpRegen;
     public bool isFriendly;
     public bool isStanding;
     public bool isDeathEffect;
@@ -437,6 +438,25 @@ public class SkillData:ICloneable
     {
         PlayerPrefs.SetString("boughtSkills", JsonHelper.ToJson<bool>(boughts));
     }
+
+    public ValueData GetValue(Value name){
+        for(int i = 0; i < values.Length; i++)
+            {
+                if (name == values[i].name)
+                    return values[i];
+            }
+        return null;
+    }
+
+    public EffectData GetEffect(EFFECT type)
+        {
+            for (int i = 0; i < effects.Length; i++)
+            {
+                if (type == effects[i].type)
+                    return effects[i];
+            }
+            return null;
+        }
 }
 
 [Serializable]
@@ -607,7 +627,7 @@ public enum ATTACK_TYPE
 [Serializable]
 public enum Value
 {
-    Amount, Time, Damage, LifeSteal, Hp, Accel, Delay, Fire, HpRegen
+    Amount, Time, Damage, LifeSteal, Hp, Accel, Delay, Fire, HpRegen, Mp, MpRegen
 }
 
 [Serializable]

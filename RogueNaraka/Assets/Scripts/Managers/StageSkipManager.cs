@@ -122,10 +122,10 @@ public class StageSkipManager : MonoSingleton<StageSkipManager>
                 bookAmountTxt.text = string.Format("{0} 개", amount);
                 break;
         }
-        Item.instance.Load();
-        Item.instance.SyncData(2);
-        Item.instance.amount = amount;
-        Item.instance.Save();
+        //Item.instance.Load();
+        //Item.instance.SyncData(2);
+        //Item.instance.amount = amount;
+        //Item.instance.Save();
     }
 
     public void AddRandomStat(Stat stat, int amount)

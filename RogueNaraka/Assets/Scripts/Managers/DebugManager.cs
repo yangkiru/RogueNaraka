@@ -62,7 +62,7 @@ public class DebugManager : MonoBehaviour {
         int slot;
         int.TryParse(skillInputs[0].text, out slot);
 
-        if (slot >= 0 && slot <= 2)
+        if (slot >= 0 && slot < SkillManager.instance.skills.Length)
         {
             int id;
             if (int.TryParse(skillInputs[1].text, out id))

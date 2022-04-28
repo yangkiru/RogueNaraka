@@ -6,7 +6,7 @@ namespace RogueNaraka.SkillScripts
 {
     public abstract class Skill : MonoBehaviour
     {
-        public SkillData data { get { return _data; } }
+        public SkillData data { get { return _data; }}
         [SerializeField]
         SkillData _data;
 
@@ -16,6 +16,11 @@ namespace RogueNaraka.SkillScripts
         {
             _data = (SkillData)dt.Clone();
             this.gui = gui;
+            OnInit();
+        }
+
+        public virtual void OnInit(){
+
         }
 
         public ValueData GetValue(Value name)
@@ -40,6 +45,10 @@ namespace RogueNaraka.SkillScripts
 
         public void LevelUp(int amount)
         {
+            _data = LevelUpData(data, amount);
+        }
+        
+        public static SkillData LevelUpData(SkillData data, int amount) {
             float reverse = amount < 0 ? -1 : 1;
             data.level += amount;
             for (int i = 0; i < amount; i++)
@@ -50,14 +59,14 @@ namespace RogueNaraka.SkillScripts
                 ;
                 for (int j = 0; j < data.levelUp.values.Length; j++)
                 {
-                    ValueData value = GetValue(data.levelUp.values[j].name);
+                    ValueData value = data.GetValue(data.levelUp.values[j].name);
                     if(value != null)
                         value.value += data.levelUp.values[j].value * reverse;
                 }
 
                 for (int j = 0; j < data.levelUp.effects.Length; j++)
                 {
-                    EffectData effect = GetEffect(data.levelUp.effects[j].type);
+                    EffectData effect = data.GetEffect(data.levelUp.effects[j].type);
                     if (effect != null)
                     {
                         effect.time += data.levelUp.effects[j].time * reverse;
@@ -65,6 +74,7 @@ namespace RogueNaraka.SkillScripts
                     }
                 }
             }
+            return data;
         }
 
         private void Update()

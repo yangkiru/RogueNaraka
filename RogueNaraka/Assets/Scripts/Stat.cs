@@ -21,8 +21,6 @@ public class Stat : ICloneable
     public float spdTemp;
     public float hpTemp;
     public float mpTemp;
-    public float hpRegenTemp;
-    public float mpRegenTemp;
 
     public float currentHp;
     public float currentMp;

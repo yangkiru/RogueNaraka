@@ -268,8 +268,8 @@ public partial class DeathManager : MonoBehaviour
         //AudioManager.instance.PlayMusic(AudioManager.instance.GetRandomMainMusic());
 
         SkillManager.instance.ResetSave();
-        Item.instance.ResetSave();
-        Item.instance.InitItem();
+        //Item.instance.ResetSave();
+        //Item.instance.InitItem();
 
         BoardManager.instance.SetStage(0);
         BoardManager.instance.ClearStage();

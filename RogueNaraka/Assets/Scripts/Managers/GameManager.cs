@@ -157,7 +157,7 @@ public partial class GameManager : MonoBehaviour {
         boardManager.Save();
         PlayerPrefs.SetInt("weapon", player.attackable.weapon.id);
         SkillManager.instance.Save();
-        Item.instance.Save();
+        //Item.instance.Save();
 
         //Debug.Log("Saved");
     }
@@ -170,7 +170,7 @@ public partial class GameManager : MonoBehaviour {
 
         moneyManager.ResetData();
         SkillManager.instance.ResetSave();
-        Item.instance.ResetSave();
+        //Item.instance.ResetSave();
 
         UnitData playerBase = GameDatabase.instance.playerBase;
 
@@ -216,7 +216,7 @@ public partial class GameManager : MonoBehaviour {
         StatTextUpdate(stat);
 
         SkillManager.instance.Load();
-        Item.instance.Load();
+        //Item.instance.Load();
 
         RageManager.instance.CheckRage();
 
@@ -266,7 +266,7 @@ public partial class GameManager : MonoBehaviour {
         BoardManager.instance.Stage = stage;
   
         skillManager.ResetSave();
-        Item.instance.ResetSave();
+        //Item.instance.ResetSave();
 
         RollManager.instance.IsFirstRoll = true;
     }
@@ -340,10 +340,10 @@ public partial class GameManager : MonoBehaviour {
 
     public void StatTextUpdate(Stat stat)
     {
-        statTxt[0].text = stat.dmg.ToString()+"/"+stat.dmgMax.ToString();
-        statTxt[1].text = stat.spd.ToString()+"/"+stat.spdMax.ToString();
-        statTxt[2].text = stat.hp.ToString()+"/"+stat.hpMax.ToString();
-        statTxt[3].text = stat.mp.ToString()+"/"+stat.mpMax.ToString();
+        statTxt[0].text = GameDatabase.instance.statLang[(int)language].items[0] + " " + stat.dmg.ToString()+"/"+stat.dmgMax.ToString();
+        statTxt[1].text = GameDatabase.instance.statLang[(int)language].items[1] + " " + stat.spd.ToString()+"/"+stat.spdMax.ToString();
+        statTxt[2].text = GameDatabase.instance.statLang[(int)language].items[2] + " " + stat.hp.ToString()+"/"+stat.hpMax.ToString();
+        statTxt[3].text = GameDatabase.instance.statLang[(int)language].items[3] + " " + stat.mp.ToString()+"/"+stat.mpMax.ToString();
     }
 
     public void SetPause(bool value)

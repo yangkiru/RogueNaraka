@@ -63,7 +63,7 @@ public class SkillManager : MonoBehaviour {
 
     public void InitSkills()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < skills.Length; i++)
         {
             skills[i].ResetSkill();
         }
@@ -74,8 +74,8 @@ public class SkillManager : MonoBehaviour {
     /// </summary>
     public void Save()
     {
-        SkillSaveData[] datas = new SkillSaveData[3];
-        for(int i = 0; i < 3; i++)
+        SkillSaveData[] datas = new SkillSaveData[skills.Length];
+        for(int i = 0; i < skills.Length; i++)
         {
             if (skills[i].skill)
             {
@@ -104,7 +104,7 @@ public class SkillManager : MonoBehaviour {
   
         if (datas == null)
         {
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < skills.Length; i++)
             {
                 skills[i].ResetSkill();
             }
@@ -112,10 +112,12 @@ public class SkillManager : MonoBehaviour {
         }
             
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < skills.Length; i++)
         {
             //Debug.Log(datas[i].id);
-            if (datas[i].id == -1)
+            if (datas.Length < skills.Length)
+                skills[skills.Length-1].ResetSkill();
+            else if (datas[i].id == -1)
                 skills[i].ResetSkill();
             else
             {
@@ -139,7 +141,7 @@ public class SkillManager : MonoBehaviour {
     /// </summary>
     public void ResetSave()
     {
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < skills.Length; i++)
         {
             skills[i].ResetSkill();
         }

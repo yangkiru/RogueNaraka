@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace RogueNaraka.EffectScripts{
-    public class HpRegenBuff : Effect
+    public class MpRegenBuff : Effect
     {
         public override void Combine(EffectData dt)
         {
@@ -16,12 +16,12 @@ namespace RogueNaraka.EffectScripts{
 
         protected override void OnDestroyEffect()
         {
-            target.data.hpRegen -= data.value;
+            target.data.mpRegen -= data.value;
         }
 
         protected override void OnInit()
         {
-            target.data.hpRegen += data.value;
+            target.data.mpRegen += data.value;
         }
     }
 }

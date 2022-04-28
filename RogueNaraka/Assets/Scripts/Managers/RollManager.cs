@@ -456,6 +456,19 @@ public class RollManager : MonoBehaviour {
                     case ROLL_TYPE.ITEM:
                         if (datas[i].id >= GameDatabase.instance.items.Length)
                             return false;
+                        if (datas[i].id == 0) // Heal potion
+                        {
+                            datas[i].type = ROLL_TYPE.SKILL;
+                            datas[i].id = 10;
+                        } else if (datas[i].id == 1) // Mana Potion
+                        {
+                            datas[i].type = ROLL_TYPE.SKILL;
+                            datas[i].id = 11;
+                        } else if (datas[i].id == 2) // Skill Book
+                        {
+                            datas[i].type = ROLL_TYPE.SKILL;
+                            datas[i].id = 12;
+                        }
                         break;
                     case ROLL_TYPE.SKILL:
                         if (datas[i].id >= GameDatabase.instance.skills.Length)
@@ -762,7 +775,7 @@ public class RollManager : MonoBehaviour {
         switch (modes[rnd])
         {
             case ROLL_TYPE.ALL:
-                int rndMode = Random.Range(1, (int)ROLL_TYPE.ITEM + 1);
+                int rndMode = Random.Range(1, (int)ROLL_TYPE.STAT + 1);
                 return GetRandom((ROLL_TYPE)rndMode);
             case ROLL_TYPE.SKILL:
                 do

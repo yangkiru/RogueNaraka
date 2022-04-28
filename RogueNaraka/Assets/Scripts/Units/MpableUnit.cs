@@ -101,7 +101,7 @@ namespace RogueNaraka.UnitScripts
                     t -= Time.deltaTime * regenSpeed;
                 } while (t > 0);
                 if(!unit.deathable.isDeath)
-                    AddMp(maxMp * 0.1f);
+                    AddMp(maxMp * 0.1f * unit.data.mpRegen);
             }
         }
 
