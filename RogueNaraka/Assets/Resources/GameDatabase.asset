@@ -3881,10 +3881,10 @@ MonoBehaviour:
     - "\uB9C8\uC2DC\uBA74 \uB9C8\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uD560 \uC218
       \uC788\uB2E4."
     useSFX: drink
-  - name: SkillBook
+  - name: SpellBook
     nameLang:
-    - Skill Book
-    - "\uAE30\uC220 \uCC45"
+    - Spell Book
+    - "\uB9C8\uBC95\uC11C"
     bulletIds: 
     unitIds: 
     spr: {fileID: 21300000, guid: fe1f74d06b929014c888ce6dcf4f6a0d, type: 3}
@@ -3907,9 +3907,8 @@ MonoBehaviour:
       effects: []
       values: []
     description:
-    - If you drink this portion, you can restore your mana
-    - "\uB9C8\uC2DC\uBA74 \uB9C8\uB825\uC744 \uBAA8\uB450 \uD68C\uBCF5\uD560 \uC218
-      \uC788\uB2E4."
+    - It uses a random skill.
+    - "\uBB34\uC791\uC704 \uAE30\uC220\uC744 \uC0AC\uC6A9\uD55C\uB2E4."
     useSFX: drink
   items:
   - name: HealPotion

@@ -693,18 +693,18 @@ public class RollManager : MonoBehaviour {
                         case 0:case 1:case 2:case 3:
                         BoardManager.instance.player.data.stat.AddOrigin((STAT)rollData.id, 1);
                         txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[rollData.id].transform.position, 1, Color.green, "#");
-                        StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f));
+                        StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f, true));
                         break;
                         case 4:case 5:case 6:case 7:
                         BoardManager.instance.player.data.stat.AddOrigin((STAT)(rollData.id-4), 2);
                         txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[(rollData.id-4)].transform.position, 2, Color.yellow, "#");
-                        StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f));
+                        StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f, true));
                         break;
                         case 8:
                         for(int i = 0; i < 4; i++) {
                             BoardManager.instance.player.data.stat.AddOrigin((STAT)i, 1);
                             txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[i].transform.position, 1, Color.red, "#");
-                            StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f));
+                            StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f, true));
                         }
                         break;
                     }

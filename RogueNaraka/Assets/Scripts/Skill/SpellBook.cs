@@ -6,7 +6,7 @@ using RogueNaraka.UnitScripts;
 
 namespace RogueNaraka.SkillScripts
 {
-    public class SkillBook : Skill
+    public class SpellBook : Skill
     {
         SkillData nextData;
         Skill nextSkill = null;

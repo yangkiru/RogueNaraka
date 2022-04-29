@@ -131,7 +131,7 @@ public class PointTxtManager : MonoBehaviour {
         txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
-    public IEnumerator AlphaDown(TextMeshProUGUI txt, float delay, float speed)
+    public IEnumerator AlphaDown(TextMeshProUGUI txt, float delay, float speed, bool isEnqueue = false)
     {
         while(delay > 0)
         {
@@ -151,6 +151,8 @@ public class PointTxtManager : MonoBehaviour {
             color.a = color.a -= 0.1f * speed;
             txt.color = color;
         }
+
+        if (isEnqueue) txtPool.EnqueueObjectPool(txt.gameObject);
     }
 
     IEnumerator Pump(TextMeshProUGUI txt, float time, float power)

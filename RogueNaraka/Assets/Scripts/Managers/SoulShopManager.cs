@@ -102,6 +102,9 @@ public class SoulShopManager : MonoBehaviour
         statPnl.SetActive(true);
         SyncStatUpgradeTxt();
         preparingPnl.SetActive(false);
+        for (int i = 0; i < statNameTxt.Length; i++){
+            statNameTxt[i].text = GameDatabase.instance.statLang[(int)GameManager.language].items[i];
+        }
         //TutorialManager.instance.StartTutorial(3);
     }
 
@@ -163,6 +166,7 @@ public class SoulShopManager : MonoBehaviour
 
     #region stat
 
+    public TextMeshProUGUI[] statNameTxt;
     public TextMeshProUGUI[] statUpgradeTxt;
     public TextMeshProUGUI[] statUpgradeBtnTxt;
     public Button[] statUpgradeBtn;
@@ -252,7 +256,7 @@ public class SoulShopManager : MonoBehaviour
             statUpgradeBtn[i].interactable = false;
         }
         float t = 0;
-        while (t < 1)
+        while (t < 0.3f)
         {
             t += Time.unscaledDeltaTime;
             yield return null;
@@ -266,6 +270,7 @@ public class SoulShopManager : MonoBehaviour
         }
         statUpgradeBtnTxt[(int)statUpgrading].text = "Up";
         SyncStatUpgradeTxt();
+        GameManager.instance.StatTextUpdate();
         //버튼 잠금 해제
     }
 
