@@ -94,7 +94,7 @@ public class SoulShopManager : MonoBehaviour
     public void StatPnlOpen()
     {
         shopPnl.SetActive(true);
-        SyncStatUpgradeTxt();
+        //SyncStatUpgradeTxt();
         skillPnl.SetActive(false);
         weaponPnl.SetActive(false);
         soulPnl.SetActive(false);
@@ -372,13 +372,32 @@ public class SoulShopManager : MonoBehaviour
         StartCoroutine("AddWeaponExpCorou");
     }
 
+    public void OnClick(){
+        int exp = PlayerPrefs.GetInt("exp");
+        int remain = exp;
+        for (int i = 0; i < GameDatabase.instance.playerWeapons.Length; i++){
+            remain -= GameDatabase.instance.playerWeapons[i].cost;
+            if (remain < 0){
+                remain = -remain;
+                break;
+            }
+        }
+        if (MoneyManager.instance.UseSoul(remain)) {
+            exp += remain;
+            PlayerPrefs.SetInt("exp", exp);
+            AudioManager.instance.PlaySFX("weaponUpgrade");
+            WeaponPnlUpdate(exp);
+            weaponLevelUpBanner.SetActive(true);
+        }
+    }
+
     int WeaponPnlUpdate(int exp)
     {
         int remain;
         PlayerWeaponData data = GameManager.instance.GetPlayerWeapon(exp, out remain);
         if(data.level == GameDatabase.instance.playerWeapons.Length-1)
         {
-            weaponSoulTxt.text = string.Format("{0}/{1} Soul", data.cost, data.cost); ;
+            weaponSoulTxt.text = string.Format("{0}/{1} Coin", data.cost, data.cost); ;
             weaponBar.fillAmount = 1;
             weaponExpBtn.interactable = false;
             Debug.Log("Max Weapon");
@@ -386,7 +405,7 @@ public class SoulShopManager : MonoBehaviour
         }
         else
         {
-            weaponSoulTxt.text = string.Format("{0}/{1} Soul", remain, data.cost);
+            weaponSoulTxt.text = string.Format("{0}/{1} Coin", remain, data.cost);
             weaponBar.fillAmount = (float)remain / data.cost;
             weaponExpBtn.interactable = true;
         }

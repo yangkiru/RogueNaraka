@@ -34797,7 +34797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75c78a0ba1bc1614caddc3e0a44ba2a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 516cf7829eab94643a16f3f079fe04c1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -47226,7 +47226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &927978724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -67506,8 +67506,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 975642905}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: StartAddWeaponExp
+        m_TargetAssemblyTypeName: SoulShopManager, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -67519,19 +67519,7 @@ MonoBehaviour:
         m_CallState: 2
   _onUp:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 975642905}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: StopCoroutine
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: AddWeaponExpCorou
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _onEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -73919,7 +73907,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0/20 Soul
+  m_text: 0/20 Coin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ac5cdb63587b9d47a0348cda27fb2ee, type: 2}
   m_sharedMaterial: {fileID: 21791244115101696, guid: 0ac5cdb63587b9d47a0348cda27fb2ee,
