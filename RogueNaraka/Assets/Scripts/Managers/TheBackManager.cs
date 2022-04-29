@@ -11,8 +11,7 @@ public class TheBackManager : MonoBehaviour
         if(bro.IsSuccess())
         {
             Debug.Log("초기화 성공");
-            Debug.Log( Backend.Utils.GetGoogleHash() );
-            Debug.Log("구글 해시");
+            
             //CustomSignUp();
         }
         else{
@@ -23,7 +22,7 @@ public class TheBackManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Backend.AsyncPoll();
+        //Backend.AsyncPoll();
         
     }
 }
