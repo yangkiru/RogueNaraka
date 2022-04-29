@@ -619,6 +619,9 @@ public class RollManager : MonoBehaviour {
         Select(position);
         if (datas[position].type == ROLL_TYPE.STAT)
             BottomGUI.Instance.HighlightOn();
+        else if (datas[position].type == ROLL_TYPE.SKILL){
+            SkillManager.instance.SkillHighlightOn();
+        }
         dragImg.sprite = GetSprite(datas[position]);
         dragImg.gameObject.SetActive(true);
     }
@@ -645,6 +648,8 @@ public class RollManager : MonoBehaviour {
         } else if (BottomGUI.Instance.IsMouseEnter && datas[position].type == ROLL_TYPE.STAT){
             Ok(position);
         }
+        
+        SkillManager.instance.SkillHighlightOff();
         BottomGUI.Instance.HighlightOff();
         dragImg.rectTransform.position = restPosition;
         dragImg.sprite = null;

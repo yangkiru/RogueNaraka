@@ -69,6 +69,18 @@ public class SkillManager : MonoBehaviour {
         }
     }
 
+    public void SkillHighlightOn(){
+        for (int i = 0; i < skills.Length; i++){
+                skills[i].highlight.SetActive(true);
+        }
+    }
+
+    public void SkillHighlightOff(){
+        for (int i = 0; i < skills.Length; i++){
+                skills[i].highlight.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Skill Save
     /// </summary>

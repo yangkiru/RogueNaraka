@@ -29,8 +29,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BottomUIHighlight
-  m_Speed: 1.4
+  m_Name: SkillUIHighlight
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -42,7 +42,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 743db48d2a150f346a2939238b0c6bae, type: 2}
+  m_Motion: {fileID: 7400000, guid: 261b70b059ff87e45bb7d5044eb93d89, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -54,7 +54,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BottomUIHighlightContorller
+  m_Name: SkillUIHighlightContorller
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:

@@ -16,6 +16,7 @@ public class SkillGUI : MonoBehaviour
     public Pointer pointer;
     public Image img;
     public Image coolImg;
+    public GameObject highlight;
     public TextMeshProUGUI levelTxt;
     public TextMeshProUGUI coolTimeTxt;
     public int position;
