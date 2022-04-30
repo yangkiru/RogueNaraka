@@ -15,10 +15,10 @@ public class RollManager : MonoBehaviour {
     public GameObject soulAlertPnl;
     public Image dragImg;
     public TextMeshProUGUI typeTxt;
-    public TextMeshProUGUI nameTxt;
     public TextMeshProUGUI descTxt;
     public TextMeshProUGUI reRollTxt;
     public TextMeshProUGUI[] statTxts;
+    public TextMeshProUGUI[] nameTxts;
     public InterstitialAds interstitialAds;
 
     public Fade fade;
@@ -84,6 +84,7 @@ public class RollManager : MonoBehaviour {
         rollCount = 0;
         isReRoll = false;
         scroll.Init();
+        for(int i = 0; i < 3; i++) nameTxts[i].gameObject.SetActive(false);
         SetSelectPnl(false);
     }
 
@@ -535,7 +536,6 @@ public class RollManager : MonoBehaviour {
                     SkillData skill = GameDatabase.instance.skills[data.id];
                     //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = GameManager.language == Language.Korean ? "기술" : "Skill";
-                    nameTxt.text = skill.GetName();
                     descTxt.text = skill.GetDescription();
                     manaUI.SetMana(skill);
                     break;
@@ -547,10 +547,6 @@ public class RollManager : MonoBehaviour {
                     string statName = GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)];
                     if (data.id + 1 > 1)
                         point += "s";
-                    if (data.id != 8)
-                        nameTxt.text = (data.id/4)+1+ " " + statName;
-                    else
-                        nameTxt.text = GameDatabase.instance.statLang[(int)GameManager.language].items[ALL_STAT_LANG_INDEX];
                     if (data.id != 8){
                         switch (GameManager.language)
                         {
@@ -576,28 +572,13 @@ public class RollManager : MonoBehaviour {
                     break;
                 case ROLL_TYPE.ITEM:
                     manaUI.gameObject.SetActive(false);
-                    //selectedImg.sprite = GetSprite(data);
                     typeTxt.text = GameManager.language == Language.Korean ? "소모품" : "ITEM";
                     ItemData item = GameDatabase.instance.items[data.id];
                     ItemSpriteData itemSpr = GameDatabase.instance.itemSprites[Item.instance.sprIds[item.id]];
-                    //if (Item.instance.isKnown[item.id])
-                    //{
-                    nameTxt.text = item.GetName();
+
                     descTxt.text = item.GetDescription();
-                    //}
-                    //else
-                    //{
-                    //    nameTxt.text = string.Format(format, item.GetName());
-                    //    descTxt.text = string.Format(format, item.GetDescription());
-                    //}
+
                     break;
-                //case ROLL_TYPE.PASSIVE:
-                //    manaUI.gameObject.SetActive(false);
-                //    //selectedImg.sprite = GetSprite(data);
-                //    typeTxt.text = "Passive";
-                //    nameTxt.text = "패시브";
-                //    descTxt.text = "패시브";
-                //    break;
             }
 
             SetSelectPnl(true);
@@ -607,15 +588,11 @@ public class RollManager : MonoBehaviour {
 
     public void OnClick(int position)
     {
-        // if ((selected == position || position == (selected-1)%showCases.Length || position == (selected+1)%showCases.Length) && datas[position].type == ROLL_TYPE.STAT)
-        //     Ok(position);
     }
     
     public void OnDown(int position)
     {
         Debug.Log(position);
-        // if (position != selected || position != ((selected-1)%showCases.Length) || position != ((selected+1)%showCases.Length))
-        //     return;
         Select(position);
         if (datas[position].type == ROLL_TYPE.STAT)
             BottomGUI.Instance.HighlightOn();
@@ -726,27 +703,8 @@ public class RollManager : MonoBehaviour {
                     SetRollPnl(false);
                 }
                 break;
-            //case ROLL_TYPE.PASSIVE:
-            //    //selectedImg.sprite = GetSprite(data);
-            //    typeTxt.text = "Passive";
-            //    nameTxt.text = "패시브";
-            //    descTxt.text = "패시브";
-            //    break;
         }
     }
-
-    ///// <summary>
-    ///// SkillUI를 가리키면 호출
-    ///// </summary>
-    ///// <param name="position"></param>
-    //public void SelectSkill(int position)
-    //{
-    //    if (isClickable && selected != -1 && datas[selected].type == ROLL_TYPE.SKILL)
-    //    {
-    //        //Debug.Log("Skill Added,position:" + position + " id:" + datas[selected].id);
-    //        target = position;
-    //    }
-    //}
 
     public Sprite GetSprite(RollData data)
     {
@@ -820,10 +778,6 @@ public class RollManager : MonoBehaviour {
             case ROLL_TYPE.ITEM:
                 result.id = Random.Range(0, GameDatabase.instance.items.Length);
                 break;
-            //case ROLL_TYPE.PASSIVE:
-            //    result = GetRandom();
-            //    //result.id = Random.Range(0, GameDatabase.instance.skills.Length);//패시브의 길이로 수정
-            //    break;
         }
         return result;
     }
@@ -880,17 +834,22 @@ public class RollManager : MonoBehaviour {
             interstitialAds.Show();
         isClickable = true;
         StartCoroutine(IconEffectCorou());
-        Select((stopped + 1) % 10);
-        
         AudioManager.instance.PlaySFX("skillStop");
-        switch(datas[(stopped + 1) % 10].type)
-        {
-            case ROLL_TYPE.SKILL:
-                //TutorialManager.instance.StartTutorial(2);
-                break;
-            case ROLL_TYPE.ITEM:
-                //TutorialManager.instance.StartTutorial(5);
-                break;
+        for(int i = 0; i < 3; i++){
+            RollData data = datas[(stopped + i) % 10];
+            switch(data.type)
+            {
+                case ROLL_TYPE.SKILL:
+                    nameTxts[i].text = GameDatabase.instance.skills[data.id].GetName();
+                    break;
+                case ROLL_TYPE.STAT:
+                    if (data.id != 8)
+                        nameTxts[i].text = (data.id / 4+1)+GameDatabase.instance.statLang[(int)GameManager.language].items[(data.id%4)];
+                    else
+                        nameTxts[i].text = GameDatabase.instance.statLang[(int)GameManager.language].items[ALL_STAT_LANG_INDEX];
+                    break;
+            }
+            nameTxts[i].gameObject.SetActive(true);
         }
     }
 
