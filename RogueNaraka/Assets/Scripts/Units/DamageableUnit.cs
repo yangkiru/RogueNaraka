@@ -65,7 +65,7 @@ namespace RogueNaraka.UnitScripts
                         color = Color.red;
                     else
                         color = Color.white;
-                    PointTxtManager.instance.TxtOnHead(-damaged, transform, color);
+                    PointTxtManager.instance.TxtOnHead(-damaged * 100, transform, color);
                     damaged = 0;
 
                     do
@@ -90,7 +90,7 @@ namespace RogueNaraka.UnitScripts
                     color = Color.red;
                 else
                     color = Color.white;
-                PointTxtManager.instance.TxtOnHead(damaged, transform, color);
+                PointTxtManager.instance.TxtOnHead(damaged * 100, transform, color);
             }
         }
     }

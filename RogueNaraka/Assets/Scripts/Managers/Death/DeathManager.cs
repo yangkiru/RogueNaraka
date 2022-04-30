@@ -186,36 +186,6 @@ public partial class DeathManager : MonoBehaviour
     }
 
     bool isADReward;
-    //-    public bool isClose { get; set; }
-    //-
-    //-    IEnumerator SoulAutoCloseCorou(float rate)
-    //-    {
-    //-        float t = 6;
-    //-        do
-    //-        {
-    //-            yield return null;
-    //-            t -= Time.unscaledDeltaTime* (isADActive? 0 : 1);
-    //-            if(isADReward)
-    //-            {
-    //-                MoneyManager.instance.RefineSoul(rate* 2);
-    //-                SetSoulPnl(false);
-    //-                yield break;
-    //-            }
-    //-            if(isClose)
-    //-            {
-    //-                MoneyManager.instance.RefineSoul(rate);
-    //-                SetSoulPnl(false);
-    //-                isClose = false;
-    //-                yield break;
-    //-            }
-    //-        } while (t > 0);
-    //-
-    //-        if (soulPnl.gameObject.activeSelf)
-    //-        {
-    //-            MoneyManager.instance.RefineSoul(rate);
-    //-            SetSoulPnl(false);
-    //-        }
-    //-    }
 
     IEnumerator soulCorou;
     IEnumerator SoulCorou()

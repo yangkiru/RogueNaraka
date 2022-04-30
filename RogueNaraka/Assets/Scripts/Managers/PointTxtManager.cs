@@ -74,7 +74,7 @@ public class PointTxtManager : MonoBehaviour {
 
     public TextMeshProUGUI TxtOnHead(float value, Transform tf, Color color)
     {
-        TextMeshProUGUI txt = TxtOn((Vector2)tf.position + new Vector2(0, 0.3f), value, color, "##0.##");
+        TextMeshProUGUI txt = TxtOn((Vector2)tf.position + new Vector2(0, 0.3f), value, color, "##0");
         if (txt)
         {
             StartCoroutine(Shoot(txt, 0.75f));

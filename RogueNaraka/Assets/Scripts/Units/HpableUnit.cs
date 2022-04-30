@@ -80,7 +80,7 @@ namespace RogueNaraka.UnitScripts
             float heal = result - _currentHp;
 
             if(heal > 0)
-                PointTxtManager.instance.TxtOnHead(heal, transform, Color.green);
+                PointTxtManager.instance.TxtOnHead(heal*100, transform, Color.green);
             _currentHp = result;
             stat.currentHp = _currentHp;
         }
