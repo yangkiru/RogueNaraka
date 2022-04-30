@@ -79,6 +79,7 @@ public partial class DeathManager : MonoBehaviour
 
         GameManager.instance.movePointer.SetActive(false);
         SetDeathPnl(true);
+        BoardManager.instance.ClearFriendly();
 
         StartCoroutine(OpenBtnPnlCorou());
 

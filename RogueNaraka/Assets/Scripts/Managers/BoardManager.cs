@@ -342,11 +342,19 @@ public class BoardManager : MonoBehaviour {
             if (friendlies[i].Equals(player))
                 continue;
             unitPool.EnqueueObjectPool(friendlies[i].gameObject);
-            //friendlies[i].Kill();
         }
         boss = null;
         Fillable.bossHp.gameObject.SetActive(false);
         //this.clearedStage = this._stage;
+    }
+
+    public void ClearFriendly(){
+        for (int i = friendlies.Count - 1; i >= 0; i--)
+        {
+            if (friendlies[i].Equals(player))
+                continue;
+            unitPool.EnqueueObjectPool(friendlies[i].gameObject);
+        }
     }
 
     public Vector3 ClampToBoard(Vector3 pos, float offsetX = 0, float offsetY = 0)
