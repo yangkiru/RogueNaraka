@@ -38,6 +38,9 @@ public class InterstitialAds : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(0.5f);
         while (!Advertisement.isInitialized || !Advertisement.IsReady(InterstitialAdID))
         {
+            if(!Advertisement.isInitialized) {
+                Advertisement.Initialize("4694417");//Android
+            }
             yield return wait;
         }
         Advertisement.Show(InterstitialAdID);

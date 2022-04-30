@@ -809,7 +809,7 @@ public class RollManager : MonoBehaviour {
                 if(rndStat > 0.3f){ // 1개 짜리 스탯
                     result.id = statList[rndStatType];
                 } else if (rndStat > 0.01f){ // 2개 짜리 스탯
-                    if (BoardManager.instance.player.stat.GetOrigin(rndStatType) + 1 >= BoardManager.instance.player.stat.GetMax(rndStatType))
+                    if (BoardManager.instance.player.stat.GetOrigin(statList[rndStatType]) + 1 >= BoardManager.instance.player.stat.GetMax(statList[rndStatType]))
                         result.id = statList[rndStatType]; // 부족해서 1개 짜리 스탯
                     else
                         result.id = 4+statList[rndStatType];

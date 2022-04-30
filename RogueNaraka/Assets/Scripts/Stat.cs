@@ -47,26 +47,34 @@ public class Stat : ICloneable
         switch(type)
         {
             case STAT.DMG:
-                if (!isIgnoreMax && dmg + amount > dmgMax)
+                if (!isIgnoreMax && dmg + amount > dmgMax) {
+                    if(amount != 0) dmg = dmgMax;
                     return false;
+                }
                 if(!isCheck)
                     dmg += amount;
                 return true;
             case STAT.SPD:
-                if (!isIgnoreMax && spd + amount > spdMax)
+                if (!isIgnoreMax && spd + amount > spdMax){
+                    if(amount != 0) spd = spdMax;
                     return false;
+                }
                 if (!isCheck)
                     spd += amount;
                 return true;
             case STAT.HP:
-                if (!isIgnoreMax && hp + amount > hpMax)
+                if (!isIgnoreMax && hp + amount > hpMax){
+                    if(amount != 0) hp = hpMax;
                     return false;
+                }
                 if (!isCheck)
                     hp += amount;
                 return true;
             case STAT.MP:
-                if (!isIgnoreMax && mp + amount > mpMax)
+                if (!isIgnoreMax && mp + amount > mpMax){
+                    if(amount != 0) mp = mpMax;
                     return false;
+                }
                 if (!isCheck)
                     mp += amount;
                 return true;
