@@ -19,7 +19,12 @@ namespace RogueNaraka.TitleScripts {
             //AdMobManager.instance.RequestBanner();
             AudioManager.instance.PlaySFX("gameStart");
             this.Fade.FadeOut();
-            this.Grid.SetActive(true);
+        }
+
+        public void OnFadeOutEnd(){
+            Fade.FadeIn();
+            LobbyManager.Instance.Content.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

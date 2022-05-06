@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using RogueNaraka.UnitScripts;
 using TMPro;
 using RogueNaraka.NotificationScripts;
-//using RogueNaraka.TheBackendScripts;
+using UnityEngine.Tilemaps;
 
 public class BoardManager : MonoBehaviour {
 
@@ -15,6 +15,8 @@ public class BoardManager : MonoBehaviour {
     public GameObject[] bossPrefabs;
     public GameObject effectPrefab;
     public GameObject soulPrefab;
+
+    public Tilemap tilemap;
 
     public Fade fade;
 

@@ -77,6 +77,7 @@ public partial class DeathManager : MonoBehaviour
         if(BoardManager.instance.player)
             GameManager.instance.Save();
 
+        PlayerPrefs.SetInt("isRun", 0);
         GameManager.instance.movePointer.SetActive(false);
         SetDeathPnl(true);
         BoardManager.instance.ClearFriendly();
@@ -228,6 +229,11 @@ public partial class DeathManager : MonoBehaviour
         EndGame();
         PlayerPrefs.SetInt("isRun", 0);
         GameManager.instance.Load();
+    }
+
+    public void OpenLobby(){
+        EndGame();
+        LobbyManager.Instance.Content.SetActive(true);
     }
 
     public void EndGame()

@@ -22,6 +22,6 @@ public class Fade : MonoBehaviour
 
     public void FadeOut()
     {
-        FadeManager.instance.FadeOut(FadeOuttime, ignoreTimeScaleOut, isClickableIn, onFadeOutEnd);
+        FadeManager.instance.FadeOut(FadeOuttime, ignoreTimeScaleOut, isClickableOut, onFadeOutEnd);
     }
 }
