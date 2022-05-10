@@ -7,12 +7,18 @@ using RogueNaraka.TitleScripts;
 
 public partial class LobbyManager : MonoBehaviour
 {
+    [Header("Dungeon")]
     public GameObject DungeonPnl;
+    public Image DungeonBtn;
 
     public void OpenDungeonPnl(){
         DungeonPnl.SetActive(true);
         StatPnl.SetActive(false);
+        if (OnSelectButtonCorou != null)
+            StopCoroutine(OnSelectButtonCorou);
+        OnSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[2]));
     }
+
     public void OnEnter(){
         AudioManager.instance.PlayMusic("cave");
         GameManager.instance.Load();

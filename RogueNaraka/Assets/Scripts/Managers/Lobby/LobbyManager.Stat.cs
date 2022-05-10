@@ -6,6 +6,7 @@ using TMPro;
 
 public partial class LobbyManager : MonoBehaviour
 {
+    [Header("Stat")]
     public GameObject StatPnl;
     public TextMeshProUGUI StatCoinTxt;
     public TextMeshProUGUI[] StatName;
@@ -20,6 +21,10 @@ public partial class LobbyManager : MonoBehaviour
         SyncStatUpgradeTxt();
         StatPnl.SetActive(true);
         DungeonPnl.SetActive(false);
+
+        if (OnSelectButtonCorou != null)
+            StopCoroutine(OnSelectButtonCorou);
+        OnSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[3]));
     }
 
     public void SyncStatUpgradeTxt(){

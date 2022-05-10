@@ -1936,6 +1936,64 @@ MonoBehaviour:
     deathSFX:
     - bugDeath
     attackSFX: 
+  - name: Flower0
+    id: 15
+    cost: 3
+    stage: 99918
+    maxStage: 0
+    weapon: 13
+    hpRegen: 0
+    mpRegen: 0
+    isFriendly: 0
+    isStanding: 0
+    isDeathEffect: 1
+    isCorpse: 0
+    limitTime: 0
+    stat:
+      dmg: 1
+      spd: 0
+      hp: 20
+      mp: 0
+      dmgMax: 0
+      spdMax: 0
+      hpMax: 0
+      mpMax: 0
+      dmgTemp: 0
+      spdTemp: 0
+      hpTemp: 0
+      mpTemp: 0
+      currentHp: 15
+      currentMp: 0
+      statPoints: 0
+    controller: {fileID: 9100000, guid: 3fd6326584b77a54391faefa40c9678d, type: 2}
+    deathEffectController: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    bulletColor: {r: 0, g: 0, b: 0, a: 0}
+    move: 2
+    tackleBulletID: 3
+    tackleSize: 0
+    tackleDamage: 0
+    tackleDelay: 0
+    moveDelay: 1
+    moveDistance: 0.5
+    moveSpeed: 0.8
+    accelerationRate: 0
+    decelerationRate: 0
+    shadowPos:
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    - {x: 0.05, y: -0.2}
+    - {x: 0.07, y: -0.1}
+    shadowZAngle: 0
+    shadowXFlip: 0
+    gainExp: 1
+    order: -100
+    bulletOrder: 0
+    effects: []
+    resistances: []
+    deathSFX:
+    - bugDeath
+    attackSFX: 
   bosses:
   - name: Boss0
     id: 0
@@ -3126,6 +3184,185 @@ MonoBehaviour:
     onDestroy: []
     hitSFX: []
     spawnSFX: 
+  - name: FlowerBullet
+    id: 28
+    color: {r: 1, g: 1, b: 1, a: 1}
+    dmg: 1
+    related: 0
+    controller: {fileID: 9100000, guid: 80d4251e0b16419439552b25fa80dcf6, type: 2}
+    type: 0
+    localSpeed: 1
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0.3
+    delay: 0
+    limitTime: 0
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 1
+    isSplash: 1
+    isHitableWall: 1
+    isBounceable: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 100
+    effects: []
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
+  - name: FlowerCircle
+    id: 29
+    color: {r: 1, g: 1, b: 1, a: 1}
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.1
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 99999
+    isSplash: 0
+    isHitableWall: 1
+    isBounceable: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 100
+    effects: []
+    children:
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 0
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 45
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 90
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 135
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 180
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 225
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 270
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    - name: FlowerBullet
+      bulletId: 28
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 0
+      angle: 315
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
+  - name: Nothing
+    id: 30
+    color: {r: 1, g: 1, b: 1, a: 1}
+    dmg: 0
+    related: 0
+    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
+    type: 2
+    localSpeed: 0
+    worldSpeed: 0
+    localAccel: 0
+    worldAccel: 0
+    guideSpeed: 0
+    spinSpeed: 0
+    size: 0
+    delay: 0
+    limitTime: 0.1
+    disapearStartTime: 0
+    disapearDuration: 0
+    pierce: 99999
+    isSplash: 0
+    isHitableWall: 1
+    isBounceable: 0
+    shake:
+      time: 0
+      power: 0
+      gap: 0
+      isOnHit: 0
+    order: 100
+    effects: []
+    children: []
+    onDestroy: []
+    hitSFX: []
+    spawnSFX: 
   weapons:
   - name: MagicBall
     id: 0
@@ -3387,6 +3624,26 @@ MonoBehaviour:
     beforeAttackDelay: 1
     afterAttackDelay: 1
     attackDistance: 4
+  - name: FlowerWeapon
+    id: 13
+    type: 1
+    startBulletId: 30
+    children:
+    - name: FlowerPattern
+      bulletId: 29
+      sortingOrder: 0
+      startTime: 0
+      waitTime: 3
+      angle: 0
+      isRepeat: 0
+      isStick: 0
+      isDestroyWith: 0
+      offset: {x: 0, y: 0, z: 0}
+    onDestroy: []
+    offset: {x: 0, y: 0, z: 0}
+    beforeAttackDelay: 0
+    afterAttackDelay: 3
+    attackDistance: 100
   playerWeapons:
   - level: 0
     cost: 500
@@ -3435,7 +3692,7 @@ MonoBehaviour:
   - cost: 2
     unitId: 02000000030000000c0000000d000000
   - cost: 3
-    unitId: 040000000e000000
+    unitId: 040000000e0000000f000000
   - cost: 4
     unitId: 0500000006000000
   - cost: 0.3
