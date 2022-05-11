@@ -16,7 +16,7 @@ namespace RogueNaraka.UnitScripts
 
         public float regenTime { get { return 1; } }
         float currentTime;
-
+        public float regenTemp = 0;
         public float regenSpeed = 1;
 
         Stat stat;
@@ -101,7 +101,7 @@ namespace RogueNaraka.UnitScripts
                     t -= Time.deltaTime * regenSpeed;
                 } while (t > 0);
                 if(!unit.deathable.isDeath)
-                    AddMp(maxMp * 0.1f * unit.data.mpRegen);
+                    AddMp(maxMp * 0.1f * (unit.data.mpRegen + regenTemp));
             }
         }
 

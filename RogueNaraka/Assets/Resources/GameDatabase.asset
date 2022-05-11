@@ -1939,7 +1939,7 @@ MonoBehaviour:
   - name: Flower0
     id: 15
     cost: 3
-    stage: 99918
+    stage: 18
     maxStage: 0
     weapon: 13
     hpRegen: 0
@@ -3191,7 +3191,7 @@ MonoBehaviour:
     related: 0
     controller: {fileID: 9100000, guid: 80d4251e0b16419439552b25fa80dcf6, type: 2}
     type: 0
-    localSpeed: 1
+    localSpeed: 1.5
     worldSpeed: 0
     localAccel: 0
     worldAccel: 0
@@ -3204,7 +3204,7 @@ MonoBehaviour:
     disapearDuration: 0
     pierce: 1
     isSplash: 1
-    isHitableWall: 1
+    isHitableWall: 0
     isBounceable: 0
     shake:
       time: 0
@@ -3212,126 +3212,16 @@ MonoBehaviour:
       gap: 0
       isOnHit: 0
     order: 100
-    effects: []
+    effects:
+    - type: 5
+      value: 0.025
+      time: 5
     children: []
     onDestroy: []
     hitSFX: []
     spawnSFX: 
-  - name: FlowerCircle
-    id: 29
-    color: {r: 1, g: 1, b: 1, a: 1}
-    dmg: 0
-    related: 0
-    controller: {fileID: 22100000, guid: 3ed343ffa45ebd2429b276144d813731, type: 2}
-    type: 2
-    localSpeed: 0
-    worldSpeed: 0
-    localAccel: 0
-    worldAccel: 0
-    guideSpeed: 0
-    spinSpeed: 0
-    size: 0
-    delay: 0
-    limitTime: 0.1
-    disapearStartTime: 0
-    disapearDuration: 0
-    pierce: 99999
-    isSplash: 0
-    isHitableWall: 1
-    isBounceable: 0
-    shake:
-      time: 0
-      power: 0
-      gap: 0
-      isOnHit: 0
-    order: 100
-    effects: []
-    children:
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 0
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 45
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 90
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 135
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 180
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 225
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 270
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    - name: FlowerBullet
-      bulletId: 28
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 0
-      angle: 315
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
-    onDestroy: []
-    hitSFX: []
-    spawnSFX: 
   - name: Nothing
-    id: 30
+    id: 29
     color: {r: 1, g: 1, b: 1, a: 1}
     dmg: 0
     related: 0
@@ -3627,18 +3517,8 @@ MonoBehaviour:
   - name: FlowerWeapon
     id: 13
     type: 1
-    startBulletId: 30
-    children:
-    - name: FlowerPattern
-      bulletId: 29
-      sortingOrder: 0
-      startTime: 0
-      waitTime: 3
-      angle: 0
-      isRepeat: 0
-      isStick: 0
-      isDestroyWith: 0
-      offset: {x: 0, y: 0, z: 0}
+    startBulletId: 28
+    children: []
     onDestroy: []
     offset: {x: 0, y: 0, z: 0}
     beforeAttackDelay: 0

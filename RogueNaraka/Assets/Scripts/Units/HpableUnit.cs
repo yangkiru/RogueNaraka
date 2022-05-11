@@ -18,6 +18,7 @@ namespace RogueNaraka.UnitScripts
         float currentTime;//Current Regen Time
         
         public float regenSpeed = 1;
+        public float regenTemp = 0;
         public bool isInvincible;
 
         Stat stat;
@@ -113,7 +114,7 @@ namespace RogueNaraka.UnitScripts
                     t -= Time.deltaTime * regenSpeed;
                 } while (t > 0);
                 if(!unit.deathable.isDeath && _currentHp > 0)
-                    AddHp(maxHp * 0.1f * unit.data.hpRegen);
+                    AddHp(maxHp * 0.1f * (unit.data.hpRegen + regenTemp));
             }
         }
 
@@ -121,6 +122,5 @@ namespace RogueNaraka.UnitScripts
         {
             StartCoroutine(RegenCorou());
         }
-
     }
 }
