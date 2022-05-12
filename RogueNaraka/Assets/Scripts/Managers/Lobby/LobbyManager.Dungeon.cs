@@ -9,7 +9,11 @@ public partial class LobbyManager : MonoBehaviour
 {
     [Header("Dungeon")]
     public GameObject DungeonPnl;
-    public Image DungeonBtn;
+    public Button LeftDungeonBtn;
+    public Button RightDungeonBtn;
+    public TextMeshProUGUI DungeonResultTxt;
+    public TextMeshProUGUI DungeonNameTxt;
+    public Image DungeonImg;
 
     public void OpenDungeonPnl(){
         DungeonPnl.SetActive(true);
@@ -17,6 +21,21 @@ public partial class LobbyManager : MonoBehaviour
         if (OnSelectButtonCorou != null)
             StopCoroutine(OnSelectButtonCorou);
         OnSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[2]));
+        InitDungeonInfo(0);
+        if (PlayerPrefs.GetInt("isRun") == 1) {
+            // 추후 플레이중인 던전 정보도 저장
+            LeftDungeonBtn.interactable = false;
+            RightDungeonBtn.interactable = false;  
+        }
+    }
+
+    private void InitDungeonInfo(int stage){
+        // 임시로 강제 지정, 추후 정글 열리면 DB 의존해서 변경
+        DungeonNameTxt.text = "Naraka";
+        DungeonResultTxt.text = "";
+        // 임시로 강제 잠금
+        LeftDungeonBtn.interactable = false;
+        RightDungeonBtn.interactable = false;
     }
 
     public void OnEnter(){

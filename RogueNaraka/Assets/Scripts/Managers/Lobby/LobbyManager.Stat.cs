@@ -79,5 +79,6 @@ public partial class LobbyManager : MonoBehaviour
             SyncStatUpgradeTxt();
         }
         StatCoinTxt.text = "Coin : " + MoneyManager.instance.soul;
+        AudioManager.instance.PlaySFX("statUp");
     }
 }
