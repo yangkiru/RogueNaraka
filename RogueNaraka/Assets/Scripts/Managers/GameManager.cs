@@ -340,10 +340,10 @@ public partial class GameManager : MonoBehaviour {
 
     public void StatTextUpdate(Stat stat)
     {
-        statTxt[0].text = GameDatabase.instance.statLang[(int)language].items[0] + " " + stat.dmg.ToString()+"/"+stat.dmgMax.ToString();
-        statTxt[1].text = GameDatabase.instance.statLang[(int)language].items[1] + " " + stat.spd.ToString()+"/"+stat.spdMax.ToString();
-        statTxt[2].text = GameDatabase.instance.statLang[(int)language].items[2] + " " + stat.hp.ToString()+"/"+stat.hpMax.ToString();
-        statTxt[3].text = GameDatabase.instance.statLang[(int)language].items[3] + " " + stat.mp.ToString()+"/"+stat.mpMax.ToString();
+        statTxt[0].text = GameDatabase.instance.statLang[(int)language].items[0] + "\n[" + stat.dmg.ToString()+"]\nMAX "+stat.dmgMax.ToString();
+        statTxt[1].text = GameDatabase.instance.statLang[(int)language].items[1] + "\n[" + stat.spd.ToString()+"]\nMAX "+stat.spdMax.ToString();
+        statTxt[2].text = GameDatabase.instance.statLang[(int)language].items[2] + "\n[" + stat.hp.ToString()+"]\nMAX "+stat.hpMax.ToString();
+        statTxt[3].text = GameDatabase.instance.statLang[(int)language].items[3] + "\n[" + stat.mp.ToString()+"]\nMAX "+stat.mpMax.ToString();
     }
 
     public void SetPause(bool value)
