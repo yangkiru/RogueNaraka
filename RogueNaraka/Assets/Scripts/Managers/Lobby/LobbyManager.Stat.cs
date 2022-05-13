@@ -11,6 +11,7 @@ public partial class LobbyManager : MonoBehaviour
     public TextMeshProUGUI StatCoinTxt;
     public TextMeshProUGUI[] StatName;
     public TextMeshProUGUI[] StatInfo;
+    public GameObject[] StatEffects;
 
     public void OpenStatPnl(){
         for(int i = 0; i < StatName.Length; i++){
@@ -77,8 +78,11 @@ public partial class LobbyManager : MonoBehaviour
             PlayerPrefs.SetString("stat", Stat.StatToJson(stat));
             MoneyManager.instance.AddSoul(-required);
             SyncStatUpgradeTxt();
+            StatCoinTxt.text = "Coin : " + MoneyManager.instance.soul;
+            AudioManager.instance.PlaySFX("statUp");
+            StatEffects[type].SetActive(false);
+            StatEffects[type].SetActive(true);
         }
-        StatCoinTxt.text = "Coin : " + MoneyManager.instance.soul;
-        AudioManager.instance.PlaySFX("statUp");
+        
     }
 }
