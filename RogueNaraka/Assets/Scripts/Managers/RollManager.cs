@@ -20,6 +20,7 @@ public class RollManager : MonoBehaviour {
     public TextMeshProUGUI[] statTxts;
     public TextMeshProUGUI[] nameTxts;
     public InterstitialAds interstitialAds;
+    public GameObject[] StatEffects;
 
     public Fade fade;
     public ManaUI manaUI;
@@ -676,23 +677,29 @@ public class RollManager : MonoBehaviour {
                         BoardManager.instance.player.data.stat.AddOrigin((STAT)rollData.id, 1);
                         txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[rollData.id].transform.position, 1, Color.green, "#");
                         StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f, true));
+                        StatEffects[rollData.id].SetActive(false);
+                        StatEffects[rollData.id].SetActive(true);
                         break;
                         case 4:case 5:case 6:case 7:
                         BoardManager.instance.player.data.stat.AddOrigin((STAT)(rollData.id-4), 2);
                         txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[(rollData.id-4)].transform.position, 2, Color.yellow, "#");
                         StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f, true));
+                        StatEffects[(rollData.id-4)].SetActive(false);
+                        StatEffects[(rollData.id-4)].SetActive(true);
                         break;
                         case 8:
                         for(int i = 0; i < 4; i++) {
                             BoardManager.instance.player.data.stat.AddOrigin((STAT)i, 1);
                             txt = PointTxtManager.instance.TxtOn(GameManager.instance.statTxt[i].transform.position, 1, Color.red, "#");
                             StartCoroutine(PointTxtManager.instance.AlphaDown(txt, 0.3f, 0.5f, true));
+                            StatEffects[i].SetActive(false);
+                            StatEffects[i].SetActive(true);
                         }
                         break;
                     }
                     Stat.StatToData(BoardManager.instance.player.data.stat);
                     GameManager.instance.StatTextUpdate();
-                    AudioManager.instance.PlaySFX("skillEquip");
+                    AudioManager.instance.PlaySFX("statUp");
                     SetRollPnl(false);
                 }
                 break;
