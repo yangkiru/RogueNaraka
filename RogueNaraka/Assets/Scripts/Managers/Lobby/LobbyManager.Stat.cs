@@ -7,6 +7,7 @@ using TMPro;
 public partial class LobbyManager : MonoBehaviour
 {
     [Header("Stat")]
+    public Button StatBtn;
     public GameObject StatPnl;
     public TextMeshProUGUI StatCoinTxt;
     public TextMeshProUGUI[] StatName;
