@@ -3955,7 +3955,7 @@ MonoBehaviour:
     id: 10
     level: 1
     cost: 500
-    coolTime: 60
+    coolTime: 25
     coolTimeLeft: 0
     manaCost: 0
     size: 0
@@ -3991,7 +3991,7 @@ MonoBehaviour:
     id: 11
     level: 1
     cost: 500
-    coolTime: 60
+    coolTime: 25
     coolTimeLeft: 0
     manaCost: 0
     size: 0
