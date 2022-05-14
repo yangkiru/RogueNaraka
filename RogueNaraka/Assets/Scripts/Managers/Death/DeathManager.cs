@@ -234,6 +234,7 @@ public partial class DeathManager : MonoBehaviour
     public void OpenLobby(){
         EndGame();
         LobbyManager.Instance.Content.SetActive(true);
+        LobbyManager.Instance.OpenDungeonPnl();
     }
 
     public void EndGame()

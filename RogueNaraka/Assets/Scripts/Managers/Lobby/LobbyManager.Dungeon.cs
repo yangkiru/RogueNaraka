@@ -26,7 +26,7 @@ public partial class LobbyManager : MonoBehaviour
             // 추후 플레이중인 던전 정보도 저장
             DeactivateButton(MenuButtons[3]); // 스탯 버튼 비활성화
             LeftDungeonBtn.interactable = false;
-            RightDungeonBtn.interactable = false;  
+            RightDungeonBtn.interactable = false;
         }else {
             ActivateButton(MenuButtons[3]); // 스탯 버튼 활성화
         }
