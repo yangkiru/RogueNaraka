@@ -13,8 +13,16 @@ public partial class LobbyManager : MonoBehaviour
     public TextMeshProUGUI[] StatName;
     public TextMeshProUGUI[] StatInfo;
     public GameObject[] StatEffects;
+    public Sprite StatBtnSpr;
+    public string[] StatAlertStrs;
+
+    private bool isLockStatBtn;
 
     public void OpenStatPnl(){
+        if (isLockStatBtn) {
+            SetAlert(StatAlertStrs[(int)GameManager.language]);
+            return;
+        }
         for(int i = 0; i < StatName.Length; i++){
             StatName[i].text = GameDatabase.instance.statLang[(int)GameManager.language].items[i];
         }
@@ -25,9 +33,19 @@ public partial class LobbyManager : MonoBehaviour
         DungeonPnl.SetActive(false);
         IAPPnl.SetActive(false);
 
-        if (OnSelectButtonCorou != null)
-            StopCoroutine(OnSelectButtonCorou);
-        OnSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[3]));
+        if (onSelectButtonCorou != null)
+            StopCoroutine(onSelectButtonCorou);
+        onSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[3]));
+    }
+
+    public void LockStatBtn(){
+        MenuButtons[3].image.sprite = LockBtnSpr;
+        isLockStatBtn = true;
+    }
+
+    public void UnLockStatBtn(){
+        MenuButtons[3].image.sprite = StatBtnSpr;
+        isLockStatBtn = false;
     }
 
     public void SyncStatUpgradeTxt(){

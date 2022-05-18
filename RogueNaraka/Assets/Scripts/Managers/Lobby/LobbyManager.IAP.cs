@@ -20,16 +20,9 @@ public partial class LobbyManager : MonoBehaviour
 
         if(PlayerPrefs.GetInt("RemoveAds") == 1) RemoveAdsBtn.interactable = false;
 
-        if (OnSelectButtonCorou != null)
-            StopCoroutine(OnSelectButtonCorou);
-        OnSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[0]));
-
-        if (PlayerPrefs.GetInt("isRun") == 1) {
-            // 추후 플레이중인 던전 정보도 저장
-            DeactivateButton(MenuButtons[3]); // 스탯 버튼 비활성화
-        }else {
-            ActivateButton(MenuButtons[3]); // 스탯 버튼 활성화
-        }
+        if (onSelectButtonCorou != null)
+            StopCoroutine(onSelectButtonCorou);
+        onSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[0]));
     }
     public void PurchaseRemoveAds() {
         PlayerPrefs.SetInt("RemoveAds", 1);

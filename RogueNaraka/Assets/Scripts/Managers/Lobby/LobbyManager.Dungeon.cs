@@ -19,13 +19,13 @@ public partial class LobbyManager : MonoBehaviour
         DungeonPnl.SetActive(true);
         StatPnl.SetActive(false);
         IAPPnl.SetActive(false);
-        if (OnSelectButtonCorou != null)
-            StopCoroutine(OnSelectButtonCorou);
-        OnSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[2]));
+        if (onSelectButtonCorou != null)
+            StopCoroutine(onSelectButtonCorou);
+        onSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[2]));
         InitDungeonInfo(0);
         if (PlayerPrefs.GetInt("isRun") == 1) {
             // 추후 플레이중인 던전 정보도 저장
-            DeactivateButton(MenuButtons[3]); // 스탯 버튼 비활성화
+            LockStatBtn();
             LeftDungeonBtn.interactable = false;
             RightDungeonBtn.interactable = false;
         }else {

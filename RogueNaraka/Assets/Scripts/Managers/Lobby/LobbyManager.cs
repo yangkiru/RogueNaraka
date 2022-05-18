@@ -9,7 +9,13 @@ public partial class LobbyManager : MonoBehaviour
     public static LobbyManager Instance;
     public GameObject Content;
     public Button[] MenuButtons;
-    private Coroutine OnSelectButtonCorou;
+    public Sprite LockBtnSpr;
+    public Image AlertPnl;
+    public TextMeshProUGUI AlertTxt;
+
+    private Coroutine onSelectButtonCorou;
+    private Coroutine alertCorou;
+
     private void Awake(){
         Instance = this;
         OpenDungeonPnl();
@@ -34,7 +40,7 @@ public partial class LobbyManager : MonoBehaviour
             img.transform.localPosition = Vector3.Lerp(img.transform.localPosition, new Vector3(0, -8, 0), t);
             yield return null;
         }
-        OnSelectButtonCorou = null;
+        onSelectButtonCorou = null;
     }
 
     private void DeactivateButton(Button btn) {
@@ -51,5 +57,32 @@ public partial class LobbyManager : MonoBehaviour
         Color c = btn.image.color;
         c.a = 1;
         btn.image.color = c;
+    }
+
+    private void SetAlert(string text) {
+        AlertTxt.text = text;
+        AlertPnl.gameObject.SetActive(true);
+        if (alertCorou != null) StopCoroutine(alertCorou);
+        alertCorou = StartCoroutine(AlertCoroutine());
+    }
+
+    private IEnumerator AlertCoroutine(){
+        Color PnlColor = AlertPnl.color;
+        Color TxtColor = AlertTxt.color;
+        PnlColor.a = 1;
+        TxtColor.a = 1;
+        float t = 1;
+        AlertPnl.color = PnlColor;
+        while(t > 0){
+            t -= Time.unscaledDeltaTime*0.05f;
+            PnlColor.a = Mathf.Lerp(0, PnlColor.a, t);
+            TxtColor.a = Mathf.Lerp(0, TxtColor.a, t);
+            AlertPnl.color = PnlColor;
+            AlertTxt.color = TxtColor;
+            yield return null;
+        }
+        AlertPnl.color = PnlColor;
+        AlertPnl.gameObject.SetActive(false);
+        alertCorou = null;
     }
 }
