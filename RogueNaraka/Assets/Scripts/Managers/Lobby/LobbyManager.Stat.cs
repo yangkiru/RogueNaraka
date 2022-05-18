@@ -23,6 +23,7 @@ public partial class LobbyManager : MonoBehaviour
         SyncStatUpgradeTxt();
         StatPnl.SetActive(true);
         DungeonPnl.SetActive(false);
+        IAPPnl.SetActive(false);
 
         if (OnSelectButtonCorou != null)
             StopCoroutine(OnSelectButtonCorou);

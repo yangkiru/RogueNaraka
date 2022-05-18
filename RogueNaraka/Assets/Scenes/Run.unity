@@ -1208,7 +1208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 240.00002, y: -753}
+  m_AnchoredPosition: {x: 240.00002, y: -47}
   m_SizeDelta: {x: 480, y: 94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6838121
@@ -4161,6 +4161,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  productId: 
+  buttonType: 0
+  consumePurchase: 1
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
+  priceText: {fileID: 0}
 --- !u!224 &66781907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8379,7 +8391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &128602982
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17718,7 +17730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 204752466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1527192116}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: OpenIAPPnl
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &209680373
 GameObject:
   m_ObjectHideFlags: 0
@@ -20075,7 +20099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &260965271
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25496,6 +25520,7 @@ GameObject:
   - component: {fileID: 359829988}
   - component: {fileID: 359829987}
   - component: {fileID: 359829989}
+  - component: {fileID: 359829990}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -25605,6 +25630,42 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &359829990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359829985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productId: com.AweTome.RandomMage.remove_ads
+  buttonType: 0
+  consumePurchase: 0
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1527192116}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: PurchaseRemoveAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
+  priceText: {fileID: 0}
 --- !u!1 &360188910
 GameObject:
   m_ObjectHideFlags: 0
@@ -91086,6 +91147,9 @@ MonoBehaviour:
   DungeonResultTxt: {fileID: 1550875056}
   DungeonNameTxt: {fileID: 1282240995}
   DungeonImg: {fileID: 728423197}
+  IAPPnl: {fileID: 1016198008}
+  IAPCoinTxt: {fileID: 1772503228}
+  RemoveAdsBtn: {fileID: 359829989}
   StatBtn: {fileID: 332681816}
   StatPnl: {fileID: 260965270}
   StatCoinTxt: {fileID: 1046685559}
@@ -117330,7 +117394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 292.5, y: 741.4995}
+  m_AnchoredPosition: {x: 292.5, y: 741.49945}
   m_SizeDelta: {x: -248.43002, y: -752.42}
   m_Pivot: {x: -0.15, y: 1.2}
 --- !u!114 &1904657810
@@ -123178,6 +123242,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  productId: 
+  buttonType: 0
+  consumePurchase: 1
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
+  titleText: {fileID: 0}
+  descriptionText: {fileID: 0}
+  priceText: {fileID: 0}
 --- !u!114 &2036865294
 MonoBehaviour:
   m_ObjectHideFlags: 0

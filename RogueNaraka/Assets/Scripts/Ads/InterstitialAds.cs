@@ -26,6 +26,7 @@ public class InterstitialAds : MonoBehaviour
 
     public void Show()
     {
+        if (PlayerPrefs.GetInt("RemoveAds") == 1) return;
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);

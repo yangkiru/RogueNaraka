@@ -18,6 +18,7 @@ public partial class LobbyManager : MonoBehaviour
     public void OpenDungeonPnl(){
         DungeonPnl.SetActive(true);
         StatPnl.SetActive(false);
+        IAPPnl.SetActive(false);
         if (OnSelectButtonCorou != null)
             StopCoroutine(OnSelectButtonCorou);
         OnSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[2]));
