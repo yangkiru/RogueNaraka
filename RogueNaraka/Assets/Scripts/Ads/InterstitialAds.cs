@@ -11,11 +11,6 @@ public class InterstitialAds : MonoBehaviour
     [SerializeField]
     private string InterstitialAdID;
 
-    void Start()
-    {
-        Advertisement.Initialize("4694417");//Android
-    }
-
     private void OnDestroy()
     {
         if (_coroutine != null)
@@ -26,7 +21,7 @@ public class InterstitialAds : MonoBehaviour
 
     public void Show()
     {
-        if (PlayerPrefs.GetInt("RemoveAds") == 1) return;
+        if (PlayerPrefs.GetInt("isRemoveAds") == 1) return;
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
@@ -37,7 +32,7 @@ public class InterstitialAds : MonoBehaviour
     public IEnumerator ShowInterstitialWhenInitialized()
     {
         WaitForSeconds wait = new WaitForSeconds(0.5f);
-        while (!Advertisement.isInitialized || !Advertisement.IsReady(InterstitialAdID))
+        while (!Advertisement.isInitialized)
         {
             if(!Advertisement.isInitialized) {
                 Advertisement.Initialize("4694417");//Android

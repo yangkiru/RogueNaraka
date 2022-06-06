@@ -55,7 +55,7 @@ public partial class GameManager : MonoBehaviour {
     private void Awake()
     {
 #if !UNITY_EDITOR
-        Debug.unityLogger.logEnabled = false;
+        //Debug.unityLogger.logEnabled = false;
 #endif
         instance = this;
 

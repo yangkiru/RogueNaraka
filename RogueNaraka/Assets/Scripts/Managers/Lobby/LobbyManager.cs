@@ -59,7 +59,7 @@ public partial class LobbyManager : MonoBehaviour
         btn.image.color = c;
     }
 
-    private void SetAlert(string text) {
+    public void SetAlert(string text) {
         AlertTxt.text = text;
         AlertPnl.gameObject.SetActive(true);
         if (alertCorou != null) StopCoroutine(alertCorou);

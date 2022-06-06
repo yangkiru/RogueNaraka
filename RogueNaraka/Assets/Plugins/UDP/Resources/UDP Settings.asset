@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -107981364, guid: 2c3078f85c1a94a82b179c36ee13484f, type: 3}
+  m_Script: {fileID: -107981364, guid: 741884b37a0234d86bb740e55081cd5f, type: 3}
   m_Name: UDP Settings
   m_EditorClassIdentifier: 
-  UnityProjectID: 1fcff29b-616c-4eca-9b57-bdfd5f4db68e
-  UnityClientID: Ciru5DMoBTFXOLxykab8sA
-  UnityClientKey: 08zs3n6W0fiYVTtOERPgGQf5qBF1VjLksGkj2YMwwts
-  UnityClientRSAPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqSHKRquG2+jQxgrTdQK8ryFg67RhKve410xENes5cXxNNCZNrGyWdcXP8ogVG1Zx10jZ7zR01+OdvCs8/ygTvsdapbR61LSkryGmnytXFdojtt2FFVk13ZREQ/y/stsUekLK4ThBgTE3q1U9cfuiyk5OqNuNNRXeRNv4l2yv3HntoWkHYIOxDzQUWqP3IbqgqLwIyof5PV6A6f9TrjyO0/YUNxA74OXEJrAMBg6J9BJY/Xua7MdmnIbUKWo89RwxFL+16kOnwgVs+KP5NiBBsOdMlOFfAoj+IOTNz+sP+hzBkhN2j1dWpwLs5BVF4yPFnIhGyXoPLqbxnX/LlQYztwIDAQAB
-  AppName: 1fcff29b-616c-4eca-9b57-bdfd5f4db68e
-  AppSlug: 8c9261d2-0912-42ab-a694-14ffbbe2ec0b
-  AppItemId: 623d6dc84fe4f590eb970e81
-  Permission: owner
+  UnityProjectID: 72106a8f-dacc-4e2f-be37-deaac417058c
+  UnityClientID: a7P6jZ1NFYj7AHKkgTkBaA
+  UnityClientKey: -rRC62BzaxEDruE8UZwiLznn1HhiUuO-6iSznY6UCoE
+  UnityClientRSAPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwrjJ+ZKR1TrbDLgPSjoxEUeDzEp4Gb3ynSnpY+HbYUPONWa+soQuzSvelRNGxbtrc/mIQFL83rq37L0ObktJ29NCS7H2DnGPsLAVNFYSkZmaAoiRCXDYwx5LDaLV2lYWHbMILmrLrMilOzNG0ai1cH45okOQvWbbf/spC7H1/OneEl+OmJZmH8erYY1UWFlhRoASpjtb67em3ENAG0eo1+qq6hvo9N390BEHDe0CfGnRAraG5wwTgLnFuFV3mevSiueNerJcvOD0RbogyqS0WcbdBkoHGJYzhO92aTCRUniEPKwcZeuVNz/IM5BCi479N9D7AycAqac7kP6w+4ZQ6wIDAQAB
+  AppName: Random Mage
+  AppSlug: aea9dcf8-ef6b-42ef-ab8f-85a6d834a170
+  AppItemId: 623dbdaae1b17ccbd13de5a4
+  Permission: 

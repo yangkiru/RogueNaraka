@@ -11,6 +11,8 @@ public partial class LobbyManager : MonoBehaviour
     public GameObject IAPPnl;
     public TextMeshProUGUI IAPCoinTxt;
     public Button RemoveAdsBtn;
+    public string[] IAPAlertStrs;
+
     public void OpenIAPPnl(){
         MoneyManager.instance.Load();
         IAPCoinTxt.text = "Coin : " + MoneyManager.instance.soul;
@@ -18,15 +20,23 @@ public partial class LobbyManager : MonoBehaviour
         DungeonPnl.SetActive(false);
         IAPPnl.SetActive(true);
 
-        if(PlayerPrefs.GetInt("RemoveAds") == 1) RemoveAdsBtn.interactable = false;
+        if(PlayerPrefs.GetInt("isRemoveAds") == 1) RemoveAdsBtn.interactable = false;
 
         if (onSelectButtonCorou != null)
             StopCoroutine(onSelectButtonCorou);
         onSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[0]));
     }
     public void PurchaseRemoveAds() {
-        PlayerPrefs.SetInt("RemoveAds", 1);
+        PlayerPrefs.SetInt("isRemoveAds", 1);
         RemoveAdsBtn.interactable = false;
+        SetAlert("Successful Purchase");
         Debug.Log("RemoveAds");
+    }
+
+    public void UnPurchaseRemoveAds() {
+        PlayerPrefs.SetInt("isRemoveAds", 0);
+        RemoveAdsBtn.interactable = true;
+        SetAlert("Purchase Failed");
+        Debug.Log("Un RemoveAds");
     }
 }

@@ -43,7 +43,7 @@
       "dependencies": {}
     },
     "com.unity.ads": {
-      "version": "3.7.5",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -139,7 +139,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.purchasing": {
-      "version": "4.1.4",
+      "version": "4.1.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {

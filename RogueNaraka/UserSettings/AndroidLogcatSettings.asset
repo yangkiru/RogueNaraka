@@ -1,19 +1,13 @@
 {
     "m_SelectedDeviceId": "emulator-5554",
     "m_SelectedPackage": {
-        "deviceId": "emulator-5554",
-        "name": "com.NoxBix.Naraka",
-        "processId": 11035,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 4,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "emulator-5554",
-            "name": "com.google.android.apps.nexuslauncher",
-            "processId": 948,
-            "exited": true
-        },
         {
             "deviceId": "emulator-5554",
             "name": "com.NoxBix.Naraka",
@@ -42,6 +36,48 @@
             "deviceId": "emulator-5554",
             "name": "com.NoxBix.Naraka",
             "processId": 11035,
+            "exited": true
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.AweTome.RandomMage",
+            "processId": 7826,
+            "exited": false
+        },
+        {
+            "deviceId": "127.0.0.1:5555",
+            "name": "com.AweTome.RandomMage",
+            "processId": 7826,
+            "exited": true
+        },
+        {
+            "deviceId": "127.0.0.1:5555",
+            "name": "com.AweTome.RandomMage",
+            "processId": 4005,
+            "exited": true
+        },
+        {
+            "deviceId": "127.0.0.1:5555",
+            "name": "com.AweTome.RandomMage",
+            "processId": 4817,
+            "exited": true
+        },
+        {
+            "deviceId": "127.0.0.1:5555",
+            "name": "com.AweTome.RandomMage",
+            "processId": 5630,
+            "exited": false
+        },
+        {
+            "deviceId": "127.0.0.1:5556",
+            "name": "com.AweTome.RandomMage",
+            "processId": 4969,
+            "exited": true
+        },
+        {
+            "deviceId": "127.0.0.1:5556",
+            "name": "com.AweTome.RandomMage",
+            "processId": 5703,
             "exited": false
         }
     ],
@@ -96,6 +132,6 @@
         "Behavior": 0
     },
     "m_Filter": "",
-    "m_FilterIsRegularExpression": true,
+    "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }
