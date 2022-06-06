@@ -11,11 +11,10 @@ public partial class LobbyManager : MonoBehaviour
     public GameObject IAPPnl;
     public TextMeshProUGUI IAPCoinTxt;
     public Button RemoveAdsBtn;
-    public string[] IAPAlertStrs;
 
     public void OpenIAPPnl(){
         MoneyManager.instance.Load();
-        IAPCoinTxt.text = "Coin : " + MoneyManager.instance.soul;
+        IAPUIUpdate();
         StatPnl.SetActive(false);
         DungeonPnl.SetActive(false);
         IAPPnl.SetActive(true);
@@ -38,5 +37,9 @@ public partial class LobbyManager : MonoBehaviour
         RemoveAdsBtn.interactable = true;
         SetAlert("Purchase Failed");
         Debug.Log("Un RemoveAds");
+    }
+
+    public void IAPUIUpdate(){
+        IAPCoinTxt.text = "Coin : " + MoneyManager.instance.soul;
     }
 }

@@ -10,7 +10,10 @@ public class IAP : MonoBehaviour, IStoreListener
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
 
-    public static string remove_ads = "remove_ads";
+    public string remove_ads = "remove_ads";
+    public string coin_1 = "coin_1";
+    public string coin_2 = "coin_2";
+    public string coin_3 = "coin_3";
 
 
     void Start()
@@ -32,14 +35,25 @@ public class IAP : MonoBehaviour, IStoreListener
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
         builder.AddProduct(remove_ads, ProductType.NonConsumable);
+        builder.AddProduct(coin_1, ProductType.Consumable);
+        builder.AddProduct(coin_2, ProductType.Consumable);
+        builder.AddProduct(coin_3, ProductType.Consumable);
 
 
         UnityPurchasing.Initialize(this, builder);
     }
 
-    public void Buy_remove_ads()
+    public void BuyRemoveAds()
     {
         BuyProductID(remove_ads);
+    }
+
+    public void BuyCoin(int num){
+        switch(num){
+            case 1: BuyProductID(coin_1); break;
+            case 2: BuyProductID(coin_2); break;
+            case 3: BuyProductID(coin_3); break;
+        }
     }
 
     
@@ -87,6 +101,21 @@ public class IAP : MonoBehaviour, IStoreListener
 
             }
             
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, coin_1, StringComparison.Ordinal))
+        {
+            MoneyManager.instance.AddSoul(400);
+            LobbyManager.Instance.IAPUIUpdate();
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, coin_2, StringComparison.Ordinal))
+        {
+            MoneyManager.instance.AddSoul(2400);
+            LobbyManager.Instance.IAPUIUpdate();
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, coin_3, StringComparison.Ordinal))
+        {
+            MoneyManager.instance.AddSoul(5500);
+            LobbyManager.Instance.IAPUIUpdate();
         }
 
         else
