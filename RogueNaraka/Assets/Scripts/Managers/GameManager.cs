@@ -262,6 +262,7 @@ public partial class GameManager : MonoBehaviour {
         RageManager.instance.ResetSave();
 
         moneyManager.Load();
+        MoneyManager.instance.TempCoinReset();
 
         BoardManager.instance.Stage = stage;
   

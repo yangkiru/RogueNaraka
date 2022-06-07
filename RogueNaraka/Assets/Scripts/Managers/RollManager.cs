@@ -699,7 +699,7 @@ public class RollManager : MonoBehaviour {
                     }
                     Stat.StatToData(BoardManager.instance.player.data.stat);
                     GameManager.instance.StatTextUpdate();
-                    AudioManager.instance.PlaySFX("statUp");
+                    AudioManager.instance.PlaySFX("statUp", 1, 0.8f);
                     SetRollPnl(false);
                 }
                 break;

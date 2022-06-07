@@ -69,7 +69,7 @@ public class SoulParticle : MonoBehaviour
         if (--soulCount <= 0)
             LevelUpManager.instance.RequestEndStageCorou();
         bgc.Speed = 0;
-        MoneyManager.instance.AddSoul(soul, false);
+        MoneyManager.instance.AddTempCoin(soul, false);
         BoardManager.instance.soulPool.EnqueueObjectPool(gameObject);
     }
 }

@@ -26,6 +26,9 @@ public class MoneyManager : MonoBehaviour {
     private int _soul;
     public float RemainSoul { get { return remainSoul; } set { remainSoul = value; } }
     private float remainSoul = 0;
+    
+    public int TempCoin { get { return _tempCoin; }}
+    private int _tempCoin;
 
     public float refiningRate { get { return PlayerPrefs.GetFloat("refiningRate"); } set { PlayerPrefs.SetFloat("refiningRate", value); } }
 
@@ -59,23 +62,44 @@ public class MoneyManager : MonoBehaviour {
             PointTxtManager.instance.TxtOnSoul(value, unrefinedSoulTxt.transform, soulSpawnPosition);
     }
 
+    public int ExchangeTempCoin(float multiply=1) {
+        int result = (int)(_tempCoin * multiply);
+        AddSoul(result);
+        TempCoinReset();
+        return result;
+    }
+
     public void SetSoul(int value)
     {
         _soul = value;
-        MoneyUpdate();
+        Save();
     }
 
-    public void AddSoul(int value, bool isSave = true)
+    public void AddSoul(int value)
     {
         if (_soul + value >= 0)
             _soul += value;
         else
             _soul = 0;
+            Save();
+    }
+
+    public void SetTempCoin(int value)
+    {
+        _tempCoin = value;
+        MoneyUpdate();
+    }
+
+    public void AddTempCoin(int value, bool isSave){
+        if (_tempCoin + value >= 0)
+            _tempCoin += value;
+        else
+            _tempCoin = 0;
         MoneyUpdate();
         if(value != 0)
             PointTxtManager.instance.TxtOnSoul(value, soulTxt.transform, Vector2.zero);
         if(isSave)
-            Save(false);
+            Save();
     }
 
     public bool UseSoul(int amount)
@@ -85,7 +109,7 @@ public class MoneyManager : MonoBehaviour {
             _soul -= amount;
             MoneyUpdate();
             PointTxtManager.instance.TxtOnSoul(-amount, soulTxt.transform, Vector2.zero);
-            Save(false);
+            Save();
             return true;
         }
         else
@@ -112,29 +136,36 @@ public class MoneyManager : MonoBehaviour {
         return rate;
     }
 
-    public void Save(bool isUnrefined = true)
+    public void Save()
     {
-        if(isUnrefined)
-            PlayerPrefs.SetInt("unrefinedSoul", _unrefinedSoul);
         PlayerPrefs.SetInt("soul", _soul);
+        PlayerPrefs.SetInt("tempCoin", _tempCoin);
     }
 
     public void Load()
     {
         SetUnrefinedSoul(PlayerPrefs.GetInt("unrefinedSoul"));
         SetSoul(PlayerPrefs.GetInt("soul"));
+        _tempCoin = PlayerPrefs.GetInt("tempCoin");
+        MoneyUpdate();
         this.loaded = true;
+    }
+
+    public void TempCoinReset(){
+        PlayerPrefs.SetInt("tempCoin", 0);
+        SetTempCoin(0);
     }
 
     public void ResetData()
     {
         PlayerPrefs.SetInt("unrefinedSoul", 0);
         PlayerPrefs.SetInt("soul", 0);
+        PlayerPrefs.SetInt("tempCoin", 0);
     }
 
     public void MoneyUpdate()
     {
         //Debug.Log("MoneyUpdate");
-        soulTxt.text = string.Format("Coin {0}", _soul.ToString());
+        soulTxt.text = string.Format("Coin {0}", _tempCoin.ToString());
     }
 }

@@ -36,6 +36,10 @@ public partial class LobbyManager : MonoBehaviour
         if (onSelectButtonCorou != null)
             StopCoroutine(onSelectButtonCorou);
         onSelectButtonCorou = StartCoroutine(OnSelectButton(MenuButtons[3]));
+        for(int i = 0; i < StatEffects.Length; i++)
+        {
+            StatEffects[i].gameObject.SetActive(false);
+        }
     }
 
     public void LockStatBtn(){
@@ -99,7 +103,7 @@ public partial class LobbyManager : MonoBehaviour
             MoneyManager.instance.AddSoul(-required);
             SyncStatUpgradeTxt();
             StatCoinTxt.text = "Coin : " + MoneyManager.instance.soul;
-            AudioManager.instance.PlaySFX("statUp");
+            AudioManager.instance.PlaySFX("statUp", 1, 0.8f);
             StatEffects[type].SetActive(false);
             StatEffects[type].SetActive(true);
         }

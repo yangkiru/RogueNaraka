@@ -85,11 +85,6 @@ public class IAP : MonoBehaviour, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        
-
-
-        
-
          if (String.Equals(args.purchasedProduct.definition.id, remove_ads, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));

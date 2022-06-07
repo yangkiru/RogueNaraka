@@ -59,6 +59,7 @@ public partial class DeathManager : MonoBehaviour
         for(int i = 0; i < GameDatabase.instance.enemies.Count(); ++i) {
             this.huntedUnitNumList.Add(0);
         }
+        RewardAdAwake();
     }
 
     public void SetDeathPnl(bool value)
@@ -67,7 +68,8 @@ public partial class DeathManager : MonoBehaviour
         //CameraShake.instance.Shake(0.2f, 0.2f, 0.01f);
         if (value)
         {
-            StartCoroutine(PumpCorou(youDied.rectTransform, 3, 0.5f));
+            StartCoroutine(OpenResultPnlCorou());
+            //StartCoroutine(PumpCorou(youDied.rectTransform, 3, 0.5f));
         }
     }
 
@@ -82,7 +84,7 @@ public partial class DeathManager : MonoBehaviour
         SetDeathPnl(true);
         BoardManager.instance.ClearFriendly();
 
-        StartCoroutine(OpenBtnPnlCorou());
+        //StartCoroutine(OpenBtnPnlCorou());
 
         GameManager.instance.SetSettingBtn(true);
 

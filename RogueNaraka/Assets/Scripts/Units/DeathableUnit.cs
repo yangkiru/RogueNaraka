@@ -43,7 +43,7 @@ namespace RogueNaraka.UnitScripts
 
         public void EnemyOnDeath()
         {
-            float amount = unit.data.cost * RageManager.instance.soul;
+            float amount = unit.data.cost * RageManager.instance.soul * 0.5f;
             float remain = (float)MoneyManager.instance.RemainSoul + amount - (int)amount;
             if (remain >= 1)
             {
@@ -52,7 +52,7 @@ namespace RogueNaraka.UnitScripts
             }
             else
                 MoneyManager.instance.RemainSoul = remain;
-            MoneyManager.instance.AddSoul((int)amount, false);
+            MoneyManager.instance.AddTempCoin((int)amount, false);
             LevelUpManager.instance.RequestEndStageCorou();
             DeathManager.instance.ReceiveHuntedUnit(this.unit.data.id);
             //TierScripts.TierManager.Instance.GainExp(this.unit.data.gainExp);
