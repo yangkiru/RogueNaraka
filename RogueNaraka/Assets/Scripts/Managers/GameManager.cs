@@ -80,6 +80,7 @@ public partial class GameManager : MonoBehaviour {
             SetLanguage(0);
         }
         Application.targetFrameRate = 60;
+        if(PlayerPrefs.GetString("stat") == string.Empty) ResetData();
     }
 
     public void SetLanguage(int num = -1)

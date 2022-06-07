@@ -123,7 +123,7 @@ public class StatOrbManager : MonoBehaviour
         current--;
         IconEffect();
         bombParticle.Play();
-        if(used == this.resultStatOfShootStatOrb.statPoints)
+        if(used == this.resultStatOfShootStatOrb.statPoints || used >= this.resultStatOfShootStatOrb.sumMax)
         {
             StartCoroutine(OnLastOverflow());
         }
