@@ -19,7 +19,7 @@ MonoBehaviour:
     stage: 0
     maxStage: 0
     weapon: 5
-    hpRegen: 0.3
+    hpRegen: 0.05
     mpRegen: 0.3
     isFriendly: 1
     isStanding: 1
@@ -1087,7 +1087,7 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 0
-      hp: 3
+      hp: 5
       mp: 0
       dmgMax: 0
       spdMax: 0
@@ -1145,7 +1145,7 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 0
-      hp: 6
+      hp: 9
       mp: 0
       dmgMax: 0
       spdMax: 0
@@ -1203,7 +1203,7 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 4
-      hp: 5
+      hp: 8
       mp: 0
       dmgMax: 0
       spdMax: 0
@@ -1259,7 +1259,7 @@ MonoBehaviour:
     stat:
       dmg: 1
       spd: 5
-      hp: 8
+      hp: 13
       mp: 0
       dmgMax: 0
       spdMax: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
     limitTime: 0
     stat:
       dmg: 0.3
-      spd: 0
+      spd: 0.2
       hp: 0.3
       mp: 0
       dmgMax: 0
@@ -1540,7 +1540,7 @@ MonoBehaviour:
     limitTime: 0
     stat:
       dmg: 0.3
-      spd: 0
+      spd: 1
       hp: 0.3
       mp: 0
       dmgMax: 0
@@ -1565,7 +1565,7 @@ MonoBehaviour:
     tackleDamage: 0.05
     tackleDelay: 1
     moveDelay: 0.5
-    moveDistance: 0.5
+    moveDistance: 1
     moveSpeed: 1.5
     accelerationRate: 0
     decelerationRate: 0
@@ -1599,7 +1599,7 @@ MonoBehaviour:
     limitTime: 0
     stat:
       dmg: 0.3
-      spd: 0
+      spd: 0.5
       hp: 0.3
       mp: 0
       dmgMax: 0
@@ -1624,7 +1624,7 @@ MonoBehaviour:
     tackleDamage: 0.08
     tackleDelay: 1
     moveDelay: 0.5
-    moveDistance: 0.5
+    moveDistance: 1.5
     moveSpeed: 1.5
     accelerationRate: 0.5
     decelerationRate: 1
@@ -3745,7 +3745,7 @@ MonoBehaviour:
     effects: []
     values:
     - name: 4
-      value: 2
+      value: 5
     - name: 1
       value: 2
     levelUp:
