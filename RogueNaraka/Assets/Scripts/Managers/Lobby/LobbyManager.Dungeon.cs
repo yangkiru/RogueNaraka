@@ -29,7 +29,7 @@ public partial class LobbyManager : MonoBehaviour
             LeftDungeonBtn.interactable = false;
             RightDungeonBtn.interactable = false;
         }else {
-            ActivateButton(MenuButtons[3]); // 스탯 버튼 활성화
+            UnLockStatBtn();
         }
     }
 

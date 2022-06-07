@@ -229,7 +229,6 @@ public partial class DeathManager : MonoBehaviour
     public void ReGame()
     {
         EndGame();
-        PlayerPrefs.SetInt("isRun", 0);
         GameManager.instance.Load();
     }
 
@@ -260,6 +259,7 @@ public partial class DeathManager : MonoBehaviour
         Fillable.playerMp.img.fillAmount = 1;
 
         GameManager.instance.SetSettingBtn(true);
+        PlayerPrefs.SetInt("isRun", 0);
 
         stageCanvas.sortingLayerName = "Wall";
     }
